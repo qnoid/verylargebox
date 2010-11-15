@@ -1,0 +1,393 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* TheBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TheBoxAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		903669B6128DD6420004E362 /* UIViewController+TheBoxUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 903669B5128DD6420004E362 /* UIViewController+TheBoxUIViewController.m */; };
+		903AE3DA1284900300A8FB28 /* Home.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3D91284900300A8FB28 /* Home.xib */; };
+		903AE3E81284BF7500A8FB28 /* Welcome.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3E71284BF7500A8FB28 /* Welcome.xib */; };
+		903AE45B1285480900A8FB28 /* TheBoxHorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 903AE45A1285480900A8FB28 /* TheBoxHorizontalTableView.m */; };
+		903AE4A51285A9B600A8FB28 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4A41285A9B600A8FB28 /* logo.jpg */; };
+		903AE4E11285BBE100A8FB28 /* TheBoxItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4E01285BBE100A8FB28 /* TheBoxItemCell.xib */; };
+		903AE4EC1285BE6500A8FB28 /* Details.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4EB1285BE6500A8FB28 /* Details.xib */; };
+		903AE4EE1285C9A600A8FB28 /* UserProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4ED1285C9A600A8FB28 /* UserProfile.xib */; };
+		903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4F51285CBD800A8FB28 /* UserProfiles.xib */; };
+		903AE5051285E1C300A8FB28 /* UserProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 903AE5031285E1C300A8FB28 /* UserProfileView.m */; };
+		903AE5081285E1F800A8FB28 /* UserProfilesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 903AE5071285E1F800A8FB28 /* UserProfilesView.m */; };
+		903AE5611285E33600A8FB28 /* Upload.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE5601285E33600A8FB28 /* Upload.xib */; };
+		9053948A1288845E00FD381C /* HomeUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905394881288845E00FD381C /* HomeUIViewController.m */; };
+		9053948D1288846900FD381C /* TheBoxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9053948B1288846900FD381C /* TheBoxScrollView.m */; };
+		905394901288847500FD381C /* TheBoxItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9053948F1288847500FD381C /* TheBoxItemCell.m */; };
+		905394F8128888AC00FD381C /* WelcomeUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905394F7128888AC00FD381C /* WelcomeUIViewController.m */; };
+		9053953212888AF000FD381C /* UploadUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9053953112888AF000FD381C /* UploadUIViewController.m */; };
+		9056A5A712900416006C148A /* NSArray+Decorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056A5A612900416006C148A /* NSArray+Decorator.m */; };
+		9056A5E01290065F006C148A /* NSString+Decorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056A5DF1290065F006C148A /* NSString+Decorator.m */; };
+		905A4F961291DBBA00BCB475 /* TheBoxUIList.m in Sources */ = {isa = PBXBuildFile; fileRef = 905A4F941291DBBA00BCB475 /* TheBoxUIList.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* TheBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* TheBoxAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* TheBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = ../MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* TheBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBox_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* TheBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "TheBox-Info.plist"; path = "../TheBox-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		903669B4128DD6420004E362 /* UIViewController+TheBoxUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TheBoxUIViewController.h"; sourceTree = "<group>"; };
+		903669B5128DD6420004E362 /* UIViewController+TheBoxUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TheBoxUIViewController.m"; sourceTree = "<group>"; };
+		903AE3D91284900300A8FB28 /* Home.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Home.xib; sourceTree = "<group>"; };
+		903AE3E71284BF7500A8FB28 /* Welcome.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Welcome.xib; sourceTree = "<group>"; };
+		903AE4591285480900A8FB28 /* TheBoxHorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxHorizontalTableView.h; sourceTree = "<group>"; };
+		903AE45A1285480900A8FB28 /* TheBoxHorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxHorizontalTableView.m; sourceTree = "<group>"; };
+		903AE4A41285A9B600A8FB28 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpg; path = Resources/logo.jpg; sourceTree = "<group>"; };
+		903AE4E01285BBE100A8FB28 /* TheBoxItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TheBoxItemCell.xib; path = ../TheBoxItemCell.xib; sourceTree = "<group>"; };
+		903AE4EB1285BE6500A8FB28 /* Details.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Details.xib; sourceTree = "<group>"; };
+		903AE4ED1285C9A600A8FB28 /* UserProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserProfile.xib; path = ../UserProfile.xib; sourceTree = "<group>"; };
+		903AE4F51285CBD800A8FB28 /* UserProfiles.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfiles.xib; sourceTree = "<group>"; };
+		903AE5031285E1C300A8FB28 /* UserProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileView.m; path = Classes/UserProfileView.m; sourceTree = "<group>"; };
+		903AE5041285E1C300A8FB28 /* UserProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileView.h; path = Classes/UserProfileView.h; sourceTree = "<group>"; };
+		903AE5061285E1F800A8FB28 /* UserProfilesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfilesView.h; path = Classes/UserProfilesView.h; sourceTree = "<group>"; };
+		903AE5071285E1F800A8FB28 /* UserProfilesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfilesView.m; path = Classes/UserProfilesView.m; sourceTree = "<group>"; };
+		903AE5601285E33600A8FB28 /* Upload.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Upload.xib; sourceTree = "<group>"; };
+		905394881288845E00FD381C /* HomeUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeUIViewController.m; path = Classes/HomeUIViewController.m; sourceTree = "<group>"; };
+		905394891288845E00FD381C /* HomeUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeUIViewController.h; path = Classes/HomeUIViewController.h; sourceTree = "<group>"; };
+		9053948B1288846900FD381C /* TheBoxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxScrollView.m; sourceTree = "<group>"; };
+		9053948C1288846900FD381C /* TheBoxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxScrollView.h; sourceTree = "<group>"; };
+		9053948E1288847500FD381C /* TheBoxItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxItemCell.h; sourceTree = "<group>"; };
+		9053948F1288847500FD381C /* TheBoxItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxItemCell.m; sourceTree = "<group>"; };
+		905394F6128888AC00FD381C /* WelcomeUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WelcomeUIViewController.h; path = Classes/WelcomeUIViewController.h; sourceTree = "<group>"; };
+		905394F7128888AC00FD381C /* WelcomeUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WelcomeUIViewController.m; path = Classes/WelcomeUIViewController.m; sourceTree = "<group>"; };
+		9053953012888AF000FD381C /* UploadUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadUIViewController.h; path = Classes/UploadUIViewController.h; sourceTree = "<group>"; };
+		9053953112888AF000FD381C /* UploadUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadUIViewController.m; path = Classes/UploadUIViewController.m; sourceTree = "<group>"; };
+		9056A5A512900416006C148A /* NSArray+Decorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Decorator.h"; sourceTree = "<group>"; };
+		9056A5A612900416006C148A /* NSArray+Decorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Decorator.m"; sourceTree = "<group>"; };
+		9056A5DE1290065F006C148A /* NSString+Decorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Decorator.h"; sourceTree = "<group>"; };
+		9056A5DF1290065F006C148A /* NSString+Decorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Decorator.m"; sourceTree = "<group>"; };
+		905A4F941291DBBA00BCB475 /* TheBoxUIList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIList.m; sourceTree = "<group>"; };
+		905A4F951291DBBA00BCB475 /* TheBoxUIList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIList.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				905A4F941291DBBA00BCB475 /* TheBoxUIList.m */,
+				905A4F951291DBBA00BCB475 /* TheBoxUIList.h */,
+				1D3623240D0F684500981E51 /* TheBoxAppDelegate.h */,
+				1D3623250D0F684500981E51 /* TheBoxAppDelegate.m */,
+				9053948B1288846900FD381C /* TheBoxScrollView.m */,
+				9053948C1288846900FD381C /* TheBoxScrollView.h */,
+				903AE4591285480900A8FB28 /* TheBoxHorizontalTableView.h */,
+				903AE45A1285480900A8FB28 /* TheBoxHorizontalTableView.m */,
+				9053948E1288847500FD381C /* TheBoxItemCell.h */,
+				9053948F1288847500FD381C /* TheBoxItemCell.m */,
+				903669B4128DD6420004E362 /* UIViewController+TheBoxUIViewController.h */,
+				903669B5128DD6420004E362 /* UIViewController+TheBoxUIViewController.m */,
+				9056A5A512900416006C148A /* NSArray+Decorator.h */,
+				9056A5A612900416006C148A /* NSArray+Decorator.m */,
+				9056A5DE1290065F006C148A /* NSString+Decorator.h */,
+				9056A5DF1290065F006C148A /* NSString+Decorator.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* TheBox.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				903AE4A31285A9B600A8FB28 /* Resources */,
+				903AE3E21284BE2100A8FB28 /* Welcome */,
+				903AE3FD12853F9D00A8FB28 /* Home */,
+				903AE40012853FBE00A8FB28 /* Details */,
+				903AE40312853FD500A8FB28 /* Description */,
+				903AE40412853FDF00A8FB28 /* Upload */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* TheBox_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		903AE3E21284BE2100A8FB28 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				905394F6128888AC00FD381C /* WelcomeUIViewController.h */,
+				905394F7128888AC00FD381C /* WelcomeUIViewController.m */,
+				903AE3E71284BF7500A8FB28 /* Welcome.xib */,
+				903AE4A41285A9B600A8FB28 /* logo.jpg */,
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
+		903AE3FD12853F9D00A8FB28 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				905394891288845E00FD381C /* HomeUIViewController.h */,
+				905394881288845E00FD381C /* HomeUIViewController.m */,
+				903AE3D91284900300A8FB28 /* Home.xib */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		903AE40012853FBE00A8FB28 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				903AE5041285E1C300A8FB28 /* UserProfileView.h */,
+				903AE5031285E1C300A8FB28 /* UserProfileView.m */,
+				903AE5061285E1F800A8FB28 /* UserProfilesView.h */,
+				903AE5071285E1F800A8FB28 /* UserProfilesView.m */,
+				903AE4EB1285BE6500A8FB28 /* Details.xib */,
+				903AE4F51285CBD800A8FB28 /* UserProfiles.xib */,
+			);
+			name = Details;
+			sourceTree = "<group>";
+		};
+		903AE40312853FD500A8FB28 /* Description */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Description;
+			sourceTree = "<group>";
+		};
+		903AE40412853FDF00A8FB28 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				9053953012888AF000FD381C /* UploadUIViewController.h */,
+				9053953112888AF000FD381C /* UploadUIViewController.m */,
+				903AE5601285E33600A8FB28 /* Upload.xib */,
+			);
+			name = Upload;
+			sourceTree = "<group>";
+		};
+		903AE4A31285A9B600A8FB28 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				903AE4E01285BBE100A8FB28 /* TheBoxItemCell.xib */,
+				903AE4ED1285C9A600A8FB28 /* UserProfile.xib */,
+				8D1107310486CEB800E47090 /* TheBox-Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* TheBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "TheBox" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TheBox;
+			productName = TheBox;
+			productReference = 1D6058910D05DD3D006BFB54 /* TheBox.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TheBox" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* TheBox */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				903AE3DA1284900300A8FB28 /* Home.xib in Resources */,
+				903AE3E81284BF7500A8FB28 /* Welcome.xib in Resources */,
+				903AE4A51285A9B600A8FB28 /* logo.jpg in Resources */,
+				903AE4E11285BBE100A8FB28 /* TheBoxItemCell.xib in Resources */,
+				903AE4EC1285BE6500A8FB28 /* Details.xib in Resources */,
+				903AE4EE1285C9A600A8FB28 /* UserProfile.xib in Resources */,
+				903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */,
+				903AE5611285E33600A8FB28 /* Upload.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* TheBoxAppDelegate.m in Sources */,
+				903AE45B1285480900A8FB28 /* TheBoxHorizontalTableView.m in Sources */,
+				903AE5051285E1C300A8FB28 /* UserProfileView.m in Sources */,
+				903AE5081285E1F800A8FB28 /* UserProfilesView.m in Sources */,
+				9053948A1288845E00FD381C /* HomeUIViewController.m in Sources */,
+				9053948D1288846900FD381C /* TheBoxScrollView.m in Sources */,
+				905394901288847500FD381C /* TheBoxItemCell.m in Sources */,
+				905394F8128888AC00FD381C /* WelcomeUIViewController.m in Sources */,
+				9053953212888AF000FD381C /* UploadUIViewController.m in Sources */,
+				903669B6128DD6420004E362 /* UIViewController+TheBoxUIViewController.m in Sources */,
+				9056A5A712900416006C148A /* NSArray+Decorator.m in Sources */,
+				9056A5E01290065F006C148A /* NSString+Decorator.m in Sources */,
+				905A4F961291DBBA00BCB475 /* TheBoxUIList.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
+				INFOPLIST_FILE = "TheBox-Info.plist";
+				PRODUCT_NAME = TheBox;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
+				INFOPLIST_FILE = "TheBox-Info.plist";
+				PRODUCT_NAME = TheBox;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphonesimulator4.1;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "TheBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TheBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
