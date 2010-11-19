@@ -16,7 +16,14 @@
 
 @synthesize textFields;
 
-+(id) listWithTextFields:(NSArray *)textFields{
+- (void) dealloc
+{
+	[textFields release];
+	[super dealloc];
+}
+
+
++(id) newListWithTextFields:(NSArray *)textFields{
 return [[TheBoxUIList alloc] init:textFields];
 }
 
@@ -66,12 +73,6 @@ return nil;
 
 -(NSUInteger) countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len{
 return [self.textFields countByEnumeratingWithState:state objects:stackbuf count:len];	
-}
-
-- (void) dealloc
-{
-	[self.textFields release];
-	[super dealloc];
 }
 
 @end

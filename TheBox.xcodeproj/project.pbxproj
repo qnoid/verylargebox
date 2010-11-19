@@ -33,6 +33,12 @@
 		9056A5A712900416006C148A /* NSArray+Decorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056A5A612900416006C148A /* NSArray+Decorator.m */; };
 		9056A5E01290065F006C148A /* NSString+Decorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056A5DF1290065F006C148A /* NSString+Decorator.m */; };
 		905A4F961291DBBA00BCB475 /* TheBoxUIList.m in Sources */ = {isa = PBXBuildFile; fileRef = 905A4F941291DBBA00BCB475 /* TheBoxUIList.m */; };
+		905A4F9B1291DE6400BCB475 /* LocationUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905A4F991291DE6400BCB475 /* LocationUIViewController.m */; };
+		905A4FBA1291DEB400BCB475 /* Location.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* Location.xib */; };
+		905A4FE21291E15400BCB475 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A4FE11291E15400BCB475 /* MapKit.framework */; };
+		905A503B1291E4AC00BCB475 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A503A1291E4AC00BCB475 /* CoreLocation.framework */; };
+		90C2ECA412930C08009195CF /* TheBoxLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2ECA312930C08009195CF /* TheBoxLocationService.m */; };
+		90C2EE7912934108009195CF /* TheBoxNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2EE7812934108009195CF /* TheBoxNotifications.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +51,7 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = ../MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* TheBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBox_Prefix.pch; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* TheBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "TheBox-Info.plist"; path = "../TheBox-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* TheBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TheBox-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		903669B4128DD6420004E362 /* UIViewController+TheBoxUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TheBoxUIViewController.h"; sourceTree = "<group>"; };
 		903669B5128DD6420004E362 /* UIViewController+TheBoxUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TheBoxUIViewController.m"; sourceTree = "<group>"; };
 		903AE3D91284900300A8FB28 /* Home.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Home.xib; sourceTree = "<group>"; };
@@ -78,6 +84,16 @@
 		9056A5DF1290065F006C148A /* NSString+Decorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Decorator.m"; sourceTree = "<group>"; };
 		905A4F941291DBBA00BCB475 /* TheBoxUIList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIList.m; sourceTree = "<group>"; };
 		905A4F951291DBBA00BCB475 /* TheBoxUIList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIList.h; sourceTree = "<group>"; };
+		905A4F991291DE6400BCB475 /* LocationUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationUIViewController.m; path = Classes/LocationUIViewController.m; sourceTree = "<group>"; };
+		905A4F9A1291DE6400BCB475 /* LocationUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationUIViewController.h; path = Classes/LocationUIViewController.h; sourceTree = "<group>"; };
+		905A4FB91291DEB400BCB475 /* Location.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Location.xib; sourceTree = "<group>"; };
+		905A4FE11291E15400BCB475 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		905A503A1291E4AC00BCB475 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		90C2ECA212930C08009195CF /* TheBoxLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxLocationService.h; sourceTree = "<group>"; };
+		90C2ECA312930C08009195CF /* TheBoxLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxLocationService.m; sourceTree = "<group>"; };
+		90C2ECD312932076009195CF /* TheBoxLocationServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxLocationServiceDelegate.h; sourceTree = "<group>"; };
+		90C2EE7712934108009195CF /* TheBoxNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxNotifications.h; sourceTree = "<group>"; };
+		90C2EE7812934108009195CF /* TheBoxNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxNotifications.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +104,8 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				905A4FE21291E15400BCB475 /* MapKit.framework in Frameworks */,
+				905A503B1291E4AC00BCB475 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,10 +115,15 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				905A4F941291DBBA00BCB475 /* TheBoxUIList.m */,
+				90C2ECD312932076009195CF /* TheBoxLocationServiceDelegate.h */,
 				905A4F951291DBBA00BCB475 /* TheBoxUIList.h */,
+				905A4F941291DBBA00BCB475 /* TheBoxUIList.m */,
 				1D3623240D0F684500981E51 /* TheBoxAppDelegate.h */,
 				1D3623250D0F684500981E51 /* TheBoxAppDelegate.m */,
+				90C2ECA212930C08009195CF /* TheBoxLocationService.h */,
+				90C2ECA312930C08009195CF /* TheBoxLocationService.m */,
+				90C2EE7712934108009195CF /* TheBoxNotifications.h */,
+				90C2EE7812934108009195CF /* TheBoxNotifications.m */,
 				9053948B1288846900FD381C /* TheBoxScrollView.m */,
 				9053948C1288846900FD381C /* TheBoxScrollView.h */,
 				903AE4591285480900A8FB28 /* TheBoxHorizontalTableView.h */,
@@ -135,8 +158,10 @@
 				903AE40012853FBE00A8FB28 /* Details */,
 				903AE40312853FD500A8FB28 /* Description */,
 				903AE40412853FDF00A8FB28 /* Upload */,
+				905A4F9C1291DE6F00BCB475 /* Location */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				8D1107310486CEB800E47090 /* TheBox-Info.plist */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = CustomTemplate;
@@ -154,6 +179,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				905A503A1291E4AC00BCB475 /* CoreLocation.framework */,
+				905A4FE11291E15400BCB475 /* MapKit.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -218,9 +245,18 @@
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				903AE4E01285BBE100A8FB28 /* TheBoxItemCell.xib */,
 				903AE4ED1285C9A600A8FB28 /* UserProfile.xib */,
-				8D1107310486CEB800E47090 /* TheBox-Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		905A4F9C1291DE6F00BCB475 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				905A4F9A1291DE6400BCB475 /* LocationUIViewController.h */,
+				905A4F991291DE6400BCB475 /* LocationUIViewController.m */,
+				905A4FB91291DEB400BCB475 /* Location.xib */,
+			);
+			name = Location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +317,7 @@
 				903AE4EE1285C9A600A8FB28 /* UserProfile.xib in Resources */,
 				903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */,
 				903AE5611285E33600A8FB28 /* Upload.xib in Resources */,
+				905A4FBA1291DEB400BCB475 /* Location.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +342,9 @@
 				9056A5A712900416006C148A /* NSArray+Decorator.m in Sources */,
 				9056A5E01290065F006C148A /* NSString+Decorator.m in Sources */,
 				905A4F961291DBBA00BCB475 /* TheBoxUIList.m in Sources */,
+				905A4F9B1291DE6400BCB475 /* LocationUIViewController.m in Sources */,
+				90C2ECA412930C08009195CF /* TheBoxLocationService.m in Sources */,
+				90C2EE7912934108009195CF /* TheBoxNotifications.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,10 +384,11 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphonesimulator4.1;
 			};
 			name = Debug;

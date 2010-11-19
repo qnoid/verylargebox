@@ -13,6 +13,13 @@
 
 @synthesize tableView;
 
+- (void) dealloc
+{
+	[tableView release];
+	[super dealloc];
+}
+
+
 -(id) initWithTableView:(UITableView *)_tableView
 {
 	self = [super init];
@@ -23,14 +30,6 @@
 	}
 	
 	return self;
-}
-
-
-
-- (void) dealloc
-{
-	[self.tableView release];
-	[super dealloc];
 }
 
 @end

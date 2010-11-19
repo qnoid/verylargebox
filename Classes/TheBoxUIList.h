@@ -19,7 +19,7 @@
 
 @property(nonatomic, retain) NSArray *textFields;
 
-+(id)listWithTextFields:(NSArray *)textFields;
++(id)newListWithTextFields:(NSArray *)textFields;
 
 -(id)init:(NSArray *)textFields;
 -(void)textFieldDidChange:(UITextField*)aTextField;

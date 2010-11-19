@@ -13,26 +13,30 @@
 @interface UploadUIViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> {
 	
 	@private
-		IBOutlet UIScrollView *uploadView;
-		IBOutlet UIButton *takePhotoButton;
-		IBOutlet UITextField *firstTag;
-		IBOutlet UIImageView *imageView;
-		IBOutlet UITextField *locationTextField;
-		IBOutlet UITextField *nameTextField;
-		IBOutlet UITextField *secondTag;
-		IBOutlet UITextField *thirdTag;
-	
+		UIScrollView *uploadView;
+		UIButton *takePhotoButton;
+		UITextField *firstTag;
+		UIImageView *imageView;
+		UIButton *locationButton;
+		UITextField *nameTextField;
+		UITextField *secondTag;
+		UITextField *thirdTag;	
 		NSArray *textFields;
 		TheBoxUIList *tags;
 }
-
+@property(nonatomic, assign) IBOutlet UIScrollView *uploadView;
+@property(nonatomic, assign) IBOutlet UIButton *takePhotoButton;
+@property(nonatomic, assign) IBOutlet UITextField *firstTag;
+@property(nonatomic, assign) IBOutlet UIImageView *imageView;
+@property(nonatomic, assign) IBOutlet UIButton *locationButton;
+@property(nonatomic, assign) IBOutlet UITextField *nameTextField;
+@property(nonatomic, assign) IBOutlet UITextField *secondTag;
+@property(nonatomic, assign) IBOutlet UITextField *thirdTag;
 @property(nonatomic, retain) NSArray *textFields;
 @property(nonatomic, retain) TheBoxUIList *tags;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
-
-- (IBAction)edit:(id)sender;
 
 /*
  *	Presents the ImagePicker to allow the user to take a photo 
@@ -44,5 +48,7 @@
  *	Also sets the delegate to self.
  */
 - (IBAction)takePhoto:(id)sender;
+
+- (IBAction)enterLocation:(id)sender;
 
 @end

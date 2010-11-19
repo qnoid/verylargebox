@@ -8,12 +8,39 @@
  *  Contributor(s): .-
  */
 #import "WelcomeUIViewController.h"
+#import "TheBoxNotifications.h"
+#import "TheBoxLocationService.h"
 
 @implementation WelcomeUIViewController
 
+@synthesize welcomeLabel;
+@synthesize toLabel;
+@synthesize locationLabel;
+@synthesize checkInButton;
+@synthesize theBoxLocationService;
+
+- (void) dealloc
+{
+	[theBoxLocationService release];
+	[super dealloc];
+}
+
 -(void) viewDidLoad
 {
-	//do location retrieval
+	self.theBoxLocationService = [TheBoxLocationService theBox];
+	[self.theBoxLocationService notifyDidFindPlacemark:self];	
+}
+
+-(void)didFindPlacemark:(NSNotification *)notification;
+{
+	MKPlacemark *place = [TheBoxNotifications place:notification];
+	NSString *city = place.locality;
+	
+	NSLog(@"city: %@", city);
+	locationLabel.text = city;	
+	locationLabel.hidden = NO;
+	checkInButton.hidden = NO;
+	checkInButton.enabled = YES;
 }
 
 - (IBAction)enter:(id)sender 
@@ -26,4 +53,5 @@
 	
 	[self presentModalViewController:home animated:YES];
 }
+
 @end

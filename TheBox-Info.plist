@@ -28,5 +28,10 @@
 	<string>Welcome</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>location-services </string>
+		<string>gps</string>
+	</array>
 </dict>
 </plist>

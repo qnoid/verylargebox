@@ -9,11 +9,23 @@
  */
 #import <UIKit/UIKit.h>
 #import "TheBoxScrollView.h"
+#import "TheBoxLocationServiceDelegate.h"
 
-@interface HomeUIViewController : UIViewController {
-    IBOutlet UILabel *location;
-    IBOutlet UISearchBar *search;
-    IBOutlet TheBoxScrollView *theBox;
+@class TheBoxLocationService;
+
+@interface HomeUIViewController : UIViewController <TheBoxLocationServiceDelegate> 
+{
+	@private
+		UILabel *locationLabel;
+		UISearchBar *searchBar;
+		TheBoxScrollView *theBoxView;
+		TheBoxLocationService *theBoxLocationService;
 }
+
+@property(nonatomic, assign) IBOutlet UILabel *locationLabel;
+@property(nonatomic, assign) IBOutlet UISearchBar *searchBar;
+@property(nonatomic, assign) IBOutlet TheBoxScrollView *theBoxView;
+@property(nonatomic, retain) TheBoxLocationService *theBoxLocationService;
+
 - (IBAction)upload:(id)sender;
 @end
