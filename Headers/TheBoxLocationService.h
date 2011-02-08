@@ -32,14 +32,23 @@
 /*
  * will call didUpdateToLocation:
  * with name "didUpdateToLocation"
+ * userInfo @"newLocation"
  */
 -(void)notifyDidUpdateToLocation:(id<TheBoxLocationServiceDelegate>) delegate;
 
 /*
  * will call didFindPlacemark:
  * with name "didFindPlacemark"
+ * userInfo @"place"
  */
 -(void)notifyDidFindPlacemark:(id<TheBoxLocationServiceDelegate>) delegate;
+
+/*
+ * will call didFailWithError:
+ * with name @"didFailWithError"
+ * userInfo @"error"
+ */
+-(void)notifyDidFailWithError:(id<TheBoxLocationServiceDelegate>) delegate;
 
 
 @end

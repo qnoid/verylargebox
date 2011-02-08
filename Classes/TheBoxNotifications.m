@@ -25,4 +25,10 @@ return [userInfo objectForKey:@"newLocation"];
 return [userInfo objectForKey:@"place"];
 }
 
++(NSError *)error:(NSNotification *)notification
+{
+	NSDictionary *userInfo = [notification userInfo];
+return [userInfo objectForKey:@"error"];
+}
+
 @end

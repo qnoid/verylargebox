@@ -16,5 +16,6 @@
 @optional
 	-(void)didUpdateToLocation:(NSNotification *)notification;
 	-(void)didFindPlacemark:(NSNotification *)notification;
+	-(void)didFailWithError:(NSNotification *)notification;
 
 @end

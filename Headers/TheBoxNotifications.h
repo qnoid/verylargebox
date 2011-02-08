@@ -17,5 +17,6 @@
 
 +(CLLocation *)location:(NSNotification *)notification;
 +(MKPlacemark *)place:(NSNotification *)notification;
++(NSError *)error:(NSNotification *)notification;
 
 @end

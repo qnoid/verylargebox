@@ -134,7 +134,7 @@
 						<object class="IBUIButton" id="605079377">
 							<reference key="NSNextResponder" ref="191373211"/>
 							<int key="NSvFlags">-2147483356</int>
-							<string key="NSFrame">{{0, 146}, {320, 320}}</string>
+							<string key="NSFrame">{{0, 160}, {320, 320}}</string>
 							<reference key="NSSuperview" ref="191373211"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<int key="IBUIContentMode">2</int>
@@ -162,7 +162,7 @@
 							</object>
 						</object>
 					</object>
-					<string key="NSFrameSize">{320, 460}</string>
+					<string key="NSFrameSize">{320, 480}</string>
 					<reference key="NSSuperview"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
@@ -174,7 +174,6 @@
 					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
-				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="interfaceOrientation">1</int>
 				</object>
@@ -370,7 +369,7 @@
 					<string>TheBoxAppDelegate</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>WelcomeUIViewController</string>
-					<string>{{329, 197}, {320, 480}}</string>
+					<string>{{312, 240}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">

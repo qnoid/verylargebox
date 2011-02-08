@@ -1,9 +1,6 @@
 //
 // Prefix header for all source files of the 'TheBox' target in the 'TheBox' project
 //
-#define __IPHONE_OS_VERSION_MAX_ALLOWED     __IPHONE_4_1
-#define __IPHONE_OS_VERSION_MIN_REQUIRED __IPHONE_3_0
-
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>

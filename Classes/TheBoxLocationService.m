@@ -63,6 +63,12 @@ return self;
 	[center addObserver:delegate selector:@selector(didFindPlacemark:) name:@"didFindPlacemark" object:self];
 }
 
+-(void)notifyDidFailWithError:(id<TheBoxLocationServiceDelegate>) delegate
+{
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:delegate selector:@selector(didFailWithError:) name:@"didFailWithError" object:self];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:newLocation forKey:@"newLocation"]; 
@@ -79,6 +85,7 @@ return self;
 // Delegate methods
 - (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFindPlacemark:(MKPlacemark*)place
 {
+	[geocoder release];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:place forKey:@"place"]; 
 	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -87,7 +94,13 @@ return self;
 
 - (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFailWithError:(NSError*)error
 {
+	[geocoder release];
     NSLog(@"Could not retrieve the specified place information.\n");
+	
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"]; 
+
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center postNotificationName:@"didFailWithError" object:self userInfo:userInfo];	
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "WelcomeUIViewController.h"
 #import "TheBoxNotifications.h"
 #import "TheBoxLocationService.h"
+#import "HomeUIGridViewController.h"
 
 @implementation WelcomeUIViewController
 
@@ -28,7 +29,8 @@
 -(void) viewDidLoad
 {
 	self.theBoxLocationService = [TheBoxLocationService theBox];
-	[self.theBoxLocationService notifyDidFindPlacemark:self];	
+	[self.theBoxLocationService notifyDidFindPlacemark:self];
+	[self.theBoxLocationService notifyDidFailWithError:self];	
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification;
@@ -43,15 +45,29 @@
 	checkInButton.enabled = YES;
 }
 
+-(void)didFailWithError:(NSNotification *)notification
+{
+	NSError *error = [TheBoxNotifications error:notification];
+	
+	NSLog(@"%@", error);
+	
+	locationLabel.text = @"Unknown";
+	locationLabel.hidden = NO;
+	checkInButton.hidden = NO;
+	checkInButton.enabled = YES;
+}
+
+
 - (IBAction)enter:(id)sender 
 {
 	NSLog(@"Hello %@", locationLabel.text);
 	
-	NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"Home" owner:self options:nil];
-	
+	NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"Home" owner:self options:nil];	
 	UIViewController *home = [views objectAtIndex:0];
 	
 	[self presentModalViewController:home animated:YES];
+	
+	[home release];
 }
 
 @end

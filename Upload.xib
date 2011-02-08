@@ -51,7 +51,7 @@
 								<object class="IBUIButton" id="1062606987">
 									<reference key="NSNextResponder" ref="321616154"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrameSize">{320, 300}</string>
+									<string key="NSFrameSize">{320, 320}</string>
 									<reference key="NSSuperview" ref="321616154"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -80,16 +80,15 @@
 								<object class="IBUIImageView" id="594212417">
 									<reference key="NSNextResponder" ref="321616154"/>
 									<int key="NSvFlags">-2147483374</int>
-									<string key="NSFrameSize">{320, 300}</string>
+									<string key="NSFrameSize">{320, 320}</string>
 									<reference key="NSSuperview" ref="321616154"/>
-									<int key="IBUIContentMode">1</int>
 									<bool key="IBUIUserInteractionEnabled">NO</bool>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<object class="IBUITextField" id="984028130">
 									<reference key="NSNextResponder" ref="321616154"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{0, 300}, {320, 21}}</string>
+									<string key="NSFrame">{{0, 320}, {320, 21}}</string>
 									<reference key="NSSuperview" ref="321616154"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClipsSubviews">YES</bool>
@@ -117,7 +116,7 @@
 								<object class="IBUIButton" id="183032429">
 									<reference key="NSNextResponder" ref="321616154"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{0, 321}, {320, 21}}</string>
+									<string key="NSFrame">{{0, 341}, {320, 21}}</string>
 									<reference key="NSSuperview" ref="321616154"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<int key="IBUIContentMode">4</int>
@@ -136,7 +135,7 @@
 								<object class="IBUITextField" id="6095566">
 									<reference key="NSNextResponder" ref="321616154"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{0, 342}, {320, 21}}</string>
+									<string key="NSFrame">{{0, 362}, {320, 21}}</string>
 									<reference key="NSSuperview" ref="321616154"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClipsSubviews">YES</bool>
@@ -160,7 +159,7 @@
 								<object class="IBUITextField" id="761542530">
 									<reference key="NSNextResponder" ref="321616154"/>
 									<int key="NSvFlags">-2147483356</int>
-									<string key="NSFrame">{{0, 363}, {320, 21}}</string>
+									<string key="NSFrame">{{0, 383}, {320, 21}}</string>
 									<reference key="NSSuperview" ref="321616154"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClipsSubviews">YES</bool>
@@ -184,7 +183,7 @@
 								<object class="IBUITextField" id="1035051630">
 									<reference key="NSNextResponder" ref="321616154"/>
 									<int key="NSvFlags">-2147483356</int>
-									<string key="NSFrame">{{0, 384}, {320, 21}}</string>
+									<string key="NSFrame">{{0, 404}, {320, 21}}</string>
 									<reference key="NSSuperview" ref="321616154"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClipsSubviews">YES</bool>
@@ -205,7 +204,7 @@
 									</object>
 								</object>
 							</object>
-							<string key="NSFrame">{{0, 44}, {320, 416}}</string>
+							<string key="NSFrame">{{0, 44}, {320, 436}}</string>
 							<reference key="NSSuperview" ref="841466699"/>
 							<object class="NSColor" key="IBUIBackgroundColor">
 								<int key="NSColorSpace">3</int>
@@ -244,7 +243,7 @@
 							</object>
 						</object>
 					</object>
-					<string key="NSFrameSize">{320, 460}</string>
+					<string key="NSFrameSize">{320, 480}</string>
 					<reference key="NSSuperview"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
@@ -253,7 +252,6 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
-				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="interfaceOrientation">1</int>
 				</object>
@@ -473,10 +471,10 @@
 							<reference ref="1035051630"/>
 							<reference ref="6095566"/>
 							<reference ref="984028130"/>
-							<reference ref="594212417"/>
 							<reference ref="761542530"/>
 							<reference ref="1062606987"/>
 							<reference ref="183032429"/>
+							<reference ref="594212417"/>
 						</object>
 						<reference key="parent" ref="841466699"/>
 						<string key="objectName">uploadView</string>
@@ -567,7 +565,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AQAAAABCMAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw6kAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -593,7 +591,7 @@
 						<bytes key="NSTransformStruct">AQAAAABCMAAAA</bytes>
 					</object>
 					<string>UploadUIViewController</string>
-					<string>{{297, 158}, {320, 480}}</string>
+					<string>{{303, 265}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
