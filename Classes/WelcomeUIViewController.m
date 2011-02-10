@@ -19,6 +19,7 @@
 @synthesize locationLabel;
 @synthesize checkInButton;
 @synthesize theBoxLocationService;
+@synthesize gridViewController;
 
 - (void) dealloc
 {
@@ -62,12 +63,7 @@
 {
 	NSLog(@"Hello %@", locationLabel.text);
 	
-	NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"Home" owner:self options:nil];	
-	UIViewController *home = [views objectAtIndex:0];
-	
-	[self presentModalViewController:home animated:YES];
-	
-	[home release];
+	[self presentModalViewController:gridViewController animated:YES];	
 }
 
 @end

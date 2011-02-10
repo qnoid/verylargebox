@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "TheBoxLocationServiceDelegate.h"
+#import "HomeUIGridViewController.h"
 
 @class TheBoxLocationService;
 
@@ -21,12 +22,14 @@
 		UILabel *locationLabel;
 		UIButton *checkInButton;
 		TheBoxLocationService *theBoxLocationService;
+		HomeUIGridViewController *gridViewController;
 }
 
 @property(nonatomic, assign) IBOutlet UILabel *welcomeLabel;
 @property(nonatomic, assign) IBOutlet UILabel *toLabel;
 @property(nonatomic, assign) IBOutlet UILabel *locationLabel;
 @property(nonatomic, assign) IBOutlet UIButton *checkInButton;
+@property(nonatomic, assign) IBOutlet HomeUIGridViewController *gridViewController;
 @property(nonatomic, retain) TheBoxLocationService *theBoxLocationService;
 
 - (IBAction)enter:(id)sender;

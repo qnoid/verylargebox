@@ -33,7 +33,6 @@ static const int SECTION_FRAME_HEIGHT = 196;
  */
 - (void)viewDidLoad
 {	
-	[super viewDidLoad];
 	TheBoxUIGridView *gridView = [TheBoxUIGridView 
 					 newGridView:CGRectMake(GRID_FRAME_X, GRID_FRAME_Y, GRID_FRAME_WIDTH, GRID_FRAME_HEIGHT) 
 					 datasource:self];		

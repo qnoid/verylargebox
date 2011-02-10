@@ -28,9 +28,9 @@
 	[super dealloc];
 }
 
--(void) viewDidLoad
+-(void) loadView
 {
-	[super viewDidLoad];
+	[super loadView];
 	
 	self.theBoxLocationService = [TheBoxLocationService theBox];
 	[self.theBoxLocationService notifyDidFindPlacemark:self];

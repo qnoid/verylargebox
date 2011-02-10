@@ -59,6 +59,7 @@ return [datasource numberOfColumnsInSection:section];
 	view.showsHorizontalScrollIndicator = YES;
 	view.bounces = NO;
 	view.clipsToBounds = YES;
+	view.pagingEnabled = YES;
 	view.index = section;
 	view.numberOfColumnsPerSectionView = view.frame.size.width / COLUMN_FRAME_WIDTH;
 	view.datasource = self.datasource;

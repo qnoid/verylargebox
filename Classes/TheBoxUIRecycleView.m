@@ -1,11 +1,12 @@
-//
-//  TheBoxUIRecycleView.m
-//  TheBox
-//
-//  Created by Markos Charatzas on 07/02/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
+/*
+ *  Copyright 2010 The Box
+ *  All rights reserved.
+ *
+ *  This file is part of TheBox
+ *
+ *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 07/02/10.
+ *  Contributor(s): .-
+ */
 #import "TheBoxUIRecycleView.h"
 #import "TheBoxUIRecycleStrategy.h"
 #import "VisibleStrategy.h"
@@ -24,6 +25,7 @@
 	TheBoxUIRecycleView *recycledView = [[TheBoxUIRecycleView alloc] initWithFrame:CGRectZero];
 	recycledView.recycleStrategy = aRecycleStrategy;
 	recycledView.visibleStrategy = aVisibleStrategy;	
+	
 return recycledView;
 }
 

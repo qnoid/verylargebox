@@ -50,6 +50,7 @@ static const int COLUMN_FRAME_WIDTH = 160;
 {
 	TheBoxUIGridView *gridView = [[TheBoxUIGridView alloc] initWithFrame:frame];
 	gridView.bounces = NO;
+	gridView.pagingEnabled = YES;
 	gridView.numberOfSectionsPerGridView = gridView.frame.size.height / SECTION_FRAME_HEIGHT;
 	gridView.datasource = aDatasource;
 	
@@ -93,7 +94,8 @@ return gridView;
 		TheBoxUISectionVisibleStrategy *visibleStrategy = [[TheBoxUISectionVisibleStrategy alloc] init];
 		visibleStrategy.delegate = self;
 				
-		TheBoxUIRecycleView *recycleView = [TheBoxUIRecycleView newRecycledView:recycleStrategy visibleStrategy:visibleStrategy];;
+		TheBoxUIRecycleView *recycleView = [TheBoxUIRecycleView newRecycledView:recycleStrategy visibleStrategy:visibleStrategy];
+		recycleView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 		
 		self.subview = recycleView;
 		[self addSubview:subview];
@@ -113,12 +115,16 @@ return self;
     CGRect visibleBounds = [self bounds];
 	
 	[self.subview size:self.sectionSize bounds:visibleBounds];	
+	
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 	NSLog(@"scrollViewDidScroll on grid");
     CGRect visibleBounds = [self bounds];
+	
+	NSLog(@"frame size of subview %@", NSStringFromCGRect(self.subview.frame));
+
 	
 	[self.subview size:self.sectionSize bounds:visibleBounds];	
 }
