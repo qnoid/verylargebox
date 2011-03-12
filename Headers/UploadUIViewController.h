@@ -15,25 +15,27 @@
 	@private
 		UIScrollView *uploadView;
 		UIButton *takePhotoButton;
-		UITextField *firstTag;
 		UIImageView *imageView;
 		UIButton *locationButton;
 		UITextField *nameTextField;
+		UITextField *category;	
+		UITextField *firstTag;
 		UITextField *secondTag;
-		UITextField *thirdTag;	
 		NSArray *textFields;
-		TheBoxUIList *tags;
+		TheBoxUIList *list;
+		NSArray *tags;
 }
 @property(nonatomic, assign) IBOutlet UIScrollView *uploadView;
 @property(nonatomic, assign) IBOutlet UIButton *takePhotoButton;
-@property(nonatomic, assign) IBOutlet UITextField *firstTag;
 @property(nonatomic, assign) IBOutlet UIImageView *imageView;
 @property(nonatomic, assign) IBOutlet UIButton *locationButton;
 @property(nonatomic, assign) IBOutlet UITextField *nameTextField;
+@property(nonatomic, assign) IBOutlet UITextField *category;
+@property(nonatomic, assign) IBOutlet UITextField *firstTag;
 @property(nonatomic, assign) IBOutlet UITextField *secondTag;
-@property(nonatomic, assign) IBOutlet UITextField *thirdTag;
 @property(nonatomic, retain) NSArray *textFields;
-@property(nonatomic, retain) TheBoxUIList *tags;
+@property(nonatomic, retain) TheBoxUIList *list;
+@property(nonatomic, retain) NSArray *tags;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;

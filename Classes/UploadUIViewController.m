@@ -10,25 +10,28 @@
 #import "UploadUIViewController.h"
 #import "TheBoxUIList.h"
 #import "NSArray+Decorator.h"
+#import "ASIFormDataRequest.h"
+#import "UITextField+TheBoxUITextField.h"
 
 @implementation UploadUIViewController
 
 @synthesize uploadView;
 @synthesize takePhotoButton;
+@synthesize category;
 @synthesize firstTag;
+@synthesize secondTag;
 @synthesize imageView;
 @synthesize locationButton;
 @synthesize nameTextField;
-@synthesize secondTag;
-@synthesize thirdTag;
 
 @synthesize textFields;
+@synthesize list;
 @synthesize tags;
 
 - (void) dealloc
 {
 	[textFields release];
-	[tags release];
+	[list release];
 	[super dealloc];
 }
 
@@ -37,14 +40,15 @@
 {
 	[super viewDidLoad];
 
-	self.textFields = [NSArray arrayWithObjects:nameTextField, firstTag, secondTag, thirdTag, nil];	
-	self.tags = [TheBoxUIList newListWithTextFields: [NSArray arrayWithObjects:firstTag, secondTag, thirdTag, nil]];
+	self.textFields = [NSArray arrayWithObjects:nameTextField, category, firstTag, secondTag, nil];	
+	self.list = [TheBoxUIList newListWithTextFields: [NSArray arrayWithObjects:category, firstTag, secondTag, nil]];
+	self.tags = [NSArray arrayWithObjects:firstTag, secondTag, nil];	
 	
 	for (UITextField *textField in textFields) {
 		textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	}
 	
-	for (UITextField *textField in tags) {
+	for (UITextField *textField in list) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
 	}
 	
@@ -100,14 +104,35 @@ return NO;
 - (void)textFieldDidChange:(NSNotification *)notification
 {
 	UITextField *textField = (UITextField *)[notification object];
-	[self.tags textFieldDidChange:textField];
+	[self.list textFieldDidChange:textField];
 }
 
 - (IBAction)cancel:(id)sender{
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)done:(id)sender {
+- (IBAction)done:(id)sender 
+{
+	NSData *imageData = UIImageJPEGRepresentation(imageView.image, 1.0);
+	
+	NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:3000/items"];
+	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+	[request setPostValue:category.text forKey:@"item[category_attributes][name]"];
+	[request setPostValue:nameTextField.text forKey:@"item[name]"];
+
+
+	for (UITextField *tag in tags) 
+	{
+		if (![tag isEmpty]){
+			[request addPostValue:tag.text forKey:@"item[tags_attributes][][name]"];
+		}
+		
+	}
+	
+	[request setData:imageData withFileName:[NSString stringWithFormat:@"%@.jpg", [nameTextField.text stringByReplacingOccurrencesOfString:@" "withString:@"_"]] andContentType:@"image/jpeg" forKey:@"item[image]"];
+	[request startAsynchronous];
+
+
 	[self dismissModalViewControllerAnimated:YES];    
 }
 
@@ -150,14 +175,14 @@ return NO;
 	imageView.hidden = NO;
 	takePhotoButton.hidden = YES;
 	
-	[self dismissModalViewControllerAnimated:YES];
 	[picker release];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-	[self dismissModalViewControllerAnimated:YES];
 	[picker release];	
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 @end

@@ -38,6 +38,11 @@
 {
 	MKPlacemark *place = [TheBoxNotifications place:notification];
 	NSString *city = place.locality;
+	CLLocationDegrees latitude = place.coordinate.latitude;
+	CLLocationDegrees longitude = place.coordinate.longitude;
+	
+	NSLog(@"latitude %f", latitude);
+	NSLog(@"longitude %f", longitude);
 	
 	NSLog(@"city: %@", city);
 	locationLabel.text = city;	

@@ -13,6 +13,7 @@
 #import "TheBoxUIRecycleStrategyMethod.h"
 #import "PartiallyVisibleWithinX.h"
 #import "PartiallyVisibleWithinY.h"
+#import "UIView+TheBoxUIView.h"
 
 @implementation TheBoxUIRecycleStrategy
 

@@ -14,6 +14,7 @@
 #import "TheBoxUISectionViewDataSource.h"
 #import "TheBoxBundle.h"
 #import "TheBoxUIRecycleView.h"
+#import "UIView+TheBoxUIView.h"
 
 @interface TheBoxUISectionView ()
 -(UIView *)dequeueReusableCell;
@@ -84,6 +85,7 @@ return self;
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
 	NSLog(@"scrollViewDidScroll on section: %d", ((TheBoxUISectionView *)scrollView).index);
+	
     CGRect visibleBounds = [self bounds];
 	
 	[self.subview size:self.cellSize bounds:visibleBounds];	

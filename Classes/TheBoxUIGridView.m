@@ -121,6 +121,7 @@ return self;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 	NSLog(@"scrollViewDidScroll on grid");
+	
     CGRect visibleBounds = [self bounds];
 	
 	NSLog(@"frame size of subview %@", NSStringFromCGRect(self.subview.frame));
