@@ -30,8 +30,7 @@
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>location-services </string>
-		<string>gps</string>
+		<string>location-services</string>
 	</array>
 </dict>
 </plist>
