@@ -157,6 +157,8 @@
 		90F08274132AED5200E7E35F /* UITextField+TheBoxUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F08272132AED5200E7E35F /* UITextField+TheBoxUITextField.m */; };
 		90F082B4132AEF4200E7E35F /* FooTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F082B3132AEF4200E7E35F /* FooTest.m */; };
 		90F082B5132AEF4200E7E35F /* FooTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F082B3132AEF4200E7E35F /* FooTest.m */; };
+		A152E551130D7A6000514061 /* Entitlement.plist in Resources */ = {isa = PBXBuildFile; fileRef = A152E550130D7A6000514061 /* Entitlement.plist */; };
+		A152E573130D80F200514061 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A152E572130D80F200514061 /* Icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,6 +335,8 @@
 		90F08275132AEDA000E7E35F /* UITextField+TheBoxUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+TheBoxUITextField.h"; sourceTree = "<group>"; };
 		90F0829A132AEF3400E7E35F /* FooTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooTest.h; sourceTree = "<group>"; };
 		90F082B3132AEF4200E7E35F /* FooTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooTest.m; sourceTree = "<group>"; };
+		A152E550130D7A6000514061 /* Entitlement.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlement.plist; sourceTree = "<group>"; };
+		A152E572130D80F200514061 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,6 +439,8 @@
 				90D8304012B506D900BE4470 /* Tests */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				8D1107310486CEB800E47090 /* TheBox-Info.plist */,
+				A152E550130D7A6000514061 /* Entitlement.plist */,
+				A152E572130D80F200514061 /* Icon.png */,
 				90D8302D12B5067E00BE4470 /* TheBoxTests-Info.plist */,
 				90D29AFF131A81FB008B8B2D /* CFNetwork.framework */,
 				90D29B07131A820F008B8B2D /* SystemConfiguration.framework */,
@@ -754,6 +760,8 @@
 				90E4C21B12BE87FB00D9E0BE /* 5,3_160x160.jpg in Resources */,
 				90E4C21C12BE87FB00D9E0BE /* 5,4_160x160.jpg in Resources */,
 				90E4C21D12BE87FB00D9E0BE /* 5,5_160x160.jpg in Resources */,
+				A152E551130D7A6000514061 /* Entitlement.plist in Resources */,
+				A152E573130D80F200514061 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -930,7 +938,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = TheBox;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -946,7 +954,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = TheBox;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -980,7 +988,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = TheBoxTests;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1013,11 +1021,79 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = TheBoxTests;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
 			};
 			name = Release;
+		};
+		A152E543130D7A2300514061 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_ENTITLEMENTS = Entitlement.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Williams";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AC6F6B61-A6A9-4A37-8FEE-80342AE36B96";
+				SDKROOT = iphoneos4.2;
+			};
+			name = AdHoc;
+		};
+		A152E544130D7A2300514061 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
+				INFOPLIST_FILE = "TheBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				PRODUCT_NAME = TheBox;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		A152E545130D7A2300514061 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_ENABLE_EXCEPTIONS = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREFIX_HEADER = TheBoxTests_Prefix.pch;
+				INFOPLIST_FILE = "TheBoxTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TheBoxTests;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = AdHoc;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1058,6 +1134,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				A152E544130D7A2300514061 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1067,6 +1144,7 @@
 			buildConfigurations = (
 				90C2C49312B6CA9600829868 /* Debug */,
 				90C2C49412B6CA9600829868 /* Release */,
+				A152E545130D7A2300514061 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1076,6 +1154,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				A152E543130D7A2300514061 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
