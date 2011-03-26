@@ -12,6 +12,8 @@
 #import "NSArray+Decorator.h"
 #import "ASIFormDataRequest.h"
 #import "UITextField+TheBoxUITextField.h"
+#import "TheBoxQueries.h"
+#import "TheBoxPost.h"
 
 @implementation UploadUIViewController
 
@@ -30,8 +32,14 @@
 
 - (void) dealloc
 {
-	[textFields release];
-	[list release];
+	[self.uploadView release];
+	[self.takePhotoButton release];
+	[self.imageView release];
+	[self.locationButton release];
+	[self.nameTextField release];
+	[self.textFields release];
+	[self.list release];
+	[self.tags release];
 	[super dealloc];
 }
 
@@ -113,41 +121,28 @@ return NO;
 
 - (IBAction)done:(id)sender 
 {
-	NSData *imageData = UIImageJPEGRepresentation(imageView.image, 1.0);
+	TheBoxPost *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
+												itemName:nameTextField.text 
+												locationName:locationButton.titleLabel.text
+												categoryName:category.text
+												tags:tags];
+	[itemQuery make:nil];
 	
-	NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:3000/items"];
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-	[request setPostValue:category.text forKey:@"item[category_attributes][name]"];
-	[request setPostValue:nameTextField.text forKey:@"item[name]"];
-
-
-	for (UITextField *tag in tags) 
-	{
-		if (![tag isEmpty]){
-			[request addPostValue:tag.text forKey:@"item[tags_attributes][][name]"];
-		}
-		
-	}
-	
-	[request setData:imageData withFileName:[NSString stringWithFormat:@"%@.jpg", [nameTextField.text stringByReplacingOccurrencesOfString:@" "withString:@"_"]] andContentType:@"image/jpeg" forKey:@"item[image]"];
-	[request startAsynchronous];
-
+	[itemQuery release];
 
 	[self dismissModalViewControllerAnimated:YES];    
 }
 
 - (IBAction)takePhoto:(id)sender 
 {
-//	BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-//	
-//	if(hasCamera)
-//	{
-		UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-		picker.delegate = self;
-		picker.allowsEditing = YES;
+	UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+	picker.delegate = self;
+	picker.allowsEditing = YES;
+#if !TARGET_IPHONE_SIMULATOR
+	picker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+#endif
 	
-		[self presentModalViewController:picker animated:YES];
-//	}
+	[self presentModalViewController:picker animated:YES];
 }
 
 - (IBAction)enterLocation:(id)sender
@@ -171,18 +166,19 @@ return NO;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
+	//less than a meg
 	imageView.image = image;
 	imageView.hidden = NO;
 	takePhotoButton.hidden = YES;
 	
-	[picker release];
 	[self dismissModalViewControllerAnimated:YES];
+	[picker release];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-	[picker release];	
 	[self dismissModalViewControllerAnimated:YES];
+	[picker release];	
 }
 
 @end

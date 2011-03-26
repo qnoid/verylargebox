@@ -7,10 +7,9 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 13/12/10.
  *  Contributor(s): .-
  */
-#import "UIViews.h"
+#import "UITestViews.h"
 
-
-@implementation UIViews
+@implementation UITestViews
 
 -(NSArray *)of:(NSArray *) rects
 {

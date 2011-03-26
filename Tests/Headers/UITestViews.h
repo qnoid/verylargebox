@@ -8,9 +8,8 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
-@interface UIViews : NSObject {
+@interface UITestViews : NSObject {
 
 }
 

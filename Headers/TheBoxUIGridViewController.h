@@ -17,12 +17,12 @@
 }
 
 /*
- * Override to customize strip
+ * Override to customize section
  */
 -(UIView *)gridView:(TheBoxUIGridView *)gridView section:(UIView *)section forSection:(NSInteger)section;
 
 /*
- * Override to customize a cell
+ * Override to customize a column
  */
 -(UIView *)gridView:(TheBoxUIGridView *)gridView forColumn:(UIView *)column withIndex:(NSInteger)index;
 

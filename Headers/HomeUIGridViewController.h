@@ -11,10 +11,11 @@
 #import "TheBoxUIGridViewController.h"
 #import "TheBoxLocationServiceDelegate.h"
 #import "UploadUIViewController.h"
+#import "TheBox.h"
 @class TheBoxLocationService;
 @class TheBoxUIGridView;
 
-@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate> 
+@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TheBoxDelegate> 
 {
 	@private
 		UploadUIViewController *uploadViewController;
@@ -25,9 +26,9 @@
 
 }
 
-@property(nonatomic, assign) IBOutlet UploadUIViewController *uploadViewController;
-@property(nonatomic, assign) IBOutlet UILabel *locationLabel;
-@property(nonatomic, assign) IBOutlet UISearchBar *searchBar;
+@property(nonatomic, retain) IBOutlet UploadUIViewController *uploadViewController;
+@property(nonatomic, retain) IBOutlet UILabel *locationLabel;
+@property(nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property(nonatomic, retain) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, retain) NSArray *items;
 

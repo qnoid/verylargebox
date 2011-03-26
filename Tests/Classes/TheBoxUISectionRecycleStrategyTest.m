@@ -11,7 +11,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import <UIKit/UIKit.h>
 #import "TheBoxUIRecycleStrategy.h"
-#import "UIViews.h"
+#import "UITestViews.h"
 
 @interface TheBoxUISectionRecycleStrategyTest : SenTestCase {
 	
@@ -77,7 +77,7 @@ return CGRectMake(bounds.origin.x, bounds.origin.y + diff, bounds.size.width, bo
 	NSValue *third = [NSValue valueWithCGRect:CGRectMake(0, 392, 320, 196)];
 	NSValue *forth = [NSValue valueWithCGRect:CGRectMake(0, 588, 320, 196)];
 	
-	NSArray *views = [[[[UIViews alloc] init] autorelease]of:[NSArray arrayWithObjects:first, second, third, forth, nil]];
+	NSArray *views = [[[[UITestViews alloc] init] autorelease]of:[NSArray arrayWithObjects:first, second, third, forth, nil]];
 	
 	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinY] autorelease];
 	

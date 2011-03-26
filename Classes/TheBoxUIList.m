@@ -18,7 +18,7 @@
 
 - (void) dealloc
 {
-	[textFields release];
+	[self.textFields release];
 	[super dealloc];
 }
 

@@ -15,6 +15,7 @@
 #import "TheBoxUIRecycleStrategy.h"
 #import "TheBoxUISectionVisibleStrategy.h"
 #import "TheBoxUIRecycleView.h"
+#import "TheBoxUISectionViewConfiguration.h"
 
 @interface TheBoxUIGridView ()
 -(UIView *) dequeueReusableSection;
@@ -50,7 +51,6 @@ static const int COLUMN_FRAME_WIDTH = 160;
 {
 	TheBoxUIGridView *gridView = [[TheBoxUIGridView alloc] initWithFrame:frame];
 	gridView.bounces = NO;
-	gridView.pagingEnabled = YES;
 	gridView.numberOfSectionsPerGridView = gridView.frame.size.height / SECTION_FRAME_HEIGHT;
 	gridView.datasource = aDatasource;
 	
@@ -74,12 +74,14 @@ return gridView;
 @synthesize datasource;
 @synthesize numberOfSectionsPerGridView;
 @synthesize sectionSize;
+@synthesize configuration;
 
 - (void) dealloc
 {
 	[self.subview release];
 	self.delegate = nil;
 	[self.sectionBuilder release];
+	[self.configuration release];
 	[super dealloc];
 }
 
@@ -104,6 +106,7 @@ return gridView;
 		[recycleStrategy release];
 		
 		self.sectionSize = CGSizeMake(SECTION_FRAME_WIDTH, SECTION_FRAME_HEIGHT);
+		self.configuration = [[TheBoxUISectionViewConfiguration alloc] initWithColumnFrameWidth:COLUMN_FRAME_WIDTH];
 	}
 	
 return self;
@@ -114,8 +117,7 @@ return self;
 	NSLog(@"layoutSubviews on grid");	
     CGRect visibleBounds = [self bounds];
 	
-	[self.subview size:self.sectionSize bounds:visibleBounds];	
-	
+	[self.subview size:self.sectionSize bounds:visibleBounds];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -125,7 +127,6 @@ return self;
     CGRect visibleBounds = [self bounds];
 	
 	NSLog(@"frame size of subview %@", NSStringFromCGRect(self.subview.frame));
-
 	
 	[self.subview size:self.sectionSize bounds:visibleBounds];	
 }
@@ -156,10 +157,12 @@ return CGRectMake(SECTION_FRAME_X, SECTION_FRAME_HEIGHT * section, MIN(columns *
 		view = [[self.sectionBuilder newSection:section] autorelease];
 	}
 	
-	((TheBoxUISectionView *)view).index = section;
-	view.frame = [self frame:section noOfColumns:[sectionBuilder numberOfColumnsInSection:section]];
-	((TheBoxUISectionView *)view).contentOffset = CGPointZero;
+	TheBoxUISectionView *sectionView = (TheBoxUISectionView *)view;
 	
+	sectionView.index = section;
+	view.frame = [self frame:section noOfColumns:[sectionBuilder numberOfColumnsInSection:section]];
+	[self.configuration configure:sectionView];
+
 	/*
 	 * Because views are being recycled, this is required so as #layoutSubviews 
 	 * is called to update what's visible for the new section

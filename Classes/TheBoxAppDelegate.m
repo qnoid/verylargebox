@@ -8,6 +8,7 @@
  *  Contributor(s): .-
  */
 #import "TheBoxAppDelegate.h"
+#import "Item.h"
 
 @implementation TheBoxAppDelegate
 
@@ -24,7 +25,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    
-    // Override point for customization after application launch.
 	NSLog(@"Hello The Box");
     [window makeKeyAndVisible];
     

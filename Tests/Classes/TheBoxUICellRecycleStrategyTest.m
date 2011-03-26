@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "TheBoxUIRecycleStrategy.h"
 #import "TheBoxBundle.h"
-#import "UIViews.h"
+#import "UITestViews.h"
 
 @interface TheBoxUICellRecycleStrategyTest : SenTestCase {
 	
@@ -121,7 +121,7 @@ return CGRectMake(bounds.origin.x + diff, bounds.origin.y, bounds.size.width, bo
 	NSValue *third = [NSValue valueWithCGRect:CGRectMake(320, 0, 160, 196)];
 	NSValue *forth = [NSValue valueWithCGRect:CGRectMake(480, 0, 160, 196)];
 
-	NSArray *views = [[[[UIViews alloc] init] autorelease]of:[NSArray arrayWithObjects:first, second, third, forth, nil]];
+	NSArray *views = [[[[UITestViews alloc] init] autorelease]of:[NSArray arrayWithObjects:first, second, third, forth, nil]];
 	
 	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinX] autorelease];
 	

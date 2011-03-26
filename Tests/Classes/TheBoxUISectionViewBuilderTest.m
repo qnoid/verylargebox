@@ -22,6 +22,7 @@
 
 -(void)testFoo
 {
+	
 }
 
 @end

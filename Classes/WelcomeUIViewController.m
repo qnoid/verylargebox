@@ -14,8 +14,6 @@
 
 @implementation WelcomeUIViewController
 
-@synthesize welcomeLabel;
-@synthesize toLabel;
 @synthesize locationLabel;
 @synthesize checkInButton;
 @synthesize theBoxLocationService;
@@ -23,8 +21,16 @@
 
 - (void) dealloc
 {
-	[theBoxLocationService release];
+	[self.locationLabel release];
+	[self.checkInButton release];
+	[self.theBoxLocationService release];
+	[self.gridViewController release];
 	[super dealloc];
+}
+
+-(void) loadView
+{
+	
 }
 
 -(void) viewDidLoad

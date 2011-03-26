@@ -12,18 +12,17 @@
 
 @implementation Item
 
-@synthesize image;
-@synthesize value;
+@synthesize imageURL;
 @synthesize when;
+@synthesize createdAt;
 
 - (void) dealloc
 {
-	[self.image release];
-	[self.value release];
+	[self.imageURL release];
 	[self.when release];
+	[self.createdAt release];
 	[super dealloc];
 }
-
 
 
 @end

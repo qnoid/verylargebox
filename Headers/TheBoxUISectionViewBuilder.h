@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "TheBoxUISectionViewDatasource.h"
 @class TheBoxUISectionView;
+@class TheBoxUISectionViewConfiguration;
 
 @interface TheBoxUISectionViewBuilder : NSObject 
 {

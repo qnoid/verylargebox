@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 #import "TheBoxUICellVisibleStrategy.h"
 #import "VisibleStrategy.h"
-#import "UIViews.h"
+#import "UITestViews.h"
 
 @interface TheBoxUICellVisibleStrategyTest : SenTestCase <VisibleStrategyDelegate> 
 {
@@ -37,7 +37,7 @@
 	NSValue *forth = [NSValue valueWithCGRect:CGRectMake(480, 0, 160, 196)];
 	NSValue *fifth = [NSValue valueWithCGRect:CGRectMake(640, 0, 160, 196)];
 	
-	UIViews *foo = [[UIViews alloc] init];
+	UITestViews *foo = [[UITestViews alloc] init];
 	self.views = [foo of:[NSArray arrayWithObjects:first, second, third, forth, fifth, nil]];
 	[foo release];
 }

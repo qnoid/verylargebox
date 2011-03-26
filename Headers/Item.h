@@ -7,19 +7,18 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 15/12/10.
  *  Contributor(s): .-
  */
-#import <Foundation/Foundation.h>
 
 
 @interface Item : NSObject 
 {
 	@private
-		UIImage *image;
-		NSString *value;
+		NSString *imageURL;
 		NSString *when;
+		NSDate *createdAt;
 }
 
-@property(nonatomic, retain) UIImage *image;
-@property(nonatomic, retain) NSString *value;
-@property(nonatomic, retain) NSString *when;
+@property(nonatomic, copy) NSString *imageURL;
+@property(nonatomic, copy) NSString *when;
+@property(nonatomic, retain) NSDate *createdAt;
 
 @end

@@ -16,6 +16,7 @@
 @class TheBoxUISectionView;
 @class TheBoxUIRecycleStrategy;
 @class TheBoxUIRecycleView;
+@class TheBoxUISectionViewConfiguration;
 
 @interface TheBoxUIGridView : UIScrollView <UIScrollViewDelegate, VisibleStrategyDelegate>
 {
@@ -26,6 +27,7 @@
 		TheBoxUISectionViewBuilder *sectionBuilder;
 		NSUInteger numberOfSectionsPerGridView;
 		CGSize sectionSize;
+		TheBoxUISectionViewConfiguration *configuration;	
 }
 
 +(TheBoxUIGridView *) newGridView:(CGRect)frame datasource:(id<TheBoxUIGridViewDatasource>) datasource;
@@ -40,6 +42,8 @@
 @property(nonatomic, assign) TheBoxUISectionViewBuilder *sectionBuilder;
 @property(nonatomic, assign) NSUInteger numberOfSectionsPerGridView;
 @property(nonatomic, assign) CGSize sectionSize;
+@property(nonatomic, retain) TheBoxUISectionViewConfiguration *configuration;
+
 
 /*
  * Override to customize section

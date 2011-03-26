@@ -25,14 +25,14 @@
 		TheBoxUIList *list;
 		NSArray *tags;
 }
-@property(nonatomic, assign) IBOutlet UIScrollView *uploadView;
-@property(nonatomic, assign) IBOutlet UIButton *takePhotoButton;
-@property(nonatomic, assign) IBOutlet UIImageView *imageView;
-@property(nonatomic, assign) IBOutlet UIButton *locationButton;
-@property(nonatomic, assign) IBOutlet UITextField *nameTextField;
-@property(nonatomic, assign) IBOutlet UITextField *category;
-@property(nonatomic, assign) IBOutlet UITextField *firstTag;
-@property(nonatomic, assign) IBOutlet UITextField *secondTag;
+@property(nonatomic, retain) IBOutlet UIScrollView *uploadView;
+@property(nonatomic, retain) IBOutlet UIButton *takePhotoButton;
+@property(nonatomic, retain) IBOutlet UIImageView *imageView;
+@property(nonatomic, retain) IBOutlet UIButton *locationButton;
+@property(nonatomic, retain) IBOutlet UITextField *nameTextField;
+@property(nonatomic, retain) IBOutlet UITextField *category;
+@property(nonatomic, retain) IBOutlet UITextField *firstTag;
+@property(nonatomic, retain) IBOutlet UITextField *secondTag;
 @property(nonatomic, retain) NSArray *textFields;
 @property(nonatomic, retain) TheBoxUIList *list;
 @property(nonatomic, retain) NSArray *tags;
