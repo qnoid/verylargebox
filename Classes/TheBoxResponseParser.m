@@ -9,11 +9,11 @@
  */
 #import "TheBoxResponseParser.h"
 #import "JSON.h"
-#import "TheBoxDataParser.h"
+#import "TheBoxCompositeDataParser.h"
 
 @interface TheBoxResponseParser ()
 
-@property(nonatomic, retain) TheBoxDataParser *dataParser;
+@property(nonatomic, retain) TheBoxCompositeDataParser *dataParser;
 
 @end
 
@@ -29,7 +29,7 @@
 	[super dealloc];
 }
 
--(id) initWithDataParser:(TheBoxDataParser *)aDataParser
+-(id) initWithDataParser:(TheBoxCompositeDataParser *)aDataParser
 {
 	self = [super init];
 	
@@ -41,9 +41,9 @@ return self;
 }
 
 #pragma mark private
-TheBoxDataParser *dataParser;
+TheBoxCompositeDataParser *dataParser;
 
-- (void)response:(NSString*)response ok:(NSDictionary *)data
+- (void)response:(NSString*)response ok:(id)data
 {
 	[self.dataParser parse:data];
 	[self.delegate response:response ok:data];
@@ -51,7 +51,7 @@ TheBoxDataParser *dataParser;
 
 -(void)parse:(NSString *) response
 {
-	NSDictionary *data = [response JSONValue];
+	id data = [response JSONValue];
 	[self response:response ok:data];
 }
 

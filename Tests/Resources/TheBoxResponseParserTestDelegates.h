@@ -8,7 +8,7 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
-#import "TheBoxResponseDelegate.h"
+#import "TheBoxResponseParserDelegate.h"
 
 @interface TheBoxResponseDelegateLogger : NSObject <TheBoxResponseParserDelegate> 
 {

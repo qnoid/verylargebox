@@ -59,7 +59,7 @@ return recycleStrategy;
 	return self;
 }
 
--(void)recycle:(UIView *)view views:(NSArray *)views bounds:(CGRect) bounds
+-(void)recycle:(NSArray *)views bounds:(CGRect) bounds
 {	
 	for (UIView *visibleView in views) 
 	{
@@ -81,7 +81,7 @@ return recycleStrategy;
     }
 
 	NSLog(@"dequeueReusableView %@", view);
-	[view didRecycle:self];
+	
 return view;
 }
 

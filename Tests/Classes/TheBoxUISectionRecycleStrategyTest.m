@@ -42,23 +42,23 @@ return CGRectMake(bounds.origin.x, bounds.origin.y + diff, bounds.size.width, bo
  */ 
 -(void)testRecycle:(TheBoxUIRecycleStrategy *)recycleStrategy visibleBounds:(CGRect)visibleBounds views:(NSArray *) views scrollVerticalBy:(NSUInteger)height
 {
-	[recycleStrategy recycle:nil views:views bounds:visibleBounds];	
+	[recycleStrategy recycle:views bounds:visibleBounds];	
 	[self assertNotRecycled:recycleStrategy];		
 	
 	visibleBounds = [self scrollVertical:visibleBounds by:1];
-	[recycleStrategy recycle:nil views:views bounds:visibleBounds];	
+	[recycleStrategy recycle:views bounds:visibleBounds];	
 	[self assertNotRecycled:recycleStrategy];
 	
 	int noOfCells = views.count;
 	for (int recycledCells = 1; recycledCells < noOfCells; recycledCells++) 
 	{
 		visibleBounds = [self scrollVertical:visibleBounds by:height];
-		[recycleStrategy recycle:nil views:views bounds:visibleBounds];	
+		[recycleStrategy recycle:views bounds:visibleBounds];	
 		[self assertRecycled:recycleStrategy count:recycledCells];
 	}
 	
 	visibleBounds = [self scrollVertical:visibleBounds by:height];
-	[recycleStrategy recycle:nil views:views bounds:visibleBounds];	
+	[recycleStrategy recycle:views bounds:visibleBounds];	
 	[self assertRecycled:recycleStrategy count:noOfCells];
 }
 
@@ -96,7 +96,7 @@ return CGRectMake(bounds.origin.x, bounds.origin.y + diff, bounds.size.width, bo
 	
 	CGRect visibleBounds = CGRectMake(0, 197, 320, 196);
 	
-	[cellRecycleStrategy recycle:nil views:views bounds:visibleBounds];
+	[cellRecycleStrategy recycle:views bounds:visibleBounds];
 	
 	STAssertNotNil([cellRecycleStrategy dequeueReusableView], @"view should have been recycled");	
 	STAssertNil([cellRecycleStrategy dequeueReusableView], @"there shouldn't be any more recycled views");	

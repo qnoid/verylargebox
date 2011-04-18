@@ -17,6 +17,6 @@
 		id<TheBoxDelegate> delegate;
 }
 
-@property(nonatomic, assign) id<TheBoxDelegate> delegate;
+@property(nonatomic, retain) id<TheBoxDelegate> delegate;
 
 @end

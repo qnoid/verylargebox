@@ -17,7 +17,6 @@
 @interface TheBoxGet : NSObject <TheBoxQuery, ASIHTTPRequestDelegate> 
 {
 	@private
-		TheBoxDelegateHandler *handler;	
 		ASIHTTPRequest *request;
 }
 

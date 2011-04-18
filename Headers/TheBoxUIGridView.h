@@ -8,51 +8,36 @@
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import "TheBoxUIGridViewDataSource.h"
 #import "TheBoxUISectionViewDataSource.h"
 #import "VisibleStrategy.h"
-@class TheBoxUISectionViewBuilder;
+@class TheBoxSize;
+@class TheBoxUIScrollViewDelegate;
 @class TheBoxUISectionView;
 @class TheBoxUIRecycleStrategy;
-@class TheBoxUIRecycleView;
+@class TheBoxUIScrollViewDelegate;
 @class TheBoxUISectionViewConfiguration;
 
-@interface TheBoxUIGridView : UIScrollView <UIScrollViewDelegate, VisibleStrategyDelegate>
+
+@protocol TheBoxUIGridViewDelegate
+
+@optional
+- (CGFloat)whatRowHeight:(TheBoxUIGridView *)gridView;
+@end
+
+@interface TheBoxUIGridView : UIScrollView <VisibleStrategyDelegate>
 {
-	id <TheBoxUIGridViewDatasource>  datasource;
-	
 	@private
-		TheBoxUIRecycleView *subview;
-		TheBoxUISectionViewBuilder *sectionBuilder;
-		NSUInteger numberOfSectionsPerGridView;
-		CGSize sectionSize;
-		TheBoxUISectionViewConfiguration *configuration;	
+		id <TheBoxUIGridViewDatasource>  datasource;
+		id <TheBoxUIGridViewDelegate>  gridViewDelegate;
+		TheBoxSize *theBoxSize;
 }
 
-+(TheBoxUIGridView *) newGridView:(CGRect)frame datasource:(id<TheBoxUIGridViewDatasource>) datasource;
++(TheBoxUIGridView *) newGridView:(CGRect) frame datasource:(id<TheBoxUIGridViewDatasource>)datasource delegate:(id<TheBoxUIGridViewDelegate>)gridViewDelegate;
 
+@property(nonatomic, assign) id <TheBoxUIGridViewDatasource> datasource;
+@property(nonatomic, assign) id <TheBoxUIGridViewDelegate> gridViewDelegate;
 
-@property(nonatomic, assign) id <TheBoxUIGridViewDatasource>  datasource;
-
-@property (nonatomic, retain) TheBoxUIRecycleView *subview;
-/*
- * how many section to display per grid view
- */
-@property(nonatomic, assign) TheBoxUISectionViewBuilder *sectionBuilder;
-@property(nonatomic, assign) NSUInteger numberOfSectionsPerGridView;
-@property(nonatomic, assign) CGSize sectionSize;
-@property(nonatomic, retain) TheBoxUISectionViewConfiguration *configuration;
-
-
-/*
- * Override to customize section
- */
--(UIView *)viewForSection:(NSInteger)section;
-
-/*
- * @return the number of sections in the grid
- */
--(NSUInteger)numberOfSections;
+-(UIView*) dequeueReusableSection;
 
 @end

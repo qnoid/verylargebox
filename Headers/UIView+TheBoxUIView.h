@@ -12,6 +12,5 @@
 
 @interface UIView (TheBoxUIView)
 
--(void)didRecycle:(TheBoxUIRecycleStrategy *)recycleStrategy;
 
 @end

@@ -8,8 +8,8 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
-#import "TheBoxResponseDelegate.h"
-@class TheBoxDataParser;
+#import "TheBoxResponseParserDelegate.h"
+@class TheBoxCompositeDataParser;
 
 @interface TheBoxResponseParser : NSObject <TheBoxResponseParserDelegate>
 {
@@ -20,7 +20,7 @@
 @property(nonatomic, assign) id<TheBoxResponseParserDelegate> delegate;
 
 
--(id)initWithDataParser:(TheBoxDataParser*) dataParser;
+-(id)initWithDataParser:(TheBoxCompositeDataParser*) dataParser;
 -(void)parse:(NSString *) response;
 
 @end

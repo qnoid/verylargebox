@@ -16,9 +16,6 @@
 
 @required
 -(NSUInteger)numberOfColumnsInSection:(NSUInteger)index;
--(UIView *)gridView:(TheBoxUIGridView *)gridView forColumn:(UIView *)column withIndex:(NSInteger)index;
-
-@optional
--(UIView *)columnView:(UIView*) column forColumn:(NSUInteger)index inSection:(NSUInteger) section;
+-(UIView *)sectionView:(TheBoxUISectionView *)sectionView cellForIndex:(NSInteger)index;
 
 @end

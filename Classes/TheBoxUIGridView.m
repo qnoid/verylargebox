@@ -7,32 +7,26 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 8/11/10.
  *  Contributor(s): .-
  */
-#import "TheBoxUISectionViewBuilder.h"
+#import "TheBoxSize.h"
 #import "TheBoxUIGridView.h"
 #import "TheBoxUISectionView.h"
 #import "TheBoxUICell.h"
 #import "TheBoxUIGridViewDatasource.h"
 #import "TheBoxUIRecycleStrategy.h"
-#import "TheBoxUISectionVisibleStrategy.h"
-#import "TheBoxUIRecycleView.h"
-#import "TheBoxUISectionViewConfiguration.h"
+#import "TheBoxVisibleStrategy.h"
+#import "TheBoxUIScrollViewDelegate.h"
 
 @interface TheBoxUIGridView ()
--(UIView *) dequeueReusableSection;
-
-/*
- * @param section the section index
- * @param columns the number of columns in the section
- * @return the frame required to display the view
- */
--(CGRect) frame:(NSUInteger)section noOfColumns:(NSUInteger) columns;
+@property(nonatomic, assign) TheBoxSize *theBoxSize;
+@property(nonatomic, assign) TheBoxUIScrollViewDelegate *contentView;
 @end
 
-static const int SECTION_FRAME_X = 0;
-static const int SECTION_FRAME_WIDTH = 320;
-static const int SECTION_FRAME_HEIGHT = 196;
-static const int COLUMN_FRAME_WIDTH = 160;
-
+/*
+ * The grid is implemented by using a fixed width and a variable height to allow scrolling
+ * across rows. Each row is an instance of TheBoxUISectionView.
+ *
+ *
+ */
 @implementation TheBoxUIGridView
 
 /**
@@ -47,41 +41,29 @@ static const int COLUMN_FRAME_WIDTH = 160;
  *		width = frame.width
  *		height = number of sections / how many visible at a time times frame.height
  */
-+(TheBoxUIGridView *) newGridView:(CGRect) frame datasource:(id<TheBoxUIGridViewDatasource>)aDatasource
++(TheBoxUIGridView *) newGridView:(CGRect) frame datasource:(id<TheBoxUIGridViewDatasource>)aDatasource delegate:(id<TheBoxUIGridViewDelegate>)aDelegate
 {
 	TheBoxUIGridView *gridView = [[TheBoxUIGridView alloc] initWithFrame:frame];
-	gridView.bounces = NO;
-	gridView.numberOfSectionsPerGridView = gridView.frame.size.height / SECTION_FRAME_HEIGHT;
+//	gridView.bounces = NO;
 	gridView.datasource = aDatasource;
-	
-	NSUInteger numberOfSections = [gridView numberOfSections];
-	
-	NSLog(@"number of sections: %d number of sections per grid view %d", numberOfSections, gridView.numberOfSectionsPerGridView);
-
-	CGSize contentSize = CGSizeMake(
-									frame.size.width, 
-									(float)numberOfSections / (float)gridView.numberOfSectionsPerGridView * frame.size.height);
-	
-	gridView.contentSize = contentSize;
-	
-	NSLog(@"content size of grid view %@", NSStringFromCGSize(gridView.contentSize));
+	gridView.gridViewDelegate = aDelegate;
 	
 return gridView;
 }
 
-@synthesize subview;
-@synthesize sectionBuilder;
+@synthesize theBoxSize;
+@synthesize contentView;
 @synthesize datasource;
-@synthesize numberOfSectionsPerGridView;
-@synthesize sectionSize;
-@synthesize configuration;
+@synthesize gridViewDelegate;
+
+
+#pragma mark private fields
+TheBoxUIScrollViewDelegate *contentView;
 
 - (void) dealloc
 {
-	[self.subview release];
+	[self.theBoxSize release];	
 	self.delegate = nil;
-	[self.sectionBuilder release];
-	[self.configuration release];
 	[super dealloc];
 }
 
@@ -89,92 +71,79 @@ return gridView;
 {
 	self = [super initWithFrame:frame];
 	
-	if (self) {
-		self.delegate = self;
+	if (self) 
+	{
+		self.theBoxSize = [[TheBoxSize alloc] initWithSize:self.frame.size];				
 		
 		TheBoxUIRecycleStrategy *recycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
-		TheBoxUISectionVisibleStrategy *visibleStrategy = [[TheBoxUISectionVisibleStrategy alloc] init];
+		TheBoxVisibleStrategy *visibleStrategy = [TheBoxVisibleStrategy newVisibleStrategyOnHeight:CGSizeMake(320, 196)];
 		visibleStrategy.delegate = self;
-				
-		TheBoxUIRecycleView *recycleView = [TheBoxUIRecycleView newRecycledView:recycleStrategy visibleStrategy:visibleStrategy];
-		recycleView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 		
-		self.subview = recycleView;
-		[self addSubview:subview];
-		[recycleView release];
+		TheBoxUIScrollViewDelegate *scrollViewDelegate = [TheBoxUIScrollViewDelegate 
+													 newScrollView:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) 
+													 recycleStrategy:recycleStrategy 
+													 visibleStrategy:visibleStrategy];
+		
+		self.contentView = scrollViewDelegate;
+		self.delegate = self.contentView;
+		[self addSubview:self.contentView];
+		[scrollViewDelegate release];		
 		[visibleStrategy release];
 		[recycleStrategy release];
-		
-		self.sectionSize = CGSizeMake(SECTION_FRAME_WIDTH, SECTION_FRAME_HEIGHT);
-		self.configuration = [[TheBoxUISectionViewConfiguration alloc] initWithColumnFrameWidth:COLUMN_FRAME_WIDTH];
 	}
 	
 return self;
 }
 
+/**
+ * Calculates the content size
+ */
 -(void) layoutSubviews
 {    
 	NSLog(@"layoutSubviews on grid");	
-    CGRect visibleBounds = [self bounds];
+	[super layoutSubviews];
 	
-	[self.subview size:self.sectionSize bounds:visibleBounds];
+	self.contentSize = [self.theBoxSize 
+						   contentSizeOf:[self.gridViewDelegate whatRowHeight:self] 
+						   ofRows:[self.datasource numberOfSectionsInGridView:self]];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-	NSLog(@"scrollViewDidScroll on grid");
-	
-    CGRect visibleBounds = [self bounds];
-	
-	NSLog(@"frame size of subview %@", NSStringFromCGRect(self.subview.frame));
-	
-	[self.subview size:self.sectionSize bounds:visibleBounds];	
-}
-
--(UIView *)dequeueReusableSection {	
-return [self.subview dequeueReusableView];
+-(UIView *)dequeueReusableSection {
+return [self.contentView dequeueReusableView];
 }
 
 -(UIView *)shouldBeVisible:(int)index
 {
-	UIView *view = [self viewForSection:index];
-	[self.subview addSubview:view];
-return view;
-}
-
--(CGRect) frame:(NSUInteger)section noOfColumns:(NSUInteger) columns {
-return CGRectMake(SECTION_FRAME_X, SECTION_FRAME_HEIGHT * section, MIN(columns * COLUMN_FRAME_WIDTH, SECTION_FRAME_WIDTH), SECTION_FRAME_HEIGHT);	
-}
-
--(UIView *)viewForSection:(NSInteger)section
-{
-	NSLog(@"asking for section %d", section);
-
-	UIView *view = [self dequeueReusableSection];
+	UIView *view = [self.datasource gridView:self sectionForIndex:index];
 	
-    if (view == nil) {
-		NSLog(@"no available section to dequeue, creating section: %d", section);
-		view = [[self.sectionBuilder newSection:section] autorelease];
-	}
-	
-	TheBoxUISectionView *sectionView = (TheBoxUISectionView *)view;
-	
-	sectionView.index = section;
-	view.frame = [self frame:section noOfColumns:[sectionBuilder numberOfColumnsInSection:section]];
-	[self.configuration configure:sectionView];
-
 	/*
-	 * Because views are being recycled, this is required so as #layoutSubviews 
-	 * is called to update what's visible for the new section
-	 */
-	[view setNeedsLayout];
-	NSLog(@"view %@", view);
-		
+	 * Adding subviews to self places them side by side which
+	 * causes scrollers to appear and disappear as if overlapping.
+	 * Thus another scrollview is used as an mediator.
+	 */	
+	[self.contentView addSubview:view];
 return view;
 }
 
-- (NSUInteger)numberOfSections{
-return [self.datasource numberOfSectionsInGridView:self];
+/*
+ * When called, the scrollView needs a new instance of TheBoxVisibleStrategy.
+ * The reason being that TheBoxVisibleStrategy#MINIMUM_VISIBLE_INDEX and
+ * TheBoxVisibleStrategy#MAXIMUM_VISIBLE_INDEX are now invalidated as well as 
+ * any visible sections since each one of them might have changed in content size
+ * and or cells it displays.
+ */
+-(void) setNeedsLayout
+{
+	[super setNeedsLayout];
+	[self.contentView setNeedsLayout];
+	
+	TheBoxVisibleStrategy *visibleStrategy = [TheBoxVisibleStrategy newVisibleStrategyOnHeight:CGSizeMake(320, 196)];
+	visibleStrategy.delegate = self;
+
+	self.contentView.visibleStrategy = visibleStrategy;
+	
+	[visibleStrategy release];
+	[self flashScrollIndicators];
 }
 
 @end

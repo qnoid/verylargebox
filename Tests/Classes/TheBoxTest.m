@@ -43,7 +43,7 @@
 {
 	TheBoxDataParserDelegateLogger* delegate = [TheBoxDataParserTestDelegates newLoggingDelegate:2];
 	TheBoxBuilder* builder = [[TheBoxBuilder alloc] init];
-	[builder delegate:delegate];
+	[builder dataParserDelegate:delegate];
 	
 	TheBox *theBox = [builder build];
 	

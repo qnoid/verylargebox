@@ -9,6 +9,95 @@
  */
 #import "TheBoxSize.h"
 
+@interface TheBoxHeight : NSObject <TheBoxDimension>
+{
+	@private
+		CGFloat height;
+}
+-(id)init:(NSUInteger) height;
+-(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
+-(NSUInteger)maximumVisible:(CGRect) visibleBounds;
+@end
+
+@interface TheBoxWidth : NSObject <TheBoxDimension>
+{
+	@private
+		CGFloat width;
+}
+-(id)init:(NSUInteger) width;
+-(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
+-(NSUInteger)maximumVisible:(CGRect) visibleBounds;
+@end
+
+
+@implementation TheBoxHeight
+
+-(id)init:(NSUInteger) aHeight
+{
+	self = [super init];
+	
+	if (self) {
+		height = aHeight; 
+	}	
+	
+return self;
+}
+
+-(NSUInteger)minimumVisible:(CGRect) visibleBounds
+{
+	NSUInteger visibleWindowStart = visibleBounds.origin.y;
+	
+return floor(visibleWindowStart / height);	
+}
+
+-(NSUInteger)maximumVisible:(CGRect) visibleBounds
+{
+	NSUInteger visibleWindowStart = visibleBounds.origin.y;
+	NSInteger visibleWindowHeight = CGRectGetHeight(visibleBounds);
+	
+return ceilf((visibleWindowStart + visibleWindowHeight) / height);	
+}
+
+-(NSString *) description{
+return [NSString stringWithFormat:@"%f", height];
+}
+
+@end
+
+@implementation TheBoxWidth
+
+-(id)init:(NSUInteger) aWidth
+{
+	self = [super init];
+	
+	if (self) {
+		width = aWidth; 
+	}	
+	
+return self;
+}
+
+-(NSUInteger)minimumVisible:(CGRect) visibleBounds
+{
+	NSUInteger visibleWindowStart = CGRectGetMinX(visibleBounds);
+	
+return floor(visibleWindowStart / width);
+}
+
+-(NSUInteger)maximumVisible:(CGRect) visibleBounds
+{
+	NSUInteger visibleWindowStart = CGRectGetMinX(visibleBounds);
+	NSUInteger visibleWindowWidth = CGRectGetWidth(visibleBounds);
+	
+return ceilf((visibleWindowStart + visibleWindowWidth) / width);
+}
+
+-(NSString *) description{
+return [NSString stringWithFormat:@"%f", width];
+}
+
+@end
+
 
 @implementation TheBoxSize
 
@@ -26,19 +115,44 @@
 return self;
 }
 
--(NSUInteger)minimumVisible:(CGRect) visibleBounds
-{
-	NSUInteger visibleWindowStart = CGRectGetMinX(visibleBounds);
-	
-return floorf(visibleWindowStart / self.size.width);
+/*
+ * @return a dimension on height
+ */
+-(id<TheBoxDimension>)height{
+return [[[TheBoxHeight alloc] init:self.size.height] autorelease];
 }
 
--(NSUInteger)maximumVisible:(CGRect) visibleBounds
+/*
+ * @return a dimension on width
+ */
+-(id<TheBoxDimension>)width{
+return [[[TheBoxWidth alloc] init:self.size.width] autorelease];	
+}
+
+-(CGSize)contentSizeOf:(CGFloat)height ofRows:(NSUInteger)noOfRows
 {
-	NSUInteger visibleWindowStart = CGRectGetMinX(visibleBounds);
-	NSUInteger visibleWindowWidth = CGRectGetWidth(visibleBounds);
+	int noOfRowsInHeight = self.size.height / height;
+
+	if(noOfRowsInHeight == 0){
+		return CGSizeZero;
+	}
 	
-return ceilf((visibleWindowStart + visibleWindowWidth) / self.size.width);
+return CGSizeMake(
+		self.size.width, 
+		(float)noOfRows / (float)noOfRowsInHeight * self.size.height);
+}
+
+-(CGSize)contentSizeOf:(CGFloat)width ofColumns:(NSUInteger)noOfColumns
+{
+	int nofOfColumnsInWidth = self.size.width / width;
+	
+	if(nofOfColumnsInWidth == 0){
+		return CGSizeZero;
+	}
+	
+return CGSizeMake(
+		  (float)noOfColumns / (float)nofOfColumnsInWidth * self.size.width,
+		  self.size.height);
 }
 
 @end

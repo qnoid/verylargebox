@@ -9,7 +9,7 @@
  */
 #import <SenTestingKit/SenTestingKit.h>
 #import "TheBoxResponseParser.h"
-#import "TheBoxResponseDelegate.h"
+#import "TheBoxResponseParserDelegate.h"
 #import "TheBoxResponseParserTestDelegates.h"
 
 @interface TheBoxResponseParserTest : SenTestCase {

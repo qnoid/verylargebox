@@ -84,4 +84,13 @@ return [self isWithinYorigin:visibleBounds];
 return [self isPartiallyVisibleWithinX:visibleBounds] && [self isPartiallyVisibleWithinY:visibleBounds];
 }
 
+-(CGRect) frame:(NSUInteger)index minimumWidth:(CGFloat) width {
+return CGRectMake(
+			self.frame.origin.x, 
+			self.frame.size.height * index, 
+			MIN(width, self.frame.size.width), 
+			self.frame.size.height);	
+}
+
+
 @end

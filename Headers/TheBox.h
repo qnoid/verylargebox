@@ -9,15 +9,18 @@
  */
 #import <Foundation/Foundation.h>
 #import "TheBoxDelegate.h"
-@protocol TheBoxDataDelegate;
+#import "ASIHTTPRequestDelegate.h"
+@protocol TheBoxResponseParserDelegate;
+@protocol TheBoxDataParserDelegate;
 @protocol TheBoxQuery;
+@protocol  TheBoxDataParser;
 @class TheBoxPost;
 @class TheBoxCache;
 
 /*
  * TheBox traces every method call to the TheBoxDelegate
  */
-@interface TheBox : NSObject <TheBoxDelegate>
+@interface TheBox : NSObject <TheBoxDelegate, ASIHTTPRequestDelegate>
 {
 	@private
 		id<TheBoxDelegate> delegate;
@@ -41,6 +44,9 @@
  *
  * In case of an equal query, a cached response will be provided in the
  * callback
+ *
+ * Take advantage of caching and multiple delegation on different parts
+ * of the response
  * 
  */
 -(void)query:(id<TheBoxQuery>)query;
@@ -57,7 +63,9 @@
 
 }
 
--(void)delegate:(id<TheBoxDataDelegate>)delegate;
+-(void)dataParser:(id<TheBoxDataParser>)aDataParser;
+-(void)responseParserDelegate:(id<TheBoxResponseParserDelegate>)delegate;
+-(void)dataParserDelegate:(id<TheBoxDataParserDelegate>)delegate;
 -(TheBox*) build;
 
 @end

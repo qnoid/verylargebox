@@ -10,7 +10,7 @@
    
 #import <SenTestingKit/SenTestingKit.h>
 #import <UIKit/UIKit.h>
-#import "TheBoxUICellVisibleStrategy.h"
+#import "TheBoxVisibleStrategy.h"
 #import "VisibleStrategy.h"
 #import "UITestViews.h"
 
@@ -52,38 +52,38 @@ return [self.views objectAtIndex:index];
 	CGSize cellSize = CGSizeMake(160, 198);
 	CGRect visibleBounds = CGRectMake(0, 0, 320, 198);
 	
-	TheBoxUICellVisibleStrategy *visibleStrategy = 
-		[[[TheBoxUICellVisibleStrategy alloc] init] autorelease];
+	TheBoxVisibleStrategy *visibleStrategy = 
+		[[TheBoxVisibleStrategy newVisibleStrategyOnWidth:cellSize] autorelease];
 	
 	visibleStrategy.delegate = self;	
-	[visibleStrategy willAppear:cellSize within:visibleBounds];	
+	[visibleStrategy willAppear:visibleBounds];	
 
-	STAssertTrue(2 == visibleStrategy.visibleViews.count, [NSString stringWithFormat:@"actual: %d", visibleStrategy.visibleViews.count]);
+	STAssertTrue(2 == visibleStrategy.visibleViews.count, @"actual: %d", visibleStrategy.visibleViews.count);
 	
-	for (int visibleCell = visibleStrategy.currentMinimumVisibleCell; visibleCell < visibleStrategy.currentMaximumVisibleCell; visibleCell++) {
+	for (int visibleCell = visibleStrategy.minimumVisibleIndex; visibleCell < visibleStrategy.maximumVisibleIndex; visibleCell++) {
 		STAssertTrue([visibleStrategy.visibleViews containsObject:[self.views objectAtIndex:visibleCell]], nil);
 	}
 	
-	STAssertTrue(0 == visibleStrategy.currentMinimumVisibleCell, [NSString stringWithFormat:@"actual: %d", visibleStrategy.currentMinimumVisibleCell]);
-	STAssertTrue(1 == visibleStrategy.currentMaximumVisibleCell, [NSString stringWithFormat:@"actual: %d", visibleStrategy.currentMaximumVisibleCell]);
+	STAssertTrue(0 == visibleStrategy.minimumVisibleIndex, @"actual: %d", visibleStrategy.minimumVisibleIndex);
+	STAssertTrue(1 == visibleStrategy.maximumVisibleIndex, @"actual: %d", visibleStrategy.maximumVisibleIndex);
 }
 
 -(void)assertWillAppear:(CGSize) cellSize visibleBounds:(CGRect)visibleBounds howMany:(NSUInteger)howMany minimum:(NSUInteger)minimum maximum:(NSUInteger)maximum
 {
-	TheBoxUICellVisibleStrategy *visibleStrategy = 
-	[[[TheBoxUICellVisibleStrategy alloc] init] autorelease];
+	TheBoxVisibleStrategy *visibleStrategy = 
+	[[TheBoxVisibleStrategy newVisibleStrategyOnWidth:cellSize] autorelease];
 	
 	visibleStrategy.delegate = self;	
-	[visibleStrategy willAppear:cellSize within:visibleBounds];	
+	[visibleStrategy willAppear:visibleBounds];	
 	
-	STAssertTrue(howMany == visibleStrategy.visibleViews.count, [NSString stringWithFormat:@"actual: %d", visibleStrategy.visibleViews.count]);
+	STAssertTrue(howMany == visibleStrategy.visibleViews.count, @"expected: %d actual: %d", howMany, visibleStrategy.visibleViews.count);
 	
-	for (int visibleCell = visibleStrategy.currentMinimumVisibleCell; visibleCell < visibleStrategy.currentMaximumVisibleCell; visibleCell++) {
+	for (int visibleCell = visibleStrategy.minimumVisibleIndex; visibleCell < visibleStrategy.maximumVisibleIndex; visibleCell++) {
 		STAssertTrue([visibleStrategy.visibleViews containsObject:[self.views objectAtIndex:visibleCell]], nil);
 	}
 	
-	STAssertTrue(minimum == visibleStrategy.currentMinimumVisibleCell, [NSString stringWithFormat:@"actual: %d", visibleStrategy.currentMinimumVisibleCell]);
-	STAssertTrue(maximum == visibleStrategy.currentMaximumVisibleCell, [NSString stringWithFormat:@"actual: %d", visibleStrategy.currentMaximumVisibleCell]);	
+	STAssertTrue(minimum == visibleStrategy.minimumVisibleIndex, @"expected: %d actual: %d", minimum, visibleStrategy.minimumVisibleIndex);
+	STAssertTrue(maximum == visibleStrategy.maximumVisibleIndex, @"expected: %d actual: %d", maximum, visibleStrategy.maximumVisibleIndex);	
 }
 
 -(void)testWillAppearSingle
@@ -116,8 +116,8 @@ return [self.views objectAtIndex:index];
 
 -(void)testIsVisible
 {
-	TheBoxUICellVisibleStrategy *visibleStrategy = 
-		[[[TheBoxUICellVisibleStrategy alloc] init] autorelease];
+	TheBoxVisibleStrategy *visibleStrategy = 
+		[[TheBoxVisibleStrategy newVisibleStrategyOnWidth:CGSizeZero] autorelease];
 
 	NSInteger zero = 0;
 	NSInteger one = 1;

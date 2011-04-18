@@ -8,9 +8,15 @@
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
+#import "TheBoxDelegate.h"
+#import "TheBoxDataParserDelegate.h"
+#import "TheBoxResponseParserDelegate.h"
+@class TheBox;
+@class HomeUIGridViewController;
 @class TheBoxUIList;
 
-@interface UploadUIViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> {
+@interface UploadUIViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> 
+{
 	
 	@private
 		UIScrollView *uploadView;
@@ -24,7 +30,10 @@
 		NSArray *textFields;
 		TheBoxUIList *list;
 		NSArray *tags;
+		TheBox *theBox;
+		id<TheBoxDelegate, TheBoxDataParserDelegate> theBoxDelegate;
 }
+
 @property(nonatomic, retain) IBOutlet UIScrollView *uploadView;
 @property(nonatomic, retain) IBOutlet UIButton *takePhotoButton;
 @property(nonatomic, retain) IBOutlet UIImageView *imageView;
@@ -36,6 +45,8 @@
 @property(nonatomic, retain) NSArray *textFields;
 @property(nonatomic, retain) TheBoxUIList *list;
 @property(nonatomic, retain) NSArray *tags;
+@property(nonatomic, retain) TheBox *theBox;
+@property(nonatomic, retain) id<TheBoxDelegate, TheBoxDataParserDelegate> theBoxDelegate;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;

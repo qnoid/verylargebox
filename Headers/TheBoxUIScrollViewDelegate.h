@@ -6,26 +6,29 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "VisibleStrategy.h"
 @class TheBoxUIRecycleStrategy;
 @class VisibleStrategy;
 
 
-@interface TheBoxUIRecycleView : UIView 
+/*
+ * An implementation of UIScrollViewDelegate which recycles views and calculates visible ones.
+ * Can also be used as a content view for a UIScrollView.
+ */
+@interface TheBoxUIScrollViewDelegate : UIView <UIScrollViewDelegate>
 {
 	
 	@private
 		TheBoxUIRecycleStrategy *recycleStrategy;
 		id<VisibleStrategy> visibleStrategy;
 }
-+(TheBoxUIRecycleView *) newRecycledView:(TheBoxUIRecycleStrategy *)recycleStrategy visibleStrategy:(id<VisibleStrategy>) visibleStrategy;
++(TheBoxUIScrollViewDelegate *) newScrollView:(CGRect)frame recycleStrategy:(TheBoxUIRecycleStrategy *)recycleStrategy visibleStrategy:(id<VisibleStrategy>) visibleStrategy;
 
 @property(nonatomic, retain) TheBoxUIRecycleStrategy *recycleStrategy;
 @property(nonatomic, retain) id<VisibleStrategy> visibleStrategy;
 
 
--(void) size:(CGSize) size bounds:(CGRect)bounds;
--(UIView *)dequeueReusableView;
+-(UIView*)dequeueReusableView;
 
 @end

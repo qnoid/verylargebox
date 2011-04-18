@@ -7,14 +7,18 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 23/11/10.
  *  Contributor(s): .-
  */
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TheBoxUIGridView.h"
+
 #import "TheBoxUIGridViewDataSource.h"
 #import "TheBoxUISectionViewDataSource.h"
-@class TheBoxUIGridView;
 
-@interface TheBoxUIGridViewController : UIViewController <TheBoxUIGridViewDatasource, TheBoxUISectionViewDatasource>
+
+@interface TheBoxUIGridViewController : UIViewController <TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TheBoxUISectionViewDatasource>
 {
 }
+
+-(void)setNeedsLayout;
 
 /*
  * Override to customize section

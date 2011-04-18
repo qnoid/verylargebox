@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "TheBoxDataParserDelegate.h"
 
-@interface TheBoxDataParserDelegateLogger : NSObject <TheBoxDataDelegate> 
+@interface TheBoxDataParserDelegateLogger : NSObject <TheBoxDataParserDelegate> 
 {
 } 
 -(id) initWithCapacity:(NSUInteger)numItems;

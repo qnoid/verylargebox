@@ -29,7 +29,7 @@
 	
 	TheBoxUIRecycleStrategy *cellRecycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinX] autorelease];
 	
-	[cellRecycleStrategy recycle:nil views:views bounds:visibleBounds];
+	[cellRecycleStrategy recycle:views bounds:visibleBounds];
 	
 return cellRecycleStrategy;
 }
@@ -87,23 +87,23 @@ return CGRectMake(bounds.origin.x + diff, bounds.origin.y, bounds.size.width, bo
  */ 
 -(void)testRecycle:(TheBoxUIRecycleStrategy *)recycleStrategy visibleBounds:(CGRect)visibleBounds views:(NSArray *) views scrollHorizontalBy:(NSUInteger)width
 {
-	[recycleStrategy recycle:nil views:views bounds:visibleBounds];	
+	[recycleStrategy recycle:views bounds:visibleBounds];	
 	[self assertNotRecycled:recycleStrategy];		
 	
 	visibleBounds = [self scrollHorizontal:visibleBounds by:1];
-	[recycleStrategy recycle:nil views:views bounds:visibleBounds];	
+	[recycleStrategy recycle:views bounds:visibleBounds];	
 	[self assertNotRecycled:recycleStrategy];
 
 	int noOfCells = views.count;
 	for (int recycledCells = 1; recycledCells < noOfCells; recycledCells++) 
 	{
 		visibleBounds = [self scrollHorizontal:visibleBounds by:width];
-		[recycleStrategy recycle:nil views:views bounds:visibleBounds];	
+		[recycleStrategy recycle:views bounds:visibleBounds];	
 		[self assertRecycled:recycleStrategy count:recycledCells];
 	}
 	
 	visibleBounds = [self scrollHorizontal:visibleBounds by:width];
-	[recycleStrategy recycle:nil views:views bounds:visibleBounds];	
+	[recycleStrategy recycle:views bounds:visibleBounds];	
 	[self assertRecycled:recycleStrategy count:noOfCells];
 }
 
@@ -140,7 +140,7 @@ return CGRectMake(bounds.origin.x + diff, bounds.origin.y, bounds.size.width, bo
 	
 	CGRect visibleBounds = CGRectMake(161, 0, 160, 196);
 	
-	[cellRecycleStrategy recycle:nil views:views bounds:visibleBounds];
+	[cellRecycleStrategy recycle:views bounds:visibleBounds];
 	
 	STAssertNotNil([cellRecycleStrategy dequeueReusableView], @"view should have been recycled");	
 	STAssertNil([cellRecycleStrategy dequeueReusableView], @"there shouldn't be any more recycled views");	

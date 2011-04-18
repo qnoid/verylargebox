@@ -12,6 +12,9 @@
 #import "TheBoxDelegate.h"
 #import "TheBoxCache.h"
 #import "TheBoxResponseParser.h"
+#import "TheBoxResponseParserDelegate.h"
+#import "TheBoxCompositeDataParser.h"
+#import "ASIHTTPRequest.h"
 #import "TheBoxDataParser.h"
 
 static NSString* theBoxURL = @"http://0.0.0.0:3000";
@@ -97,8 +100,8 @@ return self;
 @interface TheBoxBuilder ()
 
 @property(nonatomic, retain) TheBoxCache *cache;
-@property(nonatomic, retain) TheBoxResponseParser *responseParser;
-@property(nonatomic, retain) TheBoxDataParser *dataParser;
+@property(nonatomic, retain) id<TheBoxResponseParserDelegate> responseParserDelegate;
+@property(nonatomic, retain) TheBoxCompositeDataParser *dataParser;
 
 @end
 
@@ -106,17 +109,17 @@ return self;
 @implementation TheBoxBuilder
 
 @synthesize cache;
-@synthesize responseParser;
+@synthesize responseParserDelegate;
 @synthesize dataParser;
 
 TheBoxCache *cache;
-TheBoxResponseParser *responseParser;
-TheBoxDataParser *dataParser;
+id<TheBoxResponseParserDelegate> *responseParserDelegate;
+TheBoxCompositeDataParser *dataParser;
 
 -(void) dealloc
 {
 	[self.cache release];
-	[self.responseParser release];
+	[self.responseParserDelegate release];
 	[self.dataParser release];
 	[super dealloc];
 }
@@ -128,28 +131,43 @@ TheBoxDataParser *dataParser;
 	
 	if (self) 
 	{
-		TheBoxDataParser *aDataParser = [[TheBoxDataParser alloc] init];
-		TheBoxResponseParser *aResponseParser = [[TheBoxResponseParser alloc] initWithDataParser:aDataParser];
+		TheBoxCompositeDataParser *aDataParser = [[TheBoxCompositeDataParser alloc] init];
 		TheBoxCache* aCache = [[TheBoxCache alloc] init];
 		
 		self.dataParser = aDataParser;
-		self.responseParser = aResponseParser;
 		self.cache = aCache;
 		
 		[aCache release];
-		[aResponseParser release];
 		[aDataParser release];
 		
 	}
 return self;
 }
 
--(void)delegate:(id<TheBoxDataDelegate>)delegate {
+-(void)dataParser:(id<TheBoxDataParser>)aDataParser {
+	self.dataParser = aDataParser;
+}
+
+-(void)responseParserDelegate:(id<TheBoxResponseParserDelegate>)delegate {
+	self.responseParserDelegate = delegate;
+}
+
+
+-(void)dataParserDelegate:(id<TheBoxDataParserDelegate>)delegate {
 	self.dataParser.delegate = delegate;
 }
 
--(TheBox*) build {
-return [[[TheBox alloc] initWithCache:self.cache responseParser:self.responseParser] autorelease];		
+-(TheBox*) build 
+{
+	TheBoxResponseParser *aResponseParser = [[TheBoxResponseParser alloc] initWithDataParser:self.dataParser];
+	aResponseParser.delegate = self.responseParserDelegate;
+	TheBox *theBox = [[[TheBox alloc] 
+					   initWithCache:self.cache 
+					   responseParser:aResponseParser] autorelease];
+	
+	[aResponseParser release];
+
+return theBox;		
 }
 
 @end

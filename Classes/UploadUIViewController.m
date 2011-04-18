@@ -14,9 +14,14 @@
 #import "UITextField+TheBoxUITextField.h"
 #import "TheBoxQueries.h"
 #import "TheBoxPost.h"
+#import "TheBox.h"
+#import "HomeUIGridViewController.h"
+#import "TheBoxSingleDataParser.h"
+#import "TheBoxDataParser.h"
 
 @implementation UploadUIViewController
 
+@synthesize theBoxDelegate;
 @synthesize uploadView;
 @synthesize takePhotoButton;
 @synthesize category;
@@ -29,6 +34,7 @@
 @synthesize textFields;
 @synthesize list;
 @synthesize tags;
+@synthesize theBox;
 
 - (void) dealloc
 {
@@ -40,9 +46,27 @@
 	[self.textFields release];
 	[self.list release];
 	[self.tags release];
+	[self.theBox release];
+	[self.theBoxDelegate release];
 	[super dealloc];
 }
 
+-(void) loadView
+{
+	[super loadView];
+	
+	TheBoxBuilder* builder = [[TheBoxBuilder alloc] init];		
+	
+	id<TheBoxDataParser> dataParser = [[TheBoxSingleDataParser alloc] init];
+	dataParser.delegate = theBoxDelegate;	
+	[builder dataParser:dataParser];
+	
+	self.theBox = [builder build];
+	self.theBox.delegate = theBoxDelegate;
+
+	[dataParser release];
+	[builder release];		
+}
 
 -(void) viewDidLoad
 {
@@ -121,15 +145,14 @@ return NO;
 
 - (IBAction)done:(id)sender 
 {
-	TheBoxPost *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
+	TheBoxPost *itemQuery = [[TheBoxQueries itemQuery:imageView.image 
 												itemName:nameTextField.text 
 												locationName:locationButton.titleLabel.text
 												categoryName:category.text
-												tags:tags];
-	[itemQuery make:nil];
-	
-	[itemQuery release];
+												tags:tags] retain];
 
+	[self.theBox query:itemQuery];
+	
 	[self dismissModalViewControllerAnimated:YES];    
 }
 

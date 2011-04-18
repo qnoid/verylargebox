@@ -15,16 +15,16 @@
 
 @implementation TheBoxQueries
 
-+(TheBoxGet*)newItemsQuery
++(TheBoxGet*)itemsQuery
 {
-	NSURL *itemsEndPoint = [NSURL URLWithString:@"http://0.0.0.0:3000/items"];
+	NSURL *itemsEndPoint = [NSURL URLWithString:@"http://0.0.0.0:3000/categories"];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:itemsEndPoint];
 	[request addRequestHeader:@"Accept" value:@"application/json"];	
 	
-return [[TheBoxGet alloc] initWithRequest:request];		
+return [[[TheBoxGet alloc] initWithRequest:request] autorelease];		
 }
 
-+(TheBoxPost*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags
++(TheBoxPost*)itemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags
 {
 	NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
 	
@@ -50,7 +50,7 @@ return [[TheBoxGet alloc] initWithRequest:request];
 			[itemName stringByReplacingOccurrencesOfString:@" "withString:@"_"]] 
 		andContentType:@"image/jpeg" forKey:@"item[image]"];
 	
-return [[TheBoxPost alloc] initWithRequest:request];
+return [[[TheBoxPost alloc] initWithRequest:request] autorelease];
 }
 
 @end

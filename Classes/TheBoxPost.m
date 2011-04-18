@@ -30,7 +30,7 @@
 	
 	if (self) {
 		self.request = theRequest;
-		self.request.delegate = self;		
+		self.handler = [[TheBoxDelegateHandler alloc] init];		
 	}
 	
 return self;
@@ -38,6 +38,7 @@ return self;
 
 -(void)make:(id<TheBoxDelegate>)theDelegate
 {
+	self.request.delegate = self;	
 	self.handler.delegate = theDelegate;
 	[self.request startAsynchronous];	
 }
@@ -69,7 +70,7 @@ return [self.request.url isEqual:query.request.url];
 }
 
 -(NSString *) description{
-return [self.request.url description];
+return [self.request description];
 }
 
 

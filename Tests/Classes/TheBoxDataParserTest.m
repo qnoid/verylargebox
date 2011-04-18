@@ -8,7 +8,7 @@
  *  Contributor(s): .-
  */
 #import <SenTestingKit/SenTestingKit.h>
-#import "TheBoxDataParser.h"
+#import "TheBoxCompositeDataParser.h"
 #import "TheBoxDataParserDelegate.h"
 #import "TheBoxDataParserTestDelegates.h"
 
@@ -23,7 +23,7 @@
 - (void) testParse
 {
 	TheBoxDataParserDelegateLogger *delegate = [TheBoxDataParserTestDelegates newLoggingDelegate:2];
-    TheBoxDataParser* dataParser = [[TheBoxDataParser alloc] init];
+    TheBoxCompositeDataParser* dataParser = [[TheBoxCompositeDataParser alloc] init];
 	dataParser.delegate = delegate;
 	
 	NSDictionary *oneItem = [NSDictionary dictionaryWithObject:@"0" forKey:@"id"];

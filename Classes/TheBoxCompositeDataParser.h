@@ -9,14 +9,15 @@
  */
 #import <Foundation/Foundation.h>
 #import "TheBoxDataParserDelegate.h"
+#import "TheBoxDataParser.h"
 
-@interface TheBoxDataParser : NSObject
+@interface TheBoxCompositeDataParser : NSObject <TheBoxDataParser>
 {
 	@private
-		id<TheBoxDataDelegate> delegate;
+		id<TheBoxDataParserDelegate> delegate;
 }
 
-@property(nonatomic, assign) id<TheBoxDataDelegate> delegate;
+@property(nonatomic, assign) id<TheBoxDataParserDelegate> delegate;
 
 -(void)parse:(NSDictionary *) data;
 

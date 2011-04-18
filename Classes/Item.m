@@ -12,6 +12,7 @@
 
 @implementation Item
 
+@synthesize identifier;
 @synthesize imageURL;
 @synthesize when;
 @synthesize createdAt;
@@ -24,5 +25,27 @@
 	[super dealloc];
 }
 
+-(NSString *) description{
+return [self.imageURL description];
+}
+
+-(NSUInteger) hash{
+return identifier;
+}
+
+-(BOOL) isEqual:(id)that
+{
+	if (self == that) {
+		return YES;
+	}
+	
+	if (![that isKindOfClass:[Item class]]) {
+		return NO;
+	}
+	
+	Item *item = (Item*)that;
+	
+return self.identifier = item.identifier;
+}
 
 @end

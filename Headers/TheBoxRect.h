@@ -35,4 +35,13 @@
 -(BOOL)isVisibleWithinX:(CGRect) visibleBounds;
 -(BOOL)isVisibleWithinY:(CGRect) visibleBounds;
 
+/*
+ * Calculates the frame required given the index
+ *
+ * @param index the index of the frame
+ * 
+ * @return a CGRect representing the frame
+ */
+-(CGRect) frame:(NSUInteger)index minimumWidth:(CGFloat) width;
+
 @end

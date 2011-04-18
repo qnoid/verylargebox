@@ -7,10 +7,10 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 26/03/2011.
  *  Contributor(s): .-
  */
-#import "TheBoxDataParser.h"
+#import "TheBoxCompositeDataParser.h"
 
 
-@implementation TheBoxDataParser
+@implementation TheBoxCompositeDataParser
 
 @synthesize delegate;
 
@@ -20,7 +20,7 @@
 	
 	for (NSDictionary* item in items) 
 	{
-		NSString* theId = [item objectForKey:@"id"];
+		NSNumber* theId = [item objectForKey:@"id"];
 		[self.delegate element:[theId intValue] with:item];
 	}
 }

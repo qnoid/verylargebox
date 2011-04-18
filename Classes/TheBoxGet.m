@@ -31,6 +31,7 @@
 	if (self) {
 		self.request = theRequest;
 		self.request.delegate = self;
+		self.handler = [[TheBoxDelegateHandler alloc] init];
 	}
 	
 return self;
@@ -44,7 +45,6 @@ return self;
 	self.handler.delegate = theDelegate;
 	[self.request startAsynchronous];
 }
-
 - (void)requestFinished:(ASIHTTPRequest *)theRequest {
 	[self.handler query:self ok:[theRequest responseString]];
 }
@@ -72,7 +72,7 @@ return [self.request.url isEqual:query.request.url];
 }
 
 -(NSString *) description{
-return [self.request.url description];
+return [self.request description];
 }
 
 @end

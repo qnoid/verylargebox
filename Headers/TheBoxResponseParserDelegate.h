@@ -10,10 +10,10 @@
 #import <UIKit/UIKit.h>
 
 
-@protocol TheBoxDataParserDelegate <NSObject>
+@protocol TheBoxResponseParserDelegate <NSObject>
 
 @optional
 
-- (void)element:(NSInteger)theId with:(id)data;
+- (void)response:(NSString*)response ok:(id)data;
 
 @end

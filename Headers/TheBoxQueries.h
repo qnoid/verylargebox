@@ -21,8 +21,8 @@
 
 }
 
-+(TheBoxGet *)newItemsQuery;
-+(TheBoxPost *)newItemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags;
++(TheBoxGet *)itemsQuery;
++(TheBoxPost *)itemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags;
 
 
 @end

@@ -8,31 +8,25 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
-#import "TheBoxUICellVisibleStrategy.h"
 #import "TheBoxUISectionViewDataSource.h"
+#import "VisibleStrategy.h"
+@class TheBoxSize;
+@class TheBoxUISectionView;
 @class TheBoxUICell;
 @class TheBoxUIRecycleStrategy;
-@class TheBoxUIRecycleView;
+@class TheBoxUIScrollViewDelegate;
 
-@interface TheBoxUISectionView : UIScrollView <UIScrollViewDelegate, VisibleStrategyDelegate>
+@interface TheBoxUISectionView : UIScrollView <VisibleStrategyDelegate>
 {
 	id <TheBoxUISectionViewDatasource>  datasource;
 
 	@private
-		TheBoxUIRecycleView *subview;
 		NSInteger index;
-		NSInteger currentCellIndex;
-		CGSize cellSize;
-		NSInteger numberOfColumnsPerSectionView;
+		TheBoxSize *theBoxSize;
 }
+
 @property(nonatomic, assign) id <TheBoxUISectionViewDatasource>  datasource;
-@property (nonatomic, retain) TheBoxUIRecycleView *subview;
 @property(nonatomic, assign) NSInteger index;
-@property(nonatomic, assign) NSInteger currentCellIndex;
-@property(nonatomic, assign) CGSize cellSize;
-@property(nonatomic, assign) NSInteger numberOfColumnsPerSectionView;
 
--(NSInteger)numberOfColumns;
--(UIView *)viewForColumn:(NSUInteger)index inSection:(NSUInteger) section;
-
+-(UIView *)dequeueReusableCell;
 @end

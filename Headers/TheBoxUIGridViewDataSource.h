@@ -12,12 +12,10 @@
 @class TheBoxUIGridView;
 @class TheBoxUISectionView;
 
-@protocol TheBoxUIGridViewDatasource<NSObject>
+@protocol TheBoxUIGridViewDatasource <NSObject>
 
 @required
 -(NSInteger)numberOfSectionsInGridView:(TheBoxUIGridView *)gridView;
-
-@optional
--(UIView *)gridView:(TheBoxUIGridView *)gridView section:(TheBoxUISectionView *)section forSection:(NSInteger)index;
+-(UIView *)gridView:(TheBoxUIGridView *)gridView sectionForIndex:(NSInteger)index;
 
 @end

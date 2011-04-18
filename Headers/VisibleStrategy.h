@@ -22,17 +22,19 @@
 
 @protocol VisibleStrategy<NSObject>
 
+-(BOOL)isVisible:(NSInteger) index;
 /*
  * Visible bounds
  * Callback to delegate isVisible for as many indexes 
  */
-- (void)willAppear:(CGSize)size within:(CGRect) bounds;
+-(void)willAppear:(CGRect)bounds;
 
-- (void)reset;
 
 @property(nonatomic, assign) id<VisibleStrategyDelegate> delegate;
 
 @required
 @property(nonatomic, retain) NSMutableSet *visibleViews;
+@property(nonatomic, assign) NSInteger minimumVisibleIndex;
+@property(nonatomic, assign) NSInteger maximumVisibleIndex;
 
 @end

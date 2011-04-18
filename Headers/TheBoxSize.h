@@ -10,15 +10,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGGeometry.h>
 
-@interface TheBoxSize : NSObject 
-{
-	@private
-		CGSize size;
-}
-
-@property(nonatomic, assign) CGSize size;
-
--(id)initWithSize:(CGSize) size;
+/*
+ * Represents a dimension on the size
+ */
+@protocol TheBoxDimension <NSObject>
 
 /*
  * The minimum visible must take into account cells that are partially visible
@@ -48,8 +43,36 @@
  *	max = 680 / 160 = 3.25 means that some of 4 is also visible,
  *	therefore ceil the float 
  *
+ * @param visibleBounds should have zero or positive values for each of the x,y,width,height
  * @return the maximum number of times the size fits within the visible bounds
  */
 -(NSUInteger)maximumVisible:(CGRect) visibleBounds;
+
+@end
+
+@interface TheBoxSize : NSObject 
+{
+	@private
+		CGSize size;
+}
+
+@property(nonatomic, assign) CGSize size;
+
+-(id)initWithSize:(CGSize) size;
+
+-(id<TheBoxDimension>)height;
+-(id<TheBoxDimension>)width;
+/*
+ * What's the required content size for a fixed width, 
+ * given a height and the number of rows
+ *
+ *
+ * @param height the height for each row
+ * @param noOfRows the total number of rows
+ * @return the content size the content size required to fit all the rows for the
+ *		given height
+ */
+-(CGSize)contentSizeOf:(CGFloat)height ofRows:(NSUInteger)noOfRows;
+-(CGSize)contentSizeOf:(CGFloat)width ofColumns:(NSUInteger)noOfColumns;
 
 @end
