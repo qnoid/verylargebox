@@ -14,7 +14,7 @@
 	@private
 		CGFloat height;
 }
--(id)init:(NSUInteger) height;
+-(id)init:(CGFloat) height;
 -(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
 -(NSUInteger)maximumVisible:(CGRect) visibleBounds;
 @end
@@ -24,7 +24,7 @@
 	@private
 		CGFloat width;
 }
--(id)init:(NSUInteger) width;
+-(id)init:(CGFloat) width;
 -(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
 -(NSUInteger)maximumVisible:(CGRect) visibleBounds;
 @end
@@ -32,7 +32,7 @@
 
 @implementation TheBoxHeight
 
--(id)init:(NSUInteger) aHeight
+-(id)init:(CGFloat) aHeight
 {
 	self = [super init];
 	
@@ -66,7 +66,7 @@ return [NSString stringWithFormat:@"%f", height];
 
 @implementation TheBoxWidth
 
--(id)init:(NSUInteger) aWidth
+-(id)init:(CGFloat) aWidth
 {
 	self = [super init];
 	
@@ -101,6 +101,14 @@ return [NSString stringWithFormat:@"%f", width];
 
 @implementation TheBoxSize
 
++(id<TheBoxDimension>) newHeight:(CGFloat)height{
+return [[TheBoxHeight alloc] init:height];
+}
+
++(id<TheBoxDimension>) newWidth:(CGFloat)width{
+return [[TheBoxWidth alloc] init:width];
+}
+
 @synthesize size;
 
 -(id)initWithSize:(CGSize) theSize
@@ -129,9 +137,9 @@ return [[[TheBoxHeight alloc] init:self.size.height] autorelease];
 return [[[TheBoxWidth alloc] init:self.size.width] autorelease];	
 }
 
--(CGSize)contentSizeOf:(CGFloat)height ofRows:(NSUInteger)noOfRows
+-(CGSize)sizeOf:(NSUInteger)noOfRows height:(CGFloat)height
 {
-	int noOfRowsInHeight = self.size.height / height;
+	float noOfRowsInHeight = self.size.height / height;
 
 	if(noOfRowsInHeight == 0){
 		return CGSizeZero;
@@ -142,9 +150,9 @@ return CGSizeMake(
 		(float)noOfRows / (float)noOfRowsInHeight * self.size.height);
 }
 
--(CGSize)contentSizeOf:(CGFloat)width ofColumns:(NSUInteger)noOfColumns
+-(CGSize)sizeOf:(NSUInteger)noOfColumns width:(CGFloat)width
 {
-	int nofOfColumnsInWidth = self.size.width / width;
+	float nofOfColumnsInWidth = self.size.width / width;
 	
 	if(nofOfColumnsInWidth == 0){
 		return CGSizeZero;

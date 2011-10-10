@@ -20,7 +20,7 @@ return [[TheBoxBundle alloc] initWithBundle:[NSBundle mainBundle]];
 
 -(void) dealloc
 {
-	[self.bundle release];
+	[bundle release];
 	[super dealloc];
 }
 

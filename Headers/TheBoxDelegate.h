@@ -7,7 +7,7 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 25/03/2011.
  *  Contributor(s): .-
  */
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 @protocol TheBoxQuery;
 
 @protocol TheBoxDelegate <NSObject>

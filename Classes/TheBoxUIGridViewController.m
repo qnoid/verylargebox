@@ -8,55 +8,56 @@
  *  Contributor(s): .-
  */
 #import "TheBoxUIGridViewController.h"
-#import "TheBoxUIGridView.h"
+#import "TheBoxUIScrollView.h"
 #import "TheBoxUICell.h"
-#import "TheBoxUISectionView.h"
 #import "TheBox.h"
 #import "TheBoxRect.h"
 #import "TheBoxVisibleStrategy.h"
+#import "TheBoxUIRecycleStrategy.h"
+#import "TheBoxUIGridViewDelegate.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 @interface TheBoxUIGridViewController ()
-@property(nonatomic, retain) TheBoxUIGridView *gridView;
-
-@property(nonatomic, retain) TheBoxRect *sectionRect;
-
+@property(nonatomic, retain) TheBoxRect *viewRect;
+@property(nonatomic, retain) TheBoxRect *cellRect;
+@property(nonatomic, retain) TheBoxUIGridViewDelegate *gridViewDelegate;
 @end
 
 static const int GRID_FRAME_X = 0;
-static const int GRID_FRAME_Y = 88;
+static const int GRID_FRAME_Y = 44;
 static const int GRID_FRAME_WIDTH = 320;
-static const int GRID_FRAME_HEIGHT = 392;
+static const int GRID_FRAME_HEIGHT = 392 + 44;
 
 static const int SECTION_FRAME_X = 0;
 static const int SECTION_FRAME_Y = 0;
 static const int SECTION_FRAME_WIDTH = 320;
 static const int SECTION_FRAME_HEIGHT = 196;
 
-static const int COLUMN_FRAME_WIDTH = 160;
-
+static const int CELL_FRAME_X = 0;
 static const int CELL_FRAME_Y = 0;
-
 static const int CELL_FRAME_WIDTH = 160;
 static const int CELL_FRAME_HEIGHT = 196;
 
 
-
 @implementation TheBoxUIGridViewController
 
-TheBoxUIGridView *gridView;
-
-TheBoxRect *sectionRect;
-
+#pragma mark private fields
+TheBoxRect *viewRect;
+TheBoxRect *cellRect;
+TheBoxUIGridViewDelegate *gridViewDelegate;
 
 @synthesize gridView;
-
-@synthesize sectionRect;
+@synthesize viewRect;
+@synthesize cellRect;
+@synthesize gridViewDelegate;
 
 - (void) dealloc
 {
-	[self.gridView release];
-	
-	[self.sectionRect release];
+	[gridView release];
+	[viewRect release];
+	[cellRect release];
+	[gridViewDelegate release];
 	[super dealloc];
 }
 
@@ -66,93 +67,135 @@ TheBoxRect *sectionRect;
  */
 -(void) viewDidLoad
 {
-	self.sectionRect = [[TheBoxRect alloc] initWithFrame:CGRectMake(SECTION_FRAME_X, SECTION_FRAME_Y, SECTION_FRAME_WIDTH, SECTION_FRAME_HEIGHT)];
-
-	TheBoxUIGridView *theGridView = [TheBoxUIGridView 
-					 newGridView:CGRectMake(GRID_FRAME_X, GRID_FRAME_Y, GRID_FRAME_WIDTH, GRID_FRAME_HEIGHT) 
-					 datasource:self
-					 delegate:self];		
+    TheBoxRect* rowRect = [[TheBoxRect alloc] initWithFrame:
+     CGRectMake(SECTION_FRAME_X, SECTION_FRAME_Y, SECTION_FRAME_WIDTH, SECTION_FRAME_HEIGHT)];
+    
+	self.viewRect = rowRect;
 	
-	theGridView.clipsToBounds = YES;
-			
-	self.gridView = theGridView;
-	[self.view addSubview:theGridView];
-	[theGridView release];
+    
+    TheBoxRect* columnRect = [[TheBoxRect alloc] initWithFrame:
+                              CGRectMake(CELL_FRAME_X, CELL_FRAME_Y, CELL_FRAME_WIDTH, CELL_FRAME_HEIGHT)];
+    
+	self.cellRect = columnRect;	
+	
+    TheBoxUIGridViewDelegate* theGridViewDelegate = 
+        [[TheBoxUIGridViewDelegate alloc] init];
+    
+	self.gridViewDelegate = theGridViewDelegate;
+	self.gridViewDelegate.datasource = self;
+		
+	TheBoxUIScrollView *aGridView = 
+		[TheBoxUIScrollView 
+			newVerticalScrollView:CGRectMake(GRID_FRAME_X, GRID_FRAME_Y, GRID_FRAME_WIDTH, GRID_FRAME_HEIGHT)
+			viewsOf:SECTION_FRAME_HEIGHT];
+
+	aGridView.scrollViewDelegate = self;
+	aGridView.datasource = self;	
+	aGridView.clipsToBounds = YES;
+	
+	self.gridView = aGridView;
+	[self.view addSubview:self.gridView];			
+	
+	[aGridView release];
+    [theGridViewDelegate release];
+    [columnRect release];
+    [rowRect release];
 }
 
--(UIView *)gridView:(TheBoxUIGridView *)theGridView sectionForIndex:(NSInteger)index
-{
-	NSLog(@"asking for section %d", index);
-	
-	TheBoxUISectionView *view = (TheBoxUISectionView *)[theGridView dequeueReusableSection];
-	
-	NSUInteger noOfColumns = [self numberOfColumnsInSection:index];
-	
-	CGRect frame = [self.sectionRect frame:index minimumWidth:noOfColumns * COLUMN_FRAME_WIDTH];
-	
-    if (view == nil) {
-		view = [[[TheBoxUISectionView alloc] initWithFrame:frame] autorelease];
-		view.clipsToBounds = YES;
-		view.datasource = self;		
-	}
-	
-	view.index = index;
-	view.frame = frame;
-	[view setNeedsLayout];
-
-	NSLog(@"view %@", view);
-	
-return view;	
-}
-
-/*
- */
--(CGRect) cellFrame:(NSUInteger) column{
-return CGRectMake(CELL_FRAME_WIDTH * column, CELL_FRAME_Y, CELL_FRAME_WIDTH, CELL_FRAME_HEIGHT);
-}
-
--(UIView *)sectionView:(TheBoxUISectionView *)sectionView cellForIndex:(NSInteger)index
-{
-	NSLog(@"asking for column %d at section %d", index, sectionView.index);
-	
-	TheBoxUICell *cell = (TheBoxUICell*)[sectionView dequeueReusableCell];
-	
-	CGRect frame = [self cellFrame:index];
-
-    if (cell == nil) 
-	{
-        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TheBoxUICell" owner:self options:nil];
-		cell = [views objectAtIndex:0];
-	}
-	
-	cell.frame = frame;
-	NSLog(@"cell %@", cell);
-
-return cell;
-}
-
--(void)setNeedsLayout
+-(void)reloadData
 {
 	[self.gridView setNeedsLayout];
 }
 
-- (CGFloat)whatRowHeight:(TheBoxUIGridView *)gridView{
+-(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource
+{
+	NSUInteger numberOfViews = [datasource numberOfViews:scrollView];
+	CGFloat height = [self whatRowHeight:scrollView];
+	
+return [scrollView.theBoxSize sizeOf:numberOfViews height:height];
+}
+
+- (CGFloat)whatRowHeight:(TheBoxUIScrollView *)gridView{
 return SECTION_FRAME_HEIGHT;
 }
 
--(UIView *)gridView:(TheBoxUIGridView *)gridView section:(UIView *)section forSection:(NSInteger)index{
-return section;
+-(UIView *)viewOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
+{
+	NSLog(@"asking for column %d at row %d", index, row);
+	
+	UIView* view = [scrollView dequeueReusableView];
+	
+	CGRect frame = [self frameOf:scrollView atRow:row atIndex:index];
+
+    if (view == nil) 
+	{
+        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TheBoxUICell" owner:self options:nil];
+		view = [views objectAtIndex:0];
+	}
+	
+	view.frame = frame;
+    
+	NSLog(@"view %@", view);
+
+return view;
 }
 
--(UIView *)gridView:(TheBoxUIGridView *)gridView forColumn:(UIView *)column withIndex:(NSInteger)index{
-return column;
+-(UIView*)viewOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index
+{
+	NSLog(@"asking for row %d", index);
+	
+	UIView* view = [scrollView dequeueReusableView];
+	
+	NSUInteger noOfColumns = [self numberOfViews:scrollView atIndex:index];
+	
+	CGRect frame = [self.viewRect frame:index minimumWidth:noOfColumns * CELL_FRAME_WIDTH];
+	
+    if (view == nil) 
+	{		
+		TheBoxUIScrollView *viewOf = [[TheBoxUIScrollView 
+										newHorizontalScrollView:frame 
+										viewsOf:CELL_FRAME_WIDTH]autorelease];
+		
+		viewOf.clipsToBounds = YES;
+		viewOf.datasource = gridViewDelegate;
+		viewOf.scrollViewDelegate = gridViewDelegate;
+		[self.gridViewDelegate setView:viewOf atIndex:index];
+		 
+		
+		view = viewOf;
+	}
+	
+	view.frame = frame;
+	
+	NSLog(@"view %@", view);
+	
+return view;
 }
 
--(NSInteger)numberOfSectionsInGridView:(TheBoxUIGridView *)theGridView{
+
+-(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
+{
+    CGRect frame = [self.cellRect frame:index minimumHeight:CELL_FRAME_HEIGHT];
+    return frame;    
+//    CGSize margins = [self marginOf:scrollView atRow:row atIndex:index];
+//    
+//return CGRectMake(
+//                  frame.origin.x + (margins.width * index), 
+//                  frame.origin.y + (margins.height * index), 
+//                  frame.size.width, 
+//                  frame.size.height);
+}
+
+-(NSUInteger)numberOfViews:(TheBoxUIScrollView *)gridView{
 return 0;
 }
 
--(NSUInteger)numberOfColumnsInSection:(NSUInteger)index{
+-(NSUInteger)numberOfViews:(TheBoxUIScrollView*)scrollView atIndex:(NSInteger)index{
 return 0;
 }
+
+-(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index {
+return CGSizeMake(0.0, 0.0);
+}
+
 @end

@@ -7,7 +7,6 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 27/11/10.
  *  Contributor(s): .-
  */
-
 #import <UIKit/UIKit.h>
 
 @protocol VisibleStrategyDelegate<NSObject>

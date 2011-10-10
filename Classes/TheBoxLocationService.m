@@ -8,15 +8,15 @@
  *  Contributor(s): .-
  */
 #import "TheBoxLocationService.h"
+#import "CLLocationManager+ TemporaryHack.h"
 
 @implementation TheBoxLocationService
 
 +(TheBoxLocationService *) theBox
 {
 	CLLocationManager *locationManager = [[CLLocationManager alloc] init];
-	TheBoxLocationService *theBox = [[TheBoxLocationService alloc] init:locationManager];
-	[locationManager release];
-
+    TheBoxLocationService *theBox = [[[TheBoxLocationService alloc] init:locationManager] autorelease];
+    
 	locationManager.delegate = theBox;
 	locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
 	
@@ -25,6 +25,7 @@
 	
 	[locationManager startUpdatingLocation];		
 	
+	[locationManager release];
 	
 return theBox;
 }
@@ -76,10 +77,14 @@ return self;
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"didUpdateToLocation" object:self userInfo:userInfo];
 		
-	self.theGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate];
+    MKReverseGeocoder* mkReverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate];
+    
+	self.theGeocoder = mkReverseGeocoder;
 	
     theGeocoder.delegate = self;
     [theGeocoder start];
+    
+    [mkReverseGeocoder release];
 }
 
 // Delegate methods

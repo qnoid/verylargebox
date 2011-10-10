@@ -44,4 +44,6 @@
  */
 -(CGRect) frame:(NSUInteger)index minimumWidth:(CGFloat) width;
 
+-(CGRect) frame:(NSUInteger)index minimumHeight:(CGFloat) height;
+
 @end

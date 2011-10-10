@@ -17,9 +17,6 @@
 #import "ASIHTTPRequest.h"
 #import "TheBoxDataParser.h"
 
-static NSString* theBoxURL = @"http://0.0.0.0:3000";
-static NSString* theBoxItemsPrefix = @"/items";
-
 /*
  * (not so) private declarations
  */
@@ -50,8 +47,8 @@ return theBox;
 
 - (void) dealloc
 {
-	[self.responseParser release];
-	[self.cache release];
+	[responseParser release];
+	[cache release];
 	[super dealloc];
 }
 
@@ -118,9 +115,9 @@ TheBoxCompositeDataParser *dataParser;
 
 -(void) dealloc
 {
-	[self.cache release];
-	[self.responseParserDelegate release];
-	[self.dataParser release];
+	[cache release];
+	[responseParserDelegate release];
+	[dataParser release];
 	[super dealloc];
 }
 

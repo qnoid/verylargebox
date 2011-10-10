@@ -14,6 +14,6 @@
 
 }
 
-+(id<TheBoxPredicate>)newCategoryIdPredicate:(NSNumber *)categoryId;
++(id<TheBoxPredicate>)newCategoryIdPredicate;
 
 @end

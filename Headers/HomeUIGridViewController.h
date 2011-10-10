@@ -20,7 +20,6 @@
 {
 	@private
 		UILabel *locationLabel;
-		UISearchBar *searchBar;
 		TheBoxLocationService *theBoxLocationService;	
 		NSMutableArray *items;
 		TheBox *theBox;
@@ -28,7 +27,6 @@
 }
 
 @property(nonatomic, retain) IBOutlet UILabel *locationLabel;
-@property(nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property(nonatomic, retain) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, retain) NSMutableArray *items;
 @property(nonatomic, retain) TheBox *theBox;

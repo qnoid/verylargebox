@@ -14,19 +14,24 @@
  */
 @protocol TheBoxPredicate <NSObject>
 
--(BOOL)applies:(id)object;
-
+-(BOOL)does:(id)thiz match:(id)that;
 /*
  * @return true
  */
--(BOOL)isHigherThan:(id)object;
+-(BOOL)is:(id)thiz higherThan:(id)that;
 
 @end
 
 @interface TheBoxBinarySearch : NSObject 
 {
+    @private
+        id<TheBoxPredicate> predicate;
 }
 
--(id)find:(id<TheBoxPredicate>)what on:(NSArray *)values;
+@property(nonatomic, retain) id<TheBoxPredicate> predicate;
+
+-(id)initWithPredicate:(id<TheBoxPredicate>) predicate;
+
+-(NSUInteger)find:(id)what on:(NSArray *)values;
 
 @end

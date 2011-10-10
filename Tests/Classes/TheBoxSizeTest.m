@@ -24,7 +24,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:196 ofRows:0];
+	CGSize actual = [theBoxSize sizeOf:0 height:196];
 	
 	STAssertEquals(actual, CGSizeMake(320, 0), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 0)));
 	
@@ -36,7 +36,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:196 ofRows:1];
+	CGSize actual = [theBoxSize sizeOf:1 height:196];
 	
 	STAssertEquals(actual, CGSizeMake(320, 196), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 196)));
 	
@@ -48,7 +48,7 @@
 	CGSize size = CGSizeMake(320, 196);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:196 ofRows:2];
+	CGSize actual = [theBoxSize sizeOf:2 height:196];
 	
 	STAssertEquals(actual, CGSizeMake(320, 196 * 2), nil);
 	
@@ -60,7 +60,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:196 ofRows:3];
+	CGSize actual = [theBoxSize sizeOf:3 height:196];
 	
 	STAssertEquals(actual, CGSizeMake(320, 196 * 3), nil);
 	
@@ -73,7 +73,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:196 ofRows:4];
+	CGSize actual = [theBoxSize sizeOf:4 height:196];
 	
 	STAssertEquals(actual, CGSizeMake(320, 196 * 4), nil);
 	
@@ -85,7 +85,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:160 ofColumns:0];
+	CGSize actual = [theBoxSize sizeOf:0 width:160];
 	
 	STAssertEquals(actual, CGSizeMake(0, 392), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 0)));
 	
@@ -97,7 +97,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:160 ofColumns:1];
+	CGSize actual = [theBoxSize sizeOf:1 width:160];
 	
 	STAssertEquals(actual, CGSizeMake(160, 392), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 196)));
 	
@@ -109,7 +109,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:160 ofColumns:2];
+	CGSize actual = [theBoxSize sizeOf:2 width:160];
 	
 	STAssertEquals(actual, CGSizeMake(160*2, 392), nil);
 	
@@ -121,7 +121,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:160 ofColumns:3];
+	CGSize actual = [theBoxSize sizeOf:3 width:160];
 	
 	STAssertEquals(actual, CGSizeMake(160*3, 392), nil);
 	
@@ -134,7 +134,7 @@
 	CGSize size = CGSizeMake(320, 392);
 	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
 	
-	CGSize actual = [theBoxSize contentSizeOf:160 ofColumns:4];
+	CGSize actual = [theBoxSize sizeOf:4 width:160];
 	
 	STAssertEquals(actual, CGSizeMake(160*4, 392), nil);
 	

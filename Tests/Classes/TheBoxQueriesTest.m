@@ -28,27 +28,33 @@
 
 -(void)testNewItemsQuery
 {
-	id<TheBoxQuery> this = [TheBoxQueries itemsQuery];
-	id<TheBoxQuery> that = [TheBoxQueries itemsQuery];
+	id<TheBoxQuery> this = [TheBoxQueries newItemsQuery];
+	id<TheBoxQuery> that = [TheBoxQueries newItemsQuery];
 	
 	STAssertTrue([this isEqual:that], nil);	
+    
+    [this release];
+    [that release];
 }
 
 -(void)testNewItemQuery
 {
-	id<TheBoxQuery> this = [TheBoxQueries itemQuery:nil 
+	id<TheBoxQuery> this = [TheBoxQueries newItemQuery:nil 
 										  itemName:nil 
 										  locationName:nil 
 										  categoryName:nil 
 										  tags:nil];
 	
-	id<TheBoxQuery> that = [TheBoxQueries itemQuery:nil 
+	id<TheBoxQuery> that = [TheBoxQueries newItemQuery:nil 
 										  itemName:nil 
 										  locationName:nil 
 										  categoryName:nil 
 										  tags:nil];
 	
 	STAssertTrue([this isEqual:that], nil);	
+    
+    [this release];
+    [that release];    
 }
 
 @end

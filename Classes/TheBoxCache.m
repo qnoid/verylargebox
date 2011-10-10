@@ -20,7 +20,11 @@
 	
 	if (self) 
 	{
-		self.cache = [[NSCache alloc] init];
+        NSCache* theCache = [[NSCache alloc] init];
+        
+		self.cache = theCache;
+        
+        [theCache release];
 	}
 return self;
 }

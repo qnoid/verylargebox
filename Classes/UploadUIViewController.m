@@ -38,16 +38,16 @@
 
 - (void) dealloc
 {
-	[self.uploadView release];
-	[self.takePhotoButton release];
-	[self.imageView release];
-	[self.locationButton release];
-	[self.nameTextField release];
-	[self.textFields release];
-	[self.list release];
-	[self.tags release];
-	[self.theBox release];
-	[self.theBoxDelegate release];
+	[uploadView release];
+	[takePhotoButton release];
+	[imageView release];
+	[locationButton release];
+	[nameTextField release];
+	[textFields release];
+	[list release];
+	[tags release];
+	[theBox release];
+	[theBoxDelegate release];
 	[super dealloc];
 }
 
@@ -73,7 +73,9 @@
 	[super viewDidLoad];
 
 	self.textFields = [NSArray arrayWithObjects:nameTextField, category, firstTag, secondTag, nil];	
-	self.list = [TheBoxUIList newListWithTextFields: [NSArray arrayWithObjects:category, firstTag, secondTag, nil]];
+    TheBoxUIList* theboxlist = [TheBoxUIList newListWithTextFields: [NSArray arrayWithObjects:category, firstTag, secondTag, nil]];
+    
+	self.list = theboxlist;
 	self.tags = [NSArray arrayWithObjects:firstTag, secondTag, nil];	
 	
 	for (UITextField *textField in textFields) {
@@ -90,6 +92,7 @@
 	NSLog(@"%@", NSStringFromCGRect(bounds));
 	CGSize contentSize = uploadView.contentSize;
 	NSLog(@"%@", NSStringFromCGSize(contentSize));		
+    [theboxlist release];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -145,11 +148,11 @@ return NO;
 
 - (IBAction)done:(id)sender 
 {
-	TheBoxPost *itemQuery = [[TheBoxQueries itemQuery:imageView.image 
+	TheBoxPost *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
 												itemName:nameTextField.text 
 												locationName:locationButton.titleLabel.text
 												categoryName:category.text
-												tags:tags] retain];
+												tags:tags];
 
 	[self.theBox query:itemQuery];
 	

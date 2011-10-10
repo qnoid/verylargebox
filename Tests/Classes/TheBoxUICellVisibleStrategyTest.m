@@ -9,7 +9,6 @@
  */
    
 #import <SenTestingKit/SenTestingKit.h>
-#import <UIKit/UIKit.h>
 #import "TheBoxVisibleStrategy.h"
 #import "VisibleStrategy.h"
 #import "UITestViews.h"
@@ -49,11 +48,12 @@ return [self.views objectAtIndex:index];
 
 -(void)testWillAppear
 {
-	CGSize cellSize = CGSizeMake(160, 198);
 	CGRect visibleBounds = CGRectMake(0, 0, 320, 198);
 	
+	id<TheBoxDimension> dimension = [[TheBoxSize newHeight:160] autorelease];
+	
 	TheBoxVisibleStrategy *visibleStrategy = 
-		[[TheBoxVisibleStrategy newVisibleStrategyOnWidth:cellSize] autorelease];
+		[[TheBoxVisibleStrategy newVisibleStrategyOn:dimension] autorelease];
 	
 	visibleStrategy.delegate = self;	
 	[visibleStrategy willAppear:visibleBounds];	
@@ -70,8 +70,10 @@ return [self.views objectAtIndex:index];
 
 -(void)assertWillAppear:(CGSize) cellSize visibleBounds:(CGRect)visibleBounds howMany:(NSUInteger)howMany minimum:(NSUInteger)minimum maximum:(NSUInteger)maximum
 {
+	id<TheBoxDimension> dimension = [[TheBoxSize newWidth:cellSize.width] autorelease];
+
 	TheBoxVisibleStrategy *visibleStrategy = 
-	[[TheBoxVisibleStrategy newVisibleStrategyOnWidth:cellSize] autorelease];
+	[[TheBoxVisibleStrategy newVisibleStrategyOn:dimension] autorelease];
 	
 	visibleStrategy.delegate = self;	
 	[visibleStrategy willAppear:visibleBounds];	
@@ -116,8 +118,10 @@ return [self.views objectAtIndex:index];
 
 -(void)testIsVisible
 {
+	id<TheBoxDimension> dimension = [[TheBoxSize newWidth:0] autorelease];
+
 	TheBoxVisibleStrategy *visibleStrategy = 
-		[[TheBoxVisibleStrategy newVisibleStrategyOnWidth:CGSizeZero] autorelease];
+		[[TheBoxVisibleStrategy newVisibleStrategyOn:dimension] autorelease];
 
 	NSInteger zero = 0;
 	NSInteger one = 1;

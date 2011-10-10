@@ -9,7 +9,6 @@
  */
    
 #import <SenTestingKit/SenTestingKit.h>
-#import <UIKit/UIKit.h>
 #import "TheBoxBundle.h"
 #import "Math.h"
 

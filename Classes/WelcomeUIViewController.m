@@ -21,10 +21,10 @@
 
 - (void) dealloc
 {
-	[self.locationLabel release];
-	[self.checkInButton release];
-	[self.theBoxLocationService release];
-	[self.gridViewController release];
+	[locationLabel release];
+	[checkInButton release];
+	[theBoxLocationService release];
+	[gridViewController release];
 	[super dealloc];
 }
 

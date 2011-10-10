@@ -25,7 +25,7 @@
 
 - (void) dealloc
 {
-	[self.dataParser release];
+	[dataParser release];
 	[super dealloc];
 }
 
@@ -43,15 +43,28 @@ return self;
 #pragma mark private
 TheBoxCompositeDataParser *dataParser;
 
+- (void)response:(NSString*)response error:(id)data
+{
+	NSLog(@"response error: %@", response);
+}
+
 - (void)response:(NSString*)response ok:(id)data
 {
 	[self.dataParser parse:data];
 	[self.delegate response:response ok:data];
 }
 
+/*
+ * In case of an error, there is a callback to #response:error: with data being nil
+ */
 -(void)parse:(NSString *) response
 {
 	id data = [response JSONValue];
+	
+	if(!data){
+		[self response:response error:data];
+	}
+	
 	[self response:response ok:data];
 }
 

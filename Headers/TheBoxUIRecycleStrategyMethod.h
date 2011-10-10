@@ -7,9 +7,6 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 13/12/10.
  *  Contributor(s): .-
  */
-#import <CoreGraphics/CGGeometry.h>
-
-
 @protocol TheBoxUIRecycleStrategyMethod <NSObject>
 
 -(BOOL)is:(CGRect)rect visibleIn:(CGRect)bounds;

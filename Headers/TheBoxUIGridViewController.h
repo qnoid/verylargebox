@@ -8,33 +8,37 @@
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
-#import "TheBoxUIGridView.h"
+#import "TheBoxUIScrollView.h"
+#import "TheBoxUIScrollViewDatasource.h"
+#import "TheBoxUIGridViewDelegate.h"
+#import "TheBoxUIGridViewDatasource.h"
+@class TheBoxUIGridView;
+@protocol VisibleStrategy;
 
-#import "TheBoxUIGridViewDataSource.h"
-#import "TheBoxUISectionViewDataSource.h"
 
-
-@interface TheBoxUIGridViewController : UIViewController <TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TheBoxUISectionViewDatasource>
+@interface TheBoxUIGridViewController : UIViewController <TheBoxUIScrollViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TheBoxUIScrollViewDatasource>
 {
+	@private
+		TheBoxUIScrollView* gridView;
 }
 
--(void)setNeedsLayout;
+@property(nonatomic, retain) TheBoxUIScrollView* gridView;
 
-/*
- * Override to customize section
- */
--(UIView *)gridView:(TheBoxUIGridView *)gridView section:(UIView *)section forSection:(NSInteger)section;
-
-/*
- * Override to customize a column
- */
--(UIView *)gridView:(TheBoxUIGridView *)gridView forColumn:(UIView *)column withIndex:(NSInteger)index;
+-(void)reloadData;
 
 /*
  * Default 0
  */
--(NSInteger)numberOfSectionsInGridView:(TheBoxUIGridView *)theGridView;
+-(NSUInteger)numberOfViews:(TheBoxUIScrollView *)scrollView;
+-(UIView*)viewOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index;
 
--(NSUInteger)numberOfColumnsInSection:(NSUInteger)index;
+-(NSUInteger)numberOfViews:(TheBoxUIScrollView*)scrollView atIndex:(NSInteger)index;
+-(UIView*)viewOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
+
+-(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
+/*
+ *
+ */
+-(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
 
 @end

@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import <SenTestingKit/SenTestingKit.h>
-#import <UIKit/UIKit.h>
 #import "TheBoxUIRecycleStrategy.h"
 #import "TheBoxBundle.h"
 #import "UITestViews.h"

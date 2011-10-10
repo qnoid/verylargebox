@@ -19,9 +19,9 @@
 
 - (void) dealloc
 {
-	[self.imageURL release];
-	[self.when release];
-	[self.createdAt release];
+	[imageURL release];
+	[when release];
+	[createdAt release];
 	[super dealloc];
 }
 

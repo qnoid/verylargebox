@@ -18,8 +18,8 @@
 
 - (void) dealloc
 {
-	[self.handler release];
-	[self.request release];
+	[handler release];
+	[request release];
 	[super dealloc];
 }
 
@@ -28,9 +28,15 @@
 {
 	self = [super init];
 	
-	if (self) {
+	if (self) 
+    {
+        TheBoxDelegateHandler* delegateHandler = [[TheBoxDelegateHandler alloc] init];
+        
 		self.request = theRequest;
-		self.handler = [[TheBoxDelegateHandler alloc] init];		
+        
+		self.handler = delegateHandler;
+        
+        [delegateHandler release];
 	}
 	
 return self;

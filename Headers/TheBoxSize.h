@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
-#import <CoreGraphics/CGGeometry.h>
 
 /*
  * Represents a dimension on the size
@@ -58,6 +57,9 @@
 
 @property(nonatomic, assign) CGSize size;
 
++(id<TheBoxDimension>) newHeight:(CGFloat)height;
++(id<TheBoxDimension>) newWidth:(CGFloat)width;
+
 -(id)initWithSize:(CGSize) size;
 
 -(id<TheBoxDimension>)height;
@@ -67,12 +69,12 @@
  * given a height and the number of rows
  *
  *
- * @param height the height for each row
  * @param noOfRows the total number of rows
+ * @param height the height for each row
  * @return the content size the content size required to fit all the rows for the
  *		given height
  */
--(CGSize)contentSizeOf:(CGFloat)height ofRows:(NSUInteger)noOfRows;
--(CGSize)contentSizeOf:(CGFloat)width ofColumns:(NSUInteger)noOfColumns;
+-(CGSize)sizeOf:(NSUInteger)noOfRows height:(CGFloat)height;
+-(CGSize)sizeOf:(NSUInteger)noOfColumns width:(CGFloat)width;
 
 @end

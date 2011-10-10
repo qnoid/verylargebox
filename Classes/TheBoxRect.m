@@ -45,19 +45,19 @@ return self;
  *	0 + width >= 320
  */
 -(BOOL)isWithinXorigin:(CGRect) visibleBounds {
-return self.frame.origin.x + self.frame.size.width >= visibleBounds.origin.x;
+return self.frame.origin.x + self.frame.size.width > visibleBounds.origin.x;
 }
 
 -(BOOL)isWithinYorigin:(CGRect) visibleBounds {
-return self.frame.origin.y + self.frame.size.height >= visibleBounds.origin.y;
+return self.frame.origin.y + self.frame.size.height > visibleBounds.origin.y;
 }
 
 -(BOOL)isWithinWidth:(CGRect) visibleBounds {
-return (self.frame.origin.x + self.frame.size.width) <= visibleBounds.size.width;
+return (self.frame.origin.x + self.frame.size.width) < visibleBounds.size.width;
 }
 
 -(BOOL)isWithinHeight:(CGRect) visibleBounds {
-return (self.frame.origin.y + self.frame.size.height) <= visibleBounds.size.height;
+return (self.frame.origin.y + self.frame.size.height) < visibleBounds.size.height;
 }
 
 -(BOOL) isVisibleWithinX:(CGRect) visibleBounds {
@@ -90,6 +90,14 @@ return CGRectMake(
 			self.frame.size.height * index, 
 			MIN(width, self.frame.size.width), 
 			self.frame.size.height);	
+}
+
+-(CGRect) frame:(NSUInteger)index minimumHeight:(CGFloat) height {
+return CGRectMake(
+			  self.frame.size.width * index, 
+			  self.frame.origin.y, 
+			  self.frame.size.width, 
+			  MIN(height, self.frame.size.height));	
 }
 
 

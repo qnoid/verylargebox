@@ -7,9 +7,6 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 26/03/2011.
  *  Contributor(s): .-
  */
-#import <UIKit/UIKit.h>
-
-
 @protocol TheBoxDataParserDelegate <NSObject>
 
 @optional

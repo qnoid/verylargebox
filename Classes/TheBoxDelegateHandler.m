@@ -24,7 +24,7 @@
 
 - (void) dealloc
 {
-	[self.delegate release];
+	[delegate release];
 	[super dealloc];
 }
 

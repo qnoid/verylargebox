@@ -10,43 +10,28 @@
 #import "TheBoxPredicates.h"
 #import "TheBoxBinarySearch.h"
 
-@interface Foo : NSObject <TheBoxPredicate>
+@interface TheBoxPredicateOnCategory : NSObject <TheBoxPredicate>
 {
-	@private
-		NSNumber* categoryId;
 }
-@property(nonatomic, assign) NSNumber* categoryId;
-
--(id)init:(NSNumber*) categoryId;
 @end
 
-@implementation Foo
+@implementation TheBoxPredicateOnCategory
 
-@synthesize categoryId;
 
--(id)init:(NSNumber*) aCategoryId
+-(BOOL)does:(id)thiz match:(id)that
 {
-	self = [super init];
+	NSNumber *thizCategoryId = [thiz objectForKey:@"category_id"];
+	NSNumber *thatCategoryId = [that objectForKey:@"category_id"];
 	
-	if (self) {
-		self.categoryId = aCategoryId;
-	}
-	
-return self;
+return [thizCategoryId isEqual:thatCategoryId];
 }
 
--(BOOL)applies:(id)object
+-(BOOL)is:(id)thiz higherThan:(id)that
 {
-	NSNumber *theCategoryId = [object objectForKey:@"id"];
+	NSNumber *thizCategoryId = [thiz objectForKey:@"category_id"];
+	NSNumber *thatCategoryId = [that objectForKey:@"category_id"];
 	
-return [categoryId isEqual:theCategoryId];
-}
-
--(BOOL)isHigherThan:(id)object
-{
-	NSNumber *theCategoryId = [object objectForKey:@"id"];
-	
-return [categoryId intValue] > [theCategoryId intValue];
+return [thizCategoryId intValue] > [thatCategoryId intValue];
 }
 
 @end
@@ -54,8 +39,8 @@ return [categoryId intValue] > [theCategoryId intValue];
 
 @implementation TheBoxPredicates
 
-+(id<TheBoxPredicate>)newCategoryIdPredicate:(NSNumber *)categoryId {
-return [[Foo alloc] init:categoryId];
++(id<TheBoxPredicate>)newCategoryIdPredicate {
+return [[TheBoxPredicateOnCategory alloc] init];
 }
 
 @end

@@ -7,7 +7,6 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 12/12/10.
  *  Contributor(s): .-
  */
-#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 @interface TheBoxBundle : NSObject 
@@ -21,7 +20,7 @@
 @property(nonatomic, retain) NSBundle *bundle;
 
 -(id)initWithBundle:(NSBundle *) bundle;
--(UIView *)loadView:(NSString *) view;
+-(id)loadView:(NSString *) view;
 
 
 @end

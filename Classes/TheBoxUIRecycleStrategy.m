@@ -35,16 +35,16 @@ return recycleStrategy;
 return recycleStrategy;	
 }
 
-- (void) dealloc
-{
-	[self.recycleMethod release];
-	[self.recycledViews release];
-	[super dealloc];
-}
-
 
 @synthesize recycleMethod;
 @synthesize recycledViews;
+
+- (void) dealloc
+{
+	[recycleMethod release];
+	[recycledViews release];
+	[super dealloc];
+}
 
 -(id)initWith:(id<TheBoxUIRecycleStrategyMethod>) aRecycleMethod
 {
@@ -53,7 +53,7 @@ return recycleStrategy;
 	if (self) 
 	{
 		self.recycleMethod = aRecycleMethod;
-		self.recycledViews = [[NSMutableSet alloc] init];
+		self.recycledViews = [[NSMutableSet new] autorelease];
 	}
 	
 	return self;

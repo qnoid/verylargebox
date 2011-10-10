@@ -10,38 +10,59 @@
 #import "TheBoxBinarySearch.h"
 
 @interface TheBoxBinarySearch ()
--(id)find:(id<TheBoxPredicate>)what on:(NSArray *)values between:(NSUInteger)start and:(NSUInteger) to;
+-(NSUInteger)find:(id)what on:(NSArray *)values between:(NSInteger)start and:(NSInteger) to;
 @end
 
 
 @implementation TheBoxBinarySearch
 
--(id)find:(id<TheBoxPredicate>)what on:(NSArray *)values between:(NSUInteger)start and:(NSUInteger) to
+@synthesize predicate;
+
+
+- (void)dealloc 
+{
+    [predicate release];
+    [super dealloc];
+}
+
+-(id)initWithPredicate:(id<TheBoxPredicate>) aPredicate
+{
+    self = [super init];
+    
+    if (self) {
+        self.predicate = aPredicate;
+    }
+    
+return self;
+}
+
+-(NSUInteger)find:(id)what on:(NSArray *)values between:(NSInteger)start and:(NSInteger) to
 {
 	
-	while (start < to) 
+	while (start <= to) 
 	{
 		NSUInteger index = (start + to) >> 1;
 		
 		id value = [values objectAtIndex:index];
 		
-		if ([what applies:value]) {
-		return value;
+		if ([self.predicate does:value match:what]) {
+		return index;
 		}
 
-		if ([what isHigherThan:value]) {
+		if ([self.predicate is:what higherThan:value]) {
 			start = index + 1;
 		}
+        else{
+            to = index - 1;            
+        }
 
-		to = index - 1;
 	}
 	
-	
-return nil;
+return -1;
 }
 
--(id)find:(id<TheBoxPredicate>)what on:(NSArray *)values{
-return [self find:what on:values between:0 and:[values count]];
+-(NSUInteger)find:(id) what on:(NSArray *)values{
+return [self find:what on:values between:0 and:[values count] - 1];
 }
 
 @end

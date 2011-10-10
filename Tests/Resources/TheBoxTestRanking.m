@@ -12,25 +12,12 @@
 
 @implementation TheBoxTestRanking
 
-@synthesize object;
-
--(id)init:(id)anObject
-{
-	self = [super init];
-	
-	if (self) {
-		self.object = anObject;
-	}
-	
-	return self;
+-(BOOL)does:(id)thiz match:(id)that{
+return [thiz isEqual:that];
 }
 
--(BOOL)applies:(id)anObject{
-return [object isEqual:anObject];
-}
-
--(BOOL)isHigherThan:(id)anObject {
-return object > anObject;
+-(BOOL)is:(id)thiz higherThan:(id)that {    
+return [thiz intValue] > [that intValue];
 }
 
 @end

@@ -19,7 +19,6 @@
 #import "TheBoxPost.h"
 #import "TheBoxGet.h"
 #import "UploadUIViewController.h"
-#import "TheBoxUISectionView.h"
 #import "NSArray+Decorator.h"
 #import "TheBoxBinarySearch.h"
 #import "TheBoxPredicates.h"
@@ -33,7 +32,6 @@
 @implementation HomeUIGridViewController
 
 @synthesize locationLabel;
-@synthesize searchBar;
 @synthesize theBoxLocationService;
 
 @synthesize items;
@@ -42,22 +40,25 @@
 
 - (void) dealloc
 {
-	[self.locationLabel release];
-	[self.searchBar release];
-	[self.theBoxLocationService release];
-	[self.items release];
-	[self.theBoxLocationService release];
-	[self.theBox release];
-	[self.imageCache release];
+	[locationLabel release];
+	[theBoxLocationService release];
+	[items release];
+	[theBoxLocationService release];
+	[theBox release];
+	[imageCache release];
 	[super dealloc];}
 
 -(void) loadView
 {
 	[super loadView];
 	self.items = [NSMutableArray array];
-	self.imageCache = [[NSCache alloc] init];
+    NSCache* cache = [[NSCache alloc] init];
+    
+	self.imageCache = cache;
 	
-	self.theBoxLocationService = [TheBoxLocationService theBox];
+    TheBoxLocationService* aBoxLocationService = [TheBoxLocationService theBox];
+    
+	self.theBoxLocationService = aBoxLocationService;
 	[self.theBoxLocationService notifyDidFindPlacemark:self];
 	[self.theBoxLocationService notifyDidFailWithError:self];	
 	
@@ -71,22 +72,17 @@
 	self.theBox = [builder build];
 	self.theBox.delegate = self;
 	
-	[builder release];	
+	[builder release];
+	[cache release];
 	
-	id<TheBoxQuery> query = [[TheBoxQueries itemsQuery] retain];
-	[theBox query:query];
+	id<TheBoxQuery> query = [TheBoxQueries newItemsQuery];
+	[theBox query:query];    
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
 {
-	id<TheBoxQuery> query = [[TheBoxQueries itemsQuery] retain];
+	id<TheBoxQuery> query = [TheBoxQueries newItemsQuery];
 	[theBox query:query];	
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
-{
-	NSLog(@"upload");
-	[theSearchBar resignFirstResponder];
 }
 
 - (IBAction)upload:(id)sender 
@@ -121,7 +117,7 @@
 {
 	NSLog(@"got %@", data);	
 	self.items = data;
-	[super setNeedsLayout];
+	[super reloadData];
 }
 
 - (void)element:(NSInteger)theId with:(id)data
@@ -129,25 +125,30 @@
 	NSLog(@"%@", data);
 	
 	NSDictionary* item = [data objectForKey:@"item"];
-	NSNumber *categoryId = [item objectForKey:@"category_id"];
 	
 	TheBoxBinarySearch *search = [[TheBoxBinarySearch alloc] init];
 	
-	id<TheBoxPredicate> categoryPredicate = [TheBoxPredicates newCategoryIdPredicate:categoryId];
+	id<TheBoxPredicate> categoryPredicate = [TheBoxPredicates newCategoryIdPredicate];
 	
-	NSDictionary* category = [search find:categoryPredicate on:self.items];
+    NSUInteger index = [search find:item on:self.items];
 
-	if(category == nil){
-		category = [self.items objectAtIndex:0];
-	}
-	
+    
+	NSDictionary* category = [self.items objectAtIndex:0];
+    
+    if(index != -1)
+    {
+        NSDictionary* item = [self.items objectAtIndex:index];
+        
+        category = [item objectForKey:@"category"];        
+    }
+
 	NSMutableArray* categoryItems = [[category objectForKey:@"category"] objectForKey:@"items"];
 	
 	[categoryItems insertObject:item atIndex:0];
 	
 	[categoryPredicate release];
 	[search release];
-	[super setNeedsLayout];
+	[super reloadData];
 }
 
 #pragma mark location based
@@ -171,18 +172,18 @@
 }
 
 #pragma mark datasource
--(UIView *)sectionView:(TheBoxUISectionView *)sectionView cellForIndex:(NSInteger)index
+-(UIView *)viewOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
 {		
-	TheBoxUICell *theBoxCell = (TheBoxUICell*)[super sectionView:sectionView cellForIndex:index];
+	TheBoxUICell *theBoxCell = (TheBoxUICell*)[super viewOf:scrollView atRow:row atIndex:index];
 	
-	NSArray *categoryItems = [[[self.items objectAtIndex:sectionView.index] objectForKey:@"category"] objectForKey:@"items"];
+	NSArray *categoryItems = [[[self.items objectAtIndex:row] objectForKey:@"category"] objectForKey:@"items"];
 		
 	//there should be a mapping between the index of the cell and the id of the item
 	NSDictionary *item = [categoryItems objectAtIndex:index];
 	
 	NSNumber *identifier = [item objectForKey:@"id"];
 	
-	NSString *imageURL = [NSString stringWithFormat:@"http://0.0.0.0:3000/system/images/%d/thumb/%@.", [identifier intValue], [item objectForKey:@"image_file_name"]];
+	NSString *imageURL = [NSString stringWithFormat:@"http://0.0.0.0:3000/system/images/%d/thumb/%@", [identifier intValue], [item objectForKey:@"image_file_name"]];
 	NSString *when = [item objectForKey:@"when"];
 
 	NSLog(@"%@", item);
@@ -205,11 +206,11 @@
 return theBoxCell;
 }
 
--(NSInteger)numberOfSectionsInGridView:(TheBoxUIGridView *)theGridView {
+-(NSUInteger)numberOfViews:(TheBoxUIScrollView *)gridView{
 return [self.items count];
 }
 
--(NSUInteger)numberOfColumnsInSection:(NSUInteger)index 
+-(NSUInteger)numberOfViews:(TheBoxUIScrollView*)scrollView atIndex:(NSInteger)index
 {
 	if ([self.items count] == 0) {
 		return 0;
@@ -222,6 +223,10 @@ return [self.items count];
 	NSArray *itemsForCategory = [[[self.items objectAtIndex:index] objectForKey:@"category"] objectForKey:@"items"];
 	
 return [itemsForCategory count];
+}
+
+-(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index{
+return CGSizeMake(40.0, 0.0);
 }
 
 @end

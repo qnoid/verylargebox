@@ -22,24 +22,12 @@
 @implementation TheBoxVisibleStrategy
 
 
-+(TheBoxVisibleStrategy*)newVisibleStrategyOnHeight:(CGSize) size
++(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension
 {
-	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
-	TheBoxVisibleStrategy *visibleStrategy = [[TheBoxVisibleStrategy alloc] init:[theBoxSize height]];
-	[theBoxSize release];
+	TheBoxVisibleStrategy *visibleStrategy = [[TheBoxVisibleStrategy alloc] init:dimension];
 	
 return visibleStrategy;	
 }
-
-+(TheBoxVisibleStrategy*)newVisibleStrategyOnWidth:(CGSize) size
-{
-	TheBoxSize *theBoxSize = [[TheBoxSize alloc] initWithSize:size];
-	TheBoxVisibleStrategy *visibleStrategy = [[TheBoxVisibleStrategy alloc] init:[theBoxSize width]];
-	[theBoxSize release];
-	
-return visibleStrategy;
-}
-	
 
 NSMutableSet *visibleViews;
 
@@ -51,8 +39,8 @@ NSMutableSet *visibleViews;
 
 - (void) dealloc
 {
-	[self.dimension release];
-	[self.visibleViews release];
+	[dimension release];
+	[visibleViews release];
 	[super dealloc];
 }
 
@@ -62,10 +50,15 @@ NSMutableSet *visibleViews;
 	
 	if (self) 
 	{
-		self.dimension = onDimension;
-		self.visibleViews = [[NSMutableSet alloc] init]; 
+        NSMutableSet* theVisibleViews = [[NSMutableSet alloc] init];
+        
+		self.dimension = onDimension;        
+		self.visibleViews = theVisibleViews;
+        
 		minimumVisibleIndex = MINIMUM_VISIBLE_INDEX;
         maximumVisibleIndex = MAXIMUM_VISIBLE_INDEX;
+        
+        [theVisibleViews release];
 	}
 	
 return self;
@@ -97,8 +90,10 @@ return isVisible;
 		}
 	}
 	
-	minimumVisibleIndex = theMinimumVisibleIndex;
-	maximumVisibleIndex = theMaximumVisibleIndex - 1;	
+	self.minimumVisibleIndex = theMinimumVisibleIndex;
+	self.maximumVisibleIndex = theMaximumVisibleIndex - 1;
+	
+	NSLog(@"minimum visible: %d, maximum visible: %d", self.minimumVisibleIndex, self.maximumVisibleIndex);
 }
 
 @end

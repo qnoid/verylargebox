@@ -12,11 +12,5 @@
 
 @interface TheBoxTestRanking : NSObject <TheBoxPredicate>
 {
-
-	@private
-		id object;
 }
-
-@property(nonatomic, assign) id object;
-
 @end

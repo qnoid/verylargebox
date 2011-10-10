@@ -28,8 +28,7 @@
 }
 @property(nonatomic, retain) id<TheBoxDimension> dimension;
 
-+(TheBoxVisibleStrategy*)newVisibleStrategyOnHeight:(CGSize) size;
-+(TheBoxVisibleStrategy*)newVisibleStrategyOnWidth:(CGSize) size;
++(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension;
 
 /*
  * 
