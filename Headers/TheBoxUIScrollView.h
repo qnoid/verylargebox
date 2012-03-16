@@ -15,7 +15,7 @@
 @class TheBoxUIScrollView;
 @class TheBoxSize;
 @protocol TheBoxUIScrollViewDatasource;
-
+@protocol TheBoxDimension;
 
 @protocol TheBoxUIScrollViewDelegate 
 
@@ -46,5 +46,6 @@
 @property(nonatomic, retain) TheBoxSize *theBoxSize;
 
 -(UIView*)dequeueReusableView;
+-(void) setNeedsLayout:(id<TheBoxDimension>) dimension;
 
 @end

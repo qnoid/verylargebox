@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import "TheBoxLocationService.h"
-#import "CLLocationManager+ TemporaryHack.h"
 
 @implementation TheBoxLocationService
 
@@ -36,6 +35,7 @@ return theBox;
 - (void) dealloc
 {
 	[locationManager release];
+    theGeocoder.delegate = nil;
 	[theGeocoder release];
 	[super dealloc];
 }
@@ -77,20 +77,17 @@ return self;
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"didUpdateToLocation" object:self userInfo:userInfo];
 		
-    MKReverseGeocoder* mkReverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate];
+    MKReverseGeocoder* mkReverseGeocoder = [[[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate] autorelease];
     
 	self.theGeocoder = mkReverseGeocoder;
 	
     theGeocoder.delegate = self;
-    [theGeocoder start];
-    
-    [mkReverseGeocoder release];
+    [theGeocoder start];    
 }
 
 // Delegate methods
 - (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFindPlacemark:(MKPlacemark*)place
 {
-	[geocoder release];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:place forKey:@"place"]; 
 	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -99,7 +96,6 @@ return self;
 
 - (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFailWithError:(NSError*)error
 {
-	[geocoder release];
     NSLog(@"Could not retrieve the specified place information.\n");
 	
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"]; 

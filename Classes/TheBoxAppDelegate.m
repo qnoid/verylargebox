@@ -21,11 +21,19 @@
 }
 
 #pragma mark -
+
+void uncaughtExceptionHandler(NSException *exception) {
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    // Internal error reporting
+}
+
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    
 	NSLog(@"Hello The Box");
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [window makeKeyAndVisible];
     
     return YES;

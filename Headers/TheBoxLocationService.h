@@ -14,9 +14,6 @@
 
 @interface TheBoxLocationService : NSObject <CLLocationManagerDelegate, MKReverseGeocoderDelegate>
 {
-	@private
-		CLLocationManager *locationManager;
-		MKReverseGeocoder* theGeocoder;
 }
 
 @property(nonatomic, retain) CLLocationManager *locationManager;

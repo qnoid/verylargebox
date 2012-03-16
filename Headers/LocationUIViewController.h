@@ -15,10 +15,6 @@
 
 @interface LocationUIViewController : UIViewController <TheBoxLocationServiceDelegate, UITextFieldDelegate> {
 
-	@private
-		UITextField *locationTextField;
-		MKMapView *map;
-		TheBoxLocationService *theBoxLocationService;
 }
 @property(nonatomic, assign) IBOutlet UITextField *locationTextField;
 @property(nonatomic, assign) IBOutlet MKMapView *map;

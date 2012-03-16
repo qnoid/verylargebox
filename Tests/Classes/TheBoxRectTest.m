@@ -61,5 +61,17 @@
 	[rect release];
 }
 
+- (void) testIsWithinXorigin
+{
+    CGRect frame = CGRectMake(0, 0, 160, 196);
+	CGRect visibleBounds = CGRectMake(0, 0, 320, 196);
+
+    TheBoxRect *rect = [[TheBoxRect alloc] initWithFrame:frame];
+
+	STAssertTrue([rect isVisibleWithinX:visibleBounds], nil);
+	
+	[rect release];
+}
+
 
 @end

@@ -42,7 +42,7 @@
 		908363E514006C3B00E5AAAF /* TheBoxTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57D133CC68F00CC9212 /* TheBoxTest.m */; };
 		908363E614006C3B00E5AAAF /* TheBoxUICellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */; };
 		908363E714006C3B00E5AAAF /* TheBoxUICellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */; };
-		908363E814006C3B00E5AAAF /* TheBoxUISectionRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E580133CC68F00CC9212 /* TheBoxUISectionRecycleStrategyTest.m */; };
+		908363E814006C3B00E5AAAF /* TheBoxUIRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */; };
 		908363EB14006C3B00E5AAAF /* TheBoxQueriesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E7E1133D022200CC9212 /* TheBoxQueriesTest.m */; };
 		908363EC14006C3B00E5AAAF /* TheBoxResponseParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B175FC133E0E22003C50B9 /* TheBoxResponseParserTest.m */; };
 		908363ED14006C3B00E5AAAF /* TheBoxDataParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B17661133E15AD003C50B9 /* TheBoxDataParserTest.m */; };
@@ -64,7 +64,6 @@
 		908363FF140070DC00E5AAAF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		90836400140070DC00E5AAAF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		908364011400712200E5AAAF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 908363A61400659200E5AAAF /* libz.dylib */; };
-		908364041400738600E5AAAF /* CLLocationManager+ TemporaryHack.m in Sources */ = {isa = PBXBuildFile; fileRef = 908364031400738600E5AAAF /* CLLocationManager+ TemporaryHack.m */; };
 		908364051400752500E5AAAF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29AFF131A81FB008B8B2D /* CFNetwork.framework */; };
 		908364061400752500E5AAAF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B07131A820F008B8B2D /* SystemConfiguration.framework */; };
 		908364071400752500E5AAAF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B0B131A8219008B8B2D /* MobileCoreServices.framework */; };
@@ -112,6 +111,7 @@
 		90D830F412B51DA400BE4470 /* TheBoxUICell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90D830F312B51DA400BE4470 /* TheBoxUICell.xib */; };
 		90D9A93F12B921950063FF60 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9A93E12B921950063FF60 /* Item.m */; };
 		90D9A96412B924130063FF60 /* TheBoxMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9A96312B924130063FF60 /* TheBoxMath.m */; };
+		90DAF497144913D300BACE91 /* TheBoxUIRecycleStrategyMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90675A8E14491220004119D2 /* TheBoxUIRecycleStrategyMethodTest.m */; };
 		90F08273132AED5200E7E35F /* UITextField+TheBoxUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F08272132AED5200E7E35F /* UITextField+TheBoxUITextField.m */; };
 		A152E573130D80F200514061 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A152E572130D80F200514061 /* Icon.png */; };
 /* End PBXBuildFile section */
@@ -169,6 +169,7 @@
 		905A4FB91291DEB400BCB475 /* Location.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Location.xib; sourceTree = "<group>"; };
 		905A4FE11291E15400BCB475 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		905A503A1291E4AC00BCB475 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		90675A8E14491220004119D2 /* TheBoxUIRecycleStrategyMethodTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategyMethodTest.m; sourceTree = "<group>"; };
 		9077D1A81403017400959726 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Tests/Dependencies/OCMock.framework; sourceTree = "<group>"; };
 		908363531400650F00E5AAAF /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Tests/Dependencies/OCMock.framework; sourceTree = "<group>"; };
 		908363581400655300E5AAAF /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
@@ -216,8 +217,6 @@
 		908363CC14006BF000E5AAAF /* TheBoxUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheBoxUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TheBoxUnitTests-Info.plist"; path = "TheBoxUnitTests/TheBoxUnitTests-Info.plist"; sourceTree = "<group>"; };
 		908363DE14006BF100E5AAAF /* TheBoxUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "TheBoxUnitTests-Prefix.pch"; path = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch"; sourceTree = "<group>"; };
-		908364021400738600E5AAAF /* CLLocationManager+ TemporaryHack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocationManager+ TemporaryHack.h"; sourceTree = "<group>"; };
-		908364031400738600E5AAAF /* CLLocationManager+ TemporaryHack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+ TemporaryHack.m"; sourceTree = "<group>"; };
 		9094243E142E44380084C40C /* TheBoxUIGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIGridViewDelegate.h; sourceTree = "<group>"; };
 		9096CBD7133BB6FE00639685 /* TheBoxUIViewConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIViewConfiguration.h; sourceTree = "<group>"; };
 		9096CBE2133BB76700639685 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
@@ -246,7 +245,7 @@
 		90A1E57D133CC68F00CC9212 /* TheBoxTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxTest.m; sourceTree = "<group>"; };
 		90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICellRecycleStrategyTest.m; sourceTree = "<group>"; };
 		90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICellVisibleStrategyTest.m; sourceTree = "<group>"; };
-		90A1E580133CC68F00CC9212 /* TheBoxUISectionRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUISectionRecycleStrategyTest.m; sourceTree = "<group>"; };
+		90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategyTest.m; sourceTree = "<group>"; };
 		90A1E594133CC6BC00CC9212 /* TheBoxTestQueries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxTestQueries.m; sourceTree = "<group>"; };
 		90A1E5AF133CC78C00CC9212 /* TheBoxTestQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxTestQueries.h; sourceTree = "<group>"; };
 		90A1E5C6133CC8BD00CC9212 /* TheBoxTestDelegates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheBoxTestDelegates.h; path = ../Resources/TheBoxTestDelegates.h; sourceTree = "<group>"; };
@@ -529,8 +528,6 @@
 			children = (
 				908363571400655300E5AAAF /* ASIHTTPRequest */,
 				9083636E1400655300E5AAAF /* JSON */,
-				908364021400738600E5AAAF /* CLLocationManager+ TemporaryHack.h */,
-				908364031400738600E5AAAF /* CLLocationManager+ TemporaryHack.m */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -611,7 +608,8 @@
 				90A1E57D133CC68F00CC9212 /* TheBoxTest.m */,
 				90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */,
 				90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */,
-				90A1E580133CC68F00CC9212 /* TheBoxUISectionRecycleStrategyTest.m */,
+				90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */,
+				90675A8E14491220004119D2 /* TheBoxUIRecycleStrategyMethodTest.m */,
 				90A1E7E1133D022200CC9212 /* TheBoxQueriesTest.m */,
 				90B175FC133E0E22003C50B9 /* TheBoxResponseParserTest.m */,
 				90B17661133E15AD003C50B9 /* TheBoxDataParserTest.m */,
@@ -750,7 +748,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TheBox" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -880,7 +878,6 @@
 				908363A01400655300E5AAAF /* SBJsonStreamWriterState.m in Sources */,
 				908363A21400655300E5AAAF /* SBJsonTokeniser.m in Sources */,
 				908363A41400655300E5AAAF /* SBJsonWriter.m in Sources */,
-				908364041400738600E5AAAF /* CLLocationManager+ TemporaryHack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,7 +890,7 @@
 				908363E514006C3B00E5AAAF /* TheBoxTest.m in Sources */,
 				908363E614006C3B00E5AAAF /* TheBoxUICellRecycleStrategyTest.m in Sources */,
 				908363E714006C3B00E5AAAF /* TheBoxUICellVisibleStrategyTest.m in Sources */,
-				908363E814006C3B00E5AAAF /* TheBoxUISectionRecycleStrategyTest.m in Sources */,
+				908363E814006C3B00E5AAAF /* TheBoxUIRecycleStrategyTest.m in Sources */,
 				908363EB14006C3B00E5AAAF /* TheBoxQueriesTest.m in Sources */,
 				908363EC14006C3B00E5AAAF /* TheBoxResponseParserTest.m in Sources */,
 				908363ED14006C3B00E5AAAF /* TheBoxDataParserTest.m in Sources */,
@@ -906,6 +903,7 @@
 				908363F414006C5000E5AAAF /* TheBoxResponseParserTestDelegates.m in Sources */,
 				908363F514006C5000E5AAAF /* TheBoxDataParserTestDelegates.m in Sources */,
 				908363F614006C5000E5AAAF /* TheBoxTestRanking.m in Sources */,
+				90DAF497144913D300BACE91 /* TheBoxUIRecycleStrategyMethodTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,7 +922,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "";
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -947,7 +944,6 @@
 				SKIP_INSTALL = NO;
 				SYMROOT = build;
 				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = NO;
 			};
@@ -957,7 +953,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "";
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -978,7 +973,6 @@
 				SKIP_INSTALL = NO;
 				SYMROOT = build;
 				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -989,7 +983,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				BUNDLE_LOADER = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/TheBox.app/TheBox";
+				BUNDLE_LOADER = "${TARGET_BUILD_DIR}/TheBox.app/TheBox";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1034,7 +1028,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				BUNDLE_LOADER = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/TheBox.app/TheBox";
+				BUNDLE_LOADER = "${TARGET_BUILD_DIR}/TheBox.app/TheBox";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1074,7 +1068,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				BUNDLE_LOADER = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/TheBox.app/TheBox";
+				BUNDLE_LOADER = "${TARGET_BUILD_DIR}/TheBox.app/TheBox";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1099,6 +1094,7 @@
 					SenTestingKit,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
@@ -1113,7 +1109,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				BUNDLE_LOADER = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/TheBox.App/TheBox";
 				CODE_SIGN_ENTITLEMENTS = Entitlement.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Williams";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1121,7 +1116,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				MACH_O_TYPE = mh_execute;
 				MODULE_NAME = Entitlement.plist;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -1137,7 +1131,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1157,7 +1150,6 @@
 				SKIP_INSTALL = NO;
 				SYMROOT = build;
 				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1167,7 +1159,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				BUNDLE_LOADER = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/TheBox.App/TheBox";
 				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1176,7 +1167,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				MACH_O_TYPE = mh_bundle;
 				MODULE_NAME = Entitlement.plist;
 				PRODUCT_NAME = TheBox;
@@ -1190,14 +1180,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				BUNDLE_LOADER = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/TheBox.App/TheBox";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				MACH_O_TYPE = mh_execute;
 				MODULE_NAME = Entitlement.plist;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

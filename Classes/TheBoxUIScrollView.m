@@ -186,32 +186,23 @@ return self;
  * any visible sections since each one of them might have changed in content size
  * and or cells it displays.
  */
--(void) setNeedsLayout
+-(void) setNeedsLayout:(id<TheBoxDimension>) dimension
 {
+    [super setNeedsLayout];
 	NSArray* subviews = [self.contentView subviews];
 	
 	for (UIView* view in subviews) {
 		[view removeFromSuperview];
 	}
 	
-	
-	/* For horizontal scrolling must reset to visible strategy of
-	 *
-	 * TheBoxVisibleStrategy *visibleStrategy =
-	 *		[TheBoxVisibleStrategy newVisibleStrategyOnWidth:
-	 *			CGSizeMake(CELL_FRAME_WIDTH, CELL_FRAME_HEIGHT)];
-	 */	
-	id<TheBoxDimension> height = [TheBoxSize newHeight:196];
-	
 	TheBoxVisibleStrategy *aVisibleStrategy = 
-		[TheBoxVisibleStrategy newVisibleStrategyOn:height];
+		[TheBoxVisibleStrategy newVisibleStrategyOn:dimension];
 	
 	aVisibleStrategy.delegate = self;
 	
 	self.visibleStrategy = aVisibleStrategy;
 	
 	[aVisibleStrategy release];
-	[height release];
 	[self flashScrollIndicators];	
 }
 

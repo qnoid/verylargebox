@@ -104,7 +104,9 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 
 -(void)reloadData
 {
-	[self.gridView setNeedsLayout];
+    id<TheBoxDimension> dimension = [TheBoxSize newHeight:SECTION_FRAME_HEIGHT];        
+	[self.gridView setNeedsLayout:dimension];
+    [dimension release];
 }
 
 -(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource
@@ -133,7 +135,10 @@ return SECTION_FRAME_HEIGHT;
 		view = [views objectAtIndex:0];
 	}
 	
-	view.frame = frame;
+    view.frame = frame; 
+    
+    
+    [view setNeedsLayout];
     
 	NSLog(@"view %@", view);
 
@@ -164,9 +169,15 @@ return view;
 		
 		view = viewOf;
 	}
-	
-	view.frame = frame;
-	
+    else
+    {
+        id<TheBoxDimension> dimension = [TheBoxSize newWidth:CELL_FRAME_WIDTH];        
+        [(TheBoxUIScrollView*)view setNeedsLayout:dimension];
+        [dimension release];
+    }
+
+    view.frame = frame; 
+
 	NSLog(@"view %@", view);
 	
 return view;
