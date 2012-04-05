@@ -18,6 +18,11 @@
 #import "HomeUIGridViewController.h"
 #import "TheBoxSingleDataParser.h"
 #import "TheBoxDataParser.h"
+#import "TheBoxNotifications.h"
+#import "TheBoxDefaultKeyboardObserver.h"
+#import "AFHTTPRequestOperation.h"
+#import "TBCreateItemOperationDelegate.h"
+#import "JSONKit.h"
 
 @implementation UploadUIViewController
 
@@ -35,20 +40,35 @@
 @synthesize list;
 @synthesize tags;
 @synthesize theBox;
+@synthesize keyboardObserver;
+@synthesize createItemDelegate;
 
 - (void) dealloc
 {
-	[uploadView release];
-	[takePhotoButton release];
-	[imageView release];
-	[locationButton release];
-	[nameTextField release];
+    [TheBoxNotifications removeObserverForUIKeyboardNotifications:self.keyboardObserver];
 	[textFields release];
 	[list release];
 	[tags release];
 	[theBox release];
+    [keyboardObserver release];
 	[theBoxDelegate release];
+    [createItemDelegate release];
 	[super dealloc];
+}
+
++(UploadUIViewController*)newUploadUIViewController
+{
+    UploadUIViewController* newUploadUIViewController = [[UploadUIViewController alloc] initWithNibName:@"UploadUIViewController" bundle:[NSBundle mainBundle]];
+    
+    TheBoxDefaultKeyboardObserver* newKeyboardObserver = [[TheBoxDefaultKeyboardObserver alloc] init];
+    newKeyboardObserver.keyboardObserver = newUploadUIViewController;
+    newUploadUIViewController.keyboardObserver = newKeyboardObserver;
+    
+    [TheBoxNotifications addObserverForUIKeyboardNotifications:newKeyboardObserver];
+    
+    [newKeyboardObserver release];
+    
+return newUploadUIViewController;
 }
 
 -(void) loadView
@@ -94,6 +114,13 @@
 	NSLog(@"%@", NSStringFromCGSize(contentSize));		
     [theboxlist release];
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+#pragma mark TheBoxKeyboardObserver
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
@@ -148,14 +175,21 @@ return NO;
 
 - (IBAction)done:(id)sender 
 {
-	TheBoxPost *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
+	AFHTTPRequestOperation *itemQuery = [[TheBoxQueries newItemQuery:imageView.image 
 												itemName:nameTextField.text 
 												locationName:locationButton.titleLabel.text
 												categoryName:category.text
-												tags:tags];
+												tags:tags] autorelease];
 
-	[self.theBox query:itemQuery];
-	
+
+    [itemQuery setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.createItemDelegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.createItemDelegate didFailOnItemWithError:error];
+    }];
+    
+	[itemQuery start];
+    
 	[self dismissModalViewControllerAnimated:YES];    
 }
 
@@ -192,13 +226,25 @@ return NO;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
-	//less than a meg
-	imageView.image = image;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CGSize newSize = CGSizeMake(2056.0f, 1536.0f);
+        // Create a graphics image context
+        UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0f);	
+        
+        [image drawInRect:CGRectMake(0.0f, 0.0f, newSize.width, newSize.height)];
+        
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        UIGraphicsEndImageContext();
+        
+        imageView.image = newImage;
+    });
+
 	imageView.hidden = NO;
 	takePhotoButton.hidden = YES;
 	
-	[self dismissModalViewControllerAnimated:YES];
 	[picker release];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

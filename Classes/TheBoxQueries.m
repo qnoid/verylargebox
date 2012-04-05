@@ -12,45 +12,76 @@
 #import "TheBoxPost.h"
 #import "ASIFormDataRequest.h"
 #import "UITextField+TheBoxUITextField.h"
+#import "AFHTTPClient.h"
+#import "AFHTTPRequestOperation.h"
+#import "AFJSONRequestOperation.h"
+#import "TBCategoriesOperationDelegate.h"
+#import "JSONKit.h"
 
 @implementation TheBoxQueries
 
-+(TheBoxGet*)newItemsQuery
+NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
+
++(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate
 {
-	NSURL *itemsEndPoint = [NSURL URLWithString:@"http://0.0.0.0:3000/categories"];
-	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:itemsEndPoint];
-	[request addRequestHeader:@"Accept" value:@"application/json"];	
-	
-return [[TheBoxGet alloc] initWithRequest:request];		
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"/categories" parameters:nil];
+    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [categoriesRequest setTimeoutInterval:30];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
+    {
+        NSString* responseString = operation.responseString;
+        NSLog(@"%@", responseString);
+        
+        [delegate didSucceedWithItems:[responseString mutableObjectFromJSONString]];
+    } 
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnItemsWithError:error];
+    }];
+    
+    return request;
 }
 
-+(TheBoxPost*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags
++(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags
 {
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
 	NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-	
-	NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:3000/items"];
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-	[request addRequestHeader:@"Accept" value:@"application/json"];	
-	[request setPostValue:categoryName forKey:@"item[category_attributes][name]"];
-	[request setPostValue:itemName forKey:@"item[name]"];
-	[request setPostValue:locationName forKey:@"item[location_attributes][name]"];
-	
-	
-	for (UITextField *tag in tags)
+
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                categoryName, @"item[category_attributes][name]",
+                                itemName, @"item[name]",
+                                locationName, @"item[location_attributes][name]",
+                                nil];
+    
+    for (UITextField *tag in tags)
 	{
 		if (![tag isEmpty]){
-			[request addPostValue:tag.text forKey:@"item[tags_attributes][][name]"];
+			[parameters setObject:tag.text forKey:@"item[tags_attributes][][name]"];
 		}
 		
-	}
-	
-	[request setData:imageData 
-		withFileName:
-			[NSString stringWithFormat:@"%@.jpg", 
-			[itemName stringByReplacingOccurrencesOfString:@" "withString:@"_"]] 
-		andContentType:@"image/jpeg" forKey:@"item[image]"];
-	
-return [[TheBoxPost alloc] initWithRequest:request];
+	}	
+
+    NSMutableURLRequest* request = [client multipartFormRequestWithMethod:@"POST" path:@"/items" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) 
+    {
+        [formData appendPartWithFileData:imageData 
+                                    name:@"item[image]" 
+                                fileName:[NSString stringWithFormat:@"%@.jpg", [itemName stringByReplacingOccurrencesOfString:@" "withString:@"_"]]
+                                mimeType:@"image/jpeg"];
+    }];
+
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setTimeoutInterval:30];
+
+	AFHTTPRequestOperation *createItem = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [createItem setUploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+        NSLog(@"Sent %d of %d bytes", totalBytesWritten, totalBytesExpectedToWrite);
+    }];
+    
+return createItem;
 }
 
 @end

@@ -10,13 +10,7 @@
 #import "TheBoxPredicates.h"
 #import "TheBoxBinarySearch.h"
 
-@interface TheBoxPredicateOnCategory : NSObject <TheBoxPredicate>
-{
-}
-@end
-
 @implementation TheBoxPredicateOnCategory
-
 
 -(BOOL)does:(id)thiz match:(id)that
 {
@@ -39,7 +33,7 @@ return [thizCategoryId intValue] > [thatCategoryId intValue];
 
 @implementation TheBoxPredicates
 
-+(id<TheBoxPredicate>)newCategoryIdPredicate {
++(TheBoxPredicateOnCategory*)newCategoryIdPredicate {
 return [[TheBoxPredicateOnCategory alloc] init];
 }
 

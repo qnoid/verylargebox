@@ -12,6 +12,18 @@
 
 @implementation TheBoxNotifications
 
++(void)addObserverForUIKeyboardNotifications:(id<TheBoxKeyboardObserver>)observer
+{
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:observer selector:@selector(noticeShowKeyboard:) name:UIKeyboardDidShowNotification object:nil];
+	[center addObserver:observer selector:@selector(noticeHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];		
+}	
+
++(void)removeObserverForUIKeyboardNotifications:(id<TheBoxKeyboardObserver>)observer
+{
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:observer];
+}
 
 +(CLLocation *)location:(NSNotification *)notification
 {

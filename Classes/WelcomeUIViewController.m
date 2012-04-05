@@ -21,8 +21,6 @@
 
 - (void) dealloc
 {
-	[locationLabel release];
-	[checkInButton release];
 	[theBoxLocationService release];
 	[gridViewController release];
 	[super dealloc];

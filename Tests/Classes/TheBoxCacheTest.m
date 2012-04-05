@@ -12,6 +12,7 @@
 #import "TheBox.h"
 #import "TheBoxTestQueries.h"
 #import "TheBoxTestDelegates.h"
+#import "TheBox+Testing.h"
 
 @interface TheBoxCacheTest : SenTestCase {
 	

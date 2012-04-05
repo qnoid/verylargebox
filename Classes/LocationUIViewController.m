@@ -19,6 +19,8 @@
 
 - (void) dealloc
 {
+    [locationTextField release];
+    [map release];
 	[theBoxLocationService release];
 	[super dealloc];
 }

@@ -10,10 +10,16 @@
 #import <Foundation/Foundation.h>
 #import "TheBoxBinarySearch.h"
 
+@interface TheBoxPredicateOnCategory : NSObject <TheBoxPredicate>
+{
+}
+@end
+
+
 @interface TheBoxPredicates : NSObject {
 
 }
 
-+(id<TheBoxPredicate>)newCategoryIdPredicate;
++(TheBoxPredicateOnCategory*)newCategoryIdPredicate;
 
 @end

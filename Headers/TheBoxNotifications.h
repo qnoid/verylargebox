@@ -11,9 +11,25 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
+@protocol TheBoxKeyboardObserver
+
+-(void)keyboardWillShow:(NSNotification*) notification;
+
+-(void)keyboardWillHide:(NSNotification*) notification;
+
+@optional
+-(void)noticeShowKeyboard:(NSNotification*)notification;
+
+-(void)noticeHideKeyboard:(NSNotification*)notification;
+
+@end
+
 @interface TheBoxNotifications : NSObject {
 
 }
+
++(void)addObserverForUIKeyboardNotifications:(id<TheBoxKeyboardObserver>)observer;
++(void)removeObserverForUIKeyboardNotifications:(id<TheBoxKeyboardObserver>)observer;
 
 +(CLLocation *)location:(NSNotification *)notification;
 +(MKPlacemark *)place:(NSNotification *)notification;

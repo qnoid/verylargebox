@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 @class TheBoxPost;
 @class TheBoxGet;
+@class AFHTTPRequestOperation;
+@protocol TBCategoriesOperationDelegate;
 
 /*
  * Provides all available queries to TheBox API
@@ -21,8 +23,8 @@
 
 }
 
-+(TheBoxGet *)newItemsQuery;
-+(TheBoxPost *)newItemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags;
++(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
++(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags;
 
 
 @end

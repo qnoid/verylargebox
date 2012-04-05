@@ -49,6 +49,26 @@
 
 @end
 
+@interface TheBoxHeight : NSObject <TheBoxDimension>
+{
+@private
+    CGFloat height;
+}
+-(id)init:(CGFloat) height;
+-(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
+-(NSUInteger)maximumVisible:(CGRect) visibleBounds;
+@end
+
+@interface TheBoxWidth : NSObject <TheBoxDimension>
+{
+@private
+    CGFloat width;
+}
+-(id)init:(CGFloat) width;
+-(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
+-(NSUInteger)maximumVisible:(CGRect) visibleBounds;
+@end
+
 @interface TheBoxSize : NSObject 
 {
 	@private
@@ -57,8 +77,8 @@
 
 @property(nonatomic, assign) CGSize size;
 
-+(id<TheBoxDimension>) newHeight:(CGFloat)height;
-+(id<TheBoxDimension>) newWidth:(CGFloat)width;
++(TheBoxHeight*) newHeight:(CGFloat)height;
++(TheBoxWidth*) newWidth:(CGFloat)width;
 
 -(id)initWithSize:(CGSize) size;
 

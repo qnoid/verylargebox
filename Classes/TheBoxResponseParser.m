@@ -8,7 +8,7 @@
  *  Contributor(s): .-
  */
 #import "TheBoxResponseParser.h"
-#import "JSON.h"
+#import "JSONKit.h"
 #import "TheBoxCompositeDataParser.h"
 
 @interface TheBoxResponseParser ()
@@ -59,7 +59,7 @@ TheBoxCompositeDataParser *dataParser;
  */
 -(void)parse:(NSString *) response
 {
-	id data = [response JSONValue];
+	id data = [response mutableObjectFromJSONString];
 	
 	if(!data){
 		[self response:response error:data];

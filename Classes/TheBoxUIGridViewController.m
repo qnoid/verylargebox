@@ -164,7 +164,6 @@ return view;
 		viewOf.clipsToBounds = YES;
 		viewOf.datasource = gridViewDelegate;
 		viewOf.scrollViewDelegate = gridViewDelegate;
-		[self.gridViewDelegate setView:viewOf atIndex:index];
 		 
 		
 		view = viewOf;
@@ -177,6 +176,7 @@ return view;
     }
 
     view.frame = frame; 
+    [self.gridViewDelegate setView:view atIndex:index];
 
 	NSLog(@"view %@", view);
 	

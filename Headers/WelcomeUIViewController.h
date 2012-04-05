@@ -17,14 +17,12 @@
 @interface WelcomeUIViewController : UIViewController <TheBoxLocationServiceDelegate> 
 {
 	@private
-		UILabel *locationLabel;
-		UIButton *checkInButton;
 		TheBoxLocationService *theBoxLocationService;
 		HomeUIGridViewController *gridViewController;
 }
 
-@property(nonatomic, retain) IBOutlet UILabel *locationLabel;
-@property(nonatomic, retain) IBOutlet UIButton *checkInButton;
+@property(nonatomic, assign) IBOutlet UILabel *locationLabel;
+@property(nonatomic, assign) IBOutlet UIButton *checkInButton;
 @property(nonatomic, retain) IBOutlet HomeUIGridViewController *gridViewController;
 @property(nonatomic, retain) TheBoxLocationService *theBoxLocationService;
 

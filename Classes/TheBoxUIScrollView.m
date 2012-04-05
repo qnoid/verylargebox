@@ -145,6 +145,7 @@ return self;
 {
 	self.contentSize = [self.scrollViewDelegate contentSizeOf:self withData:datasource];
 	
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"frame %@", NSStringFromCGRect(self.frame));	
 	NSLog(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
 	NSLog(@"layoutSubviews on bounds %@", NSStringFromCGRect([self bounds]));	
@@ -154,7 +155,7 @@ return self;
 	/*
 	 * Avoid using bounds outside fo the content (e.g. when bouncing off a view)
 	 */
-	CGRect visibleBounds = CGRectMake(MIN(self.contentSize.width - self.frame.size.width, bounds.origin.x), MIN(self.contentSize.height - self.frame.size.height, bounds.origin.y), bounds.size.width, bounds.size.height);
+	CGRect visibleBounds = CGRectMake(self.contentOffset.x, self.contentOffset.y, bounds.size.width, bounds.size.height);
 
 	NSLog(@"layoutSubviews on visibleBounds %@", NSStringFromCGRect(visibleBounds));	
     

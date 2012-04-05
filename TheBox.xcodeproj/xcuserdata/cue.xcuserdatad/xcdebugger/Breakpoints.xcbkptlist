@@ -46,16 +46,16 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/WelcomeUIViewController.m"
-         timestampString = "353544679.739591"
+         timestampString = "354406626.629144"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "62"
-         endingLineNumber = "62"
+         startingLineNumber = "60"
+         endingLineNumber = "60"
          landmarkName = "-didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/LocationUIViewController.m"
-         timestampString = "353546031.298775"
+         timestampString = "353623881.054493"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "29"
-         endingLineNumber = "29"
+         startingLineNumber = "31"
+         endingLineNumber = "31"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -92,11 +92,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/LocationUIViewController.m"
-         timestampString = "353547804.504206"
+         timestampString = "353623881.054493"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
          landmarkName = "-didUpdateToLocation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -105,11 +105,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/LocationUIViewController.m"
-         timestampString = "353547809.196356"
+         timestampString = "353623881.054493"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
          landmarkName = "-didFindPlacemark:"
          landmarkType = "5">
       </FileBreakpoint>

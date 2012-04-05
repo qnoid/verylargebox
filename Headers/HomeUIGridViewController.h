@@ -11,26 +11,16 @@
 #import "TheBoxUIGridViewController.h"
 #import "TheBoxLocationServiceDelegate.h"
 #import "TheBox.h"
-#import "TheBoxDataParserDelegate.h"
-#import "TheBoxResponseParserDelegate.h"
+#import "TBCategoriesOperationDelegate.h"
+#import "TBCreateItemOperationDelegate.h"
 @class TheBoxLocationService;
 @class TheBoxUIGridView;
 
-@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TheBoxDelegate, TheBoxResponseParserDelegate, TheBoxDataParserDelegate> 
+@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBCategoriesOperationDelegate, TBCreateItemOperationDelegate> 
 {
-	@private
-		UILabel *locationLabel;
-		TheBoxLocationService *theBoxLocationService;	
-		NSMutableArray *items;
-		TheBox *theBox;
-		NSCache* imageCache;
 }
 
-@property(nonatomic, retain) IBOutlet UILabel *locationLabel;
-@property(nonatomic, retain) TheBoxLocationService *theBoxLocationService;
-@property(nonatomic, retain) NSMutableArray *items;
-@property(nonatomic, retain) TheBox *theBox;
-@property(nonatomic, retain) NSCache *imageCache;
+@property(nonatomic, assign) IBOutlet UILabel *locationLabel;
 
 - (IBAction)upload:(id)sender;
 

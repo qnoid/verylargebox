@@ -9,27 +9,6 @@
  */
 #import "TheBoxSize.h"
 
-@interface TheBoxHeight : NSObject <TheBoxDimension>
-{
-	@private
-		CGFloat height;
-}
--(id)init:(CGFloat) height;
--(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
--(NSUInteger)maximumVisible:(CGRect) visibleBounds;
-@end
-
-@interface TheBoxWidth : NSObject <TheBoxDimension>
-{
-	@private
-		CGFloat width;
-}
--(id)init:(CGFloat) width;
--(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
--(NSUInteger)maximumVisible:(CGRect) visibleBounds;
-@end
-
-
 @implementation TheBoxHeight
 
 -(id)init:(CGFloat) aHeight
@@ -101,11 +80,11 @@ return [NSString stringWithFormat:@"%f", width];
 
 @implementation TheBoxSize
 
-+(id<TheBoxDimension>) newHeight:(CGFloat)height{
++(TheBoxHeight*) newHeight:(CGFloat)height{
 return [[TheBoxHeight alloc] init:height];
 }
 
-+(id<TheBoxDimension>) newWidth:(CGFloat)width{
++(TheBoxWidth*) newWidth:(CGFloat)width{
 return [[TheBoxWidth alloc] init:width];
 }
 

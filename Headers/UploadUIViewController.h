@@ -11,42 +11,33 @@
 #import "TheBoxDelegate.h"
 #import "TheBoxDataParserDelegate.h"
 #import "TheBoxResponseParserDelegate.h"
+#import "TheBoxNotifications.h"
 @class TheBox;
 @class HomeUIGridViewController;
 @class TheBoxUIList;
+@class TheBoxDefaultKeyboardObserver;
+@protocol TBCreateItemOperationDelegate;
 
-@interface UploadUIViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> 
+@interface UploadUIViewController : UIViewController <TheBoxKeyboardObserver, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> 
 {
-	
-	@private
-		UIScrollView *uploadView;
-		UIButton *takePhotoButton;
-		UIImageView *imageView;
-		UIButton *locationButton;
-		UITextField *nameTextField;
-		UITextField *category;	
-		UITextField *firstTag;
-		UITextField *secondTag;
-		NSArray *textFields;
-		TheBoxUIList *list;
-		NSArray *tags;
-		TheBox *theBox;
-		id<TheBoxDelegate, TheBoxDataParserDelegate> theBoxDelegate;
 }
 
-@property(nonatomic, retain) IBOutlet UIScrollView *uploadView;
-@property(nonatomic, retain) IBOutlet UIButton *takePhotoButton;
-@property(nonatomic, retain) IBOutlet UIImageView *imageView;
-@property(nonatomic, retain) IBOutlet UIButton *locationButton;
-@property(nonatomic, retain) IBOutlet UITextField *nameTextField;
-@property(nonatomic, retain) IBOutlet UITextField *category;
-@property(nonatomic, retain) IBOutlet UITextField *firstTag;
-@property(nonatomic, retain) IBOutlet UITextField *secondTag;
+@property(nonatomic, assign) IBOutlet UIScrollView *uploadView;
+@property(nonatomic, assign) IBOutlet UIButton *takePhotoButton;
+@property(nonatomic, assign) IBOutlet UIImageView *imageView;
+@property(nonatomic, assign) IBOutlet UIButton *locationButton;
+@property(nonatomic, assign) IBOutlet UITextField *nameTextField;
+@property(nonatomic, assign) IBOutlet UITextField *category;
+@property(nonatomic, assign) IBOutlet UITextField *firstTag;
+@property(nonatomic, assign) IBOutlet UITextField *secondTag;
+
 @property(nonatomic, retain) NSArray *textFields;
 @property(nonatomic, retain) TheBoxUIList *list;
 @property(nonatomic, retain) NSArray *tags;
 @property(nonatomic, retain) TheBox *theBox;
+@property(nonatomic, retain) TheBoxDefaultKeyboardObserver *keyboardObserver;
 @property(nonatomic, retain) id<TheBoxDelegate, TheBoxDataParserDelegate> theBoxDelegate;
+@property(nonatomic, assign) NSObject<TBCreateItemOperationDelegate> *createItemDelegate;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
@@ -63,5 +54,7 @@
 - (IBAction)takePhoto:(id)sender;
 
 - (IBAction)enterLocation:(id)sender;
+
++(UploadUIViewController*)newUploadUIViewController;
 
 @end
