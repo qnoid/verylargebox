@@ -15,16 +15,10 @@
 @class TheBoxLocationService;
 
 @interface WelcomeUIViewController : UIViewController <TheBoxLocationServiceDelegate> 
-{
-	@private
-		TheBoxLocationService *theBoxLocationService;
-		HomeUIGridViewController *gridViewController;
-}
 
-@property(nonatomic, assign) IBOutlet UILabel *locationLabel;
-@property(nonatomic, assign) IBOutlet UIButton *checkInButton;
-@property(nonatomic, retain) IBOutlet HomeUIGridViewController *gridViewController;
-@property(nonatomic, retain) TheBoxLocationService *theBoxLocationService;
+@property(nonatomic, unsafe_unretained) IBOutlet UILabel *locationLabel;
+@property(nonatomic, unsafe_unretained) IBOutlet UIButton *checkInButton;
+@property(nonatomic) TheBoxLocationService *theBoxLocationService;
 
 - (IBAction)enter:(id)sender;
 @end

@@ -21,7 +21,6 @@
 {
 	PartiallyVisibleWithinX *method = [[PartiallyVisibleWithinX alloc]init];
 	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] initWith:method];
-	[method release];
 	
 return recycleStrategy;	
 }
@@ -30,7 +29,6 @@ return recycleStrategy;
 {
 	PartiallyVisibleWithinY *method = [[PartiallyVisibleWithinY alloc]init];
 	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] initWith:method];
-	[method release];
 	
 return recycleStrategy;	
 }
@@ -39,12 +37,6 @@ return recycleStrategy;
 @synthesize recycleMethod;
 @synthesize recycledViews;
 
-- (void) dealloc
-{
-	[recycleMethod release];
-	[recycledViews release];
-	[super dealloc];
-}
 
 -(id)initWith:(id<TheBoxUIRecycleStrategyMethod>) aRecycleMethod
 {
@@ -53,7 +45,7 @@ return recycleStrategy;
 	if (self) 
 	{
 		self.recycleMethod = aRecycleMethod;
-		self.recycledViews = [[NSMutableSet new] autorelease];
+		self.recycledViews = [NSMutableSet new];
 	}
 	
 	return self;
@@ -75,14 +67,14 @@ return recycleStrategy;
 -(UIView *)dequeueReusableView
 {
 	UIView *view = [self.recycledViews anyObject];
+    __strong UIView* copy = view;
     if (view) {
-        [[view retain] autorelease];
         [self.recycledViews removeObject:view];
     }
 
 	NSLog(@"dequeueReusableView %@", view);
 	
-return view;
+return copy;
 }
 
 @end

@@ -106,14 +106,14 @@ return self;
  * @return a dimension on height
  */
 -(id<TheBoxDimension>)height{
-return [[[TheBoxHeight alloc] init:self.size.height] autorelease];
+return [[TheBoxHeight alloc] init:self.size.height];
 }
 
 /*
  * @return a dimension on width
  */
 -(id<TheBoxDimension>)width{
-return [[[TheBoxWidth alloc] init:self.size.width] autorelease];	
+return [[TheBoxWidth alloc] init:self.size.width];	
 }
 
 -(CGSize)sizeOf:(NSUInteger)noOfRows height:(CGFloat)height

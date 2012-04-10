@@ -9,8 +9,6 @@
  */
 #import <SenTestingKit/SenTestingKit.h>
 #import "TheBoxCache.h"
-#import "TheBox.h"
-#import "TheBoxTestQueries.h"
 #import "TheBoxTestDelegates.h"
 #import "TheBox+Testing.h"
 

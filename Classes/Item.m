@@ -17,13 +17,6 @@
 @synthesize when;
 @synthesize createdAt;
 
-- (void) dealloc
-{
-	[imageURL release];
-	[when release];
-	[createdAt release];
-	[super dealloc];
-}
 
 -(NSString *) description{
 return [self.imageURL description];

@@ -11,24 +11,38 @@
 #import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
 
+@interface LocationUIViewController ()
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil;
+@property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
+@end
+
 @implementation LocationUIViewController
+{
+}
+
++(LocationUIViewController*)newLocationViewController {
+return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
+}
 
 @synthesize locationTextField;
 @synthesize map;
 @synthesize theBoxLocationService;
 
-- (void) dealloc
+
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil
 {
-    [locationTextField release];
-    [map release];
-	[theBoxLocationService release];
-	[super dealloc];
+    self = [super initWithNibName:@"LocationUIViewController" bundle:nibBundleOrNil];
+    
+    if (self) {
+        self.theBoxLocationService = [TheBoxLocationService theBox];
+    }
+    
+return self;
 }
 
 
 -(void) viewDidLoad
 {
-	self.theBoxLocationService = [TheBoxLocationService theBox];
 	[self.theBoxLocationService notifyDidUpdateToLocation:self];
 	[self.theBoxLocationService notifyDidFindPlacemark:self];	
 }

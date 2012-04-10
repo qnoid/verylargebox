@@ -20,7 +20,9 @@
 
 
 @implementation TheBoxVisibleStrategy
-
+{
+    NSMutableSet *visibleViews;
+}
 
 +(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension
 {
@@ -29,7 +31,6 @@
 return visibleStrategy;	
 }
 
-NSMutableSet *visibleViews;
 
 @synthesize dimension;
 @synthesize delegate;
@@ -37,12 +38,6 @@ NSMutableSet *visibleViews;
 @synthesize minimumVisibleIndex;
 @synthesize maximumVisibleIndex;
 
-- (void) dealloc
-{
-	[dimension release];
-	[visibleViews release];
-	[super dealloc];
-}
 
 - (id)init:(id<TheBoxDimension>) onDimension
 {
@@ -58,7 +53,6 @@ NSMutableSet *visibleViews;
 		minimumVisibleIndex = MINIMUM_VISIBLE_INDEX;
         maximumVisibleIndex = MAXIMUM_VISIBLE_INDEX;
         
-        [theVisibleViews release];
 	}
 	
 return self;

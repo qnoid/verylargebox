@@ -29,7 +29,7 @@
 -(void)willAppear:(CGRect)bounds;
 
 
-@property(nonatomic, assign) id<VisibleStrategyDelegate> delegate;
+@property(nonatomic, unsafe_unretained) id<VisibleStrategyDelegate> delegate;
 
 @required
 @property(nonatomic, retain) NSMutableSet *visibleViews;

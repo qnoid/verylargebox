@@ -10,26 +10,12 @@
 #import "WelcomeUIViewController.h"
 #import "TheBoxNotifications.h"
 #import "TheBoxLocationService.h"
-#import "HomeUIGridViewController.h"
 
 @implementation WelcomeUIViewController
 
 @synthesize locationLabel;
 @synthesize checkInButton;
 @synthesize theBoxLocationService;
-@synthesize gridViewController;
-
-- (void) dealloc
-{
-	[theBoxLocationService release];
-	[gridViewController release];
-	[super dealloc];
-}
-
--(void) loadView
-{
-	
-}
 
 -(void) viewDidLoad
 {
@@ -72,7 +58,8 @@
 {
 	NSLog(@"Hello %@", locationLabel.text);
 	
-	[self presentModalViewController:gridViewController animated:YES];	
+    HomeUIGridViewController *homeGridViewController = [HomeUIGridViewController newHomeGridViewController];
+	[self presentModalViewController:homeGridViewController animated:YES];	
 }
 
 @end

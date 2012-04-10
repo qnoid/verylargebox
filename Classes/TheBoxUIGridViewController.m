@@ -10,7 +10,6 @@
 #import "TheBoxUIGridViewController.h"
 #import "TheBoxUIScrollView.h"
 #import "TheBoxUICell.h"
-#import "TheBox.h"
 #import "TheBoxRect.h"
 #import "TheBoxVisibleStrategy.h"
 #import "TheBoxUIRecycleStrategy.h"
@@ -19,9 +18,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface TheBoxUIGridViewController ()
-@property(nonatomic, retain) TheBoxRect *viewRect;
-@property(nonatomic, retain) TheBoxRect *cellRect;
-@property(nonatomic, retain) TheBoxUIGridViewDelegate *gridViewDelegate;
+@property(nonatomic) TheBoxRect *viewRect;
+@property(nonatomic) TheBoxRect *cellRect;
+@property(nonatomic) TheBoxUIGridViewDelegate *gridViewDelegate;
 @end
 
 static const int GRID_FRAME_X = 0;
@@ -52,14 +51,6 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 @synthesize cellRect;
 @synthesize gridViewDelegate;
 
-- (void) dealloc
-{
-	[gridView release];
-	[viewRect release];
-	[cellRect release];
-	[gridViewDelegate release];
-	[super dealloc];
-}
 
 /*
  * Creates the grid view
@@ -96,17 +87,12 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 	self.gridView = aGridView;
 	[self.view addSubview:self.gridView];			
 	
-	[aGridView release];
-    [theGridViewDelegate release];
-    [columnRect release];
-    [rowRect release];
 }
 
 -(void)reloadData
 {
     id<TheBoxDimension> dimension = [TheBoxSize newHeight:SECTION_FRAME_HEIGHT];        
 	[self.gridView setNeedsLayout:dimension];
-    [dimension release];
 }
 
 -(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource
@@ -157,9 +143,9 @@ return view;
 	
     if (view == nil) 
 	{		
-		TheBoxUIScrollView *viewOf = [[TheBoxUIScrollView 
+		TheBoxUIScrollView *viewOf = [TheBoxUIScrollView 
 										newHorizontalScrollView:frame 
-										viewsOf:CELL_FRAME_WIDTH]autorelease];
+										viewsOf:CELL_FRAME_WIDTH];
 		
 		viewOf.clipsToBounds = YES;
 		viewOf.datasource = gridViewDelegate;
@@ -172,7 +158,6 @@ return view;
     {
         id<TheBoxDimension> dimension = [TheBoxSize newWidth:CELL_FRAME_WIDTH];        
         [(TheBoxUIScrollView*)view setNeedsLayout:dimension];
-        [dimension release];
     }
 
     view.frame = frame; 

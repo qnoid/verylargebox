@@ -8,10 +8,8 @@
  *  Contributor(s): .-
  */
 #import <SenTestingKit/SenTestingKit.h>
-#import "TheBox.h"
 #import "TheBoxQuery.h"
 #import "TheBoxDelegate.h"
-#import "TheBoxTestQueries.h"
 #import "TheBoxTestDelegates.h"
 #import "TheBoxDataParserTestDelegates.h"
 

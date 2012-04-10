@@ -19,14 +19,11 @@
  */
 @interface TheBoxVisibleStrategy : NSObject <VisibleStrategy>
 {
-	id <VisibleStrategyDelegate> delegate;
-	
 	@private
-		id<TheBoxDimension> dimension;
 		NSInteger minimumVisibleIndex;
 		NSInteger maximumVisibleIndex;	
 }
-@property(nonatomic, retain) id<TheBoxDimension> dimension;
+@property(nonatomic) id<TheBoxDimension> dimension;
 
 +(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension;
 

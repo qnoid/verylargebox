@@ -19,11 +19,6 @@
 @synthesize predicate;
 
 
-- (void)dealloc 
-{
-    [predicate release];
-    [super dealloc];
-}
 
 -(id)initWithPredicate:(id<TheBoxPredicate>) aPredicate
 {

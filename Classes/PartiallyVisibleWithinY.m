@@ -16,7 +16,6 @@
 {	
 	TheBoxRect *theRect = [[TheBoxRect alloc] initWithFrame:rect];
 	BOOL isVisible = [theRect isPartiallyVisibleWithinY:bounds];
-	[theRect release];
 	
 return isVisible;
 }

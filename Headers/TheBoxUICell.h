@@ -10,16 +10,10 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-@interface TheBoxUICell : UITableViewCell {
-    
-	@private
-		UIImageView *itemImageView;
-		UILabel *itemLabel;
-		NSString *cellIdentifier;
-}
+@interface TheBoxUICell : UITableViewCell
 
-@property (nonatomic, assign) IBOutlet UIImageView *itemImageView;
-@property (nonatomic, assign) IBOutlet UILabel *itemLabel;
+@property (nonatomic, unsafe_unretained) IBOutlet UIImageView *itemImageView;
+@property (nonatomic, unsafe_unretained) IBOutlet UILabel *itemLabel;
 @property (nonatomic, copy) NSString *cellIdentifier;
 
 -(id)initWith:(UIImageView *)itemImageView itemLabel:(UILabel *)itemLabel;

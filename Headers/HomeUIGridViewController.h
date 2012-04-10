@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "TheBoxUIGridViewController.h"
 #import "TheBoxLocationServiceDelegate.h"
-#import "TheBox.h"
 #import "TBCategoriesOperationDelegate.h"
 #import "TBCreateItemOperationDelegate.h"
 @class TheBoxLocationService;
@@ -20,7 +19,9 @@
 {
 }
 
-@property(nonatomic, assign) IBOutlet UILabel *locationLabel;
+@property(nonatomic, unsafe_unretained) IBOutlet UILabel *locationLabel;
+
++(HomeUIGridViewController*)newHomeGridViewController;
 
 - (IBAction)upload:(id)sender;
 

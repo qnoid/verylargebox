@@ -16,8 +16,8 @@
 {
 }
 
-@property(nonatomic, retain) CLLocationManager *locationManager;
-@property(nonatomic, retain) MKReverseGeocoder *theGeocoder;
+@property(nonatomic) CLLocationManager *locationManager;
+@property(nonatomic) MKReverseGeocoder *theGeocoder;
 
 /*
  *

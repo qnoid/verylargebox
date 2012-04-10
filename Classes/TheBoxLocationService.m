@@ -14,7 +14,7 @@
 +(TheBoxLocationService *) theBox
 {
 	CLLocationManager *locationManager = [[CLLocationManager alloc] init];
-    TheBoxLocationService *theBox = [[[TheBoxLocationService alloc] init:locationManager] autorelease];
+    TheBoxLocationService *theBox = [[TheBoxLocationService alloc] init:locationManager];
     
 	locationManager.delegate = theBox;
 	locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
@@ -24,7 +24,6 @@
 	
 	[locationManager startUpdatingLocation];		
 	
-	[locationManager release];
 	
 return theBox;
 }
@@ -34,10 +33,7 @@ return theBox;
 
 - (void) dealloc
 {
-	[locationManager release];
     theGeocoder.delegate = nil;
-	[theGeocoder release];
-	[super dealloc];
 }
 
 -(id)init:(CLLocationManager *)aLocationManager
@@ -77,7 +73,7 @@ return self;
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"didUpdateToLocation" object:self userInfo:userInfo];
 		
-    MKReverseGeocoder* mkReverseGeocoder = [[[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate] autorelease];
+    MKReverseGeocoder* mkReverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate];
     
 	self.theGeocoder = mkReverseGeocoder;
 	

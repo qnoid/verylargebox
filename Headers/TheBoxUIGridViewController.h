@@ -17,12 +17,8 @@
 
 
 @interface TheBoxUIGridViewController : UIViewController <TheBoxUIScrollViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TheBoxUIScrollViewDatasource>
-{
-	@private
-		TheBoxUIScrollView* gridView;
-}
 
-@property(nonatomic, retain) TheBoxUIScrollView* gridView;
+@property(nonatomic) TheBoxUIScrollView* gridView;
 
 -(void)reloadData;
 

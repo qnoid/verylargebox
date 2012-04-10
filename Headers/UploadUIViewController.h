@@ -9,8 +9,6 @@
  */
 #import <UIKit/UIKit.h>
 #import "TheBoxDelegate.h"
-#import "TheBoxDataParserDelegate.h"
-#import "TheBoxResponseParserDelegate.h"
 #import "TheBoxNotifications.h"
 @class TheBox;
 @class HomeUIGridViewController;
@@ -22,22 +20,21 @@
 {
 }
 
-@property(nonatomic, assign) IBOutlet UIScrollView *uploadView;
-@property(nonatomic, assign) IBOutlet UIButton *takePhotoButton;
-@property(nonatomic, assign) IBOutlet UIImageView *imageView;
-@property(nonatomic, assign) IBOutlet UIButton *locationButton;
-@property(nonatomic, assign) IBOutlet UITextField *nameTextField;
-@property(nonatomic, assign) IBOutlet UITextField *category;
-@property(nonatomic, assign) IBOutlet UITextField *firstTag;
-@property(nonatomic, assign) IBOutlet UITextField *secondTag;
+@property(nonatomic, unsafe_unretained) IBOutlet UIScrollView *uploadView;
+@property(nonatomic, unsafe_unretained) IBOutlet UIButton *takePhotoButton;
+@property(nonatomic, unsafe_unretained) IBOutlet UIImageView *imageView;
+@property(nonatomic, unsafe_unretained) IBOutlet UIButton *locationButton;
+@property(nonatomic, unsafe_unretained) IBOutlet UITextField *nameTextField;
+@property(nonatomic, unsafe_unretained) IBOutlet UITextField *category;
+@property(nonatomic, unsafe_unretained) IBOutlet UITextField *firstTag;
+@property(nonatomic, unsafe_unretained) IBOutlet UITextField *secondTag;
 
-@property(nonatomic, retain) NSArray *textFields;
-@property(nonatomic, retain) TheBoxUIList *list;
-@property(nonatomic, retain) NSArray *tags;
-@property(nonatomic, retain) TheBox *theBox;
-@property(nonatomic, retain) TheBoxDefaultKeyboardObserver *keyboardObserver;
-@property(nonatomic, retain) id<TheBoxDelegate, TheBoxDataParserDelegate> theBoxDelegate;
-@property(nonatomic, assign) NSObject<TBCreateItemOperationDelegate> *createItemDelegate;
+@property(nonatomic, strong) NSArray *textFields;
+@property(nonatomic, strong) TheBoxUIList *list;
+@property(nonatomic, strong) NSArray *tags;
+@property(nonatomic, strong) TheBox *theBox;
+@property(nonatomic, strong) TheBoxDefaultKeyboardObserver *keyboardObserver;
+@property(nonatomic, unsafe_unretained) NSObject<TBCreateItemOperationDelegate> *createItemDelegate;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;

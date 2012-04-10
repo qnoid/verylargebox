@@ -22,11 +22,6 @@
 
 @synthesize delegate;
 
-- (void) dealloc
-{
-	[delegate release];
-	[super dealloc];
-}
 
 
 - (void)query:(id<TheBoxQuery>)query ok:(NSString *)response

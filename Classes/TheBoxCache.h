@@ -11,12 +11,8 @@
 
 
 @interface TheBoxCache : NSObject 
-{
-	@private
-		NSCache *cache;
-}
 
-@property(nonatomic, retain) NSCache *cache;
+@property(nonatomic, strong) NSCache *cache;
 
 
 -(void)setObject:(id)anObject forKey:(id)aKey;

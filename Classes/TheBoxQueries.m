@@ -8,8 +8,6 @@
  *  Contributor(s): .-
  */
 #import "TheBoxQueries.h"
-#import "TheBoxGet.h"
-#import "TheBoxPost.h"
 #import "ASIFormDataRequest.h"
 #import "UITextField+TheBoxUITextField.h"
 #import "AFHTTPClient.h"

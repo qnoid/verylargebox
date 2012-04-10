@@ -12,12 +12,9 @@
 
 @interface TheBoxUIList : NSObject <NSFastEnumeration>
 {
-	@private
-		NSArray *textFields;
-	
 }
 
-@property(nonatomic, retain) NSArray *textFields;
+@property(nonatomic, strong) NSArray *textFields;
 
 +(id)newListWithTextFields:(NSArray *)textFields;
 

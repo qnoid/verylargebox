@@ -23,12 +23,8 @@
 @end
 
 @interface TheBoxBinarySearch : NSObject 
-{
-    @private
-        id<TheBoxPredicate> predicate;
-}
 
-@property(nonatomic, retain) id<TheBoxPredicate> predicate;
+@property(nonatomic) id<TheBoxPredicate> predicate;
 
 -(id)initWithPredicate:(id<TheBoxPredicate>) predicate;
 

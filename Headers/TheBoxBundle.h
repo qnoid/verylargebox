@@ -10,14 +10,10 @@
 #import <Foundation/Foundation.h>
 
 @interface TheBoxBundle : NSObject 
-{
-	@private
-		NSBundle *bundle;
-}
 
 +(id)allocMainBundle;
 
-@property(nonatomic, retain) NSBundle *bundle;
+@property(nonatomic) NSBundle *bundle;
 
 -(id)initWithBundle:(NSBundle *) bundle;
 -(id)loadView:(NSString *) view;

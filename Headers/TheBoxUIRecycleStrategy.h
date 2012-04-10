@@ -17,14 +17,9 @@
  *
  */
 @interface TheBoxUIRecycleStrategy : NSObject
-{
-	@private
-		NSMutableSet *recycledViews;
-		id<TheBoxUIRecycleStrategyMethod>	recycleMethod;
-}
 
-@property(nonatomic, retain) NSMutableSet *recycledViews;
-@property(nonatomic, retain) id<TheBoxUIRecycleStrategyMethod> recycleMethod;
+@property(nonatomic, strong) NSMutableSet *recycledViews;
+@property(nonatomic) id<TheBoxUIRecycleStrategyMethod> recycleMethod;
 
 /*
  * @return a new TheBoxUIRecycleStrategy that recycles views partially visible on the X

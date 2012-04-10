@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
-#import "UITestViews.h"
 
 @implementation UITestViews
 

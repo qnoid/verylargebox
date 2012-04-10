@@ -18,11 +18,6 @@ return [[TheBoxBundle alloc] initWithBundle:[NSBundle mainBundle]];
 
 @synthesize bundle;
 
--(void) dealloc
-{
-	[bundle release];
-	[super dealloc];
-}
 
 
 -(id)initWithBundle:(NSBundle *) aBundle

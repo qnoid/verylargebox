@@ -12,6 +12,6 @@
 
 @interface TheBoxDefaultKeyboardObserver : NSObject <TheBoxKeyboardObserver>
 
-@property(nonatomic, assign) id<TheBoxKeyboardObserver> keyboardObserver;
+@property(nonatomic, unsafe_unretained) id<TheBoxKeyboardObserver> keyboardObserver;
 
 @end

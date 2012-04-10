@@ -15,9 +15,9 @@
 #import "TheBoxUIScrollViewDatasource.h"
 
 @interface TheBoxUIScrollView ()
-@property(nonatomic, retain) TheBoxUIRecycleStrategy *recycleStrategy;
-@property(nonatomic, retain) id<VisibleStrategy> visibleStrategy;
-@property(nonatomic, retain) UIView *contentView;
+@property(nonatomic) TheBoxUIRecycleStrategy *recycleStrategy;
+@property(nonatomic) id<VisibleStrategy> visibleStrategy;
+@property(nonatomic) UIView *contentView;
 @end
 
 
@@ -27,7 +27,7 @@
 {
 	TheBoxVisibleStrategy *visibleStrategy = 
 		[TheBoxVisibleStrategy newVisibleStrategyOn:
-			[[TheBoxSize newHeight:height] autorelease]];
+			[TheBoxSize newHeight:height]];
 	
 	TheBoxUIRecycleStrategy *recycleStrategy = 
 		[TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
@@ -38,8 +38,6 @@
 			recycleStrategy:recycleStrategy 
 			visibleStrategy:visibleStrategy];
 	
-	[visibleStrategy release];
-	[recycleStrategy release];	
 
 return scrollView;
 }
@@ -48,7 +46,7 @@ return scrollView;
 {
 	TheBoxVisibleStrategy *visibleStrategy = 
 		[TheBoxVisibleStrategy newVisibleStrategyOn:
-			[[TheBoxSize newWidth:width] autorelease]];
+			[TheBoxSize newWidth:width]];
 	
 	TheBoxUIRecycleStrategy *recycleStrategy = 
 		[TheBoxUIRecycleStrategy newPartiallyVisibleWithinX];
@@ -59,8 +57,6 @@ return scrollView;
 		 recycleStrategy:recycleStrategy 
 		 visibleStrategy:visibleStrategy];
 	
-	[visibleStrategy release];
-	[recycleStrategy release];	
 	
 return scrollView;
 }
@@ -94,14 +90,6 @@ TheBoxSize *theBoxSize;
  */
 UIView *contentView;
 
-- (void) dealloc
-{
-	[theBoxSize release];
-	[recycleStrategy release];
-	[visibleStrategy release];
-	[contentView release];
-	[super dealloc];
-}
 
 - (id) initWithFrame:(CGRect) frame;
 {
@@ -116,8 +104,6 @@ UIView *contentView;
 		self.contentView = aContentView;
 		[super addSubview:self.contentView];
 		
-		[aContentView release];
-		[aBoxSize release];
 	}
 return self;
 }
@@ -203,7 +189,6 @@ return self;
 	
 	self.visibleStrategy = aVisibleStrategy;
 	
-	[aVisibleStrategy release];
 	[self flashScrollIndicators];	
 }
 

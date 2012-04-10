@@ -13,12 +13,8 @@
 #import "TheBoxUIGridViewDatasource.h"
 
 @interface TheBoxUIGridViewDelegate : NSObject <TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate>
-{
-	@private
-		id<TheBoxUIGridViewDatasource> datasource;
-}
 
-@property(nonatomic, retain) id<TheBoxUIGridViewDatasource> datasource;
+@property(nonatomic) id<TheBoxUIGridViewDatasource> datasource;
 
 -(void)setView:(UIView*)view atIndex:(NSUInteger)index;
 

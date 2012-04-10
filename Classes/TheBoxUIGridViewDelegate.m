@@ -15,7 +15,7 @@
 static const int CELL_FRAME_WIDTH = 160;
 
 @interface TheBoxUIGridViewDelegate()
-@property(nonatomic, retain) NSMutableDictionary* views;
+@property(nonatomic, strong) NSMutableDictionary* views;
 @end
 
 
@@ -23,16 +23,10 @@ static const int CELL_FRAME_WIDTH = 160;
 
 
 #pragma mark private fields
-NSMutableDictionary* views;
 
 @synthesize datasource;
 @synthesize views;
 
-- (void) dealloc
-{
-	[datasource release];
-	[super dealloc];
-}
 
 - (id) init
 {
@@ -40,11 +34,8 @@ NSMutableDictionary* views;
 	
 	if (self) 
 	{
-        NSMutableDictionary* dictionary = [NSMutableDictionary new];
+		self.views = [NSMutableDictionary new];
         
-		self.views = dictionary;
-        
-        [dictionary release];
 	}
 return self;
 }

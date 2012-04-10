@@ -13,20 +13,16 @@
 #import "ASIFormDataRequest.h"
 #import "UITextField+TheBoxUITextField.h"
 #import "TheBoxQueries.h"
-#import "TheBoxPost.h"
-#import "TheBox.h"
 #import "HomeUIGridViewController.h"
-#import "TheBoxSingleDataParser.h"
-#import "TheBoxDataParser.h"
 #import "TheBoxNotifications.h"
 #import "TheBoxDefaultKeyboardObserver.h"
 #import "AFHTTPRequestOperation.h"
 #import "TBCreateItemOperationDelegate.h"
 #import "JSONKit.h"
+#import "LocationUIViewController.h"
 
 @implementation UploadUIViewController
 
-@synthesize theBoxDelegate;
 @synthesize uploadView;
 @synthesize takePhotoButton;
 @synthesize category;
@@ -46,14 +42,6 @@
 - (void) dealloc
 {
     [TheBoxNotifications removeObserverForUIKeyboardNotifications:self.keyboardObserver];
-	[textFields release];
-	[list release];
-	[tags release];
-	[theBox release];
-    [keyboardObserver release];
-	[theBoxDelegate release];
-    [createItemDelegate release];
-	[super dealloc];
 }
 
 +(UploadUIViewController*)newUploadUIViewController
@@ -66,26 +54,8 @@
     
     [TheBoxNotifications addObserverForUIKeyboardNotifications:newKeyboardObserver];
     
-    [newKeyboardObserver release];
     
 return newUploadUIViewController;
-}
-
--(void) loadView
-{
-	[super loadView];
-	
-	TheBoxBuilder* builder = [[TheBoxBuilder alloc] init];		
-	
-	id<TheBoxDataParser> dataParser = [[TheBoxSingleDataParser alloc] init];
-	dataParser.delegate = theBoxDelegate;	
-	[builder dataParser:dataParser];
-	
-	self.theBox = [builder build];
-	self.theBox.delegate = theBoxDelegate;
-
-	[dataParser release];
-	[builder release];		
 }
 
 -(void) viewDidLoad
@@ -112,7 +82,6 @@ return newUploadUIViewController;
 	NSLog(@"%@", NSStringFromCGRect(bounds));
 	CGSize contentSize = uploadView.contentSize;
 	NSLog(@"%@", NSStringFromCGSize(contentSize));		
-    [theboxlist release];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -175,11 +144,11 @@ return NO;
 
 - (IBAction)done:(id)sender 
 {
-	AFHTTPRequestOperation *itemQuery = [[TheBoxQueries newItemQuery:imageView.image 
+	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
 												itemName:nameTextField.text 
 												locationName:locationButton.titleLabel.text
 												categoryName:category.text
-												tags:tags] autorelease];
+												tags:tags];
 
 
     [itemQuery setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -207,9 +176,7 @@ return NO;
 
 - (IBAction)enterLocation:(id)sender
 {
-	NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"Location" owner:self options:nil];
-	
-	UIViewController *locationController = [views objectAtIndex:0];
+	UIViewController *locationController = [LocationUIViewController newLocationViewController];
 	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(didEnterLocation:) name:@"didEnterLocation" object:locationController];
@@ -228,8 +195,8 @@ return NO;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         CGSize newSize = CGSizeMake(2056.0f, 1536.0f);
-        // Create a graphics image context
-        UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0f);	
+
+        UIGraphicsBeginImageContext(newSize);	
         
         [image drawInRect:CGRectMake(0.0f, 0.0f, newSize.width, newSize.height)];
         
@@ -243,14 +210,12 @@ return NO;
 	imageView.hidden = NO;
 	takePhotoButton.hidden = YES;
 	
-	[picker release];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
 	[self dismissModalViewControllerAnimated:YES];
-	[picker release];	
 }
 
 @end

@@ -14,10 +14,7 @@
 #import "TheBoxMath.h"	
 #import "Item.h"
 #import "ASIHTTPRequest.h"
-#import "TheBox.h"
 #import "TheBoxQueries.h"
-#import "TheBoxPost.h"
-#import "TheBoxGet.h"
 #import "UploadUIViewController.h"
 #import "NSArray+Decorator.h"
 #import "TheBoxBinarySearch.h"
@@ -28,48 +25,49 @@
 #import "TBCreateItemOperationDelegate.h"
 
 @interface HomeUIGridViewController ()
-
-
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
+@property(nonatomic, strong) NSMutableArray *items;
+@property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
+@property(nonatomic, strong) NSCache *imageCache;
 @end
 
 
 @implementation HomeUIGridViewController
-{
-    NSMutableArray *_items;
-    TheBoxLocationService *_theBoxLocationService;
-    TheBox *_theBox;
-    NSCache *_imageCache;
+
++(HomeUIGridViewController*)newHomeGridViewController
+{    
+    TheBoxLocationService *theBoxLocationService = [TheBoxLocationService theBox];
+
+    HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:theBoxLocationService];
+    [theBoxLocationService notifyDidFindPlacemark:homeGridViewController];
+	[theBoxLocationService notifyDidFailWithError:homeGridViewController];	
+
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:homeGridViewController selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     
+	AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:homeGridViewController];
+	[operation start]; 
+    
+return homeGridViewController;
 }
 
 @synthesize locationLabel;
+@synthesize items;
+@synthesize theBoxLocationService;
+@synthesize imageCache;
 
-
--(void) loadView
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService
 {
-	[super loadView];
-	_items = [NSMutableArray array];
-    NSCache* cache = [[NSCache alloc] init];
+    self = [super initWithNibName:@"HomeUIGridViewController" bundle:nibBundleOrNil];
     
-	_imageCache = cache;
-	
-    TheBoxLocationService* aBoxLocationService = [TheBoxLocationService theBox];
+    if (self) 
+    {
+        self.items = [NSMutableArray array];
+        self.imageCache = [[NSCache alloc] init];
+        self.theBoxLocationService = locationService;
+    }
     
-	_theBoxLocationService = aBoxLocationService;
-	[_theBoxLocationService notifyDidFindPlacemark:self];
-	[_theBoxLocationService notifyDidFailWithError:self];	
-	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
-
-	TheBoxBuilder* builder = [[TheBoxBuilder alloc] init];
-	[builder dataParser:nil];
-	
-	_theBox = [builder build];
-	
-	
-	AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:self];
-	[operation start]; 
+return self;
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
@@ -121,9 +119,9 @@
      ]
  */
 
--(void)didSucceedWithItems:(NSMutableArray*)items
+-(void)didSucceedWithItems:(NSMutableArray*) _items
 {
-	_items = items;
+	self.items = _items;
 	[super reloadData];
 }
 
@@ -147,14 +145,14 @@
 	
 	id<TheBoxPredicate> categoryPredicate = [TheBoxPredicates newCategoryIdPredicate];
 	
-    NSUInteger index = [search find:item on:_items];
+    NSUInteger index = [search find:item on:self.items];
 
     
-	NSDictionary* category = [_items objectAtIndex:0];
+	NSDictionary* category = [self.items objectAtIndex:0];
     
     if(index != -1)
     {
-        NSDictionary* item = [_items objectAtIndex:index];
+        NSDictionary* item = [self.items objectAtIndex:index];
         
         category = [item objectForKey:@"category"];        
     }
@@ -193,17 +191,17 @@
 {		
 	TheBoxUICell *theBoxCell = (TheBoxUICell*)[super viewOf:scrollView atRow:row atIndex:index];
 	
-	NSArray *categoryItems = [[[_items objectAtIndex:row] objectForKey:@"category"] objectForKey:@"items"];
+	NSArray *categoryItems = [[[self.items objectAtIndex:row] objectForKey:@"category"] objectForKey:@"items"];
 		
 	//there should be a mapping between the index of the cell and the id of the item
-	__unsafe_unretained NSDictionary *item = [categoryItems objectAtIndex:index];
+	NSDictionary *item = [categoryItems objectAtIndex:index];
 	
-	__unsafe_unretained NSString *imageURL = [item objectForKey:@"imageURL"];
+	NSString *imageURL = [item objectForKey:@"imageURL"];
 	NSString *when = [item objectForKey:@"when"];
 
 	NSLog(@"%@", item);
 	
-	UIImage *cachedImage = [_imageCache objectForKey:[item objectForKey:@"id"]];
+	UIImage *cachedImage = [self.imageCache objectForKey:[item objectForKey:@"id"]];
 	
 	if (cachedImage == nil) {
         
@@ -212,7 +210,7 @@
             NSData* data = [NSData dataWithContentsOfURL:url];
             
             UIImage* image = [UIImage imageWithData:data];
-            [_imageCache setObject:image forKey:[item objectForKey:@"id"]];
+            [self.imageCache setObject:image forKey:[item objectForKey:@"id"]];
             theBoxCell.itemImageView.image = image;
         });		
 	}
@@ -226,20 +224,20 @@ return theBoxCell;
 }
 
 -(NSUInteger)numberOfViews:(TheBoxUIScrollView *)gridView{
-return [_items count];
+return [self.items count];
 }
 
 -(NSUInteger)numberOfViews:(TheBoxUIScrollView*)scrollView atIndex:(NSInteger)index
 {
-	if ([_items count] == 0) {
+	if ([self.items count] == 0) {
 		return 0;
 	}
 	
-	if(index >= [_items count]){
+	if(index >= [self.items count]){
 		return 0;
 	}
 	
-	NSArray *itemsForCategory = [[[_items objectAtIndex:index] objectForKey:@"category"] objectForKey:@"items"];
+	NSArray *itemsForCategory = [[[self.items objectAtIndex:index] objectForKey:@"category"] objectForKey:@"items"];
 	
 return [itemsForCategory count];
 }

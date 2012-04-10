@@ -16,10 +16,10 @@
 @interface LocationUIViewController : UIViewController <TheBoxLocationServiceDelegate, UITextFieldDelegate> {
 
 }
-@property(nonatomic, retain) IBOutlet UITextField *locationTextField;
-@property(nonatomic, retain) IBOutlet MKMapView *map;
-@property(nonatomic, retain) TheBoxLocationService *theBoxLocationService;
+@property(nonatomic, unsafe_unretained) IBOutlet UITextField *locationTextField;
+@property(nonatomic, unsafe_unretained) IBOutlet MKMapView *map;
 
++(LocationUIViewController*)newLocationViewController;
 - (IBAction)done:(id)sender;
 
 @end

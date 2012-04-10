@@ -12,11 +12,7 @@
 #import "TheBoxDelegate.h"
 
 @interface TheBoxDelegateHandler : NSObject <TheBoxDelegate>
-{
-	@private
-		id<TheBoxDelegate> delegate;
-}
 
-@property(nonatomic, retain) id<TheBoxDelegate> delegate;
+@property(nonatomic) id<TheBoxDelegate> delegate;
 
 @end
