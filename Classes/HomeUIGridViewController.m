@@ -23,6 +23,7 @@
 #import "TBCategoriesOperationDelegate.h"
 #import "TheBoxLocationService.h"
 #import "TBCreateItemOperationDelegate.h"
+#import "DetailsUIViewController.h"
 
 @interface HomeUIGridViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
@@ -51,7 +52,6 @@
 return homeGridViewController;
 }
 
-@synthesize locationLabel;
 @synthesize items;
 @synthesize theBoxLocationService;
 @synthesize imageCache;
@@ -68,6 +68,13 @@ return homeGridViewController;
     }
     
 return self;
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];//write test
+    UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(upload:)];    
+    self.navigationItem.rightBarButtonItem = addItem;    
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
@@ -140,7 +147,7 @@ return self;
 	NSLog(@"%@", data);
 	
 	NSDictionary* item = [data objectForKey:@"item"];
-	
+	    
 	TheBoxBinarySearch *search = [[TheBoxBinarySearch alloc] init];
 	
 	id<TheBoxPredicate> categoryPredicate = [TheBoxPredicates newCategoryIdPredicate];
@@ -172,8 +179,7 @@ return self;
 	MKPlacemark *place = [TheBoxNotifications place:notification];
 	NSString *city = place.locality;
 	
-	locationLabel.text = city;		
-	locationLabel.hidden = NO;	
+	self.title = [NSString stringWithFormat:@"It's right here in %@", city];		
 }
 
 -(void)didFailWithError:(NSNotification *)notification
@@ -182,8 +188,7 @@ return self;
 	
 	NSLog(@"%@", error);
 	
-	locationLabel.text = @"Unknown";		
-	locationLabel.hidden = NO;
+	self.title = [NSString stringWithFormat:@"Unable to lookup location"];		
 }
 
 #pragma mark datasource
@@ -246,4 +251,20 @@ return [itemsForCategory count];
 return CGSizeMake(40.0, 0.0);
 }
 
+-(void)didSelect:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
+{
+   	NSArray *categoryItems = [[[self.items objectAtIndex:row] objectForKey:@"category"] objectForKey:@"items"];
+    
+	//there should be a mapping between the index of the cell and the id of the item
+	NSDictionary *item = [categoryItems objectAtIndex:index];
+ 
+    NSLog(@"%s%@", __PRETTY_FUNCTION__, item);
+    
+    DetailsUIViewController* detailsViewController = [DetailsUIViewController newDetailsViewController:item];
+
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backBarButton;
+
+    [self.navigationController pushViewController:detailsViewController animated:YES];
+}
 @end

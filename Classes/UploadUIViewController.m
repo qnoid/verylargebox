@@ -21,6 +21,11 @@
 #import "JSONKit.h"
 #import "LocationUIViewController.h"
 
+
+@interface UploadUIViewController ()
+@property(nonatomic, strong) NSDictionary* location;
+@end
+
 @implementation UploadUIViewController
 
 @synthesize uploadView;
@@ -38,6 +43,8 @@
 @synthesize theBox;
 @synthesize keyboardObserver;
 @synthesize createItemDelegate;
+
+@synthesize location;
 
 - (void) dealloc
 {
@@ -146,7 +153,7 @@ return NO;
 {
 	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
 												itemName:nameTextField.text 
-												locationName:locationButton.titleLabel.text
+												location:self.location
 												categoryName:category.text
 												tags:tags];
 
@@ -187,16 +194,20 @@ return NO;
 -(void)didEnterLocation:(NSNotification *)aNotification
 {
 	NSDictionary *userInfo = [aNotification userInfo];
-	NSString *location = [userInfo valueForKey:@"location"];
-	locationButton.titleLabel.text = location;
+    self.location = [userInfo valueForKey:@"location"];
+    
+	NSString *locationName = [location objectForKey:@"name"];
+	[locationButton setTitle:locationName forState:UIControlStateNormal];
+	[locationButton setTitle:locationName forState:UIControlStateSelected];
 }
 
+//http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         CGSize newSize = CGSizeMake(2056.0f, 1536.0f);
 
-        UIGraphicsBeginImageContext(newSize);	
+        UIGraphicsBeginImageContext(newSize);
         
         [image drawInRect:CGRectMake(0.0f, 0.0f, newSize.width, newSize.height)];
         

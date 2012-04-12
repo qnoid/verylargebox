@@ -169,10 +169,13 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="6095566"/>
 								<bool key="IBUIOpaque">NO</bool>
-								<int key="IBUIContentMode">4</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<int key="IBUILineBreakMode">0</int>
+								<string key="IBUIHighlightedTitle">location</string>
+								<string key="IBUIDisabledTitle">location</string>
+								<string key="IBUISelectedTitle">location</string>
 								<string key="IBUINormalTitle">location</string>
 								<reference key="IBUIHighlightedTitleColor" ref="266439788"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -219,6 +222,7 @@
 								<reference key="NSNextKeyView" ref="1035051630"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -243,9 +247,9 @@
 								<string key="NSFrame">{{0, 403}, {320, 22}}</string>
 								<reference key="NSSuperview" ref="321616154"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">2</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -551,6 +555,8 @@
 					<string>53.CustomClassName</string>
 					<string>53.IBPluginDependency</string>
 					<string>70.IBPluginDependency</string>
+					<string>70.IBUIButtonInspectorSelectedEdgeInsetMetadataKey</string>
+					<string>70.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -572,6 +578,8 @@
 					<string>UIScrollView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="1"/>
+					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>

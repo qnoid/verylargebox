@@ -21,6 +21,10 @@
 
 @protocol VisibleStrategy<NSObject>
 
+- (NSUInteger)minimumVisible:(CGPoint)bounds;
+
+- (NSUInteger)maximumVisible:(CGRect)bounds;
+
 -(BOOL)isVisible:(NSInteger) index;
 /*
  * Visible bounds

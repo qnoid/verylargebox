@@ -15,10 +15,15 @@
 #import "AFJSONRequestOperation.h"
 #import "TBCategoriesOperationDelegate.h"
 #import "JSONKit.h"
+#import "TBLocationOperationDelegate.h"
 
 @implementation TheBoxQueries
 
 NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
+NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
+NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
+NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
+NSUInteger const TIMEOUT = 60;
 
 +(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate
 {
@@ -26,7 +31,7 @@ NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
     
     NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"/categories" parameters:nil];
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest setTimeoutInterval:30];
+    [categoriesRequest setTimeoutInterval:TIMEOUT];
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
     {
@@ -42,7 +47,7 @@ NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
     return request;
 }
 
-+(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags
++(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName location:(NSDictionary *)location categoryName:(NSString *)categoryName tags:(NSArray *)tags
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
@@ -51,7 +56,9 @@ NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
     NSMutableDictionary* parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 categoryName, @"item[category_attributes][name]",
                                 itemName, @"item[name]",
-                                locationName, @"item[location_attributes][name]",
+                                [location objectForKey:@"name"], @"item[location_attributes][name]",
+                                [[location objectForKey:@"location"] objectForKey:@"lat"], @"item[location_attributes][latitude]",
+                                [[location objectForKey:@"location"] objectForKey:@"lng"], @"item[location_attributes][longitude]",
                                 nil];
     
     for (UITextField *tag in tags)
@@ -71,7 +78,7 @@ NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
     }];
 
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setTimeoutInterval:30];
+    [request setTimeoutInterval:TIMEOUT];
 
 	AFHTTPRequestOperation *createItem = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
@@ -80,6 +87,35 @@ NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
     }];
     
 return createItem;
+}
+
++(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:FOURSQUARE_BASE_URL_STRING]];
+   
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSString stringWithFormat:@"%f,%f", latitude, longtitude], @"ll",
+                                FOURSQUARE_CLIENT_ID, @"client_id",
+                                FOURSQUARE_CLIENT_SECRET, @"client_secret",
+                                @"20120411", @"v",
+                                nil];
+    
+    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"venues/search" parameters:parameters];
+    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [categoriesRequest setTimeoutInterval:TIMEOUT];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
+    {
+        NSString* responseString = operation.responseString;
+        NSLog(@"%@", responseString);
+                                           
+        [delegate didSucceedWithLocations:[[[responseString objectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"]];
+    } 
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnLocationWithError:error];
+    }];
+    
+return request;    
 }
 
 @end

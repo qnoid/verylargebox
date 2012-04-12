@@ -28,7 +28,7 @@
  *
  * @return the minimum number of times the size fits within the visible bounds
  */
--(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
+-(NSUInteger)minimumVisible:(CGPoint)point;
 
 /*
  * The maximum visible must take into account cells that are partially visible
@@ -45,7 +45,7 @@
  * @param visibleBounds should have zero or positive values for each of the x,y,width,height
  * @return the maximum number of times the size fits within the visible bounds
  */
--(NSUInteger)maximumVisible:(CGRect) visibleBounds;
+-(NSUInteger)maximumVisible:(CGRect)visibleBounds;
 
 @end
 
@@ -55,8 +55,8 @@
     CGFloat height;
 }
 -(id)init:(CGFloat) height;
--(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
--(NSUInteger)maximumVisible:(CGRect) visibleBounds;
+-(NSUInteger)minimumVisible:(CGPoint)point;
+-(NSUInteger)maximumVisible:(CGRect)visibleBounds;
 @end
 
 @interface TheBoxWidth : NSObject <TheBoxDimension>
@@ -65,8 +65,8 @@
     CGFloat width;
 }
 -(id)init:(CGFloat) width;
--(NSUInteger)minimumVisible:(CGRect) visibleBounds; 
--(NSUInteger)maximumVisible:(CGRect) visibleBounds;
+-(NSUInteger)minimumVisible:(CGPoint)point;
+-(NSUInteger)maximumVisible:(CGRect)visibleBounds;
 @end
 
 @interface TheBoxSize : NSObject 

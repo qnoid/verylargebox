@@ -10,10 +10,13 @@
 #import "LocationUIViewController.h"
 #import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
+#import "TheBoxQueries.h"
+#import "AFHTTPRequestOperation.h"
 
 @interface LocationUIViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
+@property(nonatomic, strong) NSArray* venues;
 @end
 
 @implementation LocationUIViewController
@@ -24,17 +27,19 @@
 return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
 }
 
-@synthesize locationTextField;
+@synthesize venuesTableView;
 @synthesize map;
 @synthesize theBoxLocationService;
-
+@synthesize venues;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:@"LocationUIViewController" bundle:nibBundleOrNil];
     
-    if (self) {
-        self.theBoxLocationService = [TheBoxLocationService theBox];
+    if (self) 
+    {
+        self.venues = [NSArray array];
+        self.theBoxLocationService = [TheBoxLocationService theBox];        
     }
     
 return self;
@@ -47,22 +52,9 @@ return self;
 	[self.theBoxLocationService notifyDidFindPlacemark:self];	
 }
 
-- (IBAction)done:(id)sender
+- (IBAction)cancel:(id)sender
 {
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:locationTextField.text forKey:@"location"]; 
-
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	
-	[center postNotificationName:@"didEnterLocation" object:self userInfo:userInfo];
-
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-	[textField resignFirstResponder];
-	[self done:self];
-return YES;	
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void)didUpdateToLocation:(NSNotification *)notification;
@@ -73,13 +65,70 @@ return YES;
 	MKCoordinateSpan span = MKCoordinateSpanMake(0.009, 0.009);
 	MKCoordinateRegion newRegion = MKCoordinateRegionMake(centerCoordinate, span);	
 
+    AFHTTPRequestOperation* operation = [TheBoxQueries newLocationQuery:location.coordinate.latitude longtitude:location.coordinate.longitude delegate:self];
+    
+    [operation start];
+    
 	[map setRegion:newRegion];
 }
+
+#pragma mark TBLocationOperationDelegate
+
+-(void)didSucceedWithLocations:(NSArray*)locations
+{
+    NSLog(@"%s: %@", __PRETTY_FUNCTION__, locations);
+
+    self.venues = locations;
+    [self.venuesTableView reloadData];
+}
+
+-(void)didFailOnLocationWithError:(NSError*)error
+{
+    NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
+}
+
 -(void)didFindPlacemark:(NSNotification *)notification
 {
 	MKPlacemark *place = [TheBoxNotifications place:notification];
 
 	[map addAnnotation:place];
+}
+
+#pragma mark UITableViewDataSource
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.venues count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    cell.textLabel.text = [[self.venues objectAtIndex:indexPath.row] objectForKey:@"name"];
+    
+return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary* location = [self.venues objectAtIndex:indexPath.row];
+
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:location forKey:@"location"]; 
+    
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	
+	[center postNotificationName:@"didEnterLocation" object:self userInfo:userInfo];
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

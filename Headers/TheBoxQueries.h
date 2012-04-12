@@ -8,10 +8,12 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 @class TheBoxPost;
 @class TheBoxGet;
 @class AFHTTPRequestOperation;
 @protocol TBCategoriesOperationDelegate;
+@protocol TBLocationOperationDelegate;
 
 /*
  * Provides all available queries to TheBox API
@@ -24,7 +26,8 @@
 }
 
 +(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
-+(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName locationName:(NSString *)locationName categoryName:(NSString *)categoryName tags:(NSArray *)tags;
++(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName location:(NSDictionary *)location categoryName:(NSString *)categoryName tags:(NSArray *)tags;
++(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
 
 
 @end

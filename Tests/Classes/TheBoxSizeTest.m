@@ -28,7 +28,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(320, 0), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 0)));
 	
-	[theBoxSize release];
 }
 
 - (void) testContentSizeOfRowsOne
@@ -40,7 +39,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(320, 196), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 196)));
 	
-	[theBoxSize release];
 }
 
 - (void) testContentSizeOfRowsTwo
@@ -52,7 +50,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(320, 196 * 2), nil);
 	
-	[theBoxSize release];
 }
 
 - (void) testContentSizeOfRowsOdd
@@ -64,7 +61,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(320, 196 * 3), nil);
 	
-	[theBoxSize release];
 }
 
 
@@ -77,7 +73,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(320, 196 * 4), nil);
 	
-	[theBoxSize release];
 }
 
 - (void) testContentSizeOfColumnsZero
@@ -89,7 +84,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(0, 392), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 0)));
 	
-	[theBoxSize release];
 }
 
 - (void) testContentSizeOfColumnsOne
@@ -101,7 +95,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(160, 392), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 196)));
 	
-	[theBoxSize release];
 }
 
 - (void) testContentSizeOfColumnsTwo
@@ -113,7 +106,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(160*2, 392), nil);
 	
-	[theBoxSize release];
 }
 
 - (void) testContentSizeOfColumnsdd
@@ -125,7 +117,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(160*3, 392), nil);
 	
-	[theBoxSize release];
 }
 
 
@@ -138,7 +129,6 @@
 	
 	STAssertEquals(actual, CGSizeMake(160*4, 392), nil);
 	
-	[theBoxSize release];
 }
 
 

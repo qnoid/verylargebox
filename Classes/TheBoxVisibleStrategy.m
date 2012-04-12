@@ -67,10 +67,18 @@ return self;
 return isVisible;
 }
 
+- (NSUInteger)minimumVisible:(CGPoint)bounds {
+    return [self.dimension minimumVisible:bounds];
+}
+
+- (NSUInteger)maximumVisible:(CGRect)bounds {
+    return [self.dimension maximumVisible:bounds];
+}
+
 - (void)willAppear:(CGRect) bounds
 {
-	NSInteger theMinimumVisibleIndex = [self.dimension minimumVisible:bounds];	
-	NSInteger theMaximumVisibleIndex = [self.dimension maximumVisible:bounds];
+	NSInteger theMinimumVisibleIndex = [self minimumVisible:bounds.origin];
+	NSInteger theMaximumVisibleIndex = [self maximumVisible:bounds];
 		
 	NSLog(@"%d >= willAppear < %d of dimension %@ on bounds %@", theMinimumVisibleIndex, theMaximumVisibleIndex, self.dimension, NSStringFromCGRect(bounds));
 	

@@ -27,6 +27,11 @@
 
 +(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension;
 
+
+- (NSUInteger)minimumVisible:(CGPoint)bounds;
+
+- (NSUInteger)maximumVisible:(CGRect)bounds;
+
 /*
  * 
  * For every visible index calculated given the bounds a call to VisibleStrategyDelegate#shouldBeVisible

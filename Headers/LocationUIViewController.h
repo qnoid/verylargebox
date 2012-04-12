@@ -11,15 +11,16 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "TheBoxLocationServiceDelegate.h"
+#import "TBLocationOperationDelegate.h"
 @class TheBoxLocationService;
 
-@interface LocationUIViewController : UIViewController <TheBoxLocationServiceDelegate, UITextFieldDelegate> {
+@interface LocationUIViewController : UIViewController <TheBoxLocationServiceDelegate, TBLocationOperationDelegate, UITableViewDataSource, UITableViewDelegate> {
 
 }
-@property(nonatomic, unsafe_unretained) IBOutlet UITextField *locationTextField;
+@property(nonatomic, unsafe_unretained) IBOutlet UITableView *venuesTableView;
 @property(nonatomic, unsafe_unretained) IBOutlet MKMapView *map;
 
 +(LocationUIViewController*)newLocationViewController;
-- (IBAction)done:(id)sender;
+- (IBAction)cancel:(id)sender;
 
 @end

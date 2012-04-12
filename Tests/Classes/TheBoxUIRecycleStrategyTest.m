@@ -44,9 +44,8 @@ return CGRectMake(bounds.origin.x, bounds.origin.y + diff, bounds.size.width, bo
 {
 	UIView *view = [[UIView alloc] initWithFrame:frame];
 	NSArray *views = [NSArray arrayWithObject:view];
-	[view release];
 	
-	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinY] autorelease];
+	TheBoxUIRecycleStrategy *recycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
 	
 	[recycleStrategy recycle:views bounds:visibleBounds];
 	
@@ -96,9 +95,9 @@ return recycleStrategy;
 	
     NSArray* frames = [NSArray arrayWithObjects:first, second, third, forth, nil];
     
-	NSArray *views = [[[[UITestViews alloc] init] autorelease]of:frames];
+	NSArray *views = [[[UITestViews alloc] init]of:frames];
 	
-	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinY] autorelease];
+	TheBoxUIRecycleStrategy *recycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
 	
 	CGRect visibleBounds = CGRectMake(0, 0, 320, 392);
 	
@@ -111,7 +110,7 @@ return recycleStrategy;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 196)];
     [superView addSubview:view];
     	
-	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinY] autorelease];	
+	TheBoxUIRecycleStrategy *recycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];	
 	CGRect visibleBounds = CGRectMake(0, 197, 320, 392);
 	
     [recycleStrategy recycle:[NSArray arrayWithObject:view] bounds:visibleBounds];
@@ -150,7 +149,7 @@ return recycleStrategy;
 	UIView *cell = [[UIView alloc] initWithFrame:frame];
 	NSArray *views = [NSArray arrayWithObjects:cell, nil];
 	
-	TheBoxUIRecycleStrategy *cellRecycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinY] autorelease];
+	TheBoxUIRecycleStrategy *cellRecycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
 	
 	CGRect visibleBounds = CGRectMake(0, 197, 320, 196);
 	

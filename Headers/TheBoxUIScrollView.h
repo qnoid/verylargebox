@@ -39,6 +39,7 @@
 @property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDelegate> scrollViewDelegate;
 @property(nonatomic) TheBoxSize *theBoxSize;
 
+-(NSUInteger)indexOf:(CGPoint)point;
 -(UIView*)dequeueReusableView;
 -(void) setNeedsLayout:(id<TheBoxDimension>) dimension;
 

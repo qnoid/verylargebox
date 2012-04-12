@@ -13,7 +13,7 @@
 
 +(id)allocMainBundle;
 
-@property(nonatomic) NSBundle *bundle;
+@property(unsafe_unretained, nonatomic) NSBundle *bundle;
 
 -(id)initWithBundle:(NSBundle *) bundle;
 -(id)loadView:(NSString *) view;

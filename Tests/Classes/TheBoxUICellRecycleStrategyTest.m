@@ -10,6 +10,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "TheBoxUIRecycleStrategy.h"
 #import "TheBoxBundle.h"
+#import "UITestViews.h"
 
 @interface TheBoxUICellRecycleStrategyTest : SenTestCase {
 	
@@ -23,9 +24,8 @@
 {
 	UIView *cell = [[UIView alloc] initWithFrame:frame];
 	NSArray *views = [NSArray arrayWithObject:cell];
-	[cell release];
 	
-	TheBoxUIRecycleStrategy *cellRecycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinX] autorelease];
+	TheBoxUIRecycleStrategy *cellRecycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinX];
 	
 	[cellRecycleStrategy recycle:views bounds:visibleBounds];
 	
@@ -118,9 +118,9 @@ return CGRectMake(bounds.origin.x + diff, bounds.origin.y, bounds.size.width, bo
 	NSValue *third = [NSValue valueWithCGRect:CGRectMake(320, 0, 160, 196)];
 	NSValue *forth = [NSValue valueWithCGRect:CGRectMake(480, 0, 160, 196)];
 
-	NSArray *views = [[[[UITestViews alloc] init] autorelease]of:[NSArray arrayWithObjects:first, second, third, forth, nil]];
+	NSArray *views = [[[UITestViews alloc] init]of:[NSArray arrayWithObjects:first, second, third, forth, nil]];
 	
-	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinX] autorelease];
+	TheBoxUIRecycleStrategy *recycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinX];
 	
 	CGRect visibleBounds = CGRectMake(0, 0, 320, 196);
 	
@@ -133,7 +133,7 @@ return CGRectMake(bounds.origin.x + diff, bounds.origin.y, bounds.size.width, bo
 	UIView *cell = [[UIView alloc] initWithFrame:frame];
 	NSArray *views = [NSArray arrayWithObjects:cell, nil];
 	
-	TheBoxUIRecycleStrategy *cellRecycleStrategy = [[TheBoxUIRecycleStrategy newPartiallyVisibleWithinX] autorelease];
+	TheBoxUIRecycleStrategy *cellRecycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinX];
 	
 	CGRect visibleBounds = CGRectMake(161, 0, 160, 196);
 	

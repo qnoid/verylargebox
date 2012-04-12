@@ -82,7 +82,6 @@ return scrollView;
 
 TheBoxUIRecycleStrategy *recycleStrategy;
 id<VisibleStrategy> visibleStrategy;
-TheBoxSize *theBoxSize;
 
 /* Apparently a UIScrollView needs another view as its content view else it messes up the scrollers.
  * Interface Builder uses a private _contentView instead.
@@ -157,13 +156,17 @@ return self;
 	/*
 	 * Avoid using bounds outside fo the content (e.g. when bouncing off a view)
 	 */
-	CGRect visibleBounds = CGRectMake(MIN(self.contentSize.width - self.frame.size.width, bounds.origin.x), MIN(self.contentSize.height - self.frame.size.height, bounds.origin.y), bounds.size.width, bounds.size.height);
+	CGRect visibleBounds = CGRectMake(self.contentOffset.x, self.contentOffset.y, bounds.size.width, bounds.size.height);
 
 	NSLog(@"scrollViewDidScroll on visibleBounds %@", NSStringFromCGRect(visibleBounds));	
 	NSLog(@"scrollViewDidScroll on bounds %@", NSStringFromCGRect(bounds));	
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];	
 	[self showViewsWithinBounds:bounds];
+}
+
+-(NSUInteger)indexOf:(CGPoint)point {
+    return [self.visibleStrategy minimumVisible:point];
 }
 
 /*

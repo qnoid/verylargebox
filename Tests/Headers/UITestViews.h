@@ -7,7 +7,7 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 13/12/10.
  *  Contributor(s): .-
  */
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface UITestViews : NSObject {
 

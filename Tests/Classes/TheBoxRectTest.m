@@ -25,7 +25,6 @@
 	
 	STAssertEquals(frame, CGRectMake(0, 0, 160, 196), nil);
 	
-	[rect release];
 }
 
 - (void) testFrame 
@@ -36,7 +35,6 @@
 	
 	STAssertEquals(frame, CGRectMake(0, 196, 160, 196), nil);
 	
-	[rect release];
 }
 
 - (void) testFrame2
@@ -47,7 +45,6 @@
 	
 	STAssertEquals(frame, CGRectMake(0, 196 * 2, 320, 196), nil);
 	
-	[rect release];
 }
 
 - (void) testFrame4
@@ -58,7 +55,6 @@
 	
 	STAssertEquals(frame, CGRectMake(0, 196 *4, 320, 196), nil);
 	
-	[rect release];
 }
 
 - (void) testIsWithinXorigin
@@ -70,7 +66,6 @@
 
 	STAssertTrue([rect isVisibleWithinX:visibleBounds], nil);
 	
-	[rect release];
 }
 
 

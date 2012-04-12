@@ -57,9 +57,10 @@
 - (IBAction)enter:(id)sender 
 {
 	NSLog(@"Hello %@", locationLabel.text);
-	
     HomeUIGridViewController *homeGridViewController = [HomeUIGridViewController newHomeGridViewController];
-	[self presentModalViewController:homeGridViewController animated:YES];	
+
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:homeGridViewController];
+    [self presentModalViewController:navigationController animated:YES];	
 }
 
 @end

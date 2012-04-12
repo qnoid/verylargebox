@@ -22,14 +22,14 @@
 return self;
 }
 
--(NSUInteger)minimumVisible:(CGRect) visibleBounds
+-(NSUInteger)minimumVisible:(CGPoint)point
 {
-	NSUInteger visibleWindowStart = visibleBounds.origin.y;
+	NSUInteger visibleWindowStart = point.y;
 	
 return floor(visibleWindowStart / height);	
 }
 
--(NSUInteger)maximumVisible:(CGRect) visibleBounds
+-(NSUInteger)maximumVisible:(CGRect)visibleBounds
 {
 	NSUInteger visibleWindowStart = visibleBounds.origin.y;
 	NSInteger visibleWindowHeight = CGRectGetHeight(visibleBounds);
@@ -56,14 +56,14 @@ return [NSString stringWithFormat:@"%f", height];
 return self;
 }
 
--(NSUInteger)minimumVisible:(CGRect) visibleBounds
+-(NSUInteger)minimumVisible:(CGPoint)point
 {
-	NSUInteger visibleWindowStart = CGRectGetMinX(visibleBounds);
+	NSUInteger visibleWindowStart = point.x;
 	
 return floor(visibleWindowStart / width);
 }
 
--(NSUInteger)maximumVisible:(CGRect) visibleBounds
+-(NSUInteger)maximumVisible:(CGRect)visibleBounds
 {
 	NSUInteger visibleWindowStart = CGRectGetMinX(visibleBounds);
 	NSUInteger visibleWindowWidth = CGRectGetWidth(visibleBounds);

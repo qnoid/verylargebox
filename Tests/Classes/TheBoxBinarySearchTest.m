@@ -22,11 +22,10 @@
 
 - (void) assertFind:(id)what on:(NSArray*)values withIndex:(NSUInteger)index
 {
-	id<TheBoxPredicate> ranking = [[[TheBoxTestRanking alloc] init] autorelease];
+	id<TheBoxPredicate> ranking = [[TheBoxTestRanking alloc] init];
 	
-	TheBoxBinarySearch *search = [[[TheBoxBinarySearch alloc] 
-                                    initWithPredicate:ranking] 
-                                    autorelease];
+	TheBoxBinarySearch *search = [[TheBoxBinarySearch alloc] 
+                                    initWithPredicate:ranking];
 
     
     NSUInteger actual = [search find:what on:values];

@@ -14,8 +14,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "21"
          endingLineNumber = "21"
-         landmarkName = "-contentSizeOf:withData:"
-         landmarkType = "5">
+         landmarkName = "viewRect"
+         landmarkType = "19">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Tests/Classes/TheBoxUICellRecycleStrategyTest.m"
-         timestampString = "355584675.261445"
+         timestampString = "355874448.097753"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "27"
+         endingLineNumber = "27"
          landmarkName = "-testRecycleViewsBoundsForSingleCell"
          landmarkType = "5">
       </FileBreakpoint>
@@ -42,7 +42,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "17"
          endingLineNumber = "17"
-         landmarkName = "-dealloc"
+         landmarkName = "+theBox"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -70,7 +70,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "17"
          endingLineNumber = "17"
-         landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
+         landmarkName = "+theBox"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -78,25 +78,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/LocationUIViewController.m"
-         timestampString = "353623881.054493"
+         timestampString = "355917264.645958"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "56"
          endingLineNumber = "56"
-         landmarkName = "-didUpdateToLocation:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Classes/LocationUIViewController.m"
-         timestampString = "353623881.054493"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
-         landmarkName = "-didFindPlacemark:"
+         landmarkName = "-cancel:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

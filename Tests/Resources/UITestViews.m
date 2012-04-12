@@ -7,13 +7,13 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 13/12/10.
  *  Contributor(s): .-
  */
-#import <UIKit/UIKit.h>
+#import "UITestViews.h"
 
 @implementation UITestViews
 
 -(NSArray *)of:(NSArray *) rects
 {
-	NSMutableArray *views = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *views = [[NSMutableArray alloc] init];
 
 	for (NSValue *value in rects) 
 	{
@@ -22,7 +22,6 @@
 		
 		[views addObject:view];
 		
-		[view release];
 	}
 	
 return views;

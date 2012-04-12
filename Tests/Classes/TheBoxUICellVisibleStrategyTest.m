@@ -20,7 +20,7 @@
 	
 }
 
-@property(nonatomic, retain) NSArray *views;
+@property(nonatomic) NSArray *views;
 
 @end
 
@@ -38,7 +38,6 @@
 	
 	UITestViews *foo = [[UITestViews alloc] init];
 	self.views = [foo of:[NSArray arrayWithObjects:first, second, third, forth, fifth, nil]];
-	[foo release];
 }
 
 
@@ -50,10 +49,10 @@ return [self.views objectAtIndex:index];
 {
 	CGRect visibleBounds = CGRectMake(0, 0, 320, 198);
 	
-	NSObject<TheBoxDimension> *dimension = [[TheBoxSize newHeight:160] autorelease];
+	NSObject<TheBoxDimension> *dimension = [TheBoxSize newHeight:160];
 	
 	TheBoxVisibleStrategy *visibleStrategy = 
-		[[TheBoxVisibleStrategy newVisibleStrategyOn:dimension] autorelease];
+		[TheBoxVisibleStrategy newVisibleStrategyOn:dimension];
 	
 	visibleStrategy.delegate = self;	
 	[visibleStrategy willAppear:visibleBounds];	
@@ -70,10 +69,10 @@ return [self.views objectAtIndex:index];
 
 -(void)assertWillAppear:(CGSize) cellSize visibleBounds:(CGRect)visibleBounds howMany:(NSUInteger)howMany minimum:(NSUInteger)minimum maximum:(NSUInteger)maximum
 {
-	NSObject<TheBoxDimension> *dimension = [[TheBoxSize newWidth:cellSize.width] autorelease];
+	NSObject<TheBoxDimension> *dimension = [TheBoxSize newWidth:cellSize.width];
 
 	TheBoxVisibleStrategy *visibleStrategy = 
-	[[TheBoxVisibleStrategy newVisibleStrategyOn:dimension] autorelease];
+	[TheBoxVisibleStrategy newVisibleStrategyOn:dimension];
 	
 	visibleStrategy.delegate = self;	
 	[visibleStrategy willAppear:visibleBounds];	
@@ -118,10 +117,10 @@ return [self.views objectAtIndex:index];
 
 -(void)testIsVisible
 {
-	NSObject<TheBoxDimension> *dimension = [[TheBoxSize newWidth:0] autorelease];
+	NSObject<TheBoxDimension> *dimension = [TheBoxSize newWidth:0];
 
 	TheBoxVisibleStrategy *visibleStrategy = 
-		[[TheBoxVisibleStrategy newVisibleStrategyOn:dimension] autorelease];
+		[TheBoxVisibleStrategy newVisibleStrategyOn:dimension];
 
 	NSInteger zero = 0;
 	NSInteger one = 1;

@@ -19,8 +19,6 @@
 {
 }
 
-@property(nonatomic, unsafe_unretained) IBOutlet UILabel *locationLabel;
-
 +(HomeUIGridViewController*)newHomeGridViewController;
 
 - (IBAction)upload:(id)sender;

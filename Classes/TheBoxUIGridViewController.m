@@ -24,7 +24,7 @@
 @end
 
 static const int GRID_FRAME_X = 0;
-static const int GRID_FRAME_Y = 44;
+static const int GRID_FRAME_Y = 0;
 static const int GRID_FRAME_WIDTH = 320;
 static const int GRID_FRAME_HEIGHT = 392 + 44;
 
@@ -85,8 +85,28 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 	aGridView.clipsToBounds = YES;
 	
 	self.gridView = aGridView;
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+
 	[self.view addSubview:self.gridView];			
 	
+}
+
+-(void)viewWasTapped:(id)sender
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer*)sender;
+    CGPoint tapPoint = [tapGestureRecognizer locationInView:self.view];
+    NSLog(@"%@", NSStringFromCGPoint(tapPoint));
+    NSLog(@"%@", NSStringFromCGSize(self.gridView.contentSize));
+
+    UIView* touchedView = [self.gridView hitTest:tapPoint withEvent:nil];
+    NSUInteger row = [self.gridView indexOf:tapPoint];
+    
+    NSLog(@"%@", touchedView);
+    NSLog(@"%u", row);
+    [self didSelect:self.gridView atRow:row atIndex:0];
 }
 
 -(void)reloadData
@@ -192,6 +212,10 @@ return 0;
 
 -(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index {
 return CGSizeMake(0.0, 0.0);
+}
+
+-(void)didSelect:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index{
+    
 }
 
 @end
