@@ -13,9 +13,10 @@
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 #import "AFJSONRequestOperation.h"
-#import "TBCategoriesOperationDelegate.h"
+#import "TBItemsOperationDelegate.h"
 #import "JSONKit.h"
 #import "TBLocationOperationDelegate.h"
+#import "TBCategoriesOperationDelegate.h"
 
 @implementation TheBoxQueries
 
@@ -25,11 +26,33 @@ NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRI
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
 NSUInteger const TIMEOUT = 60;
 
-+(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate
++(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"/categories" parameters:nil];
+    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [categoriesRequest setTimeoutInterval:TIMEOUT];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
+   {
+      NSString* responseString = operation.responseString;
+      NSLog(@"%@", responseString);
+       
+      [delegate didSucceedWithCategories:[responseString mutableObjectFromJSONString]];
+   } 
+      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [delegate didFailOnCategoriesWithError:error];
+  }];
+
+    return request;
+}
+
++(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBItemsOperationDelegate>*)delegate
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"/items" parameters:nil];
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [categoriesRequest setTimeoutInterval:TIMEOUT];
     

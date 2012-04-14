@@ -20,7 +20,7 @@
 #import "TheBoxBinarySearch.h"
 #import "TheBoxPredicates.h"
 #import "AFHTTPRequestOperation.h"
-#import "TBCategoriesOperationDelegate.h"
+#import "TBItemsOperationDelegate.h"
 #import "TheBoxLocationService.h"
 #import "TBCreateItemOperationDelegate.h"
 #import "DetailsUIViewController.h"
@@ -210,13 +210,16 @@ return self;
 	
 	if (cachedImage == nil) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
             NSURL *url = [NSURL URLWithString:imageURL];
             NSData* data = [NSData dataWithContentsOfURL:url];
             
             UIImage* image = [UIImage imageWithData:data];
-            [self.imageCache setObject:image forKey:[item objectForKey:@"id"]];
-            theBoxCell.itemImageView.image = image;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.imageCache setObject:image forKey:[item objectForKey:@"id"]];
+                theBoxCell.itemImageView.image = image;
+            });
         });		
 	}
     else {

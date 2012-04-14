@@ -9,13 +9,13 @@
  */
 #import "TheBoxUIGridViewDelegate.h"
 #import "TheBoxSize.h"
-
 #import <QuartzCore/QuartzCore.h>
 
 static const int CELL_FRAME_WIDTH = 160;
 
 @interface TheBoxUIGridViewDelegate()
 @property(nonatomic, strong) NSMutableDictionary* views;
+@property(nonatomic, strong) NSMutableDictionary* viewss;
 @end
 
 
@@ -26,7 +26,7 @@ static const int CELL_FRAME_WIDTH = 160;
 
 @synthesize datasource;
 @synthesize views;
-
+@synthesize viewss;
 
 - (id) init
 {
@@ -35,12 +35,18 @@ static const int CELL_FRAME_WIDTH = 160;
 	if (self) 
 	{
 		self.views = [NSMutableDictionary new];
-        
+		self.viewss = [NSMutableDictionary new];        
 	}
 return self;
 }
 
--(void)setView:(UIView*)view atIndex:(NSUInteger)index{
+-(UIView*)viewAtRow:(NSUInteger)row {
+return [self.viewss objectForKey:[NSNumber numberWithInt:row]];
+}
+
+-(void)setView:(UIView*)view atIndex:(NSUInteger)index
+{
+    [self.viewss setObject:view forKey:[NSNumber numberWithInt:index]];
 	[self.views setObject:[NSNumber numberWithInt:index] forKey:[NSValue valueWithCGRect:[view frame]]];
 }
 

@@ -13,6 +13,7 @@
 @class TheBoxGet;
 @class AFHTTPRequestOperation;
 @protocol TBCategoriesOperationDelegate;
+@protocol TBItemsOperationDelegate;
 @protocol TBLocationOperationDelegate;
 
 /*
@@ -25,7 +26,8 @@
 
 }
 
-+(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
++(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
++(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBItemsOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName location:(NSDictionary *)location categoryName:(NSString *)categoryName tags:(NSArray *)tags;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
 

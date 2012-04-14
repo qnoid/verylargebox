@@ -53,12 +53,15 @@ return detailsViewController;
     
 	NSLog(@"%@", imageURL);
 
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
             NSURL *url = [NSURL URLWithString:imageURL];
             NSData* data = [NSData dataWithContentsOfURL:url];
             
             UIImage* image = [UIImage imageWithData:data];
+        
+            dispatch_async(dispatch_get_main_queue(), ^{
             itemImageView.image = image;
+            });
     });
     
     [self.locationButton setTitle:[[_item objectForKey:@"location"] objectForKey:@"name"]  forState:UIControlStateNormal];

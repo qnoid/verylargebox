@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TBCategoriesOperationDelegate <NSObject>
+@protocol TBItemsOperationDelegate <NSObject>
 
 
 -(void)didSucceedWithItems:(NSMutableArray*)items;

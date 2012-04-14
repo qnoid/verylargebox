@@ -97,16 +97,43 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer*)sender;
-    CGPoint tapPoint = [tapGestureRecognizer locationInView:self.view];
+    CGPoint tapPoint = [tapGestureRecognizer locationInView:self.gridView];
     NSLog(@"%@", NSStringFromCGPoint(tapPoint));
     NSLog(@"%@", NSStringFromCGSize(self.gridView.contentSize));
 
     UIView* touchedView = [self.gridView hitTest:tapPoint withEvent:nil];
-    NSUInteger row = [self.gridView indexOf:tapPoint];
-    
     NSLog(@"%@", touchedView);
+    NSUInteger row = [self.gridView indexOf:tapPoint];
     NSLog(@"%u", row);
-    [self didSelect:self.gridView atRow:row atIndex:0];
+
+    NSUInteger numberOfRows = [self numberOfViews:self.gridView];
+    
+    if(row >= numberOfRows){
+        return;
+    }
+    
+    TheBoxUIScrollView* scrollView = (TheBoxUIScrollView*)[self.gridViewDelegate viewAtRow:row];
+    NSUInteger index = [scrollView indexOf:tapPoint];
+    NSLog(@"[%u, %u]", row, index);
+    
+    NSUInteger numberOfViews = [self numberOfViews:scrollView atIndex:row];
+    
+    /**User can tap outside of the view (e.g. when items are less than visible view
+    
+     |visible scrollview|
+     |--------|---------|
+     |  item  |dead view|
+     |--------|---------|
+         0          1
+     
+     numberOfViews = 1
+     valid indexes = 0
+     */
+    if(index >= numberOfViews){
+        return;
+    }
+    
+    [self didSelect:self.gridView atRow:row atIndex:index];
 }
 
 -(void)reloadData

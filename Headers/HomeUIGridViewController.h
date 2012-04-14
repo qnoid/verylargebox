@@ -10,12 +10,12 @@
 #import <UIKit/UIKit.h>
 #import "TheBoxUIGridViewController.h"
 #import "TheBoxLocationServiceDelegate.h"
-#import "TBCategoriesOperationDelegate.h"
+#import "TBItemsOperationDelegate.h"
 #import "TBCreateItemOperationDelegate.h"
 @class TheBoxLocationService;
 @class TheBoxUIGridView;
 
-@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBCategoriesOperationDelegate, TBCreateItemOperationDelegate> 
+@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TBCreateItemOperationDelegate> 
 {
 }
 

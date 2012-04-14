@@ -16,6 +16,7 @@
 
 @property(nonatomic) id<TheBoxUIGridViewDatasource> datasource;
 
+-(UIView*)viewAtRow:(NSUInteger)row;
 -(void)setView:(UIView*)view atIndex:(NSUInteger)index;
 
 @end
