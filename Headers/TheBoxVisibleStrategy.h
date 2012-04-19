@@ -26,7 +26,7 @@
 @property(nonatomic) id<TheBoxDimension> dimension;
 
 +(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension;
-
++(TheBoxVisibleStrategy*)newVisibleStrategyFrom:(TheBoxVisibleStrategy*) visibleStrategy;
 
 - (NSUInteger)minimumVisible:(CGPoint)bounds;
 

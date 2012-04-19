@@ -14,8 +14,8 @@
 static const int CELL_FRAME_WIDTH = 160;
 
 @interface TheBoxUIGridViewDelegate()
+@property(nonatomic, strong) NSMutableDictionary* frames;
 @property(nonatomic, strong) NSMutableDictionary* views;
-@property(nonatomic, strong) NSMutableDictionary* viewss;
 @end
 
 
@@ -25,8 +25,8 @@ static const int CELL_FRAME_WIDTH = 160;
 #pragma mark private fields
 
 @synthesize datasource;
+@synthesize frames;
 @synthesize views;
-@synthesize viewss;
 
 - (id) init
 {
@@ -34,25 +34,25 @@ static const int CELL_FRAME_WIDTH = 160;
 	
 	if (self) 
 	{
-		self.views = [NSMutableDictionary new];
-		self.viewss = [NSMutableDictionary new];        
+		self.frames = [NSMutableDictionary new];
+		self.views = [NSMutableDictionary new];        
 	}
 return self;
 }
 
 -(UIView*)viewAtRow:(NSUInteger)row {
-return [self.viewss objectForKey:[NSNumber numberWithInt:row]];
+return [self.views objectForKey:[NSNumber numberWithInt:row]];
 }
 
 -(void)setView:(UIView*)view atIndex:(NSUInteger)index
 {
-    [self.viewss setObject:view forKey:[NSNumber numberWithInt:index]];
-	[self.views setObject:[NSNumber numberWithInt:index] forKey:[NSValue valueWithCGRect:[view frame]]];
+    [self.views setObject:view forKey:[NSNumber numberWithInt:index]];
+	[self.frames setObject:[NSNumber numberWithInt:index] forKey:[NSValue valueWithCGRect:[view frame]]];
 }
 
 -(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource;
 {
-	NSNumber* index = [self.views objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
+	NSNumber* index = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
 
 	NSUInteger numberOfViews = [self.datasource numberOfViews:scrollView atIndex:[index intValue]];
 	
@@ -63,14 +63,14 @@ return [scrollView.theBoxSize sizeOf:numberOfViews width:width];
 
 -(NSUInteger)numberOfViews:(TheBoxUIScrollView *)scrollView
 {
-	NSNumber* index = [self.views objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
+	NSNumber* index = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
 	
 return [self.datasource numberOfViews:scrollView atIndex:[index intValue]];
 }
 
 -(UIView*)viewOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index
 {
-	NSNumber* row = [self.views objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
+	NSNumber* row = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
 	
     UIView* viewOf = [self.datasource viewOf:scrollView atRow:[row intValue] atIndex:index];
     

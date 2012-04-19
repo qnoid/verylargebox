@@ -20,17 +20,20 @@
 #import "TBCreateItemOperationDelegate.h"
 #import "JSONKit.h"
 #import "LocationUIViewController.h"
-
+#import "CategoriesViewController.h"
+#import "TheBoxLocationService.h"
 
 @interface UploadUIViewController ()
-@property(nonatomic, strong) NSDictionary* location;
+@property(nonatomic, strong) NSMutableDictionary* location;
+@property(nonatomic, strong) NSDictionary* category;
+@property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @end
 
 @implementation UploadUIViewController
 
 @synthesize uploadView;
 @synthesize takePhotoButton;
-@synthesize category;
+@synthesize categoryTextField;
 @synthesize firstTag;
 @synthesize secondTag;
 @synthesize imageView;
@@ -44,7 +47,9 @@
 @synthesize keyboardObserver;
 @synthesize createItemDelegate;
 
-@synthesize location;
+@synthesize location = _location;
+@synthesize category;
+@synthesize theBoxLocationService;
 
 - (void) dealloc
 {
@@ -65,14 +70,27 @@
 return newUploadUIViewController;
 }
 
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self) {
+        self.location = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"location"];
+        self.category = [NSDictionary dictionaryWithObject:@"" forKey:@"name"];
+        self.theBoxLocationService = [TheBoxLocationService theBox];                
+    }
+    
+return self;
+}
+
 -(void) viewDidLoad
 {
 	[super viewDidLoad];
 
-	self.textFields = [NSArray arrayWithObjects:nameTextField, category, firstTag, secondTag, nil];	
-    TheBoxUIList* theboxlist = [TheBoxUIList newListWithTextFields: [NSArray arrayWithObjects:category, firstTag, secondTag, nil]];
-    
-	self.list = theboxlist;
+    [self.theBoxLocationService notifyDidUpdateToLocation:self];
+
+	self.textFields = [NSArray arrayWithObjects:nameTextField, categoryTextField, firstTag, secondTag, nil];	
+	self.list = [TheBoxUIList newListWithTextFields: [NSArray arrayWithObjects:categoryTextField, firstTag, secondTag, nil]];
 	self.tags = [NSArray arrayWithObjects:firstTag, secondTag, nil];	
 	
 	for (UITextField *textField in textFields) {
@@ -95,6 +113,17 @@ return newUploadUIViewController;
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
+
+#pragma mark TheBoxLocationServiceDelegate
+
+-(void)didUpdateToLocation:(NSNotification *)notification;
+{
+	CLLocation *location = [TheBoxNotifications location:notification];
+
+	[[_location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
+	[[_location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lng"];
+}
+
 
 #pragma mark TheBoxKeyboardObserver
 
@@ -133,10 +162,24 @@ return newUploadUIViewController;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {	
+    if(textField == self.nameTextField){
+        [textField resignFirstResponder];
+    return NO;
+    }
+    
 	NSInteger index = [textFields indexOfObject:textField];	
+    if(index + 1 == [textFields count]){
+        [textField resignFirstResponder];
+    return YES;
+    }
+    
 	[[textFields objectAtIndex:++index] becomeFirstResponder];
 		
-return NO;
+return textField == self.categoryTextField;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    return textField != self.categoryTextField;  
 }
 
 - (void)textFieldDidChange:(NSNotification *)notification
@@ -154,7 +197,7 @@ return NO;
 	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
 												itemName:nameTextField.text 
 												location:self.location
-												categoryName:category.text
+												category:category
 												tags:tags];
 
 
@@ -196,9 +239,28 @@ return NO;
 	NSDictionary *userInfo = [aNotification userInfo];
     self.location = [userInfo valueForKey:@"location"];
     
-	NSString *locationName = [location objectForKey:@"name"];
+	NSString *locationName = [self.location objectForKey:@"name"];
 	[locationButton setTitle:locationName forState:UIControlStateNormal];
 	[locationButton setTitle:locationName forState:UIControlStateSelected];
+}
+
+- (IBAction)selectCategory:(id)sender
+{
+	UIViewController *categoriesController = [CategoriesViewController newCategoriesViewController];
+	
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:self selector:@selector(didSelectCategory:) name:@"didSelectCategory" object:categoriesController];
+	
+	[self presentModalViewController:categoriesController animated:YES];	    
+}
+
+-(void)didSelectCategory:(NSNotification *)aNotification
+{
+	NSDictionary *userInfo = [aNotification userInfo];
+    self.category = [userInfo valueForKey:@"category"];
+    
+	NSString *categoryName = [category objectForKey:@"name"];
+	self.categoryTextField.text = categoryName;
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio

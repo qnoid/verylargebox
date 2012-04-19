@@ -14,7 +14,7 @@
 
 -(BOOL)does:(id)thiz match:(id)that
 {
-	NSNumber *thizCategoryId = [thiz objectForKey:@"category_id"];
+	NSNumber *thizCategoryId = [[thiz objectForKey:@"category"] objectForKey:@"id"];
 	NSNumber *thatCategoryId = [that objectForKey:@"category_id"];
 	
 return [thizCategoryId isEqual:thatCategoryId];
@@ -23,7 +23,7 @@ return [thizCategoryId isEqual:thatCategoryId];
 -(BOOL)is:(id)thiz higherThan:(id)that
 {
 	NSNumber *thizCategoryId = [thiz objectForKey:@"category_id"];
-	NSNumber *thatCategoryId = [that objectForKey:@"category_id"];
+	NSNumber *thatCategoryId = [[that objectForKey:@"category"] objectForKey:@"id"];
 	
 return [thizCategoryId intValue] > [thatCategoryId intValue];
 }

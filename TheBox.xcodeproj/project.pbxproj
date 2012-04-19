@@ -10,8 +10,12 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9A33A307C4A318C23060B /* libPods.a */; };
 		808024AA1C554DCAB46088C3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9A33A307C4A318C23060B /* libPods.a */; };
+		900378A115409DBD00579FF2 /* TheBoxUIScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 900378A015409DBD00579FF2 /* TheBoxUIScrollViewTest.m */; };
 		90226B91135999D1006E43EC /* TheBoxBinarySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226B90135999D1006E43EC /* TheBoxBinarySearch.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90226C6E1359B1DB006E43EC /* TheBoxPredicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */; settings = {COMPILER_FLAGS = ""; }; };
+		9022BAA1153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */; };
+		902C78F3153CB631003A17CB /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902C78F1153CB631003A17CB /* CategoriesViewController.m */; };
+		902C78F4153CB631003A17CB /* CategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 902C78F2153CB631003A17CB /* CategoriesViewController.xib */; };
 		903AE3DA1284900300A8FB28 /* HomeUIGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */; };
 		903AE3E81284BF7500A8FB28 /* WelcomeUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */; };
 		903AE4EC1285BE6500A8FB28 /* DetailsUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */; };
@@ -104,12 +108,13 @@
 		1D6058910D05DD3D006BFB54 /* TheBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = ../Classes/MainWindow.xib; sourceTree = "<group>"; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* TheBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBox_Prefix.pch; sourceTree = "<group>"; };
 		357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		45C9A33A307C4A318C23060B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107310486CEB800E47090 /* TheBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TheBox-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		900378A015409DBD00579FF2 /* TheBoxUIScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIScrollViewTest.m; sourceTree = "<group>"; };
 		9020737C152CF1340017A385 /* TBItemsOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBItemsOperationDelegate.h; path = Headers/TBItemsOperationDelegate.h; sourceTree = "<group>"; };
 		90226B8F135999D1006E43EC /* TheBoxBinarySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxBinarySearch.h; sourceTree = "<group>"; };
 		90226B90135999D1006E43EC /* TheBoxBinarySearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxBinarySearch.m; sourceTree = "<group>"; };
@@ -117,12 +122,17 @@
 		90226C071359AA14006E43EC /* TheBoxTestRanking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxTestRanking.m; sourceTree = "<group>"; };
 		90226C6B1359B1DB006E43EC /* TheBoxPredicates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxPredicates.h; sourceTree = "<group>"; };
 		90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxPredicates.m; sourceTree = "<group>"; };
+		9022BA9F153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableDictionary+TBMutableDictionary.h"; path = "../Classes/NSMutableDictionary+TBMutableDictionary.h"; sourceTree = "<group>"; };
+		9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+TBMutableDictionary.m"; sourceTree = "<group>"; };
+		902C78F0153CB631003A17CB /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoriesViewController.h; path = ../Classes/CategoriesViewController.h; sourceTree = "<group>"; };
+		902C78F1153CB631003A17CB /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoriesViewController.m; path = Classes/CategoriesViewController.m; sourceTree = "<group>"; };
+		902C78F2153CB631003A17CB /* CategoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoriesViewController.xib; path = Classes/CategoriesViewController.xib; sourceTree = "<group>"; };
 		902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeUIGridViewController.m; path = Classes/HomeUIGridViewController.m; sourceTree = "<group>"; };
 		903367ED129C5F510046C59D /* TheBoxUIGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIGridViewController.m; sourceTree = "<group>"; };
 		903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomeUIGridViewController.xib; path = Classes/HomeUIGridViewController.xib; sourceTree = "<group>"; };
 		903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WelcomeUIViewController.xib; path = Classes/WelcomeUIViewController.xib; sourceTree = "<group>"; };
 		903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailsUIViewController.xib; path = Classes/DetailsUIViewController.xib; sourceTree = "<group>"; };
-		903AE4ED1285C9A600A8FB28 /* UserProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserProfile.xib; path = ../Classes/UserProfile.xib; sourceTree = "<group>"; };
+		903AE4ED1285C9A600A8FB28 /* UserProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserProfile.xib; path = Classes/UserProfile.xib; sourceTree = "<group>"; };
 		903AE4F51285CBD800A8FB28 /* UserProfiles.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserProfiles.xib; path = Classes/UserProfiles.xib; sourceTree = "<group>"; };
 		903AE5031285E1C300A8FB28 /* UserProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileView.m; path = Classes/UserProfileView.m; sourceTree = "<group>"; };
 		903AE5071285E1F800A8FB28 /* UserProfilesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfilesView.m; path = Classes/UserProfilesView.m; sourceTree = "<group>"; };
@@ -217,8 +227,9 @@
 		90D29AFF131A81FB008B8B2D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		90D29B07131A820F008B8B2D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		90D29B0B131A8219008B8B2D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		90D75381153E052A001C542F /* TBCreateCategoryOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCreateCategoryOperationDelegate.h; sourceTree = "<group>"; };
 		90D830D812B51BDF00BE4470 /* TheBoxBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxBundle.m; sourceTree = "<group>"; };
-		90D830F312B51DA400BE4470 /* TheBoxUICell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TheBoxUICell.xib; path = ../Classes/TheBoxUICell.xib; sourceTree = "<group>"; };
+		90D830F312B51DA400BE4470 /* TheBoxUICell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TheBoxUICell.xib; sourceTree = "<group>"; };
 		90D9A93E12B921950063FF60 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		90D9A96312B924130063FF60 /* TheBoxMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxMath.m; sourceTree = "<group>"; };
 		90F08272132AED5200E7E35F /* UITextField+TheBoxUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+TheBoxUITextField.m"; sourceTree = "<group>"; };
@@ -270,6 +281,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				90D830F312B51DA400BE4470 /* TheBoxUICell.xib */,
 				90A1E3BC133C985800CC9212 /* TheBoxDelegateHandler.m */,
 				9096CC07133BB81E00639685 /* TheBoxQueries.m */,
 				90BBA77212BD036E001B97D9 /* UIView+TheBoxUIView.m */,
@@ -296,6 +309,7 @@
 				90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */,
 				90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridViewDelegate.m */,
 				90C2A47A1526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.m */,
+				9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -313,13 +327,13 @@
 			isa = PBXGroup;
 			children = (
 				90C950FA12B6A10700A8A05F /* Headers */,
-				903AE4A31285A9B600A8FB28 /* Resources */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				903AE3E21284BE2100A8FB28 /* Welcome */,
 				903AE3FD12853F9D00A8FB28 /* Home */,
 				903AE40012853FBE00A8FB28 /* Details */,
 				903AE40312853FD500A8FB28 /* Description */,
 				903AE40412853FDF00A8FB28 /* Upload */,
+				902C78EF153CB603003A17CB /* Categories */,
 				905A4F9C1291DE6F00BCB475 /* Location */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				9038D5221539CD8500708B54 /* External */,
@@ -364,6 +378,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		902C78EF153CB603003A17CB /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				902C78F1153CB631003A17CB /* CategoriesViewController.m */,
+				902C78F2153CB631003A17CB /* CategoriesViewController.xib */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		9038D5221539CD8500708B54 /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +424,7 @@
 				903AE5071285E1F800A8FB28 /* UserProfilesView.m */,
 				903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */,
 				903AE4F51285CBD800A8FB28 /* UserProfiles.xib */,
+				903AE4ED1285C9A600A8FB28 /* UserProfile.xib */,
 			);
 			name = Details;
 			sourceTree = "<group>";
@@ -419,16 +443,6 @@
 				903AE5601285E33600A8FB28 /* UploadUIViewController.xib */,
 			);
 			name = Upload;
-			sourceTree = "<group>";
-		};
-		903AE4A31285A9B600A8FB28 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				90D830F312B51DA400BE4470 /* TheBoxUICell.xib */,
-				903AE4ED1285C9A600A8FB28 /* UserProfile.xib */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		905A4F9C1291DE6F00BCB475 /* Location */ = {
@@ -462,6 +476,7 @@
 				90CEADEB1349CDBD0084C5F0 /* TheBoxSizeTest.m */,
 				90417326134B0F1500F18F95 /* TheBoxRectTest.m */,
 				90226BF81359A983006E43EC /* TheBoxBinarySearchTest.m */,
+				900378A015409DBD00579FF2 /* TheBoxUIScrollViewTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -469,6 +484,7 @@
 		90C950FA12B6A10700A8A05F /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				902C78F0153CB631003A17CB /* CategoriesViewController.h */,
 				9094243E142E44380084C40C /* TheBoxUIGridViewDelegate.h */,
 				90A5FCCE1387CC1F004E65B3 /* TheBoxUIGridViewDelegate.h */,
 				90226C6B1359B1DB006E43EC /* TheBoxPredicates.h */,
@@ -512,6 +528,8 @@
 				90A1E3BB133C985800CC9212 /* TheBoxDelegateHandler.h */,
 				90C2A4791526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.h */,
 				90FDDF011538E57B0080A550 /* TBCategoriesOperationDelegate.h */,
+				90D75381153E052A001C542F /* TBCreateCategoryOperationDelegate.h */,
+				9022BA9F153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -623,6 +641,7 @@
 				90D830F412B51DA400BE4470 /* TheBoxUICell.xib in Resources */,
 				A152E573130D80F200514061 /* Icon.png in Resources */,
 				90539C6F1537675B00559AD0 /* logo.jpg in Resources */,
+				902C78F4153CB631003A17CB /* CategoriesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +724,8 @@
 				90A5FCD11387CC1F004E65B3 /* TheBoxUIGridViewDelegate.m in Sources */,
 				90C2A47B1526679C00AC16B6 /* TheBoxDefaultKeyboardObserver.m in Sources */,
 				90B56BE51534D3E10064CB4E /* DetailsUIViewController.m in Sources */,
+				902C78F3153CB631003A17CB /* CategoriesViewController.m in Sources */,
+				9022BAA1153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +745,7 @@
 				908363F614006C5000E5AAAF /* TheBoxTestRanking.m in Sources */,
 				90DAF497144913D300BACE91 /* TheBoxUIRecycleStrategyMethodTest.m in Sources */,
 				90C784001515E63C006D0381 /* TheBoxBundle.m in Sources */,
+				900378A115409DBD00579FF2 /* TheBoxUIScrollViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

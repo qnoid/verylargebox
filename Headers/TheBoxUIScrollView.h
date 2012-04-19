@@ -41,6 +41,5 @@
 
 -(NSUInteger)indexOf:(CGPoint)point;
 -(UIView*)dequeueReusableView;
--(void) setNeedsLayout:(id<TheBoxDimension>) dimension;
 
 @end

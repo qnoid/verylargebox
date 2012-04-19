@@ -8,15 +8,17 @@
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "TheBoxDelegate.h"
 #import "TheBoxNotifications.h"
+#import "TheBoxLocationServiceDelegate.h"
 @class TheBox;
 @class HomeUIGridViewController;
 @class TheBoxUIList;
 @class TheBoxDefaultKeyboardObserver;
 @protocol TBCreateItemOperationDelegate;
 
-@interface UploadUIViewController : UIViewController <TheBoxKeyboardObserver, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> 
+@interface UploadUIViewController : UIViewController <TheBoxKeyboardObserver, TheBoxLocationServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> 
 {
 }
 
@@ -25,7 +27,7 @@
 @property(nonatomic, unsafe_unretained) IBOutlet UIImageView *imageView;
 @property(nonatomic, unsafe_unretained) IBOutlet UIButton *locationButton;
 @property(nonatomic, unsafe_unretained) IBOutlet UITextField *nameTextField;
-@property(nonatomic, unsafe_unretained) IBOutlet UITextField *category;
+@property(nonatomic, unsafe_unretained) IBOutlet UITextField *categoryTextField;
 @property(nonatomic, unsafe_unretained) IBOutlet UITextField *firstTag;
 @property(nonatomic, unsafe_unretained) IBOutlet UITextField *secondTag;
 
@@ -51,6 +53,7 @@
 - (IBAction)takePhoto:(id)sender;
 
 - (IBAction)enterLocation:(id)sender;
+- (IBAction)selectCategory:(id)sender;
 
 +(UploadUIViewController*)newUploadUIViewController;
 

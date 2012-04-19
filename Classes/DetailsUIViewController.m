@@ -59,7 +59,7 @@ return detailsViewController;
             
             UIImage* image = [UIImage imageWithData:data];
         
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
             itemImageView.image = image;
             });
     });

@@ -31,6 +31,12 @@
 return visibleStrategy;	
 }
 
++(TheBoxVisibleStrategy*)newVisibleStrategyFrom:(TheBoxVisibleStrategy*) visibleStrategy
+{
+	TheBoxVisibleStrategy *newVisibleStrategy = [[TheBoxVisibleStrategy alloc] init:visibleStrategy.dimension];
+	
+return newVisibleStrategy;	
+}
 
 @synthesize dimension;
 @synthesize delegate;

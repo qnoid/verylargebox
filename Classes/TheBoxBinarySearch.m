@@ -48,12 +48,12 @@ return self;
 			start = index + 1;
 		}
         else{
-            to = index - 1;            
+            to = index - 1;           
         }
 
 	}
 	
-return -1;
+return NSNotFound;
 }
 
 -(NSUInteger)find:(id) what on:(NSArray *)values{

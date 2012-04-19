@@ -11,6 +11,13 @@
 
 @implementation TheBoxUICell
 
++(TheBoxUICell*)loadWith:(id)owner
+{
+    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TheBoxUICell" owner:owner options:nil];
+    
+return (TheBoxUICell*)[views objectAtIndex:0];
+}
+
 @synthesize itemImageView;
 @synthesize itemLabel;
 @synthesize cellIdentifier;

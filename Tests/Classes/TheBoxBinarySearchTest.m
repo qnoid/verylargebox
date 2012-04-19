@@ -1,10 +1,10 @@
-/*
- *  Copyright 2010 TheBox
+/**
+ *  Copyright 2012 TheBox 
  *  All rights reserved.
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 16/04/2011.
+ *  Created by Markos Charatzas (@qnoid)  on 16/04/2011.
  *  Contributor(s): .-
  */
 #import <SenTestingKit/SenTestingKit.h>
@@ -37,7 +37,7 @@
 {
     NSArray *numbers = [NSArray new];
     
-    [self assertFind:@"0" on:numbers withIndex:-1];
+    [self assertFind:@"0" on:numbers withIndex:NSNotFound];
 }
 
 -(void)testDirectHit
@@ -92,14 +92,14 @@
         [numbers addObject: [NSString stringWithFormat:@"%d", i] ];
     }
     
-    [self assertFind:@"10" on:numbers withIndex:-1];
+    [self assertFind:@"10" on:numbers withIndex:NSNotFound];
 }
 
 -(void)testIntegerMax
 {
     NSMutableArray *numbers = [NSMutableArray new];
     
-    [self assertFind:[NSString stringWithFormat:@"%d", NSIntegerMax] on:numbers withIndex:-1];
+    [self assertFind:[NSString stringWithFormat:@"%d", NSIntegerMax] on:numbers withIndex:NSNotFound];
 }
 
 @end

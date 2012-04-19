@@ -142,33 +142,54 @@ return self;
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);    
 }
 
--(void)didSucceedWithItem:(NSDictionary*)data
+/**
+ {
+ item =     {
+ "category_id" = 2;
+ "created_at" = "2012-04-18T07:54:50Z";
+ id = 122;
+ imageURL = "/system/items/images/000/000/122/thumb/.jpg?1334735688";
+ "image_content_type" = "image/jpeg";
+ "image_file_name" = ".jpg";
+ "image_file_size" = 1678390;
+ location =         {
+ "created_at" = "2012-04-18T07:54:50Z";
+ id = 121;
+ "item_id" = 122;
+ latitude = "55.960976";
+ longitude = "-3.189527";
+ name = "<null>";
+ "updated_at" = "2012-04-18T07:54:50Z";
+ };
+ name = "";
+ "updated_at" = "2012-04-18T07:54:50Z";
+ when = "less than a minute ago";
+ };
+ }
+ */
+-(void)didSucceedWithItem:(NSDictionary*)item
 {
-	NSLog(@"%@", data);
-	
-	NSDictionary* item = [data objectForKey:@"item"];
-	    
-	TheBoxBinarySearch *search = [[TheBoxBinarySearch alloc] init];
+    NSLog(@"%s", __PRETTY_FUNCTION__);    
+	NSLog(@"%@", item);
 	
 	id<TheBoxPredicate> categoryPredicate = [TheBoxPredicates newCategoryIdPredicate];
+	TheBoxBinarySearch *search = [[TheBoxBinarySearch alloc] initWithPredicate:categoryPredicate];
 	
+    item = [item objectForKey:@"item"];
+    
     NSUInteger index = [search find:item on:self.items];
-
     
-	NSDictionary* category = [self.items objectAtIndex:0];
-    
-    if(index != -1)
-    {
-        NSDictionary* item = [self.items objectAtIndex:index];
-        
-        category = [item objectForKey:@"category"];        
+    if(index == NSNotFound){
+        index = 0;
     }
+    
+	NSMutableDictionary* category = [[self.items objectAtIndex:index] objectForKey:@"category"];
 
-	NSMutableArray* categoryItems = [[category objectForKey:@"category"] objectForKey:@"items"];
+	NSMutableArray* categoryItems = [category objectForKey:@"items"];
 	
 	[categoryItems insertObject:item atIndex:0];
     
-	[[category objectForKey:@"category"] setObject:categoryItems forKey:@"items"];
+	[category setObject:categoryItems forKey:@"items"];
 	
 	[super reloadData];
 }
@@ -216,7 +237,11 @@ return self;
             
             UIImage* image = [UIImage imageWithData:data];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
+            if(image == nil){
+                return;
+            }
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.imageCache setObject:image forKey:[item objectForKey:@"id"]];
                 theBoxCell.itemImageView.image = image;
             });

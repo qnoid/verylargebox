@@ -16,6 +16,8 @@
 @property (nonatomic, unsafe_unretained) IBOutlet UILabel *itemLabel;
 @property (nonatomic, copy) NSString *cellIdentifier;
 
++(TheBoxUICell*)loadWith:(id)owner;
+
 -(id)initWith:(UIImageView *)itemImageView itemLabel:(UILabel *)itemLabel;
 
 @end

@@ -15,6 +15,7 @@
 @protocol TBCategoriesOperationDelegate;
 @protocol TBItemsOperationDelegate;
 @protocol TBLocationOperationDelegate;
+@protocol TBCreateCategoryOperationDelegate;
 
 /*
  * Provides all available queries to TheBox API
@@ -26,9 +27,10 @@
 
 }
 
++(AFHTTPRequestOperation*)newCreateCategoryQuery:(NSString*)name delegate:(NSObject<TBCreateCategoryOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBItemsOperationDelegate>*)delegate;
-+(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName location:(NSDictionary *)location categoryName:(NSString *)categoryName tags:(NSArray *)tags;
++(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName location:(NSDictionary *)location category:(NSDictionary *)category tags:(NSArray *)tags;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
 
 

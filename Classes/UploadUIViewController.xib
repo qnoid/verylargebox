@@ -128,7 +128,7 @@
 							<object class="IBUITextField" id="984028130">
 								<reference key="NSNextResponder" ref="321616154"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 320}, {320, 21}}</string>
+								<string key="NSFrame">{{0, 320}, {320, 22}}</string>
 								<reference key="NSSuperview" ref="321616154"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="183032429"/>
@@ -137,7 +137,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
-								<string key="IBUIPlaceholder">name</string>
+								<string key="IBUIPlaceholder">give a name</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">2</int>
 									<bytes key="NSRGB">MC40NzQ1MDk4MzUyIDAuNDc0NTA5ODM1MiAwLjUxNzY0NzA4NzYAA</bytes>
@@ -146,7 +146,7 @@
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<int key="IBUIAutocorrectionType">1</int>
-									<int key="IBUIReturnKeyType">4</int>
+									<int key="IBUIReturnKeyType">9</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="529836754">
@@ -164,7 +164,7 @@
 							<object class="IBUIButton" id="183032429">
 								<reference key="NSNextResponder" ref="321616154"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 341}, {320, 21}}</string>
+								<string key="NSFrame">{{0, 340}, {320, 22}}</string>
 								<reference key="NSSuperview" ref="321616154"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="6095566"/>
@@ -173,10 +173,7 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUILineBreakMode">0</int>
-								<string key="IBUIHighlightedTitle">location</string>
-								<string key="IBUIDisabledTitle">location</string>
-								<string key="IBUISelectedTitle">location</string>
-								<string key="IBUINormalTitle">location</string>
+								<string key="IBUINormalTitle">select a location</string>
 								<reference key="IBUIHighlightedTitleColor" ref="266439788"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">2</int>
@@ -195,10 +192,11 @@
 								<reference key="NSNextKeyView" ref="761542530"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
-								<string key="IBUIPlaceholder">category</string>
+								<string key="IBUIPlaceholder">assign a category</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">2</int>
 									<bytes key="NSRGB">MC40NzQ1MDk4MzUyIDAuNDc0NTA5ODM1MiAwLjUxNzY0NzA4NzYAA</bytes>
@@ -222,11 +220,11 @@
 								<reference key="NSNextKeyView" ref="1035051630"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUITag">1</int>
+								<int key="IBUITag">2</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
-								<string key="IBUIPlaceholder">new tag</string>
+								<string key="IBUIPlaceholder">enter a tag</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">2</int>
 									<bytes key="NSRGB">MC40NzQ1MDk4MzUyIDAuNDc0NTA5ODM1MiAwLjUxNzY0NzA4NzYAA</bytes>
@@ -247,13 +245,14 @@
 								<string key="NSFrame">{{0, 403}, {320, 22}}</string>
 								<reference key="NSSuperview" ref="321616154"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUITag">2</int>
+								<int key="IBUITag">3</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
-								<string key="IBUIPlaceholder">new tag</string>
+								<string key="IBUIPlaceholder">enter one more tag</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">2</int>
 									<bytes key="NSRGB">MC40NzQ1MDk4MzUyIDAuNDc0NTA5ODM1MiAwLjUxNzY0NzA4NzYAA</bytes>
@@ -262,6 +261,7 @@
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<int key="IBUIAutocorrectionType">1</int>
+									<int key="IBUIReturnKeyType">9</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="529836754"/>
@@ -304,14 +304,6 @@
 						<reference key="destination" ref="841466699"/>
 					</object>
 					<int key="connectionID">73</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">category</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="6095566"/>
-					</object>
-					<int key="connectionID">74</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -370,6 +362,14 @@
 					<int key="connectionID">81</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">categoryTextField</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="6095566"/>
+					</object>
+					<int key="connectionID">103</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">cancel:</string>
 						<reference key="source" ref="812270696"/>
@@ -386,6 +386,14 @@
 					<int key="connectionID">84</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="984028130"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">100</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">takePhoto:</string>
 						<reference key="source" ref="1062606987"/>
@@ -393,6 +401,39 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">86</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="6095566"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">94</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">selectCategory:</string>
+						<reference key="source" ref="6095566"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">1</int>
+					</object>
+					<int key="connectionID">102</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="761542530"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">95</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="1035051630"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">96</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -596,7 +637,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">91</int>
+			<int key="maxID">103</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -611,10 +652,12 @@
 							<string>cancel:</string>
 							<string>done:</string>
 							<string>enterLocation:</string>
+							<string>selectCategory:</string>
 							<string>takePhoto:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -628,6 +671,7 @@
 							<string>cancel:</string>
 							<string>done:</string>
 							<string>enterLocation:</string>
+							<string>selectCategory:</string>
 							<string>takePhoto:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -645,6 +689,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">selectCategory:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">takePhoto:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -654,7 +702,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>category</string>
+							<string>categoryTextField</string>
 							<string>firstTag</string>
 							<string>imageView</string>
 							<string>locationButton</string>
@@ -679,7 +727,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>category</string>
+							<string>categoryTextField</string>
 							<string>firstTag</string>
 							<string>imageView</string>
 							<string>locationButton</string>
@@ -691,7 +739,7 @@
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">category</string>
+								<string key="name">categoryTextField</string>
 								<string key="candidateClassName">UITextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">

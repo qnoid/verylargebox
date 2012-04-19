@@ -116,8 +116,26 @@ return self;
 	[self.visibleStrategy.visibleViews minusSet:self.recycleStrategy.recycledViews];	
 }
 
--(void)showViewsWithinBounds:(CGRect)bounds{
-	[self.visibleStrategy willAppear:bounds];	
+/**
+ * The Visible strategy uses TheBoxDimension which will ceilf the bounds as to catch any partially visible cells.
+ * However, reaching at the edge of the scrollview, will cause the bounds to include the "bouncing" part of the view which 
+ * shouldn't be taken into account as something partially visible. Therefore need to keep the width at a maximum.
+ *
+ * Visible bounds should be at maximum the original width and height
+ *
+ * @see TheBoxDimension#maximumVisible:
+ */
+-(void)displayViewsWithinBounds:(CGRect)bounds
+{
+	NSUInteger width = CGRectGetWidth(bounds);
+    NSUInteger contentSizeWidth = MIN(CGRectGetMinX(bounds) + width, self.contentSize.width) - width;
+    
+	NSUInteger height = CGRectGetHeight(bounds);    
+    NSUInteger contentSizeHeight = MIN(CGRectGetMinY(bounds) + height, self.contentSize.height) - height;
+        
+    CGRect visibleBounds = CGRectMake(contentSizeWidth, contentSizeHeight, bounds.size.width, bounds.size.height);
+    
+	[self.visibleStrategy willAppear:visibleBounds];	
 }
 
 /**
@@ -134,35 +152,34 @@ return self;
 	NSLog(@"frame %@", NSStringFromCGRect(self.frame));	
 	NSLog(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
 	NSLog(@"layoutSubviews on bounds %@", NSStringFromCGRect([self bounds]));	
-
+    
     CGRect bounds = [self bounds];
+    
+	[self recycleVisibleViewsWithinBounds:bounds];
+	[self removeRecycledFromVisibleViews];	
     
 	/*
 	 * Avoid using bounds outside fo the content (e.g. when bouncing off a view)
 	 */
-	CGRect visibleBounds = CGRectMake(self.contentOffset.x, self.contentOffset.y, bounds.size.width, bounds.size.height);
-
-	NSLog(@"layoutSubviews on visibleBounds %@", NSStringFromCGRect(visibleBounds));	
-    
-	[self recycleVisibleViewsWithinBounds:visibleBounds];
-	[self removeRecycledFromVisibleViews];	
-	[self showViewsWithinBounds:visibleBounds];
+	CGRect contentBounds = CGRectMake(self.contentOffset.x, self.contentOffset.y, bounds.size.width, bounds.size.height);    
+	NSLog(@"layoutSubviews on contentBounds %@", NSStringFromCGRect(contentBounds));
+	[self displayViewsWithinBounds:contentBounds];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 	CGRect bounds = [scrollView bounds];
 
-	/*
-	 * Avoid using bounds outside fo the content (e.g. when bouncing off a view)
-	 */
-	CGRect visibleBounds = CGRectMake(self.contentOffset.x, self.contentOffset.y, bounds.size.width, bounds.size.height);
-
-	NSLog(@"scrollViewDidScroll on visibleBounds %@", NSStringFromCGRect(visibleBounds));	
 	NSLog(@"scrollViewDidScroll on bounds %@", NSStringFromCGRect(bounds));	
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];	
-	[self showViewsWithinBounds:bounds];
+    
+	/*
+	 * Avoid using bounds outside fo the content (e.g. when bouncing off a view)
+	 */
+	CGRect contentBounds = CGRectMake(self.contentOffset.x, self.contentOffset.y, bounds.size.width, bounds.size.height);    
+	NSLog(@"scrollViewDidScroll on contentBounds %@", NSStringFromCGRect(contentBounds));	
+	[self displayViewsWithinBounds:contentBounds];
 }
 
 -(NSUInteger)indexOf:(CGPoint)point {
@@ -176,8 +193,7 @@ return self;
  * any visible sections since each one of them might have changed in content size
  * and or cells it displays.
  */
--(void) setNeedsLayout:(id<TheBoxDimension>) dimension
-{
+- (void)setNeedsLayout {
     [super setNeedsLayout];
 	NSArray* subviews = [self.contentView subviews];
 	
@@ -186,7 +202,7 @@ return self;
 	}
 	
 	TheBoxVisibleStrategy *aVisibleStrategy = 
-		[TheBoxVisibleStrategy newVisibleStrategyOn:dimension];
+		[TheBoxVisibleStrategy newVisibleStrategyFrom:self.visibleStrategy];
 	
 	aVisibleStrategy.delegate = self;
 	

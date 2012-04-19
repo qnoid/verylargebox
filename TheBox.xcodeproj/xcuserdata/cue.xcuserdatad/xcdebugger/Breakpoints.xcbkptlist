@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/TheBoxUIGridViewController.m"
-         timestampString = "355584675.261445"
+         timestampString = "356561793.431971"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
+         startingLineNumber = "22"
+         endingLineNumber = "22"
          landmarkName = "viewRect"
          landmarkType = "19">
       </FileBreakpoint>
@@ -28,7 +28,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "27"
          endingLineNumber = "27"
-         landmarkName = "-testRecycleViewsBoundsForSingleCell"
+         landmarkName = "-recycleViewsBounds:visibleBounds:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -89,7 +89,7 @@
    </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          scope = "0"

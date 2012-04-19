@@ -14,6 +14,7 @@
 #import "TheBoxVisibleStrategy.h"
 #import "TheBoxUIRecycleStrategy.h"
 #import "TheBoxUIGridViewDelegate.h"
+#import "TheBoxUICell.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -82,6 +83,7 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 
 	aGridView.scrollViewDelegate = self;
 	aGridView.datasource = self;	
+    aGridView.scrollsToTop = YES;
 	aGridView.clipsToBounds = YES;
 	
 	self.gridView = aGridView;
@@ -138,8 +140,7 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 
 -(void)reloadData
 {
-    id<TheBoxDimension> dimension = [TheBoxSize newHeight:SECTION_FRAME_HEIGHT];        
-	[self.gridView setNeedsLayout:dimension];
+	[self.gridView setNeedsLayout];
 }
 
 -(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource
@@ -162,15 +163,11 @@ return SECTION_FRAME_HEIGHT;
 	
 	CGRect frame = [self frameOf:scrollView atRow:row atIndex:index];
 
-    if (view == nil) 
-	{
-        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TheBoxUICell" owner:self options:nil];
-		view = [views objectAtIndex:0];
+    if (view == nil) {
+		view = [TheBoxUICell loadWith:self];
 	}
 	
     view.frame = frame; 
-    
-    
     [view setNeedsLayout];
     
 	NSLog(@"view %@", view);
@@ -201,16 +198,13 @@ return view;
 		
 		view = viewOf;
 	}
-    else
-    {
-        id<TheBoxDimension> dimension = [TheBoxSize newWidth:CELL_FRAME_WIDTH];        
-        [(TheBoxUIScrollView*)view setNeedsLayout:dimension];
-    }
 
     view.frame = frame; 
-    [self.gridViewDelegate setView:view atIndex:index];
+    [view setNeedsLayout];
 
 	NSLog(@"view %@", view);
+    
+    [self.gridViewDelegate setView:view atIndex:index];
 	
 return view;
 }
