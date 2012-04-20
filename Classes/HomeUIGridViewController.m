@@ -13,7 +13,6 @@
 #import "TheBoxUICell.h"
 #import "TheBoxMath.h"	
 #import "Item.h"
-#import "ASIHTTPRequest.h"
 #import "TheBoxQueries.h"
 #import "UploadUIViewController.h"
 #import "NSArray+Decorator.h"

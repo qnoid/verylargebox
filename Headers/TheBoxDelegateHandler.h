@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequestDelegate.h"
 #import "TheBoxDelegate.h"
 
 @interface TheBoxDelegateHandler : NSObject <TheBoxDelegate>
