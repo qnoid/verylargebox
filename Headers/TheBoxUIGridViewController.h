@@ -12,13 +12,12 @@
 #import "TheBoxUIScrollViewDatasource.h"
 #import "TheBoxUIGridViewDelegate.h"
 #import "TheBoxUIGridViewDatasource.h"
-@class TheBoxUIGridView;
 @protocol VisibleStrategy;
 
 
 @interface TheBoxUIGridViewController : UIViewController <TheBoxUIScrollViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TheBoxUIScrollViewDatasource>
 
-@property(nonatomic) TheBoxUIScrollView* gridView;
+@property(nonatomic, unsafe_unretained) TheBoxUIScrollView* gridView;
 
 -(void)reloadData;
 
@@ -32,6 +31,8 @@
 -(UIView*)viewOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
 
 -(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
+
+-(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index;
 /*
  *
  */

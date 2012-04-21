@@ -7,6 +7,7 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 13/12/10.
  *  Contributor(s): .-
  */
+#import <CoreGraphics/CoreGraphics.h>
 #import "TheBoxSize.h"
 
 @implementation TheBoxHeight
@@ -37,6 +38,13 @@ return floor(visibleWindowStart / height);
 return ceilf((visibleWindowStart + visibleWindowHeight) / height);	
 }
 
+- (CGPoint)ceilOriginOf:(CGRect)bounds toContentSize:(CGSize)contentSize
+{
+    NSUInteger originY = MIN(CGRectGetMinY(bounds) + bounds.size.height, contentSize.height) - bounds.size.height;
+
+return CGPointMake(CGRectGetWidth(bounds), originY);
+}
+
 -(NSString *) description{
 return [NSString stringWithFormat:@"%f", height];
 }
@@ -56,11 +64,8 @@ return [NSString stringWithFormat:@"%f", height];
 return self;
 }
 
--(NSUInteger)minimumVisible:(CGPoint)point
-{
-	NSUInteger visibleWindowStart = point.x;
-	
-return floor(visibleWindowStart / width);
+-(NSUInteger)minimumVisible:(CGPoint)point{
+return floor(point.x / width);
 }
 
 -(NSUInteger)maximumVisible:(CGRect)visibleBounds
@@ -69,6 +74,13 @@ return floor(visibleWindowStart / width);
 	NSUInteger visibleWindowWidth = CGRectGetWidth(visibleBounds);
 	
 return ceilf((visibleWindowStart + visibleWindowWidth) / width);
+}
+
+- (CGPoint)ceilOriginOf:(CGRect)bounds toContentSize:(CGSize)contentSize
+{
+    NSUInteger originX = MIN(CGRectGetMinX(bounds) + bounds.size.width, contentSize.width) - bounds.size.width;
+
+return CGPointMake(originX, CGRectGetHeight(bounds));
 }
 
 -(NSString *) description{

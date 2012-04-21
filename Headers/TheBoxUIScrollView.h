@@ -22,7 +22,7 @@
 -(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource;
 
 @optional
-- (CGFloat)whatRowHeight:(TheBoxUIScrollView *)scrollView;
+- (CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
 @end
 
 /*
@@ -37,7 +37,7 @@
 
 @property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDatasource> datasource;
 @property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDelegate> scrollViewDelegate;
-@property(nonatomic) TheBoxSize *theBoxSize;
+@property(nonatomic, strong) TheBoxSize *theBoxSize;
 
 -(NSUInteger)indexOf:(CGPoint)point;
 -(UIView*)dequeueReusableView;

@@ -11,7 +11,7 @@
 
 @implementation TheBoxUICell
 
-+(TheBoxUICell*)loadWith:(id)owner
++(TheBoxUICell*)loadWithOwner:(id)owner
 {
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TheBoxUICell" owner:owner options:nil];
     

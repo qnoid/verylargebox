@@ -231,6 +231,7 @@ return self;
 	if (cachedImage == nil) {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
+            
             NSURL *url = [NSURL URLWithString:imageURL];
             NSData* data = [NSData dataWithContentsOfURL:url];
             
@@ -264,11 +265,7 @@ return [self.items count];
 	if ([self.items count] == 0) {
 		return 0;
 	}
-	
-	if(index >= [self.items count]){
-		return 0;
-	}
-	
+		
 	NSArray *itemsForCategory = [[[self.items objectAtIndex:index] objectForKey:@"category"] objectForKey:@"items"];
 	
 return [itemsForCategory count];
