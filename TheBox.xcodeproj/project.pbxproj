@@ -10,7 +10,7 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9A33A307C4A318C23060B /* libPods.a */; };
 		808024AA1C554DCAB46088C3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9A33A307C4A318C23060B /* libPods.a */; };
-		900378A115409DBD00579FF2 /* TheBoxUIScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 900378A015409DBD00579FF2 /* TheBoxUIScrollViewTest.m */; };
+		900378A115409DBD00579FF2 /* TheBoxVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 900378A015409DBD00579FF2 /* TheBoxVisibleStrategyTest.m */; };
 		90226B91135999D1006E43EC /* TheBoxBinarySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226B90135999D1006E43EC /* TheBoxBinarySearch.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90226C6E1359B1DB006E43EC /* TheBoxPredicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */; settings = {COMPILER_FLAGS = ""; }; };
 		9022BAA1153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */; };
@@ -114,7 +114,7 @@
 		357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		45C9A33A307C4A318C23060B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107310486CEB800E47090 /* TheBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TheBox-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		900378A015409DBD00579FF2 /* TheBoxUIScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIScrollViewTest.m; sourceTree = "<group>"; };
+		900378A015409DBD00579FF2 /* TheBoxVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxVisibleStrategyTest.m; sourceTree = "<group>"; };
 		9020737C152CF1340017A385 /* TBItemsOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBItemsOperationDelegate.h; path = Headers/TBItemsOperationDelegate.h; sourceTree = "<group>"; };
 		90226B8F135999D1006E43EC /* TheBoxBinarySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxBinarySearch.h; sourceTree = "<group>"; };
 		90226B90135999D1006E43EC /* TheBoxBinarySearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxBinarySearch.m; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 				90CEADEB1349CDBD0084C5F0 /* TheBoxSizeTest.m */,
 				90417326134B0F1500F18F95 /* TheBoxRectTest.m */,
 				90226BF81359A983006E43EC /* TheBoxBinarySearchTest.m */,
-				900378A015409DBD00579FF2 /* TheBoxUIScrollViewTest.m */,
+				900378A015409DBD00579FF2 /* TheBoxVisibleStrategyTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -745,7 +745,7 @@
 				908363F614006C5000E5AAAF /* TheBoxTestRanking.m in Sources */,
 				90DAF497144913D300BACE91 /* TheBoxUIRecycleStrategyMethodTest.m in Sources */,
 				90C784001515E63C006D0381 /* TheBoxBundle.m in Sources */,
-				900378A115409DBD00579FF2 /* TheBoxUIScrollViewTest.m in Sources */,
+				900378A115409DBD00579FF2 /* TheBoxVisibleStrategyTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

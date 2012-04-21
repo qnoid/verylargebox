@@ -9,6 +9,33 @@
  */
 #import <UIKit/UIKit.h>
 
+typedef NSInteger(^MaximumVisibleIndexPrecondition)(NSInteger, NSInteger);
+
+CG_INLINE
+MaximumVisibleIndexPrecondition acceptMaximumVisibleIndex()
+{
+    MaximumVisibleIndexPrecondition precondition = ^(NSInteger currentMaximumVisibleIndex, NSInteger maximumVisibleIndex){
+        return maximumVisibleIndex;
+    };
+    
+    return precondition;
+}
+
+CG_INLINE
+MaximumVisibleIndexPrecondition ceilMaximumVisibleIndexAt(NSInteger ceil)
+{
+    MaximumVisibleIndexPrecondition precondition = ^(NSInteger currentMaximumVisibleIndex, NSInteger maximumVisibleIndex)
+    {
+        if(maximumVisibleIndex > ceil){
+            return currentMaximumVisibleIndex;
+        }
+        
+        return maximumVisibleIndex;
+    };
+    
+    return precondition;
+}
+
 @protocol VisibleStrategyDelegate<NSObject>
 
 /*
@@ -26,11 +53,32 @@
 - (NSUInteger)maximumVisible:(CGRect)bounds;
 
 -(BOOL)isVisible:(NSInteger) index;
-/*
- * Visible bounds
- * Callback to delegate isVisible for as many indexes 
+
+/**
+ Normalises the bounds to indexes based on the strategy's dimension.
+ 
+ For every visible index calculated given the bounds a call to VisibleStrategyDelegate#shouldBeVisible
+ will be made if the index is not already visible from a prior call.
+ 
+ @postcondion minimumVisibleIndex will be set 
+ @postcondion maximumVisibleIndex will be set 
+ @param bounds the visible bounds
+ @see newVisibleStrategyOn:
  */
--(void)willAppear:(CGRect)bounds;
+- (void)willAppear:(CGRect) bounds;
+
+/**
+ Applies a precondition to the maximum visible index. If the maximum visible index as calculated by 
+ the bounds given in willAppear: doesn't satisfy the precondition, the last maximum visible index is used.
+ 
+ @param conformToPrecondition the precondition that the maximum visible index should apply to
+ @see ceilMaximumVisibleIndexAt
+ */
+-(void)maximumVisibleIndexShould:(MaximumVisibleIndexPrecondition)conformToPrecondition;
+
+-(void)maximumVisibleIndexShould:(MaximumVisibleIndexPrecondition)conformToPrecondition;
+
+-(CGRect)visibleBounds:(CGRect)bounds withinContentSize:(CGSize)contentSize;
 
 
 @property(nonatomic, unsafe_unretained) id<VisibleStrategyDelegate> delegate;

@@ -84,7 +84,6 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 	aGridView.scrollViewDelegate = self;
 	aGridView.datasource = self;	
     aGridView.scrollsToTop = YES;
-	aGridView.clipsToBounds = YES;
 	
 	self.gridView = aGridView;
     
@@ -116,7 +115,7 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
     
     TheBoxUIScrollView* scrollView = (TheBoxUIScrollView*)[self.gridViewDelegate viewAtRow:row];
     NSUInteger index = [scrollView indexOf:tapPoint];
-    NSLog(@"[%u, %u]", row, index);
+    NSLog(@"[%u, %u], %@, %@", row, index, scrollView, NSStringFromCGRect(scrollView.bounds));
     
     NSUInteger numberOfViews = [self numberOfViews:scrollView atIndex:row];
     
@@ -146,12 +145,12 @@ TheBoxUIGridViewDelegate *gridViewDelegate;
 -(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource
 {
 	NSUInteger numberOfViews = [datasource numberOfViews:scrollView];
-	CGFloat height = [self whatRowHeight:scrollView];
+	CGFloat height = [self whatSize:scrollView];
 	
 return [scrollView.theBoxSize sizeOf:numberOfViews height:height];
 }
 
-- (CGFloat)whatRowHeight:(TheBoxUIScrollView *)gridView{
+- (CGFloat)whatSize:(TheBoxUIScrollView *)scrollView {
 return SECTION_FRAME_HEIGHT;
 }
 
@@ -164,7 +163,7 @@ return SECTION_FRAME_HEIGHT;
 	CGRect frame = [self frameOf:scrollView atRow:row atIndex:index];
 
     if (view == nil) {
-		view = [TheBoxUICell loadWith:self];
+		view = [TheBoxUICell loadWithOwner:self];
 	}
 	
     view.frame = frame; 
@@ -181,27 +180,23 @@ return view;
 	
 	UIView* view = [scrollView dequeueReusableView];
 	
-	NSUInteger noOfColumns = [self numberOfViews:scrollView atIndex:index];
-	
-	CGRect frame = [self.viewRect frame:index minimumWidth:noOfColumns * CELL_FRAME_WIDTH];
-	
+	CGRect frame = [self frameOf:scrollView atIndex:index];
+    
     if (view == nil) 
 	{		
 		TheBoxUIScrollView *viewOf = [TheBoxUIScrollView 
 										newHorizontalScrollView:frame 
 										viewsOf:CELL_FRAME_WIDTH];
 		
-		viewOf.clipsToBounds = YES;
 		viewOf.datasource = gridViewDelegate;
 		viewOf.scrollViewDelegate = gridViewDelegate;
-		 
-		
 		view = viewOf;
 	}
+    else{
+        [view setNeedsLayout];
+    }
 
     view.frame = frame; 
-    [view setNeedsLayout];
-
 	NSLog(@"view %@", view);
     
     [self.gridViewDelegate setView:view atIndex:index];
@@ -209,6 +204,14 @@ return view;
 return view;
 }
 
+-(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index
+{
+    NSUInteger noOfColumns = [self numberOfViews:scrollView atIndex:index];
+	
+	CGRect frame = [self.viewRect frame:index minimumWidth:noOfColumns * CELL_FRAME_WIDTH];
+    
+return frame;
+}
 
 -(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
 {

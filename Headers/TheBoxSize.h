@@ -47,6 +47,7 @@
  */
 -(NSUInteger)maximumVisible:(CGRect)visibleBounds;
 
+-(CGPoint)ceilOriginOf:(CGRect)bounds toContentSize:(CGSize)contentSize;
 @end
 
 @interface TheBoxHeight : NSObject <TheBoxDimension>

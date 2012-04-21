@@ -15,9 +15,12 @@
 #import "TheBoxUIScrollViewDatasource.h"
 
 @interface TheBoxUIScrollView ()
-@property(nonatomic) TheBoxUIRecycleStrategy *recycleStrategy;
-@property(nonatomic) id<VisibleStrategy> visibleStrategy;
-@property(nonatomic) UIView *contentView;
+@property(nonatomic, strong) TheBoxUIRecycleStrategy *recycleStrategy;
+@property(nonatomic, strong) id<VisibleStrategy> visibleStrategy;
+/* Apparently a UIScrollView needs another view as its content view else it messes up the scrollers.
+ * Interface Builder uses a private _contentView instead.
+ */
+@property(nonatomic, strong) UIView *contentView;
 @end
 
 
@@ -26,8 +29,7 @@
 +(TheBoxUIScrollView *) newVerticalScrollView:(CGRect)frame viewsOf:(CGFloat)height
 {
 	TheBoxVisibleStrategy *visibleStrategy = 
-		[TheBoxVisibleStrategy newVisibleStrategyOn:
-			[TheBoxSize newHeight:height]];
+        [TheBoxVisibleStrategy newVisibleStrategyOnHeight:height];
 	
 	TheBoxUIRecycleStrategy *recycleStrategy = 
 		[TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
@@ -45,8 +47,7 @@ return scrollView;
 +(TheBoxUIScrollView *) newHorizontalScrollView:(CGRect)frame viewsOf:(CGFloat)width
 {
 	TheBoxVisibleStrategy *visibleStrategy = 
-		[TheBoxVisibleStrategy newVisibleStrategyOn:
-			[TheBoxSize newWidth:width]];
+        [TheBoxVisibleStrategy newVisibleStrategyOnWidth:width];
 	
 	TheBoxUIRecycleStrategy *recycleStrategy = 
 		[TheBoxUIRecycleStrategy newPartiallyVisibleWithinX];
@@ -67,7 +68,8 @@ return scrollView;
 	scrollView.recycleStrategy = aRecycleStrategy;
 	scrollView.visibleStrategy = aVisibleStrategy;	
 	scrollView.visibleStrategy.delegate = scrollView;	
-	
+	scrollView.clipsToBounds = NO;
+
 return scrollView;
 }
 
@@ -80,29 +82,20 @@ return scrollView;
 
 #pragma mark private fields
 
-TheBoxUIRecycleStrategy *recycleStrategy;
-id<VisibleStrategy> visibleStrategy;
-
 /* Apparently a UIScrollView needs another view as its content view else it messes up the scrollers.
  * Interface Builder uses a private _contentView instead.
  *
  */
 UIView *contentView;
 
-
 - (id) initWithFrame:(CGRect) frame;
 {
 	self = [super initWithFrame:frame];
 	if (self) 
 	{
-		TheBoxSize *aBoxSize = [[TheBoxSize alloc] initWithSize:self.frame.size];				
-
-		UIView *aContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-		
-		self.theBoxSize = aBoxSize;
-		self.contentView = aContentView;
-		[super addSubview:self.contentView];
-		
+		self.theBoxSize = [[TheBoxSize alloc] initWithSize:self.frame.size];
+		self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+		[self addSubview:self.contentView];
 	}
 return self;
 }
@@ -127,15 +120,7 @@ return self;
  */
 -(void)displayViewsWithinBounds:(CGRect)bounds
 {
-	NSUInteger width = CGRectGetWidth(bounds);
-    NSUInteger contentSizeWidth = MIN(CGRectGetMinX(bounds) + width, self.contentSize.width) - width;
-    
-	NSUInteger height = CGRectGetHeight(bounds);    
-    NSUInteger contentSizeHeight = MIN(CGRectGetMinY(bounds) + height, self.contentSize.height) - height;
-        
-    CGRect visibleBounds = CGRectMake(contentSizeWidth, contentSizeHeight, bounds.size.width, bounds.size.height);
-    
-	[self.visibleStrategy willAppear:visibleBounds];	
+  [self.visibleStrategy willAppear:bounds];
 }
 
 /**
@@ -147,6 +132,7 @@ return self;
 -(void) layoutSubviews
 {
 	self.contentSize = [self.scrollViewDelegate contentSizeOf:self withData:datasource];
+	[self.visibleStrategy maximumVisibleIndexShould:ceilMaximumVisibleIndexAt([self.datasource numberOfViews:self])];
 	
     NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"frame %@", NSStringFromCGRect(self.frame));	
@@ -154,16 +140,10 @@ return self;
 	NSLog(@"layoutSubviews on bounds %@", NSStringFromCGRect([self bounds]));	
     
     CGRect bounds = [self bounds];
-    
+        
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];	
-    
-	/*
-	 * Avoid using bounds outside fo the content (e.g. when bouncing off a view)
-	 */
-	CGRect contentBounds = CGRectMake(self.contentOffset.x, self.contentOffset.y, bounds.size.width, bounds.size.height);    
-	NSLog(@"layoutSubviews on contentBounds %@", NSStringFromCGRect(contentBounds));
-	[self displayViewsWithinBounds:contentBounds];
+	[self displayViewsWithinBounds:bounds];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -171,15 +151,10 @@ return self;
 	CGRect bounds = [scrollView bounds];
 
 	NSLog(@"scrollViewDidScroll on bounds %@", NSStringFromCGRect(bounds));	
+
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];	
-    
-	/*
-	 * Avoid using bounds outside fo the content (e.g. when bouncing off a view)
-	 */
-	CGRect contentBounds = CGRectMake(self.contentOffset.x, self.contentOffset.y, bounds.size.width, bounds.size.height);    
-	NSLog(@"scrollViewDidScroll on contentBounds %@", NSStringFromCGRect(contentBounds));	
-	[self displayViewsWithinBounds:contentBounds];
+	[self displayViewsWithinBounds:bounds];
 }
 
 -(NSUInteger)indexOf:(CGPoint)point {
@@ -193,7 +168,8 @@ return self;
  * any visible sections since each one of them might have changed in content size
  * and or cells it displays.
  */
-- (void)setNeedsLayout {
+-(void) setNeedsLayout
+{    
     [super setNeedsLayout];
 	NSArray* subviews = [self.contentView subviews];
 	
@@ -231,6 +207,8 @@ return view;
 	 * Thus another scrollview is used as an mediator.
 	 */	
 	[self.contentView addSubview:view];
+    
+    NSLog(@"added as subview %@, with bounds %@", view, NSStringFromCGRect(view.bounds));
 return view;
 }
 

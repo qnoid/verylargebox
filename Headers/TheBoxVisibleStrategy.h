@@ -21,24 +21,17 @@
 {
 	@private
 		NSInteger minimumVisibleIndex;
-		NSInteger maximumVisibleIndex;	
+		NSInteger maximumVisibleIndex;
 }
 @property(nonatomic) id<TheBoxDimension> dimension;
 
++(TheBoxVisibleStrategy*)newVisibleStrategyOnWidth:(CGFloat) width;
++(TheBoxVisibleStrategy*)newVisibleStrategyOnHeight:(CGFloat) height;
 +(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension;
 +(TheBoxVisibleStrategy*)newVisibleStrategyFrom:(TheBoxVisibleStrategy*) visibleStrategy;
 
 - (NSUInteger)minimumVisible:(CGPoint)bounds;
 
 - (NSUInteger)maximumVisible:(CGRect)bounds;
-
-/*
- * 
- * For every visible index calculated given the bounds a call to VisibleStrategyDelegate#shouldBeVisible
- * will be made
- *
- * @param bounds the visible bounds which 
- */
-- (void)willAppear:(CGRect) bounds;
 
 @end

@@ -125,15 +125,8 @@ return [self.views objectAtIndex:index];
 	NSInteger zero = 0;
 	NSInteger one = 1;
 	
-	BOOL greaterThanMinimum = NSIntegerMax <= zero;
-	BOOL lessThanMaximum = zero <= NSIntegerMin;
-	
-	STAssertFalse(greaterThanMinimum, nil);
-	STAssertFalse(lessThanMaximum, nil);	
-	STAssertFalse(greaterThanMinimum || lessThanMaximum, nil);	
 	STAssertFalse([visibleStrategy isVisible:zero], nil);
 	STAssertFalse([visibleStrategy isVisible:one], nil);
 }
-				 
-				 
+				 				 
 @end

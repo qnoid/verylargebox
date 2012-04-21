@@ -16,12 +16,31 @@
  * @param dimension the dimension to use when calculating the index in respect to the visible bounds
  */
 -(id)init:(id<TheBoxDimension>) dimension;
+@property(nonatomic, copy) MaximumVisibleIndexPrecondition maximumVisibleIndexPrecondition;
 @end
 
 
 @implementation TheBoxVisibleStrategy
 {
     NSMutableSet *visibleViews;
+}
+
++(TheBoxVisibleStrategy*)newVisibleStrategyOnWidth:(CGFloat) width
+{
+	TheBoxVisibleStrategy *visibleStrategy = 
+    [TheBoxVisibleStrategy newVisibleStrategyOn:
+     [TheBoxSize newWidth:width]];
+	
+return visibleStrategy;	
+}
+
++(TheBoxVisibleStrategy*)newVisibleStrategyOnHeight:(CGFloat) height
+{
+	TheBoxVisibleStrategy *visibleStrategy = 
+    [TheBoxVisibleStrategy newVisibleStrategyOn:
+     [TheBoxSize newHeight:height]];
+	
+    return visibleStrategy;	
 }
 
 +(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension
@@ -43,7 +62,7 @@ return newVisibleStrategy;
 @synthesize visibleViews;
 @synthesize minimumVisibleIndex;
 @synthesize maximumVisibleIndex;
-
+@synthesize maximumVisibleIndexPrecondition;
 
 - (id)init:(id<TheBoxDimension>) onDimension
 {
@@ -57,11 +76,15 @@ return newVisibleStrategy;
 		self.visibleViews = theVisibleViews;
         
 		minimumVisibleIndex = MINIMUM_VISIBLE_INDEX;
-        maximumVisibleIndex = MAXIMUM_VISIBLE_INDEX;
-        
+        maximumVisibleIndex = MAXIMUM_VISIBLE_INDEX;        
+        self.maximumVisibleIndexPrecondition = acceptMaximumVisibleIndex();
 	}
 	
 return self;
+}
+
+-(void)maximumVisibleIndexShould:(MaximumVisibleIndexPrecondition)conformToPrecondition{
+    self.maximumVisibleIndexPrecondition = conformToPrecondition;
 }
 
 -(BOOL) isVisible:(NSInteger) index 
@@ -85,7 +108,9 @@ return isVisible;
 {
 	NSInteger theMinimumVisibleIndex = [self minimumVisible:bounds.origin];
 	NSInteger theMaximumVisibleIndex = [self maximumVisible:bounds];
-		
+	
+	theMaximumVisibleIndex = self.maximumVisibleIndexPrecondition(self.maximumVisibleIndex, theMaximumVisibleIndex);
+    
 	NSLog(@"%d >= willAppear < %d of dimension %@ on bounds %@", theMinimumVisibleIndex, theMaximumVisibleIndex, self.dimension, NSStringFromCGRect(bounds));
 	
 	for (int index = theMinimumVisibleIndex; index < theMaximumVisibleIndex; index++) 
@@ -98,10 +123,16 @@ return isVisible;
 		}
 	}
 	
-	self.minimumVisibleIndex = theMinimumVisibleIndex;
+    self.minimumVisibleIndex = theMinimumVisibleIndex;
 	self.maximumVisibleIndex = theMaximumVisibleIndex - 1;
 	
 	NSLog(@"minimum visible: %d, maximum visible: %d", self.minimumVisibleIndex, self.maximumVisibleIndex);
+}
+
+- (CGRect)visibleBounds:(CGRect)bounds withinContentSize:(CGSize)contentSize
+{
+    CGPoint origin = [self.dimension ceilOriginOf:bounds toContentSize:contentSize];
+return CGRectMake(origin.x, origin.y, bounds.size.width, bounds.size.height);
 }
 
 @end

@@ -22,7 +22,7 @@
 
 @implementation TheBoxQueries
 
-NSString* const THE_BOX_BASE_URL_STRING = @"http://192.168.1.65:3000";//@"http://www.verylargebox.com"; //
+NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com"; //@"http://192.168.1.65:3000";//
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
