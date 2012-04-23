@@ -33,6 +33,10 @@
  */
 -(void)notifyDidUpdateToLocation:(id<TheBoxLocationServiceDelegate>) delegate;
 
+-(void)dontNotifyOnUpdateToLocation:(id<TheBoxLocationServiceDelegate>) delegate;
+
+-(void)dontNotifyOnFindPlacemark:(id<TheBoxLocationServiceDelegate>) delegate;
+
 /*
  * will call didFindPlacemark:
  * with name "didFindPlacemark"

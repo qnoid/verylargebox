@@ -54,10 +54,22 @@ return self;
 	[center addObserver:delegate selector:@selector(didUpdateToLocation:) name:@"didUpdateToLocation" object:self];
 }
 
+-(void)dontNotifyOnUpdateToLocation:(id<TheBoxLocationServiceDelegate>) delegate;
+{
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:delegate name:@"didUpdateToLocation" object:self];
+}
+
 -(void)notifyDidFindPlacemark:(id<TheBoxLocationServiceDelegate>) delegate;
 {
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:delegate selector:@selector(didFindPlacemark:) name:@"didFindPlacemark" object:self];
+}
+
+-(void)dontNotifyOnFindPlacemark:(id<TheBoxLocationServiceDelegate>) delegate;
+{
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:delegate name:@"didFindPlacemark" object:self];
 }
 
 -(void)notifyDidFailWithError:(id<TheBoxLocationServiceDelegate>) delegate

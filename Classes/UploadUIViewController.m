@@ -49,6 +49,7 @@
 - (void) dealloc
 {
     [TheBoxNotifications removeObserverForUIKeyboardNotifications:self.keyboardObserver];
+    [theBoxLocationService dontNotifyOnUpdateToLocation:self];
 }
 
 +(UploadUIViewController*)newUploadUIViewController
