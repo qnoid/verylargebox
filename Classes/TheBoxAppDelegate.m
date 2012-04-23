@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import "TheBoxAppDelegate.h"
-#import "Item.h"
 
 @implementation TheBoxAppDelegate
 

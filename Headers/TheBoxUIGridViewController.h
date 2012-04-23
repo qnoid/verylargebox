@@ -8,36 +8,22 @@
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
-#import "TheBoxUIScrollView.h"
-#import "TheBoxUIScrollViewDatasource.h"
-#import "TheBoxUIGridViewDelegate.h"
+#import "TheBoxUIGridView.h"
 #import "TheBoxUIGridViewDatasource.h"
+#import "TheBoxUIGridViewDelegate.h"
 @protocol VisibleStrategy;
 
 
-@interface TheBoxUIGridViewController : UIViewController <TheBoxUIScrollViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TheBoxUIScrollViewDatasource>
+@interface TheBoxUIGridViewController : UIViewController <TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate>
 
-@property(nonatomic, unsafe_unretained) TheBoxUIScrollView* gridView;
-
--(void)reloadData;
+@property(nonatomic, assign) CGFloat rowHeight;
+@property(nonatomic, assign) CGFloat cellWidth;
 
 /*
  * Default 0
  */
--(NSUInteger)numberOfViews:(TheBoxUIScrollView *)scrollView;
--(UIView*)viewOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index;
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)gridView;
 
--(NSUInteger)numberOfViews:(TheBoxUIScrollView*)scrollView atIndex:(NSInteger)index;
--(UIView*)viewOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
-
--(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
-
--(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index;
-/*
- *
- */
--(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
-
--(void)didSelect:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView*)scrollView atIndex:(NSInteger)index;
 
 @end

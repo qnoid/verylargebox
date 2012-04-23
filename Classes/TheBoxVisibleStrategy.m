@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import "TheBoxVisibleStrategy.h"
-#import "TheBoxSize.h"
 
 @interface TheBoxVisibleStrategy ()
 
@@ -29,7 +28,7 @@
 {
 	TheBoxVisibleStrategy *visibleStrategy = 
     [TheBoxVisibleStrategy newVisibleStrategyOn:
-     [TheBoxSize newWidth:width]];
+     [TheBoxWidth newWidth:width]];
 	
 return visibleStrategy;	
 }
@@ -38,7 +37,7 @@ return visibleStrategy;
 {
 	TheBoxVisibleStrategy *visibleStrategy = 
     [TheBoxVisibleStrategy newVisibleStrategyOn:
-     [TheBoxSize newHeight:height]];
+     [TheBoxHeight newHeight:height]];
 	
     return visibleStrategy;	
 }

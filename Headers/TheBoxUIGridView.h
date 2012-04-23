@@ -12,11 +12,12 @@
 #import "TheBoxUIScrollViewDatasource.h"
 #import "TheBoxUIGridViewDatasource.h"
 
-@interface TheBoxUIGridViewDelegate : NSObject <TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate>
+@protocol TheBoxUIGridViewDelegate;
+@class TheBoxUIGridViewController;
 
-@property(nonatomic) id<TheBoxUIGridViewDatasource> datasource;
+@interface TheBoxUIGridView : UIView <TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate>
 
--(UIView*)viewAtRow:(NSUInteger)row;
--(void)setView:(UIView*)view atIndex:(NSUInteger)index;
+@property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDatasource> datasource;
+@property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDelegate> delegate;
 
 @end

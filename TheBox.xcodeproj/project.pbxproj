@@ -54,9 +54,10 @@
 		9083640C1400752500E5AAAF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		9083640D1400752A00E5AAAF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 908363A61400659200E5AAAF /* libz.dylib */; };
 		9096CC09133BB81E00639685 /* TheBoxQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* TheBoxQueries.m */; settings = {COMPILER_FLAGS = ""; }; };
+		909F9F3515442A5600D1E7AE /* TheBoxUIGridViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 909F9F3415442A5600D1E7AE /* TheBoxUIGridViewTest.m */; };
 		90A1E3BE133C985800CC9212 /* TheBoxDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E3BC133C985800CC9212 /* TheBoxDelegateHandler.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90A1E51E133CC10000CC9212 /* TheBoxCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E51D133CC10000CC9212 /* TheBoxCache.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90A5FCD11387CC1F004E65B3 /* TheBoxUIGridViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridViewDelegate.m */; settings = {COMPILER_FLAGS = ""; }; };
+		90A5FCD11387CC1F004E65B3 /* TheBoxUIGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90A6C4541300822C00AEEE9F /* TheBoxUIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A6C4521300822C00AEEE9F /* TheBoxUIScrollView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90B56BE51534D3E10064CB4E /* DetailsUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* DetailsUIViewController.m */; };
 		90BBA77612BD0418001B97D9 /* UIView+TheBoxUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BBA77212BD036E001B97D9 /* UIView+TheBoxUIView.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -166,6 +167,7 @@
 		9096CC0D133BB85300639685 /* TheBoxQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxQueries.h; sourceTree = "<group>"; };
 		9096CC0E133BB85400639685 /* TheBoxUIScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIScrollView.h; sourceTree = "<group>"; };
 		9096CC0F133BB85400639685 /* UIView+TheBoxUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TheBoxUIView.h"; sourceTree = "<group>"; };
+		909F9F3415442A5600D1E7AE /* TheBoxUIGridViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIGridViewTest.m; sourceTree = "<group>"; };
 		90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Developer/Library/Frameworks/SenTestingKit.framework; sourceTree = SDKROOT; };
 		90A1E376133C946500CC9212 /* TheBoxDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxDelegate.h; sourceTree = "<group>"; };
 		90A1E3BB133C985800CC9212 /* TheBoxDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxDelegateHandler.h; sourceTree = "<group>"; };
@@ -178,8 +180,8 @@
 		90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICellVisibleStrategyTest.m; sourceTree = "<group>"; };
 		90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategyTest.m; sourceTree = "<group>"; };
 		90A1E594133CC6BC00CC9212 /* TheBoxTestQueries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxTestQueries.m; sourceTree = "<group>"; };
-		90A5FCCE1387CC1F004E65B3 /* TheBoxUIGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheBoxUIGridViewDelegate.h; path = ../Classes/TheBoxUIGridViewDelegate.h; sourceTree = "<group>"; };
-		90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIGridViewDelegate.m; sourceTree = "<group>"; };
+		90A5FCCE1387CC1F004E65B3 /* TheBoxUIGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIGridView.h; sourceTree = "<group>"; };
+		90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIGridView.m; sourceTree = "<group>"; };
 		90A6C4521300822C00AEEE9F /* TheBoxUIScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIScrollView.m; sourceTree = "<group>"; };
 		90B56BE31534D3E10064CB4E /* DetailsUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsUIViewController.h; path = Headers/DetailsUIViewController.h; sourceTree = "<group>"; };
 		90B56BE41534D3E10064CB4E /* DetailsUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsUIViewController.m; path = Classes/DetailsUIViewController.m; sourceTree = "<group>"; };
@@ -307,7 +309,7 @@
 				90A1E51D133CC10000CC9212 /* TheBoxCache.m */,
 				90226B90135999D1006E43EC /* TheBoxBinarySearch.m */,
 				90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */,
-				90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridViewDelegate.m */,
+				90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridView.m */,
 				90C2A47A1526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.m */,
 				9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */,
 			);
@@ -477,6 +479,7 @@
 				90417326134B0F1500F18F95 /* TheBoxRectTest.m */,
 				90226BF81359A983006E43EC /* TheBoxBinarySearchTest.m */,
 				900378A015409DBD00579FF2 /* TheBoxVisibleStrategyTest.m */,
+				909F9F3415442A5600D1E7AE /* TheBoxUIGridViewTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -486,7 +489,7 @@
 			children = (
 				902C78F0153CB631003A17CB /* CategoriesViewController.h */,
 				9094243E142E44380084C40C /* TheBoxUIGridViewDelegate.h */,
-				90A5FCCE1387CC1F004E65B3 /* TheBoxUIGridViewDelegate.h */,
+				90A5FCCE1387CC1F004E65B3 /* TheBoxUIGridView.h */,
 				90226C6B1359B1DB006E43EC /* TheBoxPredicates.h */,
 				90226B8F135999D1006E43EC /* TheBoxBinarySearch.h */,
 				90A1E51C133CC10000CC9212 /* TheBoxCache.h */,
@@ -721,7 +724,7 @@
 				90A1E51E133CC10000CC9212 /* TheBoxCache.m in Sources */,
 				90226B91135999D1006E43EC /* TheBoxBinarySearch.m in Sources */,
 				90226C6E1359B1DB006E43EC /* TheBoxPredicates.m in Sources */,
-				90A5FCD11387CC1F004E65B3 /* TheBoxUIGridViewDelegate.m in Sources */,
+				90A5FCD11387CC1F004E65B3 /* TheBoxUIGridView.m in Sources */,
 				90C2A47B1526679C00AC16B6 /* TheBoxDefaultKeyboardObserver.m in Sources */,
 				90B56BE51534D3E10064CB4E /* DetailsUIViewController.m in Sources */,
 				902C78F3153CB631003A17CB /* CategoriesViewController.m in Sources */,
@@ -746,6 +749,7 @@
 				90DAF497144913D300BACE91 /* TheBoxUIRecycleStrategyMethodTest.m in Sources */,
 				90C784001515E63C006D0381 /* TheBoxBundle.m in Sources */,
 				900378A115409DBD00579FF2 /* TheBoxVisibleStrategyTest.m in Sources */,
+				909F9F3515442A5600D1E7AE /* TheBoxUIGridViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

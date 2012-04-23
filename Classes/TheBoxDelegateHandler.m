@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import "TheBoxDelegateHandler.h"
-#import "TheBoxDelegate.h"
 
 /*
  * In both TheBoxPost#make and TheBoxGet#make implementations you need to keep a 

@@ -8,230 +8,58 @@
  *  Contributor(s): .-
  */
 #import "TheBoxUIGridViewController.h"
-#import "TheBoxUIScrollView.h"
 #import "TheBoxUICell.h"
 #import "TheBoxRect.h"
 #import "TheBoxVisibleStrategy.h"
-#import "TheBoxUIRecycleStrategy.h"
-#import "TheBoxUIGridViewDelegate.h"
-#import "TheBoxUICell.h"
-
-#import <QuartzCore/QuartzCore.h>
+#import "TheBoxUIGridView.h"
 
 @interface TheBoxUIGridViewController ()
-@property(nonatomic) TheBoxRect *viewRect;
-@property(nonatomic) TheBoxRect *cellRect;
-@property(nonatomic) TheBoxUIGridViewDelegate *gridViewDelegate;
+
+@property(nonatomic) id<TheBoxUIGridViewDatasource> datasource;
 @end
 
-static const int GRID_FRAME_X = 0;
-static const int GRID_FRAME_Y = 0;
-static const int GRID_FRAME_WIDTH = 320;
-static const int GRID_FRAME_HEIGHT = 392 + 44;
-
-static const int SECTION_FRAME_X = 0;
-static const int SECTION_FRAME_Y = 0;
-static const int SECTION_FRAME_WIDTH = 320;
-static const int SECTION_FRAME_HEIGHT = 196;
-
-static const int CELL_FRAME_X = 0;
-static const int CELL_FRAME_Y = 0;
-static const int CELL_FRAME_WIDTH = 160;
-static const int CELL_FRAME_HEIGHT = 196;
-
+static const CGFloat DEFAULT_ROW_HEIGHT = 196.0;
+static const CGFloat DEFAULT_CELL_WIDTH = 160.0;
 
 @implementation TheBoxUIGridViewController
 
-#pragma mark private fields
-TheBoxRect *viewRect;
-TheBoxRect *cellRect;
-TheBoxUIGridViewDelegate *gridViewDelegate;
+@synthesize datasource;
+@synthesize rowHeight;
+@synthesize cellWidth;
 
-@synthesize gridView;
-@synthesize viewRect;
-@synthesize cellRect;
-@synthesize gridViewDelegate;
-
-
-/*
- * Creates the grid view
- * Add the grid view as a subview
- */
--(void) viewDidLoad
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    TheBoxRect* rowRect = [[TheBoxRect alloc] initWithFrame:
-     CGRectMake(SECTION_FRAME_X, SECTION_FRAME_Y, SECTION_FRAME_WIDTH, SECTION_FRAME_HEIGHT)];
-    
-	self.viewRect = rowRect;
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	
-    
-    TheBoxRect* columnRect = [[TheBoxRect alloc] initWithFrame:
-                              CGRectMake(CELL_FRAME_X, CELL_FRAME_Y, CELL_FRAME_WIDTH, CELL_FRAME_HEIGHT)];
-    
-	self.cellRect = columnRect;	
-	
-    TheBoxUIGridViewDelegate* theGridViewDelegate = 
-        [[TheBoxUIGridViewDelegate alloc] init];
-    
-	self.gridViewDelegate = theGridViewDelegate;
-	self.gridViewDelegate.datasource = self;
-		
-	TheBoxUIScrollView *aGridView = 
-		[TheBoxUIScrollView 
-			newVerticalScrollView:CGRectMake(GRID_FRAME_X, GRID_FRAME_Y, GRID_FRAME_WIDTH, GRID_FRAME_HEIGHT)
-			viewsOf:SECTION_FRAME_HEIGHT];
-
-	aGridView.scrollViewDelegate = self;
-	aGridView.datasource = self;	
-    aGridView.scrollsToTop = YES;
-	
-	self.gridView = aGridView;
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped:)];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
-
-	[self.view addSubview:self.gridView];			
-	
+	if (self) 
+	{
+        self.rowHeight = DEFAULT_ROW_HEIGHT;
+        self.cellWidth = DEFAULT_CELL_WIDTH;
+	}
+    return self;
 }
 
--(void)viewWasTapped:(id)sender
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer*)sender;
-    CGPoint tapPoint = [tapGestureRecognizer locationInView:self.gridView];
-    NSLog(@"%@", NSStringFromCGPoint(tapPoint));
-    NSLog(@"%@", NSStringFromCGSize(self.gridView.contentSize));
-
-    UIView* touchedView = [self.gridView hitTest:tapPoint withEvent:nil];
-    NSLog(@"%@", touchedView);
-    NSUInteger row = [self.gridView indexOf:tapPoint];
-    NSLog(@"%u", row);
-
-    NSUInteger numberOfRows = [self numberOfViews:self.gridView];
-    
-    if(row >= numberOfRows){
-        return;
-    }
-    
-    TheBoxUIScrollView* scrollView = (TheBoxUIScrollView*)[self.gridViewDelegate viewAtRow:row];
-    NSUInteger index = [scrollView indexOf:tapPoint];
-    NSLog(@"[%u, %u], %@, %@", row, index, scrollView, NSStringFromCGRect(scrollView.bounds));
-    
-    NSUInteger numberOfViews = [self numberOfViews:scrollView atIndex:row];
-    
-    /**User can tap outside of the view (e.g. when items are less than visible view
-    
-     |visible scrollview|
-     |--------|---------|
-     |  item  |dead view|
-     |--------|---------|
-         0          1
-     
-     numberOfViews = 1
-     valid indexes = 0
-     */
-    if(index >= numberOfViews){
-        return;
-    }
-    
-    [self didSelect:self.gridView atRow:row atIndex:index];
-}
-
--(void)reloadData
-{
-	[self.gridView setNeedsLayout];
-}
-
--(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource
-{
-	NSUInteger numberOfViews = [datasource numberOfViews:scrollView];
-	CGFloat height = [self whatSize:scrollView];
-	
-return [scrollView.theBoxSize sizeOf:numberOfViews height:height];
-}
-
-- (CGFloat)whatSize:(TheBoxUIScrollView *)scrollView {
-return SECTION_FRAME_HEIGHT;
-}
-
--(UIView *)viewOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
+- (UIView *)viewInGridView:(TheBoxUIGridView *)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index 
 {
 	NSLog(@"asking for column %d at row %d", index, row);
 	
 	UIView* view = [scrollView dequeueReusableView];
 	
-	CGRect frame = [self frameOf:scrollView atRow:row atIndex:index];
+	CGRect frame = CGRectMake(
+                              index * [self whatCellWidth:gridView], 
+                              scrollView.bounds.origin.y, 
+                              [self whatCellWidth:gridView], 
+                              scrollView.frame.size.height);
 
     if (view == nil) {
 		view = [TheBoxUICell loadWithOwner:self];
 	}
 	
     view.frame = frame; 
-    [view setNeedsLayout];
     
 	NSLog(@"view %@", view);
 
 return view;
-}
-
--(UIView*)viewOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index
-{
-	NSLog(@"asking for row %d", index);
-	
-	UIView* view = [scrollView dequeueReusableView];
-	
-	CGRect frame = [self frameOf:scrollView atIndex:index];
-    
-    if (view == nil) 
-	{		
-		TheBoxUIScrollView *viewOf = [TheBoxUIScrollView 
-										newHorizontalScrollView:frame 
-										viewsOf:CELL_FRAME_WIDTH];
-		
-		viewOf.datasource = gridViewDelegate;
-		viewOf.scrollViewDelegate = gridViewDelegate;
-		view = viewOf;
-	}
-    else{
-        [view setNeedsLayout];
-    }
-
-    view.frame = frame; 
-	NSLog(@"view %@", view);
-    
-    [self.gridViewDelegate setView:view atIndex:index];
-	
-return view;
-}
-
--(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index
-{
-    NSUInteger noOfColumns = [self numberOfViews:scrollView atIndex:index];
-	
-	CGRect frame = [self.viewRect frame:index minimumWidth:noOfColumns * CELL_FRAME_WIDTH];
-    
-return frame;
-}
-
--(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
-{
-    CGRect frame = [self.cellRect frame:index minimumHeight:CELL_FRAME_HEIGHT];
-    return frame;    
-//    CGSize margins = [self marginOf:scrollView atRow:row atIndex:index];
-//    
-//return CGRectMake(
-//                  frame.origin.x + (margins.width * index), 
-//                  frame.origin.y + (margins.height * index), 
-//                  frame.size.width, 
-//                  frame.size.height);
-}
-
--(NSUInteger)numberOfViews:(TheBoxUIScrollView *)gridView{
-return 0;
-}
-
--(NSUInteger)numberOfViews:(TheBoxUIScrollView*)scrollView atIndex:(NSInteger)index{
-return 0;
 }
 
 -(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index {
@@ -240,6 +68,22 @@ return CGSizeMake(0.0, 0.0);
 
 -(void)didSelect:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index{
     
+}
+
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView*)gridView{
+    return 0;
+}
+
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)scrollView atIndex:(NSInteger)index{
+    return 0;
+}
+
+-(CGFloat)whatRowHeight:(TheBoxUIGridView *)gridView{
+    return self.rowHeight;
+}
+
+-(CGFloat)whatCellWidth:(TheBoxUIGridView *)gridView{
+    return self.cellWidth;
 }
 
 @end

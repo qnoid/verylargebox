@@ -11,7 +11,6 @@
 #import "UITextField+TheBoxUITextField.h"
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
-#import "AFJSONRequestOperation.h"
 #import "TBItemsOperationDelegate.h"
 #import "JSONKit.h"
 #import "TBLocationOperationDelegate.h"

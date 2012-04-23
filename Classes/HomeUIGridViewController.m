@@ -11,17 +11,11 @@
 #import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
 #import "TheBoxUICell.h"
-#import "TheBoxMath.h"	
-#import "Item.h"
 #import "TheBoxQueries.h"
 #import "UploadUIViewController.h"
-#import "NSArray+Decorator.h"
 #import "TheBoxBinarySearch.h"
 #import "TheBoxPredicates.h"
 #import "AFHTTPRequestOperation.h"
-#import "TBItemsOperationDelegate.h"
-#import "TheBoxLocationService.h"
-#import "TBCreateItemOperationDelegate.h"
 #import "DetailsUIViewController.h"
 
 @interface HomeUIGridViewController ()
@@ -51,6 +45,8 @@
 return homeGridViewController;
 }
 
+@synthesize header;
+@synthesize gridView = _gridView;
 @synthesize items;
 @synthesize theBoxLocationService;
 @synthesize imageCache;
@@ -64,6 +60,7 @@ return homeGridViewController;
         self.items = [NSMutableArray array];
         self.imageCache = [[NSCache alloc] init];
         self.theBoxLocationService = locationService;
+        self.title = @"TheBox";
     }
     
 return self;
@@ -128,7 +125,7 @@ return self;
 -(void)didSucceedWithItems:(NSMutableArray*) _items
 {
 	self.items = _items;
-	[super reloadData];
+	[self.gridView setNeedsLayout];
 }
 
 -(void)didFailOnItemsWithError:(NSError*)error
@@ -190,7 +187,7 @@ return self;
     
 	[category setObject:categoryItems forKey:@"items"];
 	
-	[super reloadData];
+	[self.gridView setNeedsLayout];
 }
 
 #pragma mark location based
@@ -199,7 +196,7 @@ return self;
 	MKPlacemark *place = [TheBoxNotifications place:notification];
 	NSString *city = place.locality;
 	
-	self.title = [NSString stringWithFormat:@"It's right here in %@", city];		
+	self.header.text = [NSString stringWithFormat:self.header.text, city];		
 }
 
 -(void)didFailWithError:(NSNotification *)notification
@@ -208,13 +205,13 @@ return self;
 	
 	NSLog(@"%@", error);
 	
-	self.title = [NSString stringWithFormat:@"Unable to lookup location"];		
+	self.header.text = [NSString stringWithFormat:@"Unable to lookup location"];		
 }
 
 #pragma mark datasource
--(UIView *)viewOf:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
-{		
-	TheBoxUICell *theBoxCell = (TheBoxUICell*)[super viewOf:scrollView atRow:row atIndex:index];
+- (UIView *)viewInGridView:(TheBoxUIGridView *)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index 
+{
+	TheBoxUICell *theBoxCell = (TheBoxUICell*) [super viewInGridView:gridView inScrollView:scrollView atRow:row atIndex:index];
 	
 	NSArray *categoryItems = [[[self.items objectAtIndex:row] objectForKey:@"category"] objectForKey:@"items"];
 		
@@ -256,16 +253,12 @@ return self;
 return theBoxCell;
 }
 
--(NSUInteger)numberOfViews:(TheBoxUIScrollView *)gridView{
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)gridView{
 return [self.items count];
 }
 
--(NSUInteger)numberOfViews:(TheBoxUIScrollView*)scrollView atIndex:(NSInteger)index
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)scrollView atIndex:(NSInteger)index
 {
-	if ([self.items count] == 0) {
-		return 0;
-	}
-		
 	NSArray *itemsForCategory = [[[self.items objectAtIndex:index] objectForKey:@"category"] objectForKey:@"items"];
 	
 return [itemsForCategory count];

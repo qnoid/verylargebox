@@ -19,25 +19,39 @@
 
 @protocol TheBoxUIScrollViewDelegate 
 
--(CGSize)contentSizeOf:(TheBoxUIScrollView *)scrollView withData:(id<TheBoxUIScrollViewDatasource>)datasource;
-
 @optional
-- (CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
+-(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
 @end
 
-/*
- * An implementation of UIScrollView which recycles views and calculates visible ones.
- * Is it's own delegate
+/**
+ An implementation of UIScrollView which recycles views and calculates visible ones.
+ 
+ A datasource must be set which must return the number of views in the scrollview (TheBoxUIScrollViewDatasource#numberOfViews:) 
+ and will be queried for the view to show (TheBoxUIScrollViewDatasource#viewOf:atIndex:)
+ 
+ The datasource will be asked for a view as it becomes visible.
+ 
+ @see #newVerticalScrollView:viewsOf:
+ @see #newHorizontalScrollView:viewsOf:
  */
 @interface TheBoxUIScrollView : UIScrollView <UIScrollViewDelegate, VisibleStrategyDelegate>
 
+/**
+ Creates a new scroll view which scrolls on the vertical axis
+ 
+ @parameter frame
+ */
 +(TheBoxUIScrollView *) newVerticalScrollView:(CGRect)frame viewsOf:(CGFloat)height;
+
+/**
+ Creates a new scroll view which scrolls on the horizontal axis
+ 
+ @parameter frame
+ */
 +(TheBoxUIScrollView *) newHorizontalScrollView:(CGRect)frame viewsOf:(CGFloat)width;
-+(TheBoxUIScrollView *) newScrollView:(CGRect)frame recycleStrategy:(TheBoxUIRecycleStrategy *)recycleStrategy visibleStrategy:(id<VisibleStrategy>) visibleStrategy;
 
 @property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDatasource> datasource;
 @property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDelegate> scrollViewDelegate;
-@property(nonatomic, strong) TheBoxSize *theBoxSize;
 
 -(NSUInteger)indexOf:(CGPoint)point;
 -(UIView*)dequeueReusableView;

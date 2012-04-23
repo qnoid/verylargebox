@@ -22,7 +22,7 @@
 @synthesize locationButton;
 @synthesize itemImageView;
 @synthesize theBoxLocationService;
-@synthesize location;
+@synthesize location = _location;
 @synthesize item = _item;
 
 +(DetailsUIViewController*)newDetailsViewController:(NSDictionary*)item
@@ -64,7 +64,14 @@ return detailsViewController;
             });
     });
     
-    [self.locationButton setTitle:[[_item objectForKey:@"location"] objectForKey:@"name"]  forState:UIControlStateNormal];
+    NSDictionary* location = [_item objectForKey:@"location"];
+    id name = [location objectForKey:@"name"];
+    
+    if(name == [NSNull null]){
+        name = [NSString stringWithFormat:@"%@,%@", [location objectForKey:@"latitude"], [location objectForKey:@"longitude"]];
+    }
+    
+    [self.locationButton setTitle:name forState:UIControlStateNormal];
     [self.locationButton setTitle:[[_item objectForKey:@"location"] objectForKey:@"name"]  forState:UIControlStateSelected];
 }
 
@@ -88,7 +95,7 @@ return detailsViewController;
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",location.coordinate.latitude,location.coordinate.longitude,[[_item objectForKey:@"location"] objectForKey:@"latitude"],[[_item objectForKey:@"location"] objectForKey:@"longitude"]];
+    NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[[_item objectForKey:@"location"] objectForKey:@"latitude"],[[_item objectForKey:@"location"] objectForKey:@"longitude"]];
     
     NSLog(@"%@", urlstring);
 

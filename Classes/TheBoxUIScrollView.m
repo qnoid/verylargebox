@@ -9,22 +9,35 @@
  */
 #import "TheBoxUIScrollView.h"
 #import "TheBoxUIRecycleStrategy.h"
-#import "VisibleStrategy.h"
 #import "TheBoxVisibleStrategy.h"
 #import "TheBoxSize.h"
-#import "TheBoxUIScrollViewDatasource.h"
 
 @interface TheBoxUIScrollView ()
+-(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size;
+
 @property(nonatomic, strong) TheBoxUIRecycleStrategy *recycleStrategy;
 @property(nonatomic, strong) id<VisibleStrategy> visibleStrategy;
 /* Apparently a UIScrollView needs another view as its content view else it messes up the scrollers.
  * Interface Builder uses a private _contentView instead.
  */
 @property(nonatomic, strong) UIView *contentView;
+
+@property(nonatomic, strong) NSObject<TheBoxSize> *theBoxSize;
 @end
 
 
 @implementation TheBoxUIScrollView
+
++(TheBoxUIScrollView *) newScrollView:(CGRect)aFrame recycleStrategy:(TheBoxUIRecycleStrategy *)aRecycleStrategy visibleStrategy:(id<VisibleStrategy>) aVisibleStrategy size:(NSObject<TheBoxSize>*)size
+{
+	TheBoxUIScrollView *scrollView = [[TheBoxUIScrollView alloc] initWithFrame:aFrame size:size];
+	scrollView.recycleStrategy = aRecycleStrategy;
+	scrollView.visibleStrategy = aVisibleStrategy;	
+	scrollView.visibleStrategy.delegate = scrollView;	
+	scrollView.clipsToBounds = NO;
+    
+return scrollView;
+}
 
 +(TheBoxUIScrollView *) newVerticalScrollView:(CGRect)frame viewsOf:(CGFloat)height
 {
@@ -38,8 +51,8 @@
 		[TheBoxUIScrollView 
 			newScrollView:frame
 			recycleStrategy:recycleStrategy 
-			visibleStrategy:visibleStrategy];
-	
+			visibleStrategy:visibleStrategy
+            size:[[TheBoxSizeInHeight alloc] initWithSize:frame.size]];	
 
 return scrollView;
 }
@@ -56,20 +69,9 @@ return scrollView;
 		[TheBoxUIScrollView 
 		 newScrollView:frame
 		 recycleStrategy:recycleStrategy 
-		 visibleStrategy:visibleStrategy];
+		 visibleStrategy:visibleStrategy
+         size:[[TheBoxSizeInWidth alloc] initWithSize:frame.size]];         
 	
-	
-return scrollView;
-}
-
-+(TheBoxUIScrollView *) newScrollView:(CGRect)aFrame recycleStrategy:(TheBoxUIRecycleStrategy *)aRecycleStrategy visibleStrategy:(id<VisibleStrategy>) aVisibleStrategy;
-{
-	TheBoxUIScrollView *scrollView = [[TheBoxUIScrollView alloc] initWithFrame:aFrame];
-	scrollView.recycleStrategy = aRecycleStrategy;
-	scrollView.visibleStrategy = aVisibleStrategy;	
-	scrollView.visibleStrategy.delegate = scrollView;	
-	scrollView.clipsToBounds = NO;
-
 return scrollView;
 }
 
@@ -88,12 +90,12 @@ return scrollView;
  */
 UIView *contentView;
 
-- (id) initWithFrame:(CGRect) frame;
+- (id) initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size
 {
 	self = [super initWithFrame:frame];
 	if (self) 
 	{
-		self.theBoxSize = [[TheBoxSize alloc] initWithSize:self.frame.size];
+		self.theBoxSize = size;
 		self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 		[self addSubview:self.contentView];
 	}
@@ -131,13 +133,20 @@ return self;
  */
 -(void) layoutSubviews
 {
-	self.contentSize = [self.scrollViewDelegate contentSizeOf:self withData:datasource];
-	[self.visibleStrategy maximumVisibleIndexShould:ceilMaximumVisibleIndexAt([self.datasource numberOfViews:self])];
+    NSUInteger numberOfViews = [self.datasource numberOfViewsInScrollView:self];
+	CGFloat size = [self.scrollViewDelegate whatSize:self];	
+    self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:size];
+    
+	[self.visibleStrategy maximumVisibleIndexShould:ceilMaximumVisibleIndexAt(numberOfViews)];
 	
     NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"frame %@", NSStringFromCGRect(self.frame));	
 	NSLog(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
 	NSLog(@"layoutSubviews on bounds %@", NSStringFromCGRect([self bounds]));	
+    
+    if(numberOfViews == 0){
+        return;
+    }
     
     CGRect bounds = [self bounds];
         
@@ -171,35 +180,33 @@ return self;
 -(void) setNeedsLayout
 {    
     [super setNeedsLayout];
-	NSArray* subviews = [self.contentView subviews];
-	
-	for (UIView* view in subviews) {
-		[view removeFromSuperview];
-	}
+    NSArray* subviews = [self.contentView subviews];
+    
+    [subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 	
 	TheBoxVisibleStrategy *aVisibleStrategy = 
-		[TheBoxVisibleStrategy newVisibleStrategyFrom:self.visibleStrategy];
+    [TheBoxVisibleStrategy newVisibleStrategyFrom:self.visibleStrategy];
 	
 	aVisibleStrategy.delegate = self;
 	
 	self.visibleStrategy = aVisibleStrategy;
-	
-	[self flashScrollIndicators];	
+    [self flashScrollIndicators];
 }
 
+
 /*
- * Need to remove dequeued view from superview since it's not used anymore
+ * No need to remove dequeued view from superview since it's removed when recycled
  */
 -(UIView*)dequeueReusableView 
 {
-	UIView* view = [self.recycleStrategy dequeueReusableView];	
-	[view removeFromSuperview];
-return view;
+    UIView* recycled = [self.recycleStrategy dequeueReusableView];
+    
+return recycled;
 }
 
 -(UIView *)shouldBeVisible:(int)index
 {
-	UIView *view = [self.datasource viewOf:self atIndex:index];
+	UIView *view = [self.datasource viewInScrollView:self atIndex:index];
 	
 	/*
 	 * Adding subviews to self places them side by side which
@@ -208,7 +215,7 @@ return view;
 	 */	
 	[self.contentView addSubview:view];
     
-    NSLog(@"added as subview %@, with bounds %@", view, NSStringFromCGRect(view.bounds));
+    NSLog(@"added %@ as subview to %@", view, self);
 return view;
 }
 

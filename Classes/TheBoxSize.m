@@ -7,10 +7,13 @@
  *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 13/12/10.
  *  Contributor(s): .-
  */
-#import <CoreGraphics/CoreGraphics.h>
 #import "TheBoxSize.h"
 
 @implementation TheBoxHeight
+
++(TheBoxHeight*) newHeight:(CGFloat)height{
+    return [[TheBoxHeight alloc] init:height];
+}
 
 -(id)init:(CGFloat) aHeight
 {
@@ -53,6 +56,10 @@ return [NSString stringWithFormat:@"%f", height];
 
 @implementation TheBoxWidth
 
++(TheBoxWidth*) newWidth:(CGFloat)width{
+    return [[TheBoxWidth alloc] init:width];
+}
+
 -(id)init:(CGFloat) aWidth
 {
 	self = [super init];
@@ -90,15 +97,7 @@ return [NSString stringWithFormat:@"%f", width];
 @end
 
 
-@implementation TheBoxSize
-
-+(TheBoxHeight*) newHeight:(CGFloat)height{
-return [[TheBoxHeight alloc] init:height];
-}
-
-+(TheBoxWidth*) newWidth:(CGFloat)width{
-return [[TheBoxWidth alloc] init:width];
-}
+@implementation TheBoxSizeInHeight
 
 @synthesize size;
 
@@ -114,44 +113,62 @@ return [[TheBoxWidth alloc] init:width];
 return self;
 }
 
+-(CGSize)sizeOf:(NSUInteger)noOfRows size:(CGFloat)height
+{
+    if(noOfRows == 0){
+		return CGSizeZero;
+	}
+    
+	float noOfRowsInHeight = self.size.height / height;
+	
+    return CGSizeMake(
+                      self.size.width, 
+                      ((float)noOfRows / (float)noOfRowsInHeight) * self.size.height);
+}
+
 /*
  * @return a dimension on height
  */
--(id<TheBoxDimension>)height{
+-(id<TheBoxDimension>)dimension{
 return [[TheBoxHeight alloc] init:self.size.height];
+}
+
+@end
+
+@implementation TheBoxSizeInWidth
+
+@synthesize size;
+
+-(id)initWithSize:(CGSize) theSize
+{
+	self = [super init];
+	
+	if (self) 
+	{
+		self.size = theSize;
+	}
+	
+    return self;
+}
+
+-(CGSize)sizeOf:(NSUInteger)noOfColumns size:(CGFloat)width
+{
+    if(noOfColumns == 0){
+		return CGSizeZero;
+	}
+
+	float nofOfColumnsInWidth = self.size.width / width;
+	
+return CGSizeMake(
+		  ((float)noOfColumns / (float)nofOfColumnsInWidth) * self.size.width,
+		  self.size.height);
 }
 
 /*
  * @return a dimension on width
  */
--(id<TheBoxDimension>)width{
-return [[TheBoxWidth alloc] init:self.size.width];	
-}
-
--(CGSize)sizeOf:(NSUInteger)noOfRows height:(CGFloat)height
-{
-	float noOfRowsInHeight = self.size.height / height;
-
-	if(noOfRowsInHeight == 0){
-		return CGSizeZero;
-	}
-	
-return CGSizeMake(
-		self.size.width, 
-		(float)noOfRows / (float)noOfRowsInHeight * self.size.height);
-}
-
--(CGSize)sizeOf:(NSUInteger)noOfColumns width:(CGFloat)width
-{
-	float nofOfColumnsInWidth = self.size.width / width;
-	
-	if(nofOfColumnsInWidth == 0){
-		return CGSizeZero;
-	}
-	
-return CGSizeMake(
-		  (float)noOfColumns / (float)nofOfColumnsInWidth * self.size.width,
-		  self.size.height);
+-(id<TheBoxDimension>)dimension{
+    return [[TheBoxWidth alloc] init:self.size.width];	
 }
 
 @end

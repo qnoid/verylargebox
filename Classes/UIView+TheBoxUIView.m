@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import "UIView+TheBoxUIView.h"
-#import "TheBoxUIRecycleStrategy.h"
 
 @implementation UIView (TheBoxUIView)
 

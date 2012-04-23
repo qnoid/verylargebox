@@ -15,7 +15,23 @@
 @protocol TheBoxUIScrollViewDatasource <NSObject>
 
 @required
--(NSUInteger)numberOfViews:(TheBoxUIScrollView *)scrollView;
--(UIView*)viewOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index;
+
+/**
+ Return the number of views in the scroll view.
+
+ @param scrollView the scroll view this datasource was set to
+ */
+-(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView;
+
+
+/**
+ Called every time a view is within the bounds of the scrollview.
+
+ Indexes are in sequential order starting from 0 up to the number of views as returned by #numberOfViewsInScrollView: minus 1.
+
+ @param scrollView the scroll view this datasource was set to
+ @param index the index which identifies the view
+ */
+-(UIView*)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index;
 
 @end

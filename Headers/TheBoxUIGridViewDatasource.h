@@ -10,10 +10,33 @@
 
 #import <UIKit/UIKit.h>
 
+@class TheBoxUIGridView;
+@class TheBoxUIScrollView;
+
+/**
+
+*/
 @protocol TheBoxUIGridViewDatasource<NSObject>
 
 @required
--(NSUInteger)numberOfViews:(TheBoxUIScrollView*)scrollView atIndex:(NSInteger)index;
--(UIView *)viewOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
+/**
+ Return the number of views that the grid view should have in the vertical axis
+
+ @param gridView the grid view this datasource was set to
+ */
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView*)gridView;
+
+/**
+ Return the number of views that the grid view should have in the horizontal axis for the given index
+
+ @param gridView the grid view this datasource was set to
+ @param index the index
+ */
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView*)gridView atIndex:(NSInteger)index;
+
+/**
+
+ */
+- (UIView *)viewInGridView:(TheBoxUIGridView *)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
 
 @end

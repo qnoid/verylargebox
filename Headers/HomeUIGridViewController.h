@@ -17,9 +17,13 @@
 
 @interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TBCreateItemOperationDelegate> 
 {
+    
 }
 
 +(HomeUIGridViewController*)newHomeGridViewController;
+
+@property(nonatomic, strong) IBOutlet UILabel* header;
+@property(nonatomic, unsafe_unretained) IBOutlet TheBoxUIGridView* gridView;
 
 - (IBAction)upload:(id)sender;
 

@@ -27,7 +27,7 @@ MaximumVisibleIndexPrecondition ceilMaximumVisibleIndexAt(NSInteger ceil)
     MaximumVisibleIndexPrecondition precondition = ^(NSInteger currentMaximumVisibleIndex, NSInteger maximumVisibleIndex)
     {
         if(maximumVisibleIndex > ceil){
-            return currentMaximumVisibleIndex;
+            return ceil;
         }
         
         return maximumVisibleIndex;

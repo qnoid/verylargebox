@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import "TheBoxPredicates.h"
-#import "TheBoxBinarySearch.h"
 
 @implementation TheBoxPredicateOnCategory
 

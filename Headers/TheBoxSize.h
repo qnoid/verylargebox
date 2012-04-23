@@ -55,6 +55,9 @@
 @private
     CGFloat height;
 }
+
++(TheBoxHeight*) newHeight:(CGFloat)height;
+
 -(id)init:(CGFloat) height;
 -(NSUInteger)minimumVisible:(CGPoint)point;
 -(NSUInteger)maximumVisible:(CGRect)visibleBounds;
@@ -65,26 +68,15 @@
 @private
     CGFloat width;
 }
++(TheBoxWidth*) newWidth:(CGFloat)width;
+
 -(id)init:(CGFloat) width;
 -(NSUInteger)minimumVisible:(CGPoint)point;
 -(NSUInteger)maximumVisible:(CGRect)visibleBounds;
 @end
 
-@interface TheBoxSize : NSObject 
-{
-	@private
-		CGSize size;
-}
+@protocol TheBoxSize <NSObject>
 
-@property(nonatomic, assign) CGSize size;
-
-+(TheBoxHeight*) newHeight:(CGFloat)height;
-+(TheBoxWidth*) newWidth:(CGFloat)width;
-
--(id)initWithSize:(CGSize) size;
-
--(id<TheBoxDimension>)height;
--(id<TheBoxDimension>)width;
 /*
  * What's the required content size for a fixed width, 
  * given a height and the number of rows
@@ -95,7 +87,32 @@
  * @return the content size the content size required to fit all the rows for the
  *		given height
  */
--(CGSize)sizeOf:(NSUInteger)noOfRows height:(CGFloat)height;
--(CGSize)sizeOf:(NSUInteger)noOfColumns width:(CGFloat)width;
+-(CGSize)sizeOf:(NSUInteger)noOfRows size:(CGFloat)size;
+
+-(id<TheBoxDimension>)dimension;
+
+@end
+
+@interface TheBoxSizeInWidth : NSObject <TheBoxSize>
+{
+	@private
+		CGSize size;
+}
+
+@property(nonatomic, assign) CGSize size;
+
+-(id)initWithSize:(CGSize) size;
+
+@end
+
+@interface TheBoxSizeInHeight : NSObject <TheBoxSize>
+{
+    @private
+        CGSize size;
+}
+
+@property(nonatomic, assign) CGSize size;
+
+-(id)initWithSize:(CGSize) size;
 
 @end

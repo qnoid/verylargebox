@@ -49,7 +49,7 @@ return [self.views objectAtIndex:index];
 {
 	CGRect visibleBounds = CGRectMake(0, 0, 320, 198);
 	
-	NSObject<TheBoxDimension> *dimension = [TheBoxSize newHeight:160];
+	NSObject<TheBoxDimension> *dimension = [TheBoxHeight newHeight:160];
 	
 	TheBoxVisibleStrategy *visibleStrategy = 
 		[TheBoxVisibleStrategy newVisibleStrategyOn:dimension];
@@ -69,7 +69,7 @@ return [self.views objectAtIndex:index];
 
 -(void)assertWillAppear:(CGSize) cellSize visibleBounds:(CGRect)visibleBounds howMany:(NSUInteger)howMany minimum:(NSUInteger)minimum maximum:(NSUInteger)maximum
 {
-	NSObject<TheBoxDimension> *dimension = [TheBoxSize newWidth:cellSize.width];
+	NSObject<TheBoxDimension> *dimension = [TheBoxWidth newWidth:cellSize.width];
 
 	TheBoxVisibleStrategy *visibleStrategy = 
 	[TheBoxVisibleStrategy newVisibleStrategyOn:dimension];
@@ -117,7 +117,7 @@ return [self.views objectAtIndex:index];
 
 -(void)testIsVisible
 {
-	NSObject<TheBoxDimension> *dimension = [TheBoxSize newWidth:0];
+	NSObject<TheBoxDimension> *dimension = [TheBoxWidth newWidth:0];
 
 	TheBoxVisibleStrategy *visibleStrategy = 
 		[TheBoxVisibleStrategy newVisibleStrategyOn:dimension];
