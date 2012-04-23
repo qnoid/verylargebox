@@ -189,8 +189,6 @@ return view;
     NSLog(@"%@", NSStringFromCGPoint(tapPoint));
     NSLog(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
     
-    UIView* touchedView = [self.scrollView hitTest:tapPoint withEvent:nil];
-    NSLog(@"%@", touchedView);
     NSUInteger row = [self.scrollView indexOf:tapPoint];
     NSLog(@"%u", row);
     
@@ -201,10 +199,11 @@ return view;
     }
     
     TheBoxUIScrollView* scrollView = (TheBoxUIScrollView*)[self viewAtRow:row];
+    tapPoint = [tapGestureRecognizer locationInView:scrollView];
     NSUInteger index = [scrollView indexOf:tapPoint];
     NSLog(@"[%u, %u], %@, %@", row, index, scrollView, NSStringFromCGRect(scrollView.bounds));
     
-    NSUInteger numberOfViews = [self.datasource numberOfViewsInGridView:self atIndex:index];
+    NSUInteger numberOfViews = [self.datasource numberOfViewsInGridView:self atIndex:row];
     
     /**User can tap outside of the view (e.g. when items are less than visible view
      
