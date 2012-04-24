@@ -55,14 +55,6 @@ MaximumVisibleIndexPrecondition ceilMaximumVisibleIndexAt(NSInteger ceil)
 -(BOOL)isVisible:(NSInteger) index;
 
 /**
- This method should be called prior to calling #layoutSubviews: to avoid wasting cycles. 
- 
- @parem the bounds of the view
- @return true if #layoutSubviews: must be called
- */
-- (BOOL)needsLayoutSubviews:(CGRect) bounds;
-
-/**
  Normalises the bounds to indexes based on the strategy's dimension.
  
  For every visible index calculated given the bounds a call to VisibleStrategyDelegate#shouldBeVisible

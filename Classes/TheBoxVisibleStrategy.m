@@ -95,26 +95,12 @@ return self;
 return isVisible;
 }
 
--(BOOL)isVisibleBetweenMinimum:(NSInteger)minimumVisible andMaximum:(NSInteger)maximumVisible{
-return [self isVisible:minimumVisible] && [self isVisible:maximumVisible];
-}
-
 - (NSUInteger)minimumVisible:(CGPoint)bounds {
     return [self.dimension minimumVisible:bounds];
 }
 
 - (NSUInteger)maximumVisible:(CGRect)bounds {
     return [self.dimension maximumVisible:bounds];
-}
-
-- (BOOL)needsLayoutSubviews:(CGRect) bounds
-{
-    NSInteger minimumVisible = [self minimumVisible:bounds.origin];
-	NSInteger maximumVisible = [self maximumVisible:bounds];
-	
-	maximumVisible = self.maximumVisibleIndexPrecondition(self.maximumVisibleIndex, maximumVisible);
-    
-return !([self isVisibleBetweenMinimum:minimumVisible andMaximum:maximumVisible - 1]);
 }
 
 - (void)layoutSubviews:(CGRect) bounds

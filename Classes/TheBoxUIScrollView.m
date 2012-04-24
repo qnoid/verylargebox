@@ -154,10 +154,6 @@ return self;
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];	
     
-    if(![self.visibleStrategy needsLayoutSubviews:bounds]){
-        return;
-    }
-    
     NSLog(@"needsLayoutSubviews on bounds %@", NSStringFromCGRect(bounds));	    
 	[self displayViewsWithinBounds:bounds];
 }
