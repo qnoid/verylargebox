@@ -19,7 +19,7 @@
 #import "DetailsUIViewController.h"
 #import "NSCache+TBCache.h"
 
-static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb.jpg";
+static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 
 @interface HomeUIGridViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
