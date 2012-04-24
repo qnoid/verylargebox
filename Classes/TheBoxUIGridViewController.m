@@ -62,6 +62,9 @@ static const CGFloat DEFAULT_CELL_WIDTH = 160.0;
 return view;
 }
 
+-(void)viewInGridView:(TheBoxUIGridView*)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view{
+}
+
 -(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index {
 return CGSizeMake(0.0, 0.0);
 }

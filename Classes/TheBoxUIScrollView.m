@@ -122,47 +122,43 @@ return self;
  */
 -(void)displayViewsWithinBounds:(CGRect)bounds
 {
-  [self.visibleStrategy willAppear:bounds];
+  [self.visibleStrategy layoutSubviews:bounds];
 }
 
-/**
- * Calculates the content size.
- * Recycles any visible views within its bounds
- * Removes any non visible views
- * Shows views within bounds
+/** Called whenever the scroll view is scrolled.
+  
+ http://stackoverflow.com/questions/2760309/uiscrollview-calls-layoutsubviews-each-time-its-scrolled
+ 
+ Calculates the content size.
+ Recycles any visible views within its bounds
+ Removes any non visible views
+ Shows views within bounds
  */
 -(void) layoutSubviews
 {
     NSUInteger numberOfViews = [self.datasource numberOfViewsInScrollView:self];
-	CGFloat size = [self.scrollViewDelegate whatSize:self];	
-    self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:size];
-    
-	[self.visibleStrategy maximumVisibleIndexShould:ceilMaximumVisibleIndexAt(numberOfViews)];
-	
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSLog(@"frame %@", NSStringFromCGRect(self.frame));	
-	NSLog(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
-	NSLog(@"layoutSubviews on bounds %@", NSStringFromCGRect([self bounds]));	
-    
     if(numberOfViews == 0){
         return;
     }
     
+	[self.visibleStrategy maximumVisibleIndexShould:ceilMaximumVisibleIndexAt(numberOfViews)];
+	CGFloat size = [self.scrollViewDelegate whatSize:self];	
+    self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:size];
+	
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSLog(@"frame %@", NSStringFromCGRect(self.frame));	
+	NSLog(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
+
     CGRect bounds = [self bounds];
-        
-	[self recycleVisibleViewsWithinBounds:bounds];
-	[self removeRecycledFromVisibleViews];	
-	[self displayViewsWithinBounds:bounds];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-	CGRect bounds = [scrollView bounds];
-
-	NSLog(@"scrollViewDidScroll on bounds %@", NSStringFromCGRect(bounds));	
 
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];	
+    
+    if(![self.visibleStrategy needsLayoutSubviews:bounds]){
+        return;
+    }
+    
+    NSLog(@"needsLayoutSubviews on bounds %@", NSStringFromCGRect(bounds));	    
 	[self displayViewsWithinBounds:bounds];
 }
 
@@ -182,6 +178,7 @@ return self;
     [super setNeedsLayout];
     NSArray* subviews = [self.contentView subviews];
     
+    [self.recycleStrategy recycle:subviews];
     [subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 	
 	TheBoxVisibleStrategy *aVisibleStrategy = 
@@ -208,6 +205,8 @@ return recycled;
 {
 	UIView *view = [self.datasource viewInScrollView:self atIndex:index];
 	
+    [self.scrollViewDelegate viewInScrollView:self atIndex:index willAppear:view];
+    
 	/*
 	 * Adding subviews to self places them side by side which
 	 * causes scrollers to appear and disappear as if overlapping.

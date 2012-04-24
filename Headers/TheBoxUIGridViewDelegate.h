@@ -17,5 +17,5 @@
 @optional
 -(CGFloat)whatRowHeight:(TheBoxUIGridView*)gridView;
 -(CGFloat)whatCellWidth:(TheBoxUIGridView*)gridView;
-
+-(void)viewInGridView:(TheBoxUIGridView*)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view;
 @end

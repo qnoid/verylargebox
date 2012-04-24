@@ -22,7 +22,6 @@
 		903AE4EE1285C9A600A8FB28 /* UserProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4ED1285C9A600A8FB28 /* UserProfile.xib */; };
 		903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4F51285CBD800A8FB28 /* UserProfiles.xib */; };
 		903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE5601285E33600A8FB28 /* UploadUIViewController.xib */; };
-		90539C6F1537675B00559AD0 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90539C6E1537675B00559AD0 /* logo.jpg */; };
 		905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */; };
 		908363CD14006BF000E5AAAF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
 		908363E314006C3B00E5AAAF /* TheBoxBundleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57B133CC68F00CC9212 /* TheBoxBundleTest.m */; };
@@ -89,6 +88,9 @@
 		90D9A93F12B921950063FF60 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9A93E12B921950063FF60 /* Item.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90D9A96412B924130063FF60 /* TheBoxMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9A96312B924130063FF60 /* TheBoxMath.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90DAF497144913D300BACE91 /* TheBoxUIRecycleStrategyMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90675A8E14491220004119D2 /* TheBoxUIRecycleStrategyMethodTest.m */; };
+		90E3592C1546333700075ABF /* default_item_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90E3592A1546333700075ABF /* default_item_thumb.jpg */; };
+		90E3592D1546333700075ABF /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90E3592B1546333700075ABF /* logo.jpg */; };
+		90E359301546348E00075ABF /* NSCache+TBCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E3592F1546348E00075ABF /* NSCache+TBCache.m */; };
 		90F08273132AED5200E7E35F /* UITextField+TheBoxUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F08272132AED5200E7E35F /* UITextField+TheBoxUITextField.m */; settings = {COMPILER_FLAGS = ""; }; };
 		A152E573130D80F200514061 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A152E572130D80F200514061 /* Icon.png */; };
 /* End PBXBuildFile section */
@@ -145,7 +147,6 @@
 		905394F7128888AC00FD381C /* WelcomeUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WelcomeUIViewController.m; path = Classes/WelcomeUIViewController.m; sourceTree = "<group>"; };
 		9053953112888AF000FD381C /* UploadUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadUIViewController.m; path = Classes/UploadUIViewController.m; sourceTree = "<group>"; };
 		90539C6D1537670800559AD0 /* TBCreateItemOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBCreateItemOperationDelegate.h; path = Headers/TBCreateItemOperationDelegate.h; sourceTree = "<group>"; };
-		90539C6E1537675B00559AD0 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpg; path = "Supporting Files/logo.jpg"; sourceTree = "<group>"; };
 		9056A5A612900416006C148A /* NSArray+Decorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Decorator.m"; sourceTree = "<group>"; };
 		9056A5DF1290065F006C148A /* NSString+Decorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Decorator.m"; sourceTree = "<group>"; };
 		905A4F941291DBBA00BCB475 /* TheBoxUIList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIList.m; sourceTree = "<group>"; };
@@ -234,6 +235,10 @@
 		90D830F312B51DA400BE4470 /* TheBoxUICell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TheBoxUICell.xib; sourceTree = "<group>"; };
 		90D9A93E12B921950063FF60 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		90D9A96312B924130063FF60 /* TheBoxMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxMath.m; sourceTree = "<group>"; };
+		90E3592A1546333700075ABF /* default_item_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default_item_thumb.jpg; sourceTree = "<group>"; };
+		90E3592B1546333700075ABF /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
+		90E3592F1546348E00075ABF /* NSCache+TBCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCache+TBCache.m"; path = "Classes/NSCache+TBCache.m"; sourceTree = "<group>"; };
+		90E359311546359B00075ABF /* NSCache+TBCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCache+TBCache.h"; path = "Classes/NSCache+TBCache.h"; sourceTree = "<group>"; };
 		90F08272132AED5200E7E35F /* UITextField+TheBoxUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+TheBoxUITextField.m"; sourceTree = "<group>"; };
 		90F08275132AEDA000E7E35F /* UITextField+TheBoxUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+TheBoxUITextField.h"; sourceTree = "<group>"; };
 		90FDDF011538E57B0080A550 /* TBCategoriesOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCategoriesOperationDelegate.h; sourceTree = "<group>"; };
@@ -342,6 +347,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				90D8304012B506D900BE4470 /* Tests */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				90E359291546333700075ABF /* Supporting Files */,
 				8D1107310486CEB800E47090 /* TheBox-Info.plist */,
 				908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */,
 				A152E550130D7A6000514061 /* Entitlement.plist */,
@@ -385,6 +391,8 @@
 			children = (
 				902C78F1153CB631003A17CB /* CategoriesViewController.m */,
 				902C78F2153CB631003A17CB /* CategoriesViewController.xib */,
+				90E359311546359B00075ABF /* NSCache+TBCache.h */,
+				90E3592F1546348E00075ABF /* NSCache+TBCache.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -401,7 +409,6 @@
 			children = (
 				905394F7128888AC00FD381C /* WelcomeUIViewController.m */,
 				903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */,
-				90539C6E1537675B00559AD0 /* logo.jpg */,
 			);
 			name = Welcome;
 			sourceTree = "<group>";
@@ -558,6 +565,15 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		90E359291546333700075ABF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				90E3592A1546333700075ABF /* default_item_thumb.jpg */,
+				90E3592B1546333700075ABF /* logo.jpg */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -643,8 +659,9 @@
 				905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */,
 				90D830F412B51DA400BE4470 /* TheBoxUICell.xib in Resources */,
 				A152E573130D80F200514061 /* Icon.png in Resources */,
-				90539C6F1537675B00559AD0 /* logo.jpg in Resources */,
 				902C78F4153CB631003A17CB /* CategoriesViewController.xib in Resources */,
+				90E3592C1546333700075ABF /* default_item_thumb.jpg in Resources */,
+				90E3592D1546333700075ABF /* logo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +746,7 @@
 				90B56BE51534D3E10064CB4E /* DetailsUIViewController.m in Sources */,
 				902C78F3153CB631003A17CB /* CategoriesViewController.m in Sources */,
 				9022BAA1153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m in Sources */,
+				90E359301546348E00075ABF /* NSCache+TBCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

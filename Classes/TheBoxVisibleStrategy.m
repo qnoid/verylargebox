@@ -95,6 +95,10 @@ return self;
 return isVisible;
 }
 
+-(BOOL)isVisibleBetweenMinimum:(NSInteger)minimumVisible andMaximum:(NSInteger)maximumVisible{
+return [self isVisible:minimumVisible] && [self isVisible:maximumVisible];
+}
+
 - (NSUInteger)minimumVisible:(CGPoint)bounds {
     return [self.dimension minimumVisible:bounds];
 }
@@ -103,16 +107,26 @@ return isVisible;
     return [self.dimension maximumVisible:bounds];
 }
 
-- (void)willAppear:(CGRect) bounds
+- (BOOL)needsLayoutSubviews:(CGRect) bounds
 {
-	NSInteger theMinimumVisibleIndex = [self minimumVisible:bounds.origin];
-	NSInteger theMaximumVisibleIndex = [self maximumVisible:bounds];
+    NSInteger minimumVisible = [self minimumVisible:bounds.origin];
+	NSInteger maximumVisible = [self maximumVisible:bounds];
 	
-	theMaximumVisibleIndex = self.maximumVisibleIndexPrecondition(self.maximumVisibleIndex, theMaximumVisibleIndex);
+	maximumVisible = self.maximumVisibleIndexPrecondition(self.maximumVisibleIndex, maximumVisible);
     
-	NSLog(@"%d >= willAppear < %d of dimension %@ on bounds %@", theMinimumVisibleIndex, theMaximumVisibleIndex, self.dimension, NSStringFromCGRect(bounds));
+return !([self isVisibleBetweenMinimum:minimumVisible andMaximum:maximumVisible - 1]);
+}
+
+- (void)layoutSubviews:(CGRect) bounds
+{
+    NSInteger minimumVisible = [self minimumVisible:bounds.origin];
+	NSInteger maximumVisible = [self maximumVisible:bounds];
 	
-	for (int index = theMinimumVisibleIndex; index < theMaximumVisibleIndex; index++) 
+	maximumVisible = self.maximumVisibleIndexPrecondition(self.maximumVisibleIndex, maximumVisible);
+    
+	NSLog(@"%d >= willAppear < %d of dimension %@ on bounds %@", minimumVisible, maximumVisible, self.dimension, NSStringFromCGRect(bounds));
+	
+	for (int index = minimumVisible; index < maximumVisible; index++) 
 	{
 		if(![self isVisible:index])
 		{
@@ -122,8 +136,8 @@ return isVisible;
 		}
 	}
 	
-    self.minimumVisibleIndex = theMinimumVisibleIndex;
-	self.maximumVisibleIndex = theMaximumVisibleIndex - 1;
+    self.minimumVisibleIndex = minimumVisible;
+	self.maximumVisibleIndex = maximumVisible - 1;
 	
 	NSLog(@"minimum visible: %d, maximum visible: %d", self.minimumVisibleIndex, self.maximumVisibleIndex);
 }

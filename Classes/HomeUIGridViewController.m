@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 23/11/10.
+ *  Created by Markos Charatzas (@qnoid) on 23/11/10.
  *  Contributor(s): .-
  */
 #import "HomeUIGridViewController.h"
@@ -17,12 +17,16 @@
 #import "TheBoxPredicates.h"
 #import "AFHTTPRequestOperation.h"
 #import "DetailsUIViewController.h"
+#import "NSCache+TBCache.h"
+
+static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb.jpg";
 
 @interface HomeUIGridViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSCache *imageCache;
+@property(nonatomic, strong) UIImage *defaultItemImage;
 @end
 
 
@@ -50,6 +54,7 @@ return homeGridViewController;
 @synthesize items;
 @synthesize theBoxLocationService;
 @synthesize imageCache;
+@synthesize defaultItemImage;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService
 {
@@ -61,6 +66,9 @@ return homeGridViewController;
         self.imageCache = [[NSCache alloc] init];
         self.theBoxLocationService = locationService;
         self.title = @"TheBox";
+        NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:@"jpg"];
+        self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
+        
     }
     
 return self;
@@ -212,7 +220,7 @@ return self;
 - (UIView *)viewInGridView:(TheBoxUIGridView *)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index 
 {
 	TheBoxUICell *theBoxCell = (TheBoxUICell*) [super viewInGridView:gridView inScrollView:scrollView atRow:row atIndex:index];
-	
+
 	NSArray *categoryItems = [[[self.items objectAtIndex:row] objectForKey:@"category"] objectForKey:@"items"];
 		
 	//there should be a mapping between the index of the cell and the id of the item
@@ -220,13 +228,12 @@ return self;
 	
 	NSString *imageURL = [item objectForKey:@"imageURL"];
 	NSString *when = [item objectForKey:@"when"];
-
-	NSLog(@"%@", item);
 	
-	UIImage *cachedImage = [self.imageCache objectForKey:[item objectForKey:@"id"]];
+	UIImage *cachedImage = [self.imageCache tbObjectForKey:[item objectForKey:@"id"] ifNilReturn:self.defaultItemImage];
 	
-	if (cachedImage == nil) {
-        
+	if (cachedImage == self.defaultItemImage) 
+    {
+        NSLog(@"cache miss");
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
             
             NSURL *url = [NSURL URLWithString:imageURL];
@@ -244,10 +251,8 @@ return self;
             });
         });		
 	}
-    else {
-        theBoxCell.itemImageView.image = cachedImage;
-    }
-	
+
+    theBoxCell.itemImageView.image = cachedImage;
 	theBoxCell.itemLabel.text = [NSString stringWithFormat:@"%@", when];	
 
 return theBoxCell;

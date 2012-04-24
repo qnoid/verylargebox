@@ -15,7 +15,7 @@
 #import "TheBoxUIScrollViewDatasource.h"
 #import "TheBoxUIGridViewDelegate.h"
 
-@interface TheBoxUIGridView ()
+@interface TheBoxUIGridView () <TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate>
 @property(nonatomic, strong) NSMutableDictionary* frames;
 @property(nonatomic, strong) NSMutableDictionary* views;
 @property(nonatomic, strong) TheBoxUIScrollView *scrollView;
@@ -120,6 +120,18 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
     }
     
 return [self.delegate whatRowHeight:self];
+}
+
+-(void)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index willAppear:(UIView *)view
+{
+    if(![scrollView isEqual:self.scrollView])
+    {
+        NSNumber* row = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
+        
+        [self.delegate viewInGridView:self inScrollView:scrollView atRow:[row intValue] atIndex:index willAppear:view];
+    }
+    
+    [self.scrollViewDelegate viewInScrollView:scrollView atIndex:index willAppear:view];
 }
 
 #pragma mark TheBoxUIScrollViewDatasource

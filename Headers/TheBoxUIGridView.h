@@ -15,7 +15,7 @@
 @protocol TheBoxUIGridViewDelegate;
 @class TheBoxUIGridViewController;
 
-@interface TheBoxUIGridView : UIView <TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate>
+@interface TheBoxUIGridView : UIView
 
 @property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDatasource> datasource;
 @property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDelegate> delegate;

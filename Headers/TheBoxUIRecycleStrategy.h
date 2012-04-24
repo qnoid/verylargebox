@@ -33,6 +33,12 @@
 
 -(id)initWith:(id<TheBoxUIRecycleStrategyMethod>) recycleMethod;
 
+/** Stores the given views and makes them available in #dequeueReusableView
+ 
+ @param views the UIView(s) to make available for dequeuing 
+ */
+-(void)recycle:(NSArray *)views;
+
 /*
  * Any view from the array that is not within the specified bounds will be placed
  * in the recycled views and subsequently removed from the it's superview

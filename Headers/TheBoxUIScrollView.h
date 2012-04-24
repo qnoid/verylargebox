@@ -21,6 +21,12 @@
 
 @optional
 -(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
+
+/**
+ 
+ @param view as returned by TheBoxUIScrollViewDatasource#viewInScrollView:atIndex
+ */
+-(void)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index willAppear:(UIView*)view;
 @end
 
 /**
@@ -34,7 +40,7 @@
  @see #newVerticalScrollView:viewsOf:
  @see #newHorizontalScrollView:viewsOf:
  */
-@interface TheBoxUIScrollView : UIScrollView <UIScrollViewDelegate, VisibleStrategyDelegate>
+@interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate>
 
 /**
  Creates a new scroll view which scrolls on the vertical axis

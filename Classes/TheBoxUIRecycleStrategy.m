@@ -48,6 +48,10 @@ return recycleStrategy;
 	return self;
 }
 
+-(void)recycle:(NSArray *)views {
+    [recycledViews addObjectsFromArray:views];
+}
+
 -(void)recycle:(NSArray *)views bounds:(CGRect) bounds
 {	
 	for (UIView *visibleView in views) 
