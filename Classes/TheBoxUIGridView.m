@@ -66,12 +66,11 @@
 {
     TheBoxUIScrollView *newVerticalScrollView =
         [TheBoxUIScrollView
-            newVerticalScrollView:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
+            newVerticalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, self.frame.size.width, self.frame.size.height)
             viewsOf:[self.delegate whatRowHeight:self]];
     
 	newVerticalScrollView.datasource = self;
 	newVerticalScrollView.scrollViewDelegate = self;
-    newVerticalScrollView.scrollsToTop = YES;
     
     self.scrollView = newVerticalScrollView;
     
@@ -176,8 +175,8 @@ return [self.datasource numberOfViewsInGridView:self];
 		view = viewOf;
 	}
     else {
+        view.frame = frame;
         [view setNeedsLayout];
-        view.frame = frame; 
     }
     
 	NSLog(@"view %@", view);
@@ -188,7 +187,7 @@ return view;
 }
 
 #pragma mark public
--(void)setNeedsLayout
+-(void)reload
 {
     [self.scrollView setNeedsLayout];
 }
@@ -200,7 +199,7 @@ return view;
     CGPoint tapPoint = [tapGestureRecognizer locationInView:self.scrollView];
     NSLog(@"%@", NSStringFromCGPoint(tapPoint));
     NSLog(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
-    
+
     NSUInteger row = [self.scrollView indexOf:tapPoint];
     NSLog(@"%u", row);
     
@@ -211,6 +210,8 @@ return view;
     }
     
     TheBoxUIScrollView* scrollView = (TheBoxUIScrollView*)[self viewAtRow:row];
+    NSLog(@"contentSize %@", NSStringFromCGSize(scrollView.contentSize));	
+
     tapPoint = [tapGestureRecognizer locationInView:scrollView];
     NSUInteger index = [scrollView indexOf:tapPoint];
     NSLog(@"[%u, %u], %@, %@", row, index, scrollView, NSStringFromCGRect(scrollView.bounds));

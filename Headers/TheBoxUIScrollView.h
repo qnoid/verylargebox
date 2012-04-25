@@ -59,7 +59,13 @@
 @property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDatasource> datasource;
 @property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDelegate> scrollViewDelegate;
 
--(NSUInteger)indexOf:(CGPoint)point;
+/**
+ Call this method will recycle any subviews that where added as part of 
+ TheBoxUIScrollView#viewInScrollView:atIndex: effectively removing them from this view.
+ 
+ Any previously visible views are invalidated.
+ */
+-(void)setNeedsLayout;
 -(UIView*)dequeueReusableView;
-
+-(NSUInteger)indexOf:(CGPoint)point;
 @end

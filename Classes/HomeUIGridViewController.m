@@ -101,7 +101,7 @@ return self;
  * [self element:with:] for each item.
  * 
  * At this time the items array has been updated and we can 
- * call [super setNeedsLayout] to update the grid view
+ * call [self.gridView reload] to update the grid view
  * 
  
      [
@@ -133,7 +133,7 @@ return self;
 -(void)didSucceedWithItems:(NSMutableArray*) _items
 {
 	self.items = _items;
-	[self.gridView setNeedsLayout];
+	[self.gridView reload];
 }
 
 -(void)didFailOnItemsWithError:(NSError*)error
@@ -289,4 +289,5 @@ return CGSizeMake(40.0, 0.0);
 
     [self.navigationController pushViewController:detailsViewController animated:YES];
 }
+
 @end

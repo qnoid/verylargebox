@@ -84,19 +84,13 @@ return scrollView;
 
 #pragma mark private fields
 
-/* Apparently a UIScrollView needs another view as its content view else it messes up the scrollers.
- * Interface Builder uses a private _contentView instead.
- *
- */
-UIView *contentView;
-
 - (id) initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size
 {
 	self = [super initWithFrame:frame];
 	if (self) 
 	{
 		self.theBoxSize = size;
-		self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+		self.contentView = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, frame.size.width, frame.size.height)];
 		[self addSubview:self.contentView];
 	}
 return self;
@@ -158,34 +152,21 @@ return self;
 	[self displayViewsWithinBounds:bounds];
 }
 
--(NSUInteger)indexOf:(CGPoint)point {
-    return [self.visibleStrategy minimumVisible:point];
-}
-
-/*
- * When called, the scrollView needs a new instance of TheBoxVisibleStrategy.
- * The reason being that TheBoxVisibleStrategy#MINIMUM_VISIBLE_INDEX and
- * TheBoxVisibleStrategy#MAXIMUM_VISIBLE_INDEX are now invalidated as well as 
- * any visible sections since each one of them might have changed in content size
- * and or cells it displays.
- */
--(void) setNeedsLayout
-{    
+-(void)setNeedsLayout
+{
     [super setNeedsLayout];
     NSArray* subviews = [self.contentView subviews];
     
     [self.recycleStrategy recycle:subviews];
     [subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-	
-	TheBoxVisibleStrategy *aVisibleStrategy = 
-    [TheBoxVisibleStrategy newVisibleStrategyFrom:self.visibleStrategy];
+
+    TheBoxVisibleStrategy *aVisibleStrategy = 
+        [TheBoxVisibleStrategy newVisibleStrategyFrom:self.visibleStrategy];
 	
 	aVisibleStrategy.delegate = self;
 	
 	self.visibleStrategy = aVisibleStrategy;
-    [self flashScrollIndicators];
 }
-
 
 /*
  * No need to remove dequeued view from superview since it's removed when recycled
@@ -195,6 +176,10 @@ return self;
     UIView* recycled = [self.recycleStrategy dequeueReusableView];
     
 return recycled;
+}
+
+-(NSUInteger)indexOf:(CGPoint)point {
+    return [self.visibleStrategy minimumVisible:point];
 }
 
 -(UIView *)shouldBeVisible:(int)index

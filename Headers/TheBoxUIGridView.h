@@ -19,5 +19,6 @@
 
 @property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDatasource> datasource;
 @property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDelegate> delegate;
+-(void)reload;
 
 @end
