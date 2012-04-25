@@ -64,16 +64,24 @@
 
 -(void)awakeFromNib
 {
+    CGFloat height = [self.delegate whatRowHeight:self];
+    
     TheBoxUIScrollView *newVerticalScrollView =
         [TheBoxUIScrollView
             newVerticalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, self.frame.size.width, self.frame.size.height)
-            viewsOf:[self.delegate whatRowHeight:self]];
+            viewsOf:height];
     
 	newVerticalScrollView.datasource = self;
 	newVerticalScrollView.scrollViewDelegate = self;
     
     self.scrollView = newVerticalScrollView;
+
+    TheBoxSizeInHeight *gridViewHeight = [[TheBoxSizeInHeight alloc] initWithSize:self.frame.size];
     
+    NSUInteger numberOfViews = [self.datasource numberOfViewsInGridView:self];
+	CGFloat size = [self.scrollViewDelegate whatSize:newVerticalScrollView];	
+    newVerticalScrollView.contentSize = [gridViewHeight sizeOf:numberOfViews size:size];
+
     [self addSubview:self.scrollView];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped:)];

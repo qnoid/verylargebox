@@ -9,28 +9,43 @@
  */
 #import <UIKit/UIKit.h>
 
-typedef NSInteger(^MaximumVisibleIndexPrecondition)(NSInteger, NSInteger);
+typedef NSInteger(^VisibleIndexPrecondition)(NSInteger, NSInteger);
 
 CG_INLINE
-MaximumVisibleIndexPrecondition acceptMaximumVisibleIndex()
+VisibleIndexPrecondition acceptAnyVisibleIndex()
 {
-    MaximumVisibleIndexPrecondition precondition = ^(NSInteger currentMaximumVisibleIndex, NSInteger maximumVisibleIndex){
-        return maximumVisibleIndex;
+    VisibleIndexPrecondition precondition = ^(NSInteger currentVisibleIndex, NSInteger visibleIndex){
+        return visibleIndex;
     };
     
     return precondition;
 }
 
 CG_INLINE
-MaximumVisibleIndexPrecondition ceilMaximumVisibleIndexAt(NSInteger ceil)
+VisibleIndexPrecondition floorVisibleIndexAt(NSInteger ceil)
 {
-    MaximumVisibleIndexPrecondition precondition = ^(NSInteger currentMaximumVisibleIndex, NSInteger maximumVisibleIndex)
+    VisibleIndexPrecondition precondition = ^(NSInteger currentVisibleIndex, NSInteger visibleIndex)
     {
-        if(maximumVisibleIndex > ceil){
+        if(visibleIndex < ceil){
             return ceil;
         }
         
-        return maximumVisibleIndex;
+        return visibleIndex;
+    };
+    
+    return precondition;
+}
+
+CG_INLINE
+VisibleIndexPrecondition ceilVisibleIndexAt(NSInteger ceil)
+{
+    VisibleIndexPrecondition precondition = ^(NSInteger currentVisibleIndex, NSInteger visibleIndex)
+    {
+        if(visibleIndex > ceil){
+            return ceil;
+        }
+        
+        return visibleIndex;
     };
     
     return precondition;
@@ -74,9 +89,9 @@ MaximumVisibleIndexPrecondition ceilMaximumVisibleIndexAt(NSInteger ceil)
  @param conformToPrecondition the precondition that the maximum visible index should apply to
  @see ceilMaximumVisibleIndexAt
  */
--(void)maximumVisibleIndexShould:(MaximumVisibleIndexPrecondition)conformToPrecondition;
+-(void)minimumVisibleIndexShould:(VisibleIndexPrecondition)conformToPrecondition;
 
--(void)maximumVisibleIndexShould:(MaximumVisibleIndexPrecondition)conformToPrecondition;
+-(void)maximumVisibleIndexShould:(VisibleIndexPrecondition)conformToPrecondition;
 
 -(CGRect)visibleBounds:(CGRect)bounds withinContentSize:(CGSize)contentSize;
 

@@ -15,7 +15,8 @@
  * @param dimension the dimension to use when calculating the index in respect to the visible bounds
  */
 -(id)init:(id<TheBoxDimension>) dimension;
-@property(nonatomic, copy) MaximumVisibleIndexPrecondition maximumVisibleIndexPrecondition;
+@property(nonatomic, copy) VisibleIndexPrecondition maximumVisibleIndexPrecondition;
+@property(nonatomic, copy) VisibleIndexPrecondition minimumVisibleIndexPrecondition;
 @end
 
 
@@ -62,6 +63,7 @@ return newVisibleStrategy;
 @synthesize minimumVisibleIndex;
 @synthesize maximumVisibleIndex;
 @synthesize maximumVisibleIndexPrecondition;
+@synthesize minimumVisibleIndexPrecondition;
 
 - (id)init:(id<TheBoxDimension>) onDimension
 {
@@ -76,13 +78,18 @@ return newVisibleStrategy;
         
 		minimumVisibleIndex = MINIMUM_VISIBLE_INDEX;
         maximumVisibleIndex = MAXIMUM_VISIBLE_INDEX;        
-        self.maximumVisibleIndexPrecondition = acceptMaximumVisibleIndex();
+        self.maximumVisibleIndexPrecondition = acceptAnyVisibleIndex();
+        self.minimumVisibleIndexPrecondition = acceptAnyVisibleIndex();
 	}
 	
 return self;
 }
 
--(void)maximumVisibleIndexShould:(MaximumVisibleIndexPrecondition)conformToPrecondition{
+-(void)minimumVisibleIndexShould:(VisibleIndexPrecondition)conformToPrecondition{
+    self.minimumVisibleIndexPrecondition = conformToPrecondition;
+}
+
+-(void)maximumVisibleIndexShould:(VisibleIndexPrecondition)conformToPrecondition{
     self.maximumVisibleIndexPrecondition = conformToPrecondition;
 }
 
@@ -108,8 +115,9 @@ return isVisible;
     NSInteger minimumVisible = [self minimumVisible:bounds.origin];
 	NSInteger maximumVisible = [self maximumVisible:bounds];
 	
+    minimumVisible = self.minimumVisibleIndexPrecondition(self.minimumVisibleIndex, minimumVisible);
 	maximumVisible = self.maximumVisibleIndexPrecondition(self.maximumVisibleIndex, maximumVisible);
-    
+
 	NSLog(@"%d >= willAppear < %d of dimension %@ on bounds %@", minimumVisible, maximumVisible, self.dimension, NSStringFromCGRect(bounds));
 	
 	for (int index = minimumVisible; index < maximumVisible; index++) 

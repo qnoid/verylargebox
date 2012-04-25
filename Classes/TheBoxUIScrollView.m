@@ -96,6 +96,11 @@ return scrollView;
 return self;
 }
 
+-(void)setContentSize:(CGSize)contentSize
+{
+    [super setContentSize:contentSize];
+    self.contentView.frame = CGRectMake(CGPointZero.x, CGPointZero.y, contentSize.width, contentSize.height);
+}
 
 -(void)recycleVisibleViewsWithinBounds:(CGRect)bounds {
 	[self.recycleStrategy recycle:[self.visibleStrategy.visibleViews allObjects] bounds:bounds];		
@@ -135,7 +140,8 @@ return self;
         return;
     }
     
-	[self.visibleStrategy maximumVisibleIndexShould:ceilMaximumVisibleIndexAt(numberOfViews)];
+	[self.visibleStrategy minimumVisibleIndexShould:floorVisibleIndexAt(0)];
+	[self.visibleStrategy maximumVisibleIndexShould:ceilVisibleIndexAt(numberOfViews)];
 	CGFloat size = [self.scrollViewDelegate whatSize:self];	
     self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:size];
 	
