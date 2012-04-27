@@ -9,39 +9,18 @@
  */
 
 #import "TheBoxUIRecycleStrategy.h"
-#import "PartiallyVisibleWithinX.h"
-#import "PartiallyVisibleWithinY.h"
 
 @implementation TheBoxUIRecycleStrategy
 
-+(TheBoxUIRecycleStrategy *)newPartiallyVisibleWithinX 
-{
-	PartiallyVisibleWithinX *method = [[PartiallyVisibleWithinX alloc]init];
-	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] initWith:method];
-	
-return recycleStrategy;	
-}
-
-+(TheBoxUIRecycleStrategy *)newPartiallyVisibleWithinY 
-{
-	PartiallyVisibleWithinY *method = [[PartiallyVisibleWithinY alloc]init];
-	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] initWith:method];
-	
-return recycleStrategy;	
-}
-
-
-@synthesize recycleMethod;
 @synthesize recycledViews;
 
 
--(id)initWith:(id<TheBoxUIRecycleStrategyMethod>) aRecycleMethod
+-(id)init
 {
 	self = [super init];
 	
 	if (self) 
 	{
-		self.recycleMethod = aRecycleMethod;
 		self.recycledViews = [NSMutableSet new];
 	}
 	
@@ -56,7 +35,7 @@ return recycleStrategy;
 {	
 	for (UIView *visibleView in views) 
 	{
-		if(![self.recycleMethod is:visibleView.frame visibleIn:bounds])
+		if(!CGRectIntersectsRect(visibleView.frame, bounds))
 		{
 			NSLog(@"recycle view %@", visibleView);
 			[recycledViews addObject:visibleView];

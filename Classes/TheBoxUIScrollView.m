@@ -45,7 +45,7 @@ return scrollView;
         [TheBoxVisibleStrategy newVisibleStrategyOnHeight:height];
 	
 	TheBoxUIRecycleStrategy *recycleStrategy = 
-		[TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
+		[[TheBoxUIRecycleStrategy alloc] init];
 
 	TheBoxUIScrollView *scrollView = 
 		[TheBoxUIScrollView 
@@ -63,7 +63,7 @@ return scrollView;
         [TheBoxVisibleStrategy newVisibleStrategyOnWidth:width];
 	
 	TheBoxUIRecycleStrategy *recycleStrategy = 
-		[TheBoxUIRecycleStrategy newPartiallyVisibleWithinX];
+        [[TheBoxUIRecycleStrategy alloc] init];
 	
 	TheBoxUIScrollView *scrollView = 
 		[TheBoxUIScrollView 
@@ -140,8 +140,8 @@ return self;
         return;
     }
     
-	[self.visibleStrategy minimumVisibleIndexShould:floorVisibleIndexAt(0)];
-	[self.visibleStrategy maximumVisibleIndexShould:ceilVisibleIndexAt(numberOfViews)];
+	[self.visibleStrategy minimumVisibleIndexShould:ceilVisibleIndexAt(0)];
+	[self.visibleStrategy maximumVisibleIndexShould:floorVisibleIndexAt(numberOfViews)];
 	CGFloat size = [self.scrollViewDelegate whatSize:self];	
     self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:size];
 	

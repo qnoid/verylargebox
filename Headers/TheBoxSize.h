@@ -59,8 +59,8 @@
 +(TheBoxHeight*) newHeight:(CGFloat)height;
 
 -(id)init:(CGFloat) height;
--(NSUInteger)minimumVisible:(CGPoint)point;
--(NSUInteger)maximumVisible:(CGRect)visibleBounds;
+-(NSInteger)minimumVisible:(CGPoint)point;
+-(NSInteger)maximumVisible:(CGRect)visibleBounds;
 @end
 
 @interface TheBoxWidth : NSObject <TheBoxDimension>
@@ -71,8 +71,8 @@
 +(TheBoxWidth*) newWidth:(CGFloat)width;
 
 -(id)init:(CGFloat) width;
--(NSUInteger)minimumVisible:(CGPoint)point;
--(NSUInteger)maximumVisible:(CGRect)visibleBounds;
+-(NSInteger)minimumVisible:(CGPoint)point;
+-(NSInteger)maximumVisible:(CGRect)visibleBounds;
 @end
 
 @protocol TheBoxSize <NSObject>

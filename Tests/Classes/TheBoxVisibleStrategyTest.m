@@ -10,9 +10,15 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "VisibleStrategy.h"
 #import "TheBoxVisibleStrategy.h"
+#import "OCMock.h"
+#import "OCMArg.h"
+
+@interface TheBoxVisibleStrategy (Testing)
+-(NSInteger)minimumVisibleIndex;
+-(NSInteger)maximumVisibleIndex;
+@end
 
 @interface TheBoxVisibleStrategyTest : SenTestCase {
-	
 }
 @end
 
@@ -110,5 +116,38 @@
     
     STAssertTrue(CGRectEqualToRect(bounds, visibleBounds), @"expected: %@ actual: %@", NSStringFromCGRect(bounds), NSStringFromCGRect(visibleBounds));
 }
+
+-(void)testGivenNegativeMinimumIndexAssertFlooredToZero
+{
+    TheBoxVisibleStrategy *visibleStrategy = [[TheBoxVisibleStrategy alloc] init];
+    [visibleStrategy minimumVisibleIndexShould:[ceilVisibleIndexAt(0) copy]];
+    [visibleStrategy maximumVisibleIndexShould:[floorVisibleIndexAt(1) copy]];
+
+    id partiallyMockedVisibleStrategy = [OCMockObject partialMockForObject:visibleStrategy];
+    
+    NSInteger negativeOne = -1;
+    [[[partiallyMockedVisibleStrategy expect] andReturnValue:OCMOCK_VALUE(negativeOne)] minimumVisible:CGPointZero];
+    
+    [visibleStrategy layoutSubviews:CGRectZero];
+    
+    STAssertTrue(0 == [partiallyMockedVisibleStrategy minimumVisibleIndex], @"expected: 0 actual: %d", [partiallyMockedVisibleStrategy minimumVisibleIndex]);
+}
+
+-(void)testGivenGreaterMaximumIndexAssertCeil
+{
+    TheBoxVisibleStrategy *visibleStrategy = [[TheBoxVisibleStrategy alloc] init];
+    [visibleStrategy minimumVisibleIndexShould:[ceilVisibleIndexAt(0) copy]];
+    [visibleStrategy maximumVisibleIndexShould:[floorVisibleIndexAt(1) copy]];
+    
+    id partiallyMockedVisibleStrategy = [OCMockObject partialMockForObject:visibleStrategy];
+    
+    NSInteger two = 2;
+    [[[partiallyMockedVisibleStrategy expect] andReturnValue:OCMOCK_VALUE(two)] maximumVisible:CGRectZero];
+    
+    [visibleStrategy layoutSubviews:CGRectZero];
+    
+    STAssertTrue(0 == [partiallyMockedVisibleStrategy maximumVisibleIndex], @"expected: 0 actual: %d", [partiallyMockedVisibleStrategy maximumVisibleIndex]);
+}
+
 
 @end

@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 05/04/2011.
+ *  Created by Markos Charatzas (@qnoid) on 05/04/2011.
  *  Contributor(s): .-
  */
 #import <SenTestingKit/SenTestingKit.h>

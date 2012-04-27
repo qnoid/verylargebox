@@ -22,9 +22,9 @@
 		903AE4EE1285C9A600A8FB28 /* UserProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4ED1285C9A600A8FB28 /* UserProfile.xib */; };
 		903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4F51285CBD800A8FB28 /* UserProfiles.xib */; };
 		903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE5601285E33600A8FB28 /* UploadUIViewController.xib */; };
+		90428D39154B405D0090D280 /* TheBoxUIScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */; };
 		905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */; };
 		908363CD14006BF000E5AAAF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
-		908363E314006C3B00E5AAAF /* TheBoxBundleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57B133CC68F00CC9212 /* TheBoxBundleTest.m */; };
 		908363E614006C3B00E5AAAF /* TheBoxUICellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */; };
 		908363E714006C3B00E5AAAF /* TheBoxUICellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */; };
 		908363E814006C3B00E5AAAF /* TheBoxUIRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */; };
@@ -73,8 +73,6 @@
 		90C2C36512B6C25900829868 /* TheBoxRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0048E12B6437B0029863E /* TheBoxRect.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C36612B6C25A00829868 /* NSString+Decorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056A5DF1290065F006C148A /* NSString+Decorator.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C36A12B6C25C00829868 /* TheBoxUIRecycleStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90C2C36B12B6C25D00829868 /* PartiallyVisibleWithinX.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0058112B65DD40029863E /* PartiallyVisibleWithinX.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90C2C36C12B6C25E00829868 /* PartiallyVisibleWithinY.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C005FD12B66D150029863E /* PartiallyVisibleWithinY.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C36D12B6C26600829868 /* WelcomeUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905394F7128888AC00FD381C /* WelcomeUIViewController.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C37012B6C27000829868 /* HomeUIGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */; settings = {COMPILER_FLAGS = " "; }; };
 		90C2C37112B6C2A300829868 /* UserProfilesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 903AE5071285E1F800A8FB28 /* UserProfilesView.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -87,7 +85,6 @@
 		90D830F412B51DA400BE4470 /* TheBoxUICell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90D830F312B51DA400BE4470 /* TheBoxUICell.xib */; };
 		90D9A93F12B921950063FF60 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9A93E12B921950063FF60 /* Item.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90D9A96412B924130063FF60 /* TheBoxMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9A96312B924130063FF60 /* TheBoxMath.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90DAF497144913D300BACE91 /* TheBoxUIRecycleStrategyMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90675A8E14491220004119D2 /* TheBoxUIRecycleStrategyMethodTest.m */; };
 		90E3592C1546333700075ABF /* default_item_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90E3592A1546333700075ABF /* default_item_thumb.jpg */; };
 		90E3592D1546333700075ABF /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90E3592B1546333700075ABF /* logo.jpg */; };
 		90E359301546348E00075ABF /* NSCache+TBCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E3592F1546348E00075ABF /* NSCache+TBCache.m */; };
@@ -141,6 +138,7 @@
 		903AE5071285E1F800A8FB28 /* UserProfilesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfilesView.m; path = Classes/UserProfilesView.m; sourceTree = "<group>"; };
 		903AE5601285E33600A8FB28 /* UploadUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UploadUIViewController.xib; path = Classes/UploadUIViewController.xib; sourceTree = "<group>"; };
 		90417326134B0F1500F18F95 /* TheBoxRectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxRectTest.m; sourceTree = "<group>"; };
+		90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIScrollViewTest.m; sourceTree = "<group>"; };
 		904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategy.m; sourceTree = "<group>"; };
 		904D3EB112A13F6B00F70930 /* TheBoxVisibleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxVisibleStrategy.m; sourceTree = "<group>"; };
 		9053948F1288847500FD381C /* TheBoxUICell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICell.m; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 		905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LocationUIViewController.xib; path = Classes/LocationUIViewController.xib; sourceTree = "<group>"; };
 		905A4FE11291E15400BCB475 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		905A503A1291E4AC00BCB475 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		90675A8E14491220004119D2 /* TheBoxUIRecycleStrategyMethodTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategyMethodTest.m; sourceTree = "<group>"; };
 		908363A61400659200E5AAAF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		908363CC14006BF000E5AAAF /* TheBoxUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheBoxUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TheBoxUnitTests-Info.plist"; path = "TheBoxUnitTests/TheBoxUnitTests-Info.plist"; sourceTree = "<group>"; };
@@ -176,7 +173,6 @@
 		90A1E51C133CC10000CC9212 /* TheBoxCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxCache.h; sourceTree = "<group>"; };
 		90A1E51D133CC10000CC9212 /* TheBoxCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxCache.m; sourceTree = "<group>"; };
 		90A1E578133CC68A00CC9212 /* UITestViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITestViews.m; sourceTree = "<group>"; };
-		90A1E57B133CC68F00CC9212 /* TheBoxBundleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxBundleTest.m; sourceTree = "<group>"; };
 		90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICellRecycleStrategyTest.m; sourceTree = "<group>"; };
 		90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICellVisibleStrategyTest.m; sourceTree = "<group>"; };
 		90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategyTest.m; sourceTree = "<group>"; };
@@ -189,8 +185,6 @@
 		90BBA77212BD036E001B97D9 /* UIView+TheBoxUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TheBoxUIView.m"; sourceTree = "<group>"; };
 		90C0038D12B63C0E0029863E /* TheBoxSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxSize.m; sourceTree = "<group>"; };
 		90C0048E12B6437B0029863E /* TheBoxRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxRect.m; sourceTree = "<group>"; };
-		90C0058112B65DD40029863E /* PartiallyVisibleWithinX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartiallyVisibleWithinX.m; sourceTree = "<group>"; };
-		90C005FD12B66D150029863E /* PartiallyVisibleWithinY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartiallyVisibleWithinY.m; sourceTree = "<group>"; };
 		90C2A4791526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxDefaultKeyboardObserver.h; sourceTree = "<group>"; };
 		90C2A47A1526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxDefaultKeyboardObserver.m; sourceTree = "<group>"; };
 		90C2ECA312930C08009195CF /* TheBoxLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxLocationService.m; sourceTree = "<group>"; };
@@ -199,8 +193,6 @@
 		90C9510412B6A16C00A8A05F /* LocationUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUIViewController.h; sourceTree = "<group>"; };
 		90C9510512B6A16C00A8A05F /* NSArray+Decorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Decorator.h"; sourceTree = "<group>"; };
 		90C9510612B6A16C00A8A05F /* NSString+Decorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Decorator.h"; sourceTree = "<group>"; };
-		90C9510712B6A16C00A8A05F /* PartiallyVisibleWithinX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartiallyVisibleWithinX.h; sourceTree = "<group>"; };
-		90C9510812B6A16C00A8A05F /* PartiallyVisibleWithinY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartiallyVisibleWithinY.h; sourceTree = "<group>"; };
 		90C9510912B6A16C00A8A05F /* TheBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxAppDelegate.h; sourceTree = "<group>"; };
 		90C9510A12B6A16C00A8A05F /* TheBoxBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxBundle.h; sourceTree = "<group>"; };
 		90C9510D12B6A16C00A8A05F /* TheBoxLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxLocationService.h; sourceTree = "<group>"; };
@@ -306,8 +298,6 @@
 				9056A5A612900416006C148A /* NSArray+Decorator.m */,
 				9056A5DF1290065F006C148A /* NSString+Decorator.m */,
 				904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */,
-				90C0058112B65DD40029863E /* PartiallyVisibleWithinX.m */,
-				90C005FD12B66D150029863E /* PartiallyVisibleWithinY.m */,
 				90D9A93E12B921950063FF60 /* Item.m */,
 				90D9A96312B924130063FF60 /* TheBoxMath.m */,
 				90A6C4521300822C00AEEE9F /* TheBoxUIScrollView.m */,
@@ -477,16 +467,15 @@
 		90A1E565133CC65A00CC9212 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				90A1E57B133CC68F00CC9212 /* TheBoxBundleTest.m */,
 				90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */,
 				90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */,
 				90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */,
-				90675A8E14491220004119D2 /* TheBoxUIRecycleStrategyMethodTest.m */,
 				90CEADEB1349CDBD0084C5F0 /* TheBoxSizeTest.m */,
 				90417326134B0F1500F18F95 /* TheBoxRectTest.m */,
 				90226BF81359A983006E43EC /* TheBoxBinarySearchTest.m */,
 				900378A015409DBD00579FF2 /* TheBoxVisibleStrategyTest.m */,
 				909F9F3415442A5600D1E7AE /* TheBoxUIGridViewTest.m */,
+				90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -507,8 +496,6 @@
 				90C9510412B6A16C00A8A05F /* LocationUIViewController.h */,
 				90C9510512B6A16C00A8A05F /* NSArray+Decorator.h */,
 				90C9510612B6A16C00A8A05F /* NSString+Decorator.h */,
-				90C9510712B6A16C00A8A05F /* PartiallyVisibleWithinX.h */,
-				90C9510812B6A16C00A8A05F /* PartiallyVisibleWithinY.h */,
 				90C9510912B6A16C00A8A05F /* TheBoxAppDelegate.h */,
 				9096CC0B133BB85300639685 /* TheBoxMath.h */,
 				9096CC0D133BB85300639685 /* TheBoxQueries.h */,
@@ -721,8 +708,6 @@
 				90C2C36512B6C25900829868 /* TheBoxRect.m in Sources */,
 				90C2C36612B6C25A00829868 /* NSString+Decorator.m in Sources */,
 				90C2C36A12B6C25C00829868 /* TheBoxUIRecycleStrategy.m in Sources */,
-				90C2C36B12B6C25D00829868 /* PartiallyVisibleWithinX.m in Sources */,
-				90C2C36C12B6C25E00829868 /* PartiallyVisibleWithinY.m in Sources */,
 				90C2C36D12B6C26600829868 /* WelcomeUIViewController.m in Sources */,
 				90C2C37012B6C27000829868 /* HomeUIGridViewController.m in Sources */,
 				90C2C37112B6C2A300829868 /* UserProfilesView.m in Sources */,
@@ -754,7 +739,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				908363E314006C3B00E5AAAF /* TheBoxBundleTest.m in Sources */,
 				908363E614006C3B00E5AAAF /* TheBoxUICellRecycleStrategyTest.m in Sources */,
 				908363E714006C3B00E5AAAF /* TheBoxUICellVisibleStrategyTest.m in Sources */,
 				908363E814006C3B00E5AAAF /* TheBoxUIRecycleStrategyTest.m in Sources */,
@@ -764,10 +748,10 @@
 				908363F114006C5000E5AAAF /* TheBoxTestQueries.m in Sources */,
 				908363F214006C5000E5AAAF /* UITestViews.m in Sources */,
 				908363F614006C5000E5AAAF /* TheBoxTestRanking.m in Sources */,
-				90DAF497144913D300BACE91 /* TheBoxUIRecycleStrategyMethodTest.m in Sources */,
 				90C784001515E63C006D0381 /* TheBoxBundle.m in Sources */,
 				900378A115409DBD00579FF2 /* TheBoxVisibleStrategyTest.m in Sources */,
 				909F9F3515442A5600D1E7AE /* TheBoxUIGridViewTest.m in Sources */,
+				90428D39154B405D0090D280 /* TheBoxUIScrollViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

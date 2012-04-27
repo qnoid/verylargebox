@@ -30,8 +30,8 @@
 +(TheBoxVisibleStrategy*)newVisibleStrategyOn:(id<TheBoxDimension>) dimension;
 +(TheBoxVisibleStrategy*)newVisibleStrategyFrom:(TheBoxVisibleStrategy*) visibleStrategy;
 
-- (NSUInteger)minimumVisible:(CGPoint)bounds;
+- (NSInteger)minimumVisible:(CGPoint)bounds;
 
-- (NSUInteger)maximumVisible:(CGRect)bounds;
+- (NSInteger)maximumVisible:(CGRect)bounds;
 
 @end

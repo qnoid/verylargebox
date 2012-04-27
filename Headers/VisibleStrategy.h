@@ -22,7 +22,7 @@ VisibleIndexPrecondition acceptAnyVisibleIndex()
 }
 
 CG_INLINE
-VisibleIndexPrecondition floorVisibleIndexAt(NSInteger ceil)
+VisibleIndexPrecondition ceilVisibleIndexAt(NSInteger ceil)
 {
     VisibleIndexPrecondition precondition = ^(NSInteger currentVisibleIndex, NSInteger visibleIndex)
     {
@@ -37,12 +37,12 @@ VisibleIndexPrecondition floorVisibleIndexAt(NSInteger ceil)
 }
 
 CG_INLINE
-VisibleIndexPrecondition ceilVisibleIndexAt(NSInteger ceil)
+VisibleIndexPrecondition floorVisibleIndexAt(NSInteger floor)
 {
     VisibleIndexPrecondition precondition = ^(NSInteger currentVisibleIndex, NSInteger visibleIndex)
     {
-        if(visibleIndex > ceil){
-            return ceil;
+        if(visibleIndex > floor){
+            return floor;
         }
         
         return visibleIndex;
@@ -63,20 +63,20 @@ VisibleIndexPrecondition ceilVisibleIndexAt(NSInteger ceil)
 
 @protocol VisibleStrategy<NSObject>
 
-- (NSUInteger)minimumVisible:(CGPoint)bounds;
+- (NSInteger)minimumVisible:(CGPoint)bounds;
 
-- (NSUInteger)maximumVisible:(CGRect)bounds;
+- (NSInteger)maximumVisible:(CGRect)bounds;
 
 -(BOOL)isVisible:(NSInteger) index;
 
 /**
- Normalises the bounds to indexes based on the strategy's dimension.
+ Calculates indexes based on bounds.
  
- For every visible index calculated given the bounds a call to VisibleStrategyDelegate#shouldBeVisible
+ For every visible index a call to VisibleStrategyDelegate#shouldBeVisible
  will be made if the index is not already visible from a prior call.
- 
- @postcondion minimumVisibleIndex will be set 
- @postcondion maximumVisibleIndex will be set 
+  
+ @postcondion the minimum visible index is set
+ @postcondion the maximum visible index is set to maximumVisibleIndex - 1
  @param bounds the visible bounds
  @see newVisibleStrategyOn:
  */

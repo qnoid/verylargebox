@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 15/12/10.
+ *  Created by Markos Charatzas (@qnoid) on 15/12/10.
  *  Contributor(s): .-
  */
    
@@ -24,13 +24,11 @@
 -(void)assertNotRecycled:(TheBoxUIRecycleStrategy *) cellRecycleStrategy;
 {
 	STAssertTrue(0 == cellRecycleStrategy.recycledViews.count, @"view is recycled although still visible");
-	STAssertNil([cellRecycleStrategy dequeueReusableView], @"view shouldn't have been recycled");	
 }
 
 -(void)assertRecycled:(TheBoxUIRecycleStrategy *) recycleStrategy count:(NSUInteger)count;
 {
-	STAssertTrue(count == recycleStrategy.recycledViews.count, [NSString stringWithFormat:@"actual: %d", recycleStrategy.recycledViews.count]);
-	STAssertNotNil([recycleStrategy dequeueReusableView], @"view should have been recycled");
+	STAssertTrue(count == recycleStrategy.recycledViews.count, [NSString stringWithFormat:@"expected: %d actual: %d", count, recycleStrategy.recycledViews.count]);
 }
 
 -(CGRect)scrollVertical:(CGRect)bounds by:(int)diff{
@@ -45,38 +43,13 @@ return CGRectMake(bounds.origin.x, bounds.origin.y + diff, bounds.size.width, bo
 	UIView *view = [[UIView alloc] initWithFrame:frame];
 	NSArray *views = [NSArray arrayWithObject:view];
 	
-	TheBoxUIRecycleStrategy *recycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
+	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] init];
 	
 	[recycleStrategy recycle:views bounds:visibleBounds];
 	
 return recycleStrategy;
 }
 
-
-/*
- *
- */ 
--(void)testRecycle:(TheBoxUIRecycleStrategy *)recycleStrategy visibleBounds:(CGRect)visibleBounds views:(NSArray *) views scrollVerticalBy:(NSUInteger)height
-{
-	[recycleStrategy recycle:views bounds:visibleBounds];	
-	[self assertNotRecycled:recycleStrategy];		
-	
-	visibleBounds = [self scrollVertical:visibleBounds by:1];
-	[recycleStrategy recycle:views bounds:visibleBounds];	
-	[self assertNotRecycled:recycleStrategy];
-	
-	int noOfViews = views.count;
-	for (int recycledViews = 1; recycledViews < noOfViews; recycledViews++) 
-	{
-		visibleBounds = [self scrollVertical:visibleBounds by:height];
-		[recycleStrategy recycle:views bounds:visibleBounds];	
-		[self assertRecycled:recycleStrategy count:recycledViews];
-	}
-	
-	visibleBounds = [self scrollVertical:visibleBounds by:height];
-	[recycleStrategy recycle:views bounds:visibleBounds];	
-	[self assertRecycled:recycleStrategy count:noOfViews];
-}
 
 /* 
  *			320  
@@ -92,17 +65,58 @@ return recycleStrategy;
 	NSValue *second = [NSValue valueWithCGRect:CGRectMake(0, 196, 320, 196)];
 	NSValue *third = [NSValue valueWithCGRect:CGRectMake(0, 392, 320, 196)];
 	NSValue *forth = [NSValue valueWithCGRect:CGRectMake(0, 588, 320, 196)];
+	NSValue *fifth = [NSValue valueWithCGRect:CGRectMake(0, 784, 320, 196)];
 	
-    NSArray* frames = [NSArray arrayWithObjects:first, second, third, forth, nil];
+    NSArray* frames = [NSArray arrayWithObjects:first, second, third, forth, fifth, nil];
     
 	NSArray *views = [[[UITestViews alloc] init]of:frames];
 	
-	TheBoxUIRecycleStrategy *recycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
+	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] init];
 	
 	CGRect visibleBounds = CGRectMake(0, 0, 320, 392);
+    CGFloat height = 196;
+
+	[recycleStrategy recycle:views bounds:visibleBounds];	
+	[self assertRecycled:recycleStrategy count:3];
 	
-	[self testRecycle:recycleStrategy visibleBounds:visibleBounds views:views scrollVerticalBy:196];
+	visibleBounds = [self scrollVertical:visibleBounds by:height];
+	[recycleStrategy recycle:views bounds:visibleBounds];	
+	[self assertRecycled:recycleStrategy count:4];
+    
+   	visibleBounds = [self scrollVertical:visibleBounds by:height];
+	[recycleStrategy recycle:views bounds:visibleBounds];	
+	[self assertRecycled:recycleStrategy count:5]; 
 }
+
+-(void)testRecycleViewsBoundsForMultipleSectionsInverse
+{
+	NSValue *first = [NSValue valueWithCGRect:CGRectMake(0, 0, 320, 196)];
+	NSValue *second = [NSValue valueWithCGRect:CGRectMake(0, 196, 320, 196)];
+	NSValue *third = [NSValue valueWithCGRect:CGRectMake(0, 392, 320, 196)];
+	NSValue *forth = [NSValue valueWithCGRect:CGRectMake(0, 588, 320, 196)];
+	NSValue *fifth = [NSValue valueWithCGRect:CGRectMake(0, 784, 320, 196)];
+	
+    NSArray* frames = [NSArray arrayWithObjects:first, second, third, forth, fifth, nil];
+    
+	NSArray *views = [[[UITestViews alloc] init]of:frames];
+	
+	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] init];
+	
+	CGRect visibleBounds = CGRectMake(0, 588, 320, 392);
+    CGFloat height = -196;
+    
+	[recycleStrategy recycle:views bounds:visibleBounds];	
+	[self assertRecycled:recycleStrategy count:3];
+	
+	visibleBounds = [self scrollVertical:visibleBounds by:height];
+	[recycleStrategy recycle:views bounds:visibleBounds];	
+	[self assertRecycled:recycleStrategy count:4];
+    
+   	visibleBounds = [self scrollVertical:visibleBounds by:height];
+	[recycleStrategy recycle:views bounds:visibleBounds];	
+	[self assertRecycled:recycleStrategy count:5]; 
+}
+
 
 -(void)testGivenViewIsRecycledAssertIsRemovedFromSuperview
 {
@@ -110,7 +124,7 @@ return recycleStrategy;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 196)];
     [superView addSubview:view];
     	
-	TheBoxUIRecycleStrategy *recycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];	
+	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] init];	
 	CGRect visibleBounds = CGRectMake(0, 197, 320, 392);
 	
     [recycleStrategy recycle:[NSArray arrayWithObject:view] bounds:visibleBounds];
@@ -149,14 +163,14 @@ return recycleStrategy;
 	UIView *cell = [[UIView alloc] initWithFrame:frame];
 	NSArray *views = [NSArray arrayWithObjects:cell, nil];
 	
-	TheBoxUIRecycleStrategy *cellRecycleStrategy = [TheBoxUIRecycleStrategy newPartiallyVisibleWithinY];
+	TheBoxUIRecycleStrategy *recycleStrategy = [[TheBoxUIRecycleStrategy alloc] init];
 	
 	CGRect visibleBounds = CGRectMake(0, 197, 320, 196);
 	
-	[cellRecycleStrategy recycle:views bounds:visibleBounds];
+	[recycleStrategy recycle:views bounds:visibleBounds];
 	
-	STAssertNotNil([cellRecycleStrategy dequeueReusableView], @"view should have been recycled");	
-	STAssertNil([cellRecycleStrategy dequeueReusableView], @"there shouldn't be any more recycled views");	
+	STAssertNotNil([recycleStrategy dequeueReusableView], @"view should have been recycled");	
+	STAssertNil([recycleStrategy dequeueReusableView], @"there shouldn't be any more recycled views");	
 }
 
 -(void)testIsVisible

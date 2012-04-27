@@ -17,6 +17,7 @@
 @interface TheBoxUIGridView (Testing)
 - (id)initWith:(NSMutableDictionary*)frames;
 - (void)setScrollView:(TheBoxUIScrollView*)scrollView;
+-(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView;
 -(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index;
 @end
 

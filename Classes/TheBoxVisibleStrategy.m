@@ -102,11 +102,11 @@ return self;
 return isVisible;
 }
 
-- (NSUInteger)minimumVisible:(CGPoint)bounds {
+- (NSInteger)minimumVisible:(CGPoint)bounds {
     return [self.dimension minimumVisible:bounds];
 }
 
-- (NSUInteger)maximumVisible:(CGRect)bounds {
+- (NSInteger)maximumVisible:(CGRect)bounds {
     return [self.dimension maximumVisible:bounds];
 }
 

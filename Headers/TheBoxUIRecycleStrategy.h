@@ -19,19 +19,8 @@
 @interface TheBoxUIRecycleStrategy : NSObject
 
 @property(nonatomic, strong) NSMutableSet *recycledViews;
-@property(nonatomic) id<TheBoxUIRecycleStrategyMethod> recycleMethod;
 
-/*
- * @return a new TheBoxUIRecycleStrategy that recycles views partially visible on the X
- */
-+(TheBoxUIRecycleStrategy *)newPartiallyVisibleWithinX;
-
-/*
- * @return a new TheBoxUIRecycleStrategy that recycles views partially visible on the Y
- */
-+(TheBoxUIRecycleStrategy *)newPartiallyVisibleWithinY;
-
--(id)initWith:(id<TheBoxUIRecycleStrategyMethod>) recycleMethod;
+-(id)init;
 
 /** Stores the given views and makes them available in #dequeueReusableView
  
