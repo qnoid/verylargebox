@@ -15,7 +15,6 @@
 #import "AFHTTPRequestOperation.h"
 #import "JSONKit.h"
 #import "LocationUIViewController.h"
-#import "CategoriesViewController.h"
 #import "TheBoxLocationService.h"
 
 @interface UploadUIViewController ()

@@ -87,7 +87,6 @@
 		90CBFE5D154BF1B600349A13 /* add_category_button_highlighted_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE5C154BF1B600349A13 /* add_category_button_highlighted_color.png */; };
 		90CBFE5F154BF58F00349A13 /* poweredByFoursquare_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */; };
 		90CBFE61154C349200349A13 /* add_item.png in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE60154C349200349A13 /* add_item.png */; };
-		90CBFE67154D44E700349A13 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE66154D44E700349A13 /* home.png */; };
 		90CBFE6D154D4ACA00349A13 /* thewho.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE69154D4ACA00349A13 /* thewho.jpg */; };
 		90CBFE6E154D4ACA00349A13 /* koboloi.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE6A154D4ACA00349A13 /* koboloi.JPG */; };
 		90CBFE6F154D4ACA00349A13 /* hat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE6B154D4ACA00349A13 /* hat.jpg */; };
@@ -100,7 +99,8 @@
 		90EC895D154B62E10009F73E /* WelcomeUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90EC895C154B62E10009F73E /* WelcomeUIViewController.m */; };
 		90F08273132AED5200E7E35F /* UITextField+TheBoxUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F08272132AED5200E7E35F /* UITextField+TheBoxUITextField.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90F9FDE0154D54D8001BCD66 /* TheBoxUIRecycleStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */; };
-		A152E573130D80F200514061 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A152E572130D80F200514061 /* Icon.png */; };
+		90F9FDE4154D97C5001BCD66 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE3154D97C5001BCD66 /* icon@2x.png */; };
+		90F9FDE6154D97D0001BCD66 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE5154D97D0001BCD66 /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,7 +135,6 @@
 		90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxPredicates.m; sourceTree = "<group>"; };
 		9022BA9F153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableDictionary+TBMutableDictionary.h"; path = "../Classes/NSMutableDictionary+TBMutableDictionary.h"; sourceTree = "<group>"; };
 		9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+TBMutableDictionary.m"; sourceTree = "<group>"; };
-		902C78F0153CB631003A17CB /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoriesViewController.h; path = ../Classes/CategoriesViewController.h; sourceTree = "<group>"; };
 		902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeUIGridViewController.m; path = Classes/HomeUIGridViewController.m; sourceTree = "<group>"; };
 		903367ED129C5F510046C59D /* TheBoxUIGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIGridViewController.m; sourceTree = "<group>"; };
 		903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomeUIGridViewController.xib; path = Classes/HomeUIGridViewController.xib; sourceTree = "<group>"; };
@@ -229,7 +228,6 @@
 		90CBFE5C154BF1B600349A13 /* add_category_button_highlighted_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_category_button_highlighted_color.png; sourceTree = "<group>"; };
 		90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredByFoursquare_gray.png; sourceTree = "<group>"; };
 		90CBFE60154C349200349A13 /* add_item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_item.png; sourceTree = "<group>"; };
-		90CBFE66154D44E700349A13 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		90CBFE69154D4ACA00349A13 /* thewho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thewho.jpg; sourceTree = "<group>"; };
 		90CBFE6A154D4ACA00349A13 /* koboloi.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = koboloi.JPG; sourceTree = "<group>"; };
 		90CBFE6B154D4ACA00349A13 /* hat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hat.jpg; sourceTree = "<group>"; };
@@ -255,9 +253,10 @@
 		90EC895E154B62E90009F73E /* WelcomeUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WelcomeUIViewController.h; path = Headers/WelcomeUIViewController.h; sourceTree = "<group>"; };
 		90F08272132AED5200E7E35F /* UITextField+TheBoxUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+TheBoxUITextField.m"; sourceTree = "<group>"; };
 		90F08275132AEDA000E7E35F /* UITextField+TheBoxUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+TheBoxUITextField.h"; sourceTree = "<group>"; };
+		90F9FDE3154D97C5001BCD66 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		90F9FDE5154D97D0001BCD66 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		90FDDF011538E57B0080A550 /* TBCategoriesOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCategoriesOperationDelegate.h; sourceTree = "<group>"; };
 		A152E550130D7A6000514061 /* Entitlement.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlement.plist; sourceTree = "<group>"; };
-		A152E572130D80F200514061 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,7 +365,8 @@
 				8D1107310486CEB800E47090 /* TheBox-Info.plist */,
 				908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */,
 				A152E550130D7A6000514061 /* Entitlement.plist */,
-				A152E572130D80F200514061 /* Icon.png */,
+				90F9FDE5154D97D0001BCD66 /* icon.png */,
+				90F9FDE3154D97C5001BCD66 /* icon@2x.png */,
 				357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */,
 			);
 			name = CustomTemplate;
@@ -506,7 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				907A0E47154B5C3D007F7FCB /* TheBoxUIAddView.h */,
-				902C78F0153CB631003A17CB /* CategoriesViewController.h */,
 				9094243E142E44380084C40C /* TheBoxUIGridViewDelegate.h */,
 				90A5FCCE1387CC1F004E65B3 /* TheBoxUIGridView.h */,
 				90226C6B1359B1DB006E43EC /* TheBoxPredicates.h */,
@@ -595,7 +594,6 @@
 				90CBFE5C154BF1B600349A13 /* add_category_button_highlighted_color.png */,
 				90CBFE58154BEF4C00349A13 /* take_photo_button_highlighted_color.png */,
 				90CBFE56154BEEAA00349A13 /* add_button_highlighted_color.png */,
-				90CBFE66154D44E700349A13 /* home.png */,
 				90E3592A1546333700075ABF /* default_item_thumb.png */,
 				90CBFE5A154BEFF800349A13 /* select_location_button_highlighed_color.png */,
 			);
@@ -686,7 +684,6 @@
 				903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */,
 				905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */,
 				90D830F412B51DA400BE4470 /* TheBoxUICell.xib in Resources */,
-				A152E573130D80F200514061 /* Icon.png in Resources */,
 				90E3592C1546333700075ABF /* default_item_thumb.png in Resources */,
 				907A0E4D154B5D66007F7FCB /* TheBoxUIAddView.xib in Resources */,
 				90CBFE57154BEEAA00349A13 /* add_button_highlighted_color.png in Resources */,
@@ -695,11 +692,12 @@
 				90CBFE5D154BF1B600349A13 /* add_category_button_highlighted_color.png in Resources */,
 				90CBFE5F154BF58F00349A13 /* poweredByFoursquare_gray.png in Resources */,
 				90CBFE61154C349200349A13 /* add_item.png in Resources */,
-				90CBFE67154D44E700349A13 /* home.png in Resources */,
 				90CBFE6D154D4ACA00349A13 /* thewho.jpg in Resources */,
 				90CBFE6E154D4ACA00349A13 /* koboloi.JPG in Resources */,
 				90CBFE6F154D4ACA00349A13 /* hat.jpg in Resources */,
 				90CBFE70154D4ACA00349A13 /* earings.jpg in Resources */,
+				90F9FDE4154D97C5001BCD66 /* icon@2x.png in Resources */,
+				90F9FDE6154D97D0001BCD66 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,9 +821,13 @@
 			baseConfigurationReference = 357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markos Charatzas (7KTP8P4NET)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -856,7 +858,7 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "55A0FD7B-CC8A-4116-97DE-06B4CF47EF34";
+				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
@@ -873,9 +875,13 @@
 			baseConfigurationReference = 357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markos Charatzas (7KTP8P4NET)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -904,7 +910,7 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "55A0FD7B-CC8A-4116-97DE-06B4CF47EF34";
+				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
@@ -1102,9 +1108,13 @@
 			baseConfigurationReference = 357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markos Charatzas (7KTP8P4NET)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markos Charatzas (7KTP8P4NET)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1133,8 +1143,8 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "55A0FD7B-CC8A-4116-97DE-06B4CF47EF34";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "55A0FD7B-CC8A-4116-97DE-06B4CF47EF34";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
