@@ -12,19 +12,25 @@
 #import "TheBoxLocationServiceDelegate.h"
 #import "TBItemsOperationDelegate.h"
 #import "TBCreateItemOperationDelegate.h"
+#import "TBCreateCategoryOperationDelegate.h"
 @class TheBoxLocationService;
 @class TheBoxUIGridView;
+@class TheBoxUIScrollView;
 
-@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TBCreateItemOperationDelegate> 
+@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TBCreateItemOperationDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBCreateCategoryOperationDelegate> 
 {
     
 }
 
 +(HomeUIGridViewController*)newHomeGridViewController;
 
-@property(nonatomic, strong) IBOutlet UILabel* header;
-@property(nonatomic, unsafe_unretained) IBOutlet TheBoxUIGridView* gridView;
+@property(nonatomic, unsafe_unretained) IBOutlet UIView *headerSection;
+@property(nonatomic, unsafe_unretained) IBOutlet UIImageView *addIcon;
+@property(nonatomic, unsafe_unretained) IBOutlet UIButton *addButton;
 
-- (IBAction)upload:(id)sender;
+@property(nonatomic, unsafe_unretained) IBOutlet TheBoxUIGridView* gridView;
+@property(nonatomic, unsafe_unretained) IBOutlet TheBoxUIScrollView* scrollView;
+
+- (IBAction)addCategory:(id)sender;
 
 @end

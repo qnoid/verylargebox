@@ -84,6 +84,25 @@ return scrollView;
 
 #pragma mark private fields
 
+-(id)awakeAfterUsingCoder:(NSCoder *)aDecoder 
+{    
+    TheBoxUIScrollView* scrollView = [TheBoxUIScrollView newVerticalScrollView:self.frame viewsOf:196];
+    
+    //http://stackoverflow.com/questions/10264790/what-is-the-new-pattern-for-releasing-self-with-automatic-reference-counting
+    CFRelease((__bridge const void*)self);
+    
+    CFRetain((__bridge const void*)scrollView);
+
+return scrollView;
+}
+
+-(void)awakeFromNib
+{
+    NSLog(@"%@", self);
+    self.datasource = datasource;
+    self.scrollViewDelegate = scrollViewDelegate;
+}
+
 - (id) initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size
 {
 	self = [super initWithFrame:frame];

@@ -39,7 +39,8 @@ return detailsViewController;
     if (self) {
         _item = item;
         self.title = [_item objectForKey:@"name"];
-        self.theBoxLocationService = [TheBoxLocationService theBox];        
+        self.theBoxLocationService = [TheBoxLocationService theBox];  
+        self.title = @"Details";
     }
     return self;
 }
@@ -71,8 +72,9 @@ return detailsViewController;
         name = [NSString stringWithFormat:@"%@,%@", [location objectForKey:@"latitude"], [location objectForKey:@"longitude"]];
     }
     
-    [self.locationButton setTitle:name forState:UIControlStateNormal];
-    [self.locationButton setTitle:[[_item objectForKey:@"location"] objectForKey:@"name"]  forState:UIControlStateSelected];
+    self.locationButton.titleLabel.numberOfLines = 0;
+    [self.locationButton setTitle:[NSString stringWithFormat:self.locationButton.titleLabel.text, name] forState:UIControlStateNormal];
+    [self.locationButton setTitle:[NSString stringWithFormat:self.locationButton.titleLabel.text, name]  forState:UIControlStateSelected];
 }
 
 - (void)viewDidUnload

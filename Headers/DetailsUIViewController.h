@@ -1,11 +1,12 @@
-//
-//  DetailsUIViewController.h
-//  TheBox
-//
-//  Created by Markos Charatzas on 10/04/2012.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
+/*
+ *  Copyright 2012 TheBox 
+ *  All rights reserved.
+ *
+ *  This file is part of TheBox
+ *
+ *  Created by Markos Charatzas (@qnoid)  on 10/04/2012.
+ *  Contributor(s): .-
+ */
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "TheBoxLocationServiceDelegate.h"

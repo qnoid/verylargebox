@@ -4,11 +4,10 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas (@qnoid) on 23/11/10.
+ *  Created by Markos Charatzas (@qnoid) on 23/11/2010.
  *  Contributor(s): .-
  */
 #import "HomeUIGridViewController.h"
-#import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
 #import "TheBoxUICell.h"
 #import "TheBoxQueries.h"
@@ -18,8 +17,11 @@
 #import "AFHTTPRequestOperation.h"
 #import "DetailsUIViewController.h"
 #import "NSCache+TBCache.h"
+#import "TheBoxUIAddView.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
+static NSString* const DEFAULT_ITEM_TYPE = @"png";
+static CGFloat const kAddButtonHeight = 196.0;
 
 @interface HomeUIGridViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
@@ -27,6 +29,8 @@ static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSCache *imageCache;
 @property(nonatomic, strong) UIImage *defaultItemImage;
+@property(nonatomic, strong) UIActivityIndicatorView *activityIndicatorForAddingSection;
+@property(nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @end
 
 
@@ -34,11 +38,7 @@ static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 
 +(HomeUIGridViewController*)newHomeGridViewController
 {    
-    TheBoxLocationService *theBoxLocationService = [TheBoxLocationService theBox];
-
-    HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:theBoxLocationService];
-    [theBoxLocationService notifyDidFindPlacemark:homeGridViewController];
-	[theBoxLocationService notifyDidFailWithError:homeGridViewController];	
+    HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:nil];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:homeGridViewController selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
@@ -49,12 +49,17 @@ static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 return homeGridViewController;
 }
 
-@synthesize header;
+@synthesize headerSection;
+@synthesize addIcon;
+@synthesize addButton;
 @synthesize gridView = _gridView;
+@synthesize scrollView = _scrollView;
 @synthesize items;
 @synthesize theBoxLocationService;
 @synthesize imageCache;
 @synthesize defaultItemImage;
+@synthesize activityIndicatorForAddingSection;
+@synthesize activityIndicator;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService
 {
@@ -66,9 +71,15 @@ return homeGridViewController;
         self.imageCache = [[NSCache alloc] init];
         self.theBoxLocationService = locationService;
         self.title = @"TheBox";
-        NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:@"jpg"];
+        NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
         self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
-        
+        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
+                                  CGRectMake(CGPointZero.x, 
+                                             44, 
+                                             self.view.frame.size.width, 
+                                             self.view.frame.size.height)];
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        [self.view addSubview:activityIndicator];
     }
     
 return self;
@@ -76,23 +87,70 @@ return self;
 
 -(void)viewDidLoad
 {
-    [super viewDidLoad];//write test
-    UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(upload:)];    
-    self.navigationItem.rightBarButtonItem = addItem;    
+    [super viewDidLoad];
+    self.scrollView.scrollEnabled = NO;
+    
+    [self.gridView addObserver:self
+                  forKeyPath:@"contentOffset"
+                     options:NSKeyValueObservingOptionNew
+                     context:NULL];    
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.activityIndicator startAnimating];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    
+    [self.scrollView setValue:[change valueForKey:NSKeyValueChangeNewKey] forKey:keyPath];
+}
+
+#pragma mark application events
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
 {
 	AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:self];
 	[operation start];
 }
-
-- (IBAction)upload:(id)sender 
+#pragma IBActions
+- (IBAction)addCategory:(id)sender
 {
-	UploadUIViewController *uploadViewController = [UploadUIViewController newUploadUIViewController];
-	uploadViewController.createItemDelegate = self;
-	[self presentModalViewController:uploadViewController animated:YES];   
+    self.addButton.enabled = NO;
+    self.addIcon.hidden = YES;
+    self.activityIndicatorForAddingSection = [[UIActivityIndicatorView alloc]initWithFrame:self.addIcon.frame];
+    [self.activityIndicatorForAddingSection setBackgroundColor:[UIColor clearColor]];
+    [self.activityIndicatorForAddingSection setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    [self.headerSection addSubview:self.activityIndicatorForAddingSection];
+    [self.activityIndicatorForAddingSection startAnimating];
+
+    NSString* name = [NSString stringWithFormat:@"%d",[self.items count] + 1];
+    AFHTTPRequestOperation* createCategoryOperation = [TheBoxQueries newCreateCategoryQuery:name delegate:self];
+    
+    [createCategoryOperation start];
 }
+
+#pragma mark TBCreateCategoryOperationDelegate
+
+-(void)didSucceedWithCategory:(NSDictionary*)category
+{
+    self.addButton.enabled = YES;
+    self.addIcon.hidden = NO;
+    [self.activityIndicatorForAddingSection stopAnimating];
+    [self.activityIndicatorForAddingSection removeFromSuperview];
+
+    [self.items addObject:category];
+    [self.gridView scrollToIndex:[self.items count]-1 animated:YES];
+}
+
+-(void)didFailOnCreateCategoryWithError:(NSError*)error
+{
+    NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);   
+}
+
 
 #pragma mark thebox
 
@@ -132,13 +190,20 @@ return self;
 
 -(void)didSucceedWithItems:(NSMutableArray*) _items
 {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    
 	self.items = _items;
 	[self.gridView reload];
+    [self.scrollView setNeedsLayout];
 }
 
 -(void)didFailOnItemsWithError:(NSError*)error
 {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+
+    AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:self];
+	[operation start];
 }
 
 -(void)didFailOnItemWithError:(NSError*)error
@@ -195,25 +260,7 @@ return self;
     
 	[category setObject:categoryItems forKey:@"items"];
 	
-	[self.gridView setNeedsLayout];
-}
-
-#pragma mark location based
--(void)didFindPlacemark:(NSNotification *)notification
-{
-	MKPlacemark *place = [TheBoxNotifications place:notification];
-	NSString *city = place.locality;
-	
-	self.header.text = [NSString stringWithFormat:self.header.text, city];		
-}
-
--(void)didFailWithError:(NSNotification *)notification
-{
-	NSError *error = [TheBoxNotifications error:notification];
-	
-	NSLog(@"%@", error);
-	
-	self.header.text = [NSString stringWithFormat:@"Unable to lookup location"];		
+	[self.gridView reload];
 }
 
 #pragma mark datasource
@@ -288,6 +335,38 @@ return CGSizeMake(40.0, 0.0);
     self.navigationItem.backBarButtonItem = backBarButton;
 
     [self.navigationController pushViewController:detailsViewController animated:YES];
+}
+
+-(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView {
+return [self.items count];
+}
+
+-(void)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index willAppear:(UIView*)view{}
+
+-(UIView*)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index
+{
+    TheBoxUIAddView *view = (TheBoxUIAddView*)[scrollView dequeueReusableView];
+ 
+    CGRect frame = CGRectMake(
+                              scrollView.bounds.origin.x, 
+                              index * [self whatSize:scrollView], 
+                              self.scrollView.frame.size.width, 
+                              [self whatSize:scrollView]);
+
+    if(view == nil) {
+		view = [TheBoxUIAddView loadWithOwner:self];
+    }
+    
+    view.frame = frame;
+
+    view.category = [[self.items objectAtIndex:index] objectForKey:@"category"];
+    view.createItemDelegate = self;
+
+return view;
+}
+
+-(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView{
+    return kAddButtonHeight;
 }
 
 @end

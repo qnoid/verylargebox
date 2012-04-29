@@ -19,14 +19,14 @@
 
 @protocol TheBoxUIScrollViewDelegate 
 
-@optional
--(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
-
 /**
  
  @param view as returned by TheBoxUIScrollViewDatasource#viewInScrollView:atIndex
  */
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index willAppear:(UIView*)view;
+
+@optional
+-(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
 @end
 
 /**
@@ -56,8 +56,8 @@
  */
 +(TheBoxUIScrollView *) newHorizontalScrollView:(CGRect)frame viewsOf:(CGFloat)width;
 
-@property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDatasource> datasource;
-@property(nonatomic, unsafe_unretained) id <TheBoxUIScrollViewDelegate> scrollViewDelegate;
+@property(nonatomic, unsafe_unretained) IBOutlet id <TheBoxUIScrollViewDatasource> datasource;
+@property(nonatomic, unsafe_unretained) IBOutlet id <TheBoxUIScrollViewDelegate> scrollViewDelegate;
 
 /**
  Call this method will recycle any subviews that where added as part of 

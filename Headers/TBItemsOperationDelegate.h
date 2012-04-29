@@ -1,11 +1,12 @@
-//
-//  TBItemsOperationDelegate.h
-//  TheBox
-//
-//  Created by Markos Charatzas on 04/04/2012.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
+/*
+ *  Copyright 2010 The Box
+ *  All rights reserved.
+ *
+ *  This file is part of TheBox
+ *
+ *  Created by Markos Charatzas (@qnoid) on 04/04/2012.
+ *  Contributor(s): .-
+ */
 #import <Foundation/Foundation.h>
 
 @protocol TBItemsOperationDelegate <NSObject>

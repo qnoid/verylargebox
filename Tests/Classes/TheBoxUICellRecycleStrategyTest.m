@@ -9,7 +9,6 @@
  */
 #import <SenTestingKit/SenTestingKit.h>
 #import "TheBoxUIRecycleStrategy.h"
-#import "TheBoxBundle.h"
 #import "UITestViews.h"
 
 @interface TheBoxUICellRecycleStrategyTest : SenTestCase {

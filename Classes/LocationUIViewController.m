@@ -13,6 +13,11 @@
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
 
+static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare_gray";
+static NSString* const foursquarePoweredByType = @"png";
+
+static UIImage* foursquarePoweredBy;
+
 @interface LocationUIViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
@@ -27,6 +32,12 @@
 return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
 }
 
++(void)initialize
+{
+    NSString* path = [[NSBundle mainBundle] pathForResource:foursquarePoweredByFilename ofType:foursquarePoweredByType];
+    foursquarePoweredBy = [UIImage imageWithContentsOfFile:path];
+}
+
 @synthesize venuesTableView;
 @synthesize map;
 @synthesize theBoxLocationService;
@@ -39,7 +50,7 @@ return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
     if (self) 
     {
         self.venues = [NSArray array];
-        self.theBoxLocationService = [TheBoxLocationService theBox];        
+        self.theBoxLocationService = [TheBoxLocationService theBox];  
     }
     
 return self;
@@ -49,7 +60,12 @@ return self;
 -(void) viewDidLoad
 {
 	[self.theBoxLocationService notifyDidUpdateToLocation:self];
-	[self.theBoxLocationService notifyDidFindPlacemark:self];	
+    
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    imageView.image = foursquarePoweredBy;
+    imageView.frame = CGRectMake(10,10,320,121);
+    
+    self.venuesTableView.tableFooterView = imageView;
 }
 
 - (IBAction)cancel:(id)sender
@@ -70,6 +86,7 @@ return self;
     [operation start];
     
 	[map setRegion:newRegion];
+    map.showsUserLocation = YES;
 }
 
 #pragma mark TBLocationOperationDelegate
@@ -85,13 +102,6 @@ return self;
 -(void)didFailOnLocationWithError:(NSError*)error
 {
     NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
-}
-
--(void)didFindPlacemark:(NSNotification *)notification
-{
-	MKPlacemark *place = [TheBoxNotifications place:notification];
-
-	[map addAnnotation:place];
 }
 
 #pragma mark UITableViewDataSource
@@ -111,10 +121,13 @@ return self;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.text = [[self.venues objectAtIndex:indexPath.row] objectForKey:@"name"];
+    NSDictionary* location = [self.venues objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [location objectForKey:@"name"];
+    cell.detailTextLabel.text = [[location objectForKey:@"location"] objectForKey:@"address"];
     
 return cell;
 }

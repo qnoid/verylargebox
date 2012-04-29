@@ -73,15 +73,9 @@
     
 	newVerticalScrollView.datasource = self;
 	newVerticalScrollView.scrollViewDelegate = self;
+    newVerticalScrollView.scrollsToTop = YES;
     
     self.scrollView = newVerticalScrollView;
-
-    TheBoxSizeInHeight *gridViewHeight = [[TheBoxSizeInHeight alloc] initWithSize:self.frame.size];
-    
-    NSUInteger numberOfViews = [self.datasource numberOfViewsInGridView:self];
-	CGFloat size = [self.scrollViewDelegate whatSize:newVerticalScrollView];	
-    newVerticalScrollView.contentSize = [gridViewHeight sizeOf:numberOfViews size:size];
-
     [self addSubview:self.scrollView];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped:)];
@@ -200,6 +194,13 @@ return view;
     [self.scrollView setNeedsLayout];
 }
 
+-(void)scrollToIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    CGFloat y = index * [self whatSize:self.scrollView];
+    
+    [self.scrollView setContentOffset:CGPointMake(CGPointZero.x, y) animated:animated];
+}
+
 -(void)viewWasTapped:(id)sender
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -244,5 +245,13 @@ return view;
     [self.delegate didSelect:self atRow:row atIndex:index];
 }
 
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
+{
+    [self.scrollView addObserver:observer
+                    forKeyPath:keyPath
+                       options:options
+                       context:context];    
+
+}
 
 @end

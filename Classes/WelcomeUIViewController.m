@@ -8,51 +8,16 @@
  *  Contributor(s): .-
  */
 #import "WelcomeUIViewController.h"
-#import "TheBoxNotifications.h"
-#import "TheBoxLocationService.h"
 
 @implementation WelcomeUIViewController
 
 @synthesize locationLabel;
 @synthesize checkInButton;
-@synthesize theBoxLocationService;
 
--(void) viewDidLoad
-{
-	self.theBoxLocationService = [TheBoxLocationService theBox];
-	[self.theBoxLocationService notifyDidFindPlacemark:self];
-	[self.theBoxLocationService notifyDidFailWithError:self];	
+
++(WelcomeUIViewController*)newWelcomeViewController {
+    return [[WelcomeUIViewController alloc] initWithNibName:@"WelcomeUIViewController" bundle:[NSBundle mainBundle]];
 }
-
--(void)didFindPlacemark:(NSNotification *)notification;
-{
-	MKPlacemark *place = [TheBoxNotifications place:notification];
-	NSString *city = place.locality;
-	CLLocationDegrees latitude = place.coordinate.latitude;
-	CLLocationDegrees longitude = place.coordinate.longitude;
-	
-	NSLog(@"latitude %f", latitude);
-	NSLog(@"longitude %f", longitude);
-	
-	NSLog(@"city: %@", city);
-	locationLabel.text = city;	
-	locationLabel.hidden = NO;
-	checkInButton.hidden = NO;
-	checkInButton.enabled = YES;
-}
-
--(void)didFailWithError:(NSNotification *)notification
-{
-	NSError *error = [TheBoxNotifications error:notification];
-	
-	NSLog(@"%@", error);
-	
-	locationLabel.text = @"Unknown";
-	locationLabel.hidden = NO;
-	checkInButton.hidden = NO;
-	checkInButton.enabled = YES;
-}
-
 
 - (IBAction)enter:(id)sender 
 {

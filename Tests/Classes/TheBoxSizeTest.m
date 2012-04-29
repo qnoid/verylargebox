@@ -93,7 +93,7 @@
 	
 	CGSize actual = [theBoxSize sizeOf:1 size:160];
 	
-	STAssertEquals(actual, CGSizeMake(160, 392), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(320, 196)));
+	STAssertEquals(actual, CGSizeMake(160, 392), @"actual: %@ expected: %@", NSStringFromCGSize(actual), NSStringFromCGSize(CGSizeMake(160, 392)));
 	
 }
 

@@ -28,18 +28,10 @@
 
 @synthesize uploadView;
 @synthesize takePhotoButton;
-@synthesize categoryTextField;
-@synthesize firstTag;
-@synthesize secondTag;
 @synthesize imageView;
 @synthesize locationButton;
-@synthesize nameTextField;
 
-@synthesize textFields;
-@synthesize list;
-@synthesize tags;
 @synthesize theBox;
-@synthesize keyboardObserver;
 @synthesize createItemDelegate;
 
 @synthesize location = _location;
@@ -48,21 +40,14 @@
 
 - (void) dealloc
 {
-    [TheBoxNotifications removeObserverForUIKeyboardNotifications:self.keyboardObserver];
     [theBoxLocationService dontNotifyOnUpdateToLocation:self];
 }
 
-+(UploadUIViewController*)newUploadUIViewController
++(UploadUIViewController*)newUploadUIViewController:(NSDictionary*) category
 {
     UploadUIViewController* newUploadUIViewController = [[UploadUIViewController alloc] initWithNibName:@"UploadUIViewController" bundle:[NSBundle mainBundle]];
-    
-    TheBoxDefaultKeyboardObserver* newKeyboardObserver = [[TheBoxDefaultKeyboardObserver alloc] init];
-    newKeyboardObserver.keyboardObserver = newUploadUIViewController;
-    newUploadUIViewController.keyboardObserver = newKeyboardObserver;
-    
-    [TheBoxNotifications addObserverForUIKeyboardNotifications:newKeyboardObserver];
-    
-    
+    newUploadUIViewController.category = category;
+        
 return newUploadUIViewController;
 }
 
@@ -72,7 +57,6 @@ return newUploadUIViewController;
     
     if (self) {
         self.location = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"location"];
-        self.category = [NSDictionary dictionaryWithObject:@"" forKey:@"name"];
         self.theBoxLocationService = [TheBoxLocationService theBox];                
     }
     
@@ -82,21 +66,8 @@ return self;
 -(void) viewDidLoad
 {
 	[super viewDidLoad];
-
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
-
-	self.textFields = [NSArray arrayWithObjects:nameTextField, categoryTextField, firstTag, secondTag, nil];	
-	self.list = [TheBoxUIList newListWithTextFields: [NSArray arrayWithObjects:categoryTextField, firstTag, secondTag, nil]];
-	self.tags = [NSArray arrayWithObjects:firstTag, secondTag, nil];	
-	
-	for (UITextField *textField in textFields) {
-		textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-	}
-	
-	for (UITextField *textField in list) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
-	}
-	
+		
 	uploadView.contentSize = uploadView.frame.size;
 	
 	CGRect bounds = uploadView.bounds;
@@ -123,67 +94,6 @@ return self;
 
 #pragma mark TheBoxKeyboardObserver
 
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-	CGRect frame = [uploadView frame];
-	frame.origin.y -= [imageView frame].size.height;
-	[uploadView setFrame:frame];
-	
-	CGSize contentSize = uploadView.contentSize;
-	contentSize.height += 500;
-	uploadView.contentSize = contentSize;
-	NSLog(@"%@", NSStringFromCGSize(contentSize));
-}
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-	CGRect frame = [uploadView frame];
-	frame.origin.y += [imageView frame].size.height;	
-	[uploadView setFrame:frame];
-	
-	CGSize contentSize = uploadView.contentSize;
-	contentSize.height -= 500;
-	uploadView.contentSize = contentSize;
-	NSLog(@"%@", NSStringFromCGSize(contentSize));
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{	
-	for (UITextField *textField in textFields) {
-		if([textField resignFirstResponder]){
-			return;
-		}
-	}
-	
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{	
-    if(textField == self.nameTextField){
-        [textField resignFirstResponder];
-    return NO;
-    }
-    
-	NSInteger index = [textFields indexOfObject:textField];	
-    if(index + 1 == [textFields count]){
-        [textField resignFirstResponder];
-    return YES;
-    }
-    
-	[[textFields objectAtIndex:++index] becomeFirstResponder];
-		
-return textField == self.categoryTextField;
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    return textField != self.categoryTextField;  
-}
-
-- (void)textFieldDidChange:(NSNotification *)notification
-{
-	UITextField *textField = (UITextField *)[notification object];
-	[self.list textFieldDidChange:textField];
-}
-
 - (IBAction)cancel:(id)sender{
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -191,10 +101,9 @@ return textField == self.categoryTextField;
 - (IBAction)done:(id)sender 
 {
 	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
-												itemName:nameTextField.text 
+												itemName:@"" 
 												location:self.location
-												category:category
-												tags:tags];
+												category:category];
 
 
     [itemQuery setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -238,25 +147,6 @@ return textField == self.categoryTextField;
 	NSString *locationName = [self.location objectForKey:@"name"];
 	[locationButton setTitle:locationName forState:UIControlStateNormal];
 	[locationButton setTitle:locationName forState:UIControlStateSelected];
-}
-
-- (IBAction)selectCategory:(id)sender
-{
-	UIViewController *categoriesController = [CategoriesViewController newCategoriesViewController];
-	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(didSelectCategory:) name:@"didSelectCategory" object:categoriesController];
-	
-	[self presentModalViewController:categoriesController animated:YES];	    
-}
-
--(void)didSelectCategory:(NSNotification *)aNotification
-{
-	NSDictionary *userInfo = [aNotification userInfo];
-    self.category = [userInfo valueForKey:@"category"];
-    
-	NSString *categoryName = [category objectForKey:@"name"];
-	self.categoryTextField.text = categoryName;
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio

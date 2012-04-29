@@ -19,6 +19,8 @@
 
 @property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDatasource> datasource;
 @property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDelegate> delegate;
+
+-(void)scrollToIndex:(NSUInteger)index animated:(BOOL)animated;
 -(void)reload;
 
 @end

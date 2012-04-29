@@ -13,12 +13,9 @@
 #import "TheBoxNotifications.h"
 #import "TheBoxLocationServiceDelegate.h"
 @class TheBox;
-@class HomeUIGridViewController;
-@class TheBoxUIList;
-@class TheBoxDefaultKeyboardObserver;
 @protocol TBCreateItemOperationDelegate;
 
-@interface UploadUIViewController : UIViewController <TheBoxKeyboardObserver, TheBoxLocationServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> 
+@interface UploadUIViewController : UIViewController <TheBoxLocationServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate> 
 {
 }
 
@@ -26,16 +23,8 @@
 @property(nonatomic, unsafe_unretained) IBOutlet UIButton *takePhotoButton;
 @property(nonatomic, unsafe_unretained) IBOutlet UIImageView *imageView;
 @property(nonatomic, unsafe_unretained) IBOutlet UIButton *locationButton;
-@property(nonatomic, unsafe_unretained) IBOutlet UITextField *nameTextField;
-@property(nonatomic, unsafe_unretained) IBOutlet UITextField *categoryTextField;
-@property(nonatomic, unsafe_unretained) IBOutlet UITextField *firstTag;
-@property(nonatomic, unsafe_unretained) IBOutlet UITextField *secondTag;
 
-@property(nonatomic, strong) NSArray *textFields;
-@property(nonatomic, strong) TheBoxUIList *list;
-@property(nonatomic, strong) NSArray *tags;
 @property(nonatomic, strong) TheBox *theBox;
-@property(nonatomic, strong) TheBoxDefaultKeyboardObserver *keyboardObserver;
 @property(nonatomic, unsafe_unretained) NSObject<TBCreateItemOperationDelegate> *createItemDelegate;
 
 - (IBAction)cancel:(id)sender;
@@ -53,8 +42,7 @@
 - (IBAction)takePhoto:(id)sender;
 
 - (IBAction)enterLocation:(id)sender;
-- (IBAction)selectCategory:(id)sender;
 
-+(UploadUIViewController*)newUploadUIViewController;
++(UploadUIViewController*)newUploadUIViewController:(NSDictionary*) category;
 
 @end

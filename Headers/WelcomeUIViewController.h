@@ -9,16 +9,14 @@
  */
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "TheBoxLocationServiceDelegate.h"
 #import "HomeUIGridViewController.h"
 
-@class TheBoxLocationService;
-
-@interface WelcomeUIViewController : UIViewController <TheBoxLocationServiceDelegate> 
+@interface WelcomeUIViewController : UIViewController
 
 @property(nonatomic, unsafe_unretained) IBOutlet UILabel *locationLabel;
 @property(nonatomic, unsafe_unretained) IBOutlet UIButton *checkInButton;
-@property(nonatomic) TheBoxLocationService *theBoxLocationService;
+
++(WelcomeUIViewController*)newWelcomeViewController;
 
 - (IBAction)enter:(id)sender;
 @end
