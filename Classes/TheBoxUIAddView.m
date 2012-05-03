@@ -22,9 +22,15 @@
 return view;
 }
 
+@synthesize addButton;
 @synthesize category;
 @synthesize createItemDelegate;
 @synthesize owner;
+
+-(void)awakeFromNib
+{
+    self.addButton.titleLabel.numberOfLines = 0;
+}
 
 - (IBAction)upload:(id)sender
 {

@@ -40,27 +40,21 @@
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIImageView" id="32516658">
-						<reference key="NSNextResponder" ref="268876731"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 276}</string>
-						<reference key="NSSuperview" ref="268876731"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
 					<object class="IBUIButton" id="507448961">
 						<reference key="NSNextResponder" ref="268876731"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 276}, {320, 160}}</string>
+						<string key="NSFrameSize">{320, 436}</string>
 						<reference key="NSSuperview" ref="268876731"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="32516658"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">2</int>
+						<double key="IBUITitleEdgeInsets.top">0.0</double>
+						<double key="IBUITitleEdgeInsets.bottom">60</double>
+						<double key="IBUITitleEdgeInsets.left">0.0</double>
+						<double key="IBUITitleEdgeInsets.right">0.0</double>
 						<string type="base64-UTF8" key="IBUINormalTitle">R2V0IGRpcmVjdGlvbnMgdG8gCiVAA</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="533820605">
 							<int key="NSColorSpace">3</int>
@@ -91,11 +85,21 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
+					<object class="IBUIImageView" id="32516658">
+						<reference key="NSNextResponder" ref="268876731"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrameSize">{320, 276}</string>
+						<reference key="NSSuperview" ref="268876731"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
 				</object>
 				<string key="NSFrame">{{0, 44}, {320, 436}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="32516658"/>
+				<reference key="NSNextKeyView" ref="507448961"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -203,6 +207,7 @@
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
+					<string>9.IBUIButtonInspectorSelectedEdgeInsetMetadataKey</string>
 					<string>9.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 				</object>
 				<object class="NSArray" key="dict.values">
@@ -214,6 +219,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="1"/>
 					<real value="0.0"/>
 				</object>
 			</object>
@@ -229,7 +235,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -254,13 +260,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>itemImageView</string>
 							<string>locationButton</string>
-							<string>locationLabel</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIImageView</string>
 							<string>UIButton</string>
-							<string>UILabel</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -269,7 +273,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>itemImageView</string>
 							<string>locationButton</string>
-							<string>locationLabel</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -280,10 +283,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">locationButton</string>
 								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">locationLabel</string>
-								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
 					</object>

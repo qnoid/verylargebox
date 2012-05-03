@@ -21,6 +21,7 @@
 		903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4F51285CBD800A8FB28 /* UserProfiles.xib */; };
 		903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE5601285E33600A8FB28 /* UploadUIViewController.xib */; };
 		90428D39154B405D0090D280 /* TheBoxUIScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */; };
+		90454B05154DE5DF0064D998 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 90454B04154DE5DF0064D998 /* Icon-72.png */; };
 		905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */; };
 		907A0E49154B5C3D007F7FCB /* TheBoxUIAddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 907A0E48154B5C3D007F7FCB /* TheBoxUIAddView.m */; };
 		907A0E4D154B5D66007F7FCB /* TheBoxUIAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 907A0E4C154B5D65007F7FCB /* TheBoxUIAddView.xib */; };
@@ -52,6 +53,10 @@
 		9083640B1400752500E5AAAF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		9083640C1400752500E5AAAF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		9083640D1400752A00E5AAAF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 908363A61400659200E5AAAF /* libz.dylib */; };
+		9089482515533980009188B4 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9089482415533980009188B4 /* libTestFlight.a */; };
+		9089482715534395009188B4 /* add_new_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 9089482615534395009188B4 /* add_new_section.png */; };
+		9089482A155349DE009188B4 /* NSDictionary+TBDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 90894829155349DE009188B4 /* NSDictionary+TBDictionary.m */; };
+		9089482B155349DE009188B4 /* NSDictionary+TBDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 90894829155349DE009188B4 /* NSDictionary+TBDictionary.m */; };
 		9096CC09133BB81E00639685 /* TheBoxQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* TheBoxQueries.m */; settings = {COMPILER_FLAGS = ""; }; };
 		909F9F3515442A5600D1E7AE /* TheBoxUIGridViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 909F9F3415442A5600D1E7AE /* TheBoxUIGridViewTest.m */; };
 		90A1E3BE133C985800CC9212 /* TheBoxDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E3BC133C985800CC9212 /* TheBoxDelegateHandler.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -147,6 +152,7 @@
 		903AE5601285E33600A8FB28 /* UploadUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UploadUIViewController.xib; path = Classes/UploadUIViewController.xib; sourceTree = "<group>"; };
 		90417326134B0F1500F18F95 /* TheBoxRectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxRectTest.m; sourceTree = "<group>"; };
 		90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIScrollViewTest.m; sourceTree = "<group>"; };
+		90454B04154DE5DF0064D998 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategy.m; sourceTree = "<group>"; };
 		904D3EB112A13F6B00F70930 /* TheBoxVisibleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxVisibleStrategy.m; sourceTree = "<group>"; };
 		9053948F1288847500FD381C /* TheBoxUICell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICell.m; sourceTree = "<group>"; };
@@ -166,6 +172,10 @@
 		908363CC14006BF000E5AAAF /* TheBoxUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheBoxUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TheBoxUnitTests-Info.plist"; path = "TheBoxUnitTests/TheBoxUnitTests-Info.plist"; sourceTree = "<group>"; };
 		908363DE14006BF100E5AAAF /* TheBoxUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "TheBoxUnitTests-Prefix.pch"; path = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch"; sourceTree = "<group>"; };
+		9089482415533980009188B4 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../Pods/TestFlightSDK/libTestFlight.a; sourceTree = "<group>"; };
+		9089482615534395009188B4 /* add_new_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_new_section.png; sourceTree = "<group>"; };
+		90894828155349DE009188B4 /* NSDictionary+TBDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+TBDictionary.h"; sourceTree = "<group>"; };
+		90894829155349DE009188B4 /* NSDictionary+TBDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+TBDictionary.m"; sourceTree = "<group>"; };
 		9094243E142E44380084C40C /* TheBoxUIGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIGridViewDelegate.h; sourceTree = "<group>"; };
 		9096CBD7133BB6FE00639685 /* TheBoxUIViewConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIViewConfiguration.h; sourceTree = "<group>"; };
 		9096CBE2133BB76700639685 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
@@ -264,8 +274,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				908363F9140070DC00E5AAAF /* CFNetwork.framework in Frameworks */,
 				908363FA140070DC00E5AAAF /* SystemConfiguration.framework in Frameworks */,
+				908363F9140070DC00E5AAAF /* CFNetwork.framework in Frameworks */,
 				908363FB140070DC00E5AAAF /* MobileCoreServices.framework in Frameworks */,
 				908363FC140070DC00E5AAAF /* CoreLocation.framework in Frameworks */,
 				908363FD140070DC00E5AAAF /* MapKit.framework in Frameworks */,
@@ -274,6 +284,7 @@
 				90836400140070DC00E5AAAF /* CoreGraphics.framework in Frameworks */,
 				908364011400712200E5AAAF /* libz.dylib in Frameworks */,
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
+				9089482515533980009188B4 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +342,8 @@
 				9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */,
 				907A0E48154B5C3D007F7FCB /* TheBoxUIAddView.m */,
 				907A0E4C154B5D65007F7FCB /* TheBoxUIAddView.xib */,
+				90894828155349DE009188B4 /* NSDictionary+TBDictionary.h */,
+				90894829155349DE009188B4 /* NSDictionary+TBDictionary.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -361,11 +374,13 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				90D8304012B506D900BE4470 /* Tests */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				90454B01154DBBCA0064D998 /* External */,
 				90E359291546333700075ABF /* Supporting Files */,
 				8D1107310486CEB800E47090 /* TheBox-Info.plist */,
 				908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */,
 				A152E550130D7A6000514061 /* Entitlement.plist */,
 				90F9FDE5154D97D0001BCD66 /* icon.png */,
+				90454B04154DE5DF0064D998 /* Icon-72.png */,
 				90F9FDE3154D97C5001BCD66 /* icon@2x.png */,
 				357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */,
 			);
@@ -464,6 +479,14 @@
 				903AE5601285E33600A8FB28 /* UploadUIViewController.xib */,
 			);
 			name = Upload;
+			sourceTree = "<group>";
+		};
+		90454B01154DBBCA0064D998 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				9089482415533980009188B4 /* libTestFlight.a */,
+			);
+			path = External;
 			sourceTree = "<group>";
 		};
 		905A4F9C1291DE6F00BCB475 /* Location */ = {
@@ -596,6 +619,7 @@
 				90CBFE56154BEEAA00349A13 /* add_button_highlighted_color.png */,
 				90E3592A1546333700075ABF /* default_item_thumb.png */,
 				90CBFE5A154BEFF800349A13 /* select_location_button_highlighed_color.png */,
+				9089482615534395009188B4 /* add_new_section.png */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -698,6 +722,8 @@
 				90CBFE70154D4ACA00349A13 /* earings.jpg in Resources */,
 				90F9FDE4154D97C5001BCD66 /* icon@2x.png in Resources */,
 				90F9FDE6154D97D0001BCD66 /* icon.png in Resources */,
+				90454B05154DE5DF0064D998 /* Icon-72.png in Resources */,
+				9089482715534395009188B4 /* add_new_section.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,6 +807,7 @@
 				90E359301546348E00075ABF /* NSCache+TBCache.m in Sources */,
 				907A0E49154B5C3D007F7FCB /* TheBoxUIAddView.m in Sources */,
 				90EC895D154B62E10009F73E /* WelcomeUIViewController.m in Sources */,
+				9089482A155349DE009188B4 /* NSDictionary+TBDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +829,7 @@
 				909F9F3515442A5600D1E7AE /* TheBoxUIGridViewTest.m in Sources */,
 				90428D39154B405D0090D280 /* TheBoxUIScrollViewTest.m in Sources */,
 				90F9FDE0154D54D8001BCD66 /* TheBoxUIRecycleStrategy.m in Sources */,
+				9089482B155349DE009188B4 /* NSDictionary+TBDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,7 +858,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -840,7 +871,10 @@
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
+				);
 				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -864,6 +898,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				SYMROOT = build;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_AFTER_BUILD = YES;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = NO;
@@ -882,9 +917,12 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -892,7 +930,10 @@
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
+				);
 				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -916,6 +957,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				SYMROOT = build;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_AFTER_BUILD = YES;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -1082,7 +1124,10 @@
 		A152E543130D7A2300514061 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_ENTITLEMENTS = Entitlement.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Williams";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1115,9 +1160,12 @@
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1125,7 +1173,10 @@
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
+				);
 				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1150,6 +1201,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				SYMROOT = build;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_AFTER_BUILD = YES;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -1159,7 +1211,10 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1182,7 +1237,10 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

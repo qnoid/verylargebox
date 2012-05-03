@@ -17,6 +17,10 @@
 @class TheBoxUIGridView;
 @class TheBoxUIScrollView;
 
+
+/**
+  Categories must be sorted by id since the item lookup on the response of POST /items does a binary search to find the category the item was created. 
+ */
 @interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TBCreateItemOperationDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBCreateCategoryOperationDelegate> 
 {
     

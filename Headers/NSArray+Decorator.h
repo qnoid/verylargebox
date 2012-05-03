@@ -12,6 +12,7 @@
 
 @interface NSArray (Decorator) 
 
+- (BOOL)tbIsEmpty;
 - (BOOL)isLast:(id)anObject;
 - (id)next:(id)anObject;
 

@@ -4,13 +4,17 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 14/11/10.
+ *  Created by Markos Charatzas (@qnoid) on 14/11/10.
  *  Contributor(s): .-
  */
 #import "NSArray+Decorator.h"
 
 
 @implementation NSArray (Decorator)
+
+- (BOOL)tbIsEmpty{
+    return [self count] == 0;
+}
 
 - (BOOL)isLast:(id)anObject{
 return [self count] - 1 == [self indexOfObject:anObject];

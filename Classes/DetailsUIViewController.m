@@ -95,7 +95,7 @@ return detailsViewController;
 
 -(IBAction)didClickOnLocation:(id)sender
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
     NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[[_item objectForKey:@"location"] objectForKey:@"latitude"],[[_item objectForKey:@"location"] objectForKey:@"longitude"]];
     

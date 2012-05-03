@@ -10,9 +10,9 @@
 #import <UIKit/UIKit.h>
 #import "UploadUIViewController.h"
 
-@interface TheBoxUIAddView : UITableView
+@interface TheBoxUIAddView : UIView
 
-
+@property(nonatomic, unsafe_unretained) IBOutlet UIButton *addButton;
 @property(nonatomic, strong) NSDictionary* category;
 @property(nonatomic, unsafe_unretained) NSObject<TBCreateItemOperationDelegate> *createItemDelegate;
 @property(nonatomic, unsafe_unretained) UIViewController* owner;

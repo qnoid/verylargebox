@@ -73,7 +73,6 @@
     
 	newVerticalScrollView.datasource = self;
 	newVerticalScrollView.scrollViewDelegate = self;
-    newVerticalScrollView.scrollsToTop = YES;
     
     self.scrollView = newVerticalScrollView;
     [self addSubview:self.scrollView];
@@ -174,6 +173,7 @@ return [self.datasource numberOfViewsInGridView:self];
 		
 		viewOf.datasource = self;
 		viewOf.scrollViewDelegate = self;
+        viewOf.scrollsToTop = NO;
 		view = viewOf;
 	}
     else {

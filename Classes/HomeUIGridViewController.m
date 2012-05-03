@@ -18,6 +18,9 @@
 #import "DetailsUIViewController.h"
 #import "NSCache+TBCache.h"
 #import "TheBoxUIAddView.h"
+#import "NSArray+Decorator.h"
+#import "UIImageView+AFNetworking.h"
+#import "NSDictionary+TBDictionary.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -27,7 +30,6 @@ static CGFloat const kAddButtonHeight = 196.0;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
-@property(nonatomic, strong) NSCache *imageCache;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) UIActivityIndicatorView *activityIndicatorForAddingSection;
 @property(nonatomic, strong) UIActivityIndicatorView *activityIndicator;
@@ -56,7 +58,6 @@ return homeGridViewController;
 @synthesize scrollView = _scrollView;
 @synthesize items;
 @synthesize theBoxLocationService;
-@synthesize imageCache;
 @synthesize defaultItemImage;
 @synthesize activityIndicatorForAddingSection;
 @synthesize activityIndicator;
@@ -68,7 +69,7 @@ return homeGridViewController;
     if (self) 
     {
         self.items = [NSMutableArray array];
-        self.imageCache = [[NSCache alloc] init];
+
         self.theBoxLocationService = locationService;
         self.title = @"TheBox";
         NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
@@ -89,12 +90,23 @@ return self;
 {
     [super viewDidLoad];
     self.scrollView.scrollEnabled = NO;
-    
+
+    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                     target:self
+                                     action:@selector(launchFeedback)];
+    self.navigationItem.leftBarButtonItem = actionButton;
+
     [self.gridView addObserver:self
                   forKeyPath:@"contentOffset"
                      options:NSKeyValueObservingOptionNew
                      context:NULL];    
 }
+
+-(void)launchFeedback {
+    [TestFlight openFeedbackView];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -131,6 +143,8 @@ return self;
     AFHTTPRequestOperation* createCategoryOperation = [TheBoxQueries newCreateCategoryQuery:name delegate:self];
     
     [createCategoryOperation start];
+    
+    [self.gridView scrollToIndex:[self.items count] animated:YES];
 }
 
 #pragma mark TBCreateCategoryOperationDelegate
@@ -143,7 +157,6 @@ return self;
     [self.activityIndicatorForAddingSection removeFromSuperview];
 
     [self.items addObject:category];
-    [self.gridView scrollToIndex:[self.items count]-1 animated:YES];
 }
 
 -(void)didFailOnCreateCategoryWithError:(NSError*)error
@@ -254,7 +267,7 @@ return self;
     
 	NSMutableDictionary* category = [[self.items objectAtIndex:index] objectForKey:@"category"];
 
-	NSMutableArray* categoryItems = [category objectForKey:@"items"];
+	NSMutableArray* categoryItems = [category tbObjectForKey:@"items" ifNil:[NSMutableArray arrayWithCapacity:1]];
 	
 	[categoryItems insertObject:item atIndex:0];
     
@@ -276,30 +289,7 @@ return self;
 	NSString *imageURL = [item objectForKey:@"imageURL"];
 	NSString *when = [item objectForKey:@"when"];
 	
-	UIImage *cachedImage = [self.imageCache tbObjectForKey:[item objectForKey:@"id"] ifNilReturn:self.defaultItemImage];
-	
-	if (cachedImage == self.defaultItemImage) 
-    {
-        NSLog(@"cache miss");
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
-            
-            NSURL *url = [NSURL URLWithString:imageURL];
-            NSData* data = [NSData dataWithContentsOfURL:url];
-            
-            UIImage* image = [UIImage imageWithData:data];
-            
-            if(image == nil){
-                return;
-            }
-            
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.imageCache setObject:image forKey:[item objectForKey:@"id"]];
-                theBoxCell.itemImageView.image = image;
-            });
-        });		
-	}
-
-    theBoxCell.itemImageView.image = cachedImage;
+    [theBoxCell.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.defaultItemImage];
 	theBoxCell.itemLabel.text = [NSString stringWithFormat:@"%@", when];	
 
 return theBoxCell;
@@ -312,6 +302,10 @@ return [self.items count];
 -(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)scrollView atIndex:(NSInteger)index
 {
 	NSArray *itemsForCategory = [[[self.items objectAtIndex:index] objectForKey:@"category"] objectForKey:@"items"];
+    
+    if([itemsForCategory tbIsEmpty]){
+        return 0;
+    }
 	
 return [itemsForCategory count];
 }
@@ -327,7 +321,7 @@ return CGSizeMake(40.0, 0.0);
 	//there should be a mapping between the index of the cell and the id of the item
 	NSDictionary *item = [categoryItems objectAtIndex:index];
  
-    NSLog(@"%s%@", __PRETTY_FUNCTION__, item);
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
     DetailsUIViewController* detailsViewController = [DetailsUIViewController newDetailsViewController:item];
 

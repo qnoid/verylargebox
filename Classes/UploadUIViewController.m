@@ -17,6 +17,9 @@
 #import "LocationUIViewController.h"
 #import "TheBoxLocationService.h"
 
+static CGFloat const IMAGE_WIDTH = 640.0;
+static CGFloat const IMAGE_HEIGHT = 480.0;
+
 @interface UploadUIViewController ()
 @property(nonatomic, strong) NSMutableDictionary* location;
 @property(nonatomic, strong) NSDictionary* category;
@@ -99,6 +102,8 @@ return self;
 
 - (IBAction)done:(id)sender 
 {
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
+    
 	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
 												itemName:@"" 
 												location:self.location
@@ -152,7 +157,7 @@ return self;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        CGSize newSize = CGSizeMake(2056.0f, 1536.0f);
+        CGSize newSize = CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT);
 
         UIGraphicsBeginImageContext(newSize);
         

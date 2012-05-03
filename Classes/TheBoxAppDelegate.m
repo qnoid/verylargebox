@@ -12,24 +12,18 @@
 #import "TheBoxUIGridViewDatasource.h"
 #import "TheBoxUIGridViewDelegate.h"
 
+static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
+
 @implementation TheBoxAppDelegate
 
 @synthesize window;
-
-#pragma mark -
-
-void uncaughtExceptionHandler(NSException *exception) {
-    NSLog(@"CRASH: %@", exception);
-    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-    // Internal error reporting
-}
 
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    
 	NSLog(@"Hello The Box");
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [TestFlight takeOff:TESTFLIGHT_TEAM_TOKEN];
 
     [window makeKeyAndVisible];
     
