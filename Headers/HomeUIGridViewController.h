@@ -20,6 +20,8 @@
 
 /**
   Categories must be sorted by id since the item lookup on the response of POST /items does a binary search to find the category the item was created. 
+  Item cells are recycled, as a result setting the image to a recycled cell will cancel an existing request to load the last visible image
+  and start a new one.
  */
 @interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TBCreateItemOperationDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBCreateCategoryOperationDelegate> 
 {
