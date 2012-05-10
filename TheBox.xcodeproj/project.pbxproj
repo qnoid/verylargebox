@@ -14,6 +14,7 @@
 		90226B91135999D1006E43EC /* TheBoxBinarySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226B90135999D1006E43EC /* TheBoxBinarySearch.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90226C6E1359B1DB006E43EC /* TheBoxPredicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */; settings = {COMPILER_FLAGS = ""; }; };
 		9022BAA1153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */; };
+		902FE727155B197200C67B2E /* UploadUIViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FE726155B197200C67B2E /* UploadUIViewControllerTest.m */; };
 		903AE3DA1284900300A8FB28 /* HomeUIGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */; };
 		903AE3E81284BF7500A8FB28 /* WelcomeUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */; };
 		903AE4EC1285BE6500A8FB28 /* DetailsUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */; };
@@ -141,6 +142,7 @@
 		9022BA9F153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableDictionary+TBMutableDictionary.h"; path = "../Classes/NSMutableDictionary+TBMutableDictionary.h"; sourceTree = "<group>"; };
 		9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+TBMutableDictionary.m"; sourceTree = "<group>"; };
 		902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeUIGridViewController.m; path = Classes/HomeUIGridViewController.m; sourceTree = "<group>"; };
+		902FE726155B197200C67B2E /* UploadUIViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadUIViewControllerTest.m; path = "../../../thebox-hg/Tests/Classes/UploadUIViewControllerTest.m"; sourceTree = "<group>"; };
 		903367ED129C5F510046C59D /* TheBoxUIGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIGridViewController.m; sourceTree = "<group>"; };
 		903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomeUIGridViewController.xib; path = Classes/HomeUIGridViewController.xib; sourceTree = "<group>"; };
 		903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WelcomeUIViewController.xib; path = Classes/WelcomeUIViewController.xib; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 		90A1E565133CC65A00CC9212 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				902FE726155B197200C67B2E /* UploadUIViewControllerTest.m */,
 				90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */,
 				90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */,
 				90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */,
@@ -830,6 +833,7 @@
 				90428D39154B405D0090D280 /* TheBoxUIScrollViewTest.m in Sources */,
 				90F9FDE0154D54D8001BCD66 /* TheBoxUIRecycleStrategy.m in Sources */,
 				9089482B155349DE009188B4 /* NSDictionary+TBDictionary.m in Sources */,
+				902FE727155B197200C67B2E /* UploadUIViewControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +859,7 @@
 				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -867,6 +871,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
@@ -926,6 +931,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
@@ -1132,6 +1138,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Williams";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1161,7 +1168,7 @@
 				);
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1171,6 +1178,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
@@ -1218,10 +1226,11 @@
 					armv6,
 				);
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1246,8 +1255,9 @@
 					armv6,
 				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1258,6 +1268,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = TheBox;
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;

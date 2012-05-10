@@ -23,6 +23,7 @@ static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e8
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    
 	NSLog(@"Hello The Box");
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];   
     [TestFlight takeOff:TESTFLIGHT_TEAM_TOKEN];
 
     [window makeKeyAndVisible];
