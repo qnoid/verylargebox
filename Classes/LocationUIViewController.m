@@ -144,4 +144,19 @@ return cell;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    NSString* query = searchBar.text;
+    
+    CLLocation* userLocation = map.userLocation.location;
+    
+    AFHTTPRequestOperation* operation = [TheBoxQueries newLocationQuery:userLocation.coordinate.latitude longtitude:userLocation.coordinate.longitude query:query delegate:self];
+    
+    [operation start];    
+}
+
+
 @end

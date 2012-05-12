@@ -14,7 +14,58 @@
 #import "TBLocationOperationDelegate.h"
 @class TheBoxLocationService;
 
-@interface LocationUIViewController : UIViewController <TheBoxLocationServiceDelegate, TBLocationOperationDelegate, UITableViewDataSource, UITableViewDelegate> {
+
+/**
+ Will fire a notification of "didEnterLocation" with a userinfo containing a "location" key with he following dictionary values
+ 
+ 
+ {
+ "id": "4c1b81768b3aa5937d42975f",
+ "name": "Clarks Shoes",
+ "contact": {},
+ "location": {
+ "lat": 55.958778,
+ "lng": -3.242337,
+ "distance": 4290,
+ "country": "United Kingdom"
+ },
+ "categories": [
+ {
+ "id": "4bf58dd8d48988d107951735",
+ "name": "Shoe Store",
+ "pluralName": "Shoe Stores",
+ "shortName": "Shoes",
+ "icon": {
+ "prefix": "https://foursquare.com/img/categories/shops/apparel_shoestore_",
+ "sizes": [
+ 32,
+ 44,
+ 64,
+ 88,
+ 256
+ ],
+ "name": ".png"
+ },
+ "primary": true
+ }
+ ],
+ "verified": false,
+ "stats": {
+ "checkinsCount": 23,
+ "usersCount": 13,
+ "tipCount": 0
+ },
+ "specials": {
+ "count": 0,
+ "items": []
+ },
+ "hereNow": {
+ "count": 0
+ }
+ }
+ 
+ */
+@interface LocationUIViewController : UIViewController <TheBoxLocationServiceDelegate, TBLocationOperationDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> {
 
 }
 @property(nonatomic, unsafe_unretained) IBOutlet UITableView *venuesTableView;

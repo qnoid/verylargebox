@@ -1,20 +1,24 @@
-//
-//  DetailsUIViewController.m
-//  TheBox
-//
-//  Created by Markos Charatzas on 10/04/2012.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
+/*
+ *  Copyright 2010 TheBox
+ *  All rights reserved.
+ *
+ *  This file is part of TheBox
+ *
+ *  Created by Markos Charatzas (@qnoid) on 10/04/2012.
+ *  Contributor(s): .-
+ */
 #import "DetailsUIViewController.h"
 #import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
+#import "LocationUIViewController.h"
+#import "TheBoxQueries.h"
+#import "AFHTTPRequestOperation.h"
 
 @interface DetailsUIViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
 @property(nonatomic) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic) CLLocation *location;
-@property(nonatomic, strong) NSDictionary* item;
+@property(nonatomic, strong) NSMutableDictionary* item;
 @end
 
 @implementation DetailsUIViewController
@@ -70,6 +74,12 @@ return detailsViewController;
     
     if(name == [NSNull null]){
         name = [NSString stringWithFormat:@"%@,%@", [location objectForKey:@"latitude"], [location objectForKey:@"longitude"]];
+        
+        UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
+                                         initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                         target:self
+                                         action:@selector(enterLocation:)];
+        self.navigationItem.rightBarButtonItem = actionButton;
     }
     
     self.locationButton.titleLabel.numberOfLines = 0;
@@ -103,6 +113,44 @@ return detailsViewController;
 
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlstring]];
 }
+
+#pragma mark LocationUIViewController
+- (void)enterLocation:(id)sender
+{
+	UIViewController *locationController = [LocationUIViewController newLocationViewController];
+	
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:self selector:@selector(didEnterLocation:) name:@"didEnterLocation" object:locationController];
+	
+	[self presentModalViewController:locationController animated:YES];	
+}
+
+-(void)didEnterLocation:(NSNotification *)aNotification
+{
+	NSDictionary *userInfo = [aNotification userInfo];
+    NSDictionary *location = [userInfo valueForKey:@"location"];
+    
+    [self.item setObject:location forKey:@"location"];
+    
+	NSString *locationName = [location objectForKey:@"name"];
+	[locationButton setTitle:locationName forState:UIControlStateNormal];
+	[locationButton setTitle:locationName forState:UIControlStateSelected];
+    
+    AFHTTPRequestOperation *updateItem = [TheBoxQueries updateItemQuery:self.item delegate:self];
+    
+    [updateItem start];
+}
+
+-(void)didSucceedWithItem:(NSDictionary *)item
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+-(void)didFailOnUpdateItemWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
 
 
 @end

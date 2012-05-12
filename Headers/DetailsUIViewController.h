@@ -10,8 +10,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "TheBoxLocationServiceDelegate.h"
+#import "TBUpdateItemOperationDelegate.h"
 
-@interface DetailsUIViewController : UIViewController <TheBoxLocationServiceDelegate>
+
+@interface DetailsUIViewController : UIViewController <TheBoxLocationServiceDelegate, TBUpdateItemOperationDelegate>
 {
     
 }

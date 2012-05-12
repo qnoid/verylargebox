@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 20/03/2011.
+ *  Created by Markos Charatzas (@qnoid) on 20/03/2011.
  *  Contributor(s): .-
  */
 #import "TheBoxQueries.h"
@@ -17,10 +17,19 @@
 #import "TBCategoriesOperationDelegate.h"
 #import "TBCreateCategoryOperationDelegate.h"
 #import "NSMutableDictionary+TBMutableDictionary.h"
+#import "TBUpdateItemOperationDelegate.h"
+
+@interface TheBoxQueries ()
+
+/**
+ Migrate to 4sq queries class along with #newParameters if it starts to creep
+ */
++(AFHTTPRequestOperation*)newLocationQuery:(NSDictionary*)parameters delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
+@end
 
 @implementation TheBoxQueries
 
-NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com"; //@"http://192.168.1.65:3000";//
+NSString* const THE_BOX_BASE_URL_STRING = @"http://192.168.1.65:3000";//
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
@@ -128,33 +137,84 @@ return request;
 return createItem;
 }
 
-+(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate
++(AFHTTPRequestOperation*)updateItemQuery:(NSDictionary *) item delegate:(NSObject<TBUpdateItemOperationDelegate>*)delegate
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:FOURSQUARE_BASE_URL_STRING]];
-   
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [NSString stringWithFormat:@"%f,%f", latitude, longtitude], @"ll",
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters tbSetObjectIfNotNil:[[item objectForKey:@"location"] objectForKey:@"name"] forKey:@"item[location_attributes][name]"];
+    [parameters tbSetObjectIfNotNil:[[[item objectForKey:@"location"] objectForKey:@"location"] objectForKey:@"lat"] forKey:@"item[location_attributes][latitude]"];
+    [parameters tbSetObjectIfNotNil:[[[item objectForKey:@"location"] objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][longitude]"];
+    
+    NSMutableURLRequest* request = [client requestWithMethod:@"PUT" 
+                                                        path:[NSString stringWithFormat:@"items/%@", [item objectForKey:@"id"]] parameters:parameters];
+                                    
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setTimeoutInterval:TIMEOUT];
+    
+	AFHTTPRequestOperation *updateItem = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [updateItem setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [delegate didSucceedWithItem:nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnUpdateItemWithError:error];
+    }];
+    
+    return updateItem;
+
+}
+
+#pragma mark 4sq default parameters
++(NSMutableDictionary*)newParameters
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 FOURSQUARE_CLIENT_ID, @"client_id",
                                 FOURSQUARE_CLIENT_SECRET, @"client_secret",
                                 @"20120411", @"v",
                                 nil];
+    
+return parameters;
+}
+
++(AFHTTPRequestOperation*)newLocationQuery:(NSDictionary*)parameters delegate:(NSObject<TBLocationOperationDelegate>*)delegate
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:FOURSQUARE_BASE_URL_STRING]];
     
     NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"venues/search" parameters:parameters];
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [categoriesRequest setTimeoutInterval:TIMEOUT];
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
-    {
-        NSString* responseString = operation.responseString;
-        NSLog(@"%@", responseString);
+                                       {
+                                           NSString* responseString = operation.responseString;
+                                           NSLog(@"%@", responseString);
                                            
-        [delegate didSucceedWithLocations:[[[responseString objectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"]];
-    } 
-    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [delegate didFailOnLocationWithError:error];
-    }];
+                                           [delegate didSucceedWithLocations:[[[responseString objectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"]];
+                                       } 
+                                                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                          [delegate didFailOnLocationWithError:error];
+                                                                      }];
     
-return request;    
+    return request;    
+}
+
++(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate
+{
+    NSMutableDictionary *parameters = [self newParameters];
+
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", latitude, longtitude] forKey:@"ll"];
+    
+return [self newLocationQuery:parameters delegate:delegate];    
+}
+
++(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude query:(NSString*) query delegate:(NSObject<TBLocationOperationDelegate>*)delegate
+{
+    NSMutableDictionary *parameters = [self newParameters];
+    
+    [parameters setObject:query forKey:@"query"];
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", latitude, longtitude] forKey:@"ll"];
+    
+return [self newLocationQuery:parameters delegate:delegate];    
 }
 
 @end

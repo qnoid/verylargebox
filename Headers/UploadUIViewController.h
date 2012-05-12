@@ -9,7 +9,6 @@
  */
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "TheBoxDelegate.h"
 #import "TheBoxNotifications.h"
 #import "TheBoxLocationServiceDelegate.h"
 @class TheBox;

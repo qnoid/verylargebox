@@ -8,13 +8,12 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
+		<string>logo.png</string>
 		<string>icon@2x.png</string>
-		<string>icon.png</string>
 		<string>icon-72.png</string>
+		<string>icon.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -25,6 +24,7 @@
 				<string>logo.png</string>
 				<string>icon@2x.png</string>
 				<string>icon-72.png</string>
+				<string>icon.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
@@ -39,17 +39,15 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>2.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>WelcomeUIViewController</string>
-	<key>NSMainNibFile~ipad</key>
-	<string>WelcomeUIViewController-iPad</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
