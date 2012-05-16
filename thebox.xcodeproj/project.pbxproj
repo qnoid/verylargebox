@@ -22,7 +22,7 @@
 		903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4F51285CBD800A8FB28 /* UserProfiles.xib */; };
 		903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE5601285E33600A8FB28 /* UploadUIViewController.xib */; };
 		90428D39154B405D0090D280 /* TheBoxUIScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */; };
-		90454B05154DE5DF0064D998 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 90454B04154DE5DF0064D998 /* Icon-72.png */; };
+		90454B05154DE5DF0064D998 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 90454B04154DE5DF0064D998 /* icon-72.png */; };
 		905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */; };
 		908363CD14006BF000E5AAAF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
 		908363E614006C3B00E5AAAF /* TheBoxUICellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */; };
@@ -152,7 +152,7 @@
 		903AE5601285E33600A8FB28 /* UploadUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UploadUIViewController.xib; path = Classes/UploadUIViewController.xib; sourceTree = "<group>"; };
 		90417326134B0F1500F18F95 /* TheBoxRectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxRectTest.m; sourceTree = "<group>"; };
 		90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIScrollViewTest.m; sourceTree = "<group>"; };
-		90454B04154DE5DF0064D998 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		90454B04154DE5DF0064D998 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
 		904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategy.m; sourceTree = "<group>"; };
 		904D3EB112A13F6B00F70930 /* TheBoxVisibleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxVisibleStrategy.m; sourceTree = "<group>"; };
 		9053948F1288847500FD381C /* TheBoxUICell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICell.m; sourceTree = "<group>"; };
@@ -371,7 +371,7 @@
 				908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */,
 				A152E550130D7A6000514061 /* Entitlement.plist */,
 				90F9FDE5154D97D0001BCD66 /* icon.png */,
-				90454B04154DE5DF0064D998 /* Icon-72.png */,
+				90454B04154DE5DF0064D998 /* icon-72.png */,
 				90F9FDE3154D97C5001BCD66 /* icon@2x.png */,
 				357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */,
 			);
@@ -610,9 +610,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* TheBox */ = {
+		1D6058900D05DD3D006BFB54 /* thebox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "TheBox" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "thebox" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -623,7 +623,7 @@
 			);
 			dependencies = (
 			);
-			name = TheBox;
+			name = thebox;
 			productName = TheBox;
 			productReference = 1D6058910D05DD3D006BFB54 /* TheBox.app */;
 			productType = "com.apple.product-type.application";
@@ -658,7 +658,7 @@
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = TheBox;
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TheBox" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "thebox" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -673,7 +673,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* TheBox */,
+				1D6058900D05DD3D006BFB54 /* thebox */,
 				908363CB14006BF000E5AAAF /* TheBoxUnitTests */,
 			);
 		};
@@ -706,7 +706,7 @@
 				90CBFE70154D4ACA00349A13 /* earings.jpg in Resources */,
 				90F9FDE4154D97C5001BCD66 /* icon@2x.png in Resources */,
 				90F9FDE6154D97D0001BCD66 /* icon.png in Resources */,
-				90454B05154DE5DF0064D998 /* Icon-72.png in Resources */,
+				90454B05154DE5DF0064D998 /* icon-72.png in Resources */,
 				9089482715534395009188B4 /* add_new_section.png in Resources */,
 				BDE0DBB5155FE13000B474DC /* thebox_tabbaritem.png in Resources */,
 			);
@@ -822,7 +822,7 @@
 /* Begin PBXTargetDependency section */
 		9077D19B1402F3E200959726 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1D6058900D05DD3D006BFB54 /* TheBox */;
+			target = 1D6058900D05DD3D006BFB54 /* thebox */;
 			targetProxy = 9077D19A1402F3E200959726 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -876,7 +876,7 @@
 					"-framework",
 					SystemConfiguration,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
@@ -936,7 +936,7 @@
 					"-framework",
 					SystemConfiguration,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
@@ -1127,7 +1127,7 @@
 				MACH_O_TYPE = mh_execute;
 				MODULE_NAME = Entitlement.plist;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = TheBox;
+				PRODUCT_NAME = thebox;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AC6F6B61-A6A9-4A37-8FEE-80342AE36B96";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -1183,7 +1183,7 @@
 					"-framework",
 					SystemConfiguration,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -1218,7 +1218,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				MACH_O_TYPE = mh_bundle;
 				MODULE_NAME = Entitlement.plist;
-				PRODUCT_NAME = TheBox;
+				PRODUCT_NAME = thebox;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -1246,7 +1246,7 @@
 				MACH_O_TYPE = mh_execute;
 				MODULE_NAME = Entitlement.plist;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = TheBox;
+				PRODUCT_NAME = thebox;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -1259,7 +1259,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "TheBox" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "thebox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -1279,7 +1279,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TheBox" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "thebox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
