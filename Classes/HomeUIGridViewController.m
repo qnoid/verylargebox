@@ -17,21 +17,18 @@
 #import "AFHTTPRequestOperation.h"
 #import "DetailsUIViewController.h"
 #import "NSCache+TBCache.h"
-#import "TheBoxUIAddView.h"
 #import "NSArray+Decorator.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+TBDictionary.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
-static CGFloat const kAddButtonHeight = 196.0;
 
 @interface HomeUIGridViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) UIImage *defaultItemImage;
-@property(nonatomic, strong) UIActivityIndicatorView *activityIndicatorForAddingSection;
 @property(nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @end
 
@@ -51,15 +48,10 @@ static CGFloat const kAddButtonHeight = 196.0;
 return homeGridViewController;
 }
 
-@synthesize headerSection;
-@synthesize addIcon;
-@synthesize addButton;
 @synthesize gridView = _gridView;
-@synthesize scrollView = _scrollView;
 @synthesize items;
 @synthesize theBoxLocationService;
 @synthesize defaultItemImage;
-@synthesize activityIndicatorForAddingSection;
 @synthesize activityIndicator;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService
@@ -71,7 +63,7 @@ return homeGridViewController;
         self.items = [NSMutableArray array];
 
         self.theBoxLocationService = locationService;
-        self.title = @"TheBox";
+        self.title = @"thebox";
         NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
         self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
         self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
@@ -89,36 +81,38 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.scrollView.scrollEnabled = NO;
-
+    
     UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                      target:self
                                      action:@selector(launchFeedback)];
     self.navigationItem.leftBarButtonItem = actionButton;
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                     target:self
+                                     action:@selector(addItem)];
+    
+    self.navigationItem.rightBarButtonItem = addButton;
 
-    [self.gridView addObserver:self
-                  forKeyPath:@"contentOffset"
-                     options:NSKeyValueObservingOptionNew
-                     context:NULL];    
 }
 
 -(void)launchFeedback {
     [TestFlight openFeedbackView];
 }
 
+-(void)addItem 
+{
+    UploadUIViewController* uploadViewController = [UploadUIViewController newUploadUIViewController];
+    uploadViewController.createItemDelegate = self;
+    
+    [self presentModalViewController:uploadViewController animated:YES];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.activityIndicator startAnimating];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    
-    [self.scrollView setValue:[change valueForKey:NSKeyValueChangeNewKey] forKey:keyPath];
 }
 
 #pragma mark application events
@@ -128,42 +122,6 @@ return self;
 	AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:self];
 	[operation start];
 }
-#pragma IBActions
-- (IBAction)addCategory:(id)sender
-{
-    self.addButton.enabled = NO;
-    self.addIcon.hidden = YES;
-    self.activityIndicatorForAddingSection = [[UIActivityIndicatorView alloc]initWithFrame:self.addIcon.frame];
-    [self.activityIndicatorForAddingSection setBackgroundColor:[UIColor clearColor]];
-    [self.activityIndicatorForAddingSection setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-    [self.headerSection addSubview:self.activityIndicatorForAddingSection];
-    [self.activityIndicatorForAddingSection startAnimating];
-
-    NSString* name = [NSString stringWithFormat:@"%d",[self.items count] + 1];
-    AFHTTPRequestOperation* createCategoryOperation = [TheBoxQueries newCreateCategoryQuery:name delegate:self];
-    
-    [createCategoryOperation start];
-    
-    [self.gridView scrollToIndex:[self.items count] animated:YES];
-}
-
-#pragma mark TBCreateCategoryOperationDelegate
-
--(void)didSucceedWithCategory:(NSDictionary*)category
-{
-    self.addButton.enabled = YES;
-    self.addIcon.hidden = NO;
-    [self.activityIndicatorForAddingSection stopAnimating];
-    [self.activityIndicatorForAddingSection removeFromSuperview];
-
-    [self.items addObject:category];
-}
-
--(void)didFailOnCreateCategoryWithError:(NSError*)error
-{
-    NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);   
-}
-
 
 #pragma mark thebox
 
@@ -174,31 +132,60 @@ return self;
  * At this time the items array has been updated and we can 
  * call [self.gridView reload] to update the grid view
  * 
- 
-     [
+ [
+ {
+ "location": {
+ "created_at": "2012-05-05T11:29:19Z",
+ "distance": null,
+ "id": 11,
+ "lat": "55.94790220908779",
+ "lng": "-3.186249732971191",
+ "name": "Blackwell's",
+ "updated_at": "2012-05-05T11:29:19Z",
+ "items": [
      {
-     "category": {
-     "created_at": "2012-03-31T16:15:01Z",
-     "id": 1,
-     "name": "hats",
-     "updated_at": "2012-03-31T16:15:01Z",
-         "items": [
-         {
-         "category_id": 1,
-         "created_at": "2012-03-31T16:15:01Z",
-         "id": 1,
+         "created_at": "2012-05-05T11:35:05Z",
+         "id": 30,
          "image_content_type": "image/jpeg",
-         "image_file_name": "hat.jpg",
-         "image_file_size": 1938325,
-         "name": "hat",
-         "updated_at": "2012-03-31T16:15:01Z",
-         "when": "about 1 hour ago",
-         "imageURL": "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/001/thumb/hat.jpg"
-         }
-         ]
+         "image_file_name": ".jpg",
+         "image_file_size": 277323,
+         "location_id": 11,
+         "updated_at": "2012-05-05T11:35:05Z",
+         "when": "8 days ago",
+         "imageURL": "/system/items/images/000/000/030/thumb/.jpg",
+         "iphoneImageURL": "/system/items/images/000/000/030/iphone/.jpg",
+         "location": {
+             "created_at": "2012-05-05T11:29:19Z",
+             "distance": null,
+             "id": 11,
+             "lat": "55.94790220908779",
+             "lng": "-3.186249732971191",
+             "name": "Blackwell's",
+             "updated_at": "2012-05-05T11:29:19Z"
+        }
+     },
+     {
+         "created_at": "2012-05-05T11:34:46Z",
+         "id": 29,
+         "image_content_type": "image/jpeg",
+         "image_file_name": ".jpg",
+         "image_file_size": 386772,
+         "location_id": 11,
+         "updated_at": "2012-05-05T11:34:46Z",
+         "when": "8 days ago",
+         "imageURL": "/system/items/images/000/000/029/thumb/.jpg",
+         "iphoneImageURL": "/system/items/images/000/000/029/iphone/.jpg",
+         "location": {
+             "created_at": "2012-05-05T11:29:19Z",
+             "distance": null,
+             "id": 11,
+             "lat": "55.94790220908779",
+             "lng": "-3.186249732971191",
+             "name": "Blackwell's",
+             "updated_at": "2012-05-05T11:29:19Z"
          }
      }
-     ]
+     }]
  */
 
 -(void)didSucceedWithItems:(NSMutableArray*) _items
@@ -208,7 +195,6 @@ return self;
     
 	self.items = _items;
 	[self.gridView reload];
-    [self.scrollView setNeedsLayout];
 }
 
 -(void)didFailOnItemsWithError:(NSError*)error
@@ -226,52 +212,52 @@ return self;
 
 /**
  {
- item =     {
- "category_id" = 2;
- "created_at" = "2012-04-18T07:54:50Z";
- id = 122;
- imageURL = "/system/items/images/000/000/122/thumb/.jpg?1334735688";
- "image_content_type" = "image/jpeg";
- "image_file_name" = ".jpg";
- "image_file_size" = 1678390;
- location =         {
- "created_at" = "2012-04-18T07:54:50Z";
- id = 121;
- "item_id" = 122;
- latitude = "55.960976";
- longitude = "-3.189527";
- name = "<null>";
- "updated_at" = "2012-04-18T07:54:50Z";
- };
- name = "";
- "updated_at" = "2012-04-18T07:54:50Z";
- when = "less than a minute ago";
- };
- }
- */
+ "item": {
+     "created_at": "2012-05-05T10:59:54Z",
+     "id": 1,
+     "image_content_type": "image/jpeg",
+     "image_file_name": ".jpg",
+     "image_file_size": 283149,
+     "location_id": 171,
+     "updated_at": "2012-05-05T10:59:54Z",
+     "when": "8 days ago",
+     "imageURL": "/system/items/images/000/000/001/thumb/.jpg",
+     "iphoneImageURL": "/system/items/images/000/000/001/iphone/.jpg",
+     "location": {
+         "created_at": "2012-05-07T08:31:07Z",
+         "distance": null,
+         "id": 171,
+         "lat": "55.945658",
+         "lng": "-3.189601",
+         "name": "Napiers",
+         "updated_at": "2012-05-07T08:31:07Z"
+     }
+     }
+ } */
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);    
 	NSLog(@"%@", item);
 	
-	id<TheBoxPredicate> categoryPredicate = [TheBoxPredicates newCategoryIdPredicate];
-	TheBoxBinarySearch *search = [[TheBoxBinarySearch alloc] initWithPredicate:categoryPredicate];
+	id<TheBoxPredicate> locationPredicate = [TheBoxPredicates newLocationIdPredicate];
+	TheBoxBinarySearch *search = [[TheBoxBinarySearch alloc] initWithPredicate:locationPredicate];
 	
     item = [item objectForKey:@"item"];
     
     NSUInteger index = [search find:item on:self.items];
     
     if(index == NSNotFound){
-        index = 0;
+        index = [self.items count];
+        [self.items addObject:[NSMutableDictionary dictionaryWithObject:[item objectForKey:@"location"] forKey:@"location"]];
     }
     
-	NSMutableDictionary* category = [[self.items objectAtIndex:index] objectForKey:@"category"];
+	NSMutableDictionary* location = [[self.items objectAtIndex:index] objectForKey:@"location"];
 
-	NSMutableArray* categoryItems = [category tbObjectForKey:@"items" ifNil:[NSMutableArray arrayWithCapacity:1]];
+	NSMutableArray* locationItems = [location tbObjectForKey:@"items" ifNil:[NSMutableArray arrayWithCapacity:1]];
 	
-	[categoryItems insertObject:item atIndex:0];
+	[locationItems insertObject:item atIndex:0];
     
-	[category setObject:categoryItems forKey:@"items"];
+	[location setObject:locationItems forKey:@"items"];
 	
 	[self.gridView reload];
 }
@@ -281,10 +267,10 @@ return self;
 {
 	TheBoxUICell *theBoxCell = (TheBoxUICell*) [super viewInGridView:gridView inScrollView:scrollView atRow:row atIndex:index];
 
-	NSArray *categoryItems = [[[self.items objectAtIndex:row] objectForKey:@"category"] objectForKey:@"items"];
+	NSArray *locationItems = [[[self.items objectAtIndex:row] objectForKey:@"location"] objectForKey:@"items"];
 		
 	//there should be a mapping between the index of the cell and the id of the item
-	NSDictionary *item = [categoryItems objectAtIndex:index];
+	NSDictionary *item = [locationItems objectAtIndex:index];
 	
 	NSString *imageURL = [item objectForKey:@"imageURL"];
 	NSString *when = [item objectForKey:@"when"];
@@ -301,13 +287,13 @@ return [self.items count];
 
 -(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)scrollView atIndex:(NSInteger)index
 {
-	NSArray *itemsForCategory = [[[self.items objectAtIndex:index] objectForKey:@"category"] objectForKey:@"items"];
+	NSArray *itemsForLocation = [[[self.items objectAtIndex:index] objectForKey:@"location"] objectForKey:@"items"];
     
-    if([itemsForCategory tbIsEmpty]){
+    if([itemsForLocation tbIsEmpty]){
         return 0;
     }
 	
-return [itemsForCategory count];
+return [itemsForLocation count];
 }
 
 -(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index{
@@ -316,10 +302,10 @@ return CGSizeMake(40.0, 0.0);
 
 -(void)didSelect:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
 {
-   	NSArray *categoryItems = [[[self.items objectAtIndex:row] objectForKey:@"category"] objectForKey:@"items"];
+   	NSArray *locationItems = [[[self.items objectAtIndex:row] objectForKey:@"location"] objectForKey:@"items"];
     
 	//there should be a mapping between the index of the cell and the id of the item
-	NSDictionary *item = [categoryItems objectAtIndex:index];
+	NSMutableDictionary *item = [locationItems objectAtIndex:index];
  
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
@@ -333,34 +319,6 @@ return CGSizeMake(40.0, 0.0);
 
 -(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView {
 return [self.items count];
-}
-
--(void)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index willAppear:(UIView*)view{}
-
--(UIView*)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index
-{
-    TheBoxUIAddView *view = (TheBoxUIAddView*)[scrollView dequeueReusableView];
- 
-    CGRect frame = CGRectMake(
-                              scrollView.bounds.origin.x, 
-                              index * [self whatSize:scrollView], 
-                              self.scrollView.frame.size.width, 
-                              [self whatSize:scrollView]);
-
-    if(view == nil) {
-		view = [TheBoxUIAddView loadWithOwner:self];
-    }
-    
-    view.frame = frame;
-
-    view.category = [[self.items objectAtIndex:index] objectForKey:@"category"];
-    view.createItemDelegate = self;
-
-return view;
-}
-
--(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView{
-    return kAddButtonHeight;
 }
 
 @end

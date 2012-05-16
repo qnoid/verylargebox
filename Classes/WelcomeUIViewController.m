@@ -24,7 +24,7 @@
 	NSLog(@"Hello %@", locationLabel.text);
     HomeUIGridViewController *homeGridViewController = [HomeUIGridViewController newHomeGridViewController];
 
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:homeGridViewController];
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:homeGridViewController];    
     [self presentModalViewController:navigationController animated:YES];	
 }
 

@@ -15,7 +15,6 @@
 #import "JSONKit.h"
 #import "TBLocationOperationDelegate.h"
 #import "TBCategoriesOperationDelegate.h"
-#import "TBCreateCategoryOperationDelegate.h"
 #import "NSMutableDictionary+TBMutableDictionary.h"
 #import "TBUpdateItemOperationDelegate.h"
 
@@ -29,35 +28,11 @@
 
 @implementation TheBoxQueries
 
-NSString* const THE_BOX_BASE_URL_STRING = @"http://192.168.1.65:3000";//
+NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com"; //@"http://0.0.0.0:3000";
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
 NSUInteger const TIMEOUT = 60;
-
-+(AFHTTPRequestOperation*)newCreateCategoryQuery:(NSString*)name delegate:(NSObject<TBCreateCategoryOperationDelegate>*)delegate
-{
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
-    
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionaryWithObject:name forKey:@"category[name]"];
-
-    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"POST" path:@"/categories" parameters:parameters];
-    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest setTimeoutInterval:TIMEOUT];
-    
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
-    {
-       NSString* responseString = operation.responseString;
-       NSLog(@"%@", responseString);
-       
-       [delegate didSucceedWithCategory:[responseString mutableObjectFromJSONString]];
-    } 
-    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [delegate didFailOnCreateCategoryWithError:error];
-    }];
-    
-return request;
-}
 
 +(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate
 {
@@ -103,25 +78,23 @@ return request;
     return request;
 }
 
-+(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName location:(NSDictionary *)location category:(NSDictionary *)category
++(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image location:(NSDictionary *)location;
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
 	NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
 
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters tbSetObjectIfNotNil:[category objectForKey:@"id"] forKey:@"item[category_attributes][id]"];
-    [parameters tbSetObjectIfNotNil:[category objectForKey:@"name"] forKey:@"item[category_attributes][name]"];
-    [parameters tbSetObjectIfNotNil:itemName forKey:@"item[name]"];
     [parameters tbSetObjectIfNotNil:[location objectForKey:@"name"] forKey:@"item[location_attributes][name]"];
-    [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lat"] forKey:@"item[location_attributes][latitude]"];
-    [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][longitude]"];
+    [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lat"] forKey:@"item[location_attributes][lat]"];
+    [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][lng]"];
+    [parameters tbSetObjectIfNotNil:[location objectForKey:@"id"] forKey:@"item[location_attributes][foursquareid]"];
 
     NSMutableURLRequest* request = [client multipartFormRequestWithMethod:@"POST" path:@"/items" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) 
     {
         [formData appendPartWithFileData:imageData 
                                     name:@"item[image]" 
-                                fileName:[NSString stringWithFormat:@"%@.jpg", [itemName stringByReplacingOccurrencesOfString:@" "withString:@"_"]]
+                                fileName:@".jpg"
                                 mimeType:@"image/jpeg"];
     }];
 

@@ -28,10 +28,9 @@
 
 }
 
-+(AFHTTPRequestOperation*)newCreateCategoryQuery:(NSString*)name delegate:(NSObject<TBCreateCategoryOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBItemsOperationDelegate>*)delegate;
-+(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image itemName:(NSString *)itemName location:(NSDictionary *)location category:(NSDictionary *)category;
++(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image location:(NSDictionary *)location;
 +(AFHTTPRequestOperation*)updateItemQuery:(NSDictionary *) item delegate:(NSObject<TBUpdateItemOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude query:(NSString*) query delegate:(NSObject<TBLocationOperationDelegate>*)delegate;

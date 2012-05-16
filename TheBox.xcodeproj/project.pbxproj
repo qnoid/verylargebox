@@ -24,8 +24,6 @@
 		90428D39154B405D0090D280 /* TheBoxUIScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */; };
 		90454B05154DE5DF0064D998 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 90454B04154DE5DF0064D998 /* Icon-72.png */; };
 		905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */; };
-		907A0E49154B5C3D007F7FCB /* TheBoxUIAddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 907A0E48154B5C3D007F7FCB /* TheBoxUIAddView.m */; };
-		907A0E4D154B5D66007F7FCB /* TheBoxUIAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 907A0E4C154B5D65007F7FCB /* TheBoxUIAddView.xib */; };
 		908363CD14006BF000E5AAAF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
 		908363E614006C3B00E5AAAF /* TheBoxUICellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */; };
 		908363E714006C3B00E5AAAF /* TheBoxUICellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */; };
@@ -106,6 +104,7 @@
 		90F9FDE0154D54D8001BCD66 /* TheBoxUIRecycleStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */; };
 		90F9FDE4154D97C5001BCD66 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE3154D97C5001BCD66 /* icon@2x.png */; };
 		90F9FDE6154D97D0001BCD66 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE5154D97D0001BCD66 /* icon.png */; };
+		BDE0DBB5155FE13000B474DC /* thebox_tabbaritem.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE0DBB4155FE13000B474DC /* thebox_tabbaritem.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,9 +165,6 @@
 		905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LocationUIViewController.xib; path = Classes/LocationUIViewController.xib; sourceTree = "<group>"; };
 		905A4FE11291E15400BCB475 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		905A503A1291E4AC00BCB475 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		907A0E47154B5C3D007F7FCB /* TheBoxUIAddView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheBoxUIAddView.h; path = ../Classes/TheBoxUIAddView.h; sourceTree = "<group>"; };
-		907A0E48154B5C3D007F7FCB /* TheBoxUIAddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIAddView.m; sourceTree = "<group>"; };
-		907A0E4C154B5D65007F7FCB /* TheBoxUIAddView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TheBoxUIAddView.xib; sourceTree = "<group>"; };
 		908363A61400659200E5AAAF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		908363CC14006BF000E5AAAF /* TheBoxUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheBoxUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TheBoxUnitTests-Info.plist"; path = "TheBoxUnitTests/TheBoxUnitTests-Info.plist"; sourceTree = "<group>"; };
@@ -249,7 +245,6 @@
 		90D29AFF131A81FB008B8B2D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		90D29B07131A820F008B8B2D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		90D29B0B131A8219008B8B2D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		90D75381153E052A001C542F /* TBCreateCategoryOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCreateCategoryOperationDelegate.h; sourceTree = "<group>"; };
 		90D830D812B51BDF00BE4470 /* TheBoxBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxBundle.m; sourceTree = "<group>"; };
 		90D830F312B51DA400BE4470 /* TheBoxUICell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TheBoxUICell.xib; sourceTree = "<group>"; };
 		90D9A93E12B921950063FF60 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
@@ -266,6 +261,7 @@
 		90FDDF011538E57B0080A550 /* TBCategoriesOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCategoriesOperationDelegate.h; sourceTree = "<group>"; };
 		A152E550130D7A6000514061 /* Entitlement.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlement.plist; sourceTree = "<group>"; };
 		BDE0DBB1155EC1B600B474DC /* TBUpdateItemOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBUpdateItemOperationDelegate.h; sourceTree = "<group>"; };
+		BDE0DBB4155FE13000B474DC /* thebox_tabbaritem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thebox_tabbaritem.png; path = ../../../../../Shares/g.pavloudis/ICONS/thebox_tabbaritem.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,8 +334,6 @@
 				90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridView.m */,
 				90C2A47A1526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.m */,
 				9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */,
-				907A0E48154B5C3D007F7FCB /* TheBoxUIAddView.m */,
-				907A0E4C154B5D65007F7FCB /* TheBoxUIAddView.xib */,
 				90894828155349DE009188B4 /* NSDictionary+TBDictionary.h */,
 				90894829155349DE009188B4 /* NSDictionary+TBDictionary.m */,
 			);
@@ -519,7 +513,6 @@
 		90C950FA12B6A10700A8A05F /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				907A0E47154B5C3D007F7FCB /* TheBoxUIAddView.h */,
 				9094243E142E44380084C40C /* TheBoxUIGridViewDelegate.h */,
 				90A5FCCE1387CC1F004E65B3 /* TheBoxUIGridView.h */,
 				90226C6B1359B1DB006E43EC /* TheBoxPredicates.h */,
@@ -558,7 +551,6 @@
 				90F08275132AEDA000E7E35F /* UITextField+TheBoxUITextField.h */,
 				90C2A4791526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.h */,
 				90FDDF011538E57B0080A550 /* TBCategoriesOperationDelegate.h */,
-				90D75381153E052A001C542F /* TBCreateCategoryOperationDelegate.h */,
 				9022BA9F153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.h */,
 				90E359311546359B00075ABF /* NSCache+TBCache.h */,
 				BDE0DBB1155EC1B600B474DC /* TBUpdateItemOperationDelegate.h */,
@@ -610,6 +602,7 @@
 				90E3592A1546333700075ABF /* default_item_thumb.png */,
 				90CBFE5A154BEFF800349A13 /* select_location_button_highlighed_color.png */,
 				9089482615534395009188B4 /* add_new_section.png */,
+				BDE0DBB4155FE13000B474DC /* thebox_tabbaritem.png */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -701,7 +694,6 @@
 				905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */,
 				90D830F412B51DA400BE4470 /* TheBoxUICell.xib in Resources */,
 				90E3592C1546333700075ABF /* default_item_thumb.png in Resources */,
-				907A0E4D154B5D66007F7FCB /* TheBoxUIAddView.xib in Resources */,
 				90CBFE57154BEEAA00349A13 /* add_button_highlighted_color.png in Resources */,
 				90CBFE59154BEF4C00349A13 /* take_photo_button_highlighted_color.png in Resources */,
 				90CBFE5B154BEFF800349A13 /* select_location_button_highlighed_color.png in Resources */,
@@ -716,6 +708,7 @@
 				90F9FDE6154D97D0001BCD66 /* icon.png in Resources */,
 				90454B05154DE5DF0064D998 /* Icon-72.png in Resources */,
 				9089482715534395009188B4 /* add_new_section.png in Resources */,
+				BDE0DBB5155FE13000B474DC /* thebox_tabbaritem.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,7 +789,6 @@
 				90B56BE51534D3E10064CB4E /* DetailsUIViewController.m in Sources */,
 				9022BAA1153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m in Sources */,
 				90E359301546348E00075ABF /* NSCache+TBCache.m in Sources */,
-				907A0E49154B5C3D007F7FCB /* TheBoxUIAddView.m in Sources */,
 				90EC895D154B62E10009F73E /* WelcomeUIViewController.m in Sources */,
 				9089482A155349DE009188B4 /* NSDictionary+TBDictionary.m in Sources */,
 			);

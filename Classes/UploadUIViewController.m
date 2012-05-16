@@ -22,7 +22,6 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 
 @interface UploadUIViewController ()
 @property(nonatomic, strong) NSMutableDictionary* location;
-@property(nonatomic, strong) NSDictionary* category;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @end
 
@@ -37,7 +36,6 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 @synthesize createItemDelegate;
 
 @synthesize location = _location;
-@synthesize category;
 @synthesize theBoxLocationService;
 
 - (void) dealloc
@@ -45,10 +43,9 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
     [theBoxLocationService dontNotifyOnUpdateToLocation:self];
 }
 
-+(UploadUIViewController*)newUploadUIViewController:(NSDictionary*) category
++(UploadUIViewController*)newUploadUIViewController
 {
     UploadUIViewController* newUploadUIViewController = [[UploadUIViewController alloc] initWithNibName:@"UploadUIViewController" bundle:[NSBundle mainBundle]];
-    newUploadUIViewController.category = category;
         
 return newUploadUIViewController;
 }
@@ -104,11 +101,7 @@ return self;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:imageView.image 
-												itemName:@"" 
-												location:self.location
-												category:category];
-
+	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:imageView.image location:self.location];
 
     [itemQuery setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.createItemDelegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];

@@ -37,11 +37,11 @@
 return detailsViewController;
 }
 
-- (id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
+- (id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSMutableDictionary*)item;
 {
     self = [super initWithNibName:@"DetailsUIViewController" bundle:nibBundleOrNil];
     if (self) {
-        _item = item;
+        self.item = item;
         self.title = [_item objectForKey:@"name"];
         self.theBoxLocationService = [TheBoxLocationService theBox];  
         self.title = @"Details";
@@ -73,7 +73,7 @@ return detailsViewController;
     id name = [location objectForKey:@"name"];
     
     if(name == [NSNull null]){
-        name = [NSString stringWithFormat:@"%@,%@", [location objectForKey:@"latitude"], [location objectForKey:@"longitude"]];
+        name = [NSString stringWithFormat:@"%@,%@", [location objectForKey:@"lat"], [location objectForKey:@"lng"]];
         
         UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
                                          initWithBarButtonSystemItem:UIBarButtonSystemItemAction
@@ -107,7 +107,7 @@ return detailsViewController;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-    NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[[_item objectForKey:@"location"] objectForKey:@"latitude"],[[_item objectForKey:@"location"] objectForKey:@"longitude"]];
+    NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[[_item objectForKey:@"location"] objectForKey:@"lat"],[[_item objectForKey:@"location"] objectForKey:@"lng"]];
     
     NSLog(@"%@", urlstring);
 

@@ -21,7 +21,7 @@
 @property(nonatomic, unsafe_unretained) IBOutlet UIButton* locationButton;
 @property(nonatomic, unsafe_unretained) IBOutlet UIImageView* itemImageView;
 
-+(DetailsUIViewController*)newDetailsViewController:(NSDictionary*)item;
++(DetailsUIViewController*)newDetailsViewController:(NSMutableDictionary*)item;
 
 -(IBAction)didClickOnLocation:(id)sender;
 

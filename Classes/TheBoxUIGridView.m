@@ -73,6 +73,7 @@
     
 	newVerticalScrollView.datasource = self;
 	newVerticalScrollView.scrollViewDelegate = self;
+    newVerticalScrollView.showsVerticalScrollIndicator = NO;
     
     self.scrollView = newVerticalScrollView;
     [self addSubview:self.scrollView];

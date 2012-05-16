@@ -4,13 +4,13 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 16/04/2011.
+ *  Created by Markos Charatzas (@qnoid) on 16/04/2011.
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
 #import "TheBoxBinarySearch.h"
 
-@interface TheBoxPredicateOnCategory : NSObject <TheBoxPredicate>
+@interface TheBoxPredicateOnLocation : NSObject <TheBoxPredicate>
 {
 }
 @end
@@ -20,6 +20,6 @@
 
 }
 
-+(TheBoxPredicateOnCategory*)newCategoryIdPredicate;
++(TheBoxPredicateOnLocation*)newLocationIdPredicate;
 
 @end

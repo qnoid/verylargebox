@@ -42,6 +42,6 @@
 
 - (IBAction)enterLocation:(id)sender;
 
-+(UploadUIViewController*)newUploadUIViewController:(NSDictionary*) category;
++(UploadUIViewController*)newUploadUIViewController;
 
 @end
