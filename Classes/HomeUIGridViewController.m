@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import "HomeUIGridViewController.h"
-#import "TheBoxNotifications.h"
 #import "TheBoxUICell.h"
 #import "TheBoxQueries.h"
 #import "UploadUIViewController.h"
@@ -16,11 +15,12 @@
 #import "TheBoxPredicates.h"
 #import "AFHTTPRequestOperation.h"
 #import "DetailsUIViewController.h"
-#import "NSCache+TBCache.h"
 #import "NSArray+Decorator.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+TBDictionary.h"
+#import "TBUIView.h"
 
+static NSUInteger const HEADER_HEIGHT = 33;
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
@@ -81,7 +81,7 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                      target:self
@@ -263,9 +263,9 @@ return self;
 }
 
 #pragma mark datasource
-- (UIView *)viewInGridView:(TheBoxUIGridView *)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index 
+- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view atRow:(NSInteger)row atIndex:(NSInteger)index
 {
-	TheBoxUICell *theBoxCell = (TheBoxUICell*) [super viewInGridView:gridView inScrollView:scrollView atRow:row atIndex:index];
+	TheBoxUICell *theBoxCell = (TheBoxUICell*) [super gridView:gridView viewOf:view atRow:row atIndex:index];
 
 	NSArray *locationItems = [[[self.items objectAtIndex:row] objectForKey:@"location"] objectForKey:@"items"];
 		
@@ -296,11 +296,25 @@ return [self.items count];
 return [itemsForLocation count];
 }
 
--(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index{
-return CGSizeMake(40.0, 0.0);
+-(UIView *)gridView:(TheBoxUIGridView *)gridView headerOf:(UIView *)view atIndex:(NSInteger)index
+{
+    TBUIView *header = [[TBUIView alloc] initWithFrame:CGRectMake(0, 0, 320, HEADER_HEIGHT)];
+    
+    NSDictionary* location = [[self.items objectAtIndex:index] objectForKey:@"location"];
+    id name = [location objectForKey:@"name"];
+    
+    if(name == [NSNull null]){
+        name = [NSString stringWithFormat:@"%@,%@", [location objectForKey:@"lat"], [location objectForKey:@"lng"]];
+    }
+
+    header.title.text = name;
+    header.title.textColor = [UIColor whiteColor];
+    [view addSubview:header];
+    
+return header;
 }
 
--(void)didSelect:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
+-(void)didSelect:(TheBoxUIGridView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
 {
    	NSArray *locationItems = [[[self.items objectAtIndex:row] objectForKey:@"location"] objectForKey:@"items"];
     
@@ -315,10 +329,6 @@ return CGSizeMake(40.0, 0.0);
     self.navigationItem.backBarButtonItem = backBarButton;
 
     [self.navigationController pushViewController:detailsViewController animated:YES];
-}
-
--(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView {
-return [self.items count];
 }
 
 @end

@@ -4,12 +4,14 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 07/02/2011.
+ *  Created by Markos Charatzas (@qnoid) on 07/02/2011.
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
 #import "VisibleStrategy.h"
 #import "TheBoxUIScrollViewDatasource.h"
+#import "CanDequeueReusableView.h"
+#import "CanIndexLocationInView.h"
 @class TheBoxUIRecycleStrategy;
 @class VisibleStrategy;
 @class TheBoxUIScrollView;
@@ -26,6 +28,11 @@
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index willAppear:(UIView*)view;
 
 @optional
+
+/**
+
+ */
+-(UIView *)headerInScrollView:(TheBoxUIScrollView *)scrollView;
 -(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
 @end
 
@@ -40,7 +47,7 @@
  @see #newVerticalScrollView:viewsOf:
  @see #newHorizontalScrollView:viewsOf:
  */
-@interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate>
+@interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate, CanDequeueReusableView, CanIndexLocationInView>
 
 /**
  Creates a new scroll view which scrolls on the vertical axis
@@ -66,6 +73,5 @@
  Any previously visible views are invalidated.
  */
 -(void)setNeedsLayout;
--(UIView*)dequeueReusableView;
--(NSUInteger)indexOf:(CGPoint)point;
+
 @end

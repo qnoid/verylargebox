@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 23/11/10.
+ *  Created by Markos Charatzas (@qnoid) on 23/11/10.
  *  Contributor(s): .-
  */
 
@@ -28,7 +28,7 @@
  Called every time a view is within the bounds of the scrollview.
 
  Indexes are in sequential order starting from 0 up to the number of views as returned by #numberOfViewsInScrollView: minus 1.
-
+ 
  @param scrollView the scroll view this datasource was set to
  @param index the index which identifies the view
  */

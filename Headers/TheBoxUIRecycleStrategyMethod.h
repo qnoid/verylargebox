@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 13/12/10.
+ *  Created by Markos Charatzas (@qnoid) on 13/12/10.
  *  Contributor(s): .-
  */
 @protocol TheBoxUIRecycleStrategyMethod <NSObject>

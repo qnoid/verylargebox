@@ -4,13 +4,13 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas (@qnoid) on 18/12/10.
+ *  Created by Markos Charatzas (@qnoid) on 19/05/2012.
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
-@class TheBoxUIRecycleStrategy;
 
-@interface UIView (TheBoxUIView)
+@interface TBUIView : UIView
 
+@property(nonatomic, strong) UILabel* title;
 
 @end

@@ -8,9 +8,6 @@
  *  Contributor(s): .-
  */
 #import "TheBoxAppDelegate.h"
-#import "TheBoxUIGridView.h"
-#import "TheBoxUIGridViewDatasource.h"
-#import "TheBoxUIGridViewDelegate.h"
 
 static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
 

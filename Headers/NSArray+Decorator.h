@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 14/11/10.
+ *  Created by Markos Charatzas (@qnoid) on 14/11/10.
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>

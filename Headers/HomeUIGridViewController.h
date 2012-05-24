@@ -29,6 +29,7 @@
 
 +(HomeUIGridViewController*)newHomeGridViewController;
 
+
 @property(nonatomic, unsafe_unretained) IBOutlet TheBoxUIGridView* gridView;
 
 

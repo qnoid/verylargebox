@@ -4,15 +4,11 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 21/05/2011.
+ *  Created by Markos Charatzas (@qnoid) on 21/05/2011.
  *  Contributor(s): .-
  */
-#import "TheBoxUIGridViewController.h"
 #import "TheBoxUIGridView.h"
-#import "TheBoxSize.h"
-#import "TheBoxRect.h"
-#import "TheBoxUIScrollView.h"
-#import "TheBoxUIScrollViewDatasource.h"
+#import "TheBoxUIGridViewDatasource.h"
 #import "TheBoxUIGridViewDelegate.h"
 
 @interface TheBoxUIGridView () <TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate>
@@ -22,6 +18,7 @@
 @property(nonatomic) id<TheBoxUIScrollViewDatasource> scrollViewDatasource;
 @property(nonatomic) id<TheBoxUIScrollViewDelegate> scrollViewDelegate;
 
+-(UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view atIndex:(NSInteger)index;
 -(UIView*)viewAtRow:(NSUInteger)row;
 -(void)setView:(UIView*)view atIndex:(NSUInteger)index;
 -(CGRect)frameOf:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index;
@@ -82,12 +79,14 @@
     [self.scrollView addGestureRecognizer:tapGestureRecognizer];
 }
 
--(void)layoutSubviews
-{
-    [self.scrollView layoutSubviews];
-}
-
 #pragma mark private
+
+-(UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view atIndex:(NSInteger)index
+{
+    NSNumber* row = [self.frames objectForKey:[NSValue valueWithCGRect:[view frame]]];
+    
+return [self.datasource gridView:gridView viewOf:view atRow:[row intValue] atIndex:index];
+}
 
 -(UIView*)viewAtRow:(NSUInteger)row {
 return [self.views objectForKey:[NSNumber numberWithInt:row]];
@@ -106,7 +105,7 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
     NSUInteger noOfColumns = [self.datasource numberOfViewsInGridView:self atIndex:index];
     
     if(noOfColumns == 0){
-        return CGRectMake(bounds.origin.x, bounds.origin.y, 0.0f, scrollView.frame.size.height);
+        return CGRectMake(bounds.origin.x, bounds.origin.y, CGSizeZero.width, scrollView.frame.size.height);
     }
     
     return CGRectMake(bounds.origin.x, index * [self.delegate whatRowHeight:self], scrollView.frame.size.width, [self.delegate whatRowHeight:self]);
@@ -129,7 +128,7 @@ return [self.delegate whatRowHeight:self];
     {
         NSNumber* row = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
         
-        [self.delegate viewInGridView:self inScrollView:scrollView atRow:[row intValue] atIndex:index willAppear:view];
+        [self.delegate gridView:self viewOf:scrollView atRow:[row intValue] atIndex:index willAppear:view];
     }
     
     [self.scrollViewDelegate viewInScrollView:scrollView atIndex:index willAppear:view];
@@ -151,31 +150,33 @@ return [self.datasource numberOfViewsInGridView:self];
 
 -(UIView*)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index
 {
-    if(![scrollView isEqual:self.scrollView])
-    {
-        NSNumber* row = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
-        
-        UIView* viewOf = [self.datasource viewInGridView:self inScrollView:scrollView atRow:[row intValue] atIndex:index];
-        
-    return viewOf;
+    if(![scrollView isEqual:self.scrollView]) {        
+    return [self gridView:self viewOf:scrollView atIndex:index];
     }
 
 	NSLog(@"asking for row %d", index);
 	
-	TheBoxUIScrollView* view = (TheBoxUIScrollView*)[scrollView dequeueReusableView];
+	UIView* view = [scrollView dequeueReusableView];
 	
 	CGRect frame = [self frameOf:scrollView atIndex:index];
     
     if (view == nil) 
 	{		
 		TheBoxUIScrollView *viewOf = [TheBoxUIScrollView 
-                                      newHorizontalScrollView:frame 
-                                      viewsOf:[self.delegate whatCellWidth:self]];
-		
+                                      newHorizontalScrollView:CGRectMake(frame.origin.x, frame.origin.y + 33.0f, frame.size.width, frame.size.height) 
+                                      viewsOf:[self.delegate whatCellWidth:self]];		
 		viewOf.datasource = self;
 		viewOf.scrollViewDelegate = self;
         viewOf.scrollsToTop = NO;
-		view = viewOf;
+        
+        UIView* header = [self.delegate gridView:self headerOf:viewOf atIndex:index];
+        
+        FooView* fooView = [[FooView alloc] initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height + 33.0f)];
+        fooView.header = header;
+        fooView.contentView = viewOf;
+        [fooView addSubview:header];
+        [fooView addSubview:viewOf];
+        view = fooView;
 	}
     else {
         view.frame = frame;
@@ -185,21 +186,26 @@ return [self.datasource numberOfViewsInGridView:self];
 	NSLog(@"view %@", view);
     
 	[self setView:view atIndex:index];
-	
+
+    
 return view;
+}
+
+-(UIView *)headerInScrollView:(TheBoxUIScrollView *)scrollView
+{
+    if([scrollView isEqual:self.scrollView]){
+        return nil;
+    }
+    
+    NSNumber* index = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
+        
+return [self.delegate gridView:self headerOf:scrollView atIndex:[index intValue]];
 }
 
 #pragma mark public
 -(void)reload
 {
     [self.scrollView setNeedsLayout];
-}
-
--(void)scrollToIndex:(NSUInteger)index animated:(BOOL)animated
-{
-    CGFloat y = index * [self whatSize:self.scrollView];
-    
-    [self.scrollView setContentOffset:CGPointMake(CGPointZero.x, y) animated:animated];
 }
 
 -(void)viewWasTapped:(id)sender
@@ -219,12 +225,11 @@ return view;
         return;
     }
     
-    TheBoxUIScrollView* scrollView = (TheBoxUIScrollView*)[self viewAtRow:row];
-    NSLog(@"contentSize %@", NSStringFromCGSize(scrollView.contentSize));	
+    UIView<CanIndexLocationInView>* view = (UIView<CanIndexLocationInView>*)[self viewAtRow:row];
 
-    tapPoint = [tapGestureRecognizer locationInView:scrollView];
-    NSUInteger index = [scrollView indexOf:tapPoint];
-    NSLog(@"[%u, %u], %@, %@", row, index, scrollView, NSStringFromCGRect(scrollView.bounds));
+    tapPoint = [tapGestureRecognizer locationInView:view];
+    NSUInteger index = [view indexOf:tapPoint];
+    NSLog(@"[%u, %u], %@, %@", row, index, view, NSStringFromCGRect(view.bounds));
     
     NSUInteger numberOfViews = [self.datasource numberOfViewsInGridView:self atIndex:row];
     
@@ -246,13 +251,19 @@ return view;
     [self.delegate didSelect:self atRow:row atIndex:index];
 }
 
-- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
-{
-    [self.scrollView addObserver:observer
-                    forKeyPath:keyPath
-                       options:options
-                       context:context];    
+@end
 
+@implementation FooView
+
+@synthesize header;
+@synthesize contentView;
+
+-(UIView *)dequeueReusableView{
+return [self.contentView dequeueReusableView];
+}
+
+-(void)setNeedsLayout{
+    [self.contentView setNeedsLayout];
 }
 
 @end

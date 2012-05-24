@@ -4,14 +4,12 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 9/11/10.
+ *  Created by Markos Charatzas (@qnoid) on 9/11/10.
  *  Contributor(s): .-
  */
 #import "UploadUIViewController.h"
-#import "TheBoxUIList.h"
 #import "TheBoxQueries.h"
 #import "HomeUIGridViewController.h"
-#import "TheBoxDefaultKeyboardObserver.h"
 #import "AFHTTPRequestOperation.h"
 #import "JSONKit.h"
 #import "LocationUIViewController.h"

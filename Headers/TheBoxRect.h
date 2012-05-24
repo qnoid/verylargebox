@@ -4,11 +4,20 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 13/12/10.
+ *  Created by Markos Charatzas (@qnoid) on 13/12/10.
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGGeometry.h>
+
+CG_INLINE
+CGRect TBCGRectDiff(CGRect rect1, CGRect rect2){
+    return CGRectMake(
+                      abs(rect1.origin.x), 
+                      abs(rect1.origin.y + rect2.size.height), 
+                      rect1.size.width, 
+                      rect1.size.height);
+}
 
 @interface TheBoxRect : NSObject 
 {

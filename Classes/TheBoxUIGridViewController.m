@@ -4,14 +4,11 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 23/11/10.
+ *  Created by Markos Charatzas (@qnoid) on 23/11/10.
  *  Contributor(s): .-
  */
 #import "TheBoxUIGridViewController.h"
 #import "TheBoxUICell.h"
-#import "TheBoxRect.h"
-#import "TheBoxVisibleStrategy.h"
-#import "TheBoxUIGridView.h"
 
 @interface TheBoxUIGridViewController ()
 
@@ -39,17 +36,21 @@ static const CGFloat DEFAULT_CELL_WIDTH = 160.0;
     return self;
 }
 
-- (UIView *)viewInGridView:(TheBoxUIGridView *)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index 
+-(UIView*)viewInGridView:(TheBoxUIGridView*)gridView didLoad:(UIScrollView *)scrollView atRow:(NSInteger)row {
+    return scrollView;   
+}
+
+- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView<CanDequeueReusableView> *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index
 {
 	NSLog(@"asking for column %d at row %d", index, row);
 	
-	UIView* view = [scrollView dequeueReusableView];
+	UIView* view = [viewOf dequeueReusableView];
 	
 	CGRect frame = CGRectMake(
                               index * [self whatCellWidth:gridView], 
-                              scrollView.bounds.origin.y, 
+                              view.bounds.origin.y,
                               [self whatCellWidth:gridView], 
-                              scrollView.frame.size.height);
+                              view.frame.size.height);
 
     if (view == nil) {
 		view = [TheBoxUICell loadWithOwner:self];
@@ -62,7 +63,8 @@ static const CGFloat DEFAULT_CELL_WIDTH = 160.0;
 return view;
 }
 
--(void)viewInGridView:(TheBoxUIGridView*)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view{
+-(void)gridView:(TheBoxUIGridView*)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view
+{
 }
 
 -(CGSize)marginOf:(TheBoxUIScrollView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index {
@@ -87,6 +89,10 @@ return CGSizeMake(0.0, 0.0);
 
 -(CGFloat)whatCellWidth:(TheBoxUIGridView *)gridView{
     return self.cellWidth;
+}
+
+-(UIView *)gridView:(TheBoxUIGridView *)gridView headerOf:(UIView *)view atIndex:(NSInteger)index {
+    return nil;
 }
 
 @end

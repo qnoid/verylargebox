@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 24/09/2011.
+ *  Created by Markos Charatzas (@qnoid) on 24/09/2011.
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
@@ -17,5 +17,7 @@
 @optional
 -(CGFloat)whatRowHeight:(TheBoxUIGridView*)gridView;
 -(CGFloat)whatCellWidth:(TheBoxUIGridView*)gridView;
--(void)viewInGridView:(TheBoxUIGridView*)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view;
+
+-(void)gridView:(TheBoxUIGridView*)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view;
+-(UIView *)gridView:(TheBoxUIGridView*)gridView headerOf:(UIView *)view atIndex:(NSInteger)index;
 @end

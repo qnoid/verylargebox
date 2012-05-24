@@ -4,13 +4,12 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 07/02/10.
+ *  Created by Markos Charatzas (@qnoid) on 07/02/10.
  *  Contributor(s): .-
  */
 #import "TheBoxUIScrollView.h"
 #import "TheBoxUIRecycleStrategy.h"
 #import "TheBoxVisibleStrategy.h"
-#import "TheBoxSize.h"
 
 @interface TheBoxUIScrollView ()
 -(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size;
@@ -24,7 +23,6 @@
 
 @property(nonatomic, strong) NSObject<TheBoxSize> *theBoxSize;
 @end
-
 
 @implementation TheBoxUIScrollView
 
@@ -118,7 +116,8 @@ return self;
 -(void)setContentSize:(CGSize)contentSize
 {
     [super setContentSize:contentSize];
-    self.contentView.frame = CGRectMake(CGPointZero.x, CGPointZero.y, contentSize.width, contentSize.height);
+    self.contentView.frame = CGRectMake(CGPointZero.x, CGPointZero.y, 
+                                        self.contentSize.width, self.contentSize.height);    
 }
 
 -(void)recycleVisibleViewsWithinBounds:(CGRect)bounds {
@@ -169,11 +168,11 @@ return self;
 	NSLog(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
 
     CGRect bounds = [self bounds];
-
+    
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];	
     
-    NSLog(@"needsLayoutSubviews on bounds %@", NSStringFromCGRect(bounds));	    
+    NSLog(@"needsLayoutSubviews on bounds %@", NSStringFromCGRect(bounds));
 	[self displayViewsWithinBounds:bounds];
 }
 
@@ -196,11 +195,8 @@ return self;
 /*
  * No need to remove dequeued view from superview since it's removed when recycled
  */
--(UIView*)dequeueReusableView 
-{
-    UIView* recycled = [self.recycleStrategy dequeueReusableView];
-    
-return recycled;
+-(UIView*)dequeueReusableView {
+    return [self.recycleStrategy dequeueReusableView];
 }
 
 -(NSUInteger)indexOf:(CGPoint)point {

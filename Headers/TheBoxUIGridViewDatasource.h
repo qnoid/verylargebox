@@ -4,7 +4,7 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas <[firstname.lastname@gmail.com]> on 28/11/10.
+ *  Created by Markos Charatzas (@qnoid) on 28/11/10.
  *  Contributor(s): .-
  */
 
@@ -37,6 +37,6 @@
 /**
 
  */
-- (UIView *)viewInGridView:(TheBoxUIGridView *)gridView inScrollView:(TheBoxUIScrollView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
+- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view atRow:(NSInteger)row atIndex:(NSInteger)index;
 
 @end
