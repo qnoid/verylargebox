@@ -103,7 +103,6 @@
 		90F9FDE4154D97C5001BCD66 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE3154D97C5001BCD66 /* icon@2x.png */; };
 		90F9FDE6154D97D0001BCD66 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE5154D97D0001BCD66 /* icon.png */; };
 		BD1C3E0D15679668007769CE /* TBUIRibbon.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1C3E0C15679668007769CE /* TBUIRibbon.m */; };
-		BDE0DBB5155FE13000B474DC /* thebox_tabbaritem.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE0DBB4155FE13000B474DC /* thebox_tabbaritem.png */; };
 		BDE1E83615683FF800CF10CF /* TBUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE1E83515683FF800CF10CF /* TBUIView.m */; };
 /* End PBXBuildFile section */
 
@@ -714,7 +713,6 @@
 				90F9FDE6154D97D0001BCD66 /* icon.png in Resources */,
 				90454B05154DE5DF0064D998 /* icon-72.png in Resources */,
 				9089482715534395009188B4 /* add_new_section.png in Resources */,
-				BDE0DBB5155FE13000B474DC /* thebox_tabbaritem.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

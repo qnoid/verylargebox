@@ -15,30 +15,32 @@
     return [[TheBoxHeight alloc] init:height];
 }
 
+@synthesize value;
+
 -(id)init:(CGFloat) aHeight
 {
 	self = [super init];
 	
 	if (self) {
-		height = aHeight; 
+		value = aHeight;
 	}	
 	
 return self;
 }
 
--(NSInteger)minimumVisible:(CGPoint)point
+-(NSInteger)floorIndexOf:(CGPoint)point
 {
 	NSInteger visibleWindowStart = point.y;
 	
-return floor(visibleWindowStart / height);	
+return floor(visibleWindowStart / value);
 }
 
--(NSInteger)maximumVisible:(CGRect)visibleBounds
+-(NSInteger)ceilIndexOf:(CGRect)rect
 {
-	NSInteger visibleWindowStart = visibleBounds.origin.y;
-	NSInteger visibleWindowHeight = CGRectGetHeight(visibleBounds);
+	NSInteger visibleWindowStart = rect.origin.y;
+	NSInteger visibleWindowHeight = CGRectGetHeight(rect);
 	
-return ceilf((visibleWindowStart + visibleWindowHeight) / height);	
+return ceilf((visibleWindowStart + visibleWindowHeight) / value);
 }
 
 - (CGPoint)ceilOriginOf:(CGRect)bounds toContentSize:(CGSize)contentSize
@@ -48,8 +50,12 @@ return ceilf((visibleWindowStart + visibleWindowHeight) / height);
 return CGPointMake(CGRectGetWidth(bounds), originY);
 }
 
+-(CGRect)frameOf:(CGRect)bounds atIndex:(NSUInteger)index {
+return CGRectMake(bounds.origin.x, index * self.value, bounds.size.width, self.value);
+}
+
 -(NSString *) description{
-return [NSString stringWithFormat:@"%f", height];
+return [NSString stringWithFormat:@"%f", value];
 }
 
 @end
@@ -60,27 +66,29 @@ return [NSString stringWithFormat:@"%f", height];
     return [[TheBoxWidth alloc] init:width];
 }
 
+@synthesize value;
+
 -(id)init:(CGFloat) aWidth
 {
 	self = [super init];
 	
 	if (self) {
-		width = aWidth; 
+		value = aWidth;
 	}	
 	
 return self;
 }
 
--(NSInteger)minimumVisible:(CGPoint)point{
-return floor(point.x / width);
+-(NSInteger)floorIndexOf:(CGPoint)point{
+return floor(point.x / value);
 }
 
--(NSInteger)maximumVisible:(CGRect)visibleBounds
+-(NSInteger)ceilIndexOf:(CGRect)rect
 {
-	NSInteger visibleWindowStart = CGRectGetMinX(visibleBounds);
-	NSInteger visibleWindowWidth = CGRectGetWidth(visibleBounds);
+	NSInteger visibleWindowStart = CGRectGetMinX(rect);
+	NSInteger visibleWindowWidth = CGRectGetWidth(rect);
 	
-return ceilf((visibleWindowStart + visibleWindowWidth) / width);
+return ceilf((visibleWindowStart + visibleWindowWidth) / value);
 }
 
 - (CGPoint)ceilOriginOf:(CGRect)bounds toContentSize:(CGSize)contentSize
@@ -90,8 +98,12 @@ return ceilf((visibleWindowStart + visibleWindowWidth) / width);
 return CGPointMake(originX, CGRectGetHeight(bounds));
 }
 
+-(CGRect)frameOf:(CGRect)bounds atIndex:(NSUInteger)index {
+return CGRectMake(index * self.value, bounds.origin.y, self.value, bounds.size.width);
+}
+
 -(NSString *) description{
-return [NSString stringWithFormat:@"%f", width];
+return [NSString stringWithFormat:@"%f", value];
 }
 
 @end

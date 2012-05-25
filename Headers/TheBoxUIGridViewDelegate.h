@@ -11,13 +11,13 @@
 
 @protocol TheBoxUIGridViewDelegate <NSObject>
 
--(CGSize)marginOf:(TheBoxUIGridView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
+-(void)gridView:(TheBoxUIGridView*)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view;
 -(void)didSelect:(TheBoxUIGridView *)gridView atRow:(NSInteger)row atIndex:(NSInteger)index;
 
 @optional
 -(CGFloat)whatRowHeight:(TheBoxUIGridView*)gridView;
 -(CGFloat)whatCellWidth:(TheBoxUIGridView*)gridView;
+-(CGSize)marginOf:(TheBoxUIGridView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
 
--(void)gridView:(TheBoxUIGridView*)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view;
 -(UIView *)gridView:(TheBoxUIGridView*)gridView headerOf:(UIView *)view atIndex:(NSInteger)index;
 @end

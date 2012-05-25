@@ -126,7 +126,7 @@
     id partiallyMockedVisibleStrategy = [OCMockObject partialMockForObject:visibleStrategy];
     
     NSInteger negativeOne = -1;
-    [[[partiallyMockedVisibleStrategy expect] andReturnValue:OCMOCK_VALUE(negativeOne)] minimumVisible:CGPointZero];
+    [[[partiallyMockedVisibleStrategy expect] andReturnValue:OCMOCK_VALUE(negativeOne)] floorIndexOf:CGPointZero];
     
     [visibleStrategy layoutSubviews:CGRectZero];
     
@@ -142,7 +142,7 @@
     id partiallyMockedVisibleStrategy = [OCMockObject partialMockForObject:visibleStrategy];
     
     NSInteger two = 2;
-    [[[partiallyMockedVisibleStrategy expect] andReturnValue:OCMOCK_VALUE(two)] maximumVisible:CGRectZero];
+    [[[partiallyMockedVisibleStrategy expect] andReturnValue:OCMOCK_VALUE(two)] ceilIndexOf:CGRectZero];
     
     [visibleStrategy layoutSubviews:CGRectZero];
     

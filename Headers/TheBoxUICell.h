@@ -10,11 +10,10 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-@interface TheBoxUICell : UITableViewCell
+@interface TheBoxUICell : UIView
 
 @property (nonatomic, unsafe_unretained) IBOutlet UIImageView *itemImageView;
 @property (nonatomic, unsafe_unretained) IBOutlet UILabel *itemLabel;
-@property (nonatomic, copy) NSString *cellIdentifier;
 
 +(TheBoxUICell*)loadWithOwner:(id)owner;
 

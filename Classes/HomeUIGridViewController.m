@@ -19,6 +19,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+TBDictionary.h"
 #import "TBUIView.h"
+#import "CanDequeueReusableView.h"
+#import "TheBoxUICell.h"
 
 static NSUInteger const HEADER_HEIGHT = 33;
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
@@ -263,12 +265,21 @@ return self;
 }
 
 #pragma mark datasource
-- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view atRow:(NSInteger)row atIndex:(NSInteger)index
+- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)viewOf ofFrame:(CGRect)frame atRow:(NSUInteger)row atIndex:(NSUInteger)index 
 {
-	TheBoxUICell *theBoxCell = (TheBoxUICell*) [super gridView:gridView viewOf:view atRow:row atIndex:index];
+    UIView* cell = [TheBoxUICell loadWithOwner:self];
+    
+    cell.frame = frame;
 
+return cell;
+}
+
+-(void)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView *)view
+{
+    TheBoxUICell *theBoxCell = (TheBoxUICell*)view;
+    
 	NSArray *locationItems = [[[self.items objectAtIndex:row] objectForKey:@"location"] objectForKey:@"items"];
-		
+    
 	//there should be a mapping between the index of the cell and the id of the item
 	NSDictionary *item = [locationItems objectAtIndex:index];
 	
@@ -277,8 +288,6 @@ return self;
 	
     [theBoxCell.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.defaultItemImage];
 	theBoxCell.itemLabel.text = [NSString stringWithFormat:@"%@", when];	
-
-return theBoxCell;
 }
 
 -(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)gridView{
@@ -309,7 +318,6 @@ return [itemsForLocation count];
 
     header.title.text = name;
     header.title.textColor = [UIColor whiteColor];
-    [view addSubview:header];
     
 return header;
 }

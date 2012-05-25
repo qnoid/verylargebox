@@ -10,9 +10,12 @@
 #import "TheBoxUIScrollView.h"
 #import "TheBoxUIRecycleStrategy.h"
 #import "TheBoxVisibleStrategy.h"
+#import "TheBoxSize.h"
+
+CGFloat const DEFAULT_HEIGHT = 196;
 
 @interface TheBoxUIScrollView ()
--(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size;
+-(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size dimension:(NSObject<TheBoxDimension>*)dimension;
 
 @property(nonatomic, strong) TheBoxUIRecycleStrategy *recycleStrategy;
 @property(nonatomic, strong) id<VisibleStrategy> visibleStrategy;
@@ -22,13 +25,14 @@
 @property(nonatomic, strong) UIView *contentView;
 
 @property(nonatomic, strong) NSObject<TheBoxSize> *theBoxSize;
+@property(nonatomic, strong) NSObject<TheBoxDimension> *dimension;
 @end
 
 @implementation TheBoxUIScrollView
 
-+(TheBoxUIScrollView *) newScrollView:(CGRect)aFrame recycleStrategy:(TheBoxUIRecycleStrategy *)aRecycleStrategy visibleStrategy:(id<VisibleStrategy>) aVisibleStrategy size:(NSObject<TheBoxSize>*)size
++(TheBoxUIScrollView *) newScrollView:(CGRect)aFrame recycleStrategy:(TheBoxUIRecycleStrategy *)aRecycleStrategy visibleStrategy:(id<VisibleStrategy>) aVisibleStrategy size:(NSObject<TheBoxSize>*)size dimension:(NSObject<TheBoxDimension>*)dimension
 {
-	TheBoxUIScrollView *scrollView = [[TheBoxUIScrollView alloc] initWithFrame:aFrame size:size];
+	TheBoxUIScrollView *scrollView = [[TheBoxUIScrollView alloc] initWithFrame:aFrame size:size dimension:dimension];
 	scrollView.recycleStrategy = aRecycleStrategy;
 	scrollView.visibleStrategy = aVisibleStrategy;	
 	scrollView.visibleStrategy.delegate = scrollView;	
@@ -50,7 +54,8 @@ return scrollView;
 			newScrollView:frame
 			recycleStrategy:recycleStrategy 
 			visibleStrategy:visibleStrategy
-            size:[[TheBoxSizeInHeight alloc] initWithSize:frame.size]];	
+            size:[[TheBoxSizeInHeight alloc] initWithSize:frame.size]
+            dimension:[TheBoxHeight newHeight:height]];	
 
 return scrollView;
 }
@@ -68,7 +73,8 @@ return scrollView;
 		 newScrollView:frame
 		 recycleStrategy:recycleStrategy 
 		 visibleStrategy:visibleStrategy
-         size:[[TheBoxSizeInWidth alloc] initWithSize:frame.size]];         
+         size:[[TheBoxSizeInWidth alloc] initWithSize:frame.size]
+         dimension:[TheBoxWidth newWidth:width]];         
 	
 return scrollView;
 }
@@ -76,6 +82,7 @@ return scrollView;
 @synthesize datasource;
 @synthesize scrollViewDelegate;
 @synthesize theBoxSize;
+@synthesize dimension = _dimension;
 @synthesize contentView;
 @synthesize recycleStrategy;
 @synthesize visibleStrategy;
@@ -84,7 +91,7 @@ return scrollView;
 
 -(id)awakeAfterUsingCoder:(NSCoder *)aDecoder 
 {    
-    TheBoxUIScrollView* scrollView = [TheBoxUIScrollView newVerticalScrollView:self.frame viewsOf:196];
+    TheBoxUIScrollView* scrollView = [TheBoxUIScrollView newVerticalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];
     
     //http://stackoverflow.com/questions/10264790/what-is-the-new-pattern-for-releasing-self-with-automatic-reference-counting
     CFRelease((__bridge const void*)self);
@@ -101,12 +108,13 @@ return scrollView;
     self.scrollViewDelegate = scrollViewDelegate;
 }
 
-- (id) initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size
+- (id) initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size dimension:(NSObject<TheBoxDimension>*)dimension
 {
 	self = [super initWithFrame:frame];
 	if (self) 
 	{
 		self.theBoxSize = size;
+        self.dimension = dimension;
 		self.contentView = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, frame.size.width, frame.size.height)];
 		[self addSubview:self.contentView];
 	}
@@ -160,19 +168,18 @@ return self;
     
 	[self.visibleStrategy minimumVisibleIndexShould:ceilVisibleIndexAt(0)];
 	[self.visibleStrategy maximumVisibleIndexShould:floorVisibleIndexAt(numberOfViews)];
-	CGFloat size = [self.scrollViewDelegate whatSize:self];	
-    self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:size];
+    self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:self.dimension.value];
 	
     NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"frame %@", NSStringFromCGRect(self.frame));	
 	NSLog(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
 
     CGRect bounds = [self bounds];
-    
+    NSLog(@"layoutSubviews on bounds %@", NSStringFromCGRect(bounds));
+
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];	
     
-    NSLog(@"needsLayoutSubviews on bounds %@", NSStringFromCGRect(bounds));
 	[self displayViewsWithinBounds:bounds];
 }
 
@@ -200,14 +207,24 @@ return self;
 }
 
 -(NSUInteger)indexOf:(CGPoint)point {
-    return [self.visibleStrategy minimumVisible:point];
+    return [self.dimension floorIndexOf:point];
 }
 
 -(UIView *)shouldBeVisible:(int)index
 {
-	UIView *view = [self.datasource viewInScrollView:self atIndex:index];
-	
-    [self.scrollViewDelegate viewInScrollView:self atIndex:index willAppear:view];
+    CGRect frame = [self.dimension frameOf:self.bounds atIndex:index];
+    
+    UIView* view = [self dequeueReusableView];
+    
+    if(view == nil){
+        view = [self.datasource viewInScrollView:self ofFrame:frame atIndex:index];
+    }
+    else {
+        view.frame = frame;
+        [view setNeedsLayout];        
+    }
+
+    [self.scrollViewDelegate viewInScrollView:self willAppear:view atIndex:index];
     
 	/*
 	 * Adding subviews to self places them side by side which

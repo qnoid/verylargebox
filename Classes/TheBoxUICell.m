@@ -20,7 +20,6 @@ return (TheBoxUICell*)[views objectAtIndex:0];
 
 @synthesize itemImageView;
 @synthesize itemLabel;
-@synthesize cellIdentifier;
 
 -(id)initWith:(UIImageView *)anItemImageView itemLabel:(UILabel *)anItemLabel
 {

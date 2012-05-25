@@ -8,7 +8,6 @@
  *  Contributor(s): .-
  */
 #import "TheBoxUIGridViewController.h"
-#import "TheBoxUICell.h"
 
 @interface TheBoxUIGridViewController ()
 
@@ -40,27 +39,8 @@ static const CGFloat DEFAULT_CELL_WIDTH = 160.0;
     return scrollView;   
 }
 
-- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView<CanDequeueReusableView> *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index
-{
-	NSLog(@"asking for column %d at row %d", index, row);
-	
-	UIView* view = [viewOf dequeueReusableView];
-	
-	CGRect frame = CGRectMake(
-                              index * [self whatCellWidth:gridView], 
-                              view.bounds.origin.y,
-                              [self whatCellWidth:gridView], 
-                              view.frame.size.height);
-
-    if (view == nil) {
-		view = [TheBoxUICell loadWithOwner:self];
-	}
-	
-    view.frame = frame; 
-    
-	NSLog(@"view %@", view);
-
-return view;
+- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view ofFrame:(CGRect)frame atRow:(NSUInteger)row atIndex:(NSUInteger)index {
+return [[UIView alloc] initWithFrame:frame];
 }
 
 -(void)gridView:(TheBoxUIGridView*)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view

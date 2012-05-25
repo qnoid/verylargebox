@@ -27,5 +27,5 @@
 
 @interface FooView : UIView <CanDequeueReusableView>
 @property(nonatomic, retain) UIView* header;
-@property(nonatomic, retain) TheBoxUIScrollView* contentView;
+@property(nonatomic, retain) UIView<CanDequeueReusableView>* contentView;
 @end

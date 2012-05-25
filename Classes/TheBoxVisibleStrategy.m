@@ -103,11 +103,11 @@ return isVisible;
 }
 
 - (NSInteger)minimumVisible:(CGPoint)bounds {
-    return [self.dimension minimumVisible:bounds];
+    return [self.dimension floorIndexOf:bounds];
 }
 
 - (NSInteger)maximumVisible:(CGRect)bounds {
-    return [self.dimension maximumVisible:bounds];
+    return [self.dimension ceilIndexOf:bounds];
 }
 
 - (void)layoutSubviews:(CGRect) bounds
@@ -134,12 +134,6 @@ return isVisible;
 	self.maximumVisibleIndex = maximumVisible - 1;
 	
 	NSLog(@"minimum visible: %d, maximum visible: %d", self.minimumVisibleIndex, self.maximumVisibleIndex);
-}
-
-- (CGRect)visibleBounds:(CGRect)bounds withinContentSize:(CGSize)contentSize
-{
-    CGPoint origin = [self.dimension ceilOriginOf:bounds toContentSize:contentSize];
-return CGRectMake(origin.x, origin.y, bounds.size.width, bounds.size.height);
 }
 
 @end

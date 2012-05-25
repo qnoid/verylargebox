@@ -93,9 +93,6 @@ VisibleIndexPrecondition floorVisibleIndexAt(NSInteger floor)
 
 -(void)maximumVisibleIndexShould:(VisibleIndexPrecondition)conformToPrecondition;
 
--(CGRect)visibleBounds:(CGRect)bounds withinContentSize:(CGSize)contentSize;
-
-
 @property(nonatomic, unsafe_unretained) id<VisibleStrategyDelegate> delegate;
 
 @required

@@ -34,9 +34,6 @@
  */
 -(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView*)gridView atIndex:(NSInteger)index;
 
-/**
-
- */
-- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view atRow:(NSInteger)row atIndex:(NSInteger)index;
+- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view ofFrame:(CGRect)frame atRow:(NSUInteger)row atIndex:(NSUInteger)index;
 
 @end

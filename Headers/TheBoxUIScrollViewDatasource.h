@@ -28,10 +28,11 @@
  Called every time a view is within the bounds of the scrollview.
 
  Indexes are in sequential order starting from 0 up to the number of views as returned by #numberOfViewsInScrollView: minus 1.
- 
+
  @param scrollView the scroll view this datasource was set to
+ @param frame the frame of the view in the given index
  @param index the index which identifies the view
  */
--(UIView*)viewInScrollView:(TheBoxUIScrollView *)scrollView atIndex:(NSInteger)index;
+- (UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSInteger)index;
 
 @end

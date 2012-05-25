@@ -14,6 +14,8 @@
  */
 @protocol TheBoxDimension <NSObject>
 
+@property(nonatomic, assign) CGFloat value;
+
 /*
  * The minimum visible must take into account cells that are partially visible
  * 
@@ -28,7 +30,7 @@
  *
  * @return the minimum number of times the size fits within the visible bounds
  */
--(NSUInteger)minimumVisible:(CGPoint)point;
+-(NSUInteger)floorIndexOf:(CGPoint)point;
 
 /*
  * The maximum visible must take into account cells that are partially visible
@@ -45,37 +47,41 @@
  * @param visibleBounds should have zero or positive values for each of the x,y,width,height
  * @return the maximum number of times the size fits within the visible bounds
  */
--(NSUInteger)maximumVisible:(CGRect)visibleBounds;
+-(NSUInteger)ceilIndexOf:(CGRect)rect;
 
 -(CGPoint)ceilOriginOf:(CGRect)bounds toContentSize:(CGSize)contentSize;
+
+-(CGRect)frameOf:(CGRect) bounds atIndex:(NSUInteger)index;
 @end
 
 @interface TheBoxHeight : NSObject <TheBoxDimension>
 {
 @private
-    CGFloat height;
+    CGFloat value;
 }
 
 +(TheBoxHeight*) newHeight:(CGFloat)height;
 
 -(id)init:(CGFloat) height;
--(NSInteger)minimumVisible:(CGPoint)point;
--(NSInteger)maximumVisible:(CGRect)visibleBounds;
+-(NSInteger)floorIndexOf:(CGPoint)point;
+-(NSInteger)ceilIndexOf:(CGRect)rect;
 @end
 
 @interface TheBoxWidth : NSObject <TheBoxDimension>
 {
 @private
-    CGFloat width;
+    CGFloat value;
 }
 +(TheBoxWidth*) newWidth:(CGFloat)width;
 
 -(id)init:(CGFloat) width;
--(NSInteger)minimumVisible:(CGPoint)point;
--(NSInteger)maximumVisible:(CGRect)visibleBounds;
+-(NSInteger)floorIndexOf:(CGPoint)point;
+-(NSInteger)ceilIndexOf:(CGRect)rect;
 @end
 
 @protocol TheBoxSize <NSObject>
+
+@property(nonatomic, assign) CGSize size;
 
 /*
  * What's the required content size for a fixed width, 
