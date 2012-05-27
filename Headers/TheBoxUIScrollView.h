@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "VisibleStrategy.h"
 #import "TheBoxUIScrollViewDatasource.h"
-#import "CanDequeueReusableView.h"
 #import "CanIndexLocationInView.h"
 @class TheBoxUIRecycleStrategy;
 @class VisibleStrategy;
@@ -30,7 +29,6 @@ extern CGFloat const DEFAULT_HEIGHT;
 /**
 
  */
--(UIView *)headerInScrollView:(TheBoxUIScrollView *)scrollView;
 -(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
 @end
 
@@ -81,7 +79,7 @@ extern CGFloat const DEFAULT_HEIGHT;
  @see #newVerticalScrollView:viewsOf: to create a TheBoxUIScrollView on the vertical axis
  @see #newHorizontalScrollView:viewsOf: to create a TheBoxUIScrollView on the horizontal axis
  */
-@interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate, CanDequeueReusableView, CanIndexLocationInView>
+@interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate, CanIndexLocationInView>
 
 /**
  Creates a new scroll view which scrolls on the vertical axis.

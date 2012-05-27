@@ -19,7 +19,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+TBDictionary.h"
 #import "TBUIView.h"
-#import "CanDequeueReusableView.h"
 #import "TheBoxUICell.h"
 
 static NSUInteger const HEADER_HEIGHT = 33;
@@ -272,6 +271,11 @@ return self;
     cell.frame = frame;
 
 return cell;
+}
+
+-(void)gridView:(TheBoxUIGridView *)gridView atIndex:(NSInteger)index willAppear:(UIView *)view
+{
+    
 }
 
 -(void)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView *)view

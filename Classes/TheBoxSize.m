@@ -99,7 +99,7 @@ return CGPointMake(originX, CGRectGetHeight(bounds));
 }
 
 -(CGRect)frameOf:(CGRect)bounds atIndex:(NSUInteger)index {
-return CGRectMake(index * self.value, bounds.origin.y, self.value, bounds.size.width);
+return CGRectMake(index * self.value, bounds.origin.y, self.value, bounds.size.height);
 }
 
 -(NSString *) description{

@@ -11,7 +11,6 @@
 #import "TheBoxUIScrollView.h"
 #import "TheBoxUIScrollViewDatasource.h"
 #import "TheBoxUIGridViewDatasource.h"
-#import "CanDequeueReusableView.h"
 
 @protocol TheBoxUIGridViewDelegate;
 @class TheBoxUIGridViewController;
@@ -23,9 +22,4 @@
 
 -(void)reload;
 
-@end
-
-@interface FooView : UIView <CanDequeueReusableView>
-@property(nonatomic, retain) UIView* header;
-@property(nonatomic, retain) UIView<CanDequeueReusableView>* contentView;
 @end

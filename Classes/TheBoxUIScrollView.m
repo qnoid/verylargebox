@@ -37,7 +37,7 @@ CGFloat const DEFAULT_HEIGHT = 196;
 	scrollView.visibleStrategy = aVisibleStrategy;	
 	scrollView.visibleStrategy.delegate = scrollView;	
 	scrollView.clipsToBounds = NO;
-    
+
 return scrollView;
 }
 
@@ -92,6 +92,8 @@ return scrollView;
 -(id)awakeAfterUsingCoder:(NSCoder *)aDecoder 
 {    
     TheBoxUIScrollView* scrollView = [TheBoxUIScrollView newVerticalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];
+    
+    scrollView.scrollsToTop = YES;
     
     //http://stackoverflow.com/questions/10264790/what-is-the-new-pattern-for-releasing-self-with-automatic-reference-counting
     CFRelease((__bridge const void*)self);
@@ -215,12 +217,20 @@ return self;
     CGRect frame = [self.dimension frameOf:self.bounds atIndex:index];
     
     UIView* view = [self dequeueReusableView];
+    view.frame = frame;
     
     if(view == nil){
         view = [self.datasource viewInScrollView:self ofFrame:frame atIndex:index];
     }
-    else {
-        view.frame = frame;
+    else 
+    {
+        /* This is really required due to TheBoxUIGridView design and not mandated by UIKit.
+         TheBoxUIGridView currently uses TheBoxUIScrollView for its rows, hence when a view
+         is dequeued it needs to have its subviews removed and recycled fo reuse.
+         
+         Hence this behavior should really be on TheBoxUIGridView, as a result of 
+         a view being dequeued.
+         */
         [view setNeedsLayout];        
     }
 

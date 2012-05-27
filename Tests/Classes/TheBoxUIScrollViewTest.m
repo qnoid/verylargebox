@@ -17,7 +17,7 @@
 #import "TheBoxVisibleStrategy.h"
 
 @interface TheBoxUIScrollView(Testing)
--(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size;
+-(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size dimension:(NSObject<TheBoxDimension>*)dimension;
 -(void)setVisibleStrategy:(id<VisibleStrategy>)visibleStrategy;
 -(id<VisibleStrategy>)visibleStrategy;
 -(void)setRecycleStrategy:(TheBoxUIRecycleStrategy*)recycleStrategy;
@@ -35,7 +35,7 @@
 -(void)testGivenInitWithFrameAssertContentViewAsSubview
 {
     CGRect frame = CGRectMake(0, 0, 320, 196);
-    TheBoxUIScrollView *theBoxScrollView = [[TheBoxUIScrollView alloc] initWithFrame:frame size:nil];
+    TheBoxUIScrollView *theBoxScrollView = [[TheBoxUIScrollView alloc] initWithFrame:frame size:nil dimension:nil];
     
     STAssertTrue(1 == [theBoxScrollView.subviews count], nil);    
     UIView* contentView = [theBoxScrollView.subviews objectAtIndex:0];    
@@ -47,16 +47,15 @@
     id mockedDelegate = [OCMockObject niceMockForProtocol:@protocol(TheBoxUIScrollViewDelegate)];
     id mockedDatasource = [OCMockObject niceMockForProtocol:@protocol(TheBoxUIScrollViewDatasource)];
     id mockedSize = [OCMockObject niceMockForClass:[TheBoxSizeInWidth class]];
-    
-    TheBoxUIScrollView *theBoxScrollView = [[TheBoxUIScrollView alloc] init];
+
+    CGFloat size = 160;
+
+    TheBoxUIScrollView *theBoxScrollView = [[TheBoxUIScrollView alloc] initWithFrame:CGRectZero size:mockedSize dimension:[TheBoxWidth newWidth:size]];
     theBoxScrollView.scrollViewDelegate = mockedDelegate;
     theBoxScrollView.datasource = mockedDatasource;
-    [theBoxScrollView setTheBoxSize:mockedSize];
     
     NSUInteger one = 1;
-    CGFloat size = 160;
     [[[mockedDatasource expect] andReturnValue:OCMOCK_VALUE(one)] numberOfViewsInScrollView:theBoxScrollView];
-    [[[mockedDelegate expect] andReturnValue:OCMOCK_VALUE(size)] whatSize:theBoxScrollView];    
     
     CGSize expectedContentSize = CGSizeMake(0, 0);
     [[[mockedSize expect] andReturnValue:OCMOCK_VALUE(expectedContentSize)] sizeOf:one size:size];

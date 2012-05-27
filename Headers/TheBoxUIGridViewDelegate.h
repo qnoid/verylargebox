@@ -15,9 +15,9 @@
 -(void)didSelect:(TheBoxUIGridView *)gridView atRow:(NSInteger)row atIndex:(NSInteger)index;
 
 @optional
+-(void)gridView:(TheBoxUIGridView*)gridView atIndex:(NSInteger)index willAppear:(UIView*)view;
+
 -(CGFloat)whatRowHeight:(TheBoxUIGridView*)gridView;
 -(CGFloat)whatCellWidth:(TheBoxUIGridView*)gridView;
 -(CGSize)marginOf:(TheBoxUIGridView*)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index;
-
--(UIView *)gridView:(TheBoxUIGridView*)gridView headerOf:(UIView *)view atIndex:(NSInteger)index;
 @end

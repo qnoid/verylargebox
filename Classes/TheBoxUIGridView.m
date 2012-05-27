@@ -109,15 +109,16 @@ return [self.delegate whatRowHeight:self];
 
 - (void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index 
 {
-    if(![scrollView isEqual:self.scrollView])
+    if(![scrollView isEqual:self.scrollView]) 
     {
         NSUInteger row = [[self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]] unsignedIntegerValue];
         
         [self.delegate gridView:self viewOf:scrollView atRow:row atIndex:index willAppear:view];
     return;
-    }    
+    }       
     
     [self setView:view atIndex:index];
+    [self.delegate gridView:self atIndex:index willAppear:view];
 }
 
 #pragma mark TheBoxUIScrollViewDatasource
@@ -152,17 +153,6 @@ return [self.datasource numberOfViewsInGridView:self];
 	NSLog(@"view %@", view);
     
 return view;
-}
-
--(UIView *)headerInScrollView:(TheBoxUIScrollView *)scrollView
-{
-    if([scrollView isEqual:self.scrollView]){
-        return nil;
-    }
-    
-    NSNumber* index = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
-        
-return [self.delegate gridView:self headerOf:scrollView atIndex:[index intValue]];
 }
 
 #pragma mark public
@@ -212,21 +202,6 @@ return [self.delegate gridView:self headerOf:scrollView atIndex:[index intValue]
     }
     
     [self.delegate didSelect:self atRow:row atIndex:index];
-}
-
-@end
-
-@implementation FooView
-
-@synthesize header;
-@synthesize contentView;
-
--(UIView *)dequeueReusableView{
-return [self.contentView dequeueReusableView];
-}
-
--(void)setNeedsLayout{
-    [self.contentView setNeedsLayout];
 }
 
 @end
