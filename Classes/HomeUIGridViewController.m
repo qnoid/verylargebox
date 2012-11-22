@@ -18,10 +18,8 @@
 #import "NSArray+Decorator.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+TBDictionary.h"
-#import "TBUIView.h"
 #import "TheBoxUICell.h"
 
-static NSUInteger const HEADER_HEIGHT = 33;
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
@@ -39,12 +37,11 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 +(HomeUIGridViewController*)newHomeGridViewController
 {    
     HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:nil];
+    
+    homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Edinburgh" image:[UIImage imageNamed:@"group.png"] tag:0];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:homeGridViewController selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
-    
-	AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:homeGridViewController];
-	[operation start]; 
     
 return homeGridViewController;
 }
@@ -83,6 +80,9 @@ return self;
 {
     [super viewDidLoad];
 
+    AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:self];
+	[operation start];
+    
     UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                      target:self
@@ -95,7 +95,6 @@ return self;
                                      action:@selector(addItem)];
     
     self.navigationItem.rightBarButtonItem = addButton;
-
 }
 
 -(void)launchFeedback {
@@ -213,31 +212,31 @@ return self;
 
 /**
  {
- "item": {
-     "created_at": "2012-05-05T10:59:54Z",
-     "id": 1,
-     "image_content_type": "image/jpeg",
-     "image_file_name": ".jpg",
-     "image_file_size": 283149,
-     "location_id": 171,
-     "updated_at": "2012-05-05T10:59:54Z",
-     "when": "8 days ago",
-     "imageURL": "/system/items/images/000/000/001/thumb/.jpg",
-     "iphoneImageURL": "/system/items/images/000/000/001/iphone/.jpg",
-     "location": {
-         "created_at": "2012-05-07T08:31:07Z",
-         "distance": null,
-         "id": 171,
-         "lat": "55.945658",
-         "lng": "-3.189601",
-         "name": "Napiers",
-         "updated_at": "2012-05-07T08:31:07Z"
-     }
-     }
+ item =     {
+ "created_at" = "2012-11-04T15:33:00Z";
+ id = 213;
+ imageURL = "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/213/thumb/.jpg?1352043179";
+ "image_content_type" = "image/jpeg";
+ "image_file_name" = ".jpg";
+ "image_file_size" = 357962;
+ iphoneImageURL = "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/213/iphone/.jpg?1352043179";
+ location =         {
+ "created_at" = "2012-11-04T15:00:25Z";
+ foursquareid = 4b05881ff964a520ffb222e3;
+ id = 250;
+ lat = "55.94886495227988";
+ lng = "-3.187588255306524";
+ name = "The Cabaret Voltaire";
+ "updated_at" = "2012-11-04T15:00:25Z";
+ };
+ "location_id" = 250;
+ "updated_at" = "2012-11-04T15:33:00Z";
+ when = "less than a minute ago";
+ };
  } */
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"%@", item);
 	
 	id<TheBoxPredicate> locationPredicate = [TheBoxPredicates newLocationIdPredicate];
@@ -273,11 +272,6 @@ return self;
 return cell;
 }
 
--(void)gridView:(TheBoxUIGridView *)gridView atIndex:(NSInteger)index willAppear:(UIView *)view
-{
-    
-}
-
 -(void)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView *)view
 {
     TheBoxUICell *theBoxCell = (TheBoxUICell*)view;
@@ -309,23 +303,6 @@ return [self.items count];
 return [itemsForLocation count];
 }
 
--(UIView *)gridView:(TheBoxUIGridView *)gridView headerOf:(UIView *)view atIndex:(NSInteger)index
-{
-    TBUIView *header = [[TBUIView alloc] initWithFrame:CGRectMake(0, 0, 320, HEADER_HEIGHT)];
-    
-    NSDictionary* location = [[self.items objectAtIndex:index] objectForKey:@"location"];
-    id name = [location objectForKey:@"name"];
-    
-    if(name == [NSNull null]){
-        name = [NSString stringWithFormat:@"%@,%@", [location objectForKey:@"lat"], [location objectForKey:@"lng"]];
-    }
-
-    header.title.text = name;
-    header.title.textColor = [UIColor whiteColor];
-    
-return header;
-}
-
 -(void)didSelect:(TheBoxUIGridView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
 {
    	NSArray *locationItems = [[[self.items objectAtIndex:row] objectForKey:@"location"] objectForKey:@"items"];
@@ -336,6 +313,7 @@ return header;
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
     DetailsUIViewController* detailsViewController = [DetailsUIViewController newDetailsViewController:item];
+    detailsViewController.hidesBottomBarWhenPushed = YES;
 
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBarButton;

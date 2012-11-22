@@ -8,11 +8,12 @@
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
+#import "TheBoxAppDelegate.h"
 
 int main(int argc, char *argv[]) {
     
     @autoreleasepool {
-        int retVal = UIApplicationMain(argc, argv, nil, nil);
+        int retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([TheBoxAppDelegate class]));
         return retVal;
     }
 }

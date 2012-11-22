@@ -1,6 +1,13 @@
-platform :ios, :deployment_target => '4.0'
+platform :ios, :deployment_target => '4.3'
 
-dependency 'AFNetworking', '~> 0.9.1 '
-dependency 'JSONKit', '~> 1.4'
-dependency 'OCMock', '~> 2.0.1'
-dependency 'TestFlightSDK', '~> 1.0'
+target :UnitTests, :exclusive => true do
+	pod 'OCMock', '~> 2.0.1'
+end
+
+target :ApplicationTests, :exclusive => true do
+	pod 'OCMock', '~> 2.0.1'
+end
+
+pod 'AFNetworking', '~> 0.9.1 '
+pod 'JSONKit', '~> 1.4'
+pod 'TestFlightSDK', '= 1.1'

@@ -9,11 +9,7 @@
  */
 #import <UIKit/UIKit.h>
 
-@class TheBoxUIGridView;
-
-@interface TheBoxAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
-}
+@interface TheBoxAppDelegate : NSObject <UIApplicationDelegate> {}
 
 @property(nonatomic) IBOutlet UIWindow *window;
 

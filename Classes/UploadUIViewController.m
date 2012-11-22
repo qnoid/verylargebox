@@ -19,6 +19,7 @@ static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 480.0;
 
 @interface UploadUIViewController ()
+@property(nonatomic, strong) UIImage* itemImage;
 @property(nonatomic, strong) NSMutableDictionary* location;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @end
@@ -27,12 +28,12 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 
 @synthesize uploadView;
 @synthesize takePhotoButton;
-@synthesize imageView;
 @synthesize locationButton;
 
 @synthesize theBox;
 @synthesize createItemDelegate;
 
+@synthesize itemImage = _itemImage;
 @synthesize location = _location;
 @synthesize theBoxLocationService;
 
@@ -73,6 +74,11 @@ return self;
 	NSLog(@"%@", NSStringFromCGSize(contentSize));		
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.takePhotoButton.imageView.image = self.itemImage;
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -99,7 +105,7 @@ return self;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:imageView.image location:self.location];
+	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:self.itemImage location:self.location];
 
     [itemQuery setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.createItemDelegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];
@@ -158,11 +164,10 @@ return self;
         
         UIGraphicsEndImageContext();
         
-        imageView.image = newImage;
+        self.itemImage = newImage;
     });
 
-	imageView.hidden = NO;
-	takePhotoButton.hidden = YES;
+	takePhotoButton.titleLabel.hidden = YES;
 	
 	[self dismissModalViewControllerAnimated:YES];
 }

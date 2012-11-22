@@ -8,6 +8,7 @@
  *  Contributor(s): .-
  */
 #import "TheBoxAppDelegate.h"
+#import "TBIdentifyViewController.h"
 
 static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
 
@@ -23,9 +24,13 @@ static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e8
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];   
     [TestFlight takeOff:TESTFLIGHT_TEAM_TOKEN];
 
-    [window makeKeyAndVisible];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    self.window.rootViewController =
+        [[UINavigationController alloc] initWithRootViewController:[TBIdentifyViewController newIdentifyViewController]];
     
-    return YES;
+    [self.window makeKeyAndVisible];
+return YES;
 }
 
 

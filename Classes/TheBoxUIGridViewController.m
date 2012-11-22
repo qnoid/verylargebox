@@ -43,6 +43,10 @@ static const CGFloat DEFAULT_CELL_WIDTH = 160.0;
 return [[UIView alloc] initWithFrame:frame];
 }
 
+-(void)gridView:(TheBoxUIGridView *)gridView atIndex:(NSInteger)index willAppear:(UIView *)view{
+    
+}
+
 -(void)gridView:(TheBoxUIGridView*)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView*)view
 {
 }

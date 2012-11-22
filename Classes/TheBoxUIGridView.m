@@ -16,7 +16,7 @@
 @property(nonatomic, strong) NSMutableDictionary* views;
 @property(nonatomic, strong) TheBoxUIScrollView *scrollView;
 
-- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view ofFrame:(CGRect)frame atIndex:(NSInteger)index;
+-(UIView*)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView*)view ofFrame:(CGRect)frame atIndex:(NSInteger)index;
 -(UIView*)viewAtRow:(NSUInteger)row;
 -(void)setView:(UIView*)view atIndex:(NSUInteger)index;
 @end
@@ -77,7 +77,7 @@
 
 #pragma mark private
 
-- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view ofFrame:(CGRect)frame atIndex:(NSInteger)index 
+- (UIView*)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView*)view ofFrame:(CGRect)frame atIndex:(NSInteger)index 
 {
     NSUInteger row = [[self.frames objectForKey:[NSValue valueWithCGRect:[view frame]]] unsignedIntegerValue];
     
@@ -107,7 +107,7 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
 return [self.delegate whatRowHeight:self];
 }
 
-- (void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index 
+- (void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView*)view atIndex:(NSUInteger)index 
 {
     if(![scrollView isEqual:self.scrollView]) 
     {
@@ -127,7 +127,8 @@ return [self.delegate whatRowHeight:self];
 {
     if(![scrollView isEqual:self.scrollView])
     {
-        NSNumber* index = [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
+        NSNumber* index = 
+        [self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]];
         
     return [self.datasource numberOfViewsInGridView:self atIndex:[index intValue]];
     }
@@ -135,7 +136,7 @@ return [self.delegate whatRowHeight:self];
 return [self.datasource numberOfViewsInGridView:self];    
 }
 
-- (UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSInteger)index 
+- (UIView*)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSInteger)index 
 {
     if(![scrollView isEqual:self.scrollView]) {        
     return [self gridView:self viewOf:scrollView ofFrame:frame atIndex:index];
@@ -143,13 +144,14 @@ return [self.datasource numberOfViewsInGridView:self];
 
 	NSLog(@"asking for row %d", index);
 	
-    TheBoxUIScrollView *view = [TheBoxUIScrollView 
-                                  newHorizontalScrollView:frame
-                                  viewsOf:[self.delegate whatCellWidth:self]];		
+    TheBoxUIScrollView* view = [TheBoxUIScrollView 
+                                newHorizontalScrollView:frame
+                  viewsOf:[self.delegate whatCellWidth:self]];
+    
     view.datasource = self;
     view.scrollViewDelegate = self;
     view.scrollsToTop = NO;
-        
+    
 	NSLog(@"view %@", view);
     
 return view;

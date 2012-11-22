@@ -228,7 +228,7 @@ return self;
          TheBoxUIGridView currently uses TheBoxUIScrollView for its rows, hence when a view
          is dequeued it needs to have its subviews removed and recycled fo reuse.
          
-         Hence this behavior should really be on TheBoxUIGridView, as a result of 
+         This behavior should really be on TheBoxUIGridView, as a result of 
          a view being dequeued.
          */
         [view setNeedsLayout];        

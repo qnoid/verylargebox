@@ -18,6 +18,8 @@
 @protocol TheBoxUIScrollViewDatasource;
 @protocol TheBoxDimension;
 
+typedef void(^TBUIScrollViewConfig)(TheBoxUIScrollView *scrollView);
+
 extern CGFloat const DEFAULT_HEIGHT;
 
 @protocol TheBoxUIScrollViewDelegate

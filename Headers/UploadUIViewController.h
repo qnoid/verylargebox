@@ -20,7 +20,6 @@
 
 @property(nonatomic, unsafe_unretained) IBOutlet UIScrollView *uploadView;
 @property(nonatomic, unsafe_unretained) IBOutlet UIButton *takePhotoButton;
-@property(nonatomic, unsafe_unretained) IBOutlet UIImageView *imageView;
 @property(nonatomic, unsafe_unretained) IBOutlet UIButton *locationButton;
 
 @property(nonatomic, strong) TheBox *theBox;

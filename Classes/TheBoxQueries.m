@@ -16,6 +16,8 @@
 #import "TBCategoriesOperationDelegate.h"
 #import "NSMutableDictionary+TBMutableDictionary.h"
 #import "TBUpdateItemOperationDelegate.h"
+#import "TBCreateUserOperationDelegate.h"
+#import "TBSecureHashA1.h"
 
 @interface TheBoxQueries ()
 
@@ -33,6 +35,33 @@ NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRI
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
 NSUInteger const TIMEOUT = 60;
 
+
++(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<TBCreateUserOperationDelegate>*)delegate email:(NSString*)email
+{
+    TBSecureHashA1 *sha1 = [TBSecureHashA1 new];
+    NSString* residence = [sha1 newKey];
+    
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters tbSetObjectIfNotNil:residence forKey:@"residence"];
+    [parameters tbSetObjectIfNotNil:email forKey:@"email"];
+
+    NSMutableURLRequest *registrationRequest = [client requestWithMethod:@"POST" path:@"/user" parameters:parameters];
+    [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [registrationRequest setTimeoutInterval:TIMEOUT];
+
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:registrationRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        [delegate didSucceedWithRegistrationForEmail:email residence:residence];
+    } 
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnRegistrationWithError:error];
+    }];
+    
+return request;
+}
+
 +(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
@@ -44,7 +73,7 @@ NSUInteger const TIMEOUT = 60;
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
    {
       NSString* responseString = operation.responseString;
-      NSLog(@"%@", responseString);
+
        
       [delegate didSucceedWithCategories:[responseString mutableObjectFromJSONString]];
    } 
@@ -65,9 +94,7 @@ NSUInteger const TIMEOUT = 60;
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
     {
-        NSString* responseString = operation.responseString;
-        NSLog(@"%@", responseString);
-        
+        NSString* responseString = operation.responseString;        
         [delegate didSucceedWithItems:[responseString mutableObjectFromJSONString]];
     } 
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -157,15 +184,14 @@ return parameters;
     [categoriesRequest setTimeoutInterval:TIMEOUT];
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
-                                       {
-                                           NSString* responseString = operation.responseString;
-                                           NSLog(@"%@", responseString);
-                                           
-                                           [delegate didSucceedWithLocations:[[[responseString objectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"]];
-                                       } 
-                                                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                                          [delegate didFailOnLocationWithError:error];
-                                                                      }];
+    {
+        NSString* responseString = operation.responseString;
+
+        [delegate didSucceedWithLocations:[[[responseString objectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"]];
+    } 
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnLocationWithError:error];
+    }];
     
     return request;    
 }

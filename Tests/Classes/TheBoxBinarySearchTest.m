@@ -99,7 +99,7 @@
 {
     NSMutableArray *numbers = [NSMutableArray new];
     
-    [self assertFind:[NSString stringWithFormat:@"%d", NSIntegerMax] on:numbers withIndex:NSNotFound];
+    [self assertFind:[NSString stringWithFormat:@"%lu", NSIntegerMax] on:numbers withIndex:NSNotFound];
 }
 
 @end

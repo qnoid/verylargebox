@@ -12,6 +12,7 @@
 @class TheBoxPost;
 @class TheBoxGet;
 @class AFHTTPRequestOperation;
+@protocol TBCreateUserOperationDelegate;
 @protocol TBCategoriesOperationDelegate;
 @protocol TBItemsOperationDelegate;
 @protocol TBLocationOperationDelegate;
@@ -24,10 +25,8 @@
  * @see TheBox#query
  */
 @interface TheBoxQueries : NSObject 
-{
 
-}
-
++(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<TBCreateUserOperationDelegate>*)delegate email:(NSString*)email;
 +(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBItemsOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image location:(NSDictionary *)location;
