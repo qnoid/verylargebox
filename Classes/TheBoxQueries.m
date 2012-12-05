@@ -17,6 +17,7 @@
 #import "NSMutableDictionary+TBMutableDictionary.h"
 #import "TBUpdateItemOperationDelegate.h"
 #import "TBCreateUserOperationDelegate.h"
+#import "TBVerifyUserOperationDelegate.h"
 #import "TBSecureHashA1.h"
 
 @interface TheBoxQueries ()
@@ -29,7 +30,13 @@
 
 @implementation TheBoxQueries
 
-NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";//@"http://192.168.1.71:3000";// //
+NSString* const THE_BOX_SERVICE = @"com.verylargebox";
+#if DEBUG
+NSString* const THE_BOX_BASE_URL_STRING = @"http://169.254.164.158:3000";
+#else
+NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
+#endif
+
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
@@ -44,10 +51,10 @@ NSUInteger const TIMEOUT = 60;
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters tbSetObjectIfNotNil:residence forKey:@"residence"];
     [parameters tbSetObjectIfNotNil:email forKey:@"email"];
+    [parameters tbSetObjectIfNotNil:residence forKey:@"residence"];
 
-    NSMutableURLRequest *registrationRequest = [client requestWithMethod:@"POST" path:@"/user" parameters:parameters];
+    NSMutableURLRequest *registrationRequest = [client requestWithMethod:@"POST" path:@"/users" parameters:parameters];
     [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [registrationRequest setTimeoutInterval:TIMEOUT];
 
@@ -58,6 +65,30 @@ NSUInteger const TIMEOUT = 60;
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnRegistrationWithError:error];
     }];
+    
+return request;
+}
+
++(AFHTTPRequestOperation*)newVerifyUserQuery:(NSObject<TBVerifyUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence;
+{
+    
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters tbSetObjectIfNotNil:residence forKey:@"residence"];
+    [parameters tbSetObjectIfNotNil:email forKey:@"email"];
+    
+    NSMutableURLRequest *registrationRequest = [client requestWithMethod:@"GET" path:@"/users" parameters:parameters];
+    [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [registrationRequest setTimeoutInterval:TIMEOUT];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:registrationRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
+   {
+       [delegate didSucceedWithVerificationForEmail:email residence:residence];
+   }
+   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       [delegate didFailOnVerifyWithError:error];
+   }];
     
 return request;
 }

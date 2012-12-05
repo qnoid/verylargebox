@@ -106,6 +106,8 @@
 		BD127B4B165DA3C8002C944D /* TBNSString+TBSStringTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B4A165DA3C8002C944D /* TBNSString+TBSStringTestCase.m */; };
 		BD1C3E0D15679668007769CE /* TBUIRibbon.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1C3E0C15679668007769CE /* TBUIRibbon.m */; };
 		BD84EF70165C2363009D9408 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
+		BDA21878165EEBEA00094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
+		BDA2187A165EEBF600094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
 		BDA2BC8C165952C20068C749 /* TBIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8A165952C20068C749 /* TBIdentifyViewController.m */; };
 		BDA2BC8D165952C20068C749 /* TBIdentifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BC8B165952C20068C749 /* TBIdentifyViewController.xib */; };
 		BDA2BC911659600F0068C749 /* TBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8F1659600F0068C749 /* TBProfileViewController.m */; };
@@ -305,6 +307,8 @@
 		BD127B4A165DA3C8002C944D /* TBNSString+TBSStringTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBNSString+TBSStringTestCase.m"; sourceTree = "<group>"; };
 		BD1C3E0B15679668007769CE /* TBUIRibbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUIRibbon.h; sourceTree = "<group>"; };
 		BD1C3E0C15679668007769CE /* TBUIRibbon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUIRibbon.m; sourceTree = "<group>"; };
+		BDA21877165EEBEA00094510 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BDA2187B165EEF6700094510 /* TBVerifyUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVerifyUserOperationDelegate.h; sourceTree = "<group>"; };
 		BDA2BC89165952C20068C749 /* TBIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBIdentifyViewController.h; sourceTree = "<group>"; };
 		BDA2BC8A165952C20068C749 /* TBIdentifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBIdentifyViewController.m; sourceTree = "<group>"; };
 		BDA2BC8B165952C20068C749 /* TBIdentifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBIdentifyViewController.xib; path = Classes/TBIdentifyViewController.xib; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA2187A165EEBF600094510 /* Security.framework in Frameworks */,
 				908363FA140070DC00E5AAAF /* SystemConfiguration.framework in Frameworks */,
 				908363F9140070DC00E5AAAF /* CFNetwork.framework in Frameworks */,
 				908363FB140070DC00E5AAAF /* MobileCoreServices.framework in Frameworks */,
@@ -358,6 +363,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA21878165EEBEA00094510 /* Security.framework in Frameworks */,
 				9083640A1400752500E5AAAF /* UIKit.framework in Frameworks */,
 				9083640C1400752500E5AAAF /* CoreGraphics.framework in Frameworks */,
 				908363CD14006BF000E5AAAF /* SenTestingKit.framework in Frameworks */,
@@ -444,6 +450,7 @@
 				BD127B3E165D77B0002C944D /* TBSecureHashA1.m */,
 				BD127B45165D7E6F002C944D /* NSString+TBString.h */,
 				BD127B46165D7E6F002C944D /* NSString+TBString.m */,
+				BDA2187B165EEF6700094510 /* TBVerifyUserOperationDelegate.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -461,6 +468,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				BDA21877165EEBEA00094510 /* Security.framework */,
 				BDA2BC87165951CB0068C749 /* Interface */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,

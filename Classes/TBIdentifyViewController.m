@@ -11,8 +11,13 @@
 #import "TBColors.h"
 #import "TBEmailViewController.h"
 #import "HomeUIGridViewController.h"
+#import "SSKeychain.h"
+#import "TheBoxQueries.h"
+#import "TBProfileViewController.h"
+#import "AFHTTPRequestOperation.h"
 
 @interface TBIdentifyViewController ()
+@property(nonatomic, strong) NSOperationQueue *operations;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @end
 
@@ -29,6 +34,8 @@ return [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle]];
     if (!self) {
         return nil;
     }
+    
+    self.operations = [[NSOperationQueue alloc] init];
     
 return self;
 }
@@ -67,6 +74,22 @@ return self;
         [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:homeGridViewControler] animated:YES completion:nil];
     }];
     [self.browseButton onTouchUp:makeButtonWhite()];
+
+    NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
+    
+    for (NSDictionary* email in emails) {
+        [self.emailButton setTitle:[email objectForKey:@"acct"] forState:UIControlStateNormal];
+    }
+    
+    [self.emailButton onTouchDown:^(UIButton *button)
+    {
+        NSError *error = nil;
+        
+        AFHTTPRequestOperation *verifyUser =
+            [TheBoxQueries newVerifyUserQuery:self email:self.emailButton.titleLabel.text residence:[SSKeychain passwordForService:THE_BOX_SERVICE account:self.emailButton.titleLabel.text error:&error]];
+        
+        [self.operations addOperation:verifyUser];
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -80,4 +103,21 @@ return self;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark TBVerifyUserOperationDelegate
+-(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSString *)residence
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    TBProfileViewController *profileViewController = [TBProfileViewController newProfileViewController];
+    HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
+    
+    UITabBarController* tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[profileViewController, [[UINavigationController alloc] initWithRootViewController:homeGridViewControler]];
+    
+    [self presentViewController:tabBarController animated:YES completion:nil];
+}
+
+-(void)didFailOnVerifyWithError:(NSError *)error
+{
+    NSLog(@"ERROR: %s %@", __PRETTY_FUNCTION__, error);
+}
 @end

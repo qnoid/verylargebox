@@ -13,6 +13,7 @@
 @class TheBoxGet;
 @class AFHTTPRequestOperation;
 @protocol TBCreateUserOperationDelegate;
+@protocol TBVerifyUserOperationDelegate;
 @protocol TBCategoriesOperationDelegate;
 @protocol TBItemsOperationDelegate;
 @protocol TBLocationOperationDelegate;
@@ -26,7 +27,18 @@
  */
 @interface TheBoxQueries : NSObject 
 
+extern NSString* const THE_BOX_SERVICE;
+
 +(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<TBCreateUserOperationDelegate>*)delegate email:(NSString*)email;
+
+/**
+ Verifies the given email and residence with the server.
+ 
+ @param delegate the delegate to callback
+ @param email the email to register the user as
+ @param residence the residence associated with the user
+ */
++(AFHTTPRequestOperation*)newVerifyUserQuery:(NSObject<TBVerifyUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence;
 +(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBItemsOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image location:(NSDictionary *)location;

@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "TBButton.h"
+#import "TBVerifyUserOperationDelegate.h"
 
-@interface TBIdentifyViewController : UIViewController
+@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate>
 
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *theBoxButton;
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *identifyButton;
+@property (nonatomic, unsafe_unretained) IBOutlet TBButton *emailButton;
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *browseButton;
 
 +(TBIdentifyViewController*)newIdentifyViewController;

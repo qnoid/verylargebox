@@ -12,6 +12,8 @@
 #import "HomeUIGridViewController.h"
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
+#import "TBSecureHashA1.h"
+#import "SSKeychain.h"
 
 @interface TBEmailViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
@@ -78,9 +80,16 @@ return YES;
 }
 
 #pragma TBRegistrationOperationDelegate
--(void)didSucceedWithRegistration
+-(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
 {
+    NSError *error = nil;
+    [SSKeychain setPassword:residence forService:THE_BOX_SERVICE account:email error:&error];
     
+    if (error) {
+        NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+    }
+    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 -(void)didFailOnRegistrationWithError:(NSError*)error
