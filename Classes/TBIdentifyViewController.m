@@ -119,5 +119,8 @@ return self;
 -(void)didFailOnVerifyWithError:(NSError *)error
 {
     NSLog(@"ERROR: %s %@", __PRETTY_FUNCTION__, error);
+    UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"Unauthorised" message:@"You are not authorised. Please check your email to verify." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    
+    [userUnauthorisedAlertView show];
 }
 @end

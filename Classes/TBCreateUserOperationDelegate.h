@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TBNSErrorDelegate.h"
 
-@protocol TBCreateUserOperationDelegate <NSObject>
+@protocol TBCreateUserOperationDelegate <NSObject, TBNSErrorDelegate>
 
 /**
  Callback by TheBoxQueries#newCreateUserQuery:email: when succesfuly created a user.

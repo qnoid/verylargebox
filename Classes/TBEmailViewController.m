@@ -16,6 +16,7 @@
 #import "SSKeychain.h"
 
 @interface TBEmailViewController ()
+@property(nonatomic, strong) NSOperationQueue *operations;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @end
 
@@ -33,6 +34,8 @@ return [[TBEmailViewController alloc] initWithBundle:[NSBundle mainBundle]];
         return nil;
     }
     
+    self.operations = [[NSOperationQueue alloc] init];
+
     return self;
 }
 
@@ -61,7 +64,7 @@ return [[TBEmailViewController alloc] initWithBundle:[NSBundle mainBundle]];
         AFHTTPRequestOperation *newRegistrationOperation =
             [TheBoxQueries newCreateUserQuery:uself email:uself.emailTextField.text];
         
-        [newRegistrationOperation start];
+        [self.operations addOperation:newRegistrationOperation];
         
         TBProfileViewController *profileViewController = [TBProfileViewController newProfileViewController];
         HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
@@ -79,7 +82,15 @@ return [[TBEmailViewController alloc] initWithBundle:[NSBundle mainBundle]];
 return YES;
 }
 
-#pragma TBRegistrationOperationDelegate
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    UIAlertView* cannotConnectToHostAlertView = [[UIAlertView alloc] initWithTitle:@"Cannot connect to host" message:@"The was a problem connecting with thebox. Please check your internet connection and try again." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    
+    [cannotConnectToHostAlertView show];
+}
+
+#pragma mark TBRegistrationOperationDelegate
 -(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
 {
     NSError *error = nil;

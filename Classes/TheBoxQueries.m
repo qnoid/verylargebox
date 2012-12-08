@@ -19,6 +19,8 @@
 #import "TBCreateUserOperationDelegate.h"
 #import "TBVerifyUserOperationDelegate.h"
 #import "TBSecureHashA1.h"
+#import "TBAFHTTPRequestOperationCompletionBlocks.h"
+#import "TBNSErrorDelegate.h"
 
 @interface TheBoxQueries ()
 
@@ -32,7 +34,7 @@
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 #if DEBUG
-NSString* const THE_BOX_BASE_URL_STRING = @"http://169.254.164.158:3000";
+NSString* const THE_BOX_BASE_URL_STRING = @"http://192.168.1.249:3000";
 #else
 NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
 #endif
@@ -51,8 +53,8 @@ NSUInteger const TIMEOUT = 60;
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters tbSetObjectIfNotNil:email forKey:@"email"];
-    [parameters tbSetObjectIfNotNil:residence forKey:@"residence"];
+    [parameters tbSetObjectIfNotNil:email forKey:@"user[email]"];
+    [parameters tbSetObjectIfNotNil:residence forKey:@"user[residence]"];
 
     NSMutableURLRequest *registrationRequest = [client requestWithMethod:@"POST" path:@"/users" parameters:parameters];
     [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -62,7 +64,17 @@ NSUInteger const TIMEOUT = 60;
     {
         [delegate didSucceedWithRegistrationForEmail:email residence:residence];
     } 
-    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        TBAFHTTPRequestOperationFailureBlockOnErrorCode *cannotConnectToHost =
+            [TBAFHTTPRequestOperationFailureBlockOnErrorCode cannotConnectToHost:^(AFHTTPRequestOperation *operation){
+                [delegate didFailWithCannonConnectToHost:error];
+            }];
+        
+        if([cannotConnectToHost failure:operation error:error]){
+            return;
+        }
+
         [delegate didFailOnRegistrationWithError:error];
     }];
     

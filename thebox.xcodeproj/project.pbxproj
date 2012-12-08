@@ -105,6 +105,9 @@
 		BD127B48165D7E70002C944D /* NSString+TBString.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B46165D7E6F002C944D /* NSString+TBString.m */; };
 		BD127B4B165DA3C8002C944D /* TBNSString+TBSStringTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B4A165DA3C8002C944D /* TBNSString+TBSStringTestCase.m */; };
 		BD1C3E0D15679668007769CE /* TBUIRibbon.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1C3E0C15679668007769CE /* TBUIRibbon.m */; };
+		BD258DCD1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DCC1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m */; };
+		BD258DCE1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DCC1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m */; };
+		BD258DD51673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DD41673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m */; };
 		BD84EF70165C2363009D9408 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
 		BDA21878165EEBEA00094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
 		BDA2187A165EEBF600094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
@@ -307,6 +310,10 @@
 		BD127B4A165DA3C8002C944D /* TBNSString+TBSStringTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBNSString+TBSStringTestCase.m"; sourceTree = "<group>"; };
 		BD1C3E0B15679668007769CE /* TBUIRibbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUIRibbon.h; sourceTree = "<group>"; };
 		BD1C3E0C15679668007769CE /* TBUIRibbon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUIRibbon.m; sourceTree = "<group>"; };
+		BD258DCB1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAFHTTPRequestOperationCompletionBlocks.h; sourceTree = "<group>"; };
+		BD258DCC1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAFHTTPRequestOperationCompletionBlocks.m; sourceTree = "<group>"; };
+		BD258DD01673C33A00286511 /* TBNSErrorDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBNSErrorDelegate.h; sourceTree = "<group>"; };
+		BD258DD41673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAFHTTPRequestOperationFailureBlockTest.m; sourceTree = "<group>"; };
 		BDA21877165EEBEA00094510 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDA2187B165EEF6700094510 /* TBVerifyUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVerifyUserOperationDelegate.h; sourceTree = "<group>"; };
 		BDA2BC89165952C20068C749 /* TBIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBIdentifyViewController.h; sourceTree = "<group>"; };
@@ -451,6 +458,9 @@
 				BD127B45165D7E6F002C944D /* NSString+TBString.h */,
 				BD127B46165D7E6F002C944D /* NSString+TBString.m */,
 				BDA2187B165EEF6700094510 /* TBVerifyUserOperationDelegate.h */,
+				BD258DCB1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.h */,
+				BD258DCC1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m */,
+				BD258DD01673C33A00286511 /* TBNSErrorDelegate.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -628,6 +638,7 @@
 				BD127B43165D799F002C944D /* TBSecureHashA1Test.m */,
 				BD127B49165DA3C8002C944D /* TBNSString+TBSStringTestCase.h */,
 				BD127B4A165DA3C8002C944D /* TBNSString+TBSStringTestCase.m */,
+				BD258DD41673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1060,6 +1071,7 @@
 				BDA2BD11165AEB090068C749 /* TBEmailViewController.m in Sources */,
 				BD127B3F165D77B0002C944D /* TBSecureHashA1.m in Sources */,
 				BD127B47165D7E70002C944D /* NSString+TBString.m in Sources */,
+				BD258DCD1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,6 +1099,8 @@
 				BD127B44165D799F002C944D /* TBSecureHashA1Test.m in Sources */,
 				BD127B48165D7E70002C944D /* NSString+TBString.m in Sources */,
 				BD127B4B165DA3C8002C944D /* TBNSString+TBSStringTestCase.m in Sources */,
+				BD258DCE1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */,
+				BD258DD51673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
