@@ -34,33 +34,11 @@ TBButtonOnTouch makeButtonWhite() {
 }
 
 /**
- Groups related border properties together and allows chaining.
-*/
-@protocol TBButtonBorder
-
-/**
- Sets the border width 
- 
- @param width the border width
- @return self for chaining
- @see CALayer#borderWidth
- */
--(id<TBButtonBorder>)borderWidth:(CGFloat)width;
-
-/**
- Sets the border color
- 
- @param color the border color
- @return self for chaining
- @see CALayer#borderColor
- */
--(id<TBButtonBorder>)borderColor:(CGColorRef)color;
-@end
-/**
  A UIButton that adds expressive declarations to any properties affecting its style.
 
  Allows registering blocks to handle UIControlEvent(s).
 */
+
 @interface TBButton : UIButton
 
 /**
@@ -71,16 +49,6 @@ TBButtonOnTouch makeButtonWhite() {
  @see CALayer#cornerRadius
  */
 -(TBButton*)cornerRadius:(CGFloat)cornerRadius;
-
-/**
- Access to common properties related to the border
-
- default border width 1.0f
- default border color black
-
- @return a TBButtonBorder type to set any border properties
-*/
--(id<TBButtonBorder>)border;
 
 /**
  Sets the block to call on touch down events.

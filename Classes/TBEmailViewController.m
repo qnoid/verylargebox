@@ -8,6 +8,7 @@
 
 #import "TBEmailViewController.h"
 #import "TBButton.h"
+#import "TBUIView.h"
 #import "TBProfileViewController.h"
 #import "HomeUIGridViewController.h"
 #import "TheBoxQueries.h"
@@ -56,23 +57,16 @@ return [[TBEmailViewController alloc] initWithBundle:[NSBundle mainBundle]];
     [self.theBoxButton onTouchDown:makeButtonDarkOrange()];
     [self.theBoxButton onTouchUp:makeButtonWhite()];
     
-    __unsafe_unretained TBEmailViewController *uself = self;
-
+    __weak TBEmailViewController *uself = self;
     [self.registerButton onTouchDown:^(UIButton *button) {
         
         //no need to handle viewcontroller unloading
         AFHTTPRequestOperation *newRegistrationOperation =
-            [TheBoxQueries newCreateUserQuery:uself email:uself.emailTextField.text];
+            [TheBoxQueries newCreateUserQuery:self.createUserOperationDelegate email:uself.emailTextField.text];
         
         [self.operations addOperation:newRegistrationOperation];
         
-        TBProfileViewController *profileViewController = [TBProfileViewController newProfileViewController];
-        HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
-        
-        UITabBarController* tabBarController = [[UITabBarController alloc] init];
-        tabBarController.viewControllers = @[profileViewController, [[UINavigationController alloc] initWithRootViewController:homeGridViewControler]];
-        
-        [uself presentViewController:tabBarController animated:YES completion:nil];
+        [uself.navigationController popViewControllerAnimated:YES];
     }];
     [self.registerButton onTouchUp:makeButtonWhite()];
 }
@@ -80,14 +74,6 @@ return [[TBEmailViewController alloc] initWithBundle:[NSBundle mainBundle]];
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
 return YES;
-}
-
-#pragma mark TBNSErrorDelegate
--(void)didFailWithCannonConnectToHost:(NSError *)error
-{
-    UIAlertView* cannotConnectToHostAlertView = [[UIAlertView alloc] initWithTitle:@"Cannot connect to host" message:@"The was a problem connecting with thebox. Please check your internet connection and try again." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-    
-    [cannotConnectToHostAlertView show];
 }
 
 #pragma mark TBRegistrationOperationDelegate

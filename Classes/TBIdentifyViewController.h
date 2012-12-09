@@ -10,8 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TBButton.h"
 #import "TBVerifyUserOperationDelegate.h"
+#import "TBCreateUserOperationDelegate.h"
 
-@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, UITableViewDelegate>
+@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, TBCreateUserOperationDelegate, UITableViewDelegate>
 
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *theBoxButton;
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *identifyButton;

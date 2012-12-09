@@ -23,6 +23,65 @@
 @end
 
 /**
+ Groups related border properties together and allows chaining.
+ */
+@protocol TBViewBorder
+
+/**
+ Sets the border width
+ 
+ @param width the border width
+ @return self for chaining
+ @see CALayer#borderWidth
+ */
+-(id<TBViewBorder>)borderWidth:(CGFloat)width;
+
+/**
+ Sets the border color
+ 
+ @param color the border color
+ @return self for chaining
+ @see CALayer#borderColor
+ */
+-(id<TBViewBorder>)borderColor:(CGColorRef)color;
+@end
+
+
+/**
+ Groups related border properties together and allows chaining.
+ */
+@interface UIView (TBViewBorder) <TBViewBorder>
+
+/**
+ Access to common properties related to the border
+ 
+ default border width 1.0f
+ default border color black
+ 
+ @return a TBButtonBorder type to set any border properties
+ */
+-(id<TBViewBorder>)border;
+
+/**
+ Sets the border width
+ 
+ @param width the border width
+ @return self for chaining
+ @see CALayer#borderWidth
+ */
+-(id<TBViewBorder>)borderWidth:(CGFloat)width;
+
+/**
+ Sets the border color
+ 
+ @param color the border color
+ @return self for chaining
+ @see CALayer#borderColor
+ */
+-(id<TBViewBorder>)borderColor:(CGColorRef)color;
+@end
+
+/**
  A UIView that allows you to implement drawRect via composition.
  
  */

@@ -16,6 +16,7 @@
 #import "TBProfileViewController.h"
 #import "AFHTTPRequestOperation.h"
 #import "TBUITableViewDataSourceBuilder.h"
+#import "TBUIView.h"
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
@@ -70,6 +71,7 @@ return self;
     [self.identifyButton onTouchDown:^(UIButton *button) {
         makeButtonDarkOrange();
         TBEmailViewController* emailViewController = [TBEmailViewController newEmailViewController];
+        emailViewController.createUserOperationDelegate = self;
         [uself.navigationController pushViewController:emailViewController animated:YES];
     }];
     [self.identifyButton onTouchUp:makeButtonWhite()];
@@ -79,7 +81,7 @@ return self;
         HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
         [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:homeGridViewControler] animated:YES completion:nil];
     }];
-    [self.browseButton onTouchUp:makeButtonWhite()];
+    [self.browseButton onTouchUp:makeButtonWhite()];    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -114,6 +116,38 @@ return self;
     [userUnauthorisedAlertView show];
 }
 
+#pragma mark TBRegistrationOperationDelegate
+-(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSError *error = nil;
+    [SSKeychain setPassword:residence forService:THE_BOX_SERVICE account:email error:&error];
+    
+    if (error) {
+        NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+    }
+    
+    UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"New Registration" message:[NSString stringWithFormat:@"Please check your email %@.", email] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    
+    [userUnauthorisedAlertView show];
+    self.accounts = [NSMutableArray arrayWithArray:[SSKeychain accountsForService:THE_BOX_SERVICE]];
+    [self.accountsTableView reloadData];
+    
+}
+
+-(void)didFailOnRegistrationWithError:(NSError*)error
+{
+    NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+}
+
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    UIAlertView* cannotConnectToHostAlertView = [[UIAlertView alloc] initWithTitle:@"Cannot connect to host" message:@"The was a problem connecting with thebox. Please check your internet connection and try again." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    
+    [cannotConnectToHostAlertView show];
+}
+
 #pragma mark UITableViewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 return [self.accounts count];
@@ -128,6 +162,12 @@ return [self.accounts count];
         emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellSelectionStyleNone reuseIdentifier:@"Cell"];
         emailCell.textLabel.textColor = [TBColors colorLightOrange];
         emailCell.textLabel.textAlignment = NSTextAlignmentCenter;
+        UIView* selectedBackgroundView = [[UIView alloc] init];
+        selectedBackgroundView.backgroundColor = [TBColors colorLightOrange];
+        [[selectedBackgroundView.border
+            borderWidth:2.0f]
+            borderColor:[TBColors colorDarkOrange].CGColor];
+        emailCell.selectedBackgroundView = selectedBackgroundView;
     }
     
     NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
@@ -169,6 +209,5 @@ return YES;
     AFHTTPRequestOperation *verifyUser = [TheBoxQueries newVerifyUserQuery:self email:email residence:residence];
     
     [self.operations addOperation:verifyUser];
-
 }
 @end

@@ -9,6 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "TBButton.h"
+#import "TBUIView.h"
 
 @interface TBButtonTest : SenTestCase
 

@@ -15,11 +15,12 @@
   Asks the user for her email and makes a new registration with server.
  
  */
-@interface TBEmailViewController : UIViewController <UITextFieldDelegate, TBCreateUserOperationDelegate>
+@interface TBEmailViewController : UIViewController <UITextFieldDelegate>
 
-@property (nonatomic, unsafe_unretained) IBOutlet TBButton *theBoxButton;
-@property (nonatomic, unsafe_unretained) IBOutlet UITextField *emailTextField;
-@property (nonatomic, unsafe_unretained) IBOutlet TBButton *registerButton;
+@property (nonatomic, weak) IBOutlet TBButton *theBoxButton;
+@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
+@property (nonatomic, weak) IBOutlet TBButton *registerButton;
+@property (nonatomic, weak) id<TBCreateUserOperationDelegate> createUserOperationDelegate;
 
 +(TBEmailViewController*)newEmailViewController;
 

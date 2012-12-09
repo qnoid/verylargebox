@@ -7,9 +7,9 @@
 //
 
 #import "TBButton.h"
-#import <QuartzCore/QuartzCore.h>
+#import "TBUIView.h"
 
-@interface TBButton () <TBButtonBorder>
+@interface TBButton ()
 @property(nonatomic, strong) NSMutableDictionary* uiControlEventToBlock;
 @end
 
@@ -36,22 +36,6 @@ return[self.uiControlEventToBlock objectForKey:[NSNumber numberWithInt:controlEv
 {
     self.layer.cornerRadius = cornerRadius;
     self.layer.masksToBounds = YES;
-return self;
-}
-
-- (id<TBButtonBorder>)border {
-return [[self borderWidth:1.0f] borderColor:[UIColor blackColor].CGColor];
-}
-
-- (id<TBButtonBorder>)borderWidth:(CGFloat)width
-{
-    self.layer.borderWidth = width;
-return self;
-}
-
-- (id<TBButtonBorder>)borderColor:(CGColorRef)color
-{
-    self.layer.borderColor = color;
 return self;
 }
 

@@ -56,7 +56,6 @@
 		90A5FCD11387CC1F004E65B3 /* TheBoxUIGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90A6C4541300822C00AEEE9F /* TheBoxUIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A6C4521300822C00AEEE9F /* TheBoxUIScrollView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90B56BE51534D3E10064CB4E /* DetailsUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* DetailsUIViewController.m */; };
-		90BBA77612BD0418001B97D9 /* UIView+TheBoxUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BBA77212BD036E001B97D9 /* UIView+TheBoxUIView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2A47B1526679C00AC16B6 /* TheBoxDefaultKeyboardObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2A47A1526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C35412B6C24E00829868 /* TheBoxSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0038D12B63C0E0029863E /* TheBoxSize.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C35512B6C24E00829868 /* TheBoxBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D830D812B51BDF00BE4470 /* TheBoxBundle.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -224,7 +223,6 @@
 		9096CC0B133BB85300639685 /* TheBoxMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxMath.h; sourceTree = "<group>"; };
 		9096CC0D133BB85300639685 /* TheBoxQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxQueries.h; sourceTree = "<group>"; };
 		9096CC0E133BB85400639685 /* TheBoxUIScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIScrollView.h; sourceTree = "<group>"; };
-		9096CC0F133BB85400639685 /* UIView+TheBoxUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TheBoxUIView.h"; sourceTree = "<group>"; };
 		909F9F3415442A5600D1E7AE /* TheBoxUIGridViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TheBoxUIGridViewTest.m; path = ../Tests/Classes/TheBoxUIGridViewTest.m; sourceTree = "<group>"; };
 		90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Developer/Library/Frameworks/SenTestingKit.framework; sourceTree = SDKROOT; };
 		90A1E51C133CC10000CC9212 /* TheBoxCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxCache.h; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 		90A6C4521300822C00AEEE9F /* TheBoxUIScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIScrollView.m; sourceTree = "<group>"; };
 		90B56BE31534D3E10064CB4E /* DetailsUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsUIViewController.h; path = Headers/DetailsUIViewController.h; sourceTree = "<group>"; };
 		90B56BE41534D3E10064CB4E /* DetailsUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsUIViewController.m; path = Classes/DetailsUIViewController.m; sourceTree = "<group>"; };
-		90BBA77212BD036E001B97D9 /* UIView+TheBoxUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TheBoxUIView.m"; sourceTree = "<group>"; };
 		90C0038D12B63C0E0029863E /* TheBoxSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxSize.m; sourceTree = "<group>"; };
 		90C0048E12B6437B0029863E /* TheBoxRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxRect.m; sourceTree = "<group>"; };
 		90C2A4791526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxDefaultKeyboardObserver.h; sourceTree = "<group>"; };
@@ -423,7 +420,6 @@
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				90D830F312B51DA400BE4470 /* TheBoxUICell.xib */,
 				9096CC07133BB81E00639685 /* TheBoxQueries.m */,
-				90BBA77212BD036E001B97D9 /* UIView+TheBoxUIView.m */,
 				90C0048E12B6437B0029863E /* TheBoxRect.m */,
 				90C0038D12B63C0E0029863E /* TheBoxSize.m */,
 				90D830D812B51BDF00BE4470 /* TheBoxBundle.m */,
@@ -668,7 +664,6 @@
 				9096CC0B133BB85300639685 /* TheBoxMath.h */,
 				9096CC0D133BB85300639685 /* TheBoxQueries.h */,
 				9096CC0E133BB85400639685 /* TheBoxUIScrollView.h */,
-				9096CC0F133BB85400639685 /* UIView+TheBoxUIView.h */,
 				90C9510A12B6A16C00A8A05F /* TheBoxBundle.h */,
 				90C9510D12B6A16C00A8A05F /* TheBoxLocationService.h */,
 				90C9510E12B6A16C00A8A05F /* TheBoxLocationServiceDelegate.h */,
@@ -1054,7 +1049,6 @@
 				90C2C37612B6C2AE00829868 /* main.m in Sources */,
 				90D9A93F12B921950063FF60 /* Item.m in Sources */,
 				90D9A96412B924130063FF60 /* TheBoxMath.m in Sources */,
-				90BBA77612BD0418001B97D9 /* UIView+TheBoxUIView.m in Sources */,
 				90A6C4541300822C00AEEE9F /* TheBoxUIScrollView.m in Sources */,
 				90F08273132AED5200E7E35F /* UITextField+TheBoxUITextField.m in Sources */,
 				9096CC09133BB81E00639685 /* TheBoxQueries.m in Sources */,
@@ -1165,7 +1159,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
@@ -1225,7 +1219,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
@@ -1418,7 +1412,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				MACH_O_TYPE = mh_execute;
 				MODULE_NAME = Entitlement.plist;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -1457,7 +1451,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
@@ -1655,7 +1649,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				MACH_O_TYPE = mh_bundle;
 				MODULE_NAME = Entitlement.plist;
 				PRODUCT_NAME = thebox;
@@ -1682,7 +1676,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				MACH_O_TYPE = mh_execute;
 				MODULE_NAME = Entitlement.plist;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
