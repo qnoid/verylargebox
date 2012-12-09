@@ -33,11 +33,7 @@
 @implementation TheBoxQueries
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
-#if DEBUG
-NSString* const THE_BOX_BASE_URL_STRING = @"http://192.168.1.249:3000";
-#else
 NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
-#endif
 
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";

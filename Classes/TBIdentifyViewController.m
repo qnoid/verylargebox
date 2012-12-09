@@ -15,19 +15,47 @@
 #import "TheBoxQueries.h"
 #import "TBProfileViewController.h"
 #import "AFHTTPRequestOperation.h"
+#import "TBUITableViewDataSourceBuilder.h"
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil;
+@property(nonatomic, strong) id<UITableViewDataSource> accountsDatasource;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil accountsDatasource:(id<UITableViewDataSource>) accountsDatasource;
 @end
 
 @implementation TBIdentifyViewController
 
-+(TBIdentifyViewController*)newIdentifyViewController {
-return [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle]];
++(TBIdentifyViewController*)newIdentifyViewController
+{
+    TBUITableViewDataSourceBuilder *datasourceBuilder = [[TBUITableViewDataSourceBuilder alloc] init];
+
+    NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
+    
+    [[datasourceBuilder numberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
+        return [emails count];
+    }]
+    cellForRowAtIndexPath:^UITableViewCell *(UITableView *tableView, NSIndexPath *indexPath)
+    {
+        UITableViewCell *emailCell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        
+        if(!emailCell)
+        {
+            emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellSelectionStyleNone reuseIdentifier:@"Cell"];
+            emailCell.textLabel.textColor = [TBColors colorLightOrange];
+            emailCell.textLabel.textAlignment = NSTextAlignmentCenter;
+        }
+        
+        NSString* email = [[emails objectAtIndex:indexPath.row] objectForKey:@"acct"];
+        emailCell.textLabel.text = email;
+        
+    return emailCell;
+    }];
+    
+
+return [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accountsDatasource:[datasourceBuilder newDatasource]];
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil accountsDatasource:(id<UITableViewDataSource>) accountsDatasource;
 {
     self = [super initWithNibName:@"TBIdentifyViewController" bundle:nibBundleOrNil];
     
@@ -36,6 +64,7 @@ return [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle]];
     }
     
     self.operations = [[NSOperationQueue alloc] init];
+    self.accountsDatasource = accountsDatasource;
     
 return self;
 }
@@ -74,22 +103,6 @@ return self;
         [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:homeGridViewControler] animated:YES completion:nil];
     }];
     [self.browseButton onTouchUp:makeButtonWhite()];
-
-    NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
-    
-    for (NSDictionary* email in emails) {
-        [self.emailButton setTitle:[email objectForKey:@"acct"] forState:UIControlStateNormal];
-    }
-    
-    [self.emailButton onTouchDown:^(UIButton *button)
-    {
-        NSError *error = nil;
-        
-        AFHTTPRequestOperation *verifyUser =
-            [TheBoxQueries newVerifyUserQuery:self email:self.emailButton.titleLabel.text residence:[SSKeychain passwordForService:THE_BOX_SERVICE account:self.emailButton.titleLabel.text error:&error]];
-        
-        [self.operations addOperation:verifyUser];
-    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -122,5 +135,49 @@ return self;
     UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"Unauthorised" message:@"You are not authorised. Please check your email to verify." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     
     [userUnauthorisedAlertView show];
+}
+
+#pragma mark UITableViewDatasource
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+return [self.accountsDatasource tableView:tableView numberOfRowsInSection:section];
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+return [self.accountsDatasource tableView:tableView cellForRowAtIndexPath:indexPath];
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle != UITableViewCellEditingStyleDelete) {
+        return;
+    }
+    
+    NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
+    NSString* email = [[emails objectAtIndex:indexPath.row] objectForKey:@"acct"];
+    
+    [SSKeychain deletePasswordForService:THE_BOX_SERVICE account:email];
+    
+    [self.accountsTableView beginUpdates];
+    [self.accountsTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    [self.accountsTableView endUpdates];
+}
+
+
+#pragma mark UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
+    NSString* email = [[emails objectAtIndex:indexPath.row] objectForKey:@"acct"];
+    
+    NSError *error = nil;
+    NSString *residence = [SSKeychain passwordForService:THE_BOX_SERVICE account:email error:&error];
+    
+    AFHTTPRequestOperation *verifyUser = [TheBoxQueries newVerifyUserQuery:self email:email residence:residence];
+    
+    [self.operations addOperation:verifyUser];
+
 }
 @end

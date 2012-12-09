@@ -11,5 +11,5 @@
 @interface TBColors : NSObject
 
 + (UIColor *)colorDarkOrange;
-
++ (UIColor *)colorLightOrange;
 @end

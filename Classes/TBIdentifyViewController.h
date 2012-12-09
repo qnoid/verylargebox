@@ -11,11 +11,11 @@
 #import "TBButton.h"
 #import "TBVerifyUserOperationDelegate.h"
 
-@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate>
+@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, UITableViewDelegate>
 
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *theBoxButton;
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *identifyButton;
-@property (nonatomic, unsafe_unretained) IBOutlet TBButton *emailButton;
+@property (nonatomic, unsafe_unretained) IBOutlet UITableView *accountsTableView;
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *browseButton;
 
 +(TBIdentifyViewController*)newIdentifyViewController;
