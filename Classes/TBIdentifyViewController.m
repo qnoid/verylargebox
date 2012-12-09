@@ -19,43 +19,20 @@
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
-@property(nonatomic, strong) id<UITableViewDataSource> accountsDatasource;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil accountsDatasource:(id<UITableViewDataSource>) accountsDatasource;
+@property(nonatomic, strong) NSMutableArray* accounts;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts;
 @end
 
 @implementation TBIdentifyViewController
 
 +(TBIdentifyViewController*)newIdentifyViewController
 {
-    TBUITableViewDataSourceBuilder *datasourceBuilder = [[TBUITableViewDataSourceBuilder alloc] init];
-
-    NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
+    NSArray* accounts = [SSKeychain accountsForService:THE_BOX_SERVICE];
     
-    [[datasourceBuilder numberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
-        return [emails count];
-    }]
-    cellForRowAtIndexPath:^UITableViewCell *(UITableView *tableView, NSIndexPath *indexPath)
-    {
-        UITableViewCell *emailCell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        
-        if(!emailCell)
-        {
-            emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellSelectionStyleNone reuseIdentifier:@"Cell"];
-            emailCell.textLabel.textColor = [TBColors colorLightOrange];
-            emailCell.textLabel.textAlignment = NSTextAlignmentCenter;
-        }
-        
-        NSString* email = [[emails objectAtIndex:indexPath.row] objectForKey:@"acct"];
-        emailCell.textLabel.text = email;
-        
-    return emailCell;
-    }];
-    
-
-return [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accountsDatasource:[datasourceBuilder newDatasource]];
+return [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accounts:[NSMutableArray arrayWithArray:accounts]];
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil accountsDatasource:(id<UITableViewDataSource>) accountsDatasource;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts
 {
     self = [super initWithNibName:@"TBIdentifyViewController" bundle:nibBundleOrNil];
     
@@ -64,7 +41,7 @@ return [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] ac
     }
     
     self.operations = [[NSOperationQueue alloc] init];
-    self.accountsDatasource = accountsDatasource;
+    self.accounts = accounts;
     
 return self;
 }
@@ -139,11 +116,24 @@ return self;
 
 #pragma mark UITableViewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-return [self.accountsDatasource tableView:tableView numberOfRowsInSection:section];
+return [self.accounts count];
 }
 
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-return [self.accountsDatasource tableView:tableView cellForRowAtIndexPath:indexPath];
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *emailCell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    if(!emailCell)
+    {
+        emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellSelectionStyleNone reuseIdentifier:@"Cell"];
+        emailCell.textLabel.textColor = [TBColors colorLightOrange];
+        emailCell.textLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    
+    NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
+    emailCell.textLabel.text = email;
+    
+return emailCell;
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -155,14 +145,15 @@ return YES;
         return;
     }
     
-    NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
-    NSString* email = [[emails objectAtIndex:indexPath.row] objectForKey:@"acct"];
+    if(editingStyle == UITableViewCellSelectionStyleNone){
+        return;
+    }
     
+    NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
     [SSKeychain deletePasswordForService:THE_BOX_SERVICE account:email];
+    [self.accounts removeObjectAtIndex:indexPath.row];
     
-    [self.accountsTableView beginUpdates];
-    [self.accountsTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-    [self.accountsTableView endUpdates];
+    [self.accountsTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
 

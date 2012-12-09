@@ -25,6 +25,11 @@ return ^UITableViewCell*(UITableView *tableView, NSIndexPath *indexPath){return 
 
 @end
 
+/**
+ Use to create an datasource implementing only the required methods.
+ 
+ The datasource created does not support any changes to the underlying objects.
+ */
 @interface TBUITableViewDataSourceBuilder : NSObject
 
 -(TBUITableViewDataSourceBuilder*)numberOfRowsInSection:(TBNumberOfRowsInSectionBlock)numberOfRowsInSection;

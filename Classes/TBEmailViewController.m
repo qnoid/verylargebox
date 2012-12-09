@@ -93,6 +93,7 @@ return YES;
 #pragma mark TBRegistrationOperationDelegate
 -(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
 {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSError *error = nil;
     [SSKeychain setPassword:residence forService:THE_BOX_SERVICE account:email error:&error];
     
@@ -100,7 +101,10 @@ return YES;
         NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
     }
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"New Registration" message:[NSString stringWithFormat:@"Please check your email %@.", email] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    
+    [userUnauthorisedAlertView show];
+
 }
 
 -(void)didFailOnRegistrationWithError:(NSError*)error
