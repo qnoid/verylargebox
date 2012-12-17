@@ -29,7 +29,13 @@
 
 extern NSString* const THE_BOX_SERVICE;
 
-+(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<TBCreateUserOperationDelegate>*)delegate email:(NSString*)email;
+/**
+ 
+ @param delegate
+ @param email
+ @param residence
+ */
++(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<TBCreateUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence;
 
 /**
  Verifies the given email and residence with the server.

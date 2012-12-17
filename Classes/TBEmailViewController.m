@@ -60,16 +60,26 @@ return [[TBEmailViewController alloc] initWithBundle:[NSBundle mainBundle]];
     __weak TBEmailViewController *uself = self;
     [self.registerButton onTouchDown:^(UIButton *button) {
         
+        TBSecureHashA1 *sha1 = [TBSecureHashA1 new];
+        NSString* residence = [sha1 newKey];
+
+        [self.delegate didEnterEmail:uself.emailTextField.text forResidence:residence];
+
         //no need to handle viewcontroller unloading
         AFHTTPRequestOperation *newRegistrationOperation =
-            [TheBoxQueries newCreateUserQuery:self.createUserOperationDelegate email:uself.emailTextField.text];
+            [TheBoxQueries newCreateUserQuery:self.createUserOperationDelegate email:uself.emailTextField.text residence:residence];
         
         [self.operations addOperation:newRegistrationOperation];
         
         [uself.navigationController popViewControllerAnimated:YES];
     }];
     [self.registerButton onTouchUp:makeButtonWhite()];
+    [[self.emailTextField.border
+        borderWidth:2.0f]
+        borderColor:[TBColors colorDarkOrange].CGColor];
 }
+
+#pragma mark UITextFieldDelegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];

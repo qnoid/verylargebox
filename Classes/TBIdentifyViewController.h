@@ -11,8 +11,59 @@
 #import "TBButton.h"
 #import "TBVerifyUserOperationDelegate.h"
 #import "TBCreateUserOperationDelegate.h"
+#import "TBEmailViewController.h"
 
-@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, TBCreateUserOperationDelegate, UITableViewDelegate>
+
+
+typedef NS_ENUM(NSInteger, TBEmailStatus){
+    TBEmailStatusError,
+    TBEmailStatusUnknown,
+    TBEmailStatusUnauthorised,
+    TBEmailStatusVerified
+};
+
+typedef void(^TBEmailStatusBlock)(UITableViewCell* tableViewCell);
+
+NS_INLINE
+TBEmailStatusBlock tbBmailStatus(TBEmailStatus emailStatus)
+{
+    switch (emailStatus) {
+        case TBEmailStatusError:
+            return ^(UITableViewCell *tableViewCell){
+                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refresh.png"]];
+                
+                tableViewCell.textLabel.enabled = NO;
+                tableViewCell.userInteractionEnabled = YES;
+                tableViewCell.accessoryView = accessoryView;
+            };            
+        case TBEmailStatusUnknown:
+            return ^(UITableViewCell *tableViewCell){
+                UIActivityIndicatorView* accessoryView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                [accessoryView startAnimating];
+                
+                tableViewCell.userInteractionEnabled = NO;
+                tableViewCell.textLabel.enabled = NO;
+                tableViewCell.accessoryView = accessoryView;
+            };
+        case TBEmailStatusUnauthorised:
+            return ^(UITableViewCell *tableViewCell){
+                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"warning.png"]];
+                
+                tableViewCell.textLabel.enabled = NO;
+                tableViewCell.userInteractionEnabled = YES;
+                tableViewCell.accessoryView = accessoryView;
+            };
+        case TBEmailStatusVerified:
+            return ^(UITableViewCell *tableViewCell){
+                tableViewCell.textLabel.enabled = YES;
+                tableViewCell.userInteractionEnabled = YES;
+                tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                tableViewCell.accessoryView = nil;
+            };
+    }
+}
+
+@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, TBCreateUserOperationDelegate, TBEmailViewControllerDelegate, UITableViewDelegate>
 
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *theBoxButton;
 @property (nonatomic, unsafe_unretained) IBOutlet TBButton *identifyButton;

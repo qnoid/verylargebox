@@ -33,6 +33,7 @@
 @implementation TheBoxQueries
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
+
 NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
 
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
@@ -41,16 +42,13 @@ NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4W
 NSUInteger const TIMEOUT = 60;
 
 
-+(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<TBCreateUserOperationDelegate>*)delegate email:(NSString*)email
++(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<TBCreateUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence
 {
-    TBSecureHashA1 *sha1 = [TBSecureHashA1 new];
-    NSString* residence = [sha1 newKey];
-    
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters tbSetObjectIfNotNil:email forKey:@"user[email]"];
-    [parameters tbSetObjectIfNotNil:residence forKey:@"user[residence]"];
+    [parameters tbSetObjectIfNotNil:email forKey:@"email"];
+    [parameters tbSetObjectIfNotNil:residence forKey:@"residence"];
 
     NSMutableURLRequest *registrationRequest = [client requestWithMethod:@"POST" path:@"/users" parameters:parameters];
     [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];

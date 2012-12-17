@@ -12,6 +12,20 @@
 @class TBButton;
 
 /**
+
+ */
+@protocol TBEmailViewControllerDelegate <NSObject>
+
+/**
+ Callback
+ 
+ @param email the email as entered by the user
+ @param residence
+ */
+-(void)didEnterEmail:(NSString*)email forResidence:(NSString*)residence;
+
+@end
+/**
   Asks the user for her email and makes a new registration with server.
  
  */
@@ -21,6 +35,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet TBButton *registerButton;
 @property (nonatomic, weak) id<TBCreateUserOperationDelegate> createUserOperationDelegate;
+@property (nonatomic, weak) id<TBEmailViewControllerDelegate> delegate;
 
 +(TBEmailViewController*)newEmailViewController;
 

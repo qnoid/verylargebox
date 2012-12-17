@@ -109,6 +109,10 @@
 		BD258DD51673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DD41673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m */; };
 		BD258DD81673F1F700286511 /* TBUITableViewDataSourceBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DD71673F1F700286511 /* TBUITableViewDataSourceBuilder.m */; };
 		BD258DD91673F1F700286511 /* TBUITableViewDataSourceBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DD71673F1F700286511 /* TBUITableViewDataSourceBuilder.m */; };
+		BD258DDB1678005400286511 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDA1678005400286511 /* warning.png */; };
+		BD258DDC1678005400286511 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDA1678005400286511 /* warning.png */; };
+		BD258DDE1678040500286511 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDD1678040500286511 /* refresh.png */; };
+		BD258DDF1678040500286511 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDD1678040500286511 /* refresh.png */; };
 		BD84EF70165C2363009D9408 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
 		BDA21878165EEBEA00094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
 		BDA2187A165EEBF600094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
@@ -315,6 +319,8 @@
 		BD258DD41673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAFHTTPRequestOperationFailureBlockTest.m; sourceTree = "<group>"; };
 		BD258DD61673F1F700286511 /* TBUITableViewDataSourceBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUITableViewDataSourceBuilder.h; sourceTree = "<group>"; };
 		BD258DD71673F1F700286511 /* TBUITableViewDataSourceBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUITableViewDataSourceBuilder.m; sourceTree = "<group>"; };
+		BD258DDA1678005400286511 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = warning.png; path = "Supporting Files/warning.png"; sourceTree = "<group>"; };
+		BD258DDD1678040500286511 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = "Supporting Files/refresh.png"; sourceTree = "<group>"; };
 		BDA21877165EEBEA00094510 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDA2187B165EEF6700094510 /* TBVerifyUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVerifyUserOperationDelegate.h; sourceTree = "<group>"; };
 		BDA2BC89165952C20068C749 /* TBIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBIdentifyViewController.h; sourceTree = "<group>"; };
@@ -772,6 +778,8 @@
 		BDA2BD15165AF8D80068C749 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BD258DDD1678040500286511 /* refresh.png */,
+				BD258DDA1678005400286511 /* warning.png */,
 				BDA2BD16165AF8E30068C749 /* group.png */,
 				BDA2BD17165AF8E30068C749 /* user.png */,
 			);
@@ -918,6 +926,8 @@
 				BDA2BD13165AEB090068C749 /* TBEmailViewController.xib in Resources */,
 				BDA2BD18165AF8E30068C749 /* group.png in Resources */,
 				BDA2BD1A165AF8E30068C749 /* user.png in Resources */,
+				BD258DDB1678005400286511 /* warning.png in Resources */,
+				BD258DDE1678040500286511 /* refresh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -933,6 +943,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDD8FEBD165C196200AB3041 /* InfoPlist.strings in Resources */,
+				BD258DDC1678005400286511 /* warning.png in Resources */,
+				BD258DDF1678040500286511 /* refresh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

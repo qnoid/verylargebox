@@ -66,12 +66,13 @@ return self;
         borderWidth:2.0f]
         borderColor:darkOrange.CGColor];
     
-    __unsafe_unretained UIViewController *uself = self;
+    __unsafe_unretained TBIdentifyViewController *uself = self;
     
     [self.identifyButton onTouchDown:^(UIButton *button) {
         makeButtonDarkOrange();
         TBEmailViewController* emailViewController = [TBEmailViewController newEmailViewController];
-        emailViewController.createUserOperationDelegate = self;
+        emailViewController.delegate = uself;
+        emailViewController.createUserOperationDelegate = uself;
         [uself.navigationController pushViewController:emailViewController animated:YES];
     }];
     [self.identifyButton onTouchUp:makeButtonWhite()];
@@ -116,10 +117,9 @@ return self;
     [userUnauthorisedAlertView show];
 }
 
-#pragma mark TBRegistrationOperationDelegate
--(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
+#pragma mark TBEmailViewControllerDelegate
+-(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSError *error = nil;
     [SSKeychain setPassword:residence forService:THE_BOX_SERVICE account:email error:&error];
     
@@ -127,12 +127,18 @@ return self;
         NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
     }
     
-    UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"New Registration" message:[NSString stringWithFormat:@"Please check your email %@.", email] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-    
-    [userUnauthorisedAlertView show];
     self.accounts = [NSMutableArray arrayWithArray:[SSKeychain accountsForService:THE_BOX_SERVICE]];
     [self.accountsTableView reloadData];
+}
+
+#pragma mark TBRegistrationOperationDelegate
+-(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
+    UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"New Registration" message:[NSString stringWithFormat:@"Please check your email %@.", email] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    
+    [userUnauthorisedAlertView show];    
 }
 
 -(void)didFailOnRegistrationWithError:(NSError*)error
