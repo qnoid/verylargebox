@@ -119,11 +119,13 @@ return isVisible;
 	maximumVisible = self.maximumVisibleIndexPrecondition(self.maximumVisibleIndex, maximumVisible);
 
 	NSLog(@"%d >= willAppear < %d of dimension %@ on bounds %@", minimumVisible, maximumVisible, self.dimension, NSStringFromCGRect(bounds));
-	
+    
 	for (int index = minimumVisible; index < maximumVisible; index++) 
 	{
 		if(![self isVisible:index])
 		{
+            [self.delegate viewsShouldBeVisibleBetween:minimumVisible to:maximumVisible];
+            
 			NSLog(@"%d should be visible", index);
 			UIView *view = [self.delegate shouldBeVisible:index];
 			[self.visibleViews addObject:view];

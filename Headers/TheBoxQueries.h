@@ -52,4 +52,17 @@ extern NSString* const THE_BOX_SERVICE;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude query:(NSString*) query delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
 
+/**
+ 
+ */
++(AFHTTPRequestOperation*)newGetLocations:(NSObject<TBLocationOperationDelegate>*)delegate;
+
+/**
+ Gets the items for the given location id.
+ 
+ @param locationId the 'location_id' as returned by #newGetLocations for a location
+ @param delegate the delegate to callback with the items
+ */
++(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
+
 @end

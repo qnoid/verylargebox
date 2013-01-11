@@ -19,16 +19,19 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+TBDictionary.h"
 #import "TheBoxUICell.h"
+#import "TheBoxUIScrollView.h"
+#import "TBItemView.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 @interface HomeUIGridViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
+@property(nonatomic, strong) NSArray *locations;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) UIImage *defaultItemImage;
-@property(nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
 @end
 
 
@@ -46,42 +49,53 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 return homeGridViewController;
 }
 
-@synthesize gridView = _gridView;
-@synthesize items;
-@synthesize theBoxLocationService;
-@synthesize defaultItemImage;
-@synthesize activityIndicator;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService
 {
-    self = [super initWithNibName:@"HomeUIGridViewController" bundle:nibBundleOrNil];
+    self = [super initWithNibName:nil bundle:nibBundleOrNil];
     
     if (self) 
     {
+        self.locations = [NSArray array];
         self.items = [NSMutableArray array];
 
         self.theBoxLocationService = locationService;
         self.title = @"thebox";
         NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
         self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
-        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
-                                  CGRectMake(CGPointZero.x, 
-                                             44, 
-                                             self.view.frame.size.width, 
-                                             self.view.frame.size.height)];
-        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-        [self.view addSubview:activityIndicator];
     }
     
 return self;
 }
 
+-(void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    TheBoxUIScrollView* locationsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 44.0) viewsOf:100];
+    locationsView.datasource = self;
+    locationsView.scrollViewDelegate = self;
+
+    TheBoxUIScrollView* itemsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, 44.0, screenBounds.size.width, 323.0) viewsOf:160.0];
+    
+    itemsView.datasource = self;
+    itemsView.scrollViewDelegate = self;
+    
+    [view addSubview:locationsView];
+    [view addSubview:itemsView];
+    
+    self.view = view;
+    self.locationsView = locationsView;
+    self.itemsView = itemsView;
+}
 -(void)viewDidLoad
 {
     [super viewDidLoad];
 
-    AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:self];
-	[operation start];
+	[[TheBoxQueries newGetLocations:self] start];
     
     UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAction
@@ -112,15 +126,142 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.activityIndicator startAnimating];
+
 }
 
 #pragma mark application events
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
 {
-	AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:self];
-	[operation start];
+	[[TheBoxQueries newItemsQuery:self] start];
+}
+
+#pragma mark TBLocationOperationDelegate
+
+-(void)didSucceedWithLocations:(NSArray*)locations
+{
+    self.locations = locations;
+    [self.locationsView flashScrollIndicators];
+    [self.locationsView setNeedsLayout];
+    [self.locationsView layoutIfNeeded];
+}
+
+-(void)didFailOnLocationWithError:(NSError*)error
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+#pragma mark TheBoxUIScrollViewDatasource
+
+-(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView
+{
+    if(![self.locationsView isEqual:scrollView]){
+       return [self.items count];
+    }
+    
+return [self.locations count];
+}
+
+- (UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSInteger)index
+{
+    if(![self.locationsView isEqual:scrollView])
+    {
+        TBItemView* itemView = [TBItemView itemViewWithOwner:self];
+        itemView.frame = frame;
+        itemView.itemComments.dataSource = self;
+    return itemView;
+    }
+
+    UILabel *storeLabel = [[UILabel alloc] initWithFrame:frame];
+    storeLabel.numberOfLines = 0;
+    storeLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    
+return storeLabel;
+}
+
+#pragma mark TheBoxUIScrollViewDelegate
+
+-(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex
+{
+    if(![self.locationsView isEqual:scrollView]) {
+        return;
+    }
+
+    NSUInteger average = (maximumVisibleIndex-1) + minimumVisibleIndex >> 1;
+    
+    NSDictionary* location = [self.locations objectAtIndex:average];
+    
+    [self locationInScrollView:scrollView willAppear:location];
+}
+
+-(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index
+{
+    if(![self.locationsView isEqual:scrollView])
+    {
+        NSDictionary *item = [[[self items] objectAtIndex:index] objectForKey:@"item"];
+
+        TBItemView *imageView = (TBItemView*)view;
+        //@"http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/020/thumb/.jpg"
+        [imageView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]] placeholderImage:self.defaultItemImage];
+
+    return;
+    }
+
+    NSDictionary *location = [[[self locations] objectAtIndex:index] objectForKey:@"location"];
+
+    UILabel *label = (UILabel*)view;
+    id name = [location objectForKey:@"name"];
+    
+    if([[NSNull null] isEqual:name]){
+        name = @"";
+    }
+    
+    label.text = name;
+}
+
+-(void)locationInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(id)location
+{
+    NSDictionary* currentLocation = location;
+    NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
+
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
+                              CGRectMake(CGPointZero.x, CGPointZero.y, [[UIScreen mainScreen] bounds].size.width, 323.0)];
+    
+    activityIndicator.tag = locationId;
+    activityIndicator.backgroundColor = [UIColor blackColor];
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [activityIndicator startAnimating];
+    
+    [self.itemsView addSubview:activityIndicator];
+    [self.itemsView bringSubviewToFront:activityIndicator];
+    
+    [[TheBoxQueries newGetItemsGivenLocationId:locationId delegate:self] start];
+}
+
+#pragma mark UITableViewDataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.font = [UIFont fontWithName:@"Helvetic" size:8.0];
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    }
+    
+    cell.textLabel.text = @[@"10/01/2013 09:42 foo: fffffffff", @"10/01/2013 09:41 bar: bbbbbbbbb", @"10/01/2013 09:40 car: cccccccccc"][indexPath.row];
+    
+return cell;
 }
 
 #pragma mark thebox
@@ -188,21 +329,30 @@ return self;
      }]
  */
 
--(void)didSucceedWithItems:(NSMutableArray*) _items
+-(void)didSucceedWithItems:(NSMutableArray*) items
 {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator removeFromSuperview];
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, items);
+
+    [self.itemsView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if(![[UIActivityIndicatorView class] isEqual:[obj class]]){
+            return;
+        }
+        
+        UIActivityIndicatorView *activityIndicator = obj;
+        
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+    }];
     
-	self.items = _items;
-	[self.gridView reload];
+	self.items = items;
+    [self.itemsView flashScrollIndicators];
+    [self.itemsView setNeedsLayout];
+    [self.itemsView layoutIfNeeded];
 }
 
 -(void)didFailOnItemsWithError:(NSError*)error
 {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
-
-    AFHTTPRequestOperation *operation = [TheBoxQueries newItemsQuery:self];
-	[operation start];
 }
 
 -(void)didFailOnItemWithError:(NSError*)error
@@ -258,8 +408,6 @@ return self;
 	[locationItems insertObject:item atIndex:0];
     
 	[location setObject:locationItems forKey:@"items"];
-	
-	[self.gridView reload];
 }
 
 #pragma mark datasource
@@ -319,6 +467,11 @@ return [itemsForLocation count];
     self.navigationItem.backBarButtonItem = backBarButton;
 
     [self.navigationController pushViewController:detailsViewController animated:YES];
+}
+
+-(void)didSelectView:(TheBoxUIScrollView*)scrollView atIndex:(NSUInteger)index
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

@@ -132,6 +132,8 @@
 		BDA2BD13165AEB090068C749 /* TBEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD10165AEB090068C749 /* TBEmailViewController.xib */; };
 		BDA2BD18165AF8E30068C749 /* group.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD16165AF8E30068C749 /* group.png */; };
 		BDA2BD1A165AF8E30068C749 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD17165AF8E30068C749 /* user.png */; };
+		BDABD92C169F689F00111723 /* TBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* TBItemView.m */; };
+		BDABD92F169F68B100111723 /* TBItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDABD92E169F68B100111723 /* TBItemView.xib */; };
 		BDCD937F165C127A009C2F8F /* TheBoxUICellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */; };
 		BDCD9380165C127A009C2F8F /* TheBoxUICellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */; };
 		BDCD9385165C127A009C2F8F /* UITestViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E578133CC68A00CC9212 /* UITestViews.m */; };
@@ -343,6 +345,9 @@
 		BDA2BD16165AF8E30068C749 /* group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = group.png; path = "Supporting Files/group.png"; sourceTree = "<group>"; };
 		BDA2BD17165AF8E30068C749 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = "Supporting Files/user.png"; sourceTree = "<group>"; };
 		BDA2BD1C165AFA200068C749 /* TBCreateUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCreateUserOperationDelegate.h; sourceTree = "<group>"; };
+		BDABD92A169F689E00111723 /* TBItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBItemView.h; sourceTree = "<group>"; };
+		BDABD92B169F689F00111723 /* TBItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBItemView.m; sourceTree = "<group>"; };
+		BDABD92E169F68B100111723 /* TBItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBItemView.xib; sourceTree = "<group>"; };
 		BDCD93A5165C127A009C2F8F /* ApplicationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD8FEBC165C196200AB3041 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		BDE0DBB1155EC1B600B474DC /* TBUpdateItemOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBUpdateItemOperationDelegate.h; sourceTree = "<group>"; };
@@ -469,6 +474,9 @@
 				BD258DD01673C33A00286511 /* TBNSErrorDelegate.h */,
 				BD258DD61673F1F700286511 /* TBUITableViewDataSourceBuilder.h */,
 				BD258DD71673F1F700286511 /* TBUITableViewDataSourceBuilder.m */,
+				BDABD92A169F689E00111723 /* TBItemView.h */,
+				BDABD92B169F689F00111723 /* TBItemView.m */,
+				BDABD92E169F68B100111723 /* TBItemView.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -928,6 +936,7 @@
 				BDA2BD1A165AF8E30068C749 /* user.png in Resources */,
 				BD258DDB1678005400286511 /* warning.png in Resources */,
 				BD258DDE1678040500286511 /* refresh.png in Resources */,
+				BDABD92F169F68B100111723 /* TBItemView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,6 +1094,7 @@
 				BD127B47165D7E70002C944D /* NSString+TBString.m in Sources */,
 				BD258DCD1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */,
 				BD258DD81673F1F700286511 /* TBUITableViewDataSourceBuilder.m in Sources */,
+				BDABD92C169F689F00111723 /* TBItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

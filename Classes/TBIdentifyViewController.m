@@ -178,6 +178,8 @@ return [self.accounts count];
     
     NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
     emailCell.textLabel.text = email;
+
+    tbBmailStatus(TBEmailStatusVerified)(emailCell);
     
 return emailCell;
 }

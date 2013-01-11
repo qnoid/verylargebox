@@ -12,9 +12,19 @@
 #import "TheBoxLocationServiceDelegate.h"
 #import "TBItemsOperationDelegate.h"
 #import "TBCreateItemOperationDelegate.h"
+#import "TBLocationOperationDelegate.h"
+#import "TheBoxUIScrollView.h"
+#import "TheBoxUIScrollViewDatasource.h"
 @class TheBoxLocationService;
-@class TheBoxUIGridView;
-@class TheBoxUIScrollView;
+
+@protocol TBLocationsScrollViewDelegate <TheBoxUIScrollViewDelegate>
+
+/**
+ @param scrollView the TheBoxUIScrollView associated with the delegate
+ @param location the current location in the stores scrollview.
+ */
+-(void)locationInScrollView:(TheBoxUIScrollView*)scrollView willAppear:(id)location;
+@end
 
 
 /**
@@ -22,15 +32,14 @@
   Item cells are recycled, as a result setting the image to a recycled cell will cancel an existing request to load the last visible image
   and start a new one.
  */
-@interface HomeUIGridViewController : TheBoxUIGridViewController <TheBoxLocationServiceDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TBCreateItemOperationDelegate> 
+@interface HomeUIGridViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TBLocationsScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TBCreateItemOperationDelegate, UITableViewDataSource>
 {
     
 }
 
 +(HomeUIGridViewController*)newHomeGridViewController;
 
-
-@property(nonatomic, unsafe_unretained) IBOutlet TheBoxUIGridView* gridView;
-
+@property(nonatomic, strong) IBOutlet TheBoxUIScrollView* locationsView;
+@property(nonatomic, strong) IBOutlet TheBoxUIScrollView* itemsView;
 
 @end

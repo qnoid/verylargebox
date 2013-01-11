@@ -37,7 +37,7 @@
 {
     self = [super init];
     if (self) {
-		_frames = frames;
+		self.frames = frames;
 		self.views = [NSMutableDictionary new];       
     }
     return self;
@@ -98,13 +98,8 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
 
 #pragma mark TheBoxUIScrollViewDelegate
 
-- (CGFloat)whatSize:(TheBoxUIScrollView *)scrollView 
-{
-    if(![scrollView isEqual:self.scrollView]){
-        return [self.delegate whatCellWidth:self];    
-    }
+-(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex{
     
-return [self.delegate whatRowHeight:self];
 }
 
 - (void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView*)view atIndex:(NSUInteger)index 

@@ -24,14 +24,28 @@ extern CGFloat const DEFAULT_HEIGHT;
 
 @protocol TheBoxUIScrollViewDelegate
 
+/**
+ Implementations should customise the appearance of the view.
+ 
+ The view might be a recycled view or a new instance.
+ 
+ @param scrollView the TheBoxUIScrollView associated with the delegate
+ @param view the UIView subclass as returned by the TheBoxUIScrollViewDatasource#viewInScrollView:ofFrame:atIndex:
+ @param the index of the view that will appear
+ */
 - (void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index;
 
-@optional
-
 /**
-
+ @param scrollView the TheBoxUIScrollView associated with the delegate
+ @param minimumVisibleIndex the minimum index of the view that will appear in the next cycle
+ @param maximumVisibleIndex the maximum index of the view that will appear in the next cycle
+ @see viewInScrollView:willAppear:atIndex:
  */
--(CGFloat)whatSize:(TheBoxUIScrollView *)scrollView;
+- (void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex;
+
+@optional
+- (void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index;
+
 @end
 
 /**
@@ -78,8 +92,8 @@ extern CGFloat const DEFAULT_HEIGHT;
  The **default** TheBoxUIScrollView scrolls on the vertical axis and with views of 196px in height.
  
  To programmatically create one, use one of the following factory methods 
- @see #newVerticalScrollView:viewsOf: to create a TheBoxUIScrollView on the vertical axis
- @see #newHorizontalScrollView:viewsOf: to create a TheBoxUIScrollView on the horizontal axis
+ @see #newVerticalScrollView:viewsOf: to create a TheBoxUIScrollView scrolling on the vertical axis
+ @see #newHorizontalScrollView:viewsOf: to create a TheBoxUIScrollView scrolling on the horizontal axis
  */
 @interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate, CanIndexLocationInView>
 

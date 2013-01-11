@@ -76,7 +76,7 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.takePhotoButton.imageView.image = self.itemImage;
+    [self.takePhotoButton setImage:self.itemImage forState:UIControlStateNormal];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -153,19 +153,17 @@ return self;
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CGSize newSize = CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT);
+    CGSize newSize = CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT);
 
-        UIGraphicsBeginImageContext(newSize);
-        
-        [image drawInRect:CGRectMake(0.0f, 0.0f, newSize.width, newSize.height)];
-        
-        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-        
-        UIGraphicsEndImageContext();
-        
-        self.itemImage = newImage;
-    });
+    UIGraphicsBeginImageContext(newSize);
+    
+    [image drawInRect:CGRectMake(0.0f, 0.0f, newSize.width, newSize.height)];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    self.itemImage = newImage;
 
 	takePhotoButton.titleLabel.hidden = YES;
 	

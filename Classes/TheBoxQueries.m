@@ -22,6 +22,9 @@
 #import "TBAFHTTPRequestOperationCompletionBlocks.h"
 #import "TBNSErrorDelegate.h"
 
+static NSString* const LOCATIONS = @"/locations";
+static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
+
 @interface TheBoxQueries ()
 
 /**
@@ -34,8 +37,8 @@
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 
-NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
-
+NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com"; //@"http://0.0.0.0:3000";
+ 
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
@@ -250,6 +253,50 @@ return [self newLocationQuery:parameters delegate:delegate];
     [parameters setObject:[NSString stringWithFormat:@"%f,%f", latitude, longtitude] forKey:@"ll"];
     
 return [self newLocationQuery:parameters delegate:delegate];    
+}
+
++(AFHTTPRequestOperation*)newGetLocations:(NSObject<TBLocationOperationDelegate>*)delegate
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableURLRequest *categoriesRequest =
+    [client requestWithMethod:@"GET" path:LOCATIONS parameters:nil];
+    
+    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [categoriesRequest setTimeoutInterval:TIMEOUT];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
+   {
+       NSString* responseString = operation.responseString;
+       [delegate didSucceedWithLocations:[responseString mutableObjectFromJSONString]];
+   }
+   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [delegate didFailOnLocationWithError:error];
+   }];
+
+return request;
+}
+
++(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<TBItemsOperationDelegate>*)delegate
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableURLRequest *categoriesRequest =
+        [client requestWithMethod:@"GET" path:[NSString stringWithFormat:LOCATION_ITEMS, locationId] parameters:nil];
+    
+    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [categoriesRequest setTimeoutInterval:TIMEOUT];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+       NSString* responseString = operation.responseString;
+       [delegate didSucceedWithItems:[responseString mutableObjectFromJSONString]];
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [delegate didFailOnItemsWithError:error];
+    }];
+
+return request;
 }
 
 @end

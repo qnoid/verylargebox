@@ -38,8 +38,13 @@ CGFloat const DEFAULT_HEIGHT = 196;
 	scrollView.visibleStrategy.delegate = scrollView;	
 	scrollView.clipsToBounds = NO;
 
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:scrollView action:@selector(didTapOnScrollView:)];
+    [scrollView addGestureRecognizer:tapGestureRecognizer];
+
 return scrollView;
 }
+
+@synthesize contentView;
 
 +(TheBoxUIScrollView *) newVerticalScrollView:(CGRect)frame viewsOf:(CGFloat)height
 {
@@ -79,35 +84,19 @@ return scrollView;
 return scrollView;
 }
 
-@synthesize datasource;
-@synthesize scrollViewDelegate;
-@synthesize theBoxSize;
-@synthesize dimension = _dimension;
-@synthesize contentView;
-@synthesize recycleStrategy;
-@synthesize visibleStrategy;
-
 #pragma mark private fields
 
--(id)awakeAfterUsingCoder:(NSCoder *)aDecoder 
-{    
-    TheBoxUIScrollView* scrollView = [TheBoxUIScrollView newVerticalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];
-    
-    scrollView.scrollsToTop = YES;
-    
-    //http://stackoverflow.com/questions/10264790/what-is-the-new-pattern-for-releasing-self-with-automatic-reference-counting
-    CFRelease((__bridge const void*)self);
-    
-    CFRetain((__bridge const void*)scrollView);
-
-return scrollView;
+-(id)awakeAfterUsingCoder:(NSCoder *)aDecoder {
+return [TheBoxUIScrollView newHorizontalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];
 }
 
 -(void)awakeFromNib
 {
     NSLog(@"%@", self);
-    self.datasource = datasource;
-    self.scrollViewDelegate = scrollViewDelegate;
+    self.datasource = _datasource;
+    self.scrollViewDelegate = _scrollViewDelegate;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnScrollView:)];
+    [self addGestureRecognizer:tapGestureRecognizer];
 }
 
 - (id) initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size dimension:(NSObject<TheBoxDimension>*)dimension
@@ -212,6 +201,11 @@ return self;
     return [self.dimension floorIndexOf:point];
 }
 
+-(void)viewsShouldBeVisibleBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex
+{
+    [self.scrollViewDelegate viewInScrollView:self willAppearBetween:minimumVisibleIndex to:maximumVisibleIndex];
+}
+
 -(UIView *)shouldBeVisible:(int)index
 {
     CGRect frame = [self.dimension frameOf:self.bounds atIndex:index];
@@ -245,6 +239,23 @@ return self;
     
     NSLog(@"added %@ as subview to %@", view, self);
 return view;
+}
+
+-(void)didTapOnScrollView:(id)sender
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer*)sender;
+    CGPoint tapPoint = [tapGestureRecognizer locationInView:self];
+    NSUInteger index = [self indexOf:tapPoint];
+    NSLog(@"%u", index);
+    
+    NSUInteger numberOfViews = [self.datasource numberOfViewsInScrollView:self];
+    
+    if(index >= numberOfViews){
+        return;
+    }
+    
+    [self.scrollViewDelegate didSelectView:self atIndex:index];
 }
 
 @end

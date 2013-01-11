@@ -12,6 +12,7 @@
 #import "TheBoxVisibleStrategy.h"
 #import "VisibleStrategy.h"
 #import "UITestViews.h"
+#import "TheBoxUIScrollView.h"
 
 @interface TheBoxUICellVisibleStrategyTest : SenTestCase <VisibleStrategyDelegate> 
 {
@@ -40,6 +41,9 @@
 	self.views = [foo of:[NSArray arrayWithObjects:first, second, third, forth, fifth, nil]];
 }
 
+-(void)viewsShouldBeVisibleBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex{
+    
+}
 
 -(UIView *)shouldBeVisible:(int)index {
 return [self.views objectAtIndex:index];
