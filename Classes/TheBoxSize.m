@@ -54,6 +54,21 @@ return CGPointMake(CGRectGetWidth(bounds), originY);
 return CGRectMake(bounds.origin.x, index * self.value, bounds.size.width, self.value);
 }
 
+-(void)moveCloserToWhole:(inout CGPoint*)point
+{
+    float average = self.value / 2.0;
+    
+    float mod = fmod(point->y, self.value);
+    float whole = point->y - mod;
+    
+    if(mod <= average){
+        point->y = whole;
+    return;
+    }
+    
+    point->y = whole + self.value;
+}
+
 -(NSString *) description{
 return [NSString stringWithFormat:@"%f", value];
 }
@@ -80,7 +95,7 @@ return self;
 }
 
 -(NSInteger)floorIndexOf:(CGPoint)point{
-return floor(point.x / value);
+return floor( abs(point.x) / value);
 }
 
 -(NSInteger)ceilIndexOf:(CGRect)rect
@@ -100,6 +115,21 @@ return CGPointMake(originX, CGRectGetHeight(bounds));
 
 -(CGRect)frameOf:(CGRect)bounds atIndex:(NSUInteger)index {
 return CGRectMake(index * self.value, bounds.origin.y, self.value, bounds.size.height);
+}
+
+-(void)moveCloserToWhole:(inout CGPoint*)point
+{
+    float average = self.value / 2.0;
+    
+    float mod = fmod(point->x, self.value);
+    float whole = point->x - mod;
+    
+    if(mod <= average){
+        point->x = whole;
+    return;
+    }
+    
+    point->x = whole + self.value;
 }
 
 -(NSString *) description{

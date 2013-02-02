@@ -9,11 +9,11 @@
  */
 #import "UploadUIViewController.h"
 #import "TheBoxQueries.h"
-#import "HomeUIGridViewController.h"
 #import "AFHTTPRequestOperation.h"
 #import "JSONKit.h"
 #import "LocationUIViewController.h"
 #import "TheBoxLocationService.h"
+#import "TBCreateItemOperationDelegate.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 480.0;

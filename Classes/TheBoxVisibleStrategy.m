@@ -122,7 +122,7 @@ return isVisible;
     
 	for (int index = minimumVisible; index < maximumVisible; index++) 
 	{
-		if(![self isVisible:index])
+		if(![self isVisible:index]) //should be called anyway
 		{
             [self.delegate viewsShouldBeVisibleBetween:minimumVisible to:maximumVisible];
             

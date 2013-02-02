@@ -36,7 +36,6 @@ CGFloat const DEFAULT_HEIGHT = 196;
 	scrollView.recycleStrategy = aRecycleStrategy;
 	scrollView.visibleStrategy = aVisibleStrategy;	
 	scrollView.visibleStrategy.delegate = scrollView;	
-	scrollView.clipsToBounds = NO;
 
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:scrollView action:@selector(didTapOnScrollView:)];
     [scrollView addGestureRecognizer:tapGestureRecognizer];
@@ -86,8 +85,18 @@ return scrollView;
 
 #pragma mark private fields
 
--(id)awakeAfterUsingCoder:(NSCoder *)aDecoder {
-return [TheBoxUIScrollView newHorizontalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];
+-(id)awakeAfterUsingCoder:(NSCoder *)aDecoder
+{
+    TheBoxUIScrollView* scrollView = [TheBoxUIScrollView newHorizontalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];
+    
+    scrollView.scrollsToTop = YES;
+    
+    //http://stackoverflow.com/questions/10264790/what-is-the-new-pattern-for-releasing-self-with-automatic-reference-counting
+    CFRelease((__bridge const void*)self);
+    
+    CFRetain((__bridge const void*)scrollView);
+    
+return scrollView;
 }
 
 -(void)awakeFromNib
@@ -107,6 +116,7 @@ return [TheBoxUIScrollView newHorizontalScrollView:self.frame viewsOf:DEFAULT_HE
 		self.theBoxSize = size;
         self.dimension = dimension;
 		self.contentView = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, frame.size.width, frame.size.height)];
+        self.delegate = self;
 		[self addSubview:self.contentView];
 	}
 return self;
@@ -190,6 +200,14 @@ return self;
 	self.visibleStrategy = aVisibleStrategy;
 }
 
+-(UIView *)viewWithTag:(NSInteger)tag {
+return [self.contentView viewWithTag:tag];
+}
+
+-(NSArray *)subviews{
+return [self.contentView subviews];
+}
+
 /*
  * No need to remove dequeued view from superview since it's removed when recycled
  */
@@ -212,7 +230,7 @@ return self;
     
     UIView* view = [self dequeueReusableView];
     view.frame = frame;
-    
+
     if(view == nil){
         view = [self.datasource viewInScrollView:self ofFrame:frame atIndex:index];
     }
@@ -227,7 +245,7 @@ return self;
          */
         [view setNeedsLayout];        
     }
-
+    
     [self.scrollViewDelegate viewInScrollView:self willAppear:view atIndex:index];
     
 	/*
@@ -256,6 +274,16 @@ return view;
     }
     
     [self.scrollViewDelegate didSelectView:self atIndex:index];
+}
+
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    [self.dimension moveCloserToWhole:targetContentOffset];
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:scrollView.bounds.origin]];
 }
 
 @end

@@ -10,7 +10,6 @@
 
 @interface TBItemView : UIView
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
-@property(nonatomic, weak) IBOutlet UITableView* itemComments;
 
 +(instancetype)itemViewWithOwner:(id)owner;
 @end

@@ -104,7 +104,7 @@ return self;
     HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
     
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[profileViewController, [[UINavigationController alloc] initWithRootViewController:homeGridViewControler]];
+    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:profileViewController], [[UINavigationController alloc] initWithRootViewController:homeGridViewControler]];
     
     [self presentViewController:tabBarController animated:YES completion:nil];
 }

@@ -62,6 +62,10 @@
  */
 -(id<TBViewBorder>)border;
 
+-(id<TBViewBorder>)bottomBorder;
+
+-(id<TBViewBorder>)borders;
+
 /**
  Sets the border width
  

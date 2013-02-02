@@ -13,16 +13,14 @@
 #import "TBUpdateItemOperationDelegate.h"
 
 
-@interface DetailsUIViewController : UIViewController <TheBoxLocationServiceDelegate, TBUpdateItemOperationDelegate>
+@interface DetailsUIViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     
 }
 
-@property(nonatomic, unsafe_unretained) IBOutlet UIButton* locationButton;
-@property(nonatomic, unsafe_unretained) IBOutlet UIImageView* itemImageView;
+@property(nonatomic, weak) IBOutlet UITableView* itemComments;
+@property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
 
 +(DetailsUIViewController*)newDetailsViewController:(NSMutableDictionary*)item;
-
--(IBAction)didClickOnLocation:(id)sender;
 
 @end

@@ -11,9 +11,15 @@
 #import "TheBoxAppDelegate.h"
 
 int main(int argc, char *argv[]) {
-    
+    int retVal = -1;
     @autoreleasepool {
-        int retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([TheBoxAppDelegate class]));
-        return retVal;
+        @try {
+            retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([TheBoxAppDelegate class]));
+        }
+        @catch (NSException* exception) {
+            NSLog(@"Uncaught exception: %@", exception.description);
+            NSLog(@"Stack trace: %@", [exception callStackSymbols]);
+        }
     }
+    return retVal;
 }

@@ -7,17 +7,15 @@
  *  Created by Markos Charatzas (@qnoid) on 16/11/10.
  *  Contributor(s): .-
  */
-#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "TheBoxLocationServiceDelegate.h"
 
-@interface TheBoxLocationService : NSObject <CLLocationManagerDelegate, MKReverseGeocoderDelegate>
+@interface TheBoxLocationService : NSObject <CLLocationManagerDelegate>
 {
 }
 
-@property(nonatomic) CLLocationManager *locationManager;
-@property(nonatomic) MKReverseGeocoder *theGeocoder;
+@property(nonatomic, strong) CLLocationManager *locationManager;
 
 /*
  *

@@ -35,6 +35,6 @@
  @param frame the frame of the view in the given index
  @param index the index which identifies the view
  */
-- (UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSInteger)index;
+- (UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index;
 
 @end

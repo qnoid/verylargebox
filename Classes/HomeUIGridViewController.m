@@ -7,6 +7,7 @@
  *  Created by Markos Charatzas (@qnoid) on 23/11/2010.
  *  Contributor(s): .-
  */
+#import <QuartzCore/QuartzCore.h>
 #import "HomeUIGridViewController.h"
 #import "TheBoxUICell.h"
 #import "TheBoxQueries.h"
@@ -21,17 +22,24 @@
 #import "TheBoxUICell.h"
 #import "TheBoxUIScrollView.h"
 #import "TBItemView.h"
+#import "TBUIView.h"
+#import "TBColors.h"
+#import "TheBoxLocationService.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
-@interface HomeUIGridViewController ()
--(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
-@property(nonatomic, strong) NSArray *locations;
-@property(nonatomic, strong) NSMutableArray *items;
-@property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
-@property(nonatomic, strong) UIImage *defaultItemImage;
+static NSUInteger* const FIRST_VIEW_TAG = -1;
+static NSUInteger* const ACTIVITY_INDICATOR_TAG = -2;
 
+@interface HomeUIGridViewController ()
+@property(nonatomic, strong) CLLocation *location;
+@property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
+@property(nonatomic, strong) NSArray *locations;
+@property(nonatomic, assign) NSUInteger index;
+@property(nonatomic, strong) NSMutableArray *items;
+@property(nonatomic, strong) UIImage *defaultItemImage;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
 @end
 
 
@@ -39,7 +47,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 +(HomeUIGridViewController*)newHomeGridViewController
 {    
-    HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:nil];
+    HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:[TheBoxLocationService theBox]];
     
     homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Edinburgh" image:[UIImage imageNamed:@"group.png"] tag:0];
 
@@ -49,6 +57,11 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 return homeGridViewController;
 }
 
+-(void)dealloc
+{
+    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+}
+
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService
 {
@@ -56,9 +69,9 @@ return homeGridViewController;
     
     if (self) 
     {
+        self.theBoxLocationService = locationService;
         self.locations = [NSArray array];
         self.items = [NSMutableArray array];
-
         self.theBoxLocationService = locationService;
         self.title = @"thebox";
         NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
@@ -70,22 +83,37 @@ return self;
 
 -(void)loadView
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-    view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    
-    TheBoxUIScrollView* locationsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 44.0) viewsOf:100];
+
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, screenBounds.size.height)];
+    view.backgroundColor = [UIColor whiteColor];
+    view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+
+    TheBoxUIScrollView* locationsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 44.0) viewsOf:122.0];
+    locationsView.backgroundColor = [TBColors colorLightOrange];
     locationsView.datasource = self;
     locationsView.scrollViewDelegate = self;
+    locationsView.showsHorizontalScrollIndicator = NO;
 
     TheBoxUIScrollView* itemsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, 44.0, screenBounds.size.width, 323.0) viewsOf:160.0];
     
     itemsView.datasource = self;
     itemsView.scrollViewDelegate = self;
+
+    UIButton* directionsButton = [[UIButton alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, 122.0, 44.0)];
+    directionsButton.layer.shadowColor = [UIColor blueColor].CGColor;
+    directionsButton.layer.shadowOffset = CGSizeMake(0, 0);
+    directionsButton.layer.shadowRadius = 10;
+    directionsButton.alpha = 0.2;
+    [directionsButton addTarget:self action:@selector(didClickOnLocation:) forControlEvents:UIControlEventTouchUpInside];
     
+    UIImageView* signPostImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGPointZero.x, 8.0, 22.0, 28.0)];
+    signPostImageView.image = [UIImage imageNamed:@"signpost"];
+
     [view addSubview:locationsView];
     [view addSubview:itemsView];
+    [view addSubview:directionsButton];
+    [view addSubview:signPostImageView];
     
     self.view = view;
     self.locationsView = locationsView;
@@ -94,39 +122,12 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-
-	[[TheBoxQueries newGetLocations:self] start];
-    
-    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                     target:self
-                                     action:@selector(launchFeedback)];
-    self.navigationItem.leftBarButtonItem = actionButton;
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                     target:self
-                                     action:@selector(addItem)];
-    
-    self.navigationItem.rightBarButtonItem = addButton;
+    [self.theBoxLocationService notifyDidUpdateToLocation:self];
 }
-
--(void)launchFeedback {
-    [TestFlight openFeedbackView];
-}
-
--(void)addItem 
-{
-    UploadUIViewController* uploadViewController = [UploadUIViewController newUploadUIViewController];
-    uploadViewController.createItemDelegate = self;
-    
-    [self presentModalViewController:uploadViewController animated:YES];
-}
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
-
+	[[TheBoxQueries newGetLocations:self] start];
 }
 
 #pragma mark application events
@@ -162,36 +163,27 @@ return self;
 return [self.locations count];
 }
 
-- (UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSInteger)index
+- (UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index
 {
     if(![self.locationsView isEqual:scrollView])
     {
         TBItemView* itemView = [TBItemView itemViewWithOwner:self];
         itemView.frame = frame;
-        itemView.itemComments.dataSource = self;
     return itemView;
     }
 
-    UILabel *storeLabel = [[UILabel alloc] initWithFrame:frame];
-    storeLabel.numberOfLines = 0;
-    storeLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    UIButton *storeButton = [[UIButton alloc] initWithFrame:frame];
+    storeButton.titleLabel.numberOfLines = 0;
+    storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    [storeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-return storeLabel;
+return storeButton;
 }
 
 #pragma mark TheBoxUIScrollViewDelegate
 
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex
 {
-    if(![self.locationsView isEqual:scrollView]) {
-        return;
-    }
-
-    NSUInteger average = (maximumVisibleIndex-1) + minimumVisibleIndex >> 1;
-    
-    NSDictionary* location = [self.locations objectAtIndex:average];
-    
-    [self locationInScrollView:scrollView willAppear:location];
 }
 
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index
@@ -209,59 +201,63 @@ return storeLabel;
 
     NSDictionary *location = [[[self locations] objectAtIndex:index] objectForKey:@"location"];
 
-    UILabel *label = (UILabel*)view;
+    UIButton *button = (UIButton*)view;
+    
+    if(index == 0){
+        button.tag = FIRST_VIEW_TAG;
+    }
+    else{
+        button.tag = index;
+    }
+    
     id name = [location objectForKey:@"name"];
     
     if([[NSNull null] isEqual:name]){
         name = @"";
     }
     
-    label.text = name;
+    [button setBackgroundColor:[TBColors colorLightOrange]];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitle:name forState:UIControlStateNormal];
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, 22, 0, 0);
 }
 
--(void)locationInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(id)location
+-(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index
 {
-    NSDictionary* currentLocation = location;
+    NSLog(@"%s %u", __PRETTY_FUNCTION__, index);
+    
+    if(![self.locationsView isEqual:scrollView]){
+        return;
+    }
+    
+    self.index = index;
+
+    for (UIButton* button in self.locationsView.subviews) {
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    
+    UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
+    
+    if(index != 0){
+        locationButton = (UIButton*)[self.locationsView viewWithTag:index];
+    }
+    
+    [locationButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+
+    NSDictionary* currentLocation = [self.locations objectAtIndex:index];
     NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
 
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
                               CGRectMake(CGPointZero.x, CGPointZero.y, [[UIScreen mainScreen] bounds].size.width, 323.0)];
     
-    activityIndicator.tag = locationId;
-    activityIndicator.backgroundColor = [UIColor blackColor];
+    activityIndicator.tag = ACTIVITY_INDICATOR_TAG;
     activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
     [activityIndicator startAnimating];
     
-    [self.itemsView addSubview:activityIndicator];
-    [self.itemsView bringSubviewToFront:activityIndicator];
+    [self.view insertSubview:activityIndicator atIndex:0];
+    [self.view bringSubviewToFront:activityIndicator];
     
     [[TheBoxQueries newGetItemsGivenLocationId:locationId delegate:self] start];
-}
-
-#pragma mark UITableViewDataSource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    
-    if(cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.font = [UIFont fontWithName:@"Helvetic" size:8.0];
-        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    }
-    
-    cell.textLabel.text = @[@"10/01/2013 09:42 foo: fffffffff", @"10/01/2013 09:41 bar: bbbbbbbbb", @"10/01/2013 09:40 car: cccccccccc"][indexPath.row];
-    
-return cell;
 }
 
 #pragma mark thebox
@@ -332,17 +328,10 @@ return cell;
 -(void)didSucceedWithItems:(NSMutableArray*) items
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, items);
-
-    [self.itemsView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if(![[UIActivityIndicatorView class] isEqual:[obj class]]){
-            return;
-        }
-        
-        UIActivityIndicatorView *activityIndicator = obj;
-        
-        [activityIndicator stopAnimating];
-        [activityIndicator removeFromSuperview];
-    }];
+    
+    UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView*)[self.view viewWithTag:ACTIVITY_INDICATOR_TAG];
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
     
 	self.items = items;
     [self.itemsView flashScrollIndicators];
@@ -355,123 +344,41 @@ return cell;
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
 }
 
--(void)didFailOnItemWithError:(NSError*)error
+-(void)didSelectView:(TheBoxUIScrollView*)scrollView atIndex:(NSUInteger)index
 {
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);    
-}
-
-/**
- {
- item =     {
- "created_at" = "2012-11-04T15:33:00Z";
- id = 213;
- imageURL = "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/213/thumb/.jpg?1352043179";
- "image_content_type" = "image/jpeg";
- "image_file_name" = ".jpg";
- "image_file_size" = 357962;
- iphoneImageURL = "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/213/iphone/.jpg?1352043179";
- location =         {
- "created_at" = "2012-11-04T15:00:25Z";
- foursquareid = 4b05881ff964a520ffb222e3;
- id = 250;
- lat = "55.94886495227988";
- lng = "-3.187588255306524";
- name = "The Cabaret Voltaire";
- "updated_at" = "2012-11-04T15:00:25Z";
- };
- "location_id" = 250;
- "updated_at" = "2012-11-04T15:33:00Z";
- when = "less than a minute ago";
- };
- } */
--(void)didSucceedWithItem:(NSDictionary*)item
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSLog(@"%@", item);
-	
-	id<TheBoxPredicate> locationPredicate = [TheBoxPredicates newLocationIdPredicate];
-	TheBoxBinarySearch *search = [[TheBoxBinarySearch alloc] initWithPredicate:locationPredicate];
-	
-    item = [item objectForKey:@"item"];
-    
-    NSUInteger index = [search find:item on:self.items];
-    
-    if(index == NSNotFound){
-        index = [self.items count];
-        [self.items addObject:[NSMutableDictionary dictionaryWithObject:[item objectForKey:@"location"] forKey:@"location"]];
+    if([self.locationsView isEqual:scrollView]){
+        return;
     }
     
-	NSMutableDictionary* location = [[self.items objectAtIndex:index] objectForKey:@"location"];
-
-	NSMutableArray* locationItems = [location tbObjectForKey:@"items" ifNil:[NSMutableArray arrayWithCapacity:1]];
-	
-	[locationItems insertObject:item atIndex:0];
-    
-	[location setObject:locationItems forKey:@"items"];
-}
-
-#pragma mark datasource
-- (UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)viewOf ofFrame:(CGRect)frame atRow:(NSUInteger)row atIndex:(NSUInteger)index 
-{
-    UIView* cell = [TheBoxUICell loadWithOwner:self];
-    
-    cell.frame = frame;
-
-return cell;
-}
-
--(void)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView *)view
-{
-    TheBoxUICell *theBoxCell = (TheBoxUICell*)view;
-    
-	NSArray *locationItems = [[[self.items objectAtIndex:row] objectForKey:@"location"] objectForKey:@"items"];
-    
 	//there should be a mapping between the index of the cell and the id of the item
-	NSDictionary *item = [locationItems objectAtIndex:index];
-	
-	NSString *imageURL = [item objectForKey:@"imageURL"];
-	NSString *when = [item objectForKey:@"when"];
-	
-    [theBoxCell.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.defaultItemImage];
-	theBoxCell.itemLabel.text = [NSString stringWithFormat:@"%@", when];	
-}
-
--(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)gridView{
-return [self.items count];
-}
-
--(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)scrollView atIndex:(NSInteger)index
-{
-	NSArray *itemsForLocation = [[[self.items objectAtIndex:index] objectForKey:@"location"] objectForKey:@"items"];
+	NSMutableDictionary *item = [[self.items objectAtIndex:index] objectForKey:@"item"];
     
-    if([itemsForLocation tbIsEmpty]){
-        return 0;
-    }
-	
-return [itemsForLocation count];
-}
-
--(void)didSelect:(TheBoxUIGridView *)scrollView atRow:(NSInteger)row atIndex:(NSInteger)index
-{
-   	NSArray *locationItems = [[[self.items objectAtIndex:row] objectForKey:@"location"] objectForKey:@"items"];
-    
-	//there should be a mapping between the index of the cell and the id of the item
-	NSMutableDictionary *item = [locationItems objectAtIndex:index];
- 
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
     DetailsUIViewController* detailsViewController = [DetailsUIViewController newDetailsViewController:item];
     detailsViewController.hidesBottomBarWhenPushed = YES;
-
+    
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backBarButton;
-
+    
     [self.navigationController pushViewController:detailsViewController animated:YES];
 }
 
--(void)didSelectView:(TheBoxUIScrollView*)scrollView atIndex:(NSUInteger)index
+#pragma mark TheBoxLocationServiceDelegate
+-(void)didUpdateToLocation:(NSNotification *)notification;
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+	self.location = [TheBoxNotifications location:notification];	
+}
+
+-(IBAction)didClickOnLocation:(id)sender
+{
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
+    
+    NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[[[self.locations objectAtIndex:self.index] objectForKey:@"location"] objectForKey:@"lat"],[[[self.locations objectAtIndex:self.index] objectForKey:@"location"] objectForKey:@"lng"]];
+    
+    NSLog(@"%@", urlstring);
+    
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlstring]];
 }
 
 @end

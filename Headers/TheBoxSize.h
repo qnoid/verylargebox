@@ -9,6 +9,19 @@
  */
 #import <Foundation/Foundation.h>
 
+NS_INLINE
+CGPoint foo(CGFloat foo, CGFloat value)
+{
+    float average = value / 2.0;
+    float mod = fmod(foo, value);
+    float whole = foo - mod;
+    
+    if(mod <= average){
+        return CGPointMake(whole, foo);
+    }
+    
+return CGPointMake(whole + value, foo);
+}
 /*
  * Represents a dimension on the size
  */
@@ -52,6 +65,21 @@
 -(CGPoint)ceilOriginOf:(CGRect)bounds toContentSize:(CGSize)contentSize;
 
 -(CGRect)frameOf:(CGRect) bounds atIndex:(NSUInteger)index;
+
+/*
+ Dimension implementations set the point closer
+ to their whole number like a piecewise function where
+ 
+ e.g.
+    For a value of 100
+ 
+ f(point.x) =   {   0 : 0   < point.x ≤ 50
+                { 100 : 50  < point.x ≤ 100
+ 
+ @param point
+ */
+-(void)moveCloserToWhole:(inout CGPoint*)point;
+
 @end
 
 @interface TheBoxHeight : NSObject <TheBoxDimension>

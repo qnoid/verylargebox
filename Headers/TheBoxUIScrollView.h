@@ -46,6 +46,11 @@ extern CGFloat const DEFAULT_HEIGHT;
 @optional
 - (void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index;
 
+/**
+ @param scrollView the TheBoxUIScrollView associated with the delegate
+ @param index the index at which the scrollView will come at a stop
+ */
+-(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index;
 @end
 
 /**
@@ -95,7 +100,7 @@ extern CGFloat const DEFAULT_HEIGHT;
  @see #newVerticalScrollView:viewsOf: to create a TheBoxUIScrollView scrolling on the vertical axis
  @see #newHorizontalScrollView:viewsOf: to create a TheBoxUIScrollView scrolling on the horizontal axis
  */
-@interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate, CanIndexLocationInView>
+@interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate, CanIndexLocationInView, UIScrollViewDelegate>
 
 /**
  Creates a new scroll view which scrolls on the vertical axis.

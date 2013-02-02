@@ -23,12 +23,6 @@
 
 @implementation DetailsUIViewController
 
-@synthesize locationButton;
-@synthesize itemImageView;
-@synthesize theBoxLocationService;
-@synthesize location = _location;
-@synthesize item = _item;
-
 +(DetailsUIViewController*)newDetailsViewController:(NSDictionary*)item
 {
     DetailsUIViewController* detailsViewController = 
@@ -40,19 +34,20 @@ return detailsViewController;
 - (id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSMutableDictionary*)item;
 {
     self = [super initWithNibName:@"DetailsUIViewController" bundle:nibBundleOrNil];
-    if (self) {
-        self.item = item;
-        self.title = [_item objectForKey:@"name"];
-        self.theBoxLocationService = [TheBoxLocationService theBox];  
-        self.title = @"Details";
+    if (!self) {
+        return nil;
     }
-    return self;
+    
+    self.item = item;
+    self.title = [_item objectForKey:@"name"];
+    self.title = @"Details";
+
+return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self.theBoxLocationService notifyDidUpdateToLocation:self];
     
     NSString *imageURL = [_item objectForKey:@"iphoneImageURL"];
     
@@ -65,26 +60,9 @@ return detailsViewController;
             UIImage* image = [UIImage imageWithData:data];
         
             dispatch_sync(dispatch_get_main_queue(), ^{
-            itemImageView.image = image;
+            self.itemImageView.image = image;
             });
-    });
-    
-    NSDictionary* location = [_item objectForKey:@"location"];
-    id name = [location objectForKey:@"name"];
-    
-    if(name == [NSNull null]){
-        name = [NSString stringWithFormat:@"%@,%@", [location objectForKey:@"lat"], [location objectForKey:@"lng"]];
-        
-        UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
-                                         initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                         target:self
-                                         action:@selector(enterLocation:)];
-        self.navigationItem.rightBarButtonItem = actionButton;
-    }
-    
-    self.locationButton.titleLabel.numberOfLines = 0;
-    [self.locationButton setTitle:[NSString stringWithFormat:self.locationButton.titleLabel.text, name] forState:UIControlStateNormal];
-    [self.locationButton setTitle:[NSString stringWithFormat:self.locationButton.titleLabel.text, name]  forState:UIControlStateSelected];
+    });    
 }
 
 - (void)viewDidUnload
@@ -97,60 +75,34 @@ return detailsViewController;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)didUpdateToLocation:(NSNotification *)notification;
-{
-	self.location = [TheBoxNotifications location:notification];
-	
+#pragma mark UITableViewDataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
 
--(IBAction)didClickOnLocation:(id)sender
-{
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
-    
-    NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[[_item objectForKey:@"location"] objectForKey:@"lat"],[[_item objectForKey:@"location"] objectForKey:@"lng"]];
-    
-    NSLog(@"%@", urlstring);
-
-    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlstring]];
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
 }
 
-#pragma mark LocationUIViewController
-- (void)enterLocation:(id)sender
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UIViewController *locationController = [LocationUIViewController newLocationViewController];
-	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(didEnterLocation:) name:@"didEnterLocation" object:locationController];
-	
-	[self presentModalViewController:locationController animated:YES];	
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.font = [UIFont fontWithName:@"Gil Sans" size:12.0];
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    }
+    
+    cell.textLabel.text = @[@"foo: fffffffff", @"bar: bbbbbbbbb", @"car: cccccccccc"][indexPath.row];
+    
+    return cell;
 }
 
--(void)didEnterLocation:(NSNotification *)aNotification
-{
-	NSDictionary *userInfo = [aNotification userInfo];
-    NSDictionary *location = [userInfo valueForKey:@"location"];
-    
-    [self.item setObject:location forKey:@"location"];
-    
-	NSString *locationName = [location objectForKey:@"name"];
-	[locationButton setTitle:locationName forState:UIControlStateNormal];
-	[locationButton setTitle:locationName forState:UIControlStateSelected];
-    
-    AFHTTPRequestOperation *updateItem = [TheBoxQueries updateItemQuery:self.item delegate:self];
-    
-    [updateItem start];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 20.0;
 }
-
--(void)didSucceedWithItem:(NSDictionary *)item
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
--(void)didFailOnUpdateItemWithError:(NSError *)error
-{
-    NSLog(@"%@", error);
-}
-
-
 
 @end

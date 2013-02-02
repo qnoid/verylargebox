@@ -9,11 +9,40 @@
  */
 #import <QuartzCore/QuartzCore.h>
 #import "TBUIView.h"
+#import "TBColors.h"
 
 @implementation UIView (TBViewBorder)
 
 - (id<TBViewBorder>)border {
     return [[self borderWidth:1.0f] borderColor:[UIColor blackColor].CGColor];
+}
+
+-(id<TBViewBorder>)bottomBorder{
+    CALayer *topBorder = [CALayer layer];
+    topBorder.frame = CGRectMake(0.0f, 44.0f, 160.0f, 2.0f);
+    topBorder.backgroundColor = [TBColors colorDarkOrange].CGColor;
+    [self.layer addSublayer:topBorder];
+return self;
+}
+
+- (id<TBViewBorder>)borders
+{
+    CALayer *leftBorder = [CALayer layer];
+    leftBorder.frame = CGRectMake(0.0f, 0.0f, 2.0f, 44.0f);
+    leftBorder.backgroundColor = [TBColors colorDarkOrange].CGColor;
+
+    CALayer *topBorder = [CALayer layer];
+    topBorder.frame = CGRectMake(0.0f, 0.0f, 160.0f, 2.0f);
+    topBorder.backgroundColor = [TBColors colorDarkOrange].CGColor;
+
+    CALayer *rightBorder = [CALayer layer];
+    rightBorder.frame = CGRectMake(160.0f, 0.0f, 2.0f, 44.0f);
+    rightBorder.backgroundColor = [TBColors colorDarkOrange].CGColor;
+
+    [self.layer addSublayer:leftBorder];
+    [self.layer addSublayer:topBorder];
+    [self.layer addSublayer:rightBorder];
+return self;
 }
 
 - (id<TBViewBorder>)borderWidth:(CGFloat)width

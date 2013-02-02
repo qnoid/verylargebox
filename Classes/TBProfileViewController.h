@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TBCreateItemOperationDelegate.h"
 
-@interface TBProfileViewController : UIViewController
+@interface TBProfileViewController : UIViewController <TBCreateItemOperationDelegate>
 
 +(TBProfileViewController*)newProfileViewController;
 

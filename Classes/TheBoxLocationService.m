@@ -29,12 +29,6 @@ return theBox;
 }
 
 @synthesize locationManager;
-@synthesize theGeocoder;
-
-- (void) dealloc
-{
-    theGeocoder.delegate = nil;
-}
 
 -(id)init:(CLLocationManager *)aLocationManager
 {
@@ -85,31 +79,26 @@ return self;
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center postNotificationName:@"didUpdateToLocation" object:self userInfo:userInfo];
 		
-    MKReverseGeocoder* mkReverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate];
+    CLGeocoder* geocoder = [CLGeocoder new];
     
-	self.theGeocoder = mkReverseGeocoder;
-	
-    theGeocoder.delegate = self;
-    [theGeocoder start];    
-}
-
-// Delegate methods
-- (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFindPlacemark:(MKPlacemark*)place
-{
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:place forKey:@"place"]; 
-	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center postNotificationName:@"didFindPlacemark" object:self userInfo:userInfo];
-}
-
-- (void)reverseGeocoder:(MKReverseGeocoder*)geocoder didFailWithError:(NSError*)error
-{
-    NSLog(@"Could not retrieve the specified place information.\n");
-	
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"]; 
-
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center postNotificationName:@"didFailWithError" object:self userInfo:userInfo];	
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
+    {
+        if(error){
+            NSLog(@"Could not retrieve the specified place information.\n");
+            
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
+            
+            NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+            [center postNotificationName:@"didFailWithError" object:self userInfo:userInfo];
+        return;
+        }
+     
+        CLPlacemark *place = [placemarks objectAtIndex:0];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:place.location forKey:@"place"];
+        
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center postNotificationName:@"didFindPlacemark" object:self userInfo:userInfo];        
+    }];
 }
 
 @end
