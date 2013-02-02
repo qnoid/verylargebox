@@ -33,6 +33,12 @@
 
 -(void)dontNotifyOnUpdateToLocation:(id<TheBoxLocationServiceDelegate>) delegate;
 
+/**
+ 
+ will call didFailReverseGeocodeLocationWithError:
+ userInfo 
+    "error" - NSError
+ */
 -(void)dontNotifyOnFindPlacemark:(id<TheBoxLocationServiceDelegate>) delegate;
 
 /*
@@ -49,5 +55,10 @@
  */
 -(void)notifyDidFailWithError:(id<TheBoxLocationServiceDelegate>) delegate;
 
-
+/*
+ * will call didFailReverseGeocodeLocationWithError:
+ * with name @"didFailReverseGeocodeLocationWithError"
+ * userInfo @"error"
+ */
+-(void)notifyDidFailReverseGeocodeLocationWithError:(id<TheBoxLocationServiceDelegate>) delegate;
 @end

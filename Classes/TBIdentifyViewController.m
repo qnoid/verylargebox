@@ -29,8 +29,12 @@
 +(TBIdentifyViewController*)newIdentifyViewController
 {
     NSArray* accounts = [SSKeychain accountsForService:THE_BOX_SERVICE];
+
+    TBIdentifyViewController* identifyViewController = [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accounts:[NSMutableArray arrayWithArray:accounts]];
     
-return [[TBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accounts:[NSMutableArray arrayWithArray:accounts]];
+    identifyViewController.title = @"thebox";
+    
+return identifyViewController;
 }
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts
@@ -87,7 +91,6 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,10 +100,10 @@ return self;
 }
 
 #pragma mark TBVerifyUserOperationDelegate
--(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSString *)residence
+-(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    TBProfileViewController *profileViewController = [TBProfileViewController newProfileViewController];
+    NSLog(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);
+    TBProfileViewController *profileViewController = [TBProfileViewController newProfileViewController:residence email:email];
     HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
     
     UITabBarController* tabBarController = [[UITabBarController alloc] init];

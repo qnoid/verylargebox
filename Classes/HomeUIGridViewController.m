@@ -25,12 +25,40 @@
 #import "TBUIView.h"
 #import "TBColors.h"
 #import "TheBoxLocationService.h"
+#import "TBUITableViewDataSourceBuilder.h"
+#import "TBUITableViewDelegateBuilder.h"
+#import <objc/runtime.h>
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
-static NSUInteger* const FIRST_VIEW_TAG = -1;
-static NSUInteger* const ACTIVITY_INDICATOR_TAG = -2;
+static NSInteger const FIRST_VIEW_TAG = -1;
+static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
+
+
+@interface UITableViewController (TBUITableViewController)
+@property(nonatomic, strong) NSObject<UITableViewDataSource> *dataSource;
+@property(nonatomic, strong) NSObject<UITableViewDelegate> *delegate;
+@end
+
+@implementation UITableViewController (TBUITableViewController)
+
+@dynamic dataSource;
+@dynamic delegate;
+
+-(void)setDataSource:(NSObject<UITableViewDataSource> *)dataSource
+{
+    static char const * const UITableViewDataSourceKey = "UITableViewDataSource";
+    objc_setAssociatedObject(self, UITableViewDataSourceKey, dataSource, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+-(void)setDelegate:(NSObject<UITableViewDelegate> *)delegate
+{
+    static char const * const UITableViewDelegateKey = "UITableViewDelegate";
+    objc_setAssociatedObject(self, UITableViewDelegateKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
 
 @interface HomeUIGridViewController ()
 @property(nonatomic, strong) CLLocation *location;
@@ -40,6 +68,8 @@ static NSUInteger* const ACTIVITY_INDICATOR_TAG = -2;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
+-(void)highlightLocation;
+-(void)reloadItems;
 @end
 
 
@@ -49,7 +79,7 @@ static NSUInteger* const ACTIVITY_INDICATOR_TAG = -2;
 {    
     HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:[TheBoxLocationService theBox]];
     
-    homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Edinburgh" image:[UIImage imageNamed:@"group.png"] tag:0];
+    homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"group.png"] tag:0];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:homeGridViewController selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
@@ -60,6 +90,7 @@ return homeGridViewController;
 -(void)dealloc
 {
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
 }
 
 
@@ -73,7 +104,6 @@ return homeGridViewController;
         self.locations = [NSArray array];
         self.items = [NSMutableArray array];
         self.theBoxLocationService = locationService;
-        self.title = @"thebox";
         NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
         self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
     }
@@ -123,6 +153,8 @@ return self;
 {
     [super viewDidLoad];
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
+    [self.theBoxLocationService notifyDidFindPlacemark:self];
+    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -137,6 +169,45 @@ return self;
 	[[TheBoxQueries newItemsQuery:self] start];
 }
 
+/**
+ @precondition self.locationsView
+ */
+-(void)highlightLocation
+{
+    for (UIButton* button in self.locationsView.subviews) {
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    
+    UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
+    
+    if(self.index != 0){
+        locationButton = (UIButton*)[self.locationsView viewWithTag:self.index];
+    }
+    
+    [locationButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+}
+
+/**
+  @precondition self.locations
+ */
+-(void)reloadItems
+{
+    NSDictionary* currentLocation = [self.locations objectAtIndex:self.index];
+    NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
+    
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
+                                                  CGRectMake(CGPointZero.x, CGPointZero.y, [[UIScreen mainScreen] bounds].size.width, 323.0)];
+    
+    activityIndicator.tag = ACTIVITY_INDICATOR_TAG;
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [activityIndicator startAnimating];
+    
+    [self.view insertSubview:activityIndicator atIndex:0];
+    [self.view bringSubviewToFront:activityIndicator];
+    
+    [[TheBoxQueries newGetItemsGivenLocationId:locationId delegate:self] start];
+}
+
 #pragma mark TBLocationOperationDelegate
 
 -(void)didSucceedWithLocations:(NSArray*)locations
@@ -149,7 +220,7 @@ return self;
 
 -(void)didFailOnLocationWithError:(NSError*)error
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
 }
 
 #pragma mark TheBoxUIScrollViewDatasource
@@ -181,6 +252,16 @@ return storeButton;
 }
 
 #pragma mark TheBoxUIScrollViewDelegate
+
+-(void)didLayoutSubviews:(UIScrollView*)scrollView
+{
+    if(![self.locationsView isEqual:scrollView]){
+        return;
+    }
+
+    [self highlightLocation];
+    [self reloadItems];
+}
 
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex
 {
@@ -232,32 +313,8 @@ return storeButton;
     
     self.index = index;
 
-    for (UIButton* button in self.locationsView.subviews) {
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
-    
-    UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
-    
-    if(index != 0){
-        locationButton = (UIButton*)[self.locationsView viewWithTag:index];
-    }
-    
-    [locationButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-
-    NSDictionary* currentLocation = [self.locations objectAtIndex:index];
-    NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
-
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
-                              CGRectMake(CGPointZero.x, CGPointZero.y, [[UIScreen mainScreen] bounds].size.width, 323.0)];
-    
-    activityIndicator.tag = ACTIVITY_INDICATOR_TAG;
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    [activityIndicator startAnimating];
-    
-    [self.view insertSubview:activityIndicator atIndex:0];
-    [self.view bringSubviewToFront:activityIndicator];
-    
-    [[TheBoxQueries newGetItemsGivenLocationId:locationId delegate:self] start];
+    [self highlightLocation];
+    [self reloadItems];
 }
 
 #pragma mark thebox
@@ -336,7 +393,6 @@ return storeButton;
 	self.items = items;
     [self.itemsView flashScrollIndicators];
     [self.itemsView setNeedsLayout];
-    [self.itemsView layoutIfNeeded];
 }
 
 -(void)didFailOnItemsWithError:(NSError*)error
@@ -365,9 +421,50 @@ return storeButton;
 }
 
 #pragma mark TheBoxLocationServiceDelegate
--(void)didUpdateToLocation:(NSNotification *)notification;
+-(void)didUpdateToLocation:(NSNotification *)notification
 {
-	self.location = [TheBoxNotifications location:notification];	
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+	self.location = [TheBoxNotifications location:notification];
+}
+
+-(void)didFindPlacemark:(NSNotification *)notification
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    CLPlacemark *placemark = [TheBoxNotifications place:notification];
+    self.navigationItem.title = [NSString stringWithFormat:@"It's right here in %@", placemark.locality];
+    self.tabBarItem.title = @"Edinburgh";
+}
+
+-(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+
+    UITableViewController *availablePlacesViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    availablePlacesViewController.title = @"Select a location where thebox is available";
+    
+    NSObject<UITableViewDataSource> *datasource = [[[[TBUITableViewDataSourceBuilder new] numberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
+    return 1;
+    }] cellForRowAtIndexPath:tbCellForRowAtIndexPath(^(UITableViewCell *cell) {
+        cell.textLabel.text = @"Edinburgh";
+    })] newDatasource];
+    availablePlacesViewController.dataSource = datasource;
+    availablePlacesViewController.tableView.dataSource = datasource;
+
+    availablePlacesViewController.tableView.delegate = self;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:availablePlacesViewController];
+    navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
+
+    [self presentModalViewController:navigationController animated:YES];
+}
+
+#pragma mark UITableViewDelegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.navigationItem.title = [NSString stringWithFormat:@"It's right here in %@", @"Edinburgh"];
+    self.tabBarItem.title = @"Edinburgh";
+    [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)didClickOnLocation:(id)sender

@@ -21,9 +21,11 @@
 #import "TBSecureHashA1.h"
 #import "TBAFHTTPRequestOperationCompletionBlocks.h"
 #import "TBNSErrorDelegate.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 static NSString* const LOCATIONS = @"/locations";
 static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
+static NSString* const USER_ITEMS = @"/users/%u/items";
 
 @interface TheBoxQueries ()
 
@@ -44,6 +46,10 @@ NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRI
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
 NSUInteger const TIMEOUT = 60;
 
++(void)initialize
+{
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+}
 
 +(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<TBCreateUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence
 {
@@ -93,7 +99,7 @@ return request;
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:registrationRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
-       [delegate didSucceedWithVerificationForEmail:email residence:residence];
+       [delegate didSucceedWithVerificationForEmail:email residence:[[operation.responseString objectFromJSONString] objectForKey:@"residence"]];
    }
    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        [delegate didFailOnVerifyWithError:error];
@@ -298,5 +304,62 @@ return request;
 
 return request;
 }
+
++(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image location:(NSDictionary *)location user:(NSUInteger)userId
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+	NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters tbSetObjectIfNotNil:[location objectForKey:@"name"] forKey:@"item[location_attributes][name]"];
+    [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lat"] forKey:@"item[location_attributes][lat]"];
+    [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][lng]"];
+    [parameters tbSetObjectIfNotNil:[location objectForKey:@"id"] forKey:@"item[location_attributes][foursquareid]"];
+    
+    NSMutableURLRequest* request = [client multipartFormRequestWithMethod:@"POST"
+                                                                     path:[NSString stringWithFormat:@"users/%u/items", userId]
+                                                               parameters:parameters
+                                                constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+                                                {
+                                                    [formData appendPartWithFileData:imageData
+                                                                                name:@"item[image]"
+                                                                            fileName:@".jpg"
+                                                                            mimeType:@"image/jpeg"];
+                                                }];
+    
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setTimeoutInterval:TIMEOUT];
+    
+	AFHTTPRequestOperation *createItem = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [createItem setUploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+        NSLog(@"Sent %d of %d bytes", totalBytesWritten, totalBytesExpectedToWrite);
+    }];
+    
+    return createItem;
+}
+
++(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableURLRequest *getItemsRequest =
+    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:USER_ITEMS, userId] parameters:nil];
+    
+    [getItemsRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [getItemsRequest setTimeoutInterval:TIMEOUT];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:getItemsRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
+   {
+       [delegate didSucceedWithItems:[operation.responseString mutableObjectFromJSONString]];
+   }
+  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [delegate didFailOnItemsWithError:error];
+  }];
+    
+    return request;
+}
+
 
 @end

@@ -65,4 +65,15 @@ extern NSString* const THE_BOX_SERVICE;
  */
 +(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 
+/**
+ Creates an item under the given user id.
+ 
+ @param image image
+ @param location location
+ @param userId the user id to create the item under. 
+ @see #newVerifyUserQuery
+ */
++(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image location:(NSDictionary *)location user:(NSUInteger)userId;
+
++(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 @end

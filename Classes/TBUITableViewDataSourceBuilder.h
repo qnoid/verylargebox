@@ -10,6 +10,7 @@
 
 typedef NSInteger(^TBNumberOfRowsInSectionBlock)(UITableView *tableView, NSInteger section);
 typedef UITableViewCell*(^TBCellForRowAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
+typedef void(^TBUITableViewCellBlock)(UITableViewCell* cell);
 
 NS_INLINE
 TBNumberOfRowsInSectionBlock tbZeroNumberOfRows(){
@@ -19,6 +20,25 @@ return ^(UITableView *tableView, NSInteger section){return 0;};
 NS_INLINE
 TBCellForRowAtIndexPath tbNilCellForRowAtIndexPath(){
 return ^UITableViewCell*(UITableView *tableView, NSIndexPath *indexPath){return nil;};
+}
+
+NS_INLINE
+TBCellForRowAtIndexPath tbCellForRowAtIndexPath(TBUITableViewCellBlock block)
+{
+return ^UITableViewCell*(UITableView *tableView, NSIndexPath *indexPath)
+    {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        
+        if(cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+            cell.textLabel.font = [UIFont fontWithName:@"Gil Sans" size:14.0];
+        }
+        
+        block(cell);
+        
+    return cell;
+    };
 }
 
 @interface TBUITableViewDataSource : NSObject <UITableViewDataSource>

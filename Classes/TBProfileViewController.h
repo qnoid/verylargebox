@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TheBoxUIScrollView.h"
 #import "TBCreateItemOperationDelegate.h"
+#import "TBItemsOperationDelegate.h"
 
-@interface TBProfileViewController : UIViewController <TBCreateItemOperationDelegate>
+@interface TBProfileViewController : UIViewController <TBCreateItemOperationDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBItemsOperationDelegate>
 
-+(TBProfileViewController*)newProfileViewController;
+@property(nonatomic, strong) TheBoxUIScrollView* itemsView;
+
++(TBProfileViewController*)newProfileViewController:(NSDictionary*)residence email:(NSString*)email;
 
 @end

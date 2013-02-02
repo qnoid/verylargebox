@@ -23,8 +23,12 @@
 
 @implementation TBEmailViewController
 
-+(TBEmailViewController*)newEmailViewController {
-return [[TBEmailViewController alloc] initWithBundle:[NSBundle mainBundle]];
++(TBEmailViewController*)newEmailViewController
+{
+    TBEmailViewController* emailViewController = [[TBEmailViewController alloc] initWithBundle:[NSBundle mainBundle]];
+    emailViewController.title = @"Identify";
+    
+    return emailViewController;
 }
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil

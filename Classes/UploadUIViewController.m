@@ -22,6 +22,8 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 @property(nonatomic, strong) UIImage* itemImage;
 @property(nonatomic, strong) NSMutableDictionary* location;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
+@property(nonatomic, assign) NSUInteger userId;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil userId:(NSUInteger)userId;
 @end
 
 @implementation UploadUIViewController
@@ -42,22 +44,27 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
     [theBoxLocationService dontNotifyOnUpdateToLocation:self];
 }
 
-+(UploadUIViewController*)newUploadUIViewController
++(UploadUIViewController*)newUploadUIViewController:(NSUInteger)userId
 {
-    UploadUIViewController* newUploadUIViewController = [[UploadUIViewController alloc] initWithNibName:@"UploadUIViewController" bundle:[NSBundle mainBundle]];
+    UploadUIViewController* newUploadUIViewController = [[UploadUIViewController alloc]
+                                                         initWithBundle:[NSBundle mainBundle]
+                                                         userId:userId];
         
 return newUploadUIViewController;
 }
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil userId:(NSUInteger)userId
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:NSStringFromClass([UploadUIViewController class]) bundle:nibBundleOrNil];
     
-    if (self) {
-        self.location = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"location"];
-        self.theBoxLocationService = [TheBoxLocationService theBox];                
+    if (!self) {
+        return nil;
     }
     
+    self.location = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"location"];
+    self.theBoxLocationService = [TheBoxLocationService theBox];
+    self.userId = userId;
+
 return self;
 }
 
@@ -105,7 +112,7 @@ return self;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newItemQuery:self.itemImage location:self.location];
+	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newPostItemQuery:self.itemImage location:self.location user:self.userId];
 
     [itemQuery setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.createItemDelegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];

@@ -25,6 +25,13 @@ extern CGFloat const DEFAULT_HEIGHT;
 @protocol TheBoxUIScrollViewDelegate
 
 /**
+ Will get a callback if #setNeedsLayout has been called on the next #layoutSubviews.
+ 
+ @param scrollView the TheBoxUIScrollView associated with the delegate
+ */
+-(void)didLayoutSubviews:(UIScrollView*)scrollView;
+
+/**
  Implementations should customise the appearance of the view.
  
  The view might be a recycled view or a new instance.
@@ -43,14 +50,15 @@ extern CGFloat const DEFAULT_HEIGHT;
  */
 - (void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex;
 
-@optional
-- (void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index;
-
 /**
  @param scrollView the TheBoxUIScrollView associated with the delegate
  @param index the index at which the scrollView will come at a stop
  */
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index;
+
+@optional
+- (void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index;
+
 @end
 
 /**

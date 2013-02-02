@@ -41,6 +41,6 @@
 
 - (IBAction)enterLocation:(id)sender;
 
-+(UploadUIViewController*)newUploadUIViewController;
++(UploadUIViewController*)newUploadUIViewController:(NSUInteger)userId;
 
 @end

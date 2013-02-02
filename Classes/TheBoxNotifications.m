@@ -31,7 +31,7 @@
 return [userInfo objectForKey:@"newLocation"];
 }
 
-+(MKPlacemark *)place:(NSNotification *)notification
++(CLPlacemark *)place:(NSNotification *)notification
 {
 	NSDictionary *userInfo = [notification userInfo];
 return [userInfo objectForKey:@"place"];

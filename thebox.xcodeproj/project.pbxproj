@@ -98,6 +98,10 @@
 		BD127B47165D7E70002C944D /* NSString+TBString.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B46165D7E6F002C944D /* NSString+TBString.m */; };
 		BD127B4B165DA3C8002C944D /* TBNSString+TBSStringTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B4A165DA3C8002C944D /* TBNSString+TBSStringTestCase.m */; };
 		BD13057716A22E7D00AF0814 /* TBDimensionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD13057616A22E7D00AF0814 /* TBDimensionTest.m */; };
+		BD14C28516BDC70C0039E978 /* TBUserItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD14C28416BDC70C0039E978 /* TBUserItemView.m */; };
+		BD14C28616BDC70C0039E978 /* TBUserItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD14C28416BDC70C0039E978 /* TBUserItemView.m */; };
+		BD14C28B16BDC73F0039E978 /* TBUserItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD14C28A16BDC73F0039E978 /* TBUserItemView.xib */; };
+		BD14C28C16BDC73F0039E978 /* TBUserItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD14C28A16BDC73F0039E978 /* TBUserItemView.xib */; };
 		BD1C3E0D15679668007769CE /* TBUIRibbon.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1C3E0C15679668007769CE /* TBUIRibbon.m */; };
 		BD258DCD1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DCC1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m */; };
 		BD258DD51673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DD41673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m */; };
@@ -119,6 +123,9 @@
 		BD84EF70165C2363009D9408 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
 		BD9A781116BB0D9C00FD30E0 /* signpost.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9A781016BB0D9C00FD30E0 /* signpost.png */; };
 		BD9A781216BB0D9C00FD30E0 /* signpost.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9A781016BB0D9C00FD30E0 /* signpost.png */; };
+		BD9A781516BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */; };
+		BD9A781616BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */; };
+		BD9A781716BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */; };
 		BDA21878165EEBEA00094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
 		BDA2187A165EEBF600094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
 		BDA2BC8C165952C20068C749 /* TBIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8A165952C20068C749 /* TBIdentifyViewController.m */; };
@@ -314,6 +321,9 @@
 		BD127B49165DA3C8002C944D /* TBNSString+TBSStringTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBNSString+TBSStringTestCase.h"; sourceTree = "<group>"; };
 		BD127B4A165DA3C8002C944D /* TBNSString+TBSStringTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBNSString+TBSStringTestCase.m"; sourceTree = "<group>"; };
 		BD13057616A22E7D00AF0814 /* TBDimensionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBDimensionTest.m; sourceTree = "<group>"; };
+		BD14C28316BDC70C0039E978 /* TBUserItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUserItemView.h; sourceTree = "<group>"; };
+		BD14C28416BDC70C0039E978 /* TBUserItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUserItemView.m; sourceTree = "<group>"; };
+		BD14C28A16BDC73F0039E978 /* TBUserItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TBUserItemView.xib; sourceTree = "<group>"; };
 		BD1C3E0B15679668007769CE /* TBUIRibbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUIRibbon.h; sourceTree = "<group>"; };
 		BD1C3E0C15679668007769CE /* TBUIRibbon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUIRibbon.m; sourceTree = "<group>"; };
 		BD258DCB1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAFHTTPRequestOperationCompletionBlocks.h; sourceTree = "<group>"; };
@@ -325,6 +335,8 @@
 		BD258DDA1678005400286511 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = warning.png; path = "Supporting Files/warning.png"; sourceTree = "<group>"; };
 		BD258DDD1678040500286511 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = "Supporting Files/refresh.png"; sourceTree = "<group>"; };
 		BD9A781016BB0D9C00FD30E0 /* signpost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signpost.png; sourceTree = "<group>"; };
+		BD9A781316BD53D300FD30E0 /* TBUITableViewDelegateBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUITableViewDelegateBuilder.h; sourceTree = "<group>"; };
+		BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUITableViewDelegateBuilder.m; sourceTree = "<group>"; };
 		BDA21877165EEBEA00094510 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDA2187B165EEF6700094510 /* TBVerifyUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVerifyUserOperationDelegate.h; sourceTree = "<group>"; };
 		BDA2BC89165952C20068C749 /* TBIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBIdentifyViewController.h; sourceTree = "<group>"; };
@@ -480,6 +492,11 @@
 				BDABD92A169F689E00111723 /* TBItemView.h */,
 				BDABD92B169F689F00111723 /* TBItemView.m */,
 				BDABD92E169F68B100111723 /* TBItemView.xib */,
+				BD9A781316BD53D300FD30E0 /* TBUITableViewDelegateBuilder.h */,
+				BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */,
+				BD14C28316BDC70C0039E978 /* TBUserItemView.h */,
+				BD14C28416BDC70C0039E978 /* TBUserItemView.m */,
+				BD14C28A16BDC73F0039E978 /* TBUserItemView.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -943,6 +960,7 @@
 				BD258DDE1678040500286511 /* refresh.png in Resources */,
 				BDABD92F169F68B100111723 /* TBItemView.xib in Resources */,
 				BD9A781116BB0D9C00FD30E0 /* signpost.png in Resources */,
+				BD14C28B16BDC73F0039E978 /* TBUserItemView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,6 +979,7 @@
 				BD258DDC1678005400286511 /* warning.png in Resources */,
 				BD258DDF1678040500286511 /* refresh.png in Resources */,
 				BD9A781216BB0D9C00FD30E0 /* signpost.png in Resources */,
+				BD14C28C16BDC73F0039E978 /* TBUserItemView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,6 +1121,8 @@
 				BD258DCD1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */,
 				BD258DD81673F1F700286511 /* TBUITableViewDataSourceBuilder.m in Sources */,
 				BDABD92C169F689F00111723 /* TBItemView.m in Sources */,
+				BD9A781516BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */,
+				BD14C28516BDC70C0039E978 /* TBUserItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1129,6 +1150,7 @@
 				BD127B4B165DA3C8002C944D /* TBNSString+TBSStringTestCase.m in Sources */,
 				BD258DD51673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m in Sources */,
 				BD13057716A22E7D00AF0814 /* TBDimensionTest.m in Sources */,
+				BD9A781616BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1144,6 +1166,8 @@
 				BDCD938B165C127A009C2F8F /* NSDictionary+TBDictionary.m in Sources */,
 				BDCD93A7165C1383009C2F8F /* TheBoxUIScrollViewTest.m in Sources */,
 				BDCD93A8165C1389009C2F8F /* TBButtonTest.m in Sources */,
+				BD9A781716BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */,
+				BD14C28616BDC70C0039E978 /* TBUserItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

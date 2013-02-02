@@ -44,6 +44,7 @@ return self.cellForRowAtIndexPath(tableView, indexPath);
 
 @end
 
+
 @interface TBUITableViewDataSourceBuilder()
 @property(nonatomic, copy) TBNumberOfRowsInSectionBlock numberOfRowsInSection;
 @property(nonatomic, copy) TBCellForRowAtIndexPath cellForRowAtIndexPath;

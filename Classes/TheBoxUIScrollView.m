@@ -15,8 +15,7 @@
 CGFloat const DEFAULT_HEIGHT = 196;
 
 @interface TheBoxUIScrollView ()
--(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size dimension:(NSObject<TheBoxDimension>*)dimension;
-
+@property(nonatomic, assign) BOOL needsLayout;
 @property(nonatomic, strong) TheBoxUIRecycleStrategy *recycleStrategy;
 @property(nonatomic, strong) id<VisibleStrategy> visibleStrategy;
 /* Apparently a UIScrollView needs another view as its content view else it messes up the scrollers.
@@ -26,6 +25,7 @@ CGFloat const DEFAULT_HEIGHT = 196;
 
 @property(nonatomic, strong) NSObject<TheBoxSize> *theBoxSize;
 @property(nonatomic, strong) NSObject<TheBoxDimension> *dimension;
+-(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size dimension:(NSObject<TheBoxDimension>*)dimension;
 @end
 
 @implementation TheBoxUIScrollView
@@ -87,14 +87,8 @@ return scrollView;
 
 -(id)awakeAfterUsingCoder:(NSCoder *)aDecoder
 {
-    TheBoxUIScrollView* scrollView = [TheBoxUIScrollView newHorizontalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];
-    
+    TheBoxUIScrollView* scrollView = [TheBoxUIScrollView newHorizontalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];    
     scrollView.scrollsToTop = YES;
-    
-    //http://stackoverflow.com/questions/10264790/what-is-the-new-pattern-for-releasing-self-with-automatic-reference-counting
-    CFRelease((__bridge const void*)self);
-    
-    CFRetain((__bridge const void*)scrollView);
     
 return scrollView;
 }
@@ -179,14 +173,19 @@ return self;
     NSLog(@"layoutSubviews on bounds %@", NSStringFromCGRect(bounds));
 
 	[self recycleVisibleViewsWithinBounds:bounds];
-	[self removeRecycledFromVisibleViews];	
-    
+	[self removeRecycledFromVisibleViews];
 	[self displayViewsWithinBounds:bounds];
+
+    if(self.needsLayout){
+        [self.scrollViewDelegate didLayoutSubviews:self];
+        self.needsLayout = NO;
+    }
 }
 
 -(void)setNeedsLayout
 {
     [super setNeedsLayout];
+    self.needsLayout = YES;
     NSArray* subviews = [self.contentView subviews];
     
     [self.recycleStrategy recycle:subviews];

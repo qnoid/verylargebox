@@ -49,7 +49,8 @@
 						</object>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="404795624"/>
-						<reference key="NSNextKeyView" ref="551691585"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="46731358"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -60,6 +61,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{0, 44}, {320, 323}}</string>
 						<reference key="NSSuperview" ref="404795624"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="505754722">
 							<int key="NSColorSpace">3</int>
@@ -70,12 +72,13 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIIndicatorStyle">2</int>
 					</object>
-					<object class="IBUIButton" id="551691585">
+					<object class="IBUIButton" id="46731358">
 						<reference key="NSNextResponder" ref="404795624"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{100, 44}</string>
 						<reference key="NSSuperview" ref="404795624"/>
-						<reference key="NSNextKeyView" ref="966220668"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="481367942"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
@@ -102,11 +105,12 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="966220668">
+					<object class="IBUIImageView" id="481367942">
 						<reference key="NSNextResponder" ref="404795624"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{78, 8}, {22, 28}}</string>
+						<string key="NSFrame">{{0, 8}, {22, 28}}</string>
 						<reference key="NSSuperview" ref="404795624"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="664682720"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -119,7 +123,8 @@
 				</object>
 				<string key="NSFrame">{{0, 64}, {320, 367}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="366225802"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<reference key="IBUIBackgroundColor" ref="505754722"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -160,7 +165,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">directionsButton</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="551691585"/>
+						<reference key="destination" ref="46731358"/>
 					</object>
 					<int key="connectionID">218</int>
 				</object>
@@ -168,7 +173,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">signPostImageView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="966220668"/>
+						<reference key="destination" ref="481367942"/>
 					</object>
 					<int key="connectionID">219</int>
 				</object>
@@ -234,8 +239,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="366225802"/>
 							<reference ref="664682720"/>
-							<reference ref="966220668"/>
-							<reference ref="551691585"/>
+							<reference ref="481367942"/>
+							<reference ref="46731358"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">view</string>
@@ -257,13 +262,13 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">216</int>
-						<reference key="object" ref="551691585"/>
+						<reference key="object" ref="46731358"/>
 						<reference key="parent" ref="404795624"/>
 						<string key="objectName">directionsButton</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">217</int>
-						<reference key="object" ref="966220668"/>
+						<reference key="object" ref="481367942"/>
 						<reference key="parent" ref="404795624"/>
 						<string key="objectName">signPostImageView</string>
 					</object>
@@ -312,9 +317,125 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">219</int>
+			<int key="maxID">222</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">HomeUIGridViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">didClickOnLocation:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">didClickOnLocation:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">didClickOnLocation:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>directionsButton</string>
+							<string>itemsView</string>
+							<string>locationsView</string>
+							<string>navigationBar</string>
+							<string>signPostImageView</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
+							<string>TheBoxUIScrollView</string>
+							<string>TheBoxUIScrollView</string>
+							<string>UINavigationBar</string>
+							<string>UIImageView</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>directionsButton</string>
+							<string>itemsView</string>
+							<string>locationsView</string>
+							<string>navigationBar</string>
+							<string>signPostImageView</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">directionsButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">itemsView</string>
+								<string key="candidateClassName">TheBoxUIScrollView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">locationsView</string>
+								<string key="candidateClassName">TheBoxUIScrollView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">navigationBar</string>
+								<string key="candidateClassName">UINavigationBar</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">signPostImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HomeUIGridViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TheBoxUIScrollView</string>
+					<string key="superclassName">UIScrollView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>datasource</string>
+							<string>scrollViewDelegate</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>datasource</string>
+							<string>scrollViewDelegate</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">datasource</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">scrollViewDelegate</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/TheBoxUIScrollView.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">

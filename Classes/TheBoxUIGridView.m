@@ -98,7 +98,16 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
 
 #pragma mark TheBoxUIScrollViewDelegate
 
+-(void)didLayoutSubviews:(UIScrollView *)scrollView
+{
+    
+}
+
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex{
+    
+}
+
+-(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index{
     
 }
 

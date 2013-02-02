@@ -15,9 +15,9 @@
  the given residence.
  
  @param email the email passed in TheBoxQueries#newVerifyUserQuery:email:residence
- @param residence the residence passed in TheBoxQueries#newVerifyUserQuery:email:residence
+ @param residence the residence mapping to the JSON as returned by the server.
  */
--(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSString*)residence;
+-(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSDictionary*)residence;
 -(void)didFailOnVerifyWithError:(NSError*)error;
 
 @end
