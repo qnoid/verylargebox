@@ -24,6 +24,10 @@
 
 -(id)init:(CLLocationManager *)locationManager;
 
+-(void)startMonitoringSignificantLocationChanges;
+
+-(void)stopMonitoringSignificantLocationChanges;
+
 /*
  * will call didUpdateToLocation:
  * with name "didUpdateToLocation"

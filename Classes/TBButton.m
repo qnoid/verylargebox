@@ -43,6 +43,11 @@ return self;
     [self setBlock:doo forAction:@selector(didTouchDownButton:) on:UIControlEventTouchDown];
 }
 
+-(void)onTouchUpInside:(TBButtonOnTouch)doo {
+    [self setBlock:doo forAction:@selector(didTouchUpInsideButton:) on:UIControlEventTouchUpInside];
+}
+
+
 -(void)onTouchUp:(TBButtonOnTouch)doo
 {
     [self setBlock:doo forAction:@selector(didTouchUpInsideButton:) on:UIControlEventTouchUpInside];
@@ -57,8 +62,8 @@ return self;
 
 -(void)didTouchUpInsideButton:(id)sender
 {
-    TBButtonOnTouch onTouchDown = [self blockForControlEvent:UIControlEventTouchUpInside];
-    onTouchDown(sender);
+    TBButtonOnTouch onTouchUpInside = [self blockForControlEvent:UIControlEventTouchUpInside];
+    onTouchUpInside(sender);
 }
 
 -(void)didTouchUpOutsideButton:(id)sender

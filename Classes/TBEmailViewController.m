@@ -10,7 +10,6 @@
 #import "TBButton.h"
 #import "TBUIView.h"
 #import "TBProfileViewController.h"
-#import "HomeUIGridViewController.h"
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
 #import "TBSecureHashA1.h"

@@ -59,6 +59,9 @@ extern CGFloat const DEFAULT_HEIGHT;
 @optional
 - (void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index;
 
+#pragma when using a refresh view
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;
+
 @end
 
 /**

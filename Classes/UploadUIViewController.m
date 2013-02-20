@@ -28,20 +28,9 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 
 @implementation UploadUIViewController
 
-@synthesize uploadView;
-@synthesize takePhotoButton;
-@synthesize locationButton;
-
-@synthesize theBox;
-@synthesize createItemDelegate;
-
-@synthesize itemImage = _itemImage;
-@synthesize location = _location;
-@synthesize theBoxLocationService;
-
 - (void) dealloc
 {
-    [theBoxLocationService dontNotifyOnUpdateToLocation:self];
+    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
 }
 
 +(UploadUIViewController*)newUploadUIViewController:(NSUInteger)userId
@@ -73,22 +62,28 @@ return self;
 	[super viewDidLoad];
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
 		
-	uploadView.contentSize = uploadView.frame.size;
+	self.uploadView.contentSize = self.uploadView.frame.size;
 	
-	CGRect bounds = uploadView.bounds;
+	CGRect bounds = self.uploadView.bounds;
 	NSLog(@"%@", NSStringFromCGRect(bounds));
-	CGSize contentSize = uploadView.contentSize;
+	CGSize contentSize = self.uploadView.contentSize;
 	NSLog(@"%@", NSStringFromCGSize(contentSize));		
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    if(self.itemImage){
+        self.takePhotoButton.titleLabel.hidden = YES;
+    }
+    
     [self.takePhotoButton setImage:self.itemImage forState:UIControlStateNormal];
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 #pragma mark TheBoxLocationServiceDelegate
@@ -153,8 +148,8 @@ return self;
     self.location = [userInfo valueForKey:@"location"];
     
 	NSString *locationName = [self.location objectForKey:@"name"];
-	[locationButton setTitle:locationName forState:UIControlStateNormal];
-	[locationButton setTitle:locationName forState:UIControlStateSelected];
+	[self.locationButton setTitle:locationName forState:UIControlStateNormal];
+	[self.locationButton setTitle:locationName forState:UIControlStateSelected];
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
@@ -171,8 +166,6 @@ return self;
     UIGraphicsEndImageContext();
     
     self.itemImage = newImage;
-
-	takePhotoButton.titleLabel.hidden = YES;
 	
 	[self dismissModalViewControllerAnimated:YES];
 }

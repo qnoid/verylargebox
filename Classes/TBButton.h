@@ -59,6 +59,8 @@ TBButtonOnTouch makeButtonWhite() {
  */
 -(void)onTouchDown:(TBButtonOnTouch)doo;
 
+-(void)onTouchUpInside:(TBButtonOnTouch)doo;
+
 /**
  Sets the block to call on touch up events.
 

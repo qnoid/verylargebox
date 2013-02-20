@@ -40,11 +40,18 @@ return theBox;
 return self;
 }
 
+-(void)startMonitoringSignificantLocationChanges {
+    [self.locationManager startMonitoringSignificantLocationChanges];
+}
+
+-(void)stopMonitoringSignificantLocationChanges {
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+}
+
 -(void)notifyDidUpdateToLocation:(id<TheBoxLocationServiceDelegate>) delegate;
 {
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:delegate selector:@selector(didUpdateToLocation:) name:@"didUpdateToLocation" object:self];
-	[locationManager startMonitoringSignificantLocationChanges];
 }
 
 -(void)dontNotifyOnUpdateToLocation:(id<TheBoxLocationServiceDelegate>) delegate;
@@ -57,7 +64,6 @@ return self;
 {
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:delegate selector:@selector(didFindPlacemark:) name:@"didFindPlacemark" object:self];
-    [locationManager startMonitoringSignificantLocationChanges];
 }
 
 -(void)dontNotifyOnFindPlacemark:(id<TheBoxLocationServiceDelegate>) delegate;

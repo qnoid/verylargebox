@@ -40,7 +40,7 @@ extern NSString* const THE_BOX_SERVICE;
 /**
  Verifies the given email and residence with the server.
  
- @param delegate the delegate to callback
+ @param delegate @retained the delegate to callback
  @param email the email to register the user as
  @param residence the residence associated with the user
  */

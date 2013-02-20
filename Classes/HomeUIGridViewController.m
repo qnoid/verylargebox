@@ -29,6 +29,8 @@
 #import "TBUITableViewDelegateBuilder.h"
 #import <objc/runtime.h>
 
+static CGFloat const LOCATIONS_VIEW_HEIGHT = 44.0;
+
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
@@ -79,6 +81,14 @@ static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
 {    
     HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:[TheBoxLocationService theBox]];
     
+    UILabel* titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"Nearby";
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.adjustsFontSizeToFitWidth = YES;
+    homeGridViewController.navigationItem.titleView = titleLabel;
+    [titleLabel sizeToFit];
+
     homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"group.png"] tag:0];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -113,42 +123,38 @@ return self;
 
 -(void)loadView
 {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
 
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, screenBounds.size.height)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x,
+                                                            CGPointZero.y,
+                                                            applicationFrame.size.width,
+                                                            applicationFrame.size.height - 44.0 - 49.0)];
     view.backgroundColor = [UIColor whiteColor];
-    view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 
-    TheBoxUIScrollView* locationsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 44.0) viewsOf:122.0];
+    TheBoxUIScrollView* locationsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, applicationFrame.size.width, LOCATIONS_VIEW_HEIGHT) viewsOf:122.0];
     locationsView.backgroundColor = [TBColors colorLightOrange];
     locationsView.datasource = self;
     locationsView.scrollViewDelegate = self;
     locationsView.showsHorizontalScrollIndicator = NO;
-
-    TheBoxUIScrollView* itemsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, 44.0, screenBounds.size.width, 323.0) viewsOf:160.0];
     
+    TheBoxUIScrollView* itemsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) viewsOf:160.0];
+
     itemsView.datasource = self;
     itemsView.scrollViewDelegate = self;
-
-    UIButton* directionsButton = [[UIButton alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, 122.0, 44.0)];
-    directionsButton.layer.shadowColor = [UIColor blueColor].CGColor;
-    directionsButton.layer.shadowOffset = CGSizeMake(0, 0);
-    directionsButton.layer.shadowRadius = 10;
-    directionsButton.alpha = 0.2;
-    [directionsButton addTarget:self action:@selector(didClickOnLocation:) forControlEvents:UIControlEventTouchUpInside];
+    itemsView.decelerationRate = UIScrollViewDecelerationRateFast;
     
     UIImageView* signPostImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGPointZero.x, 8.0, 22.0, 28.0)];
     signPostImageView.image = [UIImage imageNamed:@"signpost"];
 
     [view addSubview:locationsView];
     [view addSubview:itemsView];
-    [view addSubview:directionsButton];
     [view addSubview:signPostImageView];
     
     self.view = view;
     self.locationsView = locationsView;
     self.itemsView = itemsView;
 }
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -160,6 +166,12 @@ return self;
 -(void)viewWillAppear:(BOOL)animated
 {
 	[[TheBoxQueries newGetLocations:self] start];
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 #pragma mark application events
@@ -176,6 +188,7 @@ return self;
 {
     for (UIButton* button in self.locationsView.subviews) {
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button removeTarget:self action:@selector(didClickOnLocation:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
@@ -185,6 +198,7 @@ return self;
     }
     
     [locationButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [locationButton addTarget:self action:@selector(didClickOnLocation:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 /**
@@ -431,7 +445,9 @@ return storeButton;
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
     CLPlacemark *placemark = [TheBoxNotifications place:notification];
-    self.navigationItem.title = [NSString stringWithFormat:@"It's right here in %@", placemark.locality];
+    UILabel* titleView = (UILabel*)self.navigationItem.titleView;
+    titleView.text = [NSString stringWithFormat:@"It's right here in %@", placemark.locality];
+    [titleView sizeToFit];
     self.tabBarItem.title = @"Edinburgh";
 }
 
@@ -462,7 +478,9 @@ return storeButton;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.navigationItem.title = [NSString stringWithFormat:@"It's right here in %@", @"Edinburgh"];
+    UILabel* titleView = (UILabel*)self.navigationItem.titleView;
+    titleView.text = [NSString stringWithFormat:@"It's right here in %@", @"Edinburgh"];
+    [titleView sizeToFit];
     self.tabBarItem.title = @"Edinburgh";
     [self.navigationController dismissModalViewControllerAnimated:YES];
 }

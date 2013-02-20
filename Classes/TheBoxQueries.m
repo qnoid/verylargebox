@@ -102,6 +102,7 @@ return request;
        [delegate didSucceedWithVerificationForEmail:email residence:[[operation.responseString objectFromJSONString] objectForKey:@"residence"]];
    }
    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       NSLog(@"ERROR: %s %@", __PRETTY_FUNCTION__, error);
        [delegate didFailOnVerifyWithError:error];
    }];
     
@@ -318,7 +319,7 @@ return request;
     [parameters tbSetObjectIfNotNil:[location objectForKey:@"id"] forKey:@"item[location_attributes][foursquareid]"];
     
     NSMutableURLRequest* request = [client multipartFormRequestWithMethod:@"POST"
-                                                                     path:[NSString stringWithFormat:@"users/%u/items", userId]
+                                                                     path:[NSString stringWithFormat:USER_ITEMS, userId]
                                                                parameters:parameters
                                                 constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
                                                 {

@@ -17,6 +17,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "TBUITableViewDataSourceBuilder.h"
 #import "TBUIView.h"
+#import "TBVerifyOperationBlock.h"
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
@@ -34,6 +35,12 @@
     
     identifyViewController.title = @"thebox";
     
+    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                     target:identifyViewController
+                                     action:@selector(launchFeedback)];
+    identifyViewController.navigationItem.leftBarButtonItem = actionButton;
+
 return identifyViewController;
 }
 
@@ -82,8 +89,18 @@ return self;
     [self.identifyButton onTouchUp:makeButtonWhite()];
     [self.theBoxButton onTouchDown:makeButtonDarkOrange()];
     [self.theBoxButton onTouchUp:makeButtonWhite()];
-    [self.browseButton onTouchDown:^(UIButton *button) {
+    [self.browseButton onTouchDown:^(UIButton *button)
+    {
         HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
+        
+        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
+                                        initWithTitle:@"Identify"
+                                        style:UIBarButtonItemStylePlain
+                                        target:uself
+                                        action:@selector(dismissViewControllerAnimated)];
+        
+        homeGridViewControler.navigationItem.leftBarButtonItem = closeButton;
+
         [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:homeGridViewControler] animated:YES completion:nil];
     }];
     [self.browseButton onTouchUp:makeButtonWhite()];    
@@ -97,6 +114,15 @@ return self;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)launchFeedback {
+    [TestFlight openFeedbackView];
+}
+
+-(void)dismissViewControllerAnimated
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark TBVerifyUserOperationDelegate
@@ -114,7 +140,6 @@ return self;
 
 -(void)didFailOnVerifyWithError:(NSError *)error
 {
-    NSLog(@"ERROR: %s %@", __PRETTY_FUNCTION__, error);
     UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"Unauthorised" message:@"You are not authorised. Please check your email to verify." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     
     [userUnauthorisedAlertView show];
@@ -211,13 +236,39 @@ return YES;
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell* tableViewCell = [tableView cellForRowAtIndexPath:indexPath];
+    tbBmailStatus(TBEmailStatusUnknown)(tableViewCell);
+
+    __weak NSObject<TBVerifyUserOperationDelegate> *wself = self;
+    
+    TBVerifyOperationBlock *verifyOperationBlock = [TBVerifyOperationBlock new];
+    verifyOperationBlock.didSucceedWithVerificationForEmail = ^(NSString* email, NSDictionary* residence)
+    {
+        tbBmailStatus(TBEmailStatusVerified)(tableViewCell);
+        [wself didSucceedWithVerificationForEmail:email residence:residence];
+    };
+    
+    verifyOperationBlock.didFailOnVerifyWithError = ^(NSError* error)
+    {
+        tbBmailStatus(TBEmailStatusError)(tableViewCell);
+
+        if(NSURLErrorNotConnectedToInternet == error.code){
+            UIAlertView* notConnectedToInternetAlertView = [[UIAlertView alloc] initWithTitle:@"Not Connected to Internet" message:@"You are not connected to the internet. Check your connection and try again." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            
+            [notConnectedToInternetAlertView show];            
+        return;
+        }
+
+        [wself didFailOnVerifyWithError:error];
+    };
+    
     NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
     NSString* email = [[emails objectAtIndex:indexPath.row] objectForKey:@"acct"];
     
     NSError *error = nil;
     NSString *residence = [SSKeychain passwordForService:THE_BOX_SERVICE account:email error:&error];
     
-    AFHTTPRequestOperation *verifyUser = [TheBoxQueries newVerifyUserQuery:self email:email residence:residence];
+    AFHTTPRequestOperation *verifyUser = [TheBoxQueries newVerifyUserQuery:verifyOperationBlock email:email residence:residence];
     
     [self.operations addOperation:verifyUser];
 }

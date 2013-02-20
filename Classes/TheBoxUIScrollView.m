@@ -39,6 +39,7 @@ CGFloat const DEFAULT_HEIGHT = 196;
 
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:scrollView action:@selector(didTapOnScrollView:)];
     [scrollView addGestureRecognizer:tapGestureRecognizer];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
 
 return scrollView;
 }
@@ -278,6 +279,15 @@ return view;
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     [self.dimension moveCloserToWhole:targetContentOffset];
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if(scrollView.bounds.origin.y + scrollView.contentInset.top >= scrollView.contentInset.top / 2){
+    return;
+    }
+    
+    [self.scrollViewDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

@@ -13,8 +13,6 @@
 #import "TBCreateUserOperationDelegate.h"
 #import "TBEmailViewController.h"
 
-
-
 typedef NS_ENUM(NSInteger, TBEmailStatus){
     TBEmailStatusError,
     TBEmailStatusUnknown,
@@ -41,6 +39,7 @@ TBEmailStatusBlock tbBmailStatus(TBEmailStatus emailStatus)
                 UIActivityIndicatorView* accessoryView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                 [accessoryView startAnimating];
                 
+                tableViewCell.selected = NO;
                 tableViewCell.userInteractionEnabled = NO;
                 tableViewCell.textLabel.enabled = NO;
                 tableViewCell.accessoryView = accessoryView;

@@ -68,6 +68,16 @@ return self;
     self.venuesTableView.tableFooterView = imageView;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+}
+
 - (IBAction)cancel:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];

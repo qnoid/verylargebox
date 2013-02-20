@@ -83,11 +83,6 @@ return CGPointMake(whole + value, foo);
 @end
 
 @interface TheBoxHeight : NSObject <TheBoxDimension>
-{
-@private
-    CGFloat value;
-}
-
 +(TheBoxHeight*) newHeight:(CGFloat)height;
 
 -(id)init:(CGFloat) height;
@@ -96,10 +91,7 @@ return CGPointMake(whole + value, foo);
 @end
 
 @interface TheBoxWidth : NSObject <TheBoxDimension>
-{
-@private
-    CGFloat value;
-}
+
 +(TheBoxWidth*) newWidth:(CGFloat)width;
 
 -(id)init:(CGFloat) width;

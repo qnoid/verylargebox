@@ -28,14 +28,25 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 +(TBProfileViewController*)newProfileViewController:(NSDictionary*)residence email:(NSString*)email
 {
     TBProfileViewController* profileViewController = [[TBProfileViewController alloc] initWithBundle:[NSBundle mainBundle] residence:residence];
+    
+    UILabel* titleLabel = [[UILabel alloc] init];
+    titleLabel.text = email;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    profileViewController.navigationItem.titleView = titleLabel;
+    [titleLabel sizeToFit];
+    
     profileViewController.title = email;
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
 
-    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
+                                     initWithTitle:@"Close"
+                                     style:UIBarButtonItemStylePlain
                                      target:profileViewController
-                                     action:@selector(launchFeedback)];
-    profileViewController.navigationItem.leftBarButtonItem = actionButton;
+                                     action:@selector(close)];
+    
+    profileViewController.navigationItem.leftBarButtonItem = closeButton;
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
@@ -66,13 +77,20 @@ return self;
 -(void)loadView
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+
+    UILabel* refreshView = [[UILabel alloc] initWithFrame:CGRectMake(0, -64.0, screenBounds.size.width, 64.0)];
+    refreshView.text = @"Release to refresh";
     
-    TheBoxUIScrollView* itemsView = [TheBoxUIScrollView newVerticalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:350.0];
+    TheBoxUIScrollView* itemsView = [TheBoxUIScrollView newVerticalScrollView:
+                                     CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:350.0];
+    
     itemsView.backgroundColor = [UIColor whiteColor];
     itemsView.datasource = self;
     itemsView.scrollViewDelegate = self;
+    itemsView.contentInset = UIEdgeInsetsMake(64.0,0.0,0.0,0.0);
     
     self.view = itemsView;
+    [self.view addSubview:refreshView];
     self.itemsView = itemsView;
 }
 
@@ -82,8 +100,14 @@ return self;
     [[TheBoxQueries newGetItemsGivenUserId:[[self.residence objectForKey:@"user_id"] unsignedIntValue] delegate:self] start];
 }
 
--(void)launchFeedback {
-    [TestFlight openFeedbackView];
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.itemsView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+-(void)close
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void)addItem
@@ -159,6 +183,12 @@ return self;
     
 }
 
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    NSLog(@"Will refresh items");
+    [[TheBoxQueries newGetItemsGivenUserId:[[self.residence objectForKey:@"user_id"] unsignedIntValue] delegate:self] start];
+}
+
 -(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView{
     return [self.items count];
 }
@@ -178,5 +208,9 @@ return userItemView;
     TBUserItemView* userItemView = (TBUserItemView*)view;
     [userItemView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"iphoneImageURL"]] placeholderImage:self.defaultItemImage];
     userItemView.whenLabel.text = [item objectForKey:@"when"];
+}
+
+-(void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index{
+    
 }
 @end

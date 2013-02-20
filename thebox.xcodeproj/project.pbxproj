@@ -160,6 +160,7 @@
 		BDCD93A8165C1389009C2F8F /* TBButtonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCE5165ACC430068C749 /* TBButtonTest.m */; };
 		BDD8FEBD165C196200AB3041 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDD8FEBC165C196200AB3041 /* InfoPlist.strings */; };
 		BDE1E83615683FF800CF10CF /* TBUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE1E83515683FF800CF10CF /* TBUIView.m */; };
+		BDF0F42516C8254C002CDE8E /* TBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* TBVerifyOperationBlock.m */; };
 		FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */; };
 /* End PBXBuildFile section */
 
@@ -368,6 +369,8 @@
 		BDE0DBB4155FE13000B474DC /* thebox_tabbaritem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thebox_tabbaritem.png; path = ../../../../../Shares/g.pavloudis/ICONS/thebox_tabbaritem.png; sourceTree = "<group>"; };
 		BDE1E83415683FF800CF10CF /* TBUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUIView.h; sourceTree = "<group>"; };
 		BDE1E83515683FF800CF10CF /* TBUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUIView.m; sourceTree = "<group>"; };
+		BDF0F42316C8254B002CDE8E /* TBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVerifyOperationBlock.h; sourceTree = "<group>"; };
+		BDF0F42416C8254B002CDE8E /* TBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBVerifyOperationBlock.m; sourceTree = "<group>"; };
 		C01FCF5008A954540054247D /* CanIndexLocationInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanIndexLocationInView.h; sourceTree = "<group>"; };
 		F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ApplicationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -497,6 +500,8 @@
 				BD14C28316BDC70C0039E978 /* TBUserItemView.h */,
 				BD14C28416BDC70C0039E978 /* TBUserItemView.m */,
 				BD14C28A16BDC73F0039E978 /* TBUserItemView.xib */,
+				BDF0F42316C8254B002CDE8E /* TBVerifyOperationBlock.h */,
+				BDF0F42416C8254B002CDE8E /* TBVerifyOperationBlock.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1123,6 +1128,7 @@
 				BDABD92C169F689F00111723 /* TBItemView.m in Sources */,
 				BD9A781516BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */,
 				BD14C28516BDC70C0039E978 /* TBUserItemView.m in Sources */,
+				BDF0F42516C8254C002CDE8E /* TBVerifyOperationBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
