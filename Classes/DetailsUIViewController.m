@@ -13,6 +13,7 @@
 #import "LocationUIViewController.h"
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
+#import "UIViewController+TBViewController.h"
 
 @interface DetailsUIViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
@@ -39,7 +40,7 @@ return detailsViewController;
     }
     
     self.item = item;
-    self.title = [_item objectForKey:@"name"];
+    self.title = [self.item objectForKey:@"name"];
     self.title = @"Details";
 
 return self;
@@ -48,8 +49,15 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIActivityIndicatorView *activityIndicator =
+        [[UIActivityIndicatorView alloc] initWithFrame:self.itemImageView.frame];
     
-    NSString *imageURL = [_item objectForKey:@"iphoneImageURL"];
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [activityIndicator startAnimating];
+    
+    [self.view addSubview:activityIndicator];
+
+    NSString *imageURL = [self.item objectForKey:@"iphoneImageURL"];
     
 	NSLog(@"%@", imageURL);
 
@@ -60,9 +68,13 @@ return self;
             UIImage* image = [UIImage imageWithData:data];
         
             dispatch_sync(dispatch_get_main_queue(), ^{
-            self.itemImageView.image = image;
+                [activityIndicator stopAnimating];
+                [activityIndicator removeFromSuperview];
+                self.itemImageView.image = image;
             });
-    });    
+    });
+    
+    self.itemWhenLabel.text = [self.item objectForKey:@"when"];
 }
 
 - (void)viewDidUnload

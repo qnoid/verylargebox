@@ -10,12 +10,15 @@
 #import "TheBoxUIGridView.h"
 #import "TheBoxUIGridViewDatasource.h"
 #import "TheBoxUIGridViewDelegate.h"
+#import "TheBoxUIScrollView.h"
+#import "TheBoxUIScrollViewDatasource.h"
 
 @interface TheBoxUIGridView () <TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate>
 @property(nonatomic, strong) NSMutableDictionary* frames;
 @property(nonatomic, strong) NSMutableDictionary* views;
 @property(nonatomic, strong) TheBoxUIScrollView *scrollView;
 
+- (id)initWith:(CGRect)frame scrollView:(TheBoxUIScrollView*)scrollView;
 -(UIView*)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView*)view ofFrame:(CGRect)frame atIndex:(NSInteger)index;
 -(UIView*)viewAtRow:(NSUInteger)row;
 -(void)setView:(UIView*)view atIndex:(NSUInteger)index;
@@ -24,13 +27,45 @@
 
 @implementation TheBoxUIGridView
 
-#pragma mark private fields
++(instancetype)newVerticalGridView:(CGRect)frame viewsOf:(CGFloat)height
+{
+    
+    TheBoxUIScrollViewBuilder *builder =
+        [[TheBoxUIScrollViewBuilder alloc] initWith:CGRectMake(CGPointZero.x, CGPointZero.y, frame.size.width, frame.size.height)
+                                            viewsOf:height];
 
-@synthesize frames = _frames;
-@synthesize views;
-@synthesize datasource;
-@synthesize delegate;
-@synthesize scrollView = _scrollView;
+    TheBoxUIScrollView *newVerticalScrollView = [builder newVerticalScrollView];
+    
+    TheBoxUIGridView* gridView = [[TheBoxUIGridView alloc] initWith:frame scrollView:newVerticalScrollView];
+    
+	newVerticalScrollView.datasource = gridView;
+	newVerticalScrollView.scrollViewDelegate = gridView;
+    newVerticalScrollView.showsVerticalScrollIndicator = NO;
+    newVerticalScrollView.scrollsToTop = YES;
+    
+    UITapGestureRecognizer *tapGestureRecognizer =
+        [[UITapGestureRecognizer alloc] initWithTarget:gridView action:@selector(viewWasTapped:)];
+    
+    [newVerticalScrollView addGestureRecognizer:tapGestureRecognizer];
+    
+return gridView;
+}
+
+- (id)initWith:(CGRect)frame scrollView:(TheBoxUIScrollView*)scrollView
+{
+    self = [super initWithFrame:frame];
+    if (!self) {
+        return nil;
+    }
+    
+    self.frames = [NSMutableDictionary new];
+    self.views = [NSMutableDictionary new];
+
+    self.scrollView = scrollView;
+    [self addSubview:self.scrollView];
+
+return self;
+}
 
 #pragma mark testing
 - (id)initWith:(NSMutableDictionary*)frames
@@ -52,6 +87,14 @@
 		self.views = [NSMutableDictionary new];       
     }
     return self;
+}
+
+-(void)setShowsVerticalScrollIndicator:(BOOL)indeed {
+    self.scrollView.showsVerticalScrollIndicator = indeed;
+}
+
+-(BOOL)showsVerticalScrollIndicator{
+    return self.scrollView.showsVerticalScrollIndicator;
 }
 
 -(void)awakeFromNib
@@ -100,7 +143,6 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
 
 -(void)didLayoutSubviews:(UIScrollView *)scrollView
 {
-    
 }
 
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex{
@@ -154,11 +196,26 @@ return [self.datasource numberOfViewsInGridView:self];
     
     view.datasource = self;
     view.scrollViewDelegate = self;
-    view.scrollsToTop = NO;
     
 	NSLog(@"view %@", view);
     
 return view;
+}
+
+#pragma mark TheBoxUIScrollViewDelegate
+
+-(void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index
+{
+    if(![scrollView isEqual:self.scrollView])
+    {
+        NSUInteger row = [[self.frames objectForKey:[NSValue valueWithCGRect:[scrollView frame]]] unsignedIntegerValue];
+        
+        [self.delegate didSelect:self atRow:row atIndex:index];
+    }
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
 }
 
 #pragma mark public

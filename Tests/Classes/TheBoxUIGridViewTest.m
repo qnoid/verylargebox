@@ -13,6 +13,7 @@
 #import "TheBoxUIGridView.h"
 #import "TheBoxUIGridViewDatasource.h"
 #import "TheBoxUIGridViewDelegate.h"
+#import "TheBoxUIScrollView.h"
 
 @interface TheBoxUIGridView (Testing) <TheBoxUIScrollViewDelegate>
 - (id)initWith:(NSMutableDictionary*)frames;

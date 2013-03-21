@@ -7,7 +7,6 @@
  *  Created by Markos Charatzas (@qnoid) on 07/02/2011.
  *  Contributor(s): .-
  */
-#import <UIKit/UIKit.h>
 #import "VisibleStrategy.h"
 #import "TheBoxUIScrollViewDatasource.h"
 #import "CanIndexLocationInView.h"
@@ -18,9 +17,10 @@
 @protocol TheBoxUIScrollViewDatasource;
 @protocol TheBoxDimension;
 
-typedef void(^TBUIScrollViewConfig)(TheBoxUIScrollView *scrollView);
+typedef void(^TBUIScrollViewConfig)(TheBoxUIScrollView *scrollView, BOOL cancelsTouchesInView);
 
 extern CGFloat const DEFAULT_HEIGHT;
+extern TBUIScrollViewConfig const TBUIScrollViewAllowSelection;
 
 @protocol TheBoxUIScrollViewDelegate
 
@@ -57,7 +57,7 @@ extern CGFloat const DEFAULT_HEIGHT;
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index;
 
 @optional
-- (void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index;
+- (void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index point:(CGPoint)point;
 
 #pragma when using a refresh view
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;
@@ -110,6 +110,7 @@ extern CGFloat const DEFAULT_HEIGHT;
  To programmatically create one, use one of the following factory methods 
  @see #newVerticalScrollView:viewsOf: to create a TheBoxUIScrollView scrolling on the vertical axis
  @see #newHorizontalScrollView:viewsOf: to create a TheBoxUIScrollView scrolling on the horizontal axis
+ @see TheBoxUIScrollViewBuilder for optional methods
  */
 @interface TheBoxUIScrollView : UIScrollView <VisibleStrategyDelegate, CanIndexLocationInView, UIScrollViewDelegate>
 
@@ -123,14 +124,18 @@ extern CGFloat const DEFAULT_HEIGHT;
 +(TheBoxUIScrollView *) newVerticalScrollView:(CGRect)frame viewsOf:(CGFloat)height;
 
 /**
- Creates a new scroll view which scrolls on the horizontal axis
+ Creates a new scroll view which scrolls on the horizontal axis.
  
- @parameter frame
+ @param frame the frame of the scroll view
+ @param width the width of each view in the axis the scroll view is created
  */
 +(TheBoxUIScrollView *) newHorizontalScrollView:(CGRect)frame viewsOf:(CGFloat)width;
 
 @property(nonatomic, unsafe_unretained) IBOutlet id <TheBoxUIScrollViewDatasource> datasource;
 @property(nonatomic, unsafe_unretained) IBOutlet id <TheBoxUIScrollViewDelegate> scrollViewDelegate;
+
+// the scrollview will only stop at the edge of a view.
+@property(nonatomic, assign, getter = isSeekingEnabled) BOOL enableSeeking;
 
 /**
  Call this method will recycle any subviews that where added as part of 
@@ -140,4 +145,35 @@ extern CGFloat const DEFAULT_HEIGHT;
  */
 -(void)setNeedsLayout;
 
+@end
+
+/**
+  Allows user 
+ */
+@interface TheBoxUIScrollViewBuilder : NSObject
+
+/**
+ Creates a new TheBoxUIScrollViewBuilder that creates scrollviews with the given frame.
+ 
+ A vertical scrollview will have its views matching in width and a height in the given dimension.
+ A horizontal scrollview will have its views matching in height and a width in the given dimension.
+ 
+ @param frame the frame of the scroll view
+ @param dimension the dimension of each view in the axis the scroll view is created
+ @return a new instance of TheBoxUIScrollViewBuilder
+ */
+- (id)initWith:(CGRect)frame viewsOf:(CGFloat)dimension;
+
+/**
+ Enables user selection by tapping in a view.
+ 
+ @discussion @required TheBoxUIScrollViewDelegate#didSelectView:atIndex:
+ */
+-(TheBoxUIScrollViewBuilder*)allowSelection;
+
+-(TheBoxUIScrollViewBuilder*)canCancelContentTouches;
+
+-(TheBoxUIScrollView *)newVerticalScrollView;
+
+-(TheBoxUIScrollView *)newHorizontalScrollView;
 @end

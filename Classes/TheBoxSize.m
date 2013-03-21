@@ -54,6 +54,10 @@ return CGPointMake(CGRectGetWidth(bounds), originY);
 return CGRectMake(bounds.origin.x, index * self.value, bounds.size.width, self.value);
 }
 
+-(CGPoint)pointOf:(NSUInteger)index {
+return CGPointMake(0, self.value * index);
+}
+
 -(void)moveCloserToWhole:(inout CGPoint*)point
 {
     float average = self.value / 2.0;
@@ -115,6 +119,10 @@ return CGPointMake(originX, CGRectGetHeight(bounds));
 
 -(CGRect)frameOf:(CGRect)bounds atIndex:(NSUInteger)index {
 return CGRectMake(index * self.value, bounds.origin.y, self.value, bounds.size.height);
+}
+
+-(CGPoint)pointOf:(NSUInteger)index {
+return CGPointMake(self.value * index, 0);
 }
 
 -(void)moveCloserToWhole:(inout CGPoint*)point

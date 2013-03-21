@@ -28,8 +28,10 @@
 #import "TBUITableViewDataSourceBuilder.h"
 #import "TBUITableViewDelegateBuilder.h"
 #import <objc/runtime.h>
+#import "UIViewController+TBViewController.h"
 
-static CGFloat const LOCATIONS_VIEW_HEIGHT = 44.0;
+static CGFloat const LOCATIONS_VIEW_HEIGHT = 66.0;
+static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -68,6 +70,7 @@ static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
 @property(nonatomic, strong) NSArray *locations;
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) NSMutableArray *items;
+@property(nonatomic, assign) NSUInteger numberOfRows;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
 -(void)highlightLocation;
@@ -106,14 +109,13 @@ return homeGridViewController;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService
 {
-    self = [super initWithNibName:nil bundle:nibBundleOrNil];
+    self = [super initWithNibName:NSStringFromClass([HomeUIGridViewController class]) bundle:nibBundleOrNil];
     
     if (self) 
     {
         self.theBoxLocationService = locationService;
         self.locations = [NSArray array];
         self.items = [NSMutableArray array];
-        self.theBoxLocationService = locationService;
         NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
         self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
     }
@@ -130,22 +132,24 @@ return self;
                                                             applicationFrame.size.width,
                                                             applicationFrame.size.height - 44.0 - 49.0)];
     view.backgroundColor = [UIColor whiteColor];
-
-    TheBoxUIScrollView* locationsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, applicationFrame.size.width, LOCATIONS_VIEW_HEIGHT) viewsOf:122.0];
+    
+    TheBoxUIScrollView* locationsView = [[[[TheBoxUIScrollViewBuilder alloc] initWith:CGRectMake(CGPointZero.x, CGPointZero.y, applicationFrame.size.width, LOCATIONS_VIEW_HEIGHT) viewsOf:LOCATIONS_VIEW_WIDTH] allowSelection] newHorizontalScrollView];
+    
     locationsView.backgroundColor = [TBColors colorLightOrange];
     locationsView.datasource = self;
     locationsView.scrollViewDelegate = self;
     locationsView.showsHorizontalScrollIndicator = NO;
-    
-    TheBoxUIScrollView* itemsView = [TheBoxUIScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) viewsOf:160.0];
+    locationsView.enableSeeking = YES;
+
+    TheBoxUIGridView* itemsView = [TheBoxUIGridView newVerticalGridView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) viewsOf:160.0];
 
     itemsView.datasource = self;
-    itemsView.scrollViewDelegate = self;
-    itemsView.decelerationRate = UIScrollViewDecelerationRateFast;
+    itemsView.delegate = self;
+    itemsView.showsVerticalScrollIndicator = YES;
     
-    UIImageView* signPostImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGPointZero.x, 8.0, 22.0, 28.0)];
+    UIImageView* signPostImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGPointZero.x, 16.0, LOCATIONS_VIEW_HEIGHT / 2, 28.0)];
     signPostImageView.image = [UIImage imageNamed:@"signpost"];
-
+    
     [view addSubview:locationsView];
     [view addSubview:itemsView];
     [view addSubview:signPostImageView];
@@ -178,7 +182,7 @@ return self;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
 {
-	[[TheBoxQueries newItemsQuery:self] start];
+
 }
 
 /**
@@ -188,7 +192,7 @@ return self;
 {
     for (UIButton* button in self.locationsView.subviews) {
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button removeTarget:self action:@selector(didClickOnLocation:) forControlEvents:UIControlEventTouchUpInside];
+        button.userInteractionEnabled = NO;
     }
     
     UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
@@ -198,7 +202,7 @@ return self;
     }
     
     [locationButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [locationButton addTarget:self action:@selector(didClickOnLocation:) forControlEvents:UIControlEventTouchUpInside];
+    locationButton.userInteractionEnabled = YES;
 }
 
 /**
@@ -210,10 +214,10 @@ return self;
     NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
     
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
-                                                  CGRectMake(CGPointZero.x, CGPointZero.y, [[UIScreen mainScreen] bounds].size.width, 323.0)];
+                                                  CGRectMake(self.itemsView.frame.origin.x, self.itemsView.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, 323.0)];
     
     activityIndicator.tag = ACTIVITY_INDICATOR_TAG;
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [activityIndicator startAnimating];
     
     [self.view insertSubview:activityIndicator atIndex:0];
@@ -227,9 +231,7 @@ return self;
 -(void)didSucceedWithLocations:(NSArray*)locations
 {
     self.locations = locations;
-    [self.locationsView flashScrollIndicators];
     [self.locationsView setNeedsLayout];
-    [self.locationsView layoutIfNeeded];
 }
 
 -(void)didFailOnLocationWithError:(NSError*)error
@@ -237,30 +239,77 @@ return self;
     NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
 }
 
+#pragma mark TheBoxUIGridViewDatasource
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)gridView {
+    return self.numberOfRows;
+}
+
+-(NSUInteger)numberOfViewsInGridView:(TheBoxUIGridView *)gridView atIndex:(NSInteger)index
+{
+    if(self.items.count < 2){
+        return 1;
+    }
+
+    if(index != (self.numberOfRows - 1)){
+        return 2;
+    }
+
+return self.items.count%2==0?2:1;
+}
+
+-(UIView *)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)view ofFrame:(CGRect)frame atRow:(NSUInteger)row atIndex:(NSUInteger)index {
+return [[TBItemView alloc] initWithFrame:frame];
+}
+
+-(void)gridView:(TheBoxUIGridView *)gridView atIndex:(NSInteger)index willAppear:(UIView *)view{
+    
+}
+
+-(void)gridView:(TheBoxUIGridView *)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView *)view
+{
+    NSDictionary *item = [[[self items] objectAtIndex:(row * 2) + index] objectForKey:@"item"];
+    
+    TBItemView *imageView = (TBItemView*)view;
+    //@"http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/020/thumb/.jpg"
+    [imageView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]] placeholderImage:self.defaultItemImage];
+}
+
+#pragma mark TheBoxUIGridViewDelegate
+
+-(void)didSelect:(TheBoxUIGridView *)gridView atRow:(NSInteger)row atIndex:(NSInteger)index
+{
+    //there should be a mapping between the index of the cell and the id of the item
+	NSMutableDictionary *item = [[self.items objectAtIndex:(row * 2) + index] objectForKey:@"item"];
+    
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
+    
+    DetailsUIViewController* detailsViewController = [DetailsUIViewController newDetailsViewController:item];
+    detailsViewController.hidesBottomBarWhenPushed = YES;
+    
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backBarButton;
+    
+    [self.navigationController pushViewController:detailsViewController animated:YES];
+}
+
+-(CGFloat)whatCellWidth:(TheBoxUIGridView *)gridView{
+    return 160.0;
+}
+
 #pragma mark TheBoxUIScrollViewDatasource
 
--(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView
-{
-    if(![self.locationsView isEqual:scrollView]){
-       return [self.items count];
-    }
-    
+-(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView {
 return [self.locations count];
 }
 
 - (UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index
 {
-    if(![self.locationsView isEqual:scrollView])
-    {
-        TBItemView* itemView = [TBItemView itemViewWithOwner:self];
-        itemView.frame = frame;
-    return itemView;
-    }
-
     UIButton *storeButton = [[UIButton alloc] initWithFrame:frame];
     storeButton.titleLabel.numberOfLines = 0;
     storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [storeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [storeButton addTarget:self action:@selector(didClickOnLocation:) forControlEvents:UIControlEventTouchUpInside];
+    storeButton.userInteractionEnabled = NO;
     
 return storeButton;
 }
@@ -269,10 +318,6 @@ return storeButton;
 
 -(void)didLayoutSubviews:(UIScrollView*)scrollView
 {
-    if(![self.locationsView isEqual:scrollView]){
-        return;
-    }
-
     [self highlightLocation];
     [self reloadItems];
 }
@@ -283,17 +328,6 @@ return storeButton;
 
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index
 {
-    if(![self.locationsView isEqual:scrollView])
-    {
-        NSDictionary *item = [[[self items] objectAtIndex:index] objectForKey:@"item"];
-
-        TBItemView *imageView = (TBItemView*)view;
-        //@"http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/020/thumb/.jpg"
-        [imageView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]] placeholderImage:self.defaultItemImage];
-
-    return;
-    }
-
     NSDictionary *location = [[[self locations] objectAtIndex:index] objectForKey:@"location"];
 
     UIButton *button = (UIButton*)view;
@@ -314,7 +348,7 @@ return storeButton;
     [button setBackgroundColor:[TBColors colorLightOrange]];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:name forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 22, 0, 0);
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, 28, 0, 0);
 }
 
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index
@@ -329,6 +363,11 @@ return storeButton;
 
     [self highlightLocation];
     [self reloadItems];
+}
+
+-(void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index point:(CGPoint)point
+{
+    [self.locationsView setContentOffset:point animated:YES];
 }
 
 #pragma mark thebox
@@ -405,33 +444,13 @@ return storeButton;
     [activityIndicator removeFromSuperview];
     
 	self.items = items;
-    [self.itemsView flashScrollIndicators];
-    [self.itemsView setNeedsLayout];
+    self.numberOfRows = round((float)self.items.count/2.0);
+    [self.itemsView reload];
 }
 
 -(void)didFailOnItemsWithError:(NSError*)error
 {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
-}
-
--(void)didSelectView:(TheBoxUIScrollView*)scrollView atIndex:(NSUInteger)index
-{
-    if([self.locationsView isEqual:scrollView]){
-        return;
-    }
-    
-	//there should be a mapping between the index of the cell and the id of the item
-	NSMutableDictionary *item = [[self.items objectAtIndex:index] objectForKey:@"item"];
-    
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
-    
-    DetailsUIViewController* detailsViewController = [DetailsUIViewController newDetailsViewController:item];
-    detailsViewController.hidesBottomBarWhenPushed = YES;
-    
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    self.navigationItem.backBarButtonItem = backBarButton;
-    
-    [self.navigationController pushViewController:detailsViewController animated:YES];
 }
 
 #pragma mark TheBoxLocationServiceDelegate
@@ -448,7 +467,7 @@ return storeButton;
     UILabel* titleView = (UILabel*)self.navigationItem.titleView;
     titleView.text = [NSString stringWithFormat:@"It's right here in %@", placemark.locality];
     [titleView sizeToFit];
-    self.tabBarItem.title = @"Edinburgh";
+    self.tabBarItem.title = placemark.locality;
 }
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification

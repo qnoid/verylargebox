@@ -13,6 +13,8 @@
 #import "TBLocationOperationDelegate.h"
 #import "TheBoxUIScrollView.h"
 #import "TheBoxUIScrollViewDatasource.h"
+#import "TheBoxUIGridViewDatasource.h"
+#import "TheBoxUIGridViewDelegate.h"
 @class TheBoxLocationService;
 
 /**
@@ -23,7 +25,7 @@
   Item cells are recycled, as a result setting the image to a recycled cell will cancel an existing request to load the last visible image
   and start a new one.
  */
-@interface HomeUIGridViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, UITableViewDataSource, UITableViewDelegate, TheBoxLocationServiceDelegate, UITableViewDelegate>
+@interface HomeUIGridViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, UITableViewDataSource, UITableViewDelegate, TheBoxLocationServiceDelegate, UITableViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate>
 {
     
 }
@@ -33,6 +35,6 @@
 @property(nonatomic, strong) IBOutlet UIButton* directionsButton;
 @property(nonatomic, strong) IBOutlet UIImageView* signPostImageView;
 @property(nonatomic, strong) IBOutlet TheBoxUIScrollView* locationsView;
-@property(nonatomic, strong) IBOutlet TheBoxUIScrollView* itemsView;
+@property(nonatomic, strong) IBOutlet TheBoxUIGridView* itemsView;
 
 @end

@@ -66,6 +66,8 @@ return CGPointMake(whole + value, foo);
 
 -(CGRect)frameOf:(CGRect) bounds atIndex:(NSUInteger)index;
 
+-(CGPoint)pointOf:(NSUInteger)index;
+
 /*
  Dimension implementations set the point closer
  to their whole number like a piecewise function where

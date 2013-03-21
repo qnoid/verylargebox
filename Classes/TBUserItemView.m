@@ -10,29 +10,26 @@
 
 @implementation TBUserItemView
 
-+(instancetype)userItemViewWithOwner:(id)owner
-{
-    NSArray *views = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([TBUserItemView class]) owner:owner options:nil];
-    
-return (TBUserItemView*)[views objectAtIndex:0];
-}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    if (!self) {
+        return nil;
     }
-    return self;
+    
+    NSArray *views = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([TBUserItemView class])
+                                                   owner:self
+                                                 options:nil];
+
+    [self addSubview:[views objectAtIndex:0]];
+    self.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();
+    
+return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+-(IBAction)didTapOnGetDirectionsButton:(id)sender
 {
-    // Drawing code
+    self.didTapOnGetDirectionsButton();
 }
-*/
 
 @end

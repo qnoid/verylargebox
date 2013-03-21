@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^TBUserItemViewGetDirections)();
+
+NS_INLINE
+TBUserItemViewGetDirections tbUserItemViewGetDirectionsNoOp(){
+return ^(){};
+}
+
 @interface TBUserItemView : UIView
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
 @property(nonatomic, weak) IBOutlet UILabel* whenLabel;
+@property(nonatomic, weak) IBOutlet UILabel* storeLabel;
+@property(nonatomic, copy) TBUserItemViewGetDirections didTapOnGetDirectionsButton;
 
-+(instancetype)userItemViewWithOwner:(id)owner;
+-(IBAction)didTapOnGetDirectionsButton:(id)sender;
 
 @end

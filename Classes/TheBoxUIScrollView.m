@@ -11,8 +11,20 @@
 #import "TheBoxUIRecycleStrategy.h"
 #import "TheBoxVisibleStrategy.h"
 #import "TheBoxSize.h"
+#import <QuartzCore/QuartzCore.h>
 
 CGFloat const DEFAULT_HEIGHT = 196;
+
+TBUIScrollViewConfig const TBUIScrollViewConfigEmpty = ^(TheBoxUIScrollView *scrollView, BOOL cancelsTouchesInView){};
+
+TBUIScrollViewConfig const TBUIScrollViewAllowSelection = ^(TheBoxUIScrollView *scrollView, BOOL cancelsTouchesInView)
+{
+    UITapGestureRecognizer *tapGestureRecognizer =
+        [[UITapGestureRecognizer alloc] initWithTarget:scrollView action:@selector(didTapOnScrollView:)];
+    
+    tapGestureRecognizer.cancelsTouchesInView = cancelsTouchesInView;
+    [scrollView addGestureRecognizer:tapGestureRecognizer];
+};
 
 @interface TheBoxUIScrollView ()
 @property(nonatomic, assign) BOOL needsLayout;
@@ -35,12 +47,9 @@ CGFloat const DEFAULT_HEIGHT = 196;
 	TheBoxUIScrollView *scrollView = [[TheBoxUIScrollView alloc] initWithFrame:aFrame size:size dimension:dimension];
 	scrollView.recycleStrategy = aRecycleStrategy;
 	scrollView.visibleStrategy = aVisibleStrategy;	
-	scrollView.visibleStrategy.delegate = scrollView;	
-
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:scrollView action:@selector(didTapOnScrollView:)];
-    [scrollView addGestureRecognizer:tapGestureRecognizer];
-    tapGestureRecognizer.cancelsTouchesInView = NO;
-
+	scrollView.visibleStrategy.delegate = scrollView;
+    scrollView.scrollsToTop = NO;
+    
 return scrollView;
 }
 
@@ -263,8 +272,8 @@ return view;
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer*)sender;
-    CGPoint tapPoint = [tapGestureRecognizer locationInView:self];
-    NSUInteger index = [self indexOf:tapPoint];
+    CGPoint locationInView = [tapGestureRecognizer locationInView:self];
+    NSUInteger index = [self indexOf:locationInView];
     NSLog(@"%u", index);
     
     NSUInteger numberOfViews = [self.datasource numberOfViewsInScrollView:self];
@@ -272,27 +281,96 @@ return view;
     if(index >= numberOfViews){
         return;
     }
-    
-    [self.scrollViewDelegate didSelectView:self atIndex:index];
+        
+    [self.scrollViewDelegate didSelectView:self atIndex:index point:[self.dimension pointOf:index]];
+}
+
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
 }
 
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-    [self.dimension moveCloserToWhole:targetContentOffset];
-}
-
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if(scrollView.bounds.origin.y + scrollView.contentInset.top >= scrollView.contentInset.top / 2){
-    return;
+    if(!self.isSeekingEnabled){
+        return;
     }
-    
-    [self.scrollViewDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+
+    [self.dimension moveCloserToWhole:targetContentOffset];    
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:scrollView.bounds.origin]];
 }
 
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:scrollView.bounds.origin]];    
+}
+
 @end
+
+@interface  TheBoxUIScrollViewBuilder ()
+@property (nonatomic, assign) CGRect frame;
+@property (nonatomic, assign) CGFloat dimension;
+@property (nonatomic, assign) BOOL enableSelection;
+@property (nonatomic, assign) BOOL cancelContentTouches;
+@end
+
+@implementation TheBoxUIScrollViewBuilder
+
+- (id)initWith:(CGRect)frame viewsOf:(CGFloat)dimension
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.frame = frame;
+    self.dimension = dimension;
+
+return self;
+}
+
+-(TheBoxUIScrollViewBuilder*)allowSelection
+{
+    self.enableSelection = YES;
+    
+return self;
+}
+
+-(TheBoxUIScrollViewBuilder*)canCancelContentTouches
+{
+    self.cancelContentTouches = YES;
+    
+    return self;
+}
+
+-(TheBoxUIScrollView *) newVerticalScrollView
+{
+    TheBoxUIScrollView* scrollView =
+        [TheBoxUIScrollView newVerticalScrollView:self.frame viewsOf:self.dimension];
+    
+    if(self.enableSelection){
+        TBUIScrollViewAllowSelection(scrollView, self.cancelContentTouches);
+    }
+    
+    scrollView.canCancelContentTouches = self.canCancelContentTouches;
+    
+return scrollView;
+}
+
+-(TheBoxUIScrollView *) newHorizontalScrollView
+{
+    TheBoxUIScrollView* scrollView =
+        [TheBoxUIScrollView newHorizontalScrollView:self.frame viewsOf:self.dimension];
+
+    if(self.enableSelection){
+        TBUIScrollViewAllowSelection(scrollView, self.cancelContentTouches);
+    }
+    
+    scrollView.canCancelContentTouches = self.cancelContentTouches;
+    
+return scrollView;
+}
+
+@end
+

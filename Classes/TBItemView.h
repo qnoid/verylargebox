@@ -11,5 +11,4 @@
 @interface TBItemView : UIView
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
 
-+(instancetype)itemViewWithOwner:(id)owner;
 @end

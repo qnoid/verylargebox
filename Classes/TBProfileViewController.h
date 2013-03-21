@@ -10,8 +10,9 @@
 #import "TheBoxUIScrollView.h"
 #import "TBCreateItemOperationDelegate.h"
 #import "TBItemsOperationDelegate.h"
+#import "TheBoxLocationServiceDelegate.h"
 
-@interface TBProfileViewController : UIViewController <TBCreateItemOperationDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBItemsOperationDelegate>
+@interface TBProfileViewController : UIViewController <TBCreateItemOperationDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBItemsOperationDelegate, TheBoxLocationServiceDelegate>
 
 @property(nonatomic, strong) TheBoxUIScrollView* itemsView;
 

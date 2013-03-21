@@ -14,6 +14,7 @@
 #import "LocationUIViewController.h"
 #import "TheBoxLocationService.h"
 #import "TBCreateItemOperationDelegate.h"
+#import "UIViewController+TBViewController.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 480.0;

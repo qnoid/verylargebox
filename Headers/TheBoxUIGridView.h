@@ -8,17 +8,19 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
-#import "TheBoxUIScrollView.h"
-#import "TheBoxUIScrollViewDatasource.h"
-#import "TheBoxUIGridViewDatasource.h"
 
+@protocol TheBoxUIGridViewDatasource;
 @protocol TheBoxUIGridViewDelegate;
-@class TheBoxUIGridViewController;
 
 @interface TheBoxUIGridView : UIView
 
 @property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDatasource> datasource;
 @property(nonatomic, unsafe_unretained) IBOutlet id<TheBoxUIGridViewDelegate> delegate;
+
+//@default NO
+@property(nonatomic, assign) BOOL showsVerticalScrollIndicator;
+
++(instancetype)newVerticalGridView:(CGRect)frame viewsOf:(CGFloat)height;
 
 -(void)reload;
 

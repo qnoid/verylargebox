@@ -9,6 +9,7 @@
  */
 #import "TheBoxAppDelegate.h"
 #import "TBIdentifyViewController.h"
+#import <XRay/XRay.h>
 
 static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
 
@@ -21,6 +22,8 @@ static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e8
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    
 	NSLog(@"Hello The Box");
+    [XRay startUp];
+    
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];   
     [TestFlight takeOff:TESTFLIGHT_TEAM_TOKEN];
 

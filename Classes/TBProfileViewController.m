@@ -12,11 +12,16 @@
 #import "UIImageView+AFNetworking.h"
 #import "TBUserItemView.h"
 #import "TheBoxQueries.h"
+#import "UIScrollView+SVPullToRefresh.h"
+#import "TheBoxLocationService.h"
+#import "UIViewController+TBViewController.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 @interface TBProfileViewController ()
+@property(nonatomic, strong) CLLocation *location;
+@property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSDictionary* residence;
 @property(nonatomic, strong) NSMutableArray* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
@@ -58,6 +63,11 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 return profileViewController;
 }
 
+-(void)dealloc
+{
+    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+}
+
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence
 {
     self = [super initWithNibName:NSStringFromClass([TBProfileViewController class]) bundle:nibBundleOrNil];
@@ -66,6 +76,7 @@ return profileViewController;
         return nil;
     }
     
+    self.theBoxLocationService = [TheBoxLocationService theBox];
     self.residence = residence;
     self.items = [NSMutableArray array];
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
@@ -78,31 +89,45 @@ return self;
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
 
-    UILabel* refreshView = [[UILabel alloc] initWithFrame:CGRectMake(0, -64.0, screenBounds.size.width, 64.0)];
-    refreshView.text = @"Release to refresh";
-    
-    TheBoxUIScrollView* itemsView = [TheBoxUIScrollView newVerticalScrollView:
-                                     CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:350.0];
+    TheBoxUIScrollView* itemsView = [[[[TheBoxUIScrollViewBuilder alloc] initWith:
+                                     CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:350.0] allowSelection] newVerticalScrollView];
     
     itemsView.backgroundColor = [UIColor whiteColor];
     itemsView.datasource = self;
     itemsView.scrollViewDelegate = self;
-    itemsView.contentInset = UIEdgeInsetsMake(64.0,0.0,0.0,0.0);
-    
+    itemsView.scrollsToTop = YES;
+
     self.view = itemsView;
-    [self.view addSubview:refreshView];
     self.itemsView = itemsView;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[TheBoxQueries newGetItemsGivenUserId:[[self.residence objectForKey:@"user_id"] unsignedIntValue] delegate:self] start];
+    [self.theBoxLocationService notifyDidUpdateToLocation:self];
+
+    __weak TBProfileViewController *wself = self;
+    
+    [self.itemsView addPullToRefreshWithActionHandler:^{
+        [[TheBoxQueries newGetItemsGivenUserId:[[wself.residence objectForKey:@"user_id"] unsignedIntValue] delegate:wself] start];
+    }];
+    
+    [self.itemsView triggerPullToRefresh];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self.itemsView setContentOffset:CGPointMake(0, 0) animated:YES];
+    //[self.itemsView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 -(void)close
@@ -123,11 +148,13 @@ return self;
 {
     self.items = items;
     [self.itemsView setNeedsLayout];
+    [self.itemsView.pullToRefreshView stopAnimating];
 }
 
 -(void)didFailOnItemsWithError:(NSError *)error
 {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    [self.itemsView.pullToRefreshView stopAnimating];
 }
 
 /**
@@ -169,7 +196,7 @@ return self;
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
 }
 
-#pragma mark TheBoxUIScrollViewDatasource
+#pragma mark TheBoxUIScrollViewDelegate
 
 -(void)didLayoutSubviews:(UIScrollView *)scrollView{
     
@@ -183,22 +210,18 @@ return self;
     
 }
 
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    NSLog(@"Will refresh items");
-    [[TheBoxQueries newGetItemsGivenUserId:[[self.residence objectForKey:@"user_id"] unsignedIntValue] delegate:self] start];
+-(void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)inde point:(CGPoint)point {
+    
 }
+
+#pragma mark TheBoxUIScrollViewDatasource
 
 -(NSUInteger)numberOfViewsInScrollView:(TheBoxUIScrollView *)scrollView{
     return [self.items count];
 }
 
--(UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index
-{
-    TBUserItemView* userItemView = [TBUserItemView userItemViewWithOwner:self];
-    userItemView.frame = frame;
-    
-return userItemView;
+-(UIView *)viewInScrollView:(TheBoxUIScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index {
+return [[TBUserItemView alloc] initWithFrame:frame];
 }
 
 -(void)viewInScrollView:(TheBoxUIScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index
@@ -208,9 +231,33 @@ return userItemView;
     TBUserItemView* userItemView = (TBUserItemView*)view;
     [userItemView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"iphoneImageURL"]] placeholderImage:self.defaultItemImage];
     userItemView.whenLabel.text = [item objectForKey:@"when"];
+    
+    NSDictionary *location = [item objectForKey:@"location"];
+    
+    id name = [location objectForKey:@"name"];
+    if([[NSNull null] isEqual:name]){
+        name = @"";
+    }
+
+    userItemView.storeLabel.text = name;
+    
+    userItemView.didTapOnGetDirectionsButton = ^(){
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
+        
+        NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[location objectForKey:@"lat"],[location objectForKey:@"lng"]];
+        
+        NSLog(@"%@", urlstring);
+        
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlstring]];
+    };
 }
 
--(void)didSelectView:(TheBoxUIScrollView *)scrollView atIndex:(NSUInteger)index{
-    
+#pragma mark TheBoxLocationServiceDelegate
+-(void)didUpdateToLocation:(NSNotification *)notification
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+	self.location = [TheBoxNotifications location:notification];
 }
+
+
 @end

@@ -18,8 +18,8 @@
     
 }
 
-@property(nonatomic, weak) IBOutlet UITableView* itemComments;
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
+@property(nonatomic, weak) IBOutlet UILabel* itemWhenLabel;
 
 +(DetailsUIViewController*)newDetailsViewController:(NSMutableDictionary*)item;
 

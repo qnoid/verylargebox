@@ -119,6 +119,12 @@
 		BD2D29F016B9DAC90092EB95 /* TheBoxUIRecycleStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */; };
 		BD2D29F116B9DAFC0092EB95 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DCC1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m */; };
 		BD2D29F216B9DB390092EB95 /* NSString+TBString.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B46165D7E6F002C944D /* NSString+TBString.m */; };
+		BD4BA9A916F928A5009C1518 /* ATTRIBUTIONS.md in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9A816F928A5009C1518 /* ATTRIBUTIONS.md */; };
+		BD4BA9AC16FA5B6C009C1518 /* UIViewController+TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */; };
+		BD4BA9AD16FA5B6C009C1518 /* UIViewController+TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */; };
+		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
+		BD4BA9B116FA5F66009C1518 /* XRay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4BA9B016FA5F66009C1518 /* XRay.framework */; };
+		BD4BA9B216FA5F66009C1518 /* XRay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4BA9B016FA5F66009C1518 /* XRay.framework */; };
 		BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A503A1291E4AC00BCB475 /* CoreLocation.framework */; };
 		BD84EF70165C2363009D9408 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
 		BD9A781116BB0D9C00FD30E0 /* signpost.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9A781016BB0D9C00FD30E0 /* signpost.png */; };
@@ -141,6 +147,7 @@
 		BDABD92C169F689F00111723 /* TBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* TBItemView.m */; };
 		BDABD92F169F68B100111723 /* TBItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDABD92E169F68B100111723 /* TBItemView.xib */; };
 		BDABD930169F9EF800111723 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
+		BDAC04AD16FAF95900B40646 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */; };
 		BDCD937F165C127A009C2F8F /* TheBoxUICellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */; };
 		BDCD9380165C127A009C2F8F /* TheBoxUICellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */; };
 		BDCD9385165C127A009C2F8F /* UITestViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E578133CC68A00CC9212 /* UITestViews.m */; };
@@ -335,6 +342,11 @@
 		BD258DD71673F1F700286511 /* TBUITableViewDataSourceBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUITableViewDataSourceBuilder.m; sourceTree = "<group>"; };
 		BD258DDA1678005400286511 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = warning.png; path = "Supporting Files/warning.png"; sourceTree = "<group>"; };
 		BD258DDD1678040500286511 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = "Supporting Files/refresh.png"; sourceTree = "<group>"; };
+		BD4BA9A816F928A5009C1518 /* ATTRIBUTIONS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ATTRIBUTIONS.md; sourceTree = "<group>"; };
+		BD4BA9AA16FA5B6C009C1518 /* UIViewController+TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TBViewController.h"; sourceTree = "<group>"; };
+		BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TBViewController.m"; sourceTree = "<group>"; };
+		BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		BD4BA9B016FA5F66009C1518 /* XRay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XRay.framework; sourceTree = "<group>"; };
 		BD9A781016BB0D9C00FD30E0 /* signpost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signpost.png; sourceTree = "<group>"; };
 		BD9A781316BD53D300FD30E0 /* TBUITableViewDelegateBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUITableViewDelegateBuilder.h; sourceTree = "<group>"; };
 		BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUITableViewDelegateBuilder.m; sourceTree = "<group>"; };
@@ -363,6 +375,7 @@
 		BDABD92A169F689E00111723 /* TBItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBItemView.h; sourceTree = "<group>"; };
 		BDABD92B169F689F00111723 /* TBItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBItemView.m; sourceTree = "<group>"; };
 		BDABD92E169F68B100111723 /* TBItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBItemView.xib; sourceTree = "<group>"; };
+		BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BDCD93A5165C127A009C2F8F /* ApplicationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD8FEBC165C196200AB3041 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		BDE0DBB1155EC1B600B474DC /* TBUpdateItemOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBUpdateItemOperationDelegate.h; sourceTree = "<group>"; };
@@ -393,6 +406,7 @@
 				908364011400712200E5AAAF /* libz.dylib in Frameworks */,
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
 				9089482515533980009188B4 /* libTestFlight.a in Frameworks */,
+				BD4BA9B116FA5F66009C1518 /* XRay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +444,7 @@
 				BDCD939B165C127A009C2F8F /* Foundation.framework in Frameworks */,
 				BDCD939C165C127A009C2F8F /* libz.dylib in Frameworks */,
 				FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */,
+				BD4BA9B216FA5F66009C1518 /* XRay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +517,8 @@
 				BD14C28A16BDC73F0039E978 /* TBUserItemView.xib */,
 				BDF0F42316C8254B002CDE8E /* TBVerifyOperationBlock.h */,
 				BDF0F42416C8254B002CDE8E /* TBVerifyOperationBlock.m */,
+				BD4BA9AA16FA5B6C009C1518 /* UIViewController+TBViewController.h */,
+				BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -519,6 +536,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */,
+				BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */,
+				BD4BA9A816F928A5009C1518 /* ATTRIBUTIONS.md */,
 				BDA2BC87165951CB0068C749 /* Interface */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -644,6 +664,7 @@
 		90454B01154DBBCA0064D998 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				BD4BA9B016FA5F66009C1518 /* XRay.framework */,
 				9089482415533980009188B4 /* libTestFlight.a */,
 			);
 			path = External;
@@ -966,6 +987,9 @@
 				BDABD92F169F68B100111723 /* TBItemView.xib in Resources */,
 				BD9A781116BB0D9C00FD30E0 /* signpost.png in Resources */,
 				BD14C28B16BDC73F0039E978 /* TBUserItemView.xib in Resources */,
+				BD4BA9A916F928A5009C1518 /* ATTRIBUTIONS.md in Resources */,
+				BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */,
+				BDAC04AD16FAF95900B40646 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1129,6 +1153,7 @@
 				BD9A781516BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */,
 				BD14C28516BDC70C0039E978 /* TBUserItemView.m in Sources */,
 				BDF0F42516C8254C002CDE8E /* TBVerifyOperationBlock.m in Sources */,
+				BD4BA9AC16FA5B6C009C1518 /* UIViewController+TBViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1174,6 +1199,7 @@
 				BDCD93A8165C1389009C2F8F /* TBButtonTest.m in Sources */,
 				BD9A781716BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */,
 				BD14C28616BDC70C0039E978 /* TBUserItemView.m in Sources */,
+				BD4BA9AD16FA5B6C009C1518 /* UIViewController+TBViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1562,6 +1588,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)/External\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1615,6 +1642,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)/External\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1661,6 +1689,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)/External\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;

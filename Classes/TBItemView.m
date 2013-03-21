@@ -10,20 +10,20 @@
 
 @implementation TBItemView
 
-+(instancetype)itemViewWithOwner:(id)owner
-{
-    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"TBItemView" owner:owner options:nil];
-    
-    return (TBItemView*)[views objectAtIndex:0];
-}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    if (!self) {
+        return nil;
     }
-    return self;
+    
+    NSArray *views = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
+                                                   owner:self
+                                                 options:nil];
+    
+    [self addSubview:views[0]];
+
+return self;
 }
 
 /*
