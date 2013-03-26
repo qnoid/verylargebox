@@ -11,16 +11,23 @@
 #import <MapKit/MapKit.h>
 #import "TheBoxLocationServiceDelegate.h"
 
+/**
+ Use this class to retrieve location information such as lat/long and placemarks by a notification.
+ 
+ 
+
+ @see #notifyDidUpdateToLocation
+ @see #notifyDidFindPlacemark
+ */
 @interface TheBoxLocationService : NSObject <CLLocationManagerDelegate>
-{
-}
+
 
 @property(nonatomic, strong) CLLocationManager *locationManager;
 
 /*
  *
  */
-+(TheBoxLocationService *) theBox;
++(TheBoxLocationService *)theBoxLocationService;
 
 -(id)init:(CLLocationManager *)locationManager;
 

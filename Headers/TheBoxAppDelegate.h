@@ -9,7 +9,7 @@
  */
 #import <UIKit/UIKit.h>
 
-@interface TheBoxAppDelegate : NSObject <UIApplicationDelegate> {}
+@interface TheBoxAppDelegate : NSObject <UIApplicationDelegate>
 
 @property(nonatomic) IBOutlet UIWindow *window;
 

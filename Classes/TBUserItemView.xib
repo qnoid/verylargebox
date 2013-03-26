@@ -91,7 +91,7 @@
 					<object class="IBUILabel" id="820851618">
 						<reference key="NSNextResponder" ref="389409955"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{160, 60}, {160, 20}}</string>
+						<string key="NSFrame">{{120, 60}, {200, 20}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="472349006"/>
@@ -127,7 +127,6 @@
 						<string key="NSFrame">{{0, 320}, {320, 30}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="190375170"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

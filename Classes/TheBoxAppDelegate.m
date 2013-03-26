@@ -10,8 +10,17 @@
 #import "TheBoxAppDelegate.h"
 #import "TBIdentifyViewController.h"
 #import <XRay/XRay.h>
+#import "TheBoxLocationService.h"
+#import "TheBoxNotifications.h"
+#import "TBSecureHashA1.h"
 
 static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
+
+static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73a03314809698";
+
+@interface TheBoxAppDelegate()
+@property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
+@end
 
 @implementation TheBoxAppDelegate
 
@@ -24,8 +33,19 @@ static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e8
 	NSLog(@"Hello The Box");
     [XRay startUp];
     
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];   
-    [TestFlight takeOff:TESTFLIGHT_TEAM_TOKEN];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* userSession = [standardUserDefaults objectForKey:[[NSBundle mainBundle] bundleIdentifier]];
+    
+    if(!userSession){
+        userSession = [[TBSecureHashA1 new] uuid];
+        
+        [standardUserDefaults setObject:userSession
+                                 forKey:[[NSBundle mainBundle] bundleIdentifier]];
+        [standardUserDefaults synchronize];
+    }
+    
+    [TestFlight setDeviceIdentifier:userSession];
+    [TestFlight takeOff:TESTFLIGHT_APP_TOKEN];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

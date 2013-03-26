@@ -22,7 +22,9 @@
 #import "TBAFHTTPRequestOperationCompletionBlocks.h"
 #import "TBNSErrorDelegate.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "TBLocalityOperationDelegate.h"
 
+static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
 static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
 static NSString* const USER_ITEMS = @"/users/%u/items";
@@ -131,21 +133,24 @@ return request;
     return request;
 }
 
-+(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBItemsOperationDelegate>*)delegate
++(AFHTTPRequestOperation*)newGetLocationsGivenLocalityName:(NSString*)localityName delegate:(NSObject<TBLocationOperationDelegate>*)delegate
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
-    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"/items" parameters:nil];
+    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET"
+                                                                  path:@"/locations"
+                                                            parameters:@{@"locality[name]":localityName}];
+    
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [categoriesRequest setTimeoutInterval:TIMEOUT];
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
     {
         NSString* responseString = operation.responseString;        
-        [delegate didSucceedWithItems:[responseString mutableObjectFromJSONString]];
+        [delegate didSucceedWithLocations:[responseString mutableObjectFromJSONString]];
     } 
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [delegate didFailOnItemsWithError:error];
+        [delegate didFailOnLocationWithError:error];
     }];
     
     return request;
@@ -262,6 +267,28 @@ return [self newLocationQuery:parameters delegate:delegate];
 return [self newLocationQuery:parameters delegate:delegate];    
 }
 
++(AFHTTPRequestOperation*)newGetLocalities:(NSObject<TBLocalityOperationDelegate>*)delegate
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableURLRequest *categoriesRequest =
+    [client requestWithMethod:@"GET" path:LOCALITIES parameters:nil];
+    
+    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [categoriesRequest setTimeoutInterval:TIMEOUT];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+       NSString* responseString = operation.responseString;
+       [delegate didSucceedWithLocalities:[responseString mutableObjectFromJSONString]];
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnLocalitiesWithError:error];
+    }];
+    
+    return request;
+}
+
 +(AFHTTPRequestOperation*)newGetLocations:(NSObject<TBLocationOperationDelegate>*)delegate
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
@@ -306,7 +333,7 @@ return request;
 return request;
 }
 
-+(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image location:(NSDictionary *)location user:(NSUInteger)userId
++(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image location:(NSDictionary *)location locality:(NSString*)locality user:(NSUInteger)userId
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
@@ -317,6 +344,7 @@ return request;
     [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lat"] forKey:@"item[location_attributes][lat]"];
     [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][lng]"];
     [parameters tbSetObjectIfNotNil:[location objectForKey:@"id"] forKey:@"item[location_attributes][foursquareid]"];
+    [parameters tbSetObjectIfNotNil:locality forKey:@"item[location_attributes][locality_attributes][name]"];
     
     NSMutableURLRequest* request = [client multipartFormRequestWithMethod:@"POST"
                                                                      path:[NSString stringWithFormat:USER_ITEMS, userId]

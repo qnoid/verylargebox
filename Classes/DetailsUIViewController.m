@@ -34,7 +34,7 @@ return detailsViewController;
 
 - (id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSMutableDictionary*)item;
 {
-    self = [super initWithNibName:@"DetailsUIViewController" bundle:nibBundleOrNil];
+    self = [super initWithNibName:NSStringFromClass([DetailsUIViewController class]) bundle:nibBundleOrNil];
     if (!self) {
         return nil;
     }
@@ -108,7 +108,7 @@ return self;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     }
     
-    cell.textLabel.text = @[@"foo: fffffffff", @"bar: bbbbbbbbb", @"car: cccccccccc"][indexPath.row];
+    cell.textLabel.text = @[@"updateTitle: fffffffff", @"bar: bbbbbbbbb", @"car: cccccccccc"][indexPath.row];
     
     return cell;
 }

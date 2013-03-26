@@ -15,21 +15,25 @@
 #import "TheBoxUIScrollViewDatasource.h"
 #import "TheBoxUIGridViewDatasource.h"
 #import "TheBoxUIGridViewDelegate.h"
+#import "TBLocalityOperationDelegate.h"
 @class TheBoxLocationService;
 
 /**
  Displays available stores based on the user location.
  
+ 
+ 
  If it fails to obtain the user location, the user will be prompted to select one of the locations where thebox is available. (as returned by the server)
  
   Item cells are recycled, as a result setting the image to a recycled cell will cancel an existing request to load the last visible image
   and start a new one.
+ 
  */
-@interface HomeUIGridViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, UITableViewDataSource, UITableViewDelegate, TheBoxLocationServiceDelegate, UITableViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate>
-{
-    
-}
+@interface HomeUIGridViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, UITableViewDataSource, UITableViewDelegate, TheBoxLocationServiceDelegate, UITableViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TBLocalityOperationDelegate>
 
+/**
+ Creates a new instance of HomeUIGridViewController
+ */
 +(HomeUIGridViewController*)newHomeGridViewController;
 
 @property(nonatomic, strong) IBOutlet UIButton* directionsButton;

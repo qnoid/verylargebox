@@ -29,6 +29,7 @@
 #import "TBUITableViewDelegateBuilder.h"
 #import <objc/runtime.h>
 #import "UIViewController+TBViewController.h"
+#import "TBUserItemView.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 66.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -64,15 +65,26 @@ static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
 
 @end
 
+/*
+ Using a UIButton to display a store given the requirements,
+    tap on selected store to get directions
+    have left, right padding on the store name as to distinguish with the adjacent ones
+ 
+ 
+ */
 @interface HomeUIGridViewController ()
-@property(nonatomic, strong) CLLocation *location;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
+@property(nonatomic, strong) CLPlacemark *placemark;
+@property(nonatomic, strong) CLLocation *location;
+@property(nonatomic, strong) NSArray *localities;
 @property(nonatomic, strong) NSArray *locations;
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, assign) NSUInteger numberOfRows;
 @property(nonatomic, strong) UIImage *defaultItemImage;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService;
+@property(nonatomic, copy) TBUserItemViewGetDirections didTapOnGetDirectionsButton;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton;
+-(void)updateTitle:(NSString *)localityName;
 -(void)highlightLocation;
 -(void)reloadItems;
 @end
@@ -81,9 +93,18 @@ static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
 @implementation HomeUIGridViewController
 
 +(HomeUIGridViewController*)newHomeGridViewController
-{    
-    HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:[TheBoxLocationService theBox]];
+{
+    TheBoxLocationService* locationService = [TheBoxLocationService theBoxLocationService];
     
+    HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
+                                  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                  target:homeGridViewController
+                                  action:@selector(refreshLocations)];
+    
+    homeGridViewController.navigationItem.rightBarButtonItem = addButton;
+
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"Nearby";
     titleLabel.textColor = [UIColor whiteColor];
@@ -102,25 +123,42 @@ return homeGridViewController;
 
 -(void)dealloc
 {
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
 }
 
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton
 {
     self = [super initWithNibName:NSStringFromClass([HomeUIGridViewController class]) bundle:nibBundleOrNil];
     
-    if (self) 
+    if (!self)
     {
-        self.theBoxLocationService = locationService;
-        self.locations = [NSArray array];
-        self.items = [NSMutableArray array];
-        NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
-        self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
+        return nil;
     }
     
+    self.theBoxLocationService = locationService;
+    self.locations = [NSArray array];
+    self.items = [NSMutableArray array];
+    NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
+    self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
+    self.didTapOnGetDirectionsButton = didTapOnGetDirectionsButton;
+    
 return self;
+}
+
+-(void)refreshLocations
+{
+    [[TheBoxQueries newGetLocationsGivenLocalityName:self.placemark.locality delegate:self] start];
+}
+
+- (void)updateTitle:(NSString *)localityName
+{
+    UILabel* titleView = (UILabel*) self.navigationItem.titleView;
+    titleView.text = [NSString stringWithFormat:@"It's right here in %@", localityName];
+    [titleView sizeToFit];
+    self.tabBarItem.title = localityName;
 }
 
 -(void)loadView
@@ -165,17 +203,15 @@ return self;
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
     [self.theBoxLocationService notifyDidFindPlacemark:self];
     [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-	[[TheBoxQueries newGetLocations:self] start];
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
-
+    
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 #pragma mark application events
@@ -445,6 +481,7 @@ return storeButton;
     
 	self.items = items;
     self.numberOfRows = round((float)self.items.count/2.0);
+    [self.itemsView flashScrollIndicators];
     [self.itemsView reload];
 }
 
@@ -460,59 +497,83 @@ return storeButton;
 	self.location = [TheBoxNotifications location:notification];
 }
 
+-(void)didFailWithError:(NSNotification *)notification
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);    
+}
+
 -(void)didFindPlacemark:(NSNotification *)notification
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
     CLPlacemark *placemark = [TheBoxNotifications place:notification];
-    UILabel* titleView = (UILabel*)self.navigationItem.titleView;
-    titleView.text = [NSString stringWithFormat:@"It's right here in %@", placemark.locality];
-    [titleView sizeToFit];
-    self.tabBarItem.title = placemark.locality;
+    self.placemark = placemark;
+
+    NSString *localityName = placemark.locality;
+    
+    [self updateTitle:localityName];
+
+    [[TheBoxQueries newGetLocationsGivenLocalityName:localityName delegate:self] start];
 }
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    [[TheBoxQueries newGetLocalities:self] start];
+}
+
+#pragma mark TBLocalityOperationDelegate
+-(void)didSucceedWithLocalities:(NSArray *)localities
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, localities);
+    self.localities = localities;
 
     UITableViewController *availablePlacesViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
     availablePlacesViewController.title = @"Select a location where thebox is available";
     
     NSObject<UITableViewDataSource> *datasource = [[[[TBUITableViewDataSourceBuilder new] numberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
-    return 1;
-    }] cellForRowAtIndexPath:tbCellForRowAtIndexPath(^(UITableViewCell *cell) {
-        cell.textLabel.text = @"Edinburgh";
+        return [localities count];
+    }] cellForRowAtIndexPath:tbCellForRowAtIndexPath(^(UITableViewCell *cell, NSIndexPath* indexPath) {
+        cell.textLabel.text = [[[localities objectAtIndex:indexPath.row] objectForKey:@"locality"] objectForKey:@"name"];
     })] newDatasource];
     availablePlacesViewController.dataSource = datasource;
     availablePlacesViewController.tableView.dataSource = datasource;
-
+    
     availablePlacesViewController.tableView.delegate = self;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:availablePlacesViewController];
     navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
-
+    
     [self presentModalViewController:navigationController animated:YES];
+}
+
+-(void)didFailOnLocalitiesWithError:(NSError *)error
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    
 }
 
 #pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UILabel* titleView = (UILabel*)self.navigationItem.titleView;
-    titleView.text = [NSString stringWithFormat:@"It's right here in %@", @"Edinburgh"];
-    [titleView sizeToFit];
-    self.tabBarItem.title = @"Edinburgh";
+    NSDictionary *locality = [[self.localities objectAtIndex:indexPath.row] objectForKey:@"locality"];
+    NSString *localityName = [locality objectForKey:@"name"];
+
+    [self updateTitle:localityName];
+
     [self.navigationController dismissModalViewControllerAnimated:YES];
+    [[TheBoxQueries newGetLocationsGivenLocalityName:localityName delegate:self] start];
 }
 
 -(IBAction)didClickOnLocation:(id)sender
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
+    NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
     
-    NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[[[self.locations objectAtIndex:self.index] objectForKey:@"location"] objectForKey:@"lat"],[[[self.locations objectAtIndex:self.index] objectForKey:@"location"] objectForKey:@"lng"]];
-    
-    NSLog(@"%@", urlstring);
-    
-    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlstring]];
+    self.didTapOnGetDirectionsButton(self.location.coordinate,
+                                     CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
+                                                                [[location objectForKey:@"lng"] floatValue]),
+                                     location);    
 }
 
 @end

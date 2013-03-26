@@ -21,6 +21,7 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 
 @interface UploadUIViewController ()
 @property(nonatomic, strong) UIImage* itemImage;
+@property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSMutableDictionary* location;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, assign) NSUInteger userId;
@@ -52,7 +53,7 @@ return newUploadUIViewController;
     }
     
     self.location = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"location"];
-    self.theBoxLocationService = [TheBoxLocationService theBox];
+    self.theBoxLocationService = [TheBoxLocationService theBoxLocationService];
     self.userId = userId;
 
 return self;
@@ -62,6 +63,8 @@ return self;
 {
 	[super viewDidLoad];
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
+    [self.theBoxLocationService notifyDidFindPlacemark:self];
+    
 		
 	self.uploadView.contentSize = self.uploadView.frame.size;
 	
@@ -97,6 +100,20 @@ return self;
 	[[_location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lng"];
 }
 
+-(void)didFailWithError:(NSNotification *)notification
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+}
+
+-(void)didFindPlacemark:(NSNotification *)notification
+{
+    self.locality = [TheBoxNotifications place:notification].locality;
+}
+
+-(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);    
+}
 
 #pragma mark TheBoxKeyboardObserver
 
@@ -108,7 +125,7 @@ return self;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newPostItemQuery:self.itemImage location:self.location user:self.userId];
+	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newPostItemQuery:self.itemImage location:self.location locality:self.locality user:self.userId];
 
     [itemQuery setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.createItemDelegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];

@@ -8,6 +8,9 @@
 
 #import "TBUserItemView.h"
 
+static const CLLocationDegrees EmptyLocation = -1000.0;
+static const CLLocationCoordinate2D EmptyLocationCoordinate = {-1000.0, -1000.0};
+
 @implementation TBUserItemView
 
 - (id)initWithFrame:(CGRect)frame
@@ -29,7 +32,7 @@ return self;
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender
 {
-    self.didTapOnGetDirectionsButton();
+    self.didTapOnGetDirectionsButton(EmptyLocationCoordinate, EmptyLocationCoordinate, nil);
 }
 
 @end

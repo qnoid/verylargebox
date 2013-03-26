@@ -23,5 +23,6 @@
 +(instancetype)newVerticalGridView:(CGRect)frame viewsOf:(CGFloat)height;
 
 -(void)reload;
+- (void)flashScrollIndicators;
 
 @end

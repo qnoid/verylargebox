@@ -168,6 +168,7 @@
 		BDD8FEBD165C196200AB3041 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDD8FEBC165C196200AB3041 /* InfoPlist.strings */; };
 		BDE1E83615683FF800CF10CF /* TBUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE1E83515683FF800CF10CF /* TBUIView.m */; };
 		BDF0F42516C8254C002CDE8E /* TBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* TBVerifyOperationBlock.m */; };
+		BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF825C016FDFCEA003B3003 /* AddressBook.framework */; };
 		FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */; };
 /* End PBXBuildFile section */
 
@@ -384,6 +385,8 @@
 		BDE1E83515683FF800CF10CF /* TBUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUIView.m; sourceTree = "<group>"; };
 		BDF0F42316C8254B002CDE8E /* TBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVerifyOperationBlock.h; sourceTree = "<group>"; };
 		BDF0F42416C8254B002CDE8E /* TBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBVerifyOperationBlock.m; sourceTree = "<group>"; };
+		BDF825C016FDFCEA003B3003 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		BDF825C216FFAC59003B3003 /* TBLocalityOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBLocalityOperationDelegate.h; sourceTree = "<group>"; };
 		C01FCF5008A954540054247D /* CanIndexLocationInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanIndexLocationInView.h; sourceTree = "<group>"; };
 		F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ApplicationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -393,6 +396,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */,
 				BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */,
 				BDABD930169F9EF800111723 /* QuartzCore.framework in Frameworks */,
 				BDA2187A165EEBF600094510 /* Security.framework in Frameworks */,
@@ -454,6 +458,14 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDA2BC87165951CB0068C749 /* Interface */,
+				903AE3E21284BE2100A8FB28 /* Welcome */,
+				903AE3FD12853F9D00A8FB28 /* Home */,
+				903AE40012853FBE00A8FB28 /* Details */,
+				903AE40312853FD500A8FB28 /* Description */,
+				903AE40412853FDF00A8FB28 /* Upload */,
+				902C78EF153CB603003A17CB /* Categories */,
+				905A4F9C1291DE6F00BCB475 /* Location */,
 				BDA2BD0E165AEB080068C749 /* TBEmailViewController.h */,
 				BDA2BD0F165AEB080068C749 /* TBEmailViewController.m */,
 				BDA2BC8E1659600F0068C749 /* TBProfileViewController.h */,
@@ -539,16 +551,8 @@
 				BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */,
 				BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */,
 				BD4BA9A816F928A5009C1518 /* ATTRIBUTIONS.md */,
-				BDA2BC87165951CB0068C749 /* Interface */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				903AE3E21284BE2100A8FB28 /* Welcome */,
-				903AE3FD12853F9D00A8FB28 /* Home */,
-				903AE40012853FBE00A8FB28 /* Details */,
-				903AE40312853FD500A8FB28 /* Description */,
-				903AE40412853FDF00A8FB28 /* Upload */,
-				902C78EF153CB603003A17CB /* Categories */,
-				905A4F9C1291DE6F00BCB475 /* Location */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				BDA2BCF0165ACC800068C749 /* ApplicationTests */,
@@ -584,6 +588,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDF825C016FDFCEA003B3003 /* AddressBook.framework */,
 				BDA21877165EEBEA00094510 /* Security.framework */,
 				908363A61400659200E5AAAF /* libz.dylib */,
 				BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */,
@@ -608,6 +613,7 @@
 			children = (
 			);
 			name = Categories;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		903AE3E21284BE2100A8FB28 /* Welcome */ = {
@@ -618,6 +624,7 @@
 				903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */,
 			);
 			name = Welcome;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		903AE3FD12853F9D00A8FB28 /* Home */ = {
@@ -629,6 +636,7 @@
 				90539C6D1537670800559AD0 /* TBCreateItemOperationDelegate.h */,
 			);
 			name = Home;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		903AE40012853FBE00A8FB28 /* Details */ = {
@@ -643,6 +651,7 @@
 				903AE4ED1285C9A600A8FB28 /* UserProfile.xib */,
 			);
 			name = Details;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		903AE40312853FD500A8FB28 /* Description */ = {
@@ -650,6 +659,7 @@
 			children = (
 			);
 			name = Description;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		903AE40412853FDF00A8FB28 /* Upload */ = {
@@ -659,6 +669,7 @@
 				903AE5601285E33600A8FB28 /* UploadUIViewController.xib */,
 			);
 			name = Upload;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		90454B01154DBBCA0064D998 /* External */ = {
@@ -678,6 +689,7 @@
 				90D11E571534C97500D52F58 /* TBLocationOperationDelegate.h */,
 			);
 			name = Location;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		90A1E564133CC64D00CC9212 /* Resources */ = {
@@ -749,6 +761,7 @@
 				9022BA9F153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.h */,
 				90E359311546359B00075ABF /* NSCache+TBCache.h */,
 				BDE0DBB1155EC1B600B474DC /* TBUpdateItemOperationDelegate.h */,
+				BDF825C216FFAC59003B3003 /* TBLocalityOperationDelegate.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -810,6 +823,7 @@
 				BDA2BC901659600F0068C749 /* TBProfileViewController.xib */,
 			);
 			name = Interface;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BDA2BCF0165ACC800068C749 /* ApplicationTests */ = {

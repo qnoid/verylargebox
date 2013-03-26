@@ -10,7 +10,7 @@
 
 typedef NSInteger(^TBNumberOfRowsInSectionBlock)(UITableView *tableView, NSInteger section);
 typedef UITableViewCell*(^TBCellForRowAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
-typedef void(^TBUITableViewCellBlock)(UITableViewCell* cell);
+typedef void(^TBUITableViewCellBlock)(UITableViewCell* cell, NSIndexPath* indexPath);
 
 NS_INLINE
 TBNumberOfRowsInSectionBlock tbZeroNumberOfRows(){
@@ -25,7 +25,7 @@ return ^UITableViewCell*(UITableView *tableView, NSIndexPath *indexPath){return 
 NS_INLINE
 TBCellForRowAtIndexPath tbCellForRowAtIndexPath(TBUITableViewCellBlock block)
 {
-return ^UITableViewCell*(UITableView *tableView, NSIndexPath *indexPath)
+return ^UITableViewCell*(UITableView *tableView, NSIndexPath* indexPath)
     {
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
         
@@ -35,7 +35,7 @@ return ^UITableViewCell*(UITableView *tableView, NSIndexPath *indexPath)
             cell.textLabel.font = [UIFont fontWithName:@"Gil Sans" size:14.0];
         }
         
-        block(cell);
+        block(cell, indexPath);
         
     return cell;
     };

@@ -19,6 +19,7 @@
 @protocol TBLocationOperationDelegate;
 @protocol TBCreateCategoryOperationDelegate;
 @protocol TBUpdateItemOperationDelegate;
+@protocol TBLocalityOperationDelegate;
 
 /*
  * Provides all available queries to TheBox API
@@ -46,7 +47,7 @@ extern NSString* const THE_BOX_SERVICE;
  */
 +(AFHTTPRequestOperation*)newVerifyUserQuery:(NSObject<TBVerifyUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence;
 +(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
-+(AFHTTPRequestOperation*)newItemsQuery:(NSObject<TBItemsOperationDelegate>*)delegate;
+
 +(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image location:(NSDictionary *)location;
 +(AFHTTPRequestOperation*)updateItemQuery:(NSDictionary *) item delegate:(NSObject<TBUpdateItemOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
@@ -55,8 +56,17 @@ extern NSString* const THE_BOX_SERVICE;
 /**
  
  */
++(AFHTTPRequestOperation*)newGetLocalities:(NSObject<TBLocalityOperationDelegate>*)delegate;
+
+/**
+ 
+ */
 +(AFHTTPRequestOperation*)newGetLocations:(NSObject<TBLocationOperationDelegate>*)delegate;
 
+/**
+ 
+ */
++(AFHTTPRequestOperation*)newGetLocationsGivenLocalityName:(NSString*)localityName delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 /**
  Gets the items for the given location id.
  
@@ -70,10 +80,11 @@ extern NSString* const THE_BOX_SERVICE;
  
  @param image image
  @param location location
+ @param locality locality
  @param userId the user id to create the item under. 
  @see #newVerifyUserQuery
  */
-+(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image location:(NSDictionary *)location user:(NSUInteger)userId;
++(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image location:(NSDictionary *)location locality:(NSString*)locality user:(NSUInteger)userId;
 
 +(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 @end

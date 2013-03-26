@@ -25,14 +25,17 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, strong) NSDictionary* residence;
 @property(nonatomic, strong) NSMutableArray* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence;
+@property(nonatomic, copy) TBUserItemViewGetDirections didTapOnGetDirectionsButton;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton;
 @end
 
 @implementation TBProfileViewController
 
 +(TBProfileViewController*)newProfileViewController:(NSDictionary*)residence email:(NSString*)email
 {
-    TBProfileViewController* profileViewController = [[TBProfileViewController alloc] initWithBundle:[NSBundle mainBundle] residence:residence];
+    TBProfileViewController* profileViewController = [[TBProfileViewController alloc] initWithBundle:[NSBundle mainBundle]
+                                                                                           residence:residence
+                                                                         didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
     
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = email;
@@ -68,7 +71,7 @@ return profileViewController;
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton
 {
     self = [super initWithNibName:NSStringFromClass([TBProfileViewController class]) bundle:nibBundleOrNil];
     
@@ -76,11 +79,12 @@ return profileViewController;
         return nil;
     }
     
-    self.theBoxLocationService = [TheBoxLocationService theBox];
+    self.theBoxLocationService = [TheBoxLocationService theBoxLocationService];
     self.residence = residence;
     self.items = [NSMutableArray array];
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
+    self.didTapOnGetDirectionsButton = didTapOnGetDirectionsButton;
 
 return self;
 }
@@ -146,6 +150,7 @@ return self;
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
+    NSLog(@"%s, %@", __PRETTY_FUNCTION__, items);
     self.items = items;
     [self.itemsView setNeedsLayout];
     [self.itemsView.pullToRefreshView stopAnimating];
@@ -232,6 +237,17 @@ return [[TBUserItemView alloc] initWithFrame:frame];
     [userItemView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"iphoneImageURL"]] placeholderImage:self.defaultItemImage];
     userItemView.whenLabel.text = [item objectForKey:@"when"];
     
+    /**
+     {
+     "created_at" = "2013-03-07T19:58:26Z";
+     foursquareid = 4b082a2ff964a520380523e3;
+     id = 265;
+     lat = "55.94223";
+     lng = "-3.18421";
+     name = "The Dagda Bar";
+     "updated_at" = "2013-03-07T19:58:26Z";
+     }
+    */
     NSDictionary *location = [item objectForKey:@"location"];
     
     id name = [location objectForKey:@"name"];
@@ -241,15 +257,17 @@ return [[TBUserItemView alloc] initWithFrame:frame];
 
     userItemView.storeLabel.text = name;
     
-    userItemView.didTapOnGetDirectionsButton = ^(){
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
-        
-        NSString *urlstring=[NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%@,%@",self.location.coordinate.latitude,self.location.coordinate.longitude,[location objectForKey:@"lat"],[location objectForKey:@"lng"]];
-        
-        NSLog(@"%@", urlstring);
-        
-        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlstring]];
+    __weak TBProfileViewController *wself = self;
+    
+    userItemView.didTapOnGetDirectionsButton = ^(CLLocationCoordinate2D origin, CLLocationCoordinate2D destination, NSDictionary *options){
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [self class], @"didTapOnGetDirectionsButton"]];
+
+        wself.didTapOnGetDirectionsButton(wself.location.coordinate,
+                                          CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
+                                                                     [[location objectForKey:@"lng"] floatValue]),
+                                          location);
     };
+
 }
 
 #pragma mark TheBoxLocationServiceDelegate

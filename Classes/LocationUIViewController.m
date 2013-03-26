@@ -50,7 +50,7 @@ return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
     if (self) 
     {
         self.venues = [NSArray array];
-        self.theBoxLocationService = [TheBoxLocationService theBox];  
+        self.theBoxLocationService = [TheBoxLocationService theBoxLocationService];
     }
     
 return self;

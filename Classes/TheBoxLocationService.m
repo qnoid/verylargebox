@@ -11,7 +11,7 @@
 
 @implementation TheBoxLocationService
 
-+(TheBoxLocationService *) theBox
++(TheBoxLocationService *)theBoxLocationService
 {
 	CLLocationManager *locationManager = [[CLLocationManager alloc] init];
     TheBoxLocationService *theBox = [[TheBoxLocationService alloc] init:locationManager];

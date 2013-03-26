@@ -224,6 +224,11 @@ return view;
     [self.scrollView setNeedsLayout];
 }
 
+- (void)flashScrollIndicators
+{
+    [self.scrollView flashScrollIndicators];
+}
+
 -(void)viewWasTapped:(id)sender
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);

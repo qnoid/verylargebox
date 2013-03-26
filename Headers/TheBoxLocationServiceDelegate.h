@@ -14,8 +14,9 @@
 @protocol TheBoxLocationServiceDelegate<NSObject>
 
 @optional
-	-(void)didUpdateToLocation:(NSNotification *)notification;
-	-(void)didFindPlacemark:(NSNotification *)notification;
-	-(void)didFailWithError:(NSNotification *)notification;
+-(void)didUpdateToLocation:(NSNotification *)notification;
+-(void)didFindPlacemark:(NSNotification *)notification;
+-(void)didFailWithError:(NSNotification *)notification;
+-(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification;
 
 @end

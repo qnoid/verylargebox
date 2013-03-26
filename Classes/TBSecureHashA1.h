@@ -13,6 +13,8 @@
  */
 @interface TBSecureHashA1 : NSObject
 
+-(NSString*)uuid;
+
 /**
  Generates a UUID SHA-1 hash based.
  
