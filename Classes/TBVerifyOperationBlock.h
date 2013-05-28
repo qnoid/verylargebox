@@ -26,5 +26,6 @@ return ^(NSError* error){};
 
 @property (nonatomic, copy) TBDidSucceedWithVerificationForEmail didSucceedWithVerificationForEmail;
 @property (nonatomic, copy) TBDidFailOnVerifyWithError didFailOnVerifyWithError;
+@property (nonatomic, copy) TBDidFailOnVerifyWithError didFailWithNotConnectToInternet;
 
 @end

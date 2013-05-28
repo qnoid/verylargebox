@@ -27,9 +27,10 @@
 #import "TheBoxLocationService.h"
 #import "TBUITableViewDataSourceBuilder.h"
 #import "TBUITableViewDelegateBuilder.h"
-#import <objc/runtime.h>
 #import "UIViewController+TBViewController.h"
 #import "TBUserItemView.h"
+#import "TBAlertViews.h"
+#import "MBProgressHUD.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 66.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -38,32 +39,6 @@ static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 static NSInteger const FIRST_VIEW_TAG = -1;
-static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
-
-
-@interface UITableViewController (TBUITableViewController)
-@property(nonatomic, strong) NSObject<UITableViewDataSource> *dataSource;
-@property(nonatomic, strong) NSObject<UITableViewDelegate> *delegate;
-@end
-
-@implementation UITableViewController (TBUITableViewController)
-
-@dynamic dataSource;
-@dynamic delegate;
-
--(void)setDataSource:(NSObject<UITableViewDataSource> *)dataSource
-{
-    static char const * const UITableViewDataSourceKey = "UITableViewDataSource";
-    objc_setAssociatedObject(self, UITableViewDataSourceKey, dataSource, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
--(void)setDelegate:(NSObject<UITableViewDelegate> *)delegate
-{
-    static char const * const UITableViewDelegateKey = "UITableViewDelegate";
-    objc_setAssociatedObject(self, UITableViewDelegateKey, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-@end
 
 /*
  Using a UIButton to display a store given the requirements,
@@ -75,7 +50,6 @@ static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
 @interface HomeUIGridViewController ()
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) CLPlacemark *placemark;
-@property(nonatomic, strong) CLLocation *location;
 @property(nonatomic, strong) NSArray *localities;
 @property(nonatomic, strong) NSArray *locations;
 @property(nonatomic, assign) NSUInteger index;
@@ -102,9 +76,9 @@ static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                   target:homeGridViewController
                                   action:@selector(refreshLocations)];
-    
     homeGridViewController.navigationItem.rightBarButtonItem = addButton;
-
+    homeGridViewController.navigationItem.rightBarButtonItem.enabled = NO;
+    
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"Nearby";
     titleLabel.textColor = [UIColor whiteColor];
@@ -113,7 +87,7 @@ static NSInteger const ACTIVITY_INDICATOR_TAG = -2;
     homeGridViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
-    homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"group.png"] tag:0];
+    homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"city.png"] tag:0];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:homeGridViewController selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
@@ -123,9 +97,9 @@ return homeGridViewController;
 
 -(void)dealloc
 {
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
+    [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
 
 
@@ -185,7 +159,7 @@ return self;
     itemsView.delegate = self;
     itemsView.showsVerticalScrollIndicator = YES;
     
-    UIImageView* signPostImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGPointZero.x, 16.0, LOCATIONS_VIEW_HEIGHT / 2, 28.0)];
+    UIImageView* signPostImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGPointZero.x + 8.0, (LOCATIONS_VIEW_HEIGHT / 2) - 12.0, 16, 23.0)];
     signPostImageView.image = [UIImage imageNamed:@"signpost"];
     
     [view addSubview:locationsView];
@@ -200,18 +174,21 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.theBoxLocationService notifyDidUpdateToLocation:self];
     [self.theBoxLocationService notifyDidFindPlacemark:self];
+    [self.theBoxLocationService notifyDidFailWithError:self];
     [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+    
+    [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
     
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 #pragma mark application events
@@ -249,16 +226,8 @@ return self;
     NSDictionary* currentLocation = [self.locations objectAtIndex:self.index];
     NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
     
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:
-                                                  CGRectMake(self.itemsView.frame.origin.x, self.itemsView.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, 323.0)];
-    
-    activityIndicator.tag = ACTIVITY_INDICATOR_TAG;
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-    [activityIndicator startAnimating];
-    
-    [self.view insertSubview:activityIndicator atIndex:0];
-    [self.view bringSubviewToFront:activityIndicator];
-    
+    [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+
     [[TheBoxQueries newGetItemsGivenLocationId:locationId delegate:self] start];
 }
 
@@ -266,6 +235,7 @@ return self;
 
 -(void)didSucceedWithLocations:(NSArray*)locations
 {
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     self.locations = locations;
     [self.locationsView setNeedsLayout];
 }
@@ -273,6 +243,7 @@ return self;
 -(void)didFailOnLocationWithError:(NSError*)error
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 }
 
 #pragma mark TheBoxUIGridViewDatasource
@@ -475,9 +446,7 @@ return storeButton;
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, items);
     
-    UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView*)[self.view viewWithTag:ACTIVITY_INDICATOR_TAG];
-    [activityIndicator stopAnimating];
-    [activityIndicator removeFromSuperview];
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     
 	self.items = items;
     self.numberOfRows = round((float)self.items.count/2.0);
@@ -488,27 +457,30 @@ return storeButton;
 -(void)didFailOnItemsWithError:(NSError*)error
 {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 }
 
 #pragma mark TheBoxLocationServiceDelegate
--(void)didUpdateToLocation:(NSNotification *)notification
+-(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-	self.location = [TheBoxNotifications location:notification];
-}
-
--(void)didFailWithError:(NSNotification *)notification
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);    
+    
+    TBAlertViewDelegate *alertViewDelegate = [TBAlertViews newAlertViewDelegateOnOkDismiss];
+    UIAlertView *alertView = [TBAlertViews newAlertViewWithOk:@"Location access denied"
+                                                      message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'thebox' to access your location."];
+    alertView.delegate = alertViewDelegate;
+    
+    [alertView show]; 
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
-    CLPlacemark *placemark = [TheBoxNotifications place:notification];
-    self.placemark = placemark;
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    
+    self.placemark = [TheBoxNotifications place:notification];
 
-    NSString *localityName = placemark.locality;
+    NSString *localityName = self.placemark.locality;
     
     [self updateTitle:localityName];
 
@@ -518,45 +490,21 @@ return storeButton;
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
-    [[TheBoxQueries newGetLocalities:self] start];
-}
+    TBLocalitiesTableViewController *localitiesViewController = [TBLocalitiesTableViewController newLocalitiesViewController];
+    localitiesViewController.delegate = self;
 
-#pragma mark TBLocalityOperationDelegate
--(void)didSucceedWithLocalities:(NSArray *)localities
-{
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, localities);
-    self.localities = localities;
-
-    UITableViewController *availablePlacesViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-    availablePlacesViewController.title = @"Select a location where thebox is available";
+    UINavigationController *navigationController =
+        [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
     
-    NSObject<UITableViewDataSource> *datasource = [[[[TBUITableViewDataSourceBuilder new] numberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
-        return [localities count];
-    }] cellForRowAtIndexPath:tbCellForRowAtIndexPath(^(UITableViewCell *cell, NSIndexPath* indexPath) {
-        cell.textLabel.text = [[[localities objectAtIndex:indexPath.row] objectForKey:@"locality"] objectForKey:@"name"];
-    })] newDatasource];
-    availablePlacesViewController.dataSource = datasource;
-    availablePlacesViewController.tableView.dataSource = datasource;
-    
-    availablePlacesViewController.tableView.delegate = self;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:availablePlacesViewController];
     navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
     
     [self presentModalViewController:navigationController animated:YES];
 }
 
--(void)didFailOnLocalitiesWithError:(NSError *)error
-{
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
-    
-}
+#pragma mark TBLocalitiesTableViewControllerDelegate
 
-#pragma mark UITableViewDelegate
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)didSelectLocality:(NSDictionary *)locality
 {
-    NSDictionary *locality = [[self.localities objectAtIndex:indexPath.row] objectForKey:@"locality"];
     NSString *localityName = [locality objectForKey:@"name"];
 
     [self updateTitle:localityName];
@@ -570,8 +518,7 @@ return storeButton;
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
     
-    self.didTapOnGetDirectionsButton(self.location.coordinate,
-                                     CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
+    self.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
                                                                 [[location objectForKey:@"lng"] floatValue]),
                                      location);    
 }

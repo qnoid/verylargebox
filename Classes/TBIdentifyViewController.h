@@ -14,6 +14,7 @@
 #import "TBEmailViewController.h"
 
 typedef NS_ENUM(NSInteger, TBEmailStatus){
+    TBEmailStatusDefault,
     TBEmailStatusError,
     TBEmailStatusUnknown,
     TBEmailStatusUnauthorised,
@@ -26,6 +27,12 @@ NS_INLINE
 TBEmailStatusBlock tbBmailStatus(TBEmailStatus emailStatus)
 {
     switch (emailStatus) {
+        case TBEmailStatusDefault:
+            return ^(UITableViewCell *tableViewCell){
+                tableViewCell.textLabel.enabled = YES;
+                tableViewCell.userInteractionEnabled = YES;
+                tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            };
         case TBEmailStatusError:
             return ^(UITableViewCell *tableViewCell){
                 UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refresh.png"]];
@@ -46,7 +53,7 @@ TBEmailStatusBlock tbBmailStatus(TBEmailStatus emailStatus)
             };
         case TBEmailStatusUnauthorised:
             return ^(UITableViewCell *tableViewCell){
-                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"warning.png"]];
+                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"x.png"]];
                 
                 tableViewCell.textLabel.enabled = NO;
                 tableViewCell.userInteractionEnabled = YES;
@@ -54,10 +61,10 @@ TBEmailStatusBlock tbBmailStatus(TBEmailStatus emailStatus)
             };
         case TBEmailStatusVerified:
             return ^(UITableViewCell *tableViewCell){
+                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark.png"]];                
                 tableViewCell.textLabel.enabled = YES;
                 tableViewCell.userInteractionEnabled = YES;
-                tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                tableViewCell.accessoryView = nil;
+                tableViewCell.accessoryView = accessoryView;
             };
     }
 }

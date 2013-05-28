@@ -63,8 +63,9 @@ return self;
 {
 	[super viewDidLoad];
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
+    [self.theBoxLocationService notifyDidFailWithError:self];
     [self.theBoxLocationService notifyDidFindPlacemark:self];
-    
+    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 		
 	self.uploadView.contentSize = self.uploadView.frame.size;
 	
@@ -100,19 +101,37 @@ return self;
 	[[_location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lng"];
 }
 
--(void)didFailWithError:(NSNotification *)notification
+-(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
 {
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
     self.locality = [TheBoxNotifications place:notification].locality;
 }
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);    
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    TBLocalitiesTableViewController *localitiesViewController = [TBLocalitiesTableViewController newLocalitiesViewController];
+    
+    UINavigationController *navigationController =
+    [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
+    
+    navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
+    
+    [self presentModalViewController:navigationController animated:YES];
+}
+
+#pragma mark TBLocalitiesTableViewControllerDelegate
+
+-(void)didSelectLocality:(NSDictionary *)locality
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, locality);
+    self.locality = [locality objectForKey:@"name"];
+    [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark TheBoxKeyboardObserver
@@ -125,17 +144,13 @@ return self;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newPostItemQuery:self.itemImage location:self.location locality:self.locality user:self.userId];
+	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newPostItemQuery:self.itemImage location:self.location locality:self.locality user:self.userId delegate:self.createItemDelegate];
 
-    [itemQuery setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self.createItemDelegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.createItemDelegate didFailOnItemWithError:error];
-    }];
-    
 	[itemQuery start];
     
-	[self dismissModalViewControllerAnimated:YES];    
+	[self dismissViewControllerAnimated:YES completion:^{
+        [self.createItemDelegate didStartUploadingItem];
+    }];
 }
 
 - (IBAction)takePhoto:(id)sender 
@@ -145,6 +160,7 @@ return self;
 	picker.allowsEditing = YES;
 #if !TARGET_IPHONE_SIMULATOR
 	picker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+    picker.showsCameraControls = YES;    
 #endif
 	
 	[self presentModalViewController:picker animated:YES];

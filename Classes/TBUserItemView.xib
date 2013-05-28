@@ -127,6 +127,7 @@
 						<string key="NSFrame">{{0, 320}, {320, 30}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="190375170"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -158,7 +159,7 @@
 					<object class="IBUIImageView" id="472349006">
 						<reference key="NSNextResponder" ref="389409955"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 319}, {22, 28}}</string>
+						<string key="NSFrame">{{87, 323}, {16, 24}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="697906608"/>
@@ -252,8 +253,8 @@
 							<reference ref="223132843"/>
 							<reference ref="697906608"/>
 							<reference ref="174386081"/>
-							<reference ref="472349006"/>
 							<reference ref="820851618"/>
+							<reference ref="472349006"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -356,7 +357,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">signpost.png</string>
-			<string key="NS.object.0">{22, 28}</string>
+			<string key="NS.object.0">{16, 24}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

@@ -9,13 +9,13 @@
 #import "TBUITableViewDelegateBuilder.h"
 
 @interface TBUITableViewDelegate()
-@property(nonatomic, copy) TBDidDeselectRowAtIndexPath didDeselectRowAtIndexPath;
--(id)initWithDidDeselectRowAtIndexPath:(TBDidDeselectRowAtIndexPath) didDeselectRowAtIndexPath;
+@property(nonatomic, copy) TBDidSelectRowAtIndexPath didSelectRowAtIndexPath;
+-(id)initWithDidDeselectRowAtIndexPath:(TBDidSelectRowAtIndexPath) didSelectRowAtIndexPath;
 @end
 
 @implementation TBUITableViewDelegate
 
--(id)initWithDidDeselectRowAtIndexPath:(TBDidDeselectRowAtIndexPath) didDeselectRowAtIndexPath
+-(id)initWithDidDeselectRowAtIndexPath:(TBDidSelectRowAtIndexPath) didSelectRowAtIndexPath
 {
     self = [super init];
     
@@ -23,24 +23,20 @@
         return nil;
     }
     
-    self.didDeselectRowAtIndexPath = didDeselectRowAtIndexPath;
+    self.didSelectRowAtIndexPath = didSelectRowAtIndexPath;
     
 return self;
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    self.didSelectRowAtIndexPath(tableView, indexPath);
 }
 @end
 
 
 @interface TBUITableViewDelegateBuilder()
-@property(nonatomic, copy) TBDidDeselectRowAtIndexPath didDeselectRowAtIndexPath;
+@property(nonatomic, copy) TBDidSelectRowAtIndexPath didSelectRowAtIndexPath;
 @end
 
 @implementation TBUITableViewDelegateBuilder
@@ -53,18 +49,18 @@ return self;
         return nil;
     }
     
-    self.didDeselectRowAtIndexPath = tbDoNothing();
+    self.didSelectRowAtIndexPath = tbDoNothing();
     
 return self;
 }
 
--(TBUITableViewDelegateBuilder*)didDeselectRowAtIndexPath:(TBDidDeselectRowAtIndexPath)didDeselectRowAtIndexPath;
+-(TBUITableViewDelegateBuilder*)didSelectRowAtIndexPath:(TBDidSelectRowAtIndexPath)didSelectRowAtIndexPath;
 {
-    self.didDeselectRowAtIndexPath = didDeselectRowAtIndexPath;
+    self.didSelectRowAtIndexPath = didSelectRowAtIndexPath;
 return self;
 }
 
 -(id<UITableViewDelegate>)newDelegate {
-    return [[TBUITableViewDelegate alloc] initWithDidDeselectRowAtIndexPath:self.didDeselectRowAtIndexPath];
+    return [[TBUITableViewDelegate alloc] initWithDidDeselectRowAtIndexPath:self.didSelectRowAtIndexPath];
 }
 @end

@@ -10,6 +10,9 @@ end
 
 pod 'AFNetworking', '~> 0.9.1 '
 pod 'JSONKit', '~> 1.4'
-pod 'TestFlightSDK', '= 1.2.4.beta'
+pod 'TestFlightSDK', '= 1.3.0-beta.5'
 pod 'SSKeychain', '0.1.4'
 pod 'SVPullToRefresh', '0.4.1'
+pod 'QNDAnimations', '2.0'
+pod 'CocoaLumberjack', '1.6.2'
+pod 'MBProgressHUD', '~> 0.6'

@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TBNSErrorDelegate.h"
 
-@protocol TBVerifyUserOperationDelegate <NSObject>
+@protocol TBVerifyUserOperationDelegate <NSObject, TBNSErrorDelegate>
 
 /**
  Callback TheBoxQueries#newVerifyUserQuery:email:residence succesfully verifies the user for the given email under

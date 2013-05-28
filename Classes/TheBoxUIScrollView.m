@@ -105,7 +105,7 @@ return scrollView;
 
 -(void)awakeFromNib
 {
-    NSLog(@"%@", self);
+    DDLogVerbose(@"%@", self);
     self.datasource = _datasource;
     self.scrollViewDelegate = _scrollViewDelegate;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnScrollView:)];
@@ -175,12 +175,12 @@ return self;
 	[self.visibleStrategy maximumVisibleIndexShould:floorVisibleIndexAt(numberOfViews)];
     self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:self.dimension.value];
 	
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSLog(@"frame %@", NSStringFromCGRect(self.frame));	
-	NSLog(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+	DDLogVerbose(@"frame %@", NSStringFromCGRect(self.frame));	
+	DDLogVerbose(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
 
     CGRect bounds = [self bounds];
-    NSLog(@"layoutSubviews on bounds %@", NSStringFromCGRect(bounds));
+    DDLogVerbose(@"layoutSubviews on bounds %@", NSStringFromCGRect(bounds));
 
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];
@@ -264,17 +264,17 @@ return [self.contentView subviews];
 	 */	
 	[self.contentView addSubview:view];
     
-    NSLog(@"added %@ as subview to %@", view, self);
+    DDLogVerbose(@"added %@ as subview to %@", view, self);
 return view;
 }
 
 -(void)didTapOnScrollView:(id)sender
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer*)sender;
     CGPoint locationInView = [tapGestureRecognizer locationInView:self];
     NSUInteger index = [self indexOf:locationInView];
-    NSLog(@"%u", index);
+    DDLogVerbose(@"%u", index);
     
     NSUInteger numberOfViews = [self.datasource numberOfViewsInScrollView:self];
     
@@ -353,7 +353,7 @@ return self;
         TBUIScrollViewAllowSelection(scrollView, self.cancelContentTouches);
     }
     
-    scrollView.canCancelContentTouches = self.canCancelContentTouches;
+    scrollView.canCancelContentTouches = self.cancelContentTouches;
     
 return scrollView;
 }

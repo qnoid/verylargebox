@@ -14,8 +14,6 @@
 
 @interface TBProfileViewController : UIViewController <TBCreateItemOperationDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBItemsOperationDelegate, TheBoxLocationServiceDelegate>
 
-@property(nonatomic, strong) TheBoxUIScrollView* itemsView;
-
 +(TBProfileViewController*)newProfileViewController:(NSDictionary*)residence email:(NSString*)email;
 
 @end

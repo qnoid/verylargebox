@@ -11,6 +11,8 @@
 
 @protocol TBCreateItemOperationDelegate <NSObject>
 
+-(void)didStartUploadingItem;
+-(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;
 -(void)didSucceedWithItem:(NSDictionary*)item;
 -(void)didFailOnItemWithError:(NSError*)error;
 

@@ -20,6 +20,10 @@
 return [[TBAFHTTPRequestOperationFailureBlockOnErrorCode alloc] initWithCompletionBlock:block forError:tbErrorBlockCannotConnectToHost()];
 }
 
++(TBAFHTTPRequestOperationFailureBlockOnErrorCode*)notConnectedToInternet:(TBAFHTTPRequestOperationCompletionBlock)block {
+return [[TBAFHTTPRequestOperationFailureBlockOnErrorCode alloc] initWithCompletionBlock:block forError:tbErrorBlockNotConnectedToInternet()];
+}
+
 -(id)initWithCompletionBlock:(TBAFHTTPRequestOperationCompletionBlock)block forError:(TBAFHTTPRequestOperationErrorBlock)errorBlock
 {
     self = [super init];

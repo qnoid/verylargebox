@@ -75,7 +75,13 @@ return self;
 -(void)notifyDidFailWithError:(id<TheBoxLocationServiceDelegate>) delegate
 {
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:delegate selector:@selector(didFailWithError:) name:@"didFailWithError" object:self];
+    [center addObserver:delegate selector:@selector(didFailUpdateToLocationWithError:) name:@"didFailWithError" object:self];
+}
+
+-(void)dontNotifyDidFailWithError:(id<TheBoxLocationServiceDelegate>) delegate
+{
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:delegate name:@"didFailWithError" object:self];
 }
 
 -(void)notifyDidFailReverseGeocodeLocationWithError:(id<TheBoxLocationServiceDelegate>) delegate
@@ -85,6 +91,14 @@ return self;
                                                  name:@"didFailReverseGeocodeLocationWithError"
                                                object:self];
 }
+
+-(void)dontNotifyDidFailReverseGeocodeLocationWithError:(id<TheBoxLocationServiceDelegate>) delegate
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:delegate
+                                                 name:@"didFailReverseGeocodeLocationWithError"
+                                               object:self];
+}
+
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
@@ -110,6 +124,15 @@ return self;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"didFindPlacemark" object:self userInfo:userInfo];
     }];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didFailWithError" object:self userInfo:userInfo];
 }
 
 @end

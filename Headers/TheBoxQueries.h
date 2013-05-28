@@ -20,6 +20,7 @@
 @protocol TBCreateCategoryOperationDelegate;
 @protocol TBUpdateItemOperationDelegate;
 @protocol TBLocalityOperationDelegate;
+@protocol TBCreateItemOperationDelegate;
 
 /*
  * Provides all available queries to TheBox API
@@ -84,7 +85,17 @@ extern NSString* const THE_BOX_SERVICE;
  @param userId the user id to create the item under. 
  @see #newVerifyUserQuery
  */
-+(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image location:(NSDictionary *)location locality:(NSString*)locality user:(NSUInteger)userId;
++(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image
+                                  location:(NSDictionary *)location
+                                  locality:(NSString*)locality
+                                      user:(NSUInteger)userId
+                                  delegate:(NSObject<TBCreateItemOperationDelegate>*)delegate;
 
 +(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
+
+/**
+ Gets all the items in thebox given the locality
+ 
+ */
++(AFHTTPRequestOperation*)newGetItems:(NSString*)locality delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 @end

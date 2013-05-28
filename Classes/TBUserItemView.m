@@ -32,7 +32,7 @@ return self;
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender
 {
-    self.didTapOnGetDirectionsButton(EmptyLocationCoordinate, EmptyLocationCoordinate, nil);
+    self.didTapOnGetDirectionsButton(EmptyLocationCoordinate, nil);
 }
 
 @end

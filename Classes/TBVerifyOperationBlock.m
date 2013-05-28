@@ -7,6 +7,7 @@
 //
 
 #import "TBVerifyOperationBlock.h"
+#import "TBAlertViews.h"
 
 @implementation TBVerifyOperationBlock
 
@@ -19,12 +20,17 @@
     
     self.didSucceedWithVerificationForEmail = tbEmptyDidSucceedWithVerificationForEmail();
     self.didFailOnVerifyWithError = tbEmptyDidFailOnVerifyWithError();
+    self.didFailWithNotConnectToInternet = tbEmptyDidFailOnVerifyWithError();
     
 return self;
 }
 
 -(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence {
     self.didSucceedWithVerificationForEmail(email, residence);
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error {
+    self.didFailWithNotConnectToInternet(error);
 }
 
 -(void)didFailOnVerifyWithError:(NSError *)error {

@@ -13,10 +13,11 @@
 #import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
 #import "TBSecureHashA1.h"
+#import "DDTTYLogger.h"
 
 static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
 
-static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73a03314809698";
+static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a03314809698";
 
 @interface TheBoxAppDelegate()
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
@@ -32,7 +33,8 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73a0331480
 {    
 	NSLog(@"Hello The Box");
     [XRay startUp];
-    
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     NSString* userSession = [standardUserDefaults objectForKey:[[NSBundle mainBundle] bundleIdentifier]];
     

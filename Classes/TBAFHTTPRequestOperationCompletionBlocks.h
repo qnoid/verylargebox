@@ -32,6 +32,14 @@ TBAFHTTPRequestOperationErrorBlock tbErrorBlockCannotConnectToHost(){
 return tbAFHTTPRequestOperationError(NSURLErrorCannotConnectToHost);
 }
 
+/**
+ 
+ **/
+NS_INLINE
+TBAFHTTPRequestOperationErrorBlock tbErrorBlockNotConnectedToInternet(){
+return tbAFHTTPRequestOperationError(NSURLErrorNotConnectedToInternet);
+}
+
 NS_INLINE
 TBAFHTTPRequestOperationCompletionBlock tbAFHTTPRequestOperationErrorNoOp() {
 return ^(AFHTTPRequestOperation *operation){};
@@ -64,6 +72,14 @@ return ^(AFHTTPRequestOperation *operation){};
  @return a new TBAFHTTPRequestOperationFailureBlock that handles an error with code NSURLErrorCannotConnectToHost
  */
 +(TBAFHTTPRequestOperationFailureBlockOnErrorCode*)cannotConnectToHost:(TBAFHTTPRequestOperationCompletionBlock)block;
+
+/**
+ Creates a new TBAFHTTPRequestOperationFailureBlock to handle a not connected to the internet error.
+ 
+ @param block the block to execute for the error
+ @return a new TBAFHTTPRequestOperationFailureBlock that handles an error with code NSURLErrorNotConnectedToInternet
+ */
++(TBAFHTTPRequestOperationFailureBlockOnErrorCode*)notConnectedToInternet:(TBAFHTTPRequestOperationCompletionBlock)block;
 
 /**
  

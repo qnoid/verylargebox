@@ -15,12 +15,17 @@
 #import "UIScrollView+SVPullToRefresh.h"
 #import "TheBoxLocationService.h"
 #import "UIViewController+TBViewController.h"
+#import "QNDAnimations.h"
+#import "QNDAnimatedView.h"
+#import "TBProgressView.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 @interface TBProfileViewController ()
-@property(nonatomic, strong) CLLocation *location;
+@property(nonatomic, weak) TheBoxUIScrollView* itemsView;
+@property(nonatomic, weak) UIView<QNDAnimatedView> *notificationAnimatedView;
+@property(nonatomic, weak) UIProgressView *progressView;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSDictionary* residence;
 @property(nonatomic, strong) NSMutableArray* items;
@@ -66,11 +71,6 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 return profileViewController;
 }
 
--(void)dealloc
-{
-    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
-}
-
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton
 {
     self = [super initWithNibName:NSStringFromClass([TBProfileViewController class]) bundle:nibBundleOrNil];
@@ -93,6 +93,14 @@ return self;
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
 
+    UIView<QNDAnimatedView> *notificationAnimatedView =
+        [[QNDAnimations new] newViewAnimated:CGRectMake(0, -44, 320, 44)];
+    notificationAnimatedView.backgroundColor = [UIColor blackColor];
+    notificationAnimatedView.hidden = YES;
+    
+    TBProgressView *progressView = [[TBProgressView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [notificationAnimatedView addSubview:progressView];
+    
     TheBoxUIScrollView* itemsView = [[[[TheBoxUIScrollViewBuilder alloc] initWith:
                                      CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:350.0] allowSelection] newVerticalScrollView];
     
@@ -102,13 +110,15 @@ return self;
     itemsView.scrollsToTop = YES;
 
     self.view = itemsView;
+    [self.view addSubview:notificationAnimatedView];
     self.itemsView = itemsView;
+    self.notificationAnimatedView = notificationAnimatedView;
+    self.progressView = progressView.progressView;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.theBoxLocationService notifyDidUpdateToLocation:self];
 
     __weak TBProfileViewController *wself = self;
     
@@ -188,8 +198,27 @@ return self;
     }
 }
  */
+
+-(void)didStartUploadingItem
+{
+    self.notificationAnimatedView.hidden = NO;
+    [self.notificationAnimatedView animateWithDuration:0.5 animation:^(UIView *view) {
+        view.frame = CGRectMake(0, 0, 320, 44);
+    }];
+}
+
+-(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+{
+    [self.progressView setProgress:(float)totalBytesWritten / (float)totalBytesExpectedToWrite
+                          animated:YES];
+}
+
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
+    [self.notificationAnimatedView rewind:^(BOOL finished) {
+        self.notificationAnimatedView.hidden = YES;
+    }];
+    
     NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSLog(@"%@", item);
     [self.items addObject:item];
@@ -259,23 +288,14 @@ return [[TBUserItemView alloc] initWithFrame:frame];
     
     __weak TBProfileViewController *wself = self;
     
-    userItemView.didTapOnGetDirectionsButton = ^(CLLocationCoordinate2D origin, CLLocationCoordinate2D destination, NSDictionary *options){
+    userItemView.didTapOnGetDirectionsButton = ^(CLLocationCoordinate2D destination, NSDictionary *options){
         [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [self class], @"didTapOnGetDirectionsButton"]];
 
-        wself.didTapOnGetDirectionsButton(wself.location.coordinate,
-                                          CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
+        wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
                                                                      [[location objectForKey:@"lng"] floatValue]),
                                           location);
     };
 
 }
-
-#pragma mark TheBoxLocationServiceDelegate
--(void)didUpdateToLocation:(NSNotification *)notification
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-	self.location = [TheBoxNotifications location:notification];
-}
-
 
 @end

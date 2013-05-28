@@ -23,11 +23,13 @@
 #import "TBNSErrorDelegate.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "TBLocalityOperationDelegate.h"
+#import "TBCreateItemOperationDelegate.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
 static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
 static NSString* const USER_ITEMS = @"/users/%u/items";
+static NSString* const ITEMS = @"/items";
 
 @interface TheBoxQueries ()
 
@@ -75,8 +77,17 @@ NSUInteger const TIMEOUT = 60;
             [TBAFHTTPRequestOperationFailureBlockOnErrorCode cannotConnectToHost:^(AFHTTPRequestOperation *operation){
                 [delegate didFailWithCannonConnectToHost:error];
             }];
-        
+
+        TBAFHTTPRequestOperationFailureBlockOnErrorCode *notConnectedToInternet =
+            [TBAFHTTPRequestOperationFailureBlockOnErrorCode notConnectedToInternet:^(AFHTTPRequestOperation *operation){
+                [delegate didFailWithNotConnectToInternet:error];
+            }];
+
         if([cannotConnectToHost failure:operation error:error]){
+            return;
+        }
+        
+        if([notConnectedToInternet failure:operation error:error]){
             return;
         }
 
@@ -88,7 +99,6 @@ return request;
 
 +(AFHTTPRequestOperation*)newVerifyUserQuery:(NSObject<TBVerifyUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence;
 {
-    
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
@@ -105,6 +115,16 @@ return request;
    }
    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"ERROR: %s %@", __PRETTY_FUNCTION__, error);
+       
+       TBAFHTTPRequestOperationFailureBlockOnErrorCode *notConnectedToInternet =
+       [TBAFHTTPRequestOperationFailureBlockOnErrorCode notConnectedToInternet:^(AFHTTPRequestOperation *operation){
+           [delegate didFailWithNotConnectToInternet:error];
+       }];
+       
+       if([notConnectedToInternet failure:operation error:error]){
+           return;
+       }
+
        [delegate didFailOnVerifyWithError:error];
    }];
     
@@ -333,7 +353,11 @@ return request;
 return request;
 }
 
-+(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image location:(NSDictionary *)location locality:(NSString*)locality user:(NSUInteger)userId
++(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image
+                                  location:(NSDictionary *)location
+                                  locality:(NSString*)locality
+                                      user:(NSUInteger)userId
+                                  delegate:(NSObject<TBCreateItemOperationDelegate>*)delegate
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
@@ -364,9 +388,18 @@ return request;
     
     [createItem setUploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
         NSLog(@"Sent %d of %d bytes", totalBytesWritten, totalBytesExpectedToWrite);
+        [delegate bytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
     }];
     
-    return createItem;
+    [createItem setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        [delegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnItemWithError:error];
+    }];
+    
+return createItem;
 }
 
 +(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate
@@ -388,6 +421,27 @@ return request;
   }];
     
     return request;
+}
+
++(AFHTTPRequestOperation*)newGetItems:(NSString*)locality delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableURLRequest *getItemsRequest =
+    [client requestWithMethod:@"GET" path:ITEMS parameters:@{@"locality[name]": locality}];
+    
+    [getItemsRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [getItemsRequest setTimeoutInterval:TIMEOUT];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:getItemsRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        [delegate didSucceedWithItems:[operation.responseString mutableObjectFromJSONString]];
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnItemsWithError:error];
+    }];
+    
+return request;
 }
 
 

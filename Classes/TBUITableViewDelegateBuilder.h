@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^TBDidDeselectRowAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
+typedef void(^TBDidSelectRowAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
 
 NS_INLINE
-TBDidDeselectRowAtIndexPath tbDoNothing(){
+TBDidSelectRowAtIndexPath tbDoNothing(){
 return ^(UITableView *tableView, NSIndexPath *indexPath){};
 }
 
@@ -25,6 +25,6 @@ return ^(UITableView *tableView, NSIndexPath *indexPath){};
  */
 @interface TBUITableViewDelegateBuilder : NSObject
 
--(TBUITableViewDelegateBuilder*)didDeselectRowAtIndexPath:(TBDidDeselectRowAtIndexPath)didDeselectRowAtIndexPath;
+-(TBUITableViewDelegateBuilder*)didSelectRowAtIndexPath:(TBDidSelectRowAtIndexPath)didSelectRowAtIndexPath;
 -(id<UITableViewDelegate>)newDelegate;
 @end

@@ -18,6 +18,9 @@
 #import "TBUITableViewDataSourceBuilder.h"
 #import "TBUIView.h"
 #import "TBVerifyOperationBlock.h"
+#import "TBFeedViewController.h"
+#import "UINavigationItem+TBNavigationItem.h"
+#import "TBAlertViews.h"
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
@@ -36,7 +39,8 @@
     identifyViewController.title = @"thebox";
     
     UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                     initWithImage:[UIImage imageNamed:@"chat.png"]
+                                     style:UIBarButtonItemStylePlain
                                      target:identifyViewController
                                      action:@selector(launchFeedback)];
     identifyViewController.navigationItem.leftBarButtonItem = actionButton;
@@ -77,7 +81,7 @@ return self;
         borderWidth:2.0f]
         borderColor:darkOrange.CGColor];
     
-    __unsafe_unretained TBIdentifyViewController *uself = self;
+    __weak TBIdentifyViewController *uself = self;
     
     [self.identifyButton onTouchDown:^(UIButton *button) {
         makeButtonDarkOrange();
@@ -91,17 +95,12 @@ return self;
     [self.theBoxButton onTouchUp:makeButtonWhite()];
     [self.browseButton onTouchDown:^(UIButton *button)
     {
-        HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
-        
-        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
-                                        initWithTitle:@"Identify"
-                                        style:UIBarButtonItemStylePlain
-                                        target:uself
-                                        action:@selector(dismissViewControllerAnimated)];
-        
-        homeGridViewControler.navigationItem.leftBarButtonItem = closeButton;
+        TBFeedViewController *localityItemsViewController = [TBFeedViewController newFeedViewController];
 
-        [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:homeGridViewControler] animated:YES completion:nil];
+        [localityItemsViewController.navigationItem tb_addActionOnBarButtonItem:TBNavigationItemActionDismissViewControllerAnimatedOnLeftBarButtonItem target:self];
+
+        
+        [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:localityItemsViewController] animated:YES completion:nil];
     }];
     [self.browseButton onTouchUp:makeButtonWhite()];    
 }
@@ -117,7 +116,7 @@ return self;
 }
 
 -(void)launchFeedback {
-    [TestFlight openFeedbackView];
+    [TestFlight submitFeedback:nil];
 }
 
 -(void)dismissViewControllerAnimated
@@ -131,16 +130,20 @@ return self;
     NSLog(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);
     TBProfileViewController *profileViewController = [TBProfileViewController newProfileViewController:residence email:email];
     HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
-    
+    TBFeedViewController *localityItemsViewController = [TBFeedViewController newFeedViewController];
+
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:profileViewController], [[UINavigationController alloc] initWithRootViewController:homeGridViewControler]];
+    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:profileViewController], [[UINavigationController alloc] initWithRootViewController:homeGridViewControler], 
+        [[UINavigationController alloc] initWithRootViewController:localityItemsViewController]];
     
     [self presentViewController:tabBarController animated:YES completion:nil];
 }
 
 -(void)didFailOnVerifyWithError:(NSError *)error
 {
-    UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"Unauthorised" message:@"You are not authorised. Please check your email to verify." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    UIAlertView* userUnauthorisedAlertView =
+        [TBAlertViews newAlertViewWithOk:@"Unauthorised"
+                                 message:@"You are not authorised. Please check your email to verify."];
     
     [userUnauthorisedAlertView show];
 }
@@ -157,29 +160,49 @@ return self;
     
     self.accounts = [NSMutableArray arrayWithArray:[SSKeychain accountsForService:THE_BOX_SERVICE]];
     [self.accountsTableView reloadData];
+    
+    UIAlertView* userDidEnterEmailAlertView =
+    [TBAlertViews newAlertViewWithOk:@"Device Registration"
+                             message:[NSString stringWithFormat:@"Requested to register %@ with thebox", [[UIDevice currentDevice] name]]];
+    
+    [userDidEnterEmailAlertView show];
 }
 
-#pragma mark TBRegistrationOperationDelegate
+#pragma mark TBCreateUserOperationDelegate
 -(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"New Registration" message:[NSString stringWithFormat:@"Please check your email %@.", email] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-    
-    [userUnauthorisedAlertView show];    
+    UIAlertView* userUnauthorisedAlertView =
+        [TBAlertViews newAlertViewWithOk:@"New Registration"
+                                 message:[NSString stringWithFormat:@"Please check your email to verify %@", [[UIDevice currentDevice] name]]];
+     
+    [userUnauthorisedAlertView show];
 }
 
 -(void)didFailOnRegistrationWithError:(NSError*)error
 {
     NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+    
 }
 
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
-    UIAlertView* cannotConnectToHostAlertView = [[UIAlertView alloc] initWithTitle:@"Cannot connect to host" message:@"The was a problem connecting with thebox. Please check your internet connection and try again." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-    
+    UIAlertView* cannotConnectToHostAlertView =
+        [TBAlertViews newAlertViewWithOk:@"Cannot connect to host"
+                                 message:@"The was a problem connecting with thebox. Please check your internet connection and try again."];
+
     [cannotConnectToHostAlertView show];
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error
+{
+    UIAlertView* notConnectedToInternetAlertView =
+    [TBAlertViews newAlertViewWithOk:@"Not Connected to Internet"
+                             message:@"You are not connected to the internet. Check your connection and try again."];
+    
+    [notConnectedToInternetAlertView show];
 }
 
 #pragma mark UITableViewDatasource
@@ -193,7 +216,7 @@ return [self.accounts count];
     
     if(!emailCell)
     {
-        emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellSelectionStyleNone reuseIdentifier:@"Cell"];
+        emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         emailCell.textLabel.textColor = [TBColors colorLightOrange];
         emailCell.textLabel.textAlignment = NSTextAlignmentCenter;
         UIView* selectedBackgroundView = [[UIView alloc] init];
@@ -207,7 +230,7 @@ return [self.accounts count];
     NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
     emailCell.textLabel.text = email;
 
-    tbBmailStatus(TBEmailStatusVerified)(emailCell);
+    tbBmailStatus(TBEmailStatusDefault)(emailCell);
     
 return emailCell;
 }
@@ -250,16 +273,19 @@ return YES;
     
     verifyOperationBlock.didFailOnVerifyWithError = ^(NSError* error)
     {
+        tbBmailStatus(TBEmailStatusUnauthorised)(tableViewCell);
+        [wself didFailOnVerifyWithError:error];
+    };
+    
+    verifyOperationBlock.didFailWithNotConnectToInternet = ^(NSError *error)
+    {
         tbBmailStatus(TBEmailStatusError)(tableViewCell);
 
-        if(NSURLErrorNotConnectedToInternet == error.code){
-            UIAlertView* notConnectedToInternetAlertView = [[UIAlertView alloc] initWithTitle:@"Not Connected to Internet" message:@"You are not connected to the internet. Check your connection and try again." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-            
-            [notConnectedToInternetAlertView show];            
-        return;
-        }
-
-        [wself didFailOnVerifyWithError:error];
+        UIAlertView* notConnectedToInternetAlertView =
+        [TBAlertViews newAlertViewWithOk:@"Not Connected to Internet"
+                                 message:@"You are not connected to the internet. Check your connection and try again."];
+        
+        [notConnectedToInternetAlertView show];
     };
     
     NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];

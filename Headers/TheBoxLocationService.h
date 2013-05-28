@@ -60,11 +60,13 @@
 -(void)notifyDidFindPlacemark:(id<TheBoxLocationServiceDelegate>) delegate;
 
 /*
- * will call didFailWithError:
+ * will call didFailUpdateToLocationWithError:
  * with name @"didFailWithError"
  * userInfo @"error"
  */
 -(void)notifyDidFailWithError:(id<TheBoxLocationServiceDelegate>) delegate;
+
+-(void)dontNotifyDidFailWithError:(id<TheBoxLocationServiceDelegate>) delegate;
 
 /*
  * will call didFailReverseGeocodeLocationWithError:
@@ -72,4 +74,6 @@
  * userInfo @"error"
  */
 -(void)notifyDidFailReverseGeocodeLocationWithError:(id<TheBoxLocationServiceDelegate>) delegate;
+
+-(void)dontNotifyDidFailReverseGeocodeLocationWithError:(id<TheBoxLocationServiceDelegate>) delegate;
 @end

@@ -11,20 +11,18 @@
 #import <MapKit/MapKit.h>
 #import <AddressBook/AddressBook.h>
 
-typedef void(^TBUserItemViewGetDirections)(CLLocationCoordinate2D origin, CLLocationCoordinate2D destination, NSDictionary *options);
+typedef void(^TBUserItemViewGetDirections)(CLLocationCoordinate2D destination, NSDictionary *options);
 
 NS_INLINE
 TBUserItemViewGetDirections tbUserItemViewGetDirectionsNoOp(){
-return ^(CLLocationCoordinate2D origin, CLLocationCoordinate2D destination, NSDictionary *options){};
+return ^(CLLocationCoordinate2D destination, NSDictionary *options){};
 }
 
 NS_INLINE
 TBUserItemViewGetDirections tbUserItemViewGetDirectionsWithAppleMaps()
 {
-return ^(CLLocationCoordinate2D origin, CLLocationCoordinate2D destination, NSDictionary *options)
+return ^(CLLocationCoordinate2D destination, NSDictionary *options)
     {
-        
-        
         MKPlacemark* placeMark = [[MKPlacemark alloc] initWithCoordinate:destination addressDictionary:nil];
     
         MKMapItem* mapItem =  [[MKMapItem alloc] initWithPlacemark:placeMark];
@@ -42,11 +40,9 @@ return ^(CLLocationCoordinate2D origin, CLLocationCoordinate2D destination, NSDi
 NS_INLINE
 TBUserItemViewGetDirections tbUserItemViewGetDirectionsWithGoogleMaps()
 {
-return ^(CLLocationCoordinate2D origin, CLLocationCoordinate2D destination, NSDictionary *options){
+return ^(CLLocationCoordinate2D destination, NSDictionary *options){
         NSString *urlstring =
-            [NSString stringWithFormat:@"http://maps.google.com/?dirflg=w&saddr=%f,%f&daddr=%f,%f",
-             origin.latitude,
-             origin.longitude,
+            [NSString stringWithFormat:@"http://maps.google.com/?dirflg=w&daddr=%f,%f",
              destination.latitude,
              destination.longitude];
         

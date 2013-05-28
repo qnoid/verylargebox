@@ -12,6 +12,7 @@
 #import "TheBoxNotifications.h"
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
+#import "TBAlertViews.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare_gray";
 static NSString* const foursquarePoweredByType = @"png";
@@ -19,14 +20,12 @@ static NSString* const foursquarePoweredByType = @"png";
 static UIImage* foursquarePoweredBy;
 
 @interface LocationUIViewController ()
--(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSArray* venues;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @end
 
 @implementation LocationUIViewController
-{
-}
 
 +(LocationUIViewController*)newLocationViewController {
 return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
@@ -60,10 +59,11 @@ return self;
 -(void) viewDidLoad
 {
 	[self.theBoxLocationService notifyDidUpdateToLocation:self];
+	[self.theBoxLocationService notifyDidFailWithError:self];
     
-    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    imageView.image = foursquarePoweredBy;
-    imageView.frame = CGRectMake(10,10,320,121);
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:foursquarePoweredBy];
+    imageView.frame = CGRectMake(0, 0, 320, 121);
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.venuesTableView.tableFooterView = imageView;
 }
@@ -81,6 +81,23 @@ return self;
 - (IBAction)cancel:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)didFailUpdateToLocationWithError:(NSNotification *)notification
+{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    
+    __block TBAlertViewDelegate *alertViewDelegate;
+    alertViewDelegate = [TBAlertViews newAlertViewDelegateOnOk:^(UIAlertView* alertView){
+        [self dismissModalViewControllerAnimated:YES];
+        alertViewDelegate = nil;
+    }];
+    
+    UIAlertView *alertView = [TBAlertViews newAlertViewWithOk:@"Location access denied"
+                                                      message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'thebox' to access your location."];
+    alertView.delegate = alertViewDelegate;
+    
+    [alertView show];    
 }
 
 -(void)didUpdateToLocation:(NSNotification *)notification;

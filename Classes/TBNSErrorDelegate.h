@@ -10,6 +10,7 @@
 
 @protocol TBNSErrorDelegate <NSObject>
 
+@optional
 /**
  Callback by TheBoxQueries when a AFHTTPRequestOperation cannot connect to host.
  
@@ -20,4 +21,16 @@
  @param error the error as passed on AFHTTPRequestOperation#setCompletionBlockWithSuccess:failure:
  */
 -(void)didFailWithCannonConnectToHost:(NSError*)error;
+
+/**
+ Callback by TheBoxQueries when a AFHTTPRequestOperation cannot connect to the internet.
+ 
+ {code}
+ error.code == NSURLErrorNotConnectedToInternet
+ {code}
+ 
+ @param error the error as passed on AFHTTPRequestOperation#setCompletionBlockWithSuccess:failure:
+ */
+-(void)didFailWithNotConnectToInternet:(NSError*)error;
+
 @end

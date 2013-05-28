@@ -62,19 +62,7 @@
     
     __weak TBEmailViewController *uself = self;
     [self.registerButton onTouchDown:^(UIButton *button) {
-        
-        TBSecureHashA1 *sha1 = [TBSecureHashA1 new];
-        NSString* residence = [sha1 newKey];
-
-        [self.delegate didEnterEmail:uself.emailTextField.text forResidence:residence];
-
-        //no need to handle viewcontroller unloading
-        AFHTTPRequestOperation *newRegistrationOperation =
-            [TheBoxQueries newCreateUserQuery:self.createUserOperationDelegate email:uself.emailTextField.text residence:residence];
-        
-        [self.operations addOperation:newRegistrationOperation];
-        
-        [uself.navigationController popViewControllerAnimated:YES];
+        [uself didTouchUpInsideRegister];
     }];
     [self.registerButton onTouchUp:makeButtonWhite()];
     [[self.emailTextField.border
@@ -86,29 +74,24 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    [self didTouchUpInsideRegister];
 return YES;
 }
 
-#pragma mark TBRegistrationOperationDelegate
--(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
+-(void)didTouchUpInsideRegister
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSError *error = nil;
-    [SSKeychain setPassword:residence forService:THE_BOX_SERVICE account:email error:&error];
+    TBSecureHashA1 *sha1 = [TBSecureHashA1 new];
+    NSString* residence = [sha1 newKey];
     
-    if (error) {
-        NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
-    }
+    [self.delegate didEnterEmail:self.emailTextField.text forResidence:residence];
     
-    UIAlertView* userUnauthorisedAlertView = [[UIAlertView alloc] initWithTitle:@"New Registration" message:[NSString stringWithFormat:@"Please check your email %@.", email] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    //no need to handle viewcontroller unloading
+    AFHTTPRequestOperation *newRegistrationOperation =
+        [TheBoxQueries newCreateUserQuery:self.createUserOperationDelegate email:self.emailTextField.text residence:residence];
     
-    [userUnauthorisedAlertView show];
-
-}
-
--(void)didFailOnRegistrationWithError:(NSError*)error
-{
-    NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+    [self.operations addOperation:newRegistrationOperation];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

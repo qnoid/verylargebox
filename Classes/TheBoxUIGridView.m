@@ -124,7 +124,7 @@ return self;
 {
     NSUInteger row = [[self.frames objectForKey:[NSValue valueWithCGRect:[view frame]]] unsignedIntegerValue];
     
-    NSLog(@"asking for column %d at row %d", index, row);
+    DDLogVerbose(@"asking for column %d at row %d", index, row);
 
 return [self.datasource gridView:gridView viewOf:view ofFrame:frame atRow:row atIndex:index];
 }
@@ -188,7 +188,7 @@ return [self.datasource numberOfViewsInGridView:self];
     return [self gridView:self viewOf:scrollView ofFrame:frame atIndex:index];
     }
 
-	NSLog(@"asking for row %d", index);
+	DDLogVerbose(@"asking for row %d", index);
 	
     TheBoxUIScrollView* view = [TheBoxUIScrollView 
                                 newHorizontalScrollView:frame
@@ -197,7 +197,7 @@ return [self.datasource numberOfViewsInGridView:self];
     view.datasource = self;
     view.scrollViewDelegate = self;
     
-	NSLog(@"view %@", view);
+	DDLogVerbose(@"view %@", view);
     
 return view;
 }
@@ -231,14 +231,14 @@ return view;
 
 -(void)viewWasTapped:(id)sender
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer*)sender;
     CGPoint tapPoint = [tapGestureRecognizer locationInView:self.scrollView];
-    NSLog(@"%@", NSStringFromCGPoint(tapPoint));
-    NSLog(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
+    DDLogVerbose(@"%@", NSStringFromCGPoint(tapPoint));
+    DDLogVerbose(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
 
     NSUInteger row = [self.scrollView indexOf:tapPoint];
-    NSLog(@"%u", row);
+    DDLogVerbose(@"%u", row);
     
     NSUInteger numberOfRows = [self numberOfViewsInScrollView:self.scrollView];
     
@@ -250,7 +250,7 @@ return view;
 
     tapPoint = [tapGestureRecognizer locationInView:view];
     NSUInteger index = [view indexOf:tapPoint];
-    NSLog(@"[%u, %u], %@, %@", row, index, view, NSStringFromCGRect(view.bounds));
+    DDLogVerbose(@"[%u, %u], %@, %@", row, index, view, NSStringFromCGRect(view.bounds));
     
     NSUInteger numberOfViews = [self.datasource numberOfViewsInGridView:self atIndex:row];
     
