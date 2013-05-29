@@ -88,7 +88,7 @@ return self;
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
     
     __block TBAlertViewDelegate *alertViewDelegate;
-    alertViewDelegate = [TBAlertViews newAlertViewDelegateOnOk:^(UIAlertView* alertView){
+    alertViewDelegate = [TBAlertViews newAlertViewDelegateOnOk:^(UIAlertView* alertView, NSInteger buttonIndex){
         [self dismissModalViewControllerAnimated:YES];
         alertViewDelegate = nil;
     }];

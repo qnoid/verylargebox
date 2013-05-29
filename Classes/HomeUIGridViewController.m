@@ -315,7 +315,7 @@ return [self.locations count];
     storeButton.titleLabel.numberOfLines = 0;
     storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [storeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [storeButton addTarget:self action:@selector(didClickOnLocation:) forControlEvents:UIControlEventTouchUpInside];
+    [storeButton addTarget:self action:@selector(didTapOnGetDirectionsButton:) forControlEvents:UIControlEventTouchUpInside];
     storeButton.userInteractionEnabled = NO;
     
 return storeButton;
@@ -464,7 +464,8 @@ return storeButton;
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+
     TBAlertViewDelegate *alertViewDelegate = [TBAlertViews newAlertViewDelegateOnOkDismiss];
     UIAlertView *alertView = [TBAlertViews newAlertViewWithOk:@"Location access denied"
                                                       message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'thebox' to access your location."];
@@ -513,14 +514,28 @@ return storeButton;
     [[TheBoxQueries newGetLocationsGivenLocalityName:localityName delegate:self] start];
 }
 
--(IBAction)didClickOnLocation:(id)sender
+-(IBAction)didTapOnGetDirectionsButton:(id)sender
 {
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
-    NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
+    __weak HomeUIGridViewController *wself = self;
     
-    self.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
-                                                                [[location objectForKey:@"lng"] floatValue]),
-                                     location);    
+    TBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [TBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [wself class], __PRETTY_FUNCTION__]];
+        NSDictionary *location = [[wself.locations objectAtIndex:wself.index] objectForKey:@"location"];
+        
+        wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
+                                                                    [[location objectForKey:@"lng"] floatValue]),
+                                         location);
+    }];
+
+    TBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [TBAlertViews newAlertViewDelegateOnCancelDismiss];
+    
+    NSObject<UIAlertViewDelegate> *didTapOnGetDirectionsDelegate =
+        [TBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
+    
+    UIAlertView *alertView = [TBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:@"Exit the app and get directions."];
+    alertView.delegate = didTapOnGetDirectionsDelegate;
+    
+    [alertView show];
 }
 
 @end

@@ -11,18 +11,21 @@
 #import "TBMacros.h"
 #import <objc/runtime.h>
 
-typedef NS_ENUM(NSInteger, TBButtonIndex)
-{
-    BUTTON_INDEX_OK = 0,
-    BUTTON_INDEX_CANCEL = 1
-};
+NS_INLINE
+NSPredicate* isButtonIndex(TBButtonIndex buttonIndex){
+    return [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ((NSNumber*)evaluatedObject).intValue == buttonIndex;
+    }];
+}
 
 NS_INLINE
 NSPredicate* isButtonIndexOk(){
-return [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-    NSNumber *buttonIndex = evaluatedObject;
-    return buttonIndex.intValue == BUTTON_INDEX_OK;
-}];
+return isButtonIndex(BUTTON_INDEX_OK);
+}
+
+NS_INLINE
+NSPredicate* isButtonIndexCancel(){
+return isButtonIndex(BUTTON_INDEX_CANCEL);
 }
 
 @interface TBAlertViewDelegate ()
@@ -46,7 +49,7 @@ return self;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if([self.predicateOnButtonIndex evaluateWithObject:TBInteger(buttonIndex)]){
-        self.alertViewBlock(alertView);
+        self.alertViewBlock(alertView, buttonIndex);
     }  
 }
 
@@ -55,19 +58,50 @@ return self;
 
 @implementation TBAlertViews
 
++(TBAlertViewDelegate*)newAlertViewDelegateOnPredicate:(NSPredicate*)predicate alertViewBlock:(TBAlertViewBlock)alertViewBlock{
+return [[TBAlertViewDelegate alloc] init:predicate alertViewBlock:alertViewBlock];
+}
+
++(TBAlertViewDelegate*)newAlertViewDelegateOnButtonIndex:(TBButtonIndex)buttonIndex alertViewBlock:(TBAlertViewBlock)alertViewBlock{
+return [[TBAlertViewDelegate alloc] init:isButtonIndex(buttonIndex) alertViewBlock:alertViewBlock];
+}
 
 +(TBAlertViewDelegate*)newAlertViewDelegateOnOk:(TBAlertViewBlock)alertViewBlock{
 return [[TBAlertViewDelegate alloc] init:isButtonIndexOk() alertViewBlock:alertViewBlock];
 }
 
-+(TBAlertViewDelegate*)newAlertViewDelegateOnOkDismiss
++(TBAlertViewDelegate*)newAlertViewDelegateOnCancel:(TBAlertViewBlock)alertViewBlock{
+return [[TBAlertViewDelegate alloc] init:isButtonIndexCancel() alertViewBlock:alertViewBlock];
+}
+
++(TBAlertViewDelegate*)newAlertViewDelegateDismissOn:(TBButtonIndex)buttonIndex
 {
     __block TBAlertViewDelegate *alertViewDelegate;
-    alertViewDelegate = [self newAlertViewDelegateOnOk:^(UIAlertView* alertView){
+    alertViewDelegate = [self newAlertViewDelegateOnButtonIndex:buttonIndex alertViewBlock:^(UIAlertView* alertView, NSInteger buttonIndex){
         alertViewDelegate = nil;
     }];
+    
+    return alertViewDelegate;
+}
 
-return alertViewDelegate;
++(TBAlertViewDelegate*)newAlertViewDelegateOnOkDismiss {
+return [self newAlertViewDelegateDismissOn:BUTTON_INDEX_OK];
+}
+
++(TBAlertViewDelegate*)newAlertViewDelegateOnCancelDismiss {
+return [self newAlertViewDelegateDismissOn:BUTTON_INDEX_CANCEL];
+}
+
++(NSObject<UIAlertViewDelegate>*)all:(NSArray*)alertViewDelegates
+{
+    __block NSObject<UIAlertViewDelegate>* all = [self newAlertViewDelegateOnPredicate:[NSPredicate predicateWithValue:YES] alertViewBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        for (NSObject<UIAlertViewDelegate> *alertViewDelegate in alertViewDelegates) {
+            [alertViewDelegate alertView:alertView clickedButtonAtIndex:buttonIndex];
+        }
+        all = nil;
+    }];
+    
+return all;
 }
 
 + (UIAlertView *)newAlertViewWithOk:(NSString *)title message:(NSString *)message {
@@ -79,4 +113,15 @@ return alertViewDelegate;
         
 return alertView;
 }
+
++ (UIAlertView *)newAlertViewWithOkAndCancel:(NSString *)title message:(NSString *)message {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:@"Cancel", nil];
+    
+    return alertView;
+}
+
 @end
