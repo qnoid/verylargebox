@@ -17,6 +17,7 @@
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
 #import "TBProgressView.h"
+#import "TBAlertViews.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -283,14 +284,26 @@ return [[TBUserItemView alloc] initWithFrame:frame];
     
     __weak TBProfileViewController *wself = self;
     
-    userItemView.didTapOnGetDirectionsButton = ^(CLLocationCoordinate2D destination, NSDictionary *options){
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [self class], @"didTapOnGetDirectionsButton"]];
-
-        wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
-                                                                     [[location objectForKey:@"lng"] floatValue]),
-                                          location);
+    userItemView.didTapOnGetDirectionsButton = ^(CLLocationCoordinate2D destination, NSDictionary *options){        
+        TBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [TBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTapOnGetDirectionsButton"]];
+            
+            wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
+                                                                         [[location objectForKey:@"lng"] floatValue]),
+                                              location);
+        }];
+        
+        TBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [TBAlertViews newAlertViewDelegateOnCancelDismiss];
+        
+        NSObject<UIAlertViewDelegate> *didTapOnGetDirectionsDelegate =
+        [TBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
+        
+        UIAlertView *alertView = [TBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:[NSString stringWithFormat:@"Exit the app and get directions to %@.", [location objectForKey:@"name"]]];
+        
+        alertView.delegate = didTapOnGetDirectionsDelegate;
+        
+        [alertView show];
     };
-
 }
 
 @end

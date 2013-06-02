@@ -25,6 +25,7 @@
 #import "TBHuds.h"
 #import "MBProgressHUD.h"
 #import "TBPolygon.h"
+#import "TBErrorBlocks.h"
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
@@ -193,18 +194,17 @@ return self;
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
-    MBProgressHUD *hud = [TBHuds newWithView:self.view config:TB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
-    hud.detailsLabelText = error.localizedDescription;
-    [hud show:YES];
-    [hud hide:YES afterDelay:3.0];
+    [TBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
-    MBProgressHUD *hud = [TBHuds newWithView:self.view config:TB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
-    hud.detailsLabelText = error.localizedDescription;
-    [hud show:YES];
-    [hud hide:YES afterDelay:3.0];
+    [TBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithTimeout:(NSError *)error
+{
+    [TBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark UITableViewDatasource

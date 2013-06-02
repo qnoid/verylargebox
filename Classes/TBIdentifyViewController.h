@@ -13,6 +13,7 @@
 #import "TBCreateUserOperationDelegate.h"
 #import "TBEmailViewController.h"
 #import "TBView.h"
+#import "TBAFHTTPRequestOperationCompletionBlocks.h"
 
 @protocol TBButton;
 

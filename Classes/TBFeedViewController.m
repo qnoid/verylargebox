@@ -218,16 +218,27 @@ return localityItemsViewController;
     
     userItemView.storeLabel.text = name;
     
-    __weak TBFeedViewController *wself = self;
-    
+    __weak TBFeedViewController *wself = self;    
     userItemView.didTapOnGetDirectionsButton = ^(CLLocationCoordinate2D destination, NSDictionary *options){
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [self class], @"didTapOnGetDirectionsButton"]];
+        TBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [TBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTapOnGetDirectionsButton"]];
+            
+            wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
+                                                                         [[location objectForKey:@"lng"] floatValue]),
+                                              location);
+        }];
         
-        wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
-                                                                     [[location objectForKey:@"lng"] floatValue]),
-                                          location);
+        TBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [TBAlertViews newAlertViewDelegateOnCancelDismiss];
+        
+        NSObject<UIAlertViewDelegate> *didTapOnGetDirectionsDelegate =
+        [TBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
+        
+        UIAlertView *alertView = [TBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:[NSString stringWithFormat:@"Exit the app and get directions to %@.", [location objectForKey:@"name"]]];
+        
+        alertView.delegate = didTapOnGetDirectionsDelegate;
+        
+        [alertView show];
     };
-    
 }
 
 #pragma mark TheBoxLocationServiceDelegate

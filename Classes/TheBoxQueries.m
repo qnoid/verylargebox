@@ -48,7 +48,12 @@ return ^(AFHTTPRequestOperation *operation, NSError *error)
             [delegate didFailWithNotConnectToInternet:error];
         return;
         }
-        
+
+        if(TB_ERROR_TIMEOUT(error)){
+            [delegate didFailWithTimeout:error];
+            return;
+        }
+
         failureBlock(operation, error);
     };
 }

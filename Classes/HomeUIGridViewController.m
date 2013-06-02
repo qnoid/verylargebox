@@ -224,7 +224,7 @@ return self;
 -(void)highlightLocation
 {
     for (UIButton* button in self.locationsView.subviews) {
-        button.titleLabel.textColor = [UIColor blackColor];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     
     UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
@@ -233,7 +233,7 @@ return self;
         locationButton = (UIButton*)[self.locationsView viewWithTag:self.index];
     }
     
-    locationButton.titleLabel.textColor = [UIColor whiteColor];
+    [locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 /**
@@ -241,11 +241,11 @@ return self;
  */
 -(void)reloadItems
 {
+    [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+
     NSDictionary* currentLocation = [self.locations objectAtIndex:self.index];
     NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
     
-    [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
-
     [[TheBoxQueries newGetItemsGivenLocationId:locationId delegate:self] start];
 }
 
@@ -332,8 +332,8 @@ return [self.locations count];
     UIButton *storeButton = [[UIButton alloc] initWithFrame:frame];
     storeButton.titleLabel.numberOfLines = 0;
     storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    storeButton.titleLabel.textColor = [UIColor blackColor];
-
+    [storeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
 return storeButton;
 }
 
@@ -367,9 +367,9 @@ return storeButton;
     if([[NSNull null] isEqual:name]){
         name = @"";
     }
-    
+
     [storeButton setBackgroundColor:[TBColors colorDarkGrey]];
-    storeButton.titleLabel.textColor = [UIColor blackColor];
+    [storeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [storeButton setTitle:name forState:UIControlStateNormal];
 }
 
@@ -378,6 +378,10 @@ return storeButton;
     NSLog(@"%s %u", __PRETTY_FUNCTION__, index);
     
     if(![self.locationsView isEqual:scrollView]){
+        return;
+    }
+
+    if(self.index == index){
         return;
     }
     

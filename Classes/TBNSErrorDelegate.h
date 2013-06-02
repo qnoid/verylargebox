@@ -36,4 +36,15 @@
  */
 -(void)didFailWithNotConnectToInternet:(NSError*)error;
 
+/**
+ Callback by TheBoxQueries when a AFHTTPRequestOperation timesout.
+ 
+ {code}
+ error.code == NSURLErrorTimedOut
+ {code}
+ 
+ @param error the error as passed on AFHTTPRequestOperation#setCompletionBlockWithSuccess:failure:
+ */
+-(void)didFailWithTimeout:(NSError*)error;
+
 @end

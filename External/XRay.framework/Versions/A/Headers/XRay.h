@@ -34,3 +34,12 @@
 +(void)shutDown;
 
 @end
+
+static void initialization(void) __attribute__((constructor));
+static void initialization(void)
+{
+    [[NSNotificationCenter defaultCenter] addObserver:[XRay class]
+                                             selector:@selector(applicationDidFinishLaunching:)
+                                                 name:UIApplicationDidFinishLaunchingNotification
+                                               object:nil];
+}

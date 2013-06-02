@@ -106,6 +106,23 @@
 		BD258DDE1678040500286511 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDD1678040500286511 /* refresh.png */; };
 		BD258DDF1678040500286511 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDD1678040500286511 /* refresh.png */; };
 		BD2A8A9D175A4F4C0036A852 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD2A8A9C175A4F4C0036A852 /* Settings.bundle */; };
+		BD2A8AAC175AD9360036A852 /* TheBoxAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* TheBoxAlertViews.m */; };
+		BD2A8AAE175B3DE00036A852 /* XRay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2A8AAD175B3DE00036A852 /* XRay.framework */; };
+		BD2A8AB1175B413D0036A852 /* HomeUIGridViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AB0175B413D0036A852 /* HomeUIGridViewControllerTest.m */; };
+		BD2A8AB2175B42830036A852 /* HomeUIGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */; };
+		BD2A8AB3175B42910036A852 /* DetailsUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* DetailsUIViewController.m */; };
+		BD2A8AB4175B42970036A852 /* TBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9BC5351751476000CF18EB /* TBAlertViews.m */; };
+		BD2A8AB5175B429B0036A852 /* TBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* TBButton.m */; };
+		BD2A8AB6175B42A00036A852 /* TBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0B165AD1150068C749 /* TBColors.m */; };
+		BD2A8AB7175B42A60036A852 /* TBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* TBItemView.m */; };
+		BD2A8AB8175B42B10036A852 /* TheBoxLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2ECA312930C08009195CF /* TheBoxLocationService.m */; };
+		BD2A8AB9175B42B60036A852 /* TheBoxQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* TheBoxQueries.m */; };
+		BD2A8ABA175B42BB0036A852 /* TheBoxUIGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* TheBoxUIGridView.m */; };
+		BD2A8ABB175B42C50036A852 /* TheBoxUIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A6C4521300822C00AEEE9F /* TheBoxUIScrollView.m */; };
+		BD2A8ABC175B42D30036A852 /* TBLocalitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0B25E217494778001B3A9B /* TBLocalitiesTableViewController.m */; };
+		BD2A8ABD175B42DB0036A852 /* TheBoxNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2EE7812934108009195CF /* TheBoxNotifications.m */; };
+		BD2A8ABE175B42E50036A852 /* TBHuds.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E231757E53D0070BB59 /* TBHuds.m */; };
+		BD2A8ABF175B42EB0036A852 /* TBUITableViewDataSourceBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DD71673F1F700286511 /* TBUITableViewDataSourceBuilder.m */; };
 		BD2D29EA16B9DAB30092EB95 /* TheBoxRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0048E12B6437B0029863E /* TheBoxRect.m */; };
 		BD2D29EB16B9DAB30092EB95 /* TheBoxSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0038D12B63C0E0029863E /* TheBoxSize.m */; };
 		BD2D29EC16B9DAB30092EB95 /* TheBoxBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D830D812B51BDF00BE4470 /* TheBoxBundle.m */; };
@@ -115,11 +132,12 @@
 		BD2D29F016B9DAC90092EB95 /* TheBoxUIRecycleStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */; };
 		BD2D29F116B9DAFC0092EB95 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DCC1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m */; };
 		BD2D29F216B9DB390092EB95 /* NSString+TBString.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B46165D7E6F002C944D /* NSString+TBString.m */; };
+		BD4292B4175B447700459891 /* UINavigationItem+TBNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAF7ACC175288B4008899D1 /* UINavigationItem+TBNavigationItem.m */; };
+		BD4292B9175B4BBB00459891 /* TBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* TBErrorBlocks.m */; };
+		BD4292BA175B4BBB00459891 /* TBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* TBErrorBlocks.m */; };
 		BD4BA9AC16FA5B6C009C1518 /* UIViewController+TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */; };
 		BD4BA9AD16FA5B6C009C1518 /* UIViewController+TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
-		BD4BA9B116FA5F66009C1518 /* XRay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4BA9B016FA5F66009C1518 /* XRay.framework */; };
-		BD4BA9B216FA5F66009C1518 /* XRay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4BA9B016FA5F66009C1518 /* XRay.framework */; };
 		BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A503A1291E4AC00BCB475 /* CoreLocation.framework */; };
 		BD7C27D417235DDB009D26EE /* TBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7C27D317235DDB009D26EE /* TBProgressView.m */; };
 		BD7C27D517235DDB009D26EE /* TBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7C27D317235DDB009D26EE /* TBProgressView.m */; };
@@ -215,6 +233,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BD2A8AC0175B43110036A852 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
+			remoteInfo = thebox;
+		};
 		BD84EF5E165C200C009D9408 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -379,10 +404,15 @@
 		BD258DD71673F1F700286511 /* TBUITableViewDataSourceBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUITableViewDataSourceBuilder.m; sourceTree = "<group>"; };
 		BD258DDD1678040500286511 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = "Supporting Files/refresh.png"; sourceTree = "<group>"; };
 		BD2A8A9C175A4F4C0036A852 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Supporting Files/Settings.bundle"; sourceTree = "<group>"; };
+		BD2A8AAA175AD9340036A852 /* TheBoxAlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxAlertViews.h; sourceTree = "<group>"; };
+		BD2A8AAB175AD9350036A852 /* TheBoxAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxAlertViews.m; sourceTree = "<group>"; };
+		BD2A8AAD175B3DE00036A852 /* XRay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XRay.framework; sourceTree = "<group>"; };
+		BD2A8AB0175B413D0036A852 /* HomeUIGridViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeUIGridViewControllerTest.m; sourceTree = "<group>"; };
+		BD4292B7175B4BBB00459891 /* TBErrorBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBErrorBlocks.h; sourceTree = "<group>"; };
+		BD4292B8175B4BBB00459891 /* TBErrorBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBErrorBlocks.m; sourceTree = "<group>"; };
 		BD4BA9AA16FA5B6C009C1518 /* UIViewController+TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TBViewController.h"; sourceTree = "<group>"; };
 		BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TBViewController.m"; sourceTree = "<group>"; };
 		BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		BD4BA9B016FA5F66009C1518 /* XRay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XRay.framework; sourceTree = "<group>"; };
 		BD7C27D217235DDB009D26EE /* TBProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBProgressView.h; sourceTree = "<group>"; };
 		BD7C27D317235DDB009D26EE /* TBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBProgressView.m; sourceTree = "<group>"; };
 		BD7C27D617235DE6009D26EE /* TBProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBProgressView.xib; path = Classes/TBProgressView.xib; sourceTree = "<group>"; };
@@ -479,7 +509,7 @@
 				908364011400712200E5AAAF /* libz.dylib in Frameworks */,
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
 				9089482515533980009188B4 /* libTestFlight.a in Frameworks */,
-				BD4BA9B116FA5F66009C1518 /* XRay.framework in Frameworks */,
+				BD2A8AAE175B3DE00036A852 /* XRay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +547,6 @@
 				BDCD939B165C127A009C2F8F /* Foundation.framework in Frameworks */,
 				BDCD939C165C127A009C2F8F /* libz.dylib in Frameworks */,
 				FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */,
-				BD4BA9B216FA5F66009C1518 /* XRay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +558,7 @@
 			children = (
 				BDCE1E1D1757E1280070BB59 /* TBCommon */,
 				BDCE1E181757D5E00070BB59 /* TBViews */,
+				BD4292B6175B4AF800459891 /* UIViewController+TBViewController */,
 				BDCE1E26175814B60070BB59 /* MBProgressHUD+TheBox */,
 				BDCE1E251758140C0070BB59 /* AFNetworking+TheBox */,
 				BDE482BD175050D20096903C /* Feed */,
@@ -600,6 +630,8 @@
 				BD0B25E217494778001B3A9B /* TBLocalitiesTableViewController.m */,
 				BDAF7ACB175288B4008899D1 /* UINavigationItem+TBNavigationItem.h */,
 				BDAF7ACC175288B4008899D1 /* UINavigationItem+TBNavigationItem.m */,
+				BD2A8AAA175AD9340036A852 /* TheBoxAlertViews.h */,
+				BD2A8AAB175AD9350036A852 /* TheBoxAlertViews.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -729,7 +761,7 @@
 		90454B01154DBBCA0064D998 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				BD4BA9B016FA5F66009C1518 /* XRay.framework */,
+				BD2A8AAD175B3DE00036A852 /* XRay.framework */,
 				9089482415533980009188B4 /* libTestFlight.a */,
 			);
 			path = External;
@@ -768,6 +800,7 @@
 				BD258DD41673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m */,
 				BD13057616A22E7D00AF0814 /* TBDimensionTest.m */,
 				BD9F24EA175A4302009D212F /* TBPolygonTest.m */,
+				BD2A8AB0175B413D0036A852 /* HomeUIGridViewControllerTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -859,6 +892,15 @@
 				BD9A781016BB0D9C00FD30E0 /* signpost.png */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BD4292B6175B4AF800459891 /* UIViewController+TBViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BD4292B7175B4BBB00459891 /* TBErrorBlocks.h */,
+				BD4292B8175B4BBB00459891 /* TBErrorBlocks.m */,
+			);
+			name = "UIViewController+TBViewController";
 			sourceTree = "<group>";
 		};
 		BDA2BC87165951CB0068C749 /* Interface */ = {
@@ -1032,6 +1074,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BD2A8AC1175B43110036A852 /* PBXTargetDependency */,
 			);
 			name = UnitTests;
 			productName = TheBoxUnitTests;
@@ -1239,7 +1282,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/LICENCES/\"\n./licences.pl\n";
+			shellScript = "";
 		};
 		BDCD939F165C127A009C2F8F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1361,6 +1404,8 @@
 				BDCE1E1B1757D6050070BB59 /* TBViews.m in Sources */,
 				BDCE1E241757E53E0070BB59 /* TBHuds.m in Sources */,
 				BDCE1E291759495D0070BB59 /* TBPolygon.m in Sources */,
+				BD2A8AAC175AD9360036A852 /* TheBoxAlertViews.m in Sources */,
+				BD4292B9175B4BBB00459891 /* TBErrorBlocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1391,6 +1436,23 @@
 				BD9A781616BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */,
 				BD9F24EB175A4302009D212F /* TBPolygonTest.m in Sources */,
 				BD1D000E175A4A18009B0829 /* TBPolygon.m in Sources */,
+				BD2A8AB1175B413D0036A852 /* HomeUIGridViewControllerTest.m in Sources */,
+				BD2A8AB2175B42830036A852 /* HomeUIGridViewController.m in Sources */,
+				BD2A8AB3175B42910036A852 /* DetailsUIViewController.m in Sources */,
+				BD2A8AB4175B42970036A852 /* TBAlertViews.m in Sources */,
+				BD2A8AB5175B429B0036A852 /* TBButton.m in Sources */,
+				BD2A8AB6175B42A00036A852 /* TBColors.m in Sources */,
+				BD2A8AB7175B42A60036A852 /* TBItemView.m in Sources */,
+				BD2A8AB8175B42B10036A852 /* TheBoxLocationService.m in Sources */,
+				BD2A8AB9175B42B60036A852 /* TheBoxQueries.m in Sources */,
+				BD2A8ABA175B42BB0036A852 /* TheBoxUIGridView.m in Sources */,
+				BD2A8ABB175B42C50036A852 /* TheBoxUIScrollView.m in Sources */,
+				BD2A8ABC175B42D30036A852 /* TBLocalitiesTableViewController.m in Sources */,
+				BD2A8ABD175B42DB0036A852 /* TheBoxNotifications.m in Sources */,
+				BD2A8ABE175B42E50036A852 /* TBHuds.m in Sources */,
+				BD2A8ABF175B42EB0036A852 /* TBUITableViewDataSourceBuilder.m in Sources */,
+				BD4292B4175B447700459891 /* UINavigationItem+TBNavigationItem.m in Sources */,
+				BD4292BA175B4BBB00459891 /* TBErrorBlocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1419,6 +1481,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BD2A8AC1175B43110036A852 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D6058900D05DD3D006BFB54 /* thebox */;
+			targetProxy = BD2A8AC0175B43110036A852 /* PBXContainerItemProxy */;
+		};
 		BD84EF5F165C200C009D9408 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1D6058900D05DD3D006BFB54 /* thebox */;

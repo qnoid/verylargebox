@@ -12,6 +12,7 @@
 
 TBAFHTTPRequestOperationErrorBlock const TB_ERROR_BLOCK_CANNOT_CONNECT_TO_HOST = TB_AFHTTPRequestOperationErrorBlock(NSURLErrorCannotConnectToHost);
 TBAFHTTPRequestOperationErrorBlock const TB_ERROR_BLOCK_NOT_CONNECTED_TO_INTERNET = TB_AFHTTPRequestOperationErrorBlock(NSURLErrorNotConnectedToInternet);
-
+TBAFHTTPRequestOperationErrorBlock const TB_ERROR_TIMEOUT =
+    TB_AFHTTPRequestOperationErrorBlock(NSURLErrorTimedOut);
 
 @end

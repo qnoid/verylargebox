@@ -43,5 +43,15 @@ extern TBAFHTTPRequestOperationErrorBlock const TB_ERROR_BLOCK_CANNOT_CONNECT_TO
  */
 extern TBAFHTTPRequestOperationErrorBlock const TB_ERROR_BLOCK_NOT_CONNECTED_TO_INTERNET;
 
+
+/**
+ Creates a new TBAFHTTPRequestOperationFailureBlock to handle a timeout.
+ 
+ 
+ @param block the block to execute for the error
+ @return a new TBAFHTTPRequestOperationFailureBlock that handles an error with code NSURLErrorTimedOut
+ */
+extern TBAFHTTPRequestOperationErrorBlock const TB_ERROR_TIMEOUT;
+
 @interface TBAFHTTPRequestOperationCompletionBlocks : NSObject
 @end

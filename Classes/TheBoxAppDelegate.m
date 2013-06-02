@@ -31,7 +31,6 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a033148
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    
 	NSLog(@"Hello The Box");
-    [XRay startUp];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
