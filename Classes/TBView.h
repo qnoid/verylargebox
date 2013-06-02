@@ -11,15 +11,15 @@
 #import "TheBoxUIScrollView.h"
 
 /**
-  Implementations of this protocol provide a custom drawRect method.
+ Implementations of this protocol provide a custom drawRect method.
  
  @param rect the rect as passed in UIView#drawRect:
  @param view the view that was created with this
  
  @see UIView#drawRect:
  */
-@protocol TBUIViewDrawRect <NSObject>
-- (void)drawRect:(CGRect)rect onView:(UIView*)view;
+@protocol TBViewDrawRectDelegate <NSObject>
+- (void)drawRect:(CGRect)rect inView:(UIView*)view;
 @end
 
 /**
@@ -44,13 +44,6 @@
  @see CALayer#borderColor
  */
 -(id<TBViewBorder>)borderColor:(CGColorRef)color;
-@end
-
-
-/**
- Groups related border properties together and allows chaining.
- */
-@interface UIView (TBViewBorder) <TBViewBorder>
 
 /**
  Access to common properties related to the border
@@ -66,29 +59,34 @@
 
 -(id<TBViewBorder>)borders;
 
-/**
- Sets the border width
- 
- @param width the border width
- @return self for chaining
- @see CALayer#borderWidth
- */
--(id<TBViewBorder>)borderWidth:(CGFloat)width;
+@end
 
+@protocol TBViewCorner
 /**
- Sets the border color
+ Sets the corner radius
  
- @param color the border color
+ @param cornerRadius the corner radius
  @return self for chaining
- @see CALayer#borderColor
+ @see CALayer#cornerRadius
  */
--(id<TBViewBorder>)borderColor:(CGColorRef)color;
+-(id<TBViewCorner>)cornerRadius:(CGFloat)cornerRadius;
+
 @end
 
 /**
- A UIView that allows you to implement drawRect via composition.
+ Implementation that want to provide custom drawing.
+ Set the delegate property.
  
  */
-@interface TBUIView : UIView
-@property(nonatomic, strong) NSObject<TBUIViewDrawRect> *drawRect;
+@protocol TBView <TBViewBorder, TBViewCorner>
+
+@end
+
+@interface UIView (TBView) <TBView>
+
+@end
+
+/**
+ */
+@interface TBView : UIView
 @end

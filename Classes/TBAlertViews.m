@@ -38,7 +38,7 @@ return isButtonIndex(BUTTON_INDEX_CANCEL);
 
 -(id)init:(NSPredicate*)predicateOnButtonIndex alertViewBlock:(TBAlertViewBlock)alertViewBlock
 {
-    initOrReturnNil();
+    TB_INIT_OR_RETURN_NIL();
     
     self.predicateOnButtonIndex = predicateOnButtonIndex;
     self.alertViewBlock = alertViewBlock;

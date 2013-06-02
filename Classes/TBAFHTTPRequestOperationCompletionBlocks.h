@@ -9,61 +9,23 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPRequestOperation.h"
 
-@class TBAFHTTPRequestOperationFailureBlockOnErrorCode;
-
-typedef void(^TBAFHTTPRequestOperationCompletionBlock)(AFHTTPRequestOperation *operation);
-typedef BOOL(^TBAFHTTPRequestOperationErrorBlock)(NSError *error);
-
-NS_INLINE
-TBAFHTTPRequestOperationErrorBlock tbAFHTTPRequestOperationError(NSInteger NSURLErrorCode)
-{
-    TBAFHTTPRequestOperationErrorBlock requestOperationError = ^BOOL(NSError *error){
-        return error.code == NSURLErrorCode;
-    };
-    
-return requestOperationError;
-}
-
+typedef void(^TBAFHTTPRequestOperationCompletionBlock)(AFHTTPRequestOperation *operation, id responseObject);
 /**
- 
- **/
-NS_INLINE
-TBAFHTTPRequestOperationErrorBlock tbErrorBlockCannotConnectToHost(){
-return tbAFHTTPRequestOperationError(NSURLErrorCannotConnectToHost);
-}
-
-/**
- 
- **/
-NS_INLINE
-TBAFHTTPRequestOperationErrorBlock tbErrorBlockNotConnectedToInternet(){
-return tbAFHTTPRequestOperationError(NSURLErrorNotConnectedToInternet);
-}
-
-NS_INLINE
-TBAFHTTPRequestOperationCompletionBlock tbAFHTTPRequestOperationErrorNoOp() {
-return ^(AFHTTPRequestOperation *operation){};
-}
-
-/**
-  Implementations should handle failures blocks in AFHTTPRequestOperation(s)
- */
-@protocol TBAFHTTPRequestOperationFailureBlock <NSObject>
-
-/**
- Handles the failure block.
- 
+ Implementations should handle failures blocks in AFHTTPRequestOperation(s)
  @param operation the operation in failure under AFHTTPRequestOperation:setCompletionBlockWithSuccess:failure:
  @param error the error in failure under AFHTTPRequestOperation:setCompletionBlockWithSuccess:failure:
- @return YES if the error is handled
  */
--(BOOL)failure:(AFHTTPRequestOperation*) operation error:(NSError*)error;
-@end
+typedef void(^TBAFHTTPRequestOperationFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
 
 /**
  Handles a failure block relating to an error code.
  */
-@interface TBAFHTTPRequestOperationFailureBlockOnErrorCode : NSObject <TBAFHTTPRequestOperationFailureBlock>
+typedef BOOL(^TBAFHTTPRequestOperationErrorBlock)(NSError *error);
+
+#define TB_AFHTTPRequestOperationErrorBlock(NSURLErrorCode) \
+^BOOL(NSError *error){ \
+return error.code == NSURLErrorCode; \
+};\
 
 /**
  Creates a new TBAFHTTPRequestOperationFailureBlock to handle a cannot connect to host error.
@@ -71,7 +33,7 @@ return ^(AFHTTPRequestOperation *operation){};
  @param block the block to execute for the error
  @return a new TBAFHTTPRequestOperationFailureBlock that handles an error with code NSURLErrorCannotConnectToHost
  */
-+(TBAFHTTPRequestOperationFailureBlockOnErrorCode*)cannotConnectToHost:(TBAFHTTPRequestOperationCompletionBlock)block;
+extern TBAFHTTPRequestOperationErrorBlock const TB_ERROR_BLOCK_CANNOT_CONNECT_TO_HOST;
 
 /**
  Creates a new TBAFHTTPRequestOperationFailureBlock to handle a not connected to the internet error.
@@ -79,23 +41,7 @@ return ^(AFHTTPRequestOperation *operation){};
  @param block the block to execute for the error
  @return a new TBAFHTTPRequestOperationFailureBlock that handles an error with code NSURLErrorNotConnectedToInternet
  */
-+(TBAFHTTPRequestOperationFailureBlockOnErrorCode*)notConnectedToInternet:(TBAFHTTPRequestOperationCompletionBlock)block;
+extern TBAFHTTPRequestOperationErrorBlock const TB_ERROR_BLOCK_NOT_CONNECTED_TO_INTERNET;
 
-/**
- 
- @param operation the operation as passed in failure under AFHTTPRequestOperation:setCompletionBlockWithSuccess:failure:
- @param error the error as passed in failure under AFHTTPRequestOperation:setCompletionBlockWithSuccess:failure:
- @return YES if the error is handled by self
- */
--(BOOL)failure:(AFHTTPRequestOperation*) operation error:(NSError*)error;
-@end
-
-/**
- Provides access to all avaible AFHTTPRequestOperation completion blocks that can be used in
- AFHTTPRequestOperation:setCompletionBlockWithSuccess:failure:
- 
- */
 @interface TBAFHTTPRequestOperationCompletionBlocks : NSObject
-
-
 @end

@@ -17,6 +17,8 @@
 #import "TheBoxUIGridViewDelegate.h"
 #import "TBLocalityOperationDelegate.h"
 #import "TBLocalitiesTableViewController.h"
+#import "TBViews.h"
+#import "TBView.h"
 @class TheBoxLocationService;
 
 /**
@@ -34,7 +36,7 @@
   and start a new one.
  
  */
-@interface HomeUIGridViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TheBoxLocationServiceDelegate, UITableViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TBLocalitiesTableViewControllerDelegate>
+@interface HomeUIGridViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TheBoxLocationServiceDelegate, UITableViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TBLocalitiesTableViewControllerDelegate, TBViewDrawRectDelegate>
 
 /**
  Creates a new instance of HomeUIGridViewController
@@ -42,7 +44,6 @@
 +(HomeUIGridViewController*)newHomeGridViewController;
 
 @property(nonatomic, strong) IBOutlet UIButton* directionsButton;
-@property(nonatomic, strong) IBOutlet UIImageView* signPostImageView;
 @property(nonatomic, strong) IBOutlet TheBoxUIScrollView* locationsView;
 @property(nonatomic, strong) IBOutlet TheBoxUIGridView* itemsView;
 

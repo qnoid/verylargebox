@@ -13,7 +13,6 @@
 #import "TBItemsOperationDelegate.h"
 #import "JSONKit.h"
 #import "TBLocationOperationDelegate.h"
-#import "TBCategoriesOperationDelegate.h"
 #import "NSMutableDictionary+TBMutableDictionary.h"
 #import "TBUpdateItemOperationDelegate.h"
 #import "TBCreateUserOperationDelegate.h"
@@ -24,12 +23,36 @@
 #import "AFNetworkActivityIndicatorManager.h"
 #import "TBLocalityOperationDelegate.h"
 #import "TBCreateItemOperationDelegate.h"
+#import "TBMacros.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
 static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
 static NSString* const USER_ITEMS = @"/users/%u/items";
 static NSString* const ITEMS = @"/items";
+
+
+@implementation TBQueriesFailureBlocks
+
++(TBAFHTTPRequestOperationFailureBlock)nsErrorDelegate:(NSObject<TBNSErrorDelegate>*)delegate failureBlock:(TBAFHTTPRequestOperationFailureBlock)failureBlock
+{
+return ^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+        if(TB_ERROR_BLOCK_CANNOT_CONNECT_TO_HOST(error)){
+            [delegate didFailWithCannonConnectToHost:error];
+        return;
+        }
+        
+        if(TB_ERROR_BLOCK_NOT_CONNECTED_TO_INTERNET(error)){
+            [delegate didFailWithNotConnectToInternet:error];
+        return;
+        }
+        
+        failureBlock(operation, error);
+    };
+}
+@end
 
 @interface TheBoxQueries ()
 
@@ -67,32 +90,16 @@ NSUInteger const TIMEOUT = 60;
     [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [registrationRequest setTimeoutInterval:TIMEOUT];
 
+    TBAFHTTPRequestOperationFailureBlock didFailOnRegistrationWithError =
+        [TBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [delegate didFailOnRegistrationWithError:error];
+        }];
+
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:registrationRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         [delegate didSucceedWithRegistrationForEmail:email residence:residence];
     } 
-    failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
-        TBAFHTTPRequestOperationFailureBlockOnErrorCode *cannotConnectToHost =
-            [TBAFHTTPRequestOperationFailureBlockOnErrorCode cannotConnectToHost:^(AFHTTPRequestOperation *operation){
-                [delegate didFailWithCannonConnectToHost:error];
-            }];
-
-        TBAFHTTPRequestOperationFailureBlockOnErrorCode *notConnectedToInternet =
-            [TBAFHTTPRequestOperationFailureBlockOnErrorCode notConnectedToInternet:^(AFHTTPRequestOperation *operation){
-                [delegate didFailWithNotConnectToInternet:error];
-            }];
-
-        if([cannotConnectToHost failure:operation error:error]){
-            return;
-        }
-        
-        if([notConnectedToInternet failure:operation error:error]){
-            return;
-        }
-
-        [delegate didFailOnRegistrationWithError:error];
-    }];
+    failure:didFailOnRegistrationWithError];
     
 return request;
 }
@@ -109,48 +116,18 @@ return request;
     [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [registrationRequest setTimeoutInterval:TIMEOUT];
     
+    TBAFHTTPRequestOperationFailureBlock didFailOnRegistrationWithError =
+    [TBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnVerifyWithError:error];
+    }];
+
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:registrationRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
        [delegate didSucceedWithVerificationForEmail:email residence:[[operation.responseString objectFromJSONString] objectForKey:@"residence"]];
    }
-   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-       NSLog(@"ERROR: %s %@", __PRETTY_FUNCTION__, error);
-       
-       TBAFHTTPRequestOperationFailureBlockOnErrorCode *notConnectedToInternet =
-       [TBAFHTTPRequestOperationFailureBlockOnErrorCode notConnectedToInternet:^(AFHTTPRequestOperation *operation){
-           [delegate didFailWithNotConnectToInternet:error];
-       }];
-       
-       if([notConnectedToInternet failure:operation error:error]){
-           return;
-       }
-
-       [delegate didFailOnVerifyWithError:error];
-   }];
+   failure:didFailOnRegistrationWithError];
     
 return request;
-}
-
-+(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate
-{
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
-    
-    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"/categories" parameters:nil];
-    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest setTimeoutInterval:TIMEOUT];
-    
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
-   {
-      NSString* responseString = operation.responseString;
-
-       
-      [delegate didSucceedWithCategories:[responseString mutableObjectFromJSONString]];
-   } 
-      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      [delegate didFailOnCategoriesWithError:error];
-  }];
-
-    return request;
 }
 
 +(AFHTTPRequestOperation*)newGetLocationsGivenLocalityName:(NSString*)localityName delegate:(NSObject<TBLocationOperationDelegate>*)delegate
@@ -174,38 +151,6 @@ return request;
     }];
     
     return request;
-}
-
-+(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image location:(NSDictionary *)location;
-{
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
-    
-	NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters tbSetObjectIfNotNil:[location objectForKey:@"name"] forKey:@"item[location_attributes][name]"];
-    [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lat"] forKey:@"item[location_attributes][lat]"];
-    [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][lng]"];
-    [parameters tbSetObjectIfNotNil:[location objectForKey:@"id"] forKey:@"item[location_attributes][foursquareid]"];
-
-    NSMutableURLRequest* request = [client multipartFormRequestWithMethod:@"POST" path:@"/items" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) 
-    {
-        [formData appendPartWithFileData:imageData 
-                                    name:@"item[image]" 
-                                fileName:@".jpg"
-                                mimeType:@"image/jpeg"];
-    }];
-
-    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setTimeoutInterval:TIMEOUT];
-
-	AFHTTPRequestOperation *createItem = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [createItem setUploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
-        NSLog(@"Sent %d of %d bytes", totalBytesWritten, totalBytesExpectedToWrite);
-    }];
-    
-return createItem;
 }
 
 +(AFHTTPRequestOperation*)updateItemQuery:(NSDictionary *) item delegate:(NSObject<TBUpdateItemOperationDelegate>*)delegate
@@ -425,6 +370,8 @@ return createItem;
 
 +(AFHTTPRequestOperation*)newGetItems:(NSString*)locality delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 {
+    TB_RETURN_IF_NIL(locality)
+    
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableURLRequest *getItemsRequest =

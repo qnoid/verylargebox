@@ -10,6 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <AddressBook/AddressBook.h>
+#import "TBButton.h"
+#import "TBView.h"
 
 typedef void(^TBUserItemViewGetDirections)(CLLocationCoordinate2D destination, NSDictionary *options);
 
@@ -63,7 +65,7 @@ TBUserItemViewGetDirections tbUserItemViewGetDirections()
 return tbUserItemViewGetDirectionsWithGoogleMaps();
 }
 
-@interface TBUserItemView : UIView
+@interface TBUserItemView : UIView <TBViewDrawRectDelegate>
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
 @property(nonatomic, weak) IBOutlet UILabel* whenLabel;
 @property(nonatomic, weak) IBOutlet UILabel* storeLabel;

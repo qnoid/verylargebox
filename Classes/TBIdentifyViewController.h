@@ -12,6 +12,9 @@
 #import "TBVerifyUserOperationDelegate.h"
 #import "TBCreateUserOperationDelegate.h"
 #import "TBEmailViewController.h"
+#import "TBView.h"
+
+@protocol TBButton;
 
 typedef NS_ENUM(NSInteger, TBEmailStatus){
     TBEmailStatusDefault,
@@ -69,12 +72,11 @@ TBEmailStatusBlock tbBmailStatus(TBEmailStatus emailStatus)
     }
 }
 
-@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, TBCreateUserOperationDelegate, TBEmailViewControllerDelegate, UITableViewDelegate>
+@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, TBCreateUserOperationDelegate, TBEmailViewControllerDelegate, UITableViewDelegate, TBViewDrawRectDelegate>
 
-@property (nonatomic, unsafe_unretained) IBOutlet TBButton *theBoxButton;
-@property (nonatomic, unsafe_unretained) IBOutlet TBButton *identifyButton;
-@property (nonatomic, unsafe_unretained) IBOutlet UITableView *accountsTableView;
-@property (nonatomic, unsafe_unretained) IBOutlet TBButton *browseButton;
+@property (nonatomic, strong) IBOutlet TBButton *identifyButton;
+@property (nonatomic, weak) IBOutlet UITableView *accountsTableView;
+@property (nonatomic, strong) IBOutlet TBButton *browseButton;
 
 +(TBIdentifyViewController*)newIdentifyViewController;
 

@@ -14,6 +14,8 @@
 +(TheBoxLocationService *)theBoxLocationService
 {
 	CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+    locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+    locationManager.distanceFilter = 3000.0;
     TheBoxLocationService *theBox = [[TheBoxLocationService alloc] init:locationManager];
     
 	locationManager.delegate = theBox;	
@@ -23,7 +25,7 @@ return theBox;
 
 -(void)dealloc
 {
-    [self.locationManager stopMonitoringSignificantLocationChanges];
+    [self.locationManager stopUpdatingLocation];
 }
 
 @synthesize locationManager;
@@ -41,11 +43,11 @@ return self;
 }
 
 -(void)startMonitoringSignificantLocationChanges {
-    [self.locationManager startMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingLocation];
 }
 
 -(void)stopMonitoringSignificantLocationChanges {
-    [self.locationManager stopMonitoringSignificantLocationChanges];
+    [self.locationManager stopUpdatingLocation];
 }
 
 -(void)notifyDidUpdateToLocation:(id<TheBoxLocationServiceDelegate>) delegate;

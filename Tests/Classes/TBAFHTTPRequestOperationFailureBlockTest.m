@@ -18,10 +18,15 @@
 -(void)testGivenNSURLErrorCannotConnectToHostAssertIsHandledByFailureBlock
 {
     NSError* error = [NSError errorWithDomain:@"http://www.foo.bar" code:NSURLErrorCannotConnectToHost userInfo:nil];
-    
-    TBAFHTTPRequestOperationFailureBlockOnErrorCode* cannotConnectToHost =
-        [TBAFHTTPRequestOperationFailureBlockOnErrorCode cannotConnectToHost:tbAFHTTPRequestOperationErrorNoOp()];
-    
-    STAssertTrue([cannotConnectToHost failure:nil error:error], nil);
+        
+    STAssertTrue(TB_ERROR_BLOCK_CANNOT_CONNECT_TO_HOST(error), nil);
 }
+
+-(void)testGivenNSURLErrorNotConnectedToInternetAssertIsHandledByFailureBlock
+{
+    NSError* error = [NSError errorWithDomain:@"http://www.foo.bar" code:NSURLErrorNotConnectedToInternet userInfo:nil];
+    
+    STAssertTrue(TB_ERROR_BLOCK_NOT_CONNECTED_TO_INTERNET(error), nil);
+}
+
 @end

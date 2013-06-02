@@ -16,7 +16,6 @@
 #import "DDTTYLogger.h"
 
 static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
-
 static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a03314809698";
 
 @interface TheBoxAppDelegate()
@@ -45,7 +44,8 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a033148
                                  forKey:[[NSBundle mainBundle] bundleIdentifier]];
         [standardUserDefaults synchronize];
     }
-    
+
+    [TestFlight setOptions:@{TFOptionReportCrashes: @"No"}];
     [TestFlight setDeviceIdentifier:userSession];
     [TestFlight takeOff:TESTFLIGHT_APP_TOKEN];
 

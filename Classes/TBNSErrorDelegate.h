@@ -10,6 +10,9 @@
 
 @protocol TBNSErrorDelegate <NSObject>
 
+/**
+ See TheBoxQueries calls for which methods to implement
+*/
 @optional
 /**
  Callback by TheBoxQueries when a AFHTTPRequestOperation cannot connect to host.

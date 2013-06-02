@@ -16,11 +16,15 @@
 #import "TBProfileViewController.h"
 #import "AFHTTPRequestOperation.h"
 #import "TBUITableViewDataSourceBuilder.h"
-#import "TBUIView.h"
+#import "TBView.h"
 #import "TBVerifyOperationBlock.h"
 #import "TBFeedViewController.h"
 #import "UINavigationItem+TBNavigationItem.h"
 #import "TBAlertViews.h"
+#import "TBViews.h"
+#import "TBHuds.h"
+#import "MBProgressHUD.h"
+#import "TBPolygon.h"
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
@@ -65,34 +69,31 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIColor *darkOrange = [TBColors colorDarkOrange];
-
-    [[self.theBoxButton.border
-        borderWidth:2.0f]
-        borderColor:darkOrange.CGColor];
     
-    [self.identifyButton cornerRadius:88.0f];
-    
-    [[self.identifyButton.border
-        borderWidth:2.0f]
-        borderColor:darkOrange.CGColor];
-    
-    [[self.browseButton.border
-        borderWidth:2.0f]
-        borderColor:darkOrange.CGColor];
+//    UIColor *darkOrange = [TBColors colorDarkOrange];
+//    [self.identifyButton cornerRadius:88.0f];
+//    [[self.identifyButton.border
+//        borderWidth:2.0f]
+//        borderColor:darkOrange.CGColor];
     
     __weak TBIdentifyViewController *uself = self;
-    
     [self.identifyButton onTouchDown:^(UIButton *button) {
-        makeButtonDarkOrange();
+        makeButton([TBColors colorLightGreen]);
+    }];
+    
+    [self.identifyButton onTouchUp:^(UIButton *button) {
+        makeButton([TBColors colorDarkGreen]);
         TBEmailViewController* emailViewController = [TBEmailViewController newEmailViewController];
         emailViewController.delegate = uself;
         emailViewController.createUserOperationDelegate = uself;
         [uself.navigationController pushViewController:emailViewController animated:YES];
     }];
-    [self.identifyButton onTouchUp:makeButtonWhite()];
-    [self.theBoxButton onTouchDown:makeButtonDarkOrange()];
-    [self.theBoxButton onTouchUp:makeButtonWhite()];
+    
+    UIColor *darkOrange = [TBColors colorDarkOrange];
+    [[self.browseButton.border
+        borderWidth:2.0f]
+        borderColor:darkOrange.CGColor];
+    
     [self.browseButton onTouchDown:^(UIButton *button)
     {
         TBFeedViewController *localityItemsViewController = [TBFeedViewController newFeedViewController];
@@ -182,27 +183,28 @@ return self;
 
 -(void)didFailOnRegistrationWithError:(NSError*)error
 {
-    NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+    MBProgressHUD *hud = [TBHuds newWithView:self.view config:TB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
+    hud.detailsLabelText = error.localizedDescription;
+    [hud show:YES];
+    [hud hide:YES afterDelay:3.0];
     
 }
 
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
-    UIAlertView* cannotConnectToHostAlertView =
-        [TBAlertViews newAlertViewWithOk:@"Cannot connect to host"
-                                 message:@"The was a problem connecting with thebox. Please check your internet connection and try again."];
-
-    [cannotConnectToHostAlertView show];
+    MBProgressHUD *hud = [TBHuds newWithView:self.view config:TB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
+    hud.detailsLabelText = error.localizedDescription;
+    [hud show:YES];
+    [hud hide:YES afterDelay:3.0];
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
-    UIAlertView* notConnectedToInternetAlertView =
-    [TBAlertViews newAlertViewWithOk:@"Not Connected to Internet"
-                             message:@"You are not connected to the internet. Check your connection and try again."];
-    
-    [notConnectedToInternetAlertView show];
+    MBProgressHUD *hud = [TBHuds newWithView:self.view config:TB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
+    hud.detailsLabelText = error.localizedDescription;
+    [hud show:YES];
+    [hud hide:YES afterDelay:3.0];
 }
 
 #pragma mark UITableViewDatasource
@@ -298,4 +300,21 @@ return YES;
     
     [self.operations addOperation:verifyUser];
 }
+
+-(void)drawRect:(CGRect)rect inView:(UIView *)view
+{
+    CGPoint center = CGRectCenter(rect);
+    TBPolygon* hexagon = [TBPolygon hexagonAt:center];
+    
+    tbViewSolidContext([TBColors colorLightGreen], [TBColors colorDarkGreen])(^(CGContextRef context){
+        [hexagon rotateAt:0.25 collect:^(int index, CGPoint angle) {            
+            if(index == 0){
+                CGContextMoveToPoint(context, angle.x, angle.y);
+            }
+            
+            CGContextAddLineToPoint(context, angle.x, angle.y);
+        }];
+    });    
+}
+
 @end

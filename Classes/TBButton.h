@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "TBColors.h"
-
+#import "TBView.h"
 
 /**
  Handles a callback of a UIControlEvents
@@ -35,20 +35,11 @@ TBButtonOnTouch makeButtonWhite() {
 
 /**
  A UIButton that adds expressive declarations to any properties affecting its style.
-
- Allows registering blocks to handle UIControlEvent(s).
-*/
-
-@interface TBButton : UIButton
-
-/**
- Sets the corner radius
  
- @param cornerRadius the corner radius
- @return self for chaining
- @see CALayer#cornerRadius
+ Allows registering blocks to handle UIControlEvent(s).
+ @see TBButton
  */
--(TBButton*)cornerRadius:(CGFloat)cornerRadius;
+@protocol TBButton <NSObject>
 
 /**
  Sets the block to call on touch down events.
@@ -63,10 +54,20 @@ TBButtonOnTouch makeButtonWhite() {
 
 /**
  Sets the block to call on touch up events.
-
+ 
  Subsequent call will override the existing block.
-
+ 
  @param doo the block to call on touch up events
  */
 -(void)onTouchUp:(TBButtonOnTouch)doo;
+
+@end
+
+@interface TBButton : UIButton <TBButton>
+@property(nonatomic, weak) IBOutlet NSObject<TBViewDrawRectDelegate> *delegate;
+
+/**
+ Overrides drawRect
+ */
+- (void)drawRect:(CGRect)rect;
 @end

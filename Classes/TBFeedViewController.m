@@ -15,6 +15,7 @@
 #import "TheBoxNotifications.h"
 #import "TBLocalitiesTableViewController.h"
 #import "TBAlertViews.h"
+#import "TBHuds.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -61,7 +62,7 @@ return localityItemsViewController;
 -(void)dealloc
 {
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
-    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
 
@@ -94,7 +95,7 @@ return localityItemsViewController;
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     
     TheBoxUIScrollView* itemsView = [[[[TheBoxUIScrollViewBuilder alloc] initWith:
-                                       CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:350.0] allowSelection] newVerticalScrollView];
+                                       CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:320.0] allowSelection] newVerticalScrollView];
     
     itemsView.backgroundColor = [UIColor whiteColor];
     itemsView.datasource = self;
@@ -155,6 +156,10 @@ return localityItemsViewController;
 {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
     [self.itemsView.pullToRefreshView stopAnimating];
+
+    MBProgressHUD *hud = [TBHuds newWithView:self.view config:TB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
+    hud.detailsLabelText = error.localizedDescription;
+    [hud show:YES];
 }
 
 #pragma mark TheBoxUIScrollViewDelegate

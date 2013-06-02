@@ -13,6 +13,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "UINavigationItem+TBNavigationItem.h"
 #import "MBProgressHUD.h"
+#import "TBHuds.h"
 
 @interface TBLocalitiesTableViewController ()
 @property(nonatomic, strong) NSObject<UITableViewDataSource> *tableViewDataSource;
@@ -69,15 +70,9 @@ return availablePlacesViewController;
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
-	MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
-	[self.view addSubview:hud];
-    
-	hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle-no.png"]];
-    hud.mode = MBProgressHUDModeCustomView;
-    
+
+    MBProgressHUD *hud = [TBHuds newWithView:self.view config:TB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
     hud.detailsLabelText = error.localizedDescription;
-    
     [hud show:YES];
 }
 

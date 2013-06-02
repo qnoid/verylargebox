@@ -8,10 +8,11 @@
  *  Contributor(s): .-
  */
 #import <QuartzCore/QuartzCore.h>
-#import "TBUIView.h"
+#import "TBView.h"
 #import "TBColors.h"
+#import "TBMacros.h"
 
-@implementation UIView (TBViewBorder)
+@implementation UIView (TBView)
 
 - (id<TBViewBorder>)border {
     return [[self borderWidth:1.0f] borderColor:[UIColor blackColor].CGColor];
@@ -56,30 +57,18 @@ return self;
     self.layer.borderColor = color;
     return self;
 }
-@end
 
-@interface TBUIView ()
--(id)initWithFrame:(CGRect)frame drawRect:(NSObject<TBUIViewDrawRect>*) drawRect;
-@end
-
-@implementation TBUIView
-
--(id)initWithFrame:(CGRect)frame drawRect:(NSObject<TBUIViewDrawRect>*) drawRect
+-(id<TBViewCorner>)cornerRadius:(CGFloat)cornerRadius
 {
-    self = [super initWithFrame:frame];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    self.drawRect = drawRect;
-    
-return self;
+    self.layer.cornerRadius = cornerRadius;
+    self.layer.masksToBounds = YES;
+    return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    [self.drawRect drawRect:rect onView:self];
-}
+@end
 
+@interface TBView ()
+@end
+
+@implementation TBView
 @end

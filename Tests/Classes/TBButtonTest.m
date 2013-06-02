@@ -9,7 +9,8 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "TBButton.h"
-#import "TBUIView.h"
+#import "TBView.h"
+#import "TBViews.h"
 
 @interface TBButtonTest : SenTestCase
 
@@ -19,7 +20,8 @@
 
 -(void)testTrue
 {
-    TBButton* button = [TBButton new];
+    TBButton* button = [[TBButton alloc] initWithFrame:CGRectZero];
+    
     [button border];
 
     STAssertEquals(button.layer.borderColor, [UIColor blackColor].CGColor, nil);

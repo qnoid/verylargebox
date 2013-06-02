@@ -22,7 +22,7 @@
 #import "TheBoxUICell.h"
 #import "TheBoxUIScrollView.h"
 #import "TBItemView.h"
-#import "TBUIView.h"
+#import "TBView.h"
 #import "TBColors.h"
 #import "TheBoxLocationService.h"
 #import "TBUITableViewDataSourceBuilder.h"
@@ -31,6 +31,7 @@
 #import "TBUserItemView.h"
 #import "TBAlertViews.h"
 #import "MBProgressHUD.h"
+#import "TBPolygon.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 66.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -122,6 +123,22 @@ return homeGridViewController;
 return self;
 }
 
+-(void)drawRect:(CGRect)rect inView:(UIView *)view
+{
+    CGPoint center = CGRectCenter(rect);
+    TBPolygon* hexagon = [TBPolygon hexagonAt:center];
+    
+    tbViewSolidContext([TBColors colorLightGreen], [TBColors colorDarkGreen])(^(CGContextRef context){
+        [hexagon rotateAt:0.25 collect:^(int index, CGPoint angle) {
+            if(index == 0){
+                CGContextMoveToPoint(context, angle.x, angle.y);
+            }
+            
+            CGContextAddLineToPoint(context, angle.x, angle.y);
+        }];
+    });
+}
+
 -(void)refreshLocations
 {
     [[TheBoxQueries newGetLocationsGivenLocalityName:self.placemark.locality delegate:self] start];
@@ -147,7 +164,7 @@ return self;
     
     TheBoxUIScrollView* locationsView = [[[[TheBoxUIScrollViewBuilder alloc] initWith:CGRectMake(CGPointZero.x, CGPointZero.y, applicationFrame.size.width, LOCATIONS_VIEW_HEIGHT) viewsOf:LOCATIONS_VIEW_WIDTH] allowSelection] newHorizontalScrollView];
     
-    locationsView.backgroundColor = [TBColors colorLightOrange];
+    locationsView.backgroundColor = [TBColors colorDarkGrey];
     locationsView.datasource = self;
     locationsView.scrollViewDelegate = self;
     locationsView.showsHorizontalScrollIndicator = NO;
@@ -159,12 +176,15 @@ return self;
     itemsView.delegate = self;
     itemsView.showsVerticalScrollIndicator = YES;
     
-    UIImageView* signPostImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGPointZero.x + 8.0, (LOCATIONS_VIEW_HEIGHT / 2) - 12.0, 16, 23.0)];
-    signPostImageView.image = [UIImage imageNamed:@"signpost"];
+    TBButton* directionsButton = [[TBButton alloc] initWithFrame:CGRectMake(263.0, 0.0, 60.0, LOCATIONS_VIEW_HEIGHT)];
+    [directionsButton setImage:[UIImage imageNamed:@"signpost"] forState:UIControlStateNormal];
+    directionsButton.delegate = self;
+    [directionsButton addTarget:self action:@selector(didTapOnGetDirectionsButton:) forControlEvents:UIControlEventTouchUpInside];
+
     
     [view addSubview:locationsView];
     [view addSubview:itemsView];
-    [view addSubview:signPostImageView];
+    [view addSubview:directionsButton];
     
     self.view = view;
     self.locationsView = locationsView;
@@ -204,8 +224,7 @@ return self;
 -(void)highlightLocation
 {
     for (UIButton* button in self.locationsView.subviews) {
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        button.userInteractionEnabled = NO;
+        button.titleLabel.textColor = [UIColor blackColor];
     }
     
     UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
@@ -214,8 +233,7 @@ return self;
         locationButton = (UIButton*)[self.locationsView viewWithTag:self.index];
     }
     
-    [locationButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    locationButton.userInteractionEnabled = YES;
+    locationButton.titleLabel.textColor = [UIColor whiteColor];
 }
 
 /**
@@ -314,10 +332,8 @@ return [self.locations count];
     UIButton *storeButton = [[UIButton alloc] initWithFrame:frame];
     storeButton.titleLabel.numberOfLines = 0;
     storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    [storeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [storeButton addTarget:self action:@selector(didTapOnGetDirectionsButton:) forControlEvents:UIControlEventTouchUpInside];
-    storeButton.userInteractionEnabled = NO;
-    
+    storeButton.titleLabel.textColor = [UIColor blackColor];
+
 return storeButton;
 }
 
@@ -337,13 +353,13 @@ return storeButton;
 {
     NSDictionary *location = [[[self locations] objectAtIndex:index] objectForKey:@"location"];
 
-    UIButton *button = (UIButton*)view;
+    UIButton *storeButton = (UIButton*)view;
     
     if(index == 0){
-        button.tag = FIRST_VIEW_TAG;
+        storeButton.tag = FIRST_VIEW_TAG;
     }
     else{
-        button.tag = index;
+        storeButton.tag = index;
     }
     
     id name = [location objectForKey:@"name"];
@@ -352,10 +368,9 @@ return storeButton;
         name = @"";
     }
     
-    [button setBackgroundColor:[TBColors colorLightOrange]];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button setTitle:name forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 28, 0, 0);
+    [storeButton setBackgroundColor:[TBColors colorDarkGrey]];
+    storeButton.titleLabel.textColor = [UIColor blackColor];
+    [storeButton setTitle:name forState:UIControlStateNormal];
 }
 
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index
@@ -516,11 +531,11 @@ return storeButton;
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender
 {
-    __weak HomeUIGridViewController *wself = self;
+    NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
     
+    __weak HomeUIGridViewController *wself = self;
     TBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [TBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
         [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [wself class], __PRETTY_FUNCTION__]];
-        NSDictionary *location = [[wself.locations objectAtIndex:wself.index] objectForKey:@"location"];
         
         wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
                                                                     [[location objectForKey:@"lng"] floatValue]),
@@ -532,7 +547,8 @@ return storeButton;
     NSObject<UIAlertViewDelegate> *didTapOnGetDirectionsDelegate =
         [TBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
     
-    UIAlertView *alertView = [TBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:@"Exit the app and get directions."];
+    UIAlertView *alertView = [TBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:[NSString stringWithFormat:@"Exit the app and get directions to %@.", [location objectForKey:@"name"]]];
+                                                                                                  
     alertView.delegate = didTapOnGetDirectionsDelegate;
     
     [alertView show];

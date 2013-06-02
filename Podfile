@@ -2,6 +2,7 @@ platform :ios, :deployment_target => '5.1'
 
 target :UnitTests, :exclusive => true do
 	pod 'OCMock', '~> 2.0.1'
+	pod 'Kiwi', '~> 2.1'
 end
 
 target :ApplicationTests, :exclusive => true do

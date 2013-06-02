@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "TBCreateUserOperationDelegate.h"
+#import "TBButton.h"
 
-@class TBButton;
+@protocol TBButton;
 
 /**
 
@@ -31,9 +32,8 @@
  */
 @interface TBEmailViewController : UIViewController <UITextFieldDelegate>
 
-@property (nonatomic, weak) IBOutlet TBButton *theBoxButton;
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
-@property (nonatomic, weak) IBOutlet TBButton *registerButton;
+@property (nonatomic, strong) IBOutlet TBButton *registerButton;
 @property (nonatomic, weak) id<TBCreateUserOperationDelegate> createUserOperationDelegate;
 @property (nonatomic, weak) id<TBEmailViewControllerDelegate> delegate;
 

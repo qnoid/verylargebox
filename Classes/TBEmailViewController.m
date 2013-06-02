@@ -8,12 +8,13 @@
 
 #import "TBEmailViewController.h"
 #import "TBButton.h"
-#import "TBUIView.h"
+#import "TBView.h"
 #import "TBProfileViewController.h"
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
 #import "TBSecureHashA1.h"
 #import "SSKeychain.h"
+#import "TBViews.h"
 
 @interface TBEmailViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
@@ -47,18 +48,10 @@
 {
     [super viewDidLoad];
 
-    UIColor *darkOrange = [TBColors colorDarkOrange];
-    
-    [[self.theBoxButton.border
-        borderWidth:2.0f]
-        borderColor:darkOrange.CGColor];
-    
+    UIColor *darkOrange = [TBColors colorDarkOrange];        
     [[self.registerButton.border
         borderWidth:2.0f]
         borderColor:darkOrange.CGColor];
-
-    [self.theBoxButton onTouchDown:makeButtonDarkOrange()];
-    [self.theBoxButton onTouchUp:makeButtonWhite()];
     
     __weak TBEmailViewController *uself = self;
     [self.registerButton onTouchDown:^(UIButton *button) {

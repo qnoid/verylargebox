@@ -9,6 +9,8 @@
  */
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "TheBoxQueries.h"
+#import "TBAFHTTPRequestOperationCompletionBlocks.h"
 @class TheBoxPost;
 @class TheBoxGet;
 @class AFHTTPRequestOperation;
@@ -21,6 +23,11 @@
 @protocol TBUpdateItemOperationDelegate;
 @protocol TBLocalityOperationDelegate;
 @protocol TBCreateItemOperationDelegate;
+@protocol TBNSErrorDelegate;
+
+@interface TBQueriesFailureBlocks : NSObject
++(TBAFHTTPRequestOperationFailureBlock)nsErrorDelegate:(NSObject<TBNSErrorDelegate>*)delegate failureBlock:(TBAFHTTPRequestOperationFailureBlock)failureBlock;
+@end
 
 /*
  * Provides all available queries to TheBox API
@@ -47,9 +54,7 @@ extern NSString* const THE_BOX_SERVICE;
  @param residence the residence associated with the user
  */
 +(AFHTTPRequestOperation*)newVerifyUserQuery:(NSObject<TBVerifyUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence;
-+(AFHTTPRequestOperation*)newCategoriesQuery:(NSObject<TBCategoriesOperationDelegate>*)delegate;
 
-+(AFHTTPRequestOperation*)newItemQuery:(UIImage *) image location:(NSDictionary *)location;
 +(AFHTTPRequestOperation*)updateItemQuery:(NSDictionary *) item delegate:(NSObject<TBUpdateItemOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude query:(NSString*) query delegate:(NSObject<TBLocationOperationDelegate>*)delegate;
@@ -96,6 +101,7 @@ extern NSString* const THE_BOX_SERVICE;
 /**
  Gets all the items in thebox given the locality
  
+ @return @nillable a new AFHTTPRequestOperation or nil if locality is nil.
  */
 +(AFHTTPRequestOperation*)newGetItems:(NSString*)locality delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 @end

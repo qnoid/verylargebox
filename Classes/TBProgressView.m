@@ -18,7 +18,7 @@
         return nil;
     }
 
-    loadView();
+    TB_LOAD_VIEW();
     
 return self;
 }

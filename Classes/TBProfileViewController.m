@@ -13,7 +13,6 @@
 #import "TBUserItemView.h"
 #import "TheBoxQueries.h"
 #import "UIScrollView+SVPullToRefresh.h"
-#import "TheBoxLocationService.h"
 #import "UIViewController+TBViewController.h"
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
@@ -26,7 +25,6 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, weak) TheBoxUIScrollView* itemsView;
 @property(nonatomic, weak) UIView<QNDAnimatedView> *notificationAnimatedView;
 @property(nonatomic, weak) UIProgressView *progressView;
-@property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSDictionary* residence;
 @property(nonatomic, strong) NSMutableArray* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
@@ -79,7 +77,6 @@ return profileViewController;
         return nil;
     }
     
-    self.theBoxLocationService = [TheBoxLocationService theBoxLocationService];
     self.residence = residence;
     self.items = [NSMutableArray array];
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
@@ -102,7 +99,7 @@ return self;
     [notificationAnimatedView addSubview:progressView];
     
     TheBoxUIScrollView* itemsView = [[[[TheBoxUIScrollViewBuilder alloc] initWith:
-                                     CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:350.0] allowSelection] newVerticalScrollView];
+                                     CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:320.0] allowSelection] newVerticalScrollView];
     
     itemsView.backgroundColor = [UIColor whiteColor];
     itemsView.datasource = self;
@@ -131,12 +128,10 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 -(void)viewDidAppear:(BOOL)animated

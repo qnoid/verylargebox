@@ -7,7 +7,7 @@
 //
 
 #import "TBButton.h"
-#import "TBUIView.h"
+#import "TBMacros.h"
 
 @interface TBButton ()
 @property(nonatomic, strong) NSMutableDictionary* uiControlEventToBlock;
@@ -15,9 +15,26 @@
 
 @implementation TBButton
 
--(void)awakeFromNib
+-(id)initWithFrame:(CGRect)frame
 {
+    self = [super initWithFrame:frame];
+    
+    TB_IF_NOT_SELF_RETURN_NIL()
+    
     self.uiControlEventToBlock = [NSMutableDictionary new];
+    
+return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    TB_IF_NOT_SELF_RETURN_NIL()
+    
+    self.uiControlEventToBlock = [NSMutableDictionary new];
+    
+    return self;
 }
 
 #pragma private
@@ -29,14 +46,6 @@ return[self.uiControlEventToBlock objectForKey:[NSNumber numberWithInt:controlEv
 {
     [self.uiControlEventToBlock setObject:[doo copy] forKey:[NSNumber numberWithInt:uiControlEvent]];
     [self addTarget:self action:action forControlEvents:uiControlEvent];
-}
-
-#pragma public
--(TBButton*)cornerRadius:(CGFloat)cornerRadius
-{
-    self.layer.cornerRadius = cornerRadius;
-    self.layer.masksToBounds = YES;
-return self;
 }
 
 -(void)onTouchDown:(TBButtonOnTouch)doo {
@@ -51,7 +60,6 @@ return self;
 -(void)onTouchUp:(TBButtonOnTouch)doo
 {
     [self setBlock:doo forAction:@selector(didTouchUpInsideButton:) on:UIControlEventTouchUpInside];
-    [self setBlock:doo forAction:@selector(didTouchUpOutsideButton:) on:UIControlEventTouchUpOutside];
 }
 
 -(void)didTouchDownButton:(id)sender
@@ -70,6 +78,12 @@ return self;
 {
     TBButtonOnTouch onTouchDown = [self blockForControlEvent:UIControlEventTouchUpInside];
     onTouchDown(sender);
+}
+
+-(void)drawRect:(CGRect)rect
+{
+    __weak UIView* wself = self;
+    [self.delegate drawRect:rect inView:wself];
 }
 
 @end
