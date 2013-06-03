@@ -9,7 +9,20 @@
  */
 #import <Foundation/Foundation.h>
 
+/**
+ Blocks of this type will get a callback with the 
+ 
+ @param context the context to draw at
+ @see TBViewContext
+ */
 typedef void(^TBViewDrawContext)(CGContextRef context);
+
+/**
+ A view context block provides boundaries to draw to a context.
+
+ @param drawContext the block to pass the context to draw at
+ @see TBViews#solidContext:stroke
+ */
 typedef void(^TBViewContext)(TBViewDrawContext drawContext);
 
 
@@ -18,23 +31,17 @@ CGPoint CGRectCenter(CGRect rect) {
     return CGPointMake(rect.size.width / 2.0, rect.size.height / 2.0);
 }
 
-NS_INLINE
-TBViewContext tbViewSolidContext(UIColor *fill, UIColor *stroke)
-{
-    return ^(TBViewDrawContext drawContext){
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetLineWidth(context, 2.0f);
-        CGContextSetFillColorWithColor(context, fill.CGColor);
-        CGContextSetStrokeColorWithColor(context, stroke.CGColor);
-        
-        drawContext(context);
-        
-        CGContextClosePath(context);
-        CGContextDrawPath(context, kCGPathFillStroke);
-        UIGraphicsEndImageContext();
-    };
-}
-
 @interface TBViews : NSObject
+
+/**
+ A TBViewContext to draw a filled, stroked graphic in the current context.
+ 
+ @param fill the fill color to use
+ @param stroke the stroke color to use
+ @return a TBViewContext based on the current context as returned by UIGraphicsGetCurrentContext
+ @see CGContextSetFillColorWithColor
+ @see CGContextSetStrokeColorWithColor
+ */
++(TBViewContext) solidContext:(UIColor*) fill stroke:(UIColor*) stroke;
 
 @end

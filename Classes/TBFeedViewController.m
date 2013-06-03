@@ -61,7 +61,6 @@ return localityItemsViewController;
 
 -(void)dealloc
 {
-    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
@@ -122,7 +121,6 @@ return localityItemsViewController;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -244,6 +242,9 @@ return localityItemsViewController;
 #pragma mark TheBoxLocationServiceDelegate
 -(void)didFindPlacemark:(NSNotification *)notification
 {
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    
     NSLog(@"%s", __PRETTY_FUNCTION__);
 	NSString *locality = [TheBoxNotifications place:notification].locality;
     

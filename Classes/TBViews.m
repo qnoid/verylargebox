@@ -12,4 +12,20 @@
 @implementation TBViews
 
 
++(TBViewContext) solidContext:(UIColor*) fill stroke:(UIColor*) stroke
+{
+    return ^(TBViewDrawContext drawContext){
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetLineWidth(context, 2.0f);
+        CGContextSetFillColorWithColor(context, fill.CGColor);
+        CGContextSetStrokeColorWithColor(context, stroke.CGColor);
+        
+        drawContext(context);
+        
+        CGContextClosePath(context);
+        CGContextDrawPath(context, kCGPathFillStroke);
+        UIGraphicsEndImageContext();
+    };
+}
+
 @end

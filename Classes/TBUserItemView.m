@@ -10,6 +10,8 @@
 #import "TBViews.h"
 #import "TBPolygon.h"
 #import "TBColors.h"
+#import "TBDrawRects.h"
+#import "TBMacros.h"
 
 static const CLLocationDegrees EmptyLocation = -1000.0;
 static const CLLocationCoordinate2D EmptyLocationCoordinate = {-1000.0, -1000.0};
@@ -19,16 +21,16 @@ static const CLLocationCoordinate2D EmptyLocationCoordinate = {-1000.0, -1000.0}
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (!self) {
-        return nil;
-    }
-    
-    NSArray *views = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([TBUserItemView class])
-                                                   owner:self
-                                                 options:nil];
 
-    [self addSubview:[views objectAtIndex:0]];
+    TB_IF_NOT_SELF_RETURN_NIL()
+    TB_LOAD_VIEW()
+    
     self.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();
+    
+    [[self.detailView.border
+      borderWidth:1.0f]
+     borderColor:[UIColor blackColor].CGColor];
+
     
 return self;
 }
@@ -40,18 +42,7 @@ return self;
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
 {
-    CGPoint center = CGRectCenter(rect);
-    TBPolygon* hexagon = [TBPolygon hexagonAt:center];
-    
-    tbViewSolidContext([TBColors colorLightGreen], [TBColors colorDarkGreen])(^(CGContextRef context){
-        [hexagon rotateAt:0.25 collect:^(int index, CGPoint angle) {
-            if(index == 0){
-                CGContextMoveToPoint(context, angle.x, angle.y);
-            }
-            
-            CGContextAddLineToPoint(context, angle.x, angle.y);
-        }];
-    });
+    [[TBDrawRects new] drawContextOfHexagonInRect:rect];
 }
 
 @end

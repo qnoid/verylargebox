@@ -139,6 +139,9 @@
 		BD4BA9AD16FA5B6C009C1518 /* UIViewController+TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
 		BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A503A1291E4AC00BCB475 /* CoreLocation.framework */; };
+		BD6BE05B175B524300B93854 /* TBDrawRects.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6BE05A175B524300B93854 /* TBDrawRects.m */; };
+		BD6BE05C175B524300B93854 /* TBDrawRects.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6BE05A175B524300B93854 /* TBDrawRects.m */; };
+		BD6BE05D175B570900B93854 /* TBViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E1A1757D6050070BB59 /* TBViews.m */; };
 		BD7C27D417235DDB009D26EE /* TBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7C27D317235DDB009D26EE /* TBProgressView.m */; };
 		BD7C27D517235DDB009D26EE /* TBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7C27D317235DDB009D26EE /* TBProgressView.m */; };
 		BD7C27D717235DE7009D26EE /* TBProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7C27D617235DE6009D26EE /* TBProgressView.xib */; };
@@ -202,6 +205,7 @@
 		BDB1572B175561EE00E140E9 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB15728175561EE00E140E9 /* x.png */; };
 		BDB1572C175561EE00E140E9 /* x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB15729175561EE00E140E9 /* x@2x.png */; };
 		BDB1572D175561EE00E140E9 /* x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB15729175561EE00E140E9 /* x@2x.png */; };
+		BDC97604175C0713004E72CD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC97603175C0713004E72CD /* libPods.a */; };
 		BDCD937F165C127A009C2F8F /* TheBoxUICellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */; };
 		BDCD9380165C127A009C2F8F /* TheBoxUICellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */; };
 		BDCD9385165C127A009C2F8F /* UITestViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E578133CC68A00CC9212 /* UITestViews.m */; };
@@ -413,6 +417,9 @@
 		BD4BA9AA16FA5B6C009C1518 /* UIViewController+TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TBViewController.h"; sourceTree = "<group>"; };
 		BD4BA9AB16FA5B6C009C1518 /* UIViewController+TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TBViewController.m"; sourceTree = "<group>"; };
 		BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		BD6BE058175B503D00B93854 /* TBViewControllers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBViewControllers.h; sourceTree = "<group>"; };
+		BD6BE059175B524300B93854 /* TBDrawRects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBDrawRects.h; sourceTree = "<group>"; };
+		BD6BE05A175B524300B93854 /* TBDrawRects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBDrawRects.m; sourceTree = "<group>"; };
 		BD7C27D217235DDB009D26EE /* TBProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBProgressView.h; sourceTree = "<group>"; };
 		BD7C27D317235DDB009D26EE /* TBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBProgressView.m; sourceTree = "<group>"; };
 		BD7C27D617235DE6009D26EE /* TBProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBProgressView.xib; path = Classes/TBProgressView.xib; sourceTree = "<group>"; };
@@ -468,6 +475,7 @@
 		BDB157231755549100E140E9 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark@2x.png"; path = "Supporting Files/checkmark@2x.png"; sourceTree = "<group>"; };
 		BDB15728175561EE00E140E9 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x.png; path = "Supporting Files/x.png"; sourceTree = "<group>"; };
 		BDB15729175561EE00E140E9 /* x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x@2x.png"; path = "Supporting Files/x@2x.png"; sourceTree = "<group>"; };
+		BDC97603175C0713004E72CD /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		BDCD93A5165C127A009C2F8F /* ApplicationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCE1E191757D6050070BB59 /* TBViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBViews.h; sourceTree = "<group>"; };
 		BDCE1E1A1757D6050070BB59 /* TBViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBViews.m; sourceTree = "<group>"; };
@@ -528,6 +536,7 @@
 				908364091400752500E5AAAF /* MapKit.framework in Frameworks */,
 				9083640B1400752500E5AAAF /* Foundation.framework in Frameworks */,
 				9083640D1400752A00E5AAAF /* libz.dylib in Frameworks */,
+				BDC97604175C0713004E72CD /* libPods.a in Frameworks */,
 				5FF16CEE11F2459FA554E9A4 /* libPods-UnitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,6 +658,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				BDC97603175C0713004E72CD /* libPods.a */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -899,6 +909,9 @@
 			children = (
 				BD4292B7175B4BBB00459891 /* TBErrorBlocks.h */,
 				BD4292B8175B4BBB00459891 /* TBErrorBlocks.m */,
+				BD6BE058175B503D00B93854 /* TBViewControllers.h */,
+				BD6BE059175B524300B93854 /* TBDrawRects.h */,
+				BD6BE05A175B524300B93854 /* TBDrawRects.m */,
 			);
 			name = "UIViewController+TBViewController";
 			sourceTree = "<group>";
@@ -1406,6 +1419,7 @@
 				BDCE1E291759495D0070BB59 /* TBPolygon.m in Sources */,
 				BD2A8AAC175AD9360036A852 /* TheBoxAlertViews.m in Sources */,
 				BD4292B9175B4BBB00459891 /* TBErrorBlocks.m in Sources */,
+				BD6BE05B175B524300B93854 /* TBDrawRects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1453,6 +1467,8 @@
 				BD2A8ABF175B42EB0036A852 /* TBUITableViewDataSourceBuilder.m in Sources */,
 				BD4292B4175B447700459891 /* UINavigationItem+TBNavigationItem.m in Sources */,
 				BD4292BA175B4BBB00459891 /* TBErrorBlocks.m in Sources */,
+				BD6BE05C175B524300B93854 /* TBDrawRects.m in Sources */,
+				BD6BE05D175B570900B93854 /* TBViews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

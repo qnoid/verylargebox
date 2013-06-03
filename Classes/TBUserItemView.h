@@ -67,6 +67,7 @@ return tbUserItemViewGetDirectionsWithGoogleMaps();
 
 @interface TBUserItemView : UIView <TBViewDrawRectDelegate>
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
+@property(nonatomic, weak) IBOutlet UIView* detailView;
 @property(nonatomic, weak) IBOutlet UILabel* whenLabel;
 @property(nonatomic, weak) IBOutlet UILabel* storeLabel;
 @property(nonatomic, copy) TBUserItemViewGetDirections didTapOnGetDirectionsButton;

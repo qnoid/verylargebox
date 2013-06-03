@@ -32,6 +32,7 @@
 #import "TBAlertViews.h"
 #import "MBProgressHUD.h"
 #import "TBPolygon.h"
+#import "TBDrawRects.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 66.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -98,7 +99,6 @@ return homeGridViewController;
 
 -(void)dealloc
 {
-    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
@@ -125,18 +125,7 @@ return self;
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
 {
-    CGPoint center = CGRectCenter(rect);
-    TBPolygon* hexagon = [TBPolygon hexagonAt:center];
-    
-    tbViewSolidContext([TBColors colorLightGreen], [TBColors colorDarkGreen])(^(CGContextRef context){
-        [hexagon rotateAt:0.25 collect:^(int index, CGPoint angle) {
-            if(index == 0){
-                CGContextMoveToPoint(context, angle.x, angle.y);
-            }
-            
-            CGContextAddLineToPoint(context, angle.x, angle.y);
-        }];
-    });
+    [[TBDrawRects new] drawContextOfHexagonInRect:rect];
 }
 
 -(void)refreshLocations
@@ -206,11 +195,6 @@ return self;
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
     
--(void)viewWillDisappear:(BOOL)animated
-{
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-}
-
 #pragma mark application events
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
@@ -496,6 +480,9 @@ return storeButton;
 -(void)didFindPlacemark:(NSNotification *)notification
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];    
+    
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
     self.placemark = [TheBoxNotifications place:notification];

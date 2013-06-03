@@ -26,10 +26,12 @@
 #import "MBProgressHUD.h"
 #import "TBPolygon.h"
 #import "TBErrorBlocks.h"
+#import "TBDrawRects.h"
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
 @property(nonatomic, strong) NSMutableArray* accounts;
+
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts;
 @end
 
@@ -71,19 +73,12 @@ return self;
 {
     [super viewDidLoad];
     
-//    UIColor *darkOrange = [TBColors colorDarkOrange];
-//    [self.identifyButton cornerRadius:88.0f];
-//    [[self.identifyButton.border
-//        borderWidth:2.0f]
-//        borderColor:darkOrange.CGColor];
-    
     __weak TBIdentifyViewController *uself = self;
     [self.identifyButton onTouchDown:^(UIButton *button) {
-        makeButton([TBColors colorLightGreen]);
+        button.titleLabel.text = @"";
     }];
     
     [self.identifyButton onTouchUp:^(UIButton *button) {
-        makeButton([TBColors colorDarkGreen]);
         TBEmailViewController* emailViewController = [TBEmailViewController newEmailViewController];
         emailViewController.delegate = uself;
         emailViewController.createUserOperationDelegate = uself;
@@ -303,18 +298,7 @@ return YES;
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
 {
-    CGPoint center = CGRectCenter(rect);
-    TBPolygon* hexagon = [TBPolygon hexagonAt:center];
-    
-    tbViewSolidContext([TBColors colorLightGreen], [TBColors colorDarkGreen])(^(CGContextRef context){
-        [hexagon rotateAt:0.25 collect:^(int index, CGPoint angle) {            
-            if(index == 0){
-                CGContextMoveToPoint(context, angle.x, angle.y);
-            }
-            
-            CGContextAddLineToPoint(context, angle.x, angle.y);
-        }];
-    });    
+    [[TBDrawRects new] drawContextOfHexagonInRect:rect];
 }
 
 @end

@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import "TheBoxUIScrollView.h"
 
+typedef void(^TBViewDrawRect)(CGRect rect, UIView* view);
+
 /**
  Implementations of this protocol provide a custom drawRect method.
  
