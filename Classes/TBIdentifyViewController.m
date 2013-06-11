@@ -9,7 +9,6 @@
 #import "TBIdentifyViewController.h"
 #import "TBButton.h"
 #import "TBColors.h"
-#import "TBEmailViewController.h"
 #import "HomeUIGridViewController.h"
 #import "SSKeychain.h"
 #import "TheBoxQueries.h"
@@ -27,6 +26,9 @@
 #import "TBPolygon.h"
 #import "TBErrorBlocks.h"
 #import "TBDrawRects.h"
+#import "QNDAnimations.h"
+#import "QNDAnimatedView.h"
+#import "TBSecureHashA1.h"
 
 @interface TBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
@@ -73,24 +75,34 @@ return self;
 {
     [super viewDidLoad];
     
-    __weak TBIdentifyViewController *uself = self;
-    [self.identifyButton onTouchDown:^(UIButton *button) {
-        button.titleLabel.text = @"";
+    
+    UIView<QNDAnimatedView> *accountsTableView = [[QNDAnimations new] animateView:self.accountsTableView];
+    [accountsTableView addViewAnimationBlockWithDuration:0.5 animation:^(UIView *view) {
+        view.frame = CGRectMake(0, 124, 320, 94);
     }];
+    
+    self.accountsTableView.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 20);
+    self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0);
+
+    __weak TBIdentifyViewController *uself = self;
     
     [self.identifyButton onTouchUp:^(UIButton *button) {
-        TBEmailViewController* emailViewController = [TBEmailViewController newEmailViewController];
-        emailViewController.delegate = uself;
-        emailViewController.createUserOperationDelegate = uself;
-        [uself.navigationController pushViewController:emailViewController animated:YES];
+        TBSecureHashA1 *sha1 = [TBSecureHashA1 new];
+        NSString* residence = [sha1 newKey];
+        
+        [uself didEnterEmail:uself.emailTextField.text forResidence:residence];
+        
+        //no need to handle viewcontroller unloading
+        AFHTTPRequestOperation *newRegistrationOperation =
+        [TheBoxQueries newCreateUserQuery:uself email:uself.emailTextField.text residence:residence];
+        
+        [self.operations addOperation:newRegistrationOperation];
+        
+        self.emailTextField.text = @"";
+        [self.navigationController popViewControllerAnimated:YES];
     }];
-    
-    UIColor *darkOrange = [TBColors colorDarkOrange];
-    [[self.browseButton.border
-        borderWidth:2.0f]
-        borderColor:darkOrange.CGColor];
-    
-    [self.browseButton onTouchDown:^(UIButton *button)
+
+    [self.browseButton onTouchUpInside:^(UIButton *button)
     {
         TBFeedViewController *localityItemsViewController = [TBFeedViewController newFeedViewController];
 
@@ -99,7 +111,6 @@ return self;
         
         [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:localityItemsViewController] animated:YES completion:nil];
     }];
-    [self.browseButton onTouchUp:makeButtonWhite()];    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -120,6 +131,19 @@ return self;
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark UITextFieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [self.identifyButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.identifyButton.enabled = YES;
+};
+
 
 #pragma mark TBVerifyUserOperationDelegate
 -(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence
@@ -145,7 +169,6 @@ return self;
     [userUnauthorisedAlertView show];
 }
 
-#pragma mark TBEmailViewControllerDelegate
 -(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence
 {
     NSError *error = nil;
@@ -214,13 +237,9 @@ return [self.accounts count];
     if(!emailCell)
     {
         emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        emailCell.textLabel.textColor = [TBColors colorLightOrange];
-        emailCell.textLabel.textAlignment = NSTextAlignmentCenter;
+        emailCell.textLabel.textColor = [TBColors colorPrimaryBlue];
         UIView* selectedBackgroundView = [[UIView alloc] init];
-        selectedBackgroundView.backgroundColor = [TBColors colorLightOrange];
-        [[selectedBackgroundView.border
-            borderWidth:2.0f]
-            borderColor:[TBColors colorDarkOrange].CGColor];
+        selectedBackgroundView.backgroundColor = [TBColors colorPrimaryBlue];
         emailCell.selectedBackgroundView = selectedBackgroundView;
     }
     
@@ -298,7 +317,8 @@ return YES;
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
 {
-    [[TBDrawRects new] drawContextOfHexagonInRect:rect];
+    TBViewContext context = [TBViews fill:[TBColors colorPrimaryBlue]];
+    context([[TBDrawRects new] drawContextOfHexagon:[TBPolygon hexagonAt:CGRectCenter(rect)]]);
 }
 
 @end

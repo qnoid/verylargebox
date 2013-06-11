@@ -9,7 +9,8 @@ target :ApplicationTests, :exclusive => true do
 	pod 'OCMock', '~> 2.0.1'
 end
 
-pod 'AFNetworking', '~> 0.9.1 '
+pod 'AFNetworking'  
+pod 'AWSiOSSDK/S3'
 pod 'JSONKit', '~> 1.4'
 pod 'TestFlightSDK', '= 1.3.0-beta.5'
 pod 'SSKeychain', '0.1.4'

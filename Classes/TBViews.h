@@ -33,6 +33,19 @@ CGPoint CGRectCenter(CGRect rect) {
 
 @interface TBViews : NSObject
 
+
++(TBViewContext) fill:(UIColor*) fill;
+
+/**
+ A TBViewContext to draw a stroked graphic in the current context.
+ 
+ @param stroke the stroke color to use
+ @return a TBViewContext based on the current context as returned by UIGraphicsGetCurrentContext
+ @see CGContextSetFillColorWithColor
+ @see CGContextSetStrokeColorWithColor
+ */
++(TBViewContext) stroke:(UIColor*) stroke;
+
 /**
  A TBViewContext to draw a filled, stroked graphic in the current context.
  

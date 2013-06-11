@@ -42,6 +42,13 @@ return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
 @synthesize theBoxLocationService;
 @synthesize venues;
 
+
+-(void)dealloc
+{
+    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+	[self.theBoxLocationService dontNotifyDidFailWithError:self];
+}
+
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:@"LocationUIViewController" bundle:nibBundleOrNil];

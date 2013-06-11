@@ -17,8 +17,6 @@
 		903AE3DA1284900300A8FB28 /* HomeUIGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */; };
 		903AE3E81284BF7500A8FB28 /* WelcomeUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */; };
 		903AE4EC1285BE6500A8FB28 /* DetailsUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */; };
-		903AE4EE1285C9A600A8FB28 /* UserProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4ED1285C9A600A8FB28 /* UserProfile.xib */; };
-		903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4F51285CBD800A8FB28 /* UserProfiles.xib */; };
 		903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE5601285E33600A8FB28 /* UploadUIViewController.xib */; };
 		90454B05154DE5DF0064D998 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 90454B04154DE5DF0064D998 /* icon-72.png */; };
 		905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */; };
@@ -30,7 +28,6 @@
 		908363F214006C5000E5AAAF /* UITestViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E578133CC68A00CC9212 /* UITestViews.m */; };
 		908363F614006C5000E5AAAF /* TheBoxTestRanking.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226C071359AA14006E43EC /* TheBoxTestRanking.m */; };
 		908363F9140070DC00E5AAAF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29AFF131A81FB008B8B2D /* CFNetwork.framework */; };
-		908363FA140070DC00E5AAAF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B07131A820F008B8B2D /* SystemConfiguration.framework */; };
 		908363FB140070DC00E5AAAF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B0B131A8219008B8B2D /* MobileCoreServices.framework */; };
 		908363FD140070DC00E5AAAF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A4FE11291E15400BCB475 /* MapKit.framework */; };
 		908363FE140070DC00E5AAAF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -67,8 +64,6 @@
 		90C2C36612B6C25A00829868 /* NSString+Decorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056A5DF1290065F006C148A /* NSString+Decorator.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C36A12B6C25C00829868 /* TheBoxUIRecycleStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C37012B6C27000829868 /* HomeUIGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */; settings = {COMPILER_FLAGS = " "; }; };
-		90C2C37112B6C2A300829868 /* UserProfilesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 903AE5071285E1F800A8FB28 /* UserProfilesView.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90C2C37212B6C2A400829868 /* UserProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 903AE5031285E1C300A8FB28 /* UserProfileView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C37312B6C2A900829868 /* UploadUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9053953112888AF000FD381C /* UploadUIViewController.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C37412B6C2AC00829868 /* LocationUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905A4F991291DE6400BCB475 /* LocationUIViewController.m */; settings = {COMPILER_FLAGS = " "; }; };
 		90C2C37512B6C2AD00829868 /* TheBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TheBoxAppDelegate.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -164,9 +159,9 @@
 		BDA2BC921659600F0068C749 /* TBProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BC901659600F0068C749 /* TBProfileViewController.xib */; };
 		BDA2BCDF1659853E0068C749 /* TBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* TBButton.m */; };
 		BDA2BD0C165AD1160068C749 /* TBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0B165AD1150068C749 /* TBColors.m */; };
-		BDA2BD11165AEB090068C749 /* TBEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0F165AEB080068C749 /* TBEmailViewController.m */; };
-		BDA2BD13165AEB090068C749 /* TBEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD10165AEB090068C749 /* TBEmailViewController.xib */; };
 		BDA2BD1A165AF8E30068C749 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD17165AF8E30068C749 /* user.png */; };
+		BDA4FB4C175FF393004AAEC6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */; };
+		BDA4FB4D175FF42D004AAEC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B07131A820F008B8B2D /* SystemConfiguration.framework */; };
 		BDABD92C169F689F00111723 /* TBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* TBItemView.m */; };
 		BDABD92F169F68B100111723 /* TBItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDABD92E169F68B100111723 /* TBItemView.xib */; };
 		BDABD930169F9EF800111723 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
@@ -205,7 +200,6 @@
 		BDB1572B175561EE00E140E9 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB15728175561EE00E140E9 /* x.png */; };
 		BDB1572C175561EE00E140E9 /* x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB15729175561EE00E140E9 /* x@2x.png */; };
 		BDB1572D175561EE00E140E9 /* x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB15729175561EE00E140E9 /* x@2x.png */; };
-		BDC97604175C0713004E72CD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC97603175C0713004E72CD /* libPods.a */; };
 		BDCD937F165C127A009C2F8F /* TheBoxUICellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* TheBoxUICellRecycleStrategyTest.m */; };
 		BDCD9380165C127A009C2F8F /* TheBoxUICellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* TheBoxUICellVisibleStrategyTest.m */; };
 		BDCD9385165C127A009C2F8F /* UITestViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E578133CC68A00CC9212 /* UITestViews.m */; };
@@ -229,8 +223,8 @@
 		BDD8FEBD165C196200AB3041 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDD8FEBC165C196200AB3041 /* InfoPlist.strings */; };
 		BDE1E83615683FF800CF10CF /* TBView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE1E83515683FF800CF10CF /* TBView.m */; };
 		BDE482C11750510D0096903C /* TBFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE482BF1750510D0096903C /* TBFeedViewController.m */; };
-		BDE482C31750510D0096903C /* TBLocalityItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE482C01750510D0096903C /* TBLocalityItemsViewController.xib */; };
-		BDE482C41750510D0096903C /* TBLocalityItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE482C01750510D0096903C /* TBLocalityItemsViewController.xib */; };
+		BDE482C31750510D0096903C /* TBFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE482C01750510D0096903C /* TBFeedViewController.xib */; };
+		BDE482C41750510D0096903C /* TBFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE482C01750510D0096903C /* TBFeedViewController.xib */; };
 		BDF0F42516C8254C002CDE8E /* TBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* TBVerifyOperationBlock.m */; };
 		BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF825C016FDFCEA003B3003 /* AddressBook.framework */; };
 		FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */; };
@@ -281,10 +275,6 @@
 		903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomeUIGridViewController.xib; path = Classes/HomeUIGridViewController.xib; sourceTree = "<group>"; };
 		903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WelcomeUIViewController.xib; path = Classes/WelcomeUIViewController.xib; sourceTree = "<group>"; };
 		903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailsUIViewController.xib; path = Classes/DetailsUIViewController.xib; sourceTree = "<group>"; };
-		903AE4ED1285C9A600A8FB28 /* UserProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserProfile.xib; path = Classes/UserProfile.xib; sourceTree = "<group>"; };
-		903AE4F51285CBD800A8FB28 /* UserProfiles.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserProfiles.xib; path = Classes/UserProfiles.xib; sourceTree = "<group>"; };
-		903AE5031285E1C300A8FB28 /* UserProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileView.m; path = Classes/UserProfileView.m; sourceTree = "<group>"; };
-		903AE5071285E1F800A8FB28 /* UserProfilesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfilesView.m; path = Classes/UserProfilesView.m; sourceTree = "<group>"; };
 		903AE5601285E33600A8FB28 /* UploadUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UploadUIViewController.xib; path = Classes/UploadUIViewController.xib; sourceTree = "<group>"; };
 		90417326134B0F1500F18F95 /* TheBoxRectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxRectTest.m; sourceTree = "<group>"; };
 		90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TheBoxUIScrollViewTest.m; path = ../Tests/Classes/TheBoxUIScrollViewTest.m; sourceTree = "<group>"; };
@@ -354,8 +344,6 @@
 		90C9511F12B6A16C00A8A05F /* TheBoxUIGridViewDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIGridViewDatasource.h; sourceTree = "<group>"; };
 		90C9512012B6A16C00A8A05F /* TheBoxVisibleStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxVisibleStrategy.h; sourceTree = "<group>"; };
 		90C9512212B6A16C00A8A05F /* UploadUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadUIViewController.h; sourceTree = "<group>"; };
-		90C9512312B6A16C00A8A05F /* UserProfilesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfilesView.h; sourceTree = "<group>"; };
-		90C9512412B6A16C00A8A05F /* UserProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileView.h; sourceTree = "<group>"; };
 		90C9512512B6A16C00A8A05F /* VisibleStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleStrategy.h; sourceTree = "<group>"; };
 		90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredByFoursquare_gray.png; sourceTree = "<group>"; };
 		90CBFE69154D4ACA00349A13 /* thewho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thewho.jpg; sourceTree = "<group>"; };
@@ -447,11 +435,9 @@
 		BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BDA2BD0A165AD1150068C749 /* TBColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBColors.h; sourceTree = "<group>"; };
 		BDA2BD0B165AD1150068C749 /* TBColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBColors.m; sourceTree = "<group>"; };
-		BDA2BD0E165AEB080068C749 /* TBEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBEmailViewController.h; sourceTree = "<group>"; };
-		BDA2BD0F165AEB080068C749 /* TBEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBEmailViewController.m; sourceTree = "<group>"; };
-		BDA2BD10165AEB090068C749 /* TBEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBEmailViewController.xib; path = Classes/TBEmailViewController.xib; sourceTree = "<group>"; };
 		BDA2BD17165AF8E30068C749 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = "Supporting Files/user.png"; sourceTree = "<group>"; };
 		BDA2BD1C165AFA200068C749 /* TBCreateUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCreateUserOperationDelegate.h; sourceTree = "<group>"; };
+		BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BDABD92A169F689E00111723 /* TBItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBItemView.h; sourceTree = "<group>"; };
 		BDABD92B169F689F00111723 /* TBItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBItemView.m; sourceTree = "<group>"; };
 		BDABD92E169F68B100111723 /* TBItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBItemView.xib; path = Classes/TBItemView.xib; sourceTree = "<group>"; };
@@ -475,7 +461,6 @@
 		BDB157231755549100E140E9 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark@2x.png"; path = "Supporting Files/checkmark@2x.png"; sourceTree = "<group>"; };
 		BDB15728175561EE00E140E9 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x.png; path = "Supporting Files/x.png"; sourceTree = "<group>"; };
 		BDB15729175561EE00E140E9 /* x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x@2x.png"; path = "Supporting Files/x@2x.png"; sourceTree = "<group>"; };
-		BDC97603175C0713004E72CD /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		BDCD93A5165C127A009C2F8F /* ApplicationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCE1E191757D6050070BB59 /* TBViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBViews.h; sourceTree = "<group>"; };
 		BDCE1E1A1757D6050070BB59 /* TBViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBViews.m; sourceTree = "<group>"; };
@@ -489,7 +474,7 @@
 		BDE1E83515683FF800CF10CF /* TBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBView.m; sourceTree = "<group>"; };
 		BDE482BE1750510D0096903C /* TBFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFeedViewController.h; sourceTree = "<group>"; };
 		BDE482BF1750510D0096903C /* TBFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBFeedViewController.m; sourceTree = "<group>"; };
-		BDE482C01750510D0096903C /* TBLocalityItemsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBLocalityItemsViewController.xib; path = Classes/TBLocalityItemsViewController.xib; sourceTree = "<group>"; };
+		BDE482C01750510D0096903C /* TBFeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBFeedViewController.xib; path = Classes/TBFeedViewController.xib; sourceTree = "<group>"; };
 		BDF0F42316C8254B002CDE8E /* TBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBVerifyOperationBlock.h; sourceTree = "<group>"; };
 		BDF0F42416C8254B002CDE8E /* TBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBVerifyOperationBlock.m; sourceTree = "<group>"; };
 		BDF825C016FDFCEA003B3003 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -503,13 +488,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA4FB4D175FF42D004AAEC6 /* SystemConfiguration.framework in Frameworks */,
+				908363FB140070DC00E5AAAF /* MobileCoreServices.framework in Frameworks */,
 				BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */,
 				BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */,
 				BDABD930169F9EF800111723 /* QuartzCore.framework in Frameworks */,
 				BDA2187A165EEBF600094510 /* Security.framework in Frameworks */,
-				908363FA140070DC00E5AAAF /* SystemConfiguration.framework in Frameworks */,
 				908363F9140070DC00E5AAAF /* CFNetwork.framework in Frameworks */,
-				908363FB140070DC00E5AAAF /* MobileCoreServices.framework in Frameworks */,
 				908363FD140070DC00E5AAAF /* MapKit.framework in Frameworks */,
 				908363FE140070DC00E5AAAF /* UIKit.framework in Frameworks */,
 				908363FF140070DC00E5AAAF /* Foundation.framework in Frameworks */,
@@ -518,6 +503,7 @@
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
 				9089482515533980009188B4 /* libTestFlight.a in Frameworks */,
 				BD2A8AAE175B3DE00036A852 /* XRay.framework in Frameworks */,
+				BDA4FB4C175FF393004AAEC6 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,7 +522,6 @@
 				908364091400752500E5AAAF /* MapKit.framework in Frameworks */,
 				9083640B1400752500E5AAAF /* Foundation.framework in Frameworks */,
 				9083640D1400752A00E5AAAF /* libz.dylib in Frameworks */,
-				BDC97604175C0713004E72CD /* libPods.a in Frameworks */,
 				5FF16CEE11F2459FA554E9A4 /* libPods-UnitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,8 +563,6 @@
 				903AE40312853FD500A8FB28 /* Description */,
 				903AE40412853FDF00A8FB28 /* Upload */,
 				905A4F9C1291DE6F00BCB475 /* Location */,
-				BDA2BD0E165AEB080068C749 /* TBEmailViewController.h */,
-				BDA2BD0F165AEB080068C749 /* TBEmailViewController.m */,
 				BDA2BC8E1659600F0068C749 /* TBProfileViewController.h */,
 				BDA2BC8F1659600F0068C749 /* TBProfileViewController.m */,
 				BDA2BC89165952C20068C749 /* TBIdentifyViewController.h */,
@@ -658,7 +641,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				BDC97603175C0713004E72CD /* libPods.a */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -698,6 +680,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */,
 				BDF825C016FDFCEA003B3003 /* AddressBook.framework */,
 				BDA21877165EEBEA00094510 /* Security.framework */,
 				908363A61400659200E5AAAF /* libz.dylib */,
@@ -744,8 +727,6 @@
 			children = (
 				90B56BE31534D3E10064CB4E /* DetailsUIViewController.h */,
 				90B56BE41534D3E10064CB4E /* DetailsUIViewController.m */,
-				903AE5031285E1C300A8FB28 /* UserProfileView.m */,
-				903AE5071285E1F800A8FB28 /* UserProfilesView.m */,
 			);
 			name = Details;
 			path = ..;
@@ -849,8 +830,6 @@
 				90C9511F12B6A16C00A8A05F /* TheBoxUIGridViewDatasource.h */,
 				90C9512012B6A16C00A8A05F /* TheBoxVisibleStrategy.h */,
 				90C9512212B6A16C00A8A05F /* UploadUIViewController.h */,
-				90C9512312B6A16C00A8A05F /* UserProfilesView.h */,
-				90C9512412B6A16C00A8A05F /* UserProfileView.h */,
 				90C9512512B6A16C00A8A05F /* VisibleStrategy.h */,
 				90F08275132AEDA000E7E35F /* UITextField+TheBoxUITextField.h */,
 				90C2A4791526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.h */,
@@ -920,9 +899,8 @@
 			isa = PBXGroup;
 			children = (
 				BDA2BC8B165952C20068C749 /* TBIdentifyViewController.xib */,
-				BDA2BD10165AEB090068C749 /* TBEmailViewController.xib */,
 				BDA2BC901659600F0068C749 /* TBProfileViewController.xib */,
-				BDE482C01750510D0096903C /* TBLocalityItemsViewController.xib */,
+				BDE482C01750510D0096903C /* TBFeedViewController.xib */,
 				903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				90D830F312B51DA400BE4470 /* TheBoxUICell.xib */,
@@ -931,8 +909,6 @@
 				BD7C27D617235DE6009D26EE /* TBProgressView.xib */,
 				903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */,
 				903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */,
-				903AE4F51285CBD800A8FB28 /* UserProfiles.xib */,
-				903AE4ED1285C9A600A8FB28 /* UserProfile.xib */,
 				903AE5601285E33600A8FB28 /* UploadUIViewController.xib */,
 				905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */,
 			);
@@ -1122,7 +1098,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TB;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = TheBox;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "thebox" */;
@@ -1156,8 +1132,6 @@
 				903AE3DA1284900300A8FB28 /* HomeUIGridViewController.xib in Resources */,
 				903AE3E81284BF7500A8FB28 /* WelcomeUIViewController.xib in Resources */,
 				903AE4EC1285BE6500A8FB28 /* DetailsUIViewController.xib in Resources */,
-				903AE4EE1285C9A600A8FB28 /* UserProfile.xib in Resources */,
-				903AE4F61285CBD800A8FB28 /* UserProfiles.xib in Resources */,
 				903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */,
 				905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */,
 				90D830F412B51DA400BE4470 /* TheBoxUICell.xib in Resources */,
@@ -1172,7 +1146,6 @@
 				90454B05154DE5DF0064D998 /* icon-72.png in Resources */,
 				BDA2BC8D165952C20068C749 /* TBIdentifyViewController.xib in Resources */,
 				BDA2BC921659600F0068C749 /* TBProfileViewController.xib in Resources */,
-				BDA2BD13165AEB090068C749 /* TBEmailViewController.xib in Resources */,
 				BDA2BD1A165AF8E30068C749 /* user.png in Resources */,
 				BD258DDE1678040500286511 /* refresh.png in Resources */,
 				BDABD92F169F68B100111723 /* TBItemView.xib in Resources */,
@@ -1181,7 +1154,7 @@
 				BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */,
 				BDAC04AD16FAF95900B40646 /* Default-568h@2x.png in Resources */,
 				BD7C27D717235DE7009D26EE /* TBProgressView.xib in Resources */,
-				BDE482C31750510D0096903C /* TBLocalityItemsViewController.xib in Resources */,
+				BDE482C31750510D0096903C /* TBFeedViewController.xib in Resources */,
 				BD9BC53317513C0E00CF18EB /* city.png in Resources */,
 				BDAF7AAE17528196008899D1 /* refresh@2x.png in Resources */,
 				BDAF7AB217528196008899D1 /* signpost@2x.png in Resources */,
@@ -1219,7 +1192,7 @@
 				BD9A781216BB0D9C00FD30E0 /* signpost.png in Resources */,
 				BD14C28C16BDC73F0039E978 /* TBUserItemView.xib in Resources */,
 				BD7C27D817235DE7009D26EE /* TBProgressView.xib in Resources */,
-				BDE482C41750510D0096903C /* TBLocalityItemsViewController.xib in Resources */,
+				BDE482C41750510D0096903C /* TBFeedViewController.xib in Resources */,
 				BDAF7AAF17528196008899D1 /* refresh@2x.png in Resources */,
 				BDAF7AB317528196008899D1 /* signpost@2x.png in Resources */,
 				BDAF7AB517528196008899D1 /* user@2x.png in Resources */,
@@ -1372,8 +1345,6 @@
 				90C2C36612B6C25A00829868 /* NSString+Decorator.m in Sources */,
 				90C2C36A12B6C25C00829868 /* TheBoxUIRecycleStrategy.m in Sources */,
 				90C2C37012B6C27000829868 /* HomeUIGridViewController.m in Sources */,
-				90C2C37112B6C2A300829868 /* UserProfilesView.m in Sources */,
-				90C2C37212B6C2A400829868 /* UserProfileView.m in Sources */,
 				90C2C37312B6C2A900829868 /* UploadUIViewController.m in Sources */,
 				90C2C37412B6C2AC00829868 /* LocationUIViewController.m in Sources */,
 				90C2C37512B6C2AD00829868 /* TheBoxAppDelegate.m in Sources */,
@@ -1399,7 +1370,6 @@
 				BDA2BC911659600F0068C749 /* TBProfileViewController.m in Sources */,
 				BDA2BCDF1659853E0068C749 /* TBButton.m in Sources */,
 				BDA2BD0C165AD1160068C749 /* TBColors.m in Sources */,
-				BDA2BD11165AEB090068C749 /* TBEmailViewController.m in Sources */,
 				BD127B3F165D77B0002C944D /* TBSecureHashA1.m in Sources */,
 				BD127B47165D7E70002C944D /* NSString+TBString.m in Sources */,
 				BD258DCD1673BF6E00286511 /* TBAFHTTPRequestOperationCompletionBlocks.m in Sources */,
@@ -1515,17 +1485,13 @@
 			baseConfigurationReference = 357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
-				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/External\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1578,17 +1544,13 @@
 			baseConfigurationReference = 357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
-				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/External\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
@@ -1639,7 +1601,6 @@
 			baseConfigurationReference = 83F757C9D3B843C4A2749415 /* Pods-UnitTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
@@ -1690,7 +1651,6 @@
 			baseConfigurationReference = 83F757C9D3B843C4A2749415 /* Pods-UnitTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1735,7 +1695,6 @@
 			baseConfigurationReference = 83F757C9D3B843C4A2749415 /* Pods-UnitTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1779,11 +1738,10 @@
 		A152E543130D7A2300514061 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1793,7 +1751,9 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -1814,10 +1774,6 @@
 			baseConfigurationReference = 357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
@@ -1825,6 +1781,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/External\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
@@ -1876,7 +1833,6 @@
 			baseConfigurationReference = 9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/thebox.app/thebox";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1929,7 +1885,6 @@
 			baseConfigurationReference = 9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/thebox.app/thebox";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
@@ -1976,7 +1931,6 @@
 			baseConfigurationReference = 9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/thebox.app/thebox";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -2022,11 +1976,10 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2037,11 +1990,14 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				MACH_O_TYPE = mh_bundle;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = thebox;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -2054,11 +2010,10 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2068,7 +2023,9 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;

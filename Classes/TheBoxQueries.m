@@ -24,6 +24,10 @@
 #import "TBLocalityOperationDelegate.h"
 #import "TBCreateItemOperationDelegate.h"
 #import "TBMacros.h"
+#import "AmazonS3Client.h"
+#import "S3PutObjectRequest.h"
+#import "S3UploadInputStream.h"
+
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
@@ -77,6 +81,12 @@ NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
 NSUInteger const TIMEOUT = 60;
+
+NSString* const ACCESS_KEY = @"AKIAIJIW6RKNOZZPTMRA";
+NSString* const SECRET_KEY = @"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";
+
+NSString* const S3_BUCKET_NAME = @"com.verylargebox.server";
+
 
 +(void)initialize
 {
@@ -303,51 +313,53 @@ return request;
 return request;
 }
 
-+(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image
++(void)newPostImage:(UIImage*)image delegate:(NSObject<AmazonServiceRequestDelegate>*)delegate
+{
+    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:@"AKIAIFACVDF6VNIEY2EQ"
+                                                     withSecretKey:@"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"];
+    
+    [s3 setEndpoint:@"https://s3-eu-west-1.amazonaws.com"];
+
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+
+    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:@"tmp.jpg" inBucket:@"com.verylargebox.server"];
+    por.contentType = @"image/jpeg";
+    por.data = imageData;
+    por.cannedACL   = [S3CannedACL publicRead];
+    por.delegate = delegate;
+    [s3 putObject:por];
+}
+
++(AFHTTPRequestOperation*)newPostItemQuery:(NSString*)imageURL
                                   location:(NSDictionary *)location
                                   locality:(NSString*)locality
                                       user:(NSUInteger)userId
                                   delegate:(NSObject<TBCreateItemOperationDelegate>*)delegate
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
-    
-	NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-    
+
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:imageURL forKey:@"item_url"];	
     [parameters tbSetObjectIfNotNil:[location objectForKey:@"name"] forKey:@"item[location_attributes][name]"];
     [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lat"] forKey:@"item[location_attributes][lat]"];
     [parameters tbSetObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][lng]"];
     [parameters tbSetObjectIfNotNil:[location objectForKey:@"id"] forKey:@"item[location_attributes][foursquareid]"];
     [parameters tbSetObjectIfNotNil:locality forKey:@"item[location_attributes][locality_attributes][name]"];
-    
-    NSMutableURLRequest* request = [client multipartFormRequestWithMethod:@"POST"
-                                                                     path:[NSString stringWithFormat:USER_ITEMS, userId]
-                                                               parameters:parameters
-                                                constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
-                                                {
-                                                    [formData appendPartWithFileData:imageData
-                                                                                name:@"item[image]"
-                                                                            fileName:@".jpg"
-                                                                            mimeType:@"image/jpeg"];
-                                                }];
-    
-    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setTimeoutInterval:TIMEOUT];
-    
-	AFHTTPRequestOperation *createItem = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [createItem setUploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
-        NSLog(@"Sent %d of %d bytes", totalBytesWritten, totalBytesExpectedToWrite);
-        [delegate bytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
-    }];
-    
+
+    NSMutableURLRequest *createItemRequest = [client requestWithMethod:@"POST" path:[NSString stringWithFormat:USER_ITEMS, userId] parameters:parameters];
+    [createItemRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [createItemRequest setTimeoutInterval:TIMEOUT];
+
+    AFHTTPRequestOperation *createItem = [[AFHTTPRequestOperation alloc] initWithRequest:createItemRequest];
+
     [createItem setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        [delegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];
+            [delegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [delegate didFailOnItemWithError:error];
+            [delegate didFailOnItemWithError:error];
     }];
+    [createItem start]; 
     
 return createItem;
 }

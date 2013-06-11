@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -65,7 +65,6 @@
 						<string key="NSFrame">{{0, 44}, {320, 323}}</string>
 						<reference key="NSSuperview" ref="404795624"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="505754722">
 							<int key="NSColorSpace">3</int>
@@ -317,14 +316,12 @@
 							<string>directionsButton</string>
 							<string>itemsView</string>
 							<string>locationsView</string>
-							<string>signPostImageView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
 							<string>TheBoxUIGridView</string>
 							<string>TheBoxUIScrollView</string>
-							<string>UIImageView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -334,7 +331,6 @@
 							<string>directionsButton</string>
 							<string>itemsView</string>
 							<string>locationsView</string>
-							<string>signPostImageView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -349,10 +345,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">locationsView</string>
 								<string key="candidateClassName">TheBoxUIScrollView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">signPostImageView</string>
-								<string key="candidateClassName">UIImageView</string>
 							</object>
 						</object>
 					</object>

@@ -8,8 +8,9 @@
  *  Contributor(s): .-
  */
 #import "TheBoxAppDelegate.h"
-#import "TBIdentifyViewController.h"
 #import <XRay/XRay.h>
+#import <Crashlytics/Crashlytics.h>
+#import "TBIdentifyViewController.h"
 #import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
 #import "TBSecureHashA1.h"
@@ -47,7 +48,8 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a033148
     [TestFlight setOptions:@{TFOptionReportCrashes: @"No"}];
     [TestFlight setDeviceIdentifier:userSession];
     [TestFlight takeOff:TESTFLIGHT_APP_TOKEN];
-
+    [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.rootViewController =

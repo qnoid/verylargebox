@@ -8,11 +8,12 @@
  *  Contributor(s): .-
  */
 #import <Foundation/Foundation.h>
+#import "AmazonServiceRequest.h"
 
-@protocol TBCreateItemOperationDelegate <NSObject>
+@protocol TBCreateItemOperationDelegate <NSObject, AmazonServiceRequestDelegate>
 
--(void)didStartUploadingItem;
--(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;
+-(void)didStartUploadingItem:(NSMutableDictionary*) location locality:(NSString*) locality;
+-(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(long long)totalBytesWritten totalBytesExpectedToWrite:(long long)totalBytesExpectedToWrite;
 -(void)didSucceedWithItem:(NSDictionary*)item;
 -(void)didFailOnItemWithError:(NSError*)error;
 

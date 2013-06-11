@@ -33,6 +33,10 @@ return self;
     self.didFailWithNotConnectToInternet(error);
 }
 
+-(void)didFailWithTimeout:(NSError *)error{
+    self.didFailOnVerifyWithError(error);    
+}
+
 -(void)didFailOnVerifyWithError:(NSError *)error {
     self.didFailOnVerifyWithError(error);
 }

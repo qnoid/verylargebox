@@ -33,6 +33,8 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 - (void) dealloc
 {
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
+    [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
 
 +(UploadUIViewController*)newUploadUIViewController:(NSUInteger)userId
@@ -67,12 +69,7 @@ return self;
     [self.theBoxLocationService notifyDidFindPlacemark:self];
     [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 		
-	self.uploadView.contentSize = self.uploadView.frame.size;
-	
-	CGRect bounds = self.uploadView.bounds;
-	NSLog(@"%@", NSStringFromCGRect(bounds));
-	CGSize contentSize = self.uploadView.contentSize;
-	NSLog(@"%@", NSStringFromCGSize(contentSize));		
+	self.uploadView.contentSize = self.uploadView.frame.size;	
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -82,13 +79,15 @@ return self;
     }
     
     [self.takePhotoButton setImage:self.itemImage forState:UIControlStateNormal];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 #pragma mark TheBoxLocationServiceDelegate
@@ -103,18 +102,21 @@ return self;
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     self.locality = [TheBoxNotifications place:notification].locality;
 }
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
     TBLocalitiesTableViewController *localitiesViewController = [TBLocalitiesTableViewController newLocalitiesViewController];
     
     UINavigationController *navigationController =
@@ -129,7 +131,7 @@ return self;
 
 -(void)didSelectLocality:(NSDictionary *)locality
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, locality);
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, locality);
     self.locality = [locality objectForKey:@"name"];
     [self.navigationController dismissModalViewControllerAnimated:YES];
 }
@@ -144,12 +146,10 @@ return self;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newPostItemQuery:self.itemImage location:self.location locality:self.locality user:self.userId delegate:self.createItemDelegate];
+  [TheBoxQueries newPostImage:self.itemImage delegate:self.createItemDelegate];
 
-	[itemQuery start];
-    
 	[self dismissViewControllerAnimated:YES completion:^{
-        [self.createItemDelegate didStartUploadingItem];
+        [self.createItemDelegate didStartUploadingItem:self.location locality:self.locality];
     }];
 }
 

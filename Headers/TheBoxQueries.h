@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "TheBoxQueries.h"
 #import "TBAFHTTPRequestOperationCompletionBlocks.h"
+
 @class TheBoxPost;
 @class TheBoxGet;
 @class AFHTTPRequestOperation;
@@ -24,6 +25,7 @@
 @protocol TBLocalityOperationDelegate;
 @protocol TBCreateItemOperationDelegate;
 @protocol TBNSErrorDelegate;
+@protocol AmazonServiceRequestDelegate;
 
 @interface TBQueriesFailureBlocks : NSObject
 +(TBAFHTTPRequestOperationFailureBlock)nsErrorDelegate:(NSObject<TBNSErrorDelegate>*)delegate failureBlock:(TBAFHTTPRequestOperationFailureBlock)failureBlock;
@@ -34,7 +36,7 @@
  *
  * @see TheBox#query
  */
-@interface TheBoxQueries : NSObject 
+@interface TheBoxQueries : NSObject  
 
 extern NSString* const THE_BOX_SERVICE;
 
@@ -81,6 +83,8 @@ extern NSString* const THE_BOX_SERVICE;
  */
 +(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 
++(void)newPostImage:(UIImage*)image delegate:(NSObject<AmazonServiceRequestDelegate>*)delegate;
+
 /**
  Creates an item under the given user id.
  
@@ -90,7 +94,7 @@ extern NSString* const THE_BOX_SERVICE;
  @param userId the user id to create the item under. 
  @see #newVerifyUserQuery
  */
-+(AFHTTPRequestOperation*)newPostItemQuery:(UIImage *)image
++(AFHTTPRequestOperation*)newPostItemQuery:(NSString*)imageURL
                                   location:(NSDictionary *)location
                                   locality:(NSString*)locality
                                       user:(NSUInteger)userId

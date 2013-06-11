@@ -1,0 +1,47 @@
+mobile
+    ios, android
+platform
+    open graph, timeline backend
+security
+    spam, phising, authentication, encryption
+internal tools
+    
+user interface redesign for ticketing system
+
+
+team selection comes to use as a candidate
+    have a conversation
+    1st interview coding, logical thought, algorithmic / fundementals iOS engineer from the US
+        45', look through obj-c code to fix bugs, write obj-c for a task, general type of questions (not related to iOS, algorithmic), conversation on iOS
+    2nd onsite, 2 general (systems design, culture)
+
+    first 4 weeks boot camp US (60-90 people)
+        doing coding, pushing production code
+    come back to London
+        pick a team
+
+
+unstructured, clear definitions wihtin team, flat
+performance based improvemnets
+    photo loading, how long connected on the radio
+    alan will take over some product based work
+
+13 multiple choice questions on iOS
+    initial phone interview
+
+turnaround 1 month
+
+    
+
+        memory warning
+    ARC
+        static analysis
+    frame/bounds
+    delegate
+    KVO
+    KVC
+    xib
+    retained
+    block
+    protocol
+    delegate

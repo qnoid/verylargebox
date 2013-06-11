@@ -15,4 +15,5 @@
 + (UIColor *)colorDarkGreen;
 + (UIColor *)colorLightGreen;
 + (UIColor *)colorDarkGrey;
++ (UIColor*)colorPrimaryBlue;
 @end

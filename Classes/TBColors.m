@@ -30,4 +30,8 @@ return [UIColor colorWithRed:228.0 / 255.0 green:125.0 / 255.0 blue:56.0 / 255.0
     return [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0];
 }
 
++ (UIColor*)colorPrimaryBlue {
+    return [UIColor colorWithRed:1.0/255.0 green:116.0/255.0 blue:185.0/255.0 alpha:1.0];
+}
+
 @end

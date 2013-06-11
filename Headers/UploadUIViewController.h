@@ -12,6 +12,7 @@
 #import "TheBoxNotifications.h"
 #import "TheBoxLocationServiceDelegate.h"
 #import "TBLocalitiesTableViewController.h"
+#import "AmazonServiceRequest.h"
 @class TheBox;
 @protocol TBCreateItemOperationDelegate;
 
@@ -20,7 +21,7 @@
  When done, if the locality hasn't resolved, the user will be prompted to select one of the existing ones, 
  or asked to get a fix on her location.
  */
-@interface UploadUIViewController : UIViewController <TheBoxLocationServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, TBLocalitiesTableViewControllerDelegate>
+@interface UploadUIViewController : UIViewController <TheBoxLocationServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, TBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate>
 {
 }
 

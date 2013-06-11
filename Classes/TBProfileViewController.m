@@ -30,6 +30,8 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, strong) NSMutableArray* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, copy) TBUserItemViewGetDirections didTapOnGetDirectionsButton;
+@property(nonatomic, strong) NSString* locality;
+@property(nonatomic, strong) NSMutableDictionary* location;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton;
 @end
 
@@ -100,7 +102,7 @@ return self;
     [notificationAnimatedView addSubview:progressView];
     
     TheBoxUIScrollView* itemsView = [[[[TheBoxUIScrollViewBuilder alloc] initWith:
-                                     CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:320.0] allowSelection] newVerticalScrollView];
+                                     CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:320.0] allowSelection] newVerticalScrollView];
     
     itemsView.backgroundColor = [UIColor whiteColor];
     itemsView.datasource = self;
@@ -153,6 +155,30 @@ return self;
     [self presentModalViewController:uploadViewController animated:YES];
 }
 
+#pragma mark AmazonServiceRequestDelegate
+-(void)request:(AmazonServiceRequest *)request didSendData:(NSInteger)bytesWritten
+totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+{
+	[self bytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+}
+
+-(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(long long)totalBytesWritten totalBytesExpectedToWrite:(long long)totalBytesExpectedToWrite
+{
+    [self.progressView setProgress:(float)totalBytesWritten / (float)totalBytesExpectedToWrite animated:YES];
+}
+
+-(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
+{
+	AFHTTPRequestOperation *itemQuery = [TheBoxQueries newPostItemQuery:@"http://com.verylargebox.server.s3.amazonaws.com/tmp.jpg" location:self.location locality:self.locality user:[[self.residence objectForKey:@"user_id"] unsignedIntValue] delegate:self];
+
+	[itemQuery start];
+}
+
+-(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error{
+	[self didFailOnItemWithError:error];
+}
+
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
@@ -195,19 +221,18 @@ return self;
 }
  */
 
--(void)didStartUploadingItem
+-(void)didStartUploadingItem:(NSMutableDictionary*) location locality:(NSString*) locality
 {
+	self.location = location;
+	self.locality = locality;
+
     self.notificationAnimatedView.hidden = NO;
     [self.notificationAnimatedView animateWithDuration:0.5 animation:^(UIView *view) {
         view.frame = CGRectMake(0, 0, 320, 44);
     }];
 }
 
--(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
-{
-    [self.progressView setProgress:(float)totalBytesWritten / (float)totalBytesExpectedToWrite
-                          animated:YES];
-}
+
 
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
@@ -224,6 +249,16 @@ return self;
 -(void)didFailOnItemWithError:(NSError*)error
 {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    [self.notificationAnimatedView rewind:^(BOOL finished) {
+        self.notificationAnimatedView.hidden = YES;
+    }];
+    
+    TBAlertViewDelegate *alertViewDelegate = [TBAlertViews newAlertViewDelegateOnOkDismiss];
+    UIAlertView *alertView = [TBAlertViews newAlertViewWithOk:@"Upload Fail"
+                                                      message:error.localizedDescription];
+    alertView.delegate = alertViewDelegate;
+    
+    [alertView show]; 
 }
 
 #pragma mark TheBoxUIScrollViewDelegate

@@ -11,7 +11,6 @@
 #import "TBButton.h"
 #import "TBVerifyUserOperationDelegate.h"
 #import "TBCreateUserOperationDelegate.h"
-#import "TBEmailViewController.h"
 #import "TBView.h"
 #import "TBAFHTTPRequestOperationCompletionBlocks.h"
 
@@ -35,7 +34,7 @@ TBEmailStatusBlock tbBmailStatus(TBEmailStatus emailStatus)
             return ^(UITableViewCell *tableViewCell){
                 tableViewCell.textLabel.enabled = YES;
                 tableViewCell.userInteractionEnabled = YES;
-                tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                tableViewCell.accessoryType = UITableViewCellAccessoryNone;
             };
         case TBEmailStatusError:
             return ^(UITableViewCell *tableViewCell){
@@ -73,11 +72,13 @@ TBEmailStatusBlock tbBmailStatus(TBEmailStatus emailStatus)
     }
 }
 
-@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, TBCreateUserOperationDelegate, TBEmailViewControllerDelegate, UITableViewDelegate, TBViewDrawRectDelegate>
+@interface TBIdentifyViewController : UIViewController <TBVerifyUserOperationDelegate, TBCreateUserOperationDelegate, UITableViewDelegate, TBViewDrawRectDelegate>
 
-@property (nonatomic, strong) IBOutlet TBButton *identifyButton;
+@property (nonatomic, weak) IBOutlet TBButton *identifyButton;
+@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UITableView *accountsTableView;
-@property (nonatomic, strong) IBOutlet TBButton *browseButton;
+@property (nonatomic, weak) IBOutlet TBButton *showMoreButton;
+@property (nonatomic, weak) IBOutlet TBButton *browseButton;
 
 +(TBIdentifyViewController*)newIdentifyViewController;
 
