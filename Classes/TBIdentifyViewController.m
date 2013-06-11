@@ -137,7 +137,13 @@ return self;
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     [self.identifyButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-return YES;
+return self.identifyButton.enabled;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    self.identifyButton.enabled = textField.text.length - range.length + string.length > 0;
+    
+    return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
