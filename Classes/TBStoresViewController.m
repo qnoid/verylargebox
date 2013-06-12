@@ -7,28 +7,29 @@
  *  Created by Markos Charatzas (@qnoid) on 15/11/10.
  *  Contributor(s): .-
  */
-#import "LocationUIViewController.h"
+#import "TBStoresViewController.h"
 #import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
 #import "TBAlertViews.h"
+#import "TBColors.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare_gray";
 static NSString* const foursquarePoweredByType = @"png";
 
 static UIImage* foursquarePoweredBy;
 
-@interface LocationUIViewController ()
+@interface TBStoresViewController ()
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSArray* venues;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @end
 
-@implementation LocationUIViewController
+@implementation TBStoresViewController
 
-+(LocationUIViewController*)newLocationViewController {
-return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
++(TBStoresViewController*)newLocationViewController {
+return [[TBStoresViewController alloc] initWithBundle:[NSBundle mainBundle]];
 }
 
 +(void)initialize
@@ -51,7 +52,7 @@ return [[LocationUIViewController alloc] initWithBundle:[NSBundle mainBundle]];
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:@"LocationUIViewController" bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"TBStoresViewController" bundle:nibBundleOrNil];
     
     if (self) 
     {
@@ -156,6 +157,8 @@ return self;
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
+        cell.detailTextLabel.textAlignment = UITextAlignmentCenter;
     }
     
     NSDictionary* location = [self.venues objectAtIndex:indexPath.row];
@@ -165,6 +168,13 @@ return self;
     
 return cell;
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary* location = [self.venues objectAtIndex:indexPath.row];

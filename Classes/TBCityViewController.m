@@ -8,10 +8,10 @@
  *  Contributor(s): .-
  */
 #import <QuartzCore/QuartzCore.h>
-#import "HomeUIGridViewController.h"
+#import "TBCityViewController.h"
 #import "TheBoxUICell.h"
 #import "TheBoxQueries.h"
-#import "UploadUIViewController.h"
+#import "TBTakePhotoViewController.h"
 #import "TheBoxBinarySearch.h"
 #import "TheBoxPredicates.h"
 #import "AFHTTPRequestOperation.h"
@@ -34,7 +34,7 @@
 #import "TBPolygon.h"
 #import "TBDrawRects.h"
 
-static CGFloat const LOCATIONS_VIEW_HEIGHT = 66.0;
+static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
@@ -49,7 +49,7 @@ static NSInteger const FIRST_VIEW_TAG = -1;
  
  
  */
-@interface HomeUIGridViewController ()
+@interface TBCityViewController ()
 @property(nonatomic, strong) TheBoxLocationService *theBoxLocationService;
 @property(nonatomic, strong) CLPlacemark *placemark;
 @property(nonatomic, strong) NSArray *localities;
@@ -66,16 +66,17 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 @end
 
 
-@implementation HomeUIGridViewController
+@implementation TBCityViewController
 
-+(HomeUIGridViewController*)newHomeGridViewController
++(TBCityViewController*)newHomeGridViewController
 {
     TheBoxLocationService* locationService = [TheBoxLocationService theBoxLocationService];
     
-    HomeUIGridViewController* homeGridViewController = [[HomeUIGridViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
+    TBCityViewController* homeGridViewController = [[TBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
-                                  initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                  initWithImage:[UIImage imageNamed:@"refresh.png"]
+                                  style:UIBarButtonItemStylePlain                                  
                                   target:homeGridViewController
                                   action:@selector(refreshLocations)];
     homeGridViewController.navigationItem.rightBarButtonItem = addButton;
@@ -106,7 +107,7 @@ return homeGridViewController;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton
 {
-    self = [super initWithNibName:NSStringFromClass([HomeUIGridViewController class]) bundle:nibBundleOrNil];
+    self = [super initWithNibName:NSStringFromClass([TBCityViewController class]) bundle:nibBundleOrNil];
     
     if (!self)
     {
@@ -136,7 +137,7 @@ return self;
 - (void)updateTitle:(NSString *)localityName
 {
     UILabel* titleView = (UILabel*) self.navigationItem.titleView;
-    titleView.text = [NSString stringWithFormat:@"It's right here in %@", localityName];
+    titleView.text = [NSString stringWithFormat:@"Stores in %@", localityName];
     [titleView sizeToFit];
     self.tabBarItem.title = localityName;
 }
@@ -165,7 +166,7 @@ return self;
     itemsView.delegate = self;
     itemsView.showsVerticalScrollIndicator = YES;
     
-    TBButton* directionsButton = [[TBButton alloc] initWithFrame:CGRectMake(263.0, 0.0, 60.0, LOCATIONS_VIEW_HEIGHT)];
+    TBButton* directionsButton = [[TBButton alloc] initWithFrame:CGRectMake(130.0, LOCATIONS_VIEW_HEIGHT - 30, 60, 60)];
     [directionsButton setImage:[UIImage imageNamed:@"signpost"] forState:UIControlStateNormal];
     directionsButton.delegate = self;
     [directionsButton addTarget:self action:@selector(didTapOnGetDirectionsButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -208,7 +209,7 @@ return self;
 -(void)highlightLocation
 {
     for (UIButton* button in self.locationsView.subviews) {
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     }
     
     UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
@@ -316,7 +317,7 @@ return [self.locations count];
     UIButton *storeButton = [[UIButton alloc] initWithFrame:frame];
     storeButton.titleLabel.numberOfLines = 0;
     storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    [storeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
 return storeButton;
 }
@@ -353,7 +354,7 @@ return storeButton;
     }
 
     [storeButton setBackgroundColor:[TBColors colorDarkGrey]];
-    [storeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [storeButton setTitle:name forState:UIControlStateNormal];
 }
 
@@ -524,7 +525,7 @@ return storeButton;
 {
     NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
     
-    __weak HomeUIGridViewController *wself = self;
+    __weak TBCityViewController *wself = self;
     TBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [TBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
         [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [wself class], __PRETTY_FUNCTION__]];
         

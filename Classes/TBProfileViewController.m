@@ -7,7 +7,7 @@
 //
 
 #import "TBProfileViewController.h"
-#import "UploadUIViewController.h"
+#import "TBTakePhotoViewController.h"
 #import "TheBoxPredicates.h"
 #import "UIImageView+AFNetworking.h"
 #import "TBUserItemView.h"
@@ -55,15 +55,16 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
 
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
-                                     initWithTitle:@"Close"
-                                     style:UIBarButtonItemStylePlain
+                                     initWithImage:[UIImage imageNamed:@"circlex.png"]
+                                     style:UIBarButtonItemStyleBordered
                                      target:profileViewController
                                      action:@selector(close)];
     
     profileViewController.navigationItem.leftBarButtonItem = closeButton;
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
-                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                  initWithImage:[UIImage imageNamed:@"camera-mini.png"]
+                                  style:UIBarButtonItemStyleDone
                                   target:profileViewController
                                   action:@selector(addItem)];
     
@@ -149,10 +150,11 @@ return self;
 
 -(void)addItem
 {
-    UploadUIViewController* uploadViewController = [UploadUIViewController newUploadUIViewController:[[self.residence objectForKey:@"user_id"] unsignedIntValue]];
-    uploadViewController.createItemDelegate = self;
+    TBTakePhotoViewController* takePhotoViewController = [TBTakePhotoViewController newUploadUIViewController:[[self.residence objectForKey:@"user_id"] unsignedIntValue]];
+    takePhotoViewController.createItemDelegate = self;
     
-    [self presentModalViewController:uploadViewController animated:YES];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:takePhotoViewController];
+    [self presentModalViewController:navigationController animated:YES];
 }
 
 #pragma mark AmazonServiceRequestDelegate

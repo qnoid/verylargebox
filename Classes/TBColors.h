@@ -10,10 +10,8 @@
 
 @interface TBColors : NSObject
 
-+ (UIColor *)colorDarkOrange;
-+ (UIColor *)colorLightOrange;
-+ (UIColor *)colorDarkGreen;
-+ (UIColor *)colorLightGreen;
-+ (UIColor *)colorDarkGrey;
-+ (UIColor*)colorPrimaryBlue;
++(UIColor*)colorDarkGreen;
++(UIColor*)colorLightGreen;
++(UIColor*)colorDarkGrey;
++(UIColor*)colorPrimaryBlue;
 @end

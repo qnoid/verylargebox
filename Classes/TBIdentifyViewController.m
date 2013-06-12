@@ -9,7 +9,7 @@
 #import "TBIdentifyViewController.h"
 #import "TBButton.h"
 #import "TBColors.h"
-#import "HomeUIGridViewController.h"
+#import "TBCityViewController.h"
 #import "SSKeychain.h"
 #import "TheBoxQueries.h"
 #import "TBProfileViewController.h"
@@ -156,7 +156,7 @@ return self.identifyButton.enabled;
 {
     NSLog(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);
     TBProfileViewController *profileViewController = [TBProfileViewController newProfileViewController:residence email:email];
-    HomeUIGridViewController *homeGridViewControler = [HomeUIGridViewController newHomeGridViewController];
+    TBCityViewController *homeGridViewControler = [TBCityViewController newHomeGridViewController];
     TBFeedViewController *localityItemsViewController = [TBFeedViewController newFeedViewController];
 
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
@@ -323,8 +323,7 @@ return YES;
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
 {
-    TBViewContext context = [TBViews fill:[TBColors colorPrimaryBlue]];
-    context([[TBDrawRects new] drawContextOfHexagon:[TBPolygon hexagonAt:CGRectCenter(rect)]]);
+    [[TBDrawRects new] drawContextOfHexagonInRect:rect];
 }
 
 @end

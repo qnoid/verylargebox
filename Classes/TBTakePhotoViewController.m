@@ -7,19 +7,21 @@
  *  Created by Markos Charatzas (@qnoid) on 9/11/10.
  *  Contributor(s): .-
  */
-#import "UploadUIViewController.h"
+#import "TBTakePhotoViewController.h"
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
 #import "JSONKit.h"
-#import "LocationUIViewController.h"
+#import "TBStoresViewController.h"
 #import "TheBoxLocationService.h"
 #import "TBCreateItemOperationDelegate.h"
 #import "UIViewController+TBViewController.h"
+#import "TBDrawRects.h"
+#import "TBPolygon.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 480.0;
 
-@interface UploadUIViewController ()
+@interface TBTakePhotoViewController ()
 @property(nonatomic, strong) UIImage* itemImage;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSMutableDictionary* location;
@@ -28,7 +30,7 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil userId:(NSUInteger)userId;
 @end
 
-@implementation UploadUIViewController
+@implementation TBTakePhotoViewController
 
 - (void) dealloc
 {
@@ -37,18 +39,36 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
 
-+(UploadUIViewController*)newUploadUIViewController:(NSUInteger)userId
++(TBTakePhotoViewController*)newUploadUIViewController:(NSUInteger)userId
 {
-    UploadUIViewController* newUploadUIViewController = [[UploadUIViewController alloc]
+    TBTakePhotoViewController* newUploadUIViewController = [[TBTakePhotoViewController alloc]
                                                          initWithBundle:[NSBundle mainBundle]
                                                          userId:userId];
-        
+    
+    newUploadUIViewController.title = @"Add Item";
+
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]
+                                     initWithImage:[UIImage imageNamed:@"circlex.png"]
+                                     style:UIBarButtonItemStyleBordered
+                                     target:newUploadUIViewController
+                                     action:@selector(cancel:)];
+    
+    newUploadUIViewController.navigationItem.leftBarButtonItem = cancelButton;
+
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
+                                     initWithImage:[UIImage imageNamed:@"checkmark-mini.png"]
+                                     style:UIBarButtonItemStyleDone
+                                     target:newUploadUIViewController
+                                     action:@selector(done:)];
+    
+    newUploadUIViewController.navigationItem.rightBarButtonItem = doneButton;
+
 return newUploadUIViewController;
 }
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil userId:(NSUInteger)userId
 {
-    self = [super initWithNibName:NSStringFromClass([UploadUIViewController class]) bundle:nibBundleOrNil];
+    self = [super initWithNibName:NSStringFromClass([TBTakePhotoViewController class]) bundle:nibBundleOrNil];
     
     if (!self) {
         return nil;
@@ -67,9 +87,7 @@ return self;
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
     [self.theBoxLocationService notifyDidFailWithError:self];
     [self.theBoxLocationService notifyDidFindPlacemark:self];
-    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
-		
-	self.uploadView.contentSize = self.uploadView.frame.size;	
+    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];		
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -78,7 +96,7 @@ return self;
         self.takePhotoButton.titleLabel.hidden = YES;
     }
     
-    [self.takePhotoButton setImage:self.itemImage forState:UIControlStateNormal];
+    self.itemImageView.image = self.itemImage;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -94,6 +112,8 @@ return self;
 
 -(void)didUpdateToLocation:(NSNotification *)notification;
 {
+    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+
 	CLLocation *location = [TheBoxNotifications location:notification];
 
 	[[_location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
@@ -168,7 +188,7 @@ return self;
 
 - (IBAction)enterLocation:(id)sender
 {
-	UIViewController *locationController = [LocationUIViewController newLocationViewController];
+	UIViewController *locationController = [TBStoresViewController newLocationViewController];
 	
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(didEnterLocation:) name:@"didEnterLocation" object:locationController];
@@ -182,8 +202,7 @@ return self;
     self.location = [userInfo valueForKey:@"location"];
     
 	NSString *locationName = [self.location objectForKey:@"name"];
-	[self.locationButton setTitle:locationName forState:UIControlStateNormal];
-	[self.locationButton setTitle:locationName forState:UIControlStateSelected];
+    self.storeLabel.text = locationName;
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
@@ -207,6 +226,19 @@ return self;
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)drawRect:(CGRect)rect inView:(UIView *)view
+{
+    if([view isEqual:self.takePhotoButton]){
+        TBViewContext context = [TBViews fill:[TBColors colorPrimaryBlue]];
+        context([[TBDrawRects new] drawContextOfHexagon:[TBPolygon hexagonAt:CGRectCenter(rect)]]);
+    }
+    else if([view isEqual:self.locationButton]){
+        TBViewContext context = [TBViews fill:[TBColors colorDarkGreen]];
+        context([[TBDrawRects new] drawContextOfHexagon:[TBPolygon hexagonAt:CGRectCenter(rect)]]);
+    }
+    
 }
 
 @end

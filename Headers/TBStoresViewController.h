@@ -65,13 +65,13 @@
  }
  
  */
-@interface LocationUIViewController : UIViewController <TheBoxLocationServiceDelegate, TBLocationOperationDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> {
+@interface TBStoresViewController : UIViewController <TheBoxLocationServiceDelegate, TBLocationOperationDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> {
 
 }
 @property(nonatomic, unsafe_unretained) IBOutlet UITableView *venuesTableView;
 @property(nonatomic, unsafe_unretained) IBOutlet MKMapView *map;
 
-+(LocationUIViewController*)newLocationViewController;
++(TBStoresViewController*)newLocationViewController;
 - (IBAction)cancel:(id)sender;
 
 @end

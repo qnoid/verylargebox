@@ -9,7 +9,7 @@
  */
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "HomeUIGridViewController.h"
+#import "TBCityViewController.h"
 
 @interface WelcomeUIViewController : UIViewController
 

@@ -13,6 +13,8 @@
 #import "TheBoxLocationServiceDelegate.h"
 #import "TBLocalitiesTableViewController.h"
 #import "AmazonServiceRequest.h"
+#import "TBButton.h"
+#import "TBViews.h"
 @class TheBox;
 @protocol TBCreateItemOperationDelegate;
 
@@ -21,13 +23,14 @@
  When done, if the locality hasn't resolved, the user will be prompted to select one of the existing ones, 
  or asked to get a fix on her location.
  */
-@interface UploadUIViewController : UIViewController <TheBoxLocationServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, TBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate>
+@interface TBTakePhotoViewController : UIViewController <TheBoxLocationServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, TBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate, TBViewDrawRectDelegate>
 {
 }
 
-@property(nonatomic, unsafe_unretained) IBOutlet UIScrollView *uploadView;
-@property(nonatomic, unsafe_unretained) IBOutlet UIButton *takePhotoButton;
-@property(nonatomic, unsafe_unretained) IBOutlet UIButton *locationButton;
+@property(nonatomic, weak) IBOutlet UILabel *storeLabel;
+@property(nonatomic, weak) IBOutlet UIImageView *itemImageView;
+@property(nonatomic, weak) IBOutlet TBButton *takePhotoButton;
+@property(nonatomic, weak) IBOutlet TBButton *locationButton;
 
 @property(nonatomic, strong) TheBox *theBox;
 @property(nonatomic, unsafe_unretained) NSObject<TBCreateItemOperationDelegate> *createItemDelegate;
@@ -48,6 +51,6 @@
 
 - (IBAction)enterLocation:(id)sender;
 
-+(UploadUIViewController*)newUploadUIViewController:(NSUInteger)userId;
++(TBTakePhotoViewController*)newUploadUIViewController:(NSUInteger)userId;
 
 @end

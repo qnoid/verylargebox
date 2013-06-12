@@ -36,12 +36,12 @@
   and start a new one.
  
  */
-@interface HomeUIGridViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TheBoxLocationServiceDelegate, UITableViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TBLocalitiesTableViewControllerDelegate, TBViewDrawRectDelegate>
+@interface TBCityViewController : UIViewController <TheBoxLocationServiceDelegate, TheBoxUIScrollViewDatasource, TheBoxUIScrollViewDelegate, TBLocationOperationDelegate, UISearchBarDelegate, TBItemsOperationDelegate, TheBoxLocationServiceDelegate, UITableViewDelegate, TheBoxUIGridViewDatasource, TheBoxUIGridViewDelegate, TBLocalitiesTableViewControllerDelegate, TBViewDrawRectDelegate>
 
 /**
  Creates a new instance of HomeUIGridViewController
  */
-+(HomeUIGridViewController*)newHomeGridViewController;
++(TBCityViewController*)newHomeGridViewController;
 
 @property(nonatomic, strong) IBOutlet UIButton* directionsButton;
 @property(nonatomic, strong) IBOutlet TheBoxUIScrollView* locationsView;

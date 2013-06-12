@@ -10,7 +10,7 @@
 #import "DetailsUIViewController.h"
 #import "TheBoxLocationService.h"
 #import "TheBoxNotifications.h"
-#import "LocationUIViewController.h"
+#import "TBStoresViewController.h"
 #import "TheBoxQueries.h"
 #import "AFHTTPRequestOperation.h"
 #import "UIViewController+TBViewController.h"

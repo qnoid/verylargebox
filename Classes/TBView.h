@@ -57,9 +57,9 @@ typedef void(^TBViewDrawRect)(CGRect rect, UIView* view);
  */
 -(id<TBViewBorder>)border;
 
--(id<TBViewBorder>)bottomBorder;
+-(id<TBViewBorder>)bottomBorder:(UIColor*)color;
 
--(id<TBViewBorder>)borders;
+- (id<TBViewBorder>)borders:(UIColor*)color;
 
 @end
 

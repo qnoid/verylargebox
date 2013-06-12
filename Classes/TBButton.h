@@ -24,11 +24,6 @@ TBButtonOnTouch makeButton(UIColor* color) {
 }
 
 NS_INLINE
-TBButtonOnTouch makeButtonDarkOrange() {
-    return makeButton([TBColors colorDarkOrange]);
-}
-
-NS_INLINE
 TBButtonOnTouch makeButtonWhite() {
     return makeButton([UIColor whiteColor]);
 }

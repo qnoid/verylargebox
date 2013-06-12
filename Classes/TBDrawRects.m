@@ -52,8 +52,7 @@ return ^(CGContextRef context){
 
 -(void)drawContextOfHexagonInRect:(CGRect) rect
 {
-    TBViewContext viewContext = [TBViews solidContext:[TBColors colorDarkGrey] stroke:[UIColor blackColor]];
-    
-    viewContext([self drawContextOfHexagon:[TBPolygon hexagonAt:CGRectCenter(rect)]]);
+    TBViewContext context = [TBViews fill:[TBColors colorPrimaryBlue]];
+    context([[TBDrawRects new] drawContextOfHexagon:[TBPolygon hexagonAt:CGRectCenter(rect)]]);
 }
 @end

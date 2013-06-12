@@ -14,12 +14,12 @@
 		90226B91135999D1006E43EC /* TheBoxBinarySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226B90135999D1006E43EC /* TheBoxBinarySearch.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90226C6E1359B1DB006E43EC /* TheBoxPredicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */; settings = {COMPILER_FLAGS = ""; }; };
 		9022BAA1153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */; };
-		903AE3DA1284900300A8FB28 /* HomeUIGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */; };
+		903AE3DA1284900300A8FB28 /* TBCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3D91284900300A8FB28 /* TBCityViewController.xib */; };
 		903AE3E81284BF7500A8FB28 /* WelcomeUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */; };
 		903AE4EC1285BE6500A8FB28 /* DetailsUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */; };
-		903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE5601285E33600A8FB28 /* UploadUIViewController.xib */; };
+		903AE5611285E33600A8FB28 /* TBTakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 903AE5601285E33600A8FB28 /* TBTakePhotoViewController.xib */; };
 		90454B05154DE5DF0064D998 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 90454B04154DE5DF0064D998 /* icon-72.png */; };
-		905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */; };
+		905A4FBA1291DEB400BCB475 /* TBStoresViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 905A4FB91291DEB400BCB475 /* TBStoresViewController.xib */; };
 		908363CD14006BF000E5AAAF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
 		908363E814006C3B00E5AAAF /* TheBoxUIRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E580133CC68F00CC9212 /* TheBoxUIRecycleStrategyTest.m */; };
 		908363EE14006C3B00E5AAAF /* TheBoxSizeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CEADEB1349CDBD0084C5F0 /* TheBoxSizeTest.m */; };
@@ -63,9 +63,9 @@
 		90C2C36512B6C25900829868 /* TheBoxRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0048E12B6437B0029863E /* TheBoxRect.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C36612B6C25A00829868 /* NSString+Decorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9056A5DF1290065F006C148A /* NSString+Decorator.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C36A12B6C25C00829868 /* TheBoxUIRecycleStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90C2C37012B6C27000829868 /* HomeUIGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */; settings = {COMPILER_FLAGS = " "; }; };
-		90C2C37312B6C2A900829868 /* UploadUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9053953112888AF000FD381C /* UploadUIViewController.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90C2C37412B6C2AC00829868 /* LocationUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905A4F991291DE6400BCB475 /* LocationUIViewController.m */; settings = {COMPILER_FLAGS = " "; }; };
+		90C2C37012B6C27000829868 /* TBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* TBCityViewController.m */; settings = {COMPILER_FLAGS = " "; }; };
+		90C2C37312B6C2A900829868 /* TBTakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9053953112888AF000FD381C /* TBTakePhotoViewController.m */; settings = {COMPILER_FLAGS = ""; }; };
+		90C2C37412B6C2AC00829868 /* TBStoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905A4F991291DE6400BCB475 /* TBStoresViewController.m */; settings = {COMPILER_FLAGS = " "; }; };
 		90C2C37512B6C2AD00829868 /* TheBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TheBoxAppDelegate.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C37612B6C2AE00829868 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90CBFE5F154BF58F00349A13 /* poweredByFoursquare_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */; };
@@ -82,6 +82,22 @@
 		90F08273132AED5200E7E35F /* UITextField+TheBoxUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F08272132AED5200E7E35F /* UITextField+TheBoxUITextField.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90F9FDE4154D97C5001BCD66 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE3154D97C5001BCD66 /* icon@2x.png */; };
 		90F9FDE6154D97D0001BCD66 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE5154D97D0001BCD66 /* icon.png */; };
+		BD0A53D51767E63200279EA5 /* checkmark-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53D31767E63200279EA5 /* checkmark-mini.png */; };
+		BD0A53D61767E63200279EA5 /* checkmark-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53D31767E63200279EA5 /* checkmark-mini.png */; };
+		BD0A53D71767E63200279EA5 /* checkmark-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53D41767E63200279EA5 /* checkmark-mini@2x.png */; };
+		BD0A53D81767E63200279EA5 /* checkmark-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53D41767E63200279EA5 /* checkmark-mini@2x.png */; };
+		BD0A53E11767E82700279EA5 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53DF1767E82700279EA5 /* camera.png */; };
+		BD0A53E21767E82700279EA5 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53DF1767E82700279EA5 /* camera.png */; };
+		BD0A53E31767E82700279EA5 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53E01767E82700279EA5 /* camera@2x.png */; };
+		BD0A53E41767E82700279EA5 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53E01767E82700279EA5 /* camera@2x.png */; };
+		BD0A53E71767EDC100279EA5 /* camera-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53E51767EDC100279EA5 /* camera-mini.png */; };
+		BD0A53E81767EDC100279EA5 /* camera-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53E51767EDC100279EA5 /* camera-mini.png */; };
+		BD0A53E91767EDC100279EA5 /* camera-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53E61767EDC100279EA5 /* camera-mini@2x.png */; };
+		BD0A53EA1767EDC100279EA5 /* camera-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53E61767EDC100279EA5 /* camera-mini@2x.png */; };
+		BD0A53ED1767F09600279EA5 /* circlex.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53EB1767F09500279EA5 /* circlex.png */; };
+		BD0A53EE1767F09600279EA5 /* circlex.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53EB1767F09500279EA5 /* circlex.png */; };
+		BD0A53EF1767F09600279EA5 /* circlex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53EC1767F09500279EA5 /* circlex@2x.png */; };
+		BD0A53F01767F09600279EA5 /* circlex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53EC1767F09500279EA5 /* circlex@2x.png */; };
 		BD0B25E317494778001B3A9B /* TBLocalitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0B25E217494778001B3A9B /* TBLocalitiesTableViewController.m */; };
 		BD0B25E417494778001B3A9B /* TBLocalitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0B25E217494778001B3A9B /* TBLocalitiesTableViewController.m */; };
 		BD127B3F165D77B0002C944D /* TBSecureHashA1.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B3E165D77B0002C944D /* TBSecureHashA1.m */; };
@@ -103,8 +119,8 @@
 		BD2A8A9D175A4F4C0036A852 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD2A8A9C175A4F4C0036A852 /* Settings.bundle */; };
 		BD2A8AAC175AD9360036A852 /* TheBoxAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* TheBoxAlertViews.m */; };
 		BD2A8AAE175B3DE00036A852 /* XRay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2A8AAD175B3DE00036A852 /* XRay.framework */; };
-		BD2A8AB1175B413D0036A852 /* HomeUIGridViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AB0175B413D0036A852 /* HomeUIGridViewControllerTest.m */; };
-		BD2A8AB2175B42830036A852 /* HomeUIGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */; };
+		BD2A8AB1175B413D0036A852 /* TBCityViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AB0175B413D0036A852 /* TBCityViewControllerTest.m */; };
+		BD2A8AB2175B42830036A852 /* TBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* TBCityViewController.m */; };
 		BD2A8AB3175B42910036A852 /* DetailsUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* DetailsUIViewController.m */; };
 		BD2A8AB4175B42970036A852 /* TBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9BC5351751476000CF18EB /* TBAlertViews.m */; };
 		BD2A8AB5175B429B0036A852 /* TBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* TBButton.m */; };
@@ -270,25 +286,25 @@
 		90226C6C1359B1DB006E43EC /* TheBoxPredicates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxPredicates.m; sourceTree = "<group>"; };
 		9022BA9F153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableDictionary+TBMutableDictionary.h"; path = "../Classes/NSMutableDictionary+TBMutableDictionary.h"; sourceTree = "<group>"; };
 		9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+TBMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+TBMutableDictionary.m"; sourceTree = "<group>"; };
-		902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeUIGridViewController.m; path = Classes/HomeUIGridViewController.m; sourceTree = "<group>"; };
+		902FDA8C12ABACF200CE1161 /* TBCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBCityViewController.m; path = Classes/TBCityViewController.m; sourceTree = "<group>"; };
 		903367ED129C5F510046C59D /* TheBoxUIGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIGridViewController.m; sourceTree = "<group>"; };
-		903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomeUIGridViewController.xib; path = Classes/HomeUIGridViewController.xib; sourceTree = "<group>"; };
+		903AE3D91284900300A8FB28 /* TBCityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TBCityViewController.xib; path = Classes/TBCityViewController.xib; sourceTree = "<group>"; };
 		903AE3E71284BF7500A8FB28 /* WelcomeUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WelcomeUIViewController.xib; path = Classes/WelcomeUIViewController.xib; sourceTree = "<group>"; };
 		903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailsUIViewController.xib; path = Classes/DetailsUIViewController.xib; sourceTree = "<group>"; };
-		903AE5601285E33600A8FB28 /* UploadUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UploadUIViewController.xib; path = Classes/UploadUIViewController.xib; sourceTree = "<group>"; };
+		903AE5601285E33600A8FB28 /* TBTakePhotoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TBTakePhotoViewController.xib; path = Classes/TBTakePhotoViewController.xib; sourceTree = "<group>"; };
 		90417326134B0F1500F18F95 /* TheBoxRectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxRectTest.m; sourceTree = "<group>"; };
 		90428D38154B405D0090D280 /* TheBoxUIScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TheBoxUIScrollViewTest.m; path = ../Tests/Classes/TheBoxUIScrollViewTest.m; sourceTree = "<group>"; };
 		90454B04154DE5DF0064D998 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
 		904D3E6112A13BDA00F70930 /* TheBoxUIRecycleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIRecycleStrategy.m; sourceTree = "<group>"; };
 		904D3EB112A13F6B00F70930 /* TheBoxVisibleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxVisibleStrategy.m; sourceTree = "<group>"; };
 		9053948F1288847500FD381C /* TheBoxUICell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUICell.m; sourceTree = "<group>"; };
-		9053953112888AF000FD381C /* UploadUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadUIViewController.m; path = Classes/UploadUIViewController.m; sourceTree = "<group>"; };
+		9053953112888AF000FD381C /* TBTakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBTakePhotoViewController.m; path = Classes/TBTakePhotoViewController.m; sourceTree = "<group>"; };
 		90539C6D1537670800559AD0 /* TBCreateItemOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBCreateItemOperationDelegate.h; path = Headers/TBCreateItemOperationDelegate.h; sourceTree = "<group>"; };
 		9056A5A612900416006C148A /* NSArray+Decorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Decorator.m"; sourceTree = "<group>"; };
 		9056A5DF1290065F006C148A /* NSString+Decorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Decorator.m"; sourceTree = "<group>"; };
 		905A4F941291DBBA00BCB475 /* TheBoxUIList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxUIList.m; sourceTree = "<group>"; };
-		905A4F991291DE6400BCB475 /* LocationUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationUIViewController.m; path = Classes/LocationUIViewController.m; sourceTree = "<group>"; };
-		905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LocationUIViewController.xib; path = Classes/LocationUIViewController.xib; sourceTree = "<group>"; };
+		905A4F991291DE6400BCB475 /* TBStoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBStoresViewController.m; path = Classes/TBStoresViewController.m; sourceTree = "<group>"; };
+		905A4FB91291DEB400BCB475 /* TBStoresViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TBStoresViewController.xib; path = Classes/TBStoresViewController.xib; sourceTree = "<group>"; };
 		905A4FE11291E15400BCB475 /* MapKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		905A503A1291E4AC00BCB475 /* CoreLocation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		908363A61400659200E5AAAF /* libz.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -324,8 +340,8 @@
 		90C2A47A1526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxDefaultKeyboardObserver.m; sourceTree = "<group>"; };
 		90C2ECA312930C08009195CF /* TheBoxLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxLocationService.m; sourceTree = "<group>"; };
 		90C2EE7812934108009195CF /* TheBoxNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxNotifications.m; sourceTree = "<group>"; };
-		90C9510212B6A16C00A8A05F /* HomeUIGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeUIGridViewController.h; sourceTree = "<group>"; };
-		90C9510412B6A16C00A8A05F /* LocationUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUIViewController.h; sourceTree = "<group>"; };
+		90C9510212B6A16C00A8A05F /* TBCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCityViewController.h; sourceTree = "<group>"; };
+		90C9510412B6A16C00A8A05F /* TBStoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStoresViewController.h; sourceTree = "<group>"; };
 		90C9510512B6A16C00A8A05F /* NSArray+Decorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Decorator.h"; sourceTree = "<group>"; };
 		90C9510612B6A16C00A8A05F /* NSString+Decorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Decorator.h"; sourceTree = "<group>"; };
 		90C9510912B6A16C00A8A05F /* TheBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxAppDelegate.h; sourceTree = "<group>"; };
@@ -343,7 +359,7 @@
 		90C9511C12B6A16C00A8A05F /* TheBoxUIRecycleStrategyMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIRecycleStrategyMethod.h; sourceTree = "<group>"; };
 		90C9511F12B6A16C00A8A05F /* TheBoxUIGridViewDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxUIGridViewDatasource.h; sourceTree = "<group>"; };
 		90C9512012B6A16C00A8A05F /* TheBoxVisibleStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxVisibleStrategy.h; sourceTree = "<group>"; };
-		90C9512212B6A16C00A8A05F /* UploadUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadUIViewController.h; sourceTree = "<group>"; };
+		90C9512212B6A16C00A8A05F /* TBTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTakePhotoViewController.h; sourceTree = "<group>"; };
 		90C9512512B6A16C00A8A05F /* VisibleStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleStrategy.h; sourceTree = "<group>"; };
 		90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredByFoursquare_gray.png; sourceTree = "<group>"; };
 		90CBFE69154D4ACA00349A13 /* thewho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thewho.jpg; sourceTree = "<group>"; };
@@ -373,6 +389,14 @@
 		90F9FDE5154D97D0001BCD66 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		956F7906F02145ECABCED92A /* libPods-UnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicationTests.xcconfig"; path = "Pods/Pods-ApplicationTests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		BD0A53D31767E63200279EA5 /* checkmark-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-mini.png"; path = "Supporting Files/checkmark-mini.png"; sourceTree = "<group>"; };
+		BD0A53D41767E63200279EA5 /* checkmark-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-mini@2x.png"; path = "Supporting Files/checkmark-mini@2x.png"; sourceTree = "<group>"; };
+		BD0A53DF1767E82700279EA5 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = "Supporting Files/camera.png"; sourceTree = "<group>"; };
+		BD0A53E01767E82700279EA5 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera@2x.png"; path = "Supporting Files/camera@2x.png"; sourceTree = "<group>"; };
+		BD0A53E51767EDC100279EA5 /* camera-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-mini.png"; path = "Supporting Files/camera-mini.png"; sourceTree = "<group>"; };
+		BD0A53E61767EDC100279EA5 /* camera-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-mini@2x.png"; path = "Supporting Files/camera-mini@2x.png"; sourceTree = "<group>"; };
+		BD0A53EB1767F09500279EA5 /* circlex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circlex.png; path = "Supporting Files/circlex.png"; sourceTree = "<group>"; };
+		BD0A53EC1767F09500279EA5 /* circlex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "circlex@2x.png"; path = "Supporting Files/circlex@2x.png"; sourceTree = "<group>"; };
 		BD0B25E117494778001B3A9B /* TBLocalitiesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBLocalitiesTableViewController.h; sourceTree = "<group>"; };
 		BD0B25E217494778001B3A9B /* TBLocalitiesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBLocalitiesTableViewController.m; sourceTree = "<group>"; };
 		BD127B3D165D77AF002C944D /* TBSecureHashA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSecureHashA1.h; sourceTree = "<group>"; };
@@ -399,7 +423,7 @@
 		BD2A8AAA175AD9340036A852 /* TheBoxAlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBoxAlertViews.h; sourceTree = "<group>"; };
 		BD2A8AAB175AD9350036A852 /* TheBoxAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheBoxAlertViews.m; sourceTree = "<group>"; };
 		BD2A8AAD175B3DE00036A852 /* XRay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XRay.framework; sourceTree = "<group>"; };
-		BD2A8AB0175B413D0036A852 /* HomeUIGridViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeUIGridViewControllerTest.m; sourceTree = "<group>"; };
+		BD2A8AB0175B413D0036A852 /* TBCityViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCityViewControllerTest.m; sourceTree = "<group>"; };
 		BD4292B7175B4BBB00459891 /* TBErrorBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBErrorBlocks.h; sourceTree = "<group>"; };
 		BD4292B8175B4BBB00459891 /* TBErrorBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBErrorBlocks.m; sourceTree = "<group>"; };
 		BD4BA9AA16FA5B6C009C1518 /* UIViewController+TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TBViewController.h"; sourceTree = "<group>"; };
@@ -555,13 +579,13 @@
 				BD4292B6175B4AF800459891 /* UIViewController+TBViewController */,
 				BDCE1E26175814B60070BB59 /* MBProgressHUD+TheBox */,
 				BDCE1E251758140C0070BB59 /* AFNetworking+TheBox */,
+				903AE3FD12853F9D00A8FB28 /* City */,
 				BDE482BD175050D20096903C /* Feed */,
+				903AE40412853FDF00A8FB28 /* TakePhoto */,
 				BDA2BC87165951CB0068C749 /* Interface */,
 				903AE3E21284BE2100A8FB28 /* Welcome */,
-				903AE3FD12853F9D00A8FB28 /* Home */,
 				903AE40012853FBE00A8FB28 /* Details */,
 				903AE40312853FD500A8FB28 /* Description */,
-				903AE40412853FDF00A8FB28 /* Upload */,
 				905A4F9C1291DE6F00BCB475 /* Location */,
 				BDA2BC8E1659600F0068C749 /* TBProfileViewController.h */,
 				BDA2BC8F1659600F0068C749 /* TBProfileViewController.m */,
@@ -641,9 +665,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				BDA2BCF0165ACC800068C749 /* ApplicationTests */,
 				90D8304012B506D900BE4470 /* Tests */,
@@ -711,14 +735,14 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		903AE3FD12853F9D00A8FB28 /* Home */ = {
+		903AE3FD12853F9D00A8FB28 /* City */ = {
 			isa = PBXGroup;
 			children = (
-				902FDA8C12ABACF200CE1161 /* HomeUIGridViewController.m */,
+				902FDA8C12ABACF200CE1161 /* TBCityViewController.m */,
 				9020737C152CF1340017A385 /* TBItemsOperationDelegate.h */,
 				90539C6D1537670800559AD0 /* TBCreateItemOperationDelegate.h */,
 			);
-			name = Home;
+			name = City;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -740,12 +764,12 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		903AE40412853FDF00A8FB28 /* Upload */ = {
+		903AE40412853FDF00A8FB28 /* TakePhoto */ = {
 			isa = PBXGroup;
 			children = (
-				9053953112888AF000FD381C /* UploadUIViewController.m */,
+				9053953112888AF000FD381C /* TBTakePhotoViewController.m */,
 			);
-			name = Upload;
+			name = TakePhoto;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -761,7 +785,7 @@
 		905A4F9C1291DE6F00BCB475 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				905A4F991291DE6400BCB475 /* LocationUIViewController.m */,
+				905A4F991291DE6400BCB475 /* TBStoresViewController.m */,
 				90D11E571534C97500D52F58 /* TBLocationOperationDelegate.h */,
 			);
 			name = Location;
@@ -791,7 +815,7 @@
 				BD258DD41673D0AC00286511 /* TBAFHTTPRequestOperationFailureBlockTest.m */,
 				BD13057616A22E7D00AF0814 /* TBDimensionTest.m */,
 				BD9F24EA175A4302009D212F /* TBPolygonTest.m */,
-				BD2A8AB0175B413D0036A852 /* HomeUIGridViewControllerTest.m */,
+				BD2A8AB0175B413D0036A852 /* TBCityViewControllerTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -807,8 +831,8 @@
 				90A1E51C133CC10000CC9212 /* TheBoxCache.h */,
 				9096CBE2133BB76700639685 /* Item.h */,
 				9096CBD7133BB6FE00639685 /* TheBoxUIViewConfiguration.h */,
-				90C9510212B6A16C00A8A05F /* HomeUIGridViewController.h */,
-				90C9510412B6A16C00A8A05F /* LocationUIViewController.h */,
+				90C9510212B6A16C00A8A05F /* TBCityViewController.h */,
+				90C9510412B6A16C00A8A05F /* TBStoresViewController.h */,
 				90C9510512B6A16C00A8A05F /* NSArray+Decorator.h */,
 				90C9510612B6A16C00A8A05F /* NSString+Decorator.h */,
 				90C9510912B6A16C00A8A05F /* TheBoxAppDelegate.h */,
@@ -829,7 +853,7 @@
 				90C9511C12B6A16C00A8A05F /* TheBoxUIRecycleStrategyMethod.h */,
 				90C9511F12B6A16C00A8A05F /* TheBoxUIGridViewDatasource.h */,
 				90C9512012B6A16C00A8A05F /* TheBoxVisibleStrategy.h */,
-				90C9512212B6A16C00A8A05F /* UploadUIViewController.h */,
+				90C9512212B6A16C00A8A05F /* TBTakePhotoViewController.h */,
 				90C9512512B6A16C00A8A05F /* VisibleStrategy.h */,
 				90F08275132AEDA000E7E35F /* UITextField+TheBoxUITextField.h */,
 				90C2A4791526679B00AC16B6 /* TheBoxDefaultKeyboardObserver.h */,
@@ -907,10 +931,10 @@
 				BDABD92E169F68B100111723 /* TBItemView.xib */,
 				BD14C28A16BDC73F0039E978 /* TBUserItemView.xib */,
 				BD7C27D617235DE6009D26EE /* TBProgressView.xib */,
-				903AE3D91284900300A8FB28 /* HomeUIGridViewController.xib */,
+				903AE3D91284900300A8FB28 /* TBCityViewController.xib */,
 				903AE4EB1285BE6500A8FB28 /* DetailsUIViewController.xib */,
-				903AE5601285E33600A8FB28 /* UploadUIViewController.xib */,
-				905A4FB91291DEB400BCB475 /* LocationUIViewController.xib */,
+				903AE5601285E33600A8FB28 /* TBTakePhotoViewController.xib */,
+				905A4FB91291DEB400BCB475 /* TBStoresViewController.xib */,
 			);
 			name = Interface;
 			path = ..;
@@ -938,12 +962,20 @@
 		BDA2BD15165AF8D80068C749 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BD0A53DF1767E82700279EA5 /* camera.png */,
+				BD0A53E01767E82700279EA5 /* camera@2x.png */,
+				BD0A53E51767EDC100279EA5 /* camera-mini.png */,
+				BD0A53E61767EDC100279EA5 /* camera-mini@2x.png */,
 				BDB1571C175552F500E140E9 /* chat.png */,
 				BDB1571D175552F600E140E9 /* chat@2x.png */,
 				BDB157221755549100E140E9 /* checkmark.png */,
 				BDB157231755549100E140E9 /* checkmark@2x.png */,
+				BD0A53D31767E63200279EA5 /* checkmark-mini.png */,
+				BD0A53D41767E63200279EA5 /* checkmark-mini@2x.png */,
 				BDB157161755492B00E140E9 /* circle-no.png */,
 				BDB157171755492B00E140E9 /* circle-no@2x.png */,
+				BD0A53EB1767F09500279EA5 /* circlex.png */,
+				BD0A53EC1767F09500279EA5 /* circlex@2x.png */,
 				BD9BC53217513C0E00CF18EB /* city.png */,
 				BDAF7AD317534816008899D1 /* city@2x.png */,
 				BDAF7AB6175281EB008899D1 /* clock.png */,
@@ -1129,11 +1161,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				903AE3DA1284900300A8FB28 /* HomeUIGridViewController.xib in Resources */,
+				903AE3DA1284900300A8FB28 /* TBCityViewController.xib in Resources */,
 				903AE3E81284BF7500A8FB28 /* WelcomeUIViewController.xib in Resources */,
 				903AE4EC1285BE6500A8FB28 /* DetailsUIViewController.xib in Resources */,
-				903AE5611285E33600A8FB28 /* UploadUIViewController.xib in Resources */,
-				905A4FBA1291DEB400BCB475 /* LocationUIViewController.xib in Resources */,
+				903AE5611285E33600A8FB28 /* TBTakePhotoViewController.xib in Resources */,
+				905A4FBA1291DEB400BCB475 /* TBStoresViewController.xib in Resources */,
 				90D830F412B51DA400BE4470 /* TheBoxUICell.xib in Resources */,
 				90E3592C1546333700075ABF /* default_item_thumb.png in Resources */,
 				90CBFE5F154BF58F00349A13 /* poweredByFoursquare_gray.png in Resources */,
@@ -1173,6 +1205,14 @@
 				BDB1572A175561EE00E140E9 /* x.png in Resources */,
 				BDB1572C175561EE00E140E9 /* x@2x.png in Resources */,
 				BD2A8A9D175A4F4C0036A852 /* Settings.bundle in Resources */,
+				BD0A53D51767E63200279EA5 /* checkmark-mini.png in Resources */,
+				BD0A53D71767E63200279EA5 /* checkmark-mini@2x.png in Resources */,
+				BD0A53E11767E82700279EA5 /* camera.png in Resources */,
+				BD0A53E31767E82700279EA5 /* camera@2x.png in Resources */,
+				BD0A53E71767EDC100279EA5 /* camera-mini.png in Resources */,
+				BD0A53E91767EDC100279EA5 /* camera-mini@2x.png in Resources */,
+				BD0A53ED1767F09600279EA5 /* circlex.png in Resources */,
+				BD0A53EF1767F09600279EA5 /* circlex@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1209,6 +1249,14 @@
 				BDB157271755549100E140E9 /* checkmark@2x.png in Resources */,
 				BDB1572B175561EE00E140E9 /* x.png in Resources */,
 				BDB1572D175561EE00E140E9 /* x@2x.png in Resources */,
+				BD0A53D61767E63200279EA5 /* checkmark-mini.png in Resources */,
+				BD0A53D81767E63200279EA5 /* checkmark-mini@2x.png in Resources */,
+				BD0A53E21767E82700279EA5 /* camera.png in Resources */,
+				BD0A53E41767E82700279EA5 /* camera@2x.png in Resources */,
+				BD0A53E81767EDC100279EA5 /* camera-mini.png in Resources */,
+				BD0A53EA1767EDC100279EA5 /* camera-mini@2x.png in Resources */,
+				BD0A53EE1767F09600279EA5 /* circlex.png in Resources */,
+				BD0A53F01767F09600279EA5 /* circlex@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1344,9 +1392,9 @@
 				90C2C36512B6C25900829868 /* TheBoxRect.m in Sources */,
 				90C2C36612B6C25A00829868 /* NSString+Decorator.m in Sources */,
 				90C2C36A12B6C25C00829868 /* TheBoxUIRecycleStrategy.m in Sources */,
-				90C2C37012B6C27000829868 /* HomeUIGridViewController.m in Sources */,
-				90C2C37312B6C2A900829868 /* UploadUIViewController.m in Sources */,
-				90C2C37412B6C2AC00829868 /* LocationUIViewController.m in Sources */,
+				90C2C37012B6C27000829868 /* TBCityViewController.m in Sources */,
+				90C2C37312B6C2A900829868 /* TBTakePhotoViewController.m in Sources */,
+				90C2C37412B6C2AC00829868 /* TBStoresViewController.m in Sources */,
 				90C2C37512B6C2AD00829868 /* TheBoxAppDelegate.m in Sources */,
 				90C2C37612B6C2AE00829868 /* main.m in Sources */,
 				90D9A93F12B921950063FF60 /* Item.m in Sources */,
@@ -1420,8 +1468,8 @@
 				BD9A781616BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */,
 				BD9F24EB175A4302009D212F /* TBPolygonTest.m in Sources */,
 				BD1D000E175A4A18009B0829 /* TBPolygon.m in Sources */,
-				BD2A8AB1175B413D0036A852 /* HomeUIGridViewControllerTest.m in Sources */,
-				BD2A8AB2175B42830036A852 /* HomeUIGridViewController.m in Sources */,
+				BD2A8AB1175B413D0036A852 /* TBCityViewControllerTest.m in Sources */,
+				BD2A8AB2175B42830036A852 /* TBCityViewController.m in Sources */,
 				BD2A8AB3175B42910036A852 /* DetailsUIViewController.m in Sources */,
 				BD2A8AB4175B42970036A852 /* TBAlertViews.m in Sources */,
 				BD2A8AB5175B429B0036A852 /* TBButton.m in Sources */,

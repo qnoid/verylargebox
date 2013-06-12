@@ -10,27 +10,20 @@
 
 @implementation TBColors
 
-+ (UIColor *)colorDarkOrange {
-return [UIColor colorWithRed:153.0 / 255.0 green:102.0 / 255.0 blue:51.0 / 255.0 alpha:1.0];
-}
 
-+ (UIColor *)colorLightOrange {
-return [UIColor colorWithRed:228.0 / 255.0 green:125.0 / 255.0 blue:56.0 / 255.0 alpha:1.0];
-}
-
-+ (UIColor *)colorDarkGreen {
++(UIColor*)colorDarkGreen {
     return [UIColor colorWithRed:0.0 / 255.0 green:69.0 / 255.0 blue:45.0 / 255.0 alpha:1.0];
 }
 
-+ (UIColor *)colorLightGreen {
++(UIColor*)colorLightGreen {
     return [UIColor colorWithRed:1.0 / 255.0 green:126.0 / 255.0 blue:92.0 / 255.0 alpha:1.0];
 }
 
-+ (UIColor*)colorDarkGrey {
++(UIColor*)colorDarkGrey {
     return [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0];
 }
 
-+ (UIColor*)colorPrimaryBlue {
++(UIColor*)colorPrimaryBlue {
     return [UIColor colorWithRed:1.0/255.0 green:116.0/255.0 blue:185.0/255.0 alpha:1.0];
 }
 

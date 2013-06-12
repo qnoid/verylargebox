@@ -8,22 +8,22 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import <OCMock/OCMock.h>
-#import "HomeUIGridViewController.h"
+#import "TBCityViewController.h"
 
-@interface HomeUIGridViewController (Testing)
+@interface TBCityViewController (Testing)
 -(void)reloadItems;
 @end
 
-@interface HomeUIGridViewControllerTest : SenTestCase
+@interface TBCityViewControllerTest : SenTestCase
 
 @end
 
-@implementation HomeUIGridViewControllerTest
+@implementation TBCityViewControllerTest
 
 -(void)testGivenScrollViewWillStopAtOnDoubleTapAssertReloadItemsOnce
 
 {
-    HomeUIGridViewController *viewController = [[HomeUIGridViewController alloc] init];
+    TBCityViewController *viewController = [[TBCityViewController alloc] init];
     id mockLocationsView = [OCMockObject niceMockForClass:[TheBoxUIScrollView class]];
     id mockItemsView = [OCMockObject niceMockForClass:[TheBoxUIGridView class]];
     viewController.locationsView = mockLocationsView;

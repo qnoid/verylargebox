@@ -22,7 +22,7 @@
 - (IBAction)enter:(id)sender 
 {
 	NSLog(@"Hello %@", locationLabel.text);
-    HomeUIGridViewController *homeGridViewController = [HomeUIGridViewController newHomeGridViewController];
+    TBCityViewController *homeGridViewController = [TBCityViewController newHomeGridViewController];
 
     UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:homeGridViewController];    
     [self presentModalViewController:navigationController animated:YES];	

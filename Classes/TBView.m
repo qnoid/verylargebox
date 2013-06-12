@@ -18,27 +18,27 @@
     return [[self borderWidth:1.0f] borderColor:[UIColor blackColor].CGColor];
 }
 
--(id<TBViewBorder>)bottomBorder{
+-(id<TBViewBorder>)bottomBorder:(UIColor*)color{
     CALayer *topBorder = [CALayer layer];
     topBorder.frame = CGRectMake(0.0f, 44.0f, 160.0f, 2.0f);
-    topBorder.backgroundColor = [TBColors colorDarkOrange].CGColor;
+    topBorder.backgroundColor = color.CGColor;
     [self.layer addSublayer:topBorder];
 return self;
 }
 
-- (id<TBViewBorder>)borders
+- (id<TBViewBorder>)borders:(UIColor*)color
 {
     CALayer *leftBorder = [CALayer layer];
     leftBorder.frame = CGRectMake(0.0f, 0.0f, 2.0f, 44.0f);
-    leftBorder.backgroundColor = [TBColors colorDarkOrange].CGColor;
+    leftBorder.backgroundColor = color.CGColor;
 
     CALayer *topBorder = [CALayer layer];
     topBorder.frame = CGRectMake(0.0f, 0.0f, 160.0f, 2.0f);
-    topBorder.backgroundColor = [TBColors colorDarkOrange].CGColor;
+    topBorder.backgroundColor = color.CGColor;
 
     CALayer *rightBorder = [CALayer layer];
     rightBorder.frame = CGRectMake(160.0f, 0.0f, 2.0f, 44.0f);
-    rightBorder.backgroundColor = [TBColors colorDarkOrange].CGColor;
+    rightBorder.backgroundColor = color.CGColor;
 
     [self.layer addSublayer:leftBorder];
     [self.layer addSublayer:topBorder];
