@@ -1041,7 +1041,6 @@
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "thebox" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
-				BD2A8AA9175A56EE0036A852 /* Acknowledgements */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				1249C2DE2CCC45C08200A4E7 /* Copy Pods Resources */,
@@ -1274,20 +1273,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-ApplicationTests-resources.sh\"\n";
-		};
-		BD2A8AA9175A56EE0036A852 /* Acknowledgements */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Acknowledgements;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "";
 		};
 		BDCD939F165C127A009C2F8F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
