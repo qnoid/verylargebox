@@ -3,7 +3,7 @@
 //  thebox
 //
 //  Created by Markos Charatzas on 15/06/2013.
-//  Copyright (c) 2013 TheBox. All rights reserved.
+//  Copyright (c) 2013 (verylargebox.com). All rights reserved.
 //
 
 #import "NSDictionary+VLBResidence.h"

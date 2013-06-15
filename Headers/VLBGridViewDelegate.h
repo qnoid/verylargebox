@@ -4,8 +4,8 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas (@qnoid) on 24/09/2011.
- *  Contributor(s): .-
+ *  Created by Markos Charatzas on 24/09/2011.
+
  */
 #import <Foundation/Foundation.h>
 

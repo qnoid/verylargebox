@@ -1,12 +1,13 @@
-/*
- *  Copyright 2013 TheBox
- *  All rights reserved.
- *
- *  This file is part of thebox
- *
- *  Created by Markos Charatzas (___twitter___) 25/05/2013.
- *  Contributor(s): .-
- */
+//
+// Copyright 2013 TheBox
+// All rights reserved.
+//
+// This file is part of thebox
+//
+// Created by Markos Charatzas on 25/05/2013.
+//
+//
+
 #import <Foundation/Foundation.h>
 
 typedef void(^VLBAlertViewBlock)(UIAlertView* alertView, NSInteger buttonIndex);

@@ -1,12 +1,13 @@
-/*
- *  Copyright 2010 TheBox
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas (@qnoid) on 20/03/2011.
- *  Contributor(s): .-
- */
+//
+//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
+//  All rights reserved.
+//
+//  This file is part of TheBox
+//
+//  Created by Markos Charatzas on 20/03/2011.
+//
+//
+
 #import "VLBQueries.h"
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"

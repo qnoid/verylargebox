@@ -3,7 +3,7 @@
 //  thebox
 //
 //  Created by Markos Charatzas on 19/05/2013.
-//  Copyright (c) 2013 TheBox. All rights reserved.
+//  Copyright (c) 2013 (verylargebox.com). All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

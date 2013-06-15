@@ -4,8 +4,8 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas (@qnoid) on 05/04/2012.
- *  Contributor(s): .-
+ *  Created by Markos Charatzas on 05/04/2012.
+
  */
 #import <Foundation/Foundation.h>
 #import "AmazonServiceRequest.h"

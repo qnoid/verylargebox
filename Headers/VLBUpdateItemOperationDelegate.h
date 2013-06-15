@@ -1,11 +1,11 @@
 /*
- *  Copyright 2010 TheBox
+ *  Copyright (c) 2010 (verylargebox.com). All rights reserved.
  *  All rights reserved.
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas (@qnoid) on 12/05/2012.
- *  Contributor(s): .-
+ *  Created by Markos Charatzas on 12/05/2012.
+
  */
 #import <Foundation/Foundation.h>
 

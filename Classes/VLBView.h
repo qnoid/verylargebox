@@ -1,12 +1,13 @@
-/*
- *  Copyright 2010 The Box
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas (@qnoid) on 19/05/2012.
- *  Contributor(s): .-
- */
+//
+// Copyright 2010 The Box
+// All rights reserved.
+//
+// This file is part of thebox
+//
+// Created by Markos Charatzas on 19/05/2012.
+//
+//
+
 #import <UIKit/UIKit.h>
 #import "VLBScrollView.h"
 

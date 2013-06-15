@@ -4,8 +4,8 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas (@qnoid) on 20/11/10.
- *  Contributor(s): .-
+ *  Created by Markos Charatzas on 20/11/10.
+
  */
 #import <Foundation/Foundation.h>
 #import <UIKit/UIkit.h>

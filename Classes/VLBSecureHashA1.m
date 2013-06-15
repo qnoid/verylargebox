@@ -3,7 +3,7 @@
 //  thebox
 //
 //  Created by Markos Charatzas on 21/11/2012.
-//  Copyright (c) 2012 TheBox. All rights reserved.
+//  Copyright (c) 2012 (verylargebox.com). All rights reserved.
 //
 
 #import "VLBSecureHashA1.h"

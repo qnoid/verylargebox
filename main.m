@@ -4,8 +4,8 @@
  *
  *  This file is part of TheBox
  *
- *  Created by Markos Charatzas (@qnoid) on 5/11/10.
- *  Contributor(s): .-
+ *  Created by Markos Charatzas on 5/11/10.
+
  */
 #import <UIKit/UIKit.h>
 #import "VLBAppDelegate.h"

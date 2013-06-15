@@ -1,12 +1,12 @@
-/**
- *  Copyright 2012 TheBox 
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas (@qnoid)  on 22/04/2012.
- *  Contributor(s): .-
- */
+//
+//  Copyright 2012 TheBox 
+//  All rights reserved.
+//
+//  This file is part of TheBox
+//
+//  Created by Markos Charatzas on 22/04/2012.
+//
+
 #import <SenTestingKit/SenTestingKit.h>
 #import "OCMock.h"
 #import "OCMArg.h"

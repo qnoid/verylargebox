@@ -1,12 +1,13 @@
-/*
- *  Copyright 2011 TheBox
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas (@qnoid) on 19/05/2012.
- *  Contributor(s): .-
- */
+//
+//  Copyright (c) 2011 (verylargebox.com). All rights reserved.
+//  All rights reserved.
+//
+//  This file is part of TheBox
+//
+//  Created by Markos Charatzas on 19/05/2012.
+//
+//
+
 #import <QuartzCore/QuartzCore.h>
 #import "VLBView.h"
 #import "VLBColors.h"

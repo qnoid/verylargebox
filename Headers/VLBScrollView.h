@@ -1,12 +1,12 @@
-/*
- *  Copyright 2011 TheBox
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas (@qnoid) on 07/02/2011.
- *  Contributor(s): .-
- */
+//
+//  Copyright (c) 2011 (verylargebox.com). All rights reserved.
+//  All rights reserved.
+//
+//  This file is part of TheBox
+//
+//  Created by Markos Charatzas on 07/02/2011.
+//
+//
 #import "VLBVisibleStrategy.h"
 #import "VLBScrollViewDatasource.h"
 #import "VLBCanIndexLocationInView.h"

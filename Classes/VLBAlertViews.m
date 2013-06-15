@@ -1,12 +1,13 @@
-/*
- *  Copyright 2010 The Box
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas (@qnoid) on 25/05/2013.
- *  Contributor(s): .-
- */
+//
+//  Copyright 2010 The Box
+//  All rights reserved.
+//
+//  This file is part of TheBox
+//
+//  Created by Markos Charatzas on 25/05/2013.
+//
+//
+
 #import "VLBAlertViews.h"
 #import "VLBMacros.h"
 #import <objc/runtime.h>
