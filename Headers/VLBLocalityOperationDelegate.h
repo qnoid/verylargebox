@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VLBNSErrorDelegate.h"
 
-@protocol VLBLocalityOperationDelegate <NSObject>
+@protocol VLBLocalityOperationDelegate <NSObject, VLBNSErrorDelegate>
 -(void)didSucceedWithLocalities:(NSArray*)localities;
 -(void)didFailOnLocalitiesWithError:(NSError*)error;
 @end

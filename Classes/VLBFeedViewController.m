@@ -18,6 +18,7 @@
 #import "VLBHuds.h"
 #import "VLBMacros.h"
 #import "DDLog.h"
+#import "VLBErrorBlocks.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -170,6 +171,22 @@ return localityItemsViewController;
     MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
     hud.detailsLabelText = error.localizedDescription;
     [hud show:YES];
+}
+
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithTimeout:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TheBoxUIScrollViewDelegate

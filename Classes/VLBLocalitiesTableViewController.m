@@ -14,6 +14,7 @@
 #import "UINavigationItem+VLBNavigationItem.h"
 #import "MBProgressHUD.h"
 #import "VLBHuds.h"
+#import "VLBErrorBlocks.h"
 
 @interface VLBLocalitiesTableViewController ()
 @property(nonatomic, strong) NSObject<UITableViewDataSource> *tableViewDataSource;
@@ -31,6 +32,12 @@
     availablePlacesViewController.title = @"Select a location for thebox";
     
 return availablePlacesViewController;
+}
+
+
+-(void)dismissViewControllerAnimated
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark TBLocalityOperationDelegate
@@ -61,11 +68,6 @@ return availablePlacesViewController;
     [self.tableView reloadData];
 }
 
--(void)dismissViewControllerAnimated
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 -(void)didFailOnLocalitiesWithError:(NSError *)error
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
@@ -74,6 +76,22 @@ return availablePlacesViewController;
     MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
     hud.detailsLabelText = error.localizedDescription;
     [hud show:YES];
+}
+
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithTimeout:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

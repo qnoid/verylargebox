@@ -20,6 +20,7 @@
 #import "VLBAlertViews.h"
 #import "NSDictionary+VLBResidence.h"
 #import "VLBMacros.h"
+#import "VLBErrorBlocks.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -266,6 +267,22 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
     alertView.delegate = alertViewDelegate;
     
     [alertView show]; 
+}
+
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithTimeout:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TheBoxUIScrollViewDelegate

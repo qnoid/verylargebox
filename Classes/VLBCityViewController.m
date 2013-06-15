@@ -35,6 +35,7 @@
 #import "VLBPolygon.h"
 #import "VLBDrawRects.h"
 #import "VLBMacros.h"
+#import "VLBErrorBlocks.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -266,6 +267,22 @@ return self;
 {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+}
+
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithTimeout:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TheBoxUIGridViewDatasource

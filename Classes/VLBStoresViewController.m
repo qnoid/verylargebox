@@ -18,6 +18,9 @@
 #import "DDLog.h"
 #import "NSArray+VLBDecorator.h"
 #import "NSDictionary+VLBVenuesOperationParameters.h"
+#import "VLBNotifications.h"
+#import "MBProgressHUD.h"
+#import "VLBErrorBlocks.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare_gray";
 static NSString* const foursquarePoweredByType = @"png";
@@ -27,6 +30,8 @@ static UIImage* foursquarePoweredBy;
 @interface VLBStoresViewController ()
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSArray* venues;
+
+@property(nonatomic, weak) MBProgressHUD *hud;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @end
 
@@ -78,6 +83,9 @@ return self;
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.venuesTableView.tableFooterView = imageView;
+    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.labelText = @"Finding your location";    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -98,6 +106,12 @@ return self;
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
     DDLogError(@"%s %@", __PRETTY_FUNCTION__, notification);
+    NSError* error = [VLBNotifications error:notification];
+
+    if([kCLErrorDomain isEqual:error.domain]){
+        DDLogWarn(@"%@", error);
+    return;
+    }
     
     __block VLBAlertViewDelegate *alertViewDelegate;
     alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
@@ -114,6 +128,10 @@ return self;
 
 -(void)didUpdateToLocation:(NSNotification *)notification;
 {
+    [self.hud hide:YES];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+
 	CLLocation *location = [VLBNotifications location:notification];
 	
 	CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude) ;
@@ -136,7 +154,7 @@ return self;
 
     if([locations vlb_isEmpty]){
         UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"No stores found"
-                                                           message:[NSString stringWithFormat:@"There were no stores found matching '%@'.",[parameters vlb_query]]];
+                                                           message:[NSString stringWithFormat:@"There were no stores found"]];
         [alertView show];
     return;
     }
@@ -147,7 +165,24 @@ return self;
 
 -(void)didFailOnLocationWithError:(NSError*)error
 {
+    [self.hud hide:YES];
     DDLogError(@"%s: %@", __PRETTY_FUNCTION__, error);
+}
+
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithTimeout:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark UITableViewDataSource

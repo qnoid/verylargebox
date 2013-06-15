@@ -57,7 +57,6 @@ extern NSString* const THE_BOX_SERVICE;
  */
 +(AFHTTPRequestOperation*)newVerifyUserQuery:(NSObject<VLBVerifyUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence;
 
-+(AFHTTPRequestOperation*)updateItemQuery:(NSDictionary *) item delegate:(NSObject<VLBUpdateItemOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<VLBLocationOperationDelegate>*)delegate;
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude query:(NSString*) query delegate:(NSObject<VLBLocationOperationDelegate>*)delegate;
 

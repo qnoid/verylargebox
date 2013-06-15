@@ -8,8 +8,9 @@
 
  */
 #import <Foundation/Foundation.h>
+#import "VLBNSErrorDelegate.h"
 
-@protocol VLBLocationOperationDelegate <NSObject>
+@protocol VLBLocationOperationDelegate <NSObject, VLBNSErrorDelegate>
 
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary*)parameters;
 -(void)didFailOnLocationWithError:(NSError*)error;

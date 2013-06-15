@@ -8,8 +8,9 @@
 
  */
 #import <Foundation/Foundation.h>
+#import "VLBNSErrorDelegate.h"
 
-@protocol VLBItemsOperationDelegate <NSObject>
+@protocol VLBItemsOperationDelegate <NSObject, VLBNSErrorDelegate>
 
 
 -(void)didSucceedWithItems:(NSMutableArray*)items;

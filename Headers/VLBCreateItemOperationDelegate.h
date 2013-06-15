@@ -9,8 +9,9 @@
  */
 #import <Foundation/Foundation.h>
 #import "AmazonServiceRequest.h"
+#import "VLBNSErrorDelegate.h"
 
-@protocol VLBCreateItemOperationDelegate <NSObject, AmazonServiceRequestDelegate>
+@protocol VLBCreateItemOperationDelegate <NSObject, AmazonServiceRequestDelegate, VLBNSErrorDelegate>
 
 -(void)didStartUploadingItem:(NSMutableDictionary*) location locality:(NSString*) locality;
 -(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(long long)totalBytesWritten totalBytesExpectedToWrite:(long long)totalBytesExpectedToWrite;
