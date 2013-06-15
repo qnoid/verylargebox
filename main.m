@@ -8,13 +8,13 @@
  *  Contributor(s): .-
  */
 #import <UIKit/UIKit.h>
-#import "TheBoxAppDelegate.h"
+#import "VLBAppDelegate.h"
 
 int main(int argc, char *argv[]) {
     int retVal = -1;
     @autoreleasepool {
         @try {
-            retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([TheBoxAppDelegate class]));
+            retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([VLBAppDelegate class]));
         }
         @catch (NSException* exception) {
             NSLog(@"Uncaught exception: %@", exception.description);
