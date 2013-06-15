@@ -158,8 +158,9 @@
 		BD7C27D717235DE7009D26EE /* TBProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7C27D617235DE6009D26EE /* TBProgressView.xib */; };
 		BD7C27D817235DE7009D26EE /* TBProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7C27D617235DE6009D26EE /* TBProgressView.xib */; };
 		BD84EF70165C2363009D9408 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
-		BD9A781116BB0D9C00FD30E0 /* signpost.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9A781016BB0D9C00FD30E0 /* signpost.png */; };
-		BD9A781216BB0D9C00FD30E0 /* signpost.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9A781016BB0D9C00FD30E0 /* signpost.png */; };
+		BD8BB288176C99D000AE6157 /* NSDictionary+TBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+TBResidence.m */; };
+		BD8BB289176C99D000AE6157 /* NSDictionary+TBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+TBResidence.m */; };
+		BD8BB28A176C99D000AE6157 /* NSDictionary+TBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+TBResidence.m */; };
 		BD9A781516BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */; };
 		BD9A781616BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */; };
 		BD9A781716BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */; };
@@ -436,7 +437,8 @@
 		BD7C27D317235DDB009D26EE /* TBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBProgressView.m; sourceTree = "<group>"; };
 		BD7C27D617235DE6009D26EE /* TBProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBProgressView.xib; path = Classes/TBProgressView.xib; sourceTree = "<group>"; };
 		BD7C27D917235E9A009D26EE /* TBMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBMacros.h; sourceTree = "<group>"; };
-		BD9A781016BB0D9C00FD30E0 /* signpost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signpost.png; sourceTree = "<group>"; };
+		BD8BB286176C99CF00AE6157 /* NSDictionary+TBResidence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+TBResidence.h"; sourceTree = "<group>"; };
+		BD8BB287176C99CF00AE6157 /* NSDictionary+TBResidence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+TBResidence.m"; sourceTree = "<group>"; };
 		BD9A781316BD53D300FD30E0 /* TBUITableViewDelegateBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBUITableViewDelegateBuilder.h; sourceTree = "<group>"; };
 		BD9A781416BD53D400FD30E0 /* TBUITableViewDelegateBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBUITableViewDelegateBuilder.m; sourceTree = "<group>"; };
 		BD9BC53217513C0E00CF18EB /* city.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = city.png; path = "Supporting Files/city.png"; sourceTree = "<group>"; };
@@ -591,6 +593,8 @@
 				BDA2BC8F1659600F0068C749 /* TBProfileViewController.m */,
 				BDA2BC89165952C20068C749 /* TBIdentifyViewController.h */,
 				BDA2BC8A165952C20068C749 /* TBIdentifyViewController.m */,
+				BD8BB286176C99CF00AE6157 /* NSDictionary+TBResidence.h */,
+				BD8BB287176C99CF00AE6157 /* NSDictionary+TBResidence.m */,
 				90E3592F1546348E00075ABF /* NSCache+TBCache.m */,
 				9096CC07133BB81E00639685 /* TheBoxQueries.m */,
 				90C0048E12B6437B0029863E /* TheBoxRect.m */,
@@ -902,7 +906,6 @@
 				90CBFE68154D4ACA00349A13 /* welcome */,
 				90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */,
 				90E3592A1546333700075ABF /* default_item_thumb.png */,
-				BD9A781016BB0D9C00FD30E0 /* signpost.png */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1181,7 +1184,6 @@
 				BDA2BD1A165AF8E30068C749 /* user.png in Resources */,
 				BD258DDE1678040500286511 /* refresh.png in Resources */,
 				BDABD92F169F68B100111723 /* TBItemView.xib in Resources */,
-				BD9A781116BB0D9C00FD30E0 /* signpost.png in Resources */,
 				BD14C28B16BDC73F0039E978 /* TBUserItemView.xib in Resources */,
 				BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */,
 				BDAC04AD16FAF95900B40646 /* Default-568h@2x.png in Resources */,
@@ -1229,7 +1231,6 @@
 			files = (
 				BDD8FEBD165C196200AB3041 /* InfoPlist.strings in Resources */,
 				BD258DDF1678040500286511 /* refresh.png in Resources */,
-				BD9A781216BB0D9C00FD30E0 /* signpost.png in Resources */,
 				BD14C28C16BDC73F0039E978 /* TBUserItemView.xib in Resources */,
 				BD7C27D817235DE7009D26EE /* TBProgressView.xib in Resources */,
 				BDE482C41750510D0096903C /* TBFeedViewController.xib in Resources */,
@@ -1438,6 +1439,7 @@
 				BD2A8AAC175AD9360036A852 /* TheBoxAlertViews.m in Sources */,
 				BD4292B9175B4BBB00459891 /* TBErrorBlocks.m in Sources */,
 				BD6BE05B175B524300B93854 /* TBDrawRects.m in Sources */,
+				BD8BB288176C99D000AE6157 /* NSDictionary+TBResidence.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1487,6 +1489,7 @@
 				BD4292BA175B4BBB00459891 /* TBErrorBlocks.m in Sources */,
 				BD6BE05C175B524300B93854 /* TBDrawRects.m in Sources */,
 				BD6BE05D175B570900B93854 /* TBViews.m in Sources */,
+				BD8BB289176C99D000AE6157 /* NSDictionary+TBResidence.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1509,6 +1512,7 @@
 				BD0B25E417494778001B3A9B /* TBLocalitiesTableViewController.m in Sources */,
 				BD9BC5371751476000CF18EB /* TBAlertViews.m in Sources */,
 				BDAF7ACE175288B4008899D1 /* UINavigationItem+TBNavigationItem.m in Sources */,
+				BD8BB28A176C99D000AE6157 /* NSDictionary+TBResidence.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

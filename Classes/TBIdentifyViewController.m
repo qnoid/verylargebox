@@ -106,8 +106,14 @@ return self;
     {
         TBFeedViewController *localityItemsViewController = [TBFeedViewController newFeedViewController];
 
-        [localityItemsViewController.navigationItem tb_addActionOnBarButtonItem:TBNavigationItemActionDismissViewControllerAnimatedOnLeftBarButtonItem target:self];
-
+        
+        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
+                                        initWithImage:[UIImage imageNamed:@"circlex.png"]
+                                        style:UIBarButtonItemStyleBordered
+                                        target:self
+                                        action:@selector(dismissViewControllerAnimated)];
+        
+        localityItemsViewController.navigationItem.leftBarButtonItem = closeButton;
         
         [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:localityItemsViewController] animated:YES completion:nil];
     }];
@@ -247,12 +253,11 @@ return [self.accounts count];
         UIView* selectedBackgroundView = [[UIView alloc] init];
         selectedBackgroundView.backgroundColor = [TBColors colorPrimaryBlue];
         emailCell.selectedBackgroundView = selectedBackgroundView;
+        tbBmailStatus(TBEmailStatusDefault)(emailCell);
     }
     
     NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
     emailCell.textLabel.text = email;
-
-    tbBmailStatus(TBEmailStatusDefault)(emailCell);
     
 return emailCell;
 }

@@ -15,17 +15,6 @@
 
 CGFloat const DEFAULT_HEIGHT = 196;
 
-TBUIScrollViewConfig const TBUIScrollViewConfigEmpty = ^(TheBoxUIScrollView *scrollView, BOOL cancelsTouchesInView){};
-
-TBUIScrollViewConfig const TBUIScrollViewAllowSelection = ^(TheBoxUIScrollView *scrollView, BOOL cancelsTouchesInView)
-{
-    UITapGestureRecognizer *tapGestureRecognizer =
-        [[UITapGestureRecognizer alloc] initWithTarget:scrollView action:@selector(didTapOnScrollView:)];
-    
-    tapGestureRecognizer.cancelsTouchesInView = cancelsTouchesInView;
-    [scrollView addGestureRecognizer:tapGestureRecognizer];
-};
-
 @interface TheBoxUIScrollView ()
 @property(nonatomic, assign) BOOL needsLayout;
 @property(nonatomic, strong) TheBoxUIRecycleStrategy *recycleStrategy;
@@ -38,7 +27,19 @@ TBUIScrollViewConfig const TBUIScrollViewAllowSelection = ^(TheBoxUIScrollView *
 @property(nonatomic, strong) NSObject<TheBoxSize> *theBoxSize;
 @property(nonatomic, strong) NSObject<TheBoxDimension> *dimension;
 -(id)initWithFrame:(CGRect) frame size:(NSObject<TheBoxSize>*)size dimension:(NSObject<TheBoxDimension>*)dimension;
+-(void)didTapOnScrollView:(id)sender;
 @end
+
+TBUIScrollViewConfig const TBUIScrollViewConfigEmpty = ^(TheBoxUIScrollView *scrollView, BOOL cancelsTouchesInView){};
+
+TBUIScrollViewConfig const TBUIScrollViewAllowSelection = ^(TheBoxUIScrollView *scrollView, BOOL cancelsTouchesInView)
+{
+    UITapGestureRecognizer *tapGestureRecognizer =
+        [[UITapGestureRecognizer alloc] initWithTarget:scrollView action:@selector(didTapOnScrollView:)];
+    
+    tapGestureRecognizer.cancelsTouchesInView = cancelsTouchesInView;
+    [scrollView addGestureRecognizer:tapGestureRecognizer];
+};
 
 @implementation TheBoxUIScrollView
 

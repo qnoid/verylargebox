@@ -27,6 +27,7 @@
 #import "AmazonS3Client.h"
 #import "S3PutObjectRequest.h"
 #import "S3UploadInputStream.h"
+#import "TBMacros.h"
 
 
 static NSString* const LOCALITIES = @"/localities";
@@ -291,27 +292,35 @@ return [self newLocationQuery:parameters delegate:delegate];
 return request;
 }
 
-+(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<TBItemsOperationDelegate>*)delegate
++(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<TBItemsOperationDelegate>*)delegate {
+return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
+}
+
++(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId page:(NSNumber*)page delegate:(NSObject<TBItemsOperationDelegate>*)delegate
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters tbSetObjectIfNotNil:page forKey:@"page"];
+
     NSMutableURLRequest *categoriesRequest =
-        [client requestWithMethod:@"GET" path:[NSString stringWithFormat:LOCATION_ITEMS, locationId] parameters:nil];
+    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:LOCATION_ITEMS, locationId] parameters:parameters];
     
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [categoriesRequest setTimeoutInterval:TIMEOUT];
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-       NSString* responseString = operation.responseString;
-       [delegate didSucceedWithItems:[responseString mutableObjectFromJSONString]];
-    }
-    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      [delegate didFailOnItemsWithError:error];
-    }];
-
-return request;
+                                       {
+                                           NSString* responseString = operation.responseString;
+                                           [delegate didSucceedWithItems:[responseString mutableObjectFromJSONString]];
+                                       }
+                                                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                          [delegate didFailOnItemsWithError:error];
+                                                                      }];
+    
+    return request;
 }
+
 
 +(void)newPostImage:(UIImage*)image delegate:(NSObject<AmazonServiceRequestDelegate>*)delegate
 {
@@ -364,49 +373,66 @@ return request;
 return createItem;
 }
 
-+(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate
++(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSUInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate {
+    return [self newGetItemsGivenUserId:userId page:nil delegate:delegate];
+}
+
++(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSUInteger)userId page:(NSNumber*)page delegate:(NSObject<TBItemsOperationDelegate>*)delegate
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters tbSetObjectIfNotNil:page forKey:@"page"];
+
     NSMutableURLRequest *getItemsRequest =
-    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:USER_ITEMS, userId] parameters:nil];
+    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:USER_ITEMS, userId] parameters:parameters];
     
     [getItemsRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [getItemsRequest setTimeoutInterval:TIMEOUT];
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:getItemsRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-   {
-       [delegate didSucceedWithItems:[operation.responseString mutableObjectFromJSONString]];
-   }
-  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      [delegate didFailOnItemsWithError:error];
-  }];
+                                       {
+                                           [delegate didSucceedWithItems:[operation.responseString mutableObjectFromJSONString]];
+                                       }
+                                                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                          [delegate didFailOnItemsWithError:error];
+                                                                      }];
     
     return request;
 }
 
-+(AFHTTPRequestOperation*)newGetItems:(NSString*)locality delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
+
++(AFHTTPRequestOperation*)newGetItems:(NSString*)locality delegate:(NSObject<TBItemsOperationDelegate>*)delegate{
+    return [self newGetItems:locality page:nil delegate:delegate];
+}
+
++(AFHTTPRequestOperation*)newGetItems:(NSString*)locality page:(NSNumber*)page delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 {
     TB_RETURN_IF_NIL(locality)
     
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setObject:locality forKey:@"locality[name]"];
+    [parameters tbSetObjectIfNotNil:page forKey:@"page"];
+    
     NSMutableURLRequest *getItemsRequest =
-    [client requestWithMethod:@"GET" path:ITEMS parameters:@{@"locality[name]": locality}];
+    [client requestWithMethod:@"GET" path:ITEMS parameters:parameters];
     
     [getItemsRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [getItemsRequest setTimeoutInterval:TIMEOUT];
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:getItemsRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        [delegate didSucceedWithItems:[operation.responseString mutableObjectFromJSONString]];
-    }
-    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [delegate didFailOnItemsWithError:error];
-    }];
+                                       {
+                                           [delegate didSucceedWithItems:[operation.responseString mutableObjectFromJSONString]];
+                                       }
+                                                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                          [delegate didFailOnItemsWithError:error];
+                                                                      }];
     
-return request;
+    return request;
 }
+
 
 
 @end

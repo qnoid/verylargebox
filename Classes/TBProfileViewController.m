@@ -18,6 +18,8 @@
 #import "QNDAnimatedView.h"
 #import "TBProgressView.h"
 #import "TBAlertViews.h"
+#import "NSDictionary+TBResidence.h"
+#import "TBMacros.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -32,6 +34,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, copy) TBUserItemViewGetDirections didTapOnGetDirectionsButton;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSMutableDictionary* location;
+@property(nonatomic, strong) NSOperationQueue *operationQueue;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton;
 @end
 
@@ -86,6 +89,7 @@ return profileViewController;
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
     self.didTapOnGetDirectionsButton = didTapOnGetDirectionsButton;
+    self.operationQueue = [NSOperationQueue new];
 
 return self;
 }
@@ -124,7 +128,8 @@ return self;
     __weak TBProfileViewController *wself = self;
     
     [self.itemsView addPullToRefreshWithActionHandler:^{
-        [[TheBoxQueries newGetItemsGivenUserId:[[wself.residence objectForKey:@"user_id"] unsignedIntValue] delegate:wself] start];
+        [self.operationQueue addOperation:[TheBoxQueries newGetItemsGivenUserId:[wself.residence tbResidenceUserId] page:TBInteger(1) delegate:wself]];
+        [self.operationQueue addOperation:[TheBoxQueries newGetItemsGivenUserId:[wself.residence tbResidenceUserId] delegate:wself]];
     }];
     
     [self.itemsView triggerPullToRefresh];

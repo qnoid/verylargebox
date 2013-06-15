@@ -16,6 +16,8 @@
 #import "TBLocalitiesTableViewController.h"
 #import "TBAlertViews.h"
 #import "TBHuds.h"
+#import "TBMacros.h"
+#import "DDLog.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -29,6 +31,9 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, strong) NSMutableArray* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, copy) TBUserItemViewGetDirections didTapOnGetDirectionsButton;
+@property(nonatomic, strong) NSOperationQueue *operationQueue;
+
+@property(nonatomic, weak) MBProgressHUD *hud;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton;
 @end
 
@@ -78,6 +83,7 @@ return localityItemsViewController;
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
     self.didTapOnGetDirectionsButton = didTapOnGetDirectionsButton;
+    self.operationQueue = [NSOperationQueue new];
     
     return self;
 }
@@ -115,8 +121,12 @@ return localityItemsViewController;
     __weak TBFeedViewController *wself = self;
     
     [self.itemsView addPullToRefreshWithActionHandler:^{
-        [[TheBoxQueries newGetItems:wself.locality delegate:wself] start];
+        [wself.operationQueue addOperation:[TheBoxQueries newGetItems:wself.locality page:TBInteger(1) delegate:wself]];
+        [wself.operationQueue addOperation:[TheBoxQueries newGetItems:wself.locality delegate:wself]];
     }];
+    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+    self.hud.labelText = @"Finding your location";
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -125,7 +135,7 @@ return localityItemsViewController;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];    
 }
 
 -(void)locate
@@ -144,7 +154,9 @@ return localityItemsViewController;
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, items);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%@", items);
+    
     self.items = items;
     [self.itemsView setNeedsLayout];
     [self.itemsView.pullToRefreshView stopAnimating];
@@ -152,7 +164,7 @@ return localityItemsViewController;
 
 -(void)didFailOnItemsWithError:(NSError *)error
 {
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     [self.itemsView.pullToRefreshView stopAnimating];
 
     MBProgressHUD *hud = [TBHuds newWithView:self.view config:TB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
@@ -242,10 +254,12 @@ return localityItemsViewController;
 #pragma mark TheBoxLocationServiceDelegate
 -(void)didFindPlacemark:(NSNotification *)notification
 {
+    [self.hud hide:YES];
+    
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogInfo(@"%s", __PRETTY_FUNCTION__);
 	NSString *locality = [TheBoxNotifications place:notification].locality;
     
     [self updateTitle:locality];
@@ -256,7 +270,9 @@ return localityItemsViewController;
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self.hud hide:YES];
+    
+    DDLogWarn(@"%s", __PRETTY_FUNCTION__);
     
     TBAlertViewDelegate *alertViewDelegate = [TBAlertViews newAlertViewDelegateOnOkDismiss];
     UIAlertView *alertView = [TBAlertViews newAlertViewWithOk:@"Location access denied"
@@ -269,7 +285,9 @@ return localityItemsViewController;
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self.hud hide:YES];
+    
+    DDLogWarn(@"%s", __PRETTY_FUNCTION__);
     TBLocalitiesTableViewController *localitiesViewController = [TBLocalitiesTableViewController newLocalitiesViewController];
     localitiesViewController.delegate = self;
     
@@ -278,7 +296,7 @@ return localityItemsViewController;
     
     navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
     
-    [self presentModalViewController:navigationController animated:YES];    
+    [self presentModalViewController:navigationController animated:YES];
 }
 
 #pragma mark TBLocalitiesTableViewControllerDelegate
@@ -286,12 +304,14 @@ return localityItemsViewController;
 -(void)didSelectLocality:(NSDictionary *)locality
 {
     [self.navigationController dismissModalViewControllerAnimated:YES];
+    
     NSString *localityName = [locality objectForKey:@"name"];
     
     [self updateTitle:localityName];
     
     self.locality = localityName;
     
-    [[TheBoxQueries newGetItems:localityName delegate:self] start];
+    [self.operationQueue addOperation:[TheBoxQueries newGetItems:self.locality page:TBInteger(1) delegate:self]];
+    [self.operationQueue addOperation:[TheBoxQueries newGetItems:self.locality delegate:self]];
 }
 @end

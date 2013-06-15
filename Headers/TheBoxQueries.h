@@ -83,6 +83,8 @@ extern NSString* const THE_BOX_SERVICE;
  */
 +(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 
++(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId page:(NSNumber*)page delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
+
 +(void)newPostImage:(UIImage*)image delegate:(NSObject<AmazonServiceRequestDelegate>*)delegate;
 
 /**
@@ -100,7 +102,9 @@ extern NSString* const THE_BOX_SERVICE;
                                       user:(NSUInteger)userId
                                   delegate:(NSObject<TBCreateItemOperationDelegate>*)delegate;
 
-+(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
++(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSUInteger)userId delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
+
++(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSUInteger)userId page:(NSNumber*)page delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
 
 /**
  Gets all the items in thebox given the locality
@@ -108,4 +112,7 @@ extern NSString* const THE_BOX_SERVICE;
  @return @nillable a new AFHTTPRequestOperation or nil if locality is nil.
  */
 +(AFHTTPRequestOperation*)newGetItems:(NSString*)locality delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
+
++(AFHTTPRequestOperation*)newGetItems:(NSString*)locality page:(NSNumber*)page delegate:(NSObject<TBItemsOperationDelegate>*)delegate;
+
 @end

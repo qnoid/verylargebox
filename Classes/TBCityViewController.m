@@ -33,6 +33,7 @@
 #import "MBProgressHUD.h"
 #import "TBPolygon.h"
 #import "TBDrawRects.h"
+#import "TBMacros.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -58,6 +59,7 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, assign) NSUInteger numberOfRows;
 @property(nonatomic, strong) UIImage *defaultItemImage;
+@property(nonatomic, strong) NSOperationQueue *operationQueue;
 @property(nonatomic, copy) TBUserItemViewGetDirections didTapOnGetDirectionsButton;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(TheBoxLocationService*)locationService didTapOnGetDirectionsButton:(TBUserItemViewGetDirections)didTapOnGetDirectionsButton;
 -(void)updateTitle:(NSString *)localityName;
@@ -120,6 +122,7 @@ return homeGridViewController;
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
     self.didTapOnGetDirectionsButton = didTapOnGetDirectionsButton;
+    self.operationQueue = [NSOperationQueue new];
     
 return self;
 }
@@ -231,7 +234,8 @@ return self;
     NSDictionary* currentLocation = [self.locations objectAtIndex:self.index];
     NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
     
-    [[TheBoxQueries newGetItemsGivenLocationId:locationId delegate:self] start];
+    [self.operationQueue addOperation:[TheBoxQueries newGetItemsGivenLocationId:locationId page:TBInteger(1) delegate:self]];
+    [self.operationQueue addOperation:[TheBoxQueries newGetItemsGivenLocationId:locationId delegate:self]];
 }
 
 #pragma mark TBLocationOperationDelegate
@@ -480,7 +484,7 @@ return storeButton;
 
 -(void)didFindPlacemark:(NSNotification *)notification
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];    
     
@@ -497,7 +501,7 @@ return storeButton;
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
     TBLocalitiesTableViewController *localitiesViewController = [TBLocalitiesTableViewController newLocalitiesViewController];
     localitiesViewController.delegate = self;
 
