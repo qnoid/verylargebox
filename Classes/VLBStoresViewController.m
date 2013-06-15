@@ -14,6 +14,10 @@
 #import "AFHTTPRequestOperation.h"
 #import "VLBAlertViews.h"
 #import "VLBColors.h"
+#import "NSDictionary+VLBFoursquareVenue.h"
+#import "DDLog.h"
+#import "NSArray+VLBDecorator.h"
+#import "NSDictionary+VLBVenuesOperationParameters.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare_gray";
 static NSString* const foursquarePoweredByType = @"png";
@@ -93,7 +97,7 @@ return self;
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, notification);
+    DDLogError(@"%s %@", __PRETTY_FUNCTION__, notification);
     
     __block VLBAlertViewDelegate *alertViewDelegate;
     alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
@@ -126,17 +130,24 @@ return self;
 
 #pragma mark TBLocationOperationDelegate
 
--(void)didSucceedWithLocations:(NSArray*)locations
+-(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
-    NSLog(@"%s: %@", __PRETTY_FUNCTION__, locations);
+    DDLogVerbose(@"%s: %@", __PRETTY_FUNCTION__, locations);
 
+    if([locations vlb_isEmpty]){
+        UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"No stores found"
+                                                           message:[NSString stringWithFormat:@"There were no stores found matching '%@'.",[parameters vlb_query]]];
+        [alertView show];
+    return;
+    }
+    
     self.venues = locations;
     [self.venuesTableView reloadData];
 }
 
 -(void)didFailOnLocationWithError:(NSError*)error
 {
-    NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
+    DDLogError(@"%s: %@", __PRETTY_FUNCTION__, error);
 }
 
 #pragma mark UITableViewDataSource
@@ -163,7 +174,7 @@ return self;
     
     NSDictionary* location = [self.venues objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [location objectForKey:@"name"];
+    cell.textLabel.text = [location vlb_name];
     cell.detailTextLabel.text = [[location objectForKey:@"location"] objectForKey:@"address"];
     
 return cell;

@@ -11,7 +11,7 @@
 
 @protocol VLBLocationOperationDelegate <NSObject>
 
--(void)didSucceedWithLocations:(NSArray*)locations;
+-(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary*)parameters;
 -(void)didFailOnLocationWithError:(NSError*)error;
 
 @end

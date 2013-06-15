@@ -44,6 +44,18 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 static NSInteger const FIRST_VIEW_TAG = -1;
 
+@interface NSOperationQueue (VLBOperationQueue)
+-(BOOL)vlb_isInProgress;
+@end
+
+@implementation NSOperationQueue (VLBOperationQueue)
+
+-(BOOL)vlb_isInProgress {
+    return [self operationCount] > 0;
+}
+
+@end
+
 /*
  Using a UIButton to display a store given the requirements,
     tap on selected store to get directions
@@ -230,7 +242,9 @@ return self;
  */
 -(void)reloadItems
 {
-    [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+    if(![self.operationQueue vlb_isInProgress]){
+        [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+    }
 
     NSDictionary* currentLocation = [self.locations objectAtIndex:self.index];
     NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
@@ -241,7 +255,7 @@ return self;
 
 #pragma mark TBLocationOperationDelegate
 
--(void)didSucceedWithLocations:(NSArray*)locations
+-(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     self.locations = locations;

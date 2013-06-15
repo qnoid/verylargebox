@@ -151,9 +151,11 @@ return request;
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
+    NSDictionary* parameters = @{@"locality[name]":localityName};
+    
     NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET"
                                                                   path:@"/locations"
-                                                            parameters:@{@"locality[name]":localityName}];
+                                                            parameters:parameters];
     
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [categoriesRequest setTimeoutInterval:TIMEOUT];
@@ -161,7 +163,7 @@ return request;
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject) 
     {
         NSString* responseString = operation.responseString;        
-        [delegate didSucceedWithLocations:[responseString mutableObjectFromJSONString]];
+        [delegate didSucceedWithLocations:[responseString mutableObjectFromJSONString] givenParameters:parameters];
     } 
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnLocationWithError:error];
@@ -221,7 +223,7 @@ return parameters;
     {
         NSString* responseString = operation.responseString;
 
-        [delegate didSucceedWithLocations:[[[responseString objectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"]];
+        [delegate didSucceedWithLocations:[[[responseString objectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"] givenParameters:parameters];
     } 
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnLocationWithError:error];
@@ -284,7 +286,7 @@ return [self newLocationQuery:parameters delegate:delegate];
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
        NSString* responseString = operation.responseString;
-       [delegate didSucceedWithLocations:[responseString mutableObjectFromJSONString]];
+       [delegate didSucceedWithLocations:[responseString mutableObjectFromJSONString] givenParameters:nil];
    }
    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
       [delegate didFailOnLocationWithError:error];
