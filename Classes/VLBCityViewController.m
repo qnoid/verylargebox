@@ -201,19 +201,22 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.theBoxLocationService notifyDidFindPlacemark:self];
-    [self.theBoxLocationService notifyDidFailWithError:self];
-    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
-    
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
     hud.labelText = @"Finding your location";
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
-    
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.theBoxLocationService notifyDidFindPlacemark:self];
+    [self.theBoxLocationService notifyDidFailWithError:self];
+    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+}
+
 #pragma mark application events
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;

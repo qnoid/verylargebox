@@ -8,10 +8,19 @@
 
 #import "NSDictionary+VLBResidence.h"
 
+
+NSString* const VLBResidenceUserId = @"user_id";
+NSString* const VLBResidenceToken = @"token";
+NSString* const VLBResidence = @"residence";
+
 @implementation NSDictionary (VLBResidence)
 
 -(NSUInteger)vlb_residenceUserId {
-    return [[self objectForKey:@"user_id"] unsignedIntValue];
+    return [[self vlb_objectForKey:VLBResidenceUserId] unsignedIntValue];
+}
+
+-(id)vlb_objectForKey:(VLBResidenceKey)key {
+    return [self objectForKey:key];
 }
 
 @end

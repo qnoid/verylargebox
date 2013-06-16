@@ -75,22 +75,25 @@ return self;
 
 -(void) viewDidLoad
 {
-	[self.theBoxLocationService notifyDidUpdateToLocation:self];
-	[self.theBoxLocationService notifyDidFailWithError:self];
-    
     UIImageView* imageView = [[UIImageView alloc] initWithImage:foursquarePoweredBy];
     imageView.frame = CGRectMake(0, 0, 320, 121);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.venuesTableView.tableFooterView = imageView;
     
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.labelText = @"Finding your location";    
+    self.hud.labelText = @"Finding your location";
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+    [self.theBoxLocationService notifyDidUpdateToLocation:self];
+	[self.theBoxLocationService notifyDidFailWithError:self];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -144,6 +147,9 @@ return self;
     
 	[map setRegion:newRegion];
     map.showsUserLocation = YES;
+    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.venuesTableView animated:YES];
+    self.hud.labelText = [NSString stringWithFormat:@"Finding stores nearby"];
 }
 
 #pragma mark TBLocationOperationDelegate
@@ -151,6 +157,7 @@ return self;
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
     DDLogVerbose(@"%s: %@", __PRETTY_FUNCTION__, locations);
+    [self.hud hide:YES];
 
     if([locations vlb_isEmpty]){
         UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"No stores found"
@@ -223,7 +230,7 @@ return cell;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary* location = [self.venues objectAtIndex:indexPath.row];
+    NSMutableDictionary* location = [self.venues objectAtIndex:indexPath.row];
 
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:location forKey:@"location"]; 
     

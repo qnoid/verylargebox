@@ -178,6 +178,8 @@
 		BDAE3C4A176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C49176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m */; };
 		BDAE3C4C176D9CFC0037734C /* VLBDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */; };
 		BDAE3C4D176D9CFC0037734C /* VLBDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */; };
+		BDAE3C55176E04AC0037734C /* VLBTheBox.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C54176E04AA0037734C /* VLBTheBox.m */; };
+		BDAE3C56176E04AC0037734C /* VLBTheBox.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C54176E04AA0037734C /* VLBTheBox.m */; };
 		BDAF7AAE17528196008899D1 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAA17528194008899D1 /* refresh@2x.png */; };
 		BDAF7AAF17528196008899D1 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAA17528194008899D1 /* refresh@2x.png */; };
 		BDAF7AB217528196008899D1 /* signpost@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAC17528194008899D1 /* signpost@2x.png */; };
@@ -455,9 +457,11 @@
 		BDAE3C43176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+VLBNavigationItem.m"; sourceTree = "<group>"; };
 		BDAE3C45176CEE0A0037734C /* NSDictionary+VLBFoursquareVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBFoursquareVenue.h"; path = "../Classes/NSDictionary+VLBFoursquareVenue.h"; sourceTree = "<group>"; };
 		BDAE3C46176CEE0B0037734C /* NSDictionary+VLBFoursquareVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBFoursquareVenue.m"; sourceTree = "<group>"; };
-		BDAE3C48176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBVenuesOperationParameters.h"; path = "../NSDictionary+VLBVenuesOperationParameters.h"; sourceTree = "<group>"; };
-		BDAE3C49176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBVenuesOperationParameters.m"; sourceTree = "<group>"; };
+		BDAE3C48176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBVenuesOperationParameters.h"; path = "../Classes/NSDictionary+VLBVenuesOperationParameters.h"; sourceTree = "<group>"; };
+		BDAE3C49176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+VLBVenuesOperationParameters.m"; path = "Classes/NSDictionary+VLBVenuesOperationParameters.m"; sourceTree = "<group>"; };
 		BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBDetailsViewController.xib; path = Classes/VLBDetailsViewController.xib; sourceTree = "<group>"; };
+		BDAE3C53176E04A90037734C /* VLBTheBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBTheBox.h; sourceTree = "<group>"; };
+		BDAE3C54176E04AA0037734C /* VLBTheBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTheBox.m; sourceTree = "<group>"; };
 		BDAF7AAA17528194008899D1 /* refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh@2x.png"; path = "Supporting Files/refresh@2x.png"; sourceTree = "<group>"; };
 		BDAF7AAB17528194008899D1 /* signpost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signpost.png; path = "Supporting Files/signpost.png"; sourceTree = "<group>"; };
 		BDAF7AAC17528194008899D1 /* signpost@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signpost@2x.png"; path = "Supporting Files/signpost@2x.png"; sourceTree = "<group>"; };
@@ -618,6 +622,8 @@
 				BD7C27D317235DDB009D26EE /* VLBProgressView.m */,
 				BD0B25E217494778001B3A9B /* VLBLocalitiesTableViewController.m */,
 				BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */,
+				BDAE3C53176E04A90037734C /* VLBTheBox.h */,
+				BDAE3C54176E04AA0037734C /* VLBTheBox.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1107,9 +1113,9 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = TB;
+				CLASSPREFIX = VLB;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = TheBox;
+				ORGANIZATIONNAME = verylargebox.com;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "thebox" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1399,6 +1405,7 @@
 				BDAE3C44176CE0ED0037734C /* UINavigationItem+VLBNavigationItem.m in Sources */,
 				BDAE3C47176CEE0D0037734C /* NSDictionary+VLBFoursquareVenue.m in Sources */,
 				BDAE3C4A176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m in Sources */,
+				BDAE3C55176E04AC0037734C /* VLBTheBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1447,6 +1454,7 @@
 				BD6BE05C175B524300B93854 /* VLBDrawRects.m in Sources */,
 				BD6BE05D175B570900B93854 /* VLBViews.m in Sources */,
 				BD8BB289176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */,
+				BDAE3C56176E04AC0037734C /* VLBTheBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

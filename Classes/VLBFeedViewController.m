@@ -85,7 +85,7 @@ return localityItemsViewController;
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
     self.didTapOnGetDirectionsButton = didTapOnGetDirectionsButton;
     self.operationQueue = [NSOperationQueue new];
-    
+
     return self;
 }
 
@@ -114,11 +114,7 @@ return localityItemsViewController;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    [self.theBoxLocationService notifyDidFindPlacemark:self];
-    [self.theBoxLocationService notifyDidFailWithError:self];
-    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
-    
+    [super viewDidLoad];    
     __weak VLBFeedViewController *wself = self;
     
     [self.itemsView addPullToRefreshWithActionHandler:^{
@@ -126,17 +122,20 @@ return localityItemsViewController;
         [wself.operationQueue addOperation:[VLBQueries newGetItems:wself.locality delegate:wself]];
     }];
     
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     self.hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
-    self.hud.labelText = @"Finding your location";
+    self.hud.labelText = @"Finding your location";    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{    
+    [self.theBoxLocationService notifyDidFindPlacemark:self];
+    [self.theBoxLocationService notifyDidFailWithError:self];
+    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];    
 }
 
 -(void)locate

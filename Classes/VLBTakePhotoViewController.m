@@ -82,15 +82,6 @@ return newUploadUIViewController;
 return self;
 }
 
--(void) viewDidLoad
-{
-	[super viewDidLoad];
-    [self.theBoxLocationService notifyDidUpdateToLocation:self];
-    [self.theBoxLocationService notifyDidFailWithError:self];
-    [self.theBoxLocationService notifyDidFindPlacemark:self];
-    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];		
-}
-
 -(void)viewWillAppear:(BOOL)animated
 {
     if(self.itemImage){
@@ -98,6 +89,11 @@ return self;
     }
     
     self.itemImageView.image = self.itemImage;
+    
+    [self.theBoxLocationService notifyDidUpdateToLocation:self];
+    [self.theBoxLocationService notifyDidFailWithError:self];
+    [self.theBoxLocationService notifyDidFindPlacemark:self];
+    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -117,8 +113,8 @@ return self;
 
 	CLLocation *location = [VLBNotifications location:notification];
 
-	[[_location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
-	[[_location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lng"];
+	[[self.location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
+	[[self.location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lng"];
 }
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification

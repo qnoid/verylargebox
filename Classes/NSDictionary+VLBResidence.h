@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#define VLBResidenceKey NSString*
+
+extern VLBResidenceKey const VLBResidenceUserId;
+extern VLBResidenceKey const VLBResidenceToken;
+extern VLBResidenceKey const VLBResidence;
+
 @interface NSDictionary (VLBResidence)
 
 -(NSUInteger)vlb_residenceUserId;
 
+-(id)vlb_objectForKey:(VLBResidenceKey)key;
 @end

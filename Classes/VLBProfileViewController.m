@@ -178,7 +178,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 
 -(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
 {
-	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:@"http://com.verylargebox.server.s3.amazonaws.com/tmp.jpg" location:self.location locality:self.locality user:[[self.residence objectForKey:@"user_id"] unsignedIntValue] delegate:self];
+	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:[[request url] absoluteString] location:self.location locality:self.locality user:[[self.residence objectForKey:@"user_id"] unsignedIntValue] delegate:self];
 
 	[itemQuery start];
 }

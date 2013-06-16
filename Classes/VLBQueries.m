@@ -321,7 +321,7 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
 
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
 
-    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:@"tmp.jpg" inBucket:@"com.verylargebox.server"];
+    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"foo/%f.jpg", CACurrentMediaTime()] inBucket:@"com.verylargebox.server"];
     por.contentType = @"image/jpeg";
     por.data = imageData;
     por.cannedACL   = [S3CannedACL publicRead];
@@ -360,8 +360,6 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
             [delegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];
     }
     failure:didFailOnItemWithError];
-    
-    [createItem start]; 
     
 return createItem;
 }
