@@ -176,6 +176,8 @@
 		BDAE3C44176CE0ED0037734C /* UINavigationItem+VLBNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C43176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.m */; };
 		BDAE3C47176CEE0D0037734C /* NSDictionary+VLBFoursquareVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C46176CEE0B0037734C /* NSDictionary+VLBFoursquareVenue.m */; };
 		BDAE3C4A176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C49176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m */; };
+		BDAE3C4C176D9CFC0037734C /* VLBDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */; };
+		BDAE3C4D176D9CFC0037734C /* VLBDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */; };
 		BDAF7AAE17528196008899D1 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAA17528194008899D1 /* refresh@2x.png */; };
 		BDAF7AAF17528196008899D1 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAA17528194008899D1 /* refresh@2x.png */; };
 		BDAF7AB217528196008899D1 /* signpost@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAC17528194008899D1 /* signpost@2x.png */; };
@@ -266,7 +268,7 @@
 		357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		45C9A33A307C4A318C23060B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F757C9D3B843C4A2749415 /* Pods-UnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.xcconfig"; path = "Pods/Pods-UnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
-		8D1107310486CEB800E47090 /* TheBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TheBox-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* thebox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "thebox-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		900378A015409DBD00579FF2 /* VLBVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVisibleStrategyTest.m; sourceTree = "<group>"; };
 		9020737C152CF1340017A385 /* VLBItemsOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBItemsOperationDelegate.h; sourceTree = "<group>"; };
 		90226B8F135999D1006E43EC /* VLBBinarySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBBinarySearch.h; sourceTree = "<group>"; };
@@ -299,7 +301,7 @@
 		905A503A1291E4AC00BCB475 /* CoreLocation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		908363A61400659200E5AAAF /* libz.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		908363CC14006BF000E5AAAF /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TheBoxUnitTests-Info.plist"; path = "TheBoxUnitTests/TheBoxUnitTests-Info.plist"; sourceTree = "<group>"; };
+		908363D614006BF100E5AAAF /* unittests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "unittests-Info.plist"; path = "TheBoxUnitTests/unittests-Info.plist"; sourceTree = "<group>"; };
 		908363DE14006BF100E5AAAF /* TheBoxUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "TheBoxUnitTests-Prefix.pch"; path = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		9089482415533980009188B4 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../Pods/TestFlightSDK/libTestFlight.a; sourceTree = "<group>"; };
 		90894828155349DE009188B4 /* NSDictionary+VLBDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBDictionary.h"; path = "../Classes/NSDictionary+VLBDictionary.h"; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 		BDAE3C46176CEE0B0037734C /* NSDictionary+VLBFoursquareVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBFoursquareVenue.m"; sourceTree = "<group>"; };
 		BDAE3C48176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBVenuesOperationParameters.h"; path = "../NSDictionary+VLBVenuesOperationParameters.h"; sourceTree = "<group>"; };
 		BDAE3C49176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBVenuesOperationParameters.m"; sourceTree = "<group>"; };
+		BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBDetailsViewController.xib; path = Classes/VLBDetailsViewController.xib; sourceTree = "<group>"; };
 		BDAF7AAA17528194008899D1 /* refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh@2x.png"; path = "Supporting Files/refresh@2x.png"; sourceTree = "<group>"; };
 		BDAF7AAB17528194008899D1 /* signpost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signpost.png; path = "Supporting Files/signpost.png"; sourceTree = "<group>"; };
 		BDAF7AAC17528194008899D1 /* signpost@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signpost@2x.png"; path = "Supporting Files/signpost@2x.png"; sourceTree = "<group>"; };
@@ -641,8 +644,8 @@
 				90D8304012B506D900BE4470 /* UnitTests */,
 				BDA2BCF0165ACC800068C749 /* ApplicationTests */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				8D1107310486CEB800E47090 /* TheBox-Info.plist */,
-				908363D614006BF100E5AAAF /* TheBoxUnitTests-Info.plist */,
+				8D1107310486CEB800E47090 /* thebox-Info.plist */,
+				908363D614006BF100E5AAAF /* unittests-Info.plist */,
 				BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */,
 				BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */,
 				90F9FDE5154D97D0001BCD66 /* icon.png */,
@@ -912,6 +915,7 @@
 				BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */,
 				BDE482C01750510D0096903C /* VLBFeedViewController.xib */,
 				90D830F312B51DA400BE4470 /* VLBCell.xib */,
+				BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */,
 				BDABD92E169F68B100111723 /* VLBItemView.xib */,
 				BD14C28A16BDC73F0039E978 /* VLBUserItemView.xib */,
 				BD7C27D617235DE6009D26EE /* VLBProgressView.xib */,
@@ -1184,6 +1188,7 @@
 				BD0A53E91767EDC100279EA5 /* camera-mini@2x.png in Resources */,
 				BD0A53ED1767F09600279EA5 /* circlex.png in Resources */,
 				BD0A53EF1767F09600279EA5 /* circlex@2x.png in Resources */,
+				BDAE3C4C176D9CFC0037734C /* VLBDetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,6 +1232,7 @@
 				BD0A53EA1767EDC100279EA5 /* camera-mini@2x.png in Resources */,
 				BD0A53EE1767F09600279EA5 /* circlex.png in Resources */,
 				BD0A53F01767F09600279EA5 /* circlex@2x.png in Resources */,
+				BDAE3C4D176D9CFC0037734C /* VLBDetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1500,7 +1506,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "TheBox-Info.plist";
+				INFOPLIST_FILE = "thebox-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -1557,7 +1563,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "TheBox-Info.plist";
+				INFOPLIST_FILE = "thebox-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -1626,7 +1632,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Tests/Headers\"/**",
 				);
-				INFOPLIST_FILE = "TheBoxUnitTests/TheBoxUnitTests-Info.plist";
+				INFOPLIST_FILE = "TheBoxUnitTests/unittests-Info.plist";
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1670,7 +1676,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Tests/Headers\"/**",
 				);
-				INFOPLIST_FILE = "TheBoxUnitTests/TheBoxUnitTests-Info.plist";
+				INFOPLIST_FILE = "TheBoxUnitTests/unittests-Info.plist";
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1714,7 +1720,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Tests/Headers\"/**",
 				);
-				INFOPLIST_FILE = "TheBoxUnitTests/TheBoxUnitTests-Info.plist";
+				INFOPLIST_FILE = "TheBoxUnitTests/unittests-Info.plist";
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1788,7 +1794,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "TheBox-Info.plist";
+				INFOPLIST_FILE = "thebox-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (

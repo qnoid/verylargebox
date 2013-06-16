@@ -46,7 +46,7 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
                                                          initWithBundle:[NSBundle mainBundle]
                                                          userId:userId];
     
-    newUploadUIViewController.title = @"Add VLBItem";
+    newUploadUIViewController.title = @"Add item";
 
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]
                                      initWithImage:[UIImage imageNamed:@"circlex.png"]

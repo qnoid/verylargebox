@@ -205,7 +205,8 @@ return self;
     [self.theBoxLocationService notifyDidFailWithError:self];
     [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
     
-    [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+    hud.labelText = @"Finding your location";
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -329,7 +330,7 @@ return [[VLBItemView alloc] initWithFrame:frame];
     
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-    VLBDetailsViewController * detailsViewController = [VLBDetailsViewController newDetailsViewController:item];
+    VLBDetailsViewController* detailsViewController = [VLBDetailsViewController newDetailsViewController:item];
     detailsViewController.hidesBottomBarWhenPushed = YES;
     
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
@@ -500,9 +501,12 @@ return storeButton;
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 }
 
-#pragma mark TheBoxLocationServiceDelegate
+#pragma mark VLBServiceDelegate
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 
@@ -534,6 +538,9 @@ return storeButton;
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+    
     VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
     localitiesViewController.delegate = self;
 

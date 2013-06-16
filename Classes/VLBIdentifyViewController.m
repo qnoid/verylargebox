@@ -129,7 +129,7 @@ return self;
 }
 
 -(void)launchFeedback {
-    [TestFlight submitFeedback:nil];
+    [TestFlight openFeedbackView];
 }
 
 -(void)dismissViewControllerAnimated

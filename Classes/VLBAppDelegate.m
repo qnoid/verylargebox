@@ -46,10 +46,9 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a033148
         [standardUserDefaults synchronize];
     }
 
-    [TestFlight setOptions:@{TFOptionReportCrashes: @"No"}];
+    [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
     [TestFlight setDeviceIdentifier:userSession];
     [TestFlight takeOff:TESTFLIGHT_APP_TOKEN];
-    [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
