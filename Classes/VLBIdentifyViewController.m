@@ -103,6 +103,8 @@ return self;
 
     [self.browseButton onTouchUpInside:^(UIButton *button)
     {
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [uself class], @"didTouchUpInsideBrowseButton"]];
+
         VLBFeedViewController *localityItemsViewController = [VLBFeedViewController newFeedViewController];
 
         
