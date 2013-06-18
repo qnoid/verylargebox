@@ -21,6 +21,7 @@
 #import "NSDictionary+VLBResidence.h"
 #import "VLBMacros.h"
 #import "VLBErrorBlocks.h"
+#import "VLBTheBox.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -156,7 +157,9 @@ return self;
 
 -(void)addItem
 {
-    VLBTakePhotoViewController * takePhotoViewController = [VLBTakePhotoViewController newUploadUIViewController:[[self.residence objectForKey:@"user_id"] unsignedIntValue]];
+    //thebox should be a property
+    VLBTakePhotoViewController * takePhotoViewController = [VLBTakePhotoViewController newUploadUIViewController:[VLBTheBox newTheBox:self.residence] userId:[self.residence vlb_residenceUserId]];
+    
     takePhotoViewController.createItemDelegate = self;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:takePhotoViewController];
@@ -178,7 +181,11 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 
 -(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
 {
-	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:[[request url] absoluteString] location:self.location locality:self.locality user:[[self.residence objectForKey:@"user_id"] unsignedIntValue] delegate:self];
+	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:[[request url] absoluteString]
+                                                            location:self.location
+                                                            locality:self.locality
+                                                                user:[self.residence vlb_residenceUserId]
+                                                            delegate:self];
 
 	[itemQuery start];
 }

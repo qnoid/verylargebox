@@ -15,7 +15,7 @@
 #import "AmazonServiceRequest.h"
 #import "VLBButton.h"
 #import "VLBViews.h"
-@class TheBox;
+@class VLBTheBox;
 @protocol VLBCreateItemOperationDelegate;
 
 /**
@@ -32,7 +32,6 @@
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 @property(nonatomic, weak) IBOutlet VLBButton *locationButton;
 
-@property(nonatomic, strong) TheBox *theBox;
 @property(nonatomic, unsafe_unretained) NSObject<VLBCreateItemOperationDelegate> *createItemDelegate;
 
 - (IBAction)cancel:(id)sender;
@@ -51,6 +50,6 @@
 
 - (IBAction)enterLocation:(id)sender;
 
-+(VLBTakePhotoViewController *)newUploadUIViewController:(NSUInteger)userId;
++(VLBTakePhotoViewController *)newUploadUIViewController:(VLBTheBox*)thebox userId:(NSUInteger)userId;
 
 @end

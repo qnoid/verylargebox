@@ -18,17 +18,19 @@
 #import "UIViewController+VLBViewController.h"
 #import "VLBDrawRects.h"
 #import "VLBPolygon.h"
+#import "VLBTheBox.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 480.0;
 
 @interface VLBTakePhotoViewController ()
+@property(nonatomic, strong) VLBTheBox* thebox;
+
 @property(nonatomic, strong) UIImage* itemImage;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSMutableDictionary* location;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, assign) NSUInteger userId;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil userId:(NSUInteger)userId;
 @end
 
 @implementation VLBTakePhotoViewController
@@ -40,11 +42,12 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
 
-+(VLBTakePhotoViewController *)newUploadUIViewController:(NSUInteger)userId
++(VLBTakePhotoViewController *)newUploadUIViewController:(VLBTheBox*)thebox userId:(NSUInteger)userId
 {
     VLBTakePhotoViewController * newUploadUIViewController = [[VLBTakePhotoViewController alloc]
                                                          initWithBundle:[NSBundle mainBundle]
-                                                         userId:userId];
+                                                              thebox:thebox
+                                                              userId:userId];
     
     newUploadUIViewController.title = @"Add item";
 
@@ -67,7 +70,7 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 return newUploadUIViewController;
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil userId:(NSUInteger)userId
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox userId:(NSUInteger)userId
 {
     self = [super initWithNibName:NSStringFromClass([VLBTakePhotoViewController class]) bundle:nibBundleOrNil];
     
@@ -77,6 +80,7 @@ return newUploadUIViewController;
     
     self.location = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"location"];
     self.theBoxLocationService = [VLBLocationService theBoxLocationService];
+    self.thebox = thebox;
     self.userId = userId;
 
 return self;
@@ -163,7 +167,7 @@ return self;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-  [VLBQueries newPostImage:self.itemImage delegate:self.createItemDelegate];
+    [self.thebox newPostImage:self.itemImage delegate:self.createItemDelegate];
 
 	[self dismissViewControllerAnimated:YES completion:^{
         [self.createItemDelegate didStartUploadingItem:self.location locality:self.locality];

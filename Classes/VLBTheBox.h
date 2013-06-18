@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol VLBCreateItemOperationDelegate;
 
 @interface VLBTheBox : NSObject
+
++(instancetype) newTheBox:(NSDictionary *) residence;
+
+-(void)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate;
 
 @end

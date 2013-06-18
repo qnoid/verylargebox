@@ -26,6 +26,14 @@
 @protocol VLBCreateItemOperationDelegate;
 @protocol VLBNSErrorDelegate;
 @protocol AmazonServiceRequestDelegate;
+@class S3PutObjectRequest;
+
+
+typedef void(^VLBQueryBlock)(NSDictionary* parameters);
+
+typedef void(^VLBS3PutObjectRequestConfiguration)(S3PutObjectRequest* request);
+
+extern VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImageJpegPublicRead;
 
 @interface VLBQueriesFailureBlocks : NSObject
 +(VLBAFHTTPRequestOperationFailureBlock)nsErrorDelegate:(NSObject<VLBNSErrorDelegate>*)delegate failureBlock:(VLBAFHTTPRequestOperationFailureBlock)failureBlock;
@@ -39,6 +47,8 @@
 @interface VLBQueries : NSObject
 
 extern NSString* const THE_BOX_SERVICE;
+
+-(VLBQueryBlock)newS3PutObjectRequest:(VLBS3PutObjectRequestConfiguration)config;
 
 /**
  
@@ -83,8 +93,6 @@ extern NSString* const THE_BOX_SERVICE;
 +(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<VLBItemsOperationDelegate>*)delegate;
 
 +(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId page:(NSNumber*)page delegate:(NSObject<VLBItemsOperationDelegate>*)delegate;
-
-+(void)newPostImage:(UIImage*)image delegate:(NSObject<AmazonServiceRequestDelegate>*)delegate;
 
 /**
  Creates an item under the given user id.

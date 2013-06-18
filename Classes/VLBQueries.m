@@ -30,13 +30,16 @@
 #import "S3UploadInputStream.h"
 #import "VLBMacros.h"
 
-
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
 static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
 static NSString* const USER_ITEMS = @"/users/%u/items";
 static NSString* const ITEMS = @"/items";
 
+VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImageJpegPublicRead = ^(S3PutObjectRequest *por){
+    por.contentType = @"image/jpeg";
+    por.cannedACL   = [S3CannedACL publicRead];
+};
 
 @implementation VLBQueriesFailureBlocks
 
@@ -44,7 +47,7 @@ static NSString* const ITEMS = @"/items";
 {
 return ^(AFHTTPRequestOperation *operation, NSError *error)
     {
-        NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+        DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, error);
         if(VLB_ERROR_BLOCK_CANNOT_CONNECT_TO_HOST(error)){
             [delegate didFailWithCannonConnectToHost:error];
         return;
@@ -77,22 +80,35 @@ return ^(AFHTTPRequestOperation *operation, NSError *error)
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 
-NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com"; //@"http://0.0.0.0:3000";//
- 
+NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
+
+NSString* const AWS_ACCESS_KEY = @"AKIAIFACVDF6VNIEY2EQ";
+NSString* const AWS_SECRET_KEY = @"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";
+
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
 NSUInteger const TIMEOUT = 60;
 
-NSString* const ACCESS_KEY = @"AKIAIJIW6RKNOZZPTMRA";
-NSString* const SECRET_KEY = @"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";
-
-NSString* const S3_BUCKET_NAME = @"com.verylargebox.server";
-
-
 +(void)initialize
 {
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+}
+
+-(VLBQueryBlock)newS3PutObjectRequest:(VLBS3PutObjectRequestConfiguration)config
+{
+    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:AWS_ACCESS_KEY
+                                                     withSecretKey:AWS_SECRET_KEY];
+return ^(NSDictionary* parameters) {
+    
+        [s3 setEndpoint:[parameters objectForKey:@"endpoint"]];
+        S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:[parameters objectForKey:@"key"]
+                                                                 inBucket:[parameters objectForKey:@"bucket"]];
+    
+        config(por);
+    
+        [s3 putObject:por];
+    };
 }
 
 +(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<VLBCreateUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence
@@ -309,24 +325,6 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
     failure:didFailOnItemsWithError];
     
     return request;
-}
-
-
-+(void)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate
-{
-    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:@"AKIAIFACVDF6VNIEY2EQ"
-                                                     withSecretKey:@"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"];
-    
-    [s3 setEndpoint:@"https://s3-eu-west-1.amazonaws.com"];
-
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-
-    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"foo/%f.jpg", CACurrentMediaTime()] inBucket:@"com.verylargebox.server"];
-    por.contentType = @"image/jpeg";
-    por.data = imageData;
-    por.cannedACL   = [S3CannedACL publicRead];
-    por.delegate = delegate;
-    [s3 putObject:por];
 }
 
 +(AFHTTPRequestOperation*)newPostItemQuery:(NSString*)imageURL

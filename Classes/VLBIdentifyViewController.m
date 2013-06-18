@@ -162,6 +162,9 @@ return self.identifyButton.enabled;
 -(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence
 {
     NSLog(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);
+    
+    //thebox should be a property to be shared across every controller
+    //the residence should be passed to thebox on a method like didSucceedWithVerificationForEmail:residence
     VLBProfileViewController *profileViewController = [VLBProfileViewController newProfileViewController:residence email:email];
     VLBCityViewController *homeGridViewControler = [VLBCityViewController newHomeGridViewController];
     VLBFeedViewController *localityItemsViewController = [VLBFeedViewController newFeedViewController];

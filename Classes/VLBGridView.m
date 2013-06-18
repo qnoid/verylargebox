@@ -183,7 +183,7 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
 return [self.datasource numberOfViewsInGridView:self];    
 }
 
-- (UIView*)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSInteger)index
+- (UIView*)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index
 {
     if(![scrollView isEqual:self.scrollView]) {        
     return [self gridView:self viewOf:scrollView ofFrame:frame atIndex:index];
