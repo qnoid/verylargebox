@@ -220,7 +220,7 @@ return parameters;
     {
         NSString* responseString = operation.responseString;
 
-        [delegate didSucceedWithLocations:[[[responseString objectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"] givenParameters:parameters];
+        [delegate didSucceedWithLocations:[[[responseString mutableObjectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"] givenParameters:parameters];
     } 
     failure:didFailOnLocationWithError];
     

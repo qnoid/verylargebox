@@ -13,5 +13,6 @@
 +(UIColor*)colorDarkGreen;
 +(UIColor*)colorLightGreen;
 +(UIColor*)colorDarkGrey;
++(UIColor*)colorPearlWhite;
 +(UIColor*)colorPrimaryBlue;
 @end

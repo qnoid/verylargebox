@@ -21,8 +21,10 @@
 #import "VLBNotifications.h"
 #import "MBProgressHUD.h"
 #import "VLBErrorBlocks.h"
+#import "VLBColors.h"
+#import "VLBTypography.h"
 
-static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare_gray";
+static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare";
 static NSString* const foursquarePoweredByType = @"png";
 
 static UIImage* foursquarePoweredBy;
@@ -152,7 +154,7 @@ return self;
     self.hud.labelText = [NSString stringWithFormat:@"Finding stores nearby"];
 }
 
-#pragma mark TBLocationOperationDelegate
+#pragma mark VLBLocationOperationDelegate
 
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
@@ -210,8 +212,9 @@ return self;
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
-        cell.detailTextLabel.textAlignment = UITextAlignmentCenter;
+        cell.textLabel.font = cell.detailTextLabel.font = [VLBTypography fontLucidaGrandeTwenty];
+        cell.textLabel.textColor = [VLBColors colorPearlWhite];
+        cell.detailTextLabel.textColor = [VLBColors colorDarkGrey];
     }
     
     NSDictionary* location = [self.venues objectAtIndex:indexPath.row];
@@ -230,15 +233,15 @@ return cell;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableDictionary* location = [self.venues objectAtIndex:indexPath.row];
+    NSMutableDictionary* store = [self.venues objectAtIndex:indexPath.row];
 
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:location forKey:@"location"]; 
-    
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	
-	[center postNotificationName:@"didEnterLocation" object:self userInfo:userInfo];
+	[self.delegate didSelectStore:store];
     
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 96.0;
 }
 
 #pragma mark UISearchBarDelegate

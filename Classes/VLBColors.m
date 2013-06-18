@@ -23,6 +23,10 @@
     return [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0];
 }
 
++(UIColor*)colorPearlWhite {
+    return [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0];
+}
+
 +(UIColor*)colorPrimaryBlue {
     return [UIColor colorWithRed:1.0/255.0 green:116.0/255.0 blue:185.0/255.0 alpha:1.0];
 }

@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "VLBHuds.h"
 #import "VLBErrorBlocks.h"
+#import "VLBColors.h"
 
 @interface VLBLocalitiesTableViewController ()
 @property(nonatomic, strong) NSObject<UITableViewDataSource> *tableViewDataSource;
@@ -27,7 +28,13 @@
 {
     VLBLocalitiesTableViewController *availablePlacesViewController = [[VLBLocalitiesTableViewController alloc] initWithStyle:UITableViewStylePlain];
 
-    [availablePlacesViewController.navigationItem vlb_addActionOnBarButtonItem:TBNavigationItemActionDismissViewControllerAnimatedOnLeftBarButtonItem target:availablePlacesViewController];
+    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
+                                    initWithImage:[UIImage imageNamed:@"circlex.png"]
+                                    style:UIBarButtonItemStyleBordered
+                                    target:availablePlacesViewController
+                                    action:@selector(dismissViewControllerAnimated)];
+    
+    availablePlacesViewController.navigationItem.leftBarButtonItem = closeButton;
 
     availablePlacesViewController.title = @"Select a location for thebox";
     
@@ -53,7 +60,7 @@ return availablePlacesViewController;
     })] newDatasource];
     
     self.tableViewDataSource = datasource;
-    self.tableView.dataSource = datasource;
+    self.tableView.dataSource = self;
     
     __weak VLBLocalitiesTableViewController *wself = self;
     
@@ -107,6 +114,7 @@ return availablePlacesViewController;
 {
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [VLBColors colorDarkGrey];
 
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
@@ -129,6 +137,14 @@ return availablePlacesViewController;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.tableViewDataSource tableView:tableView numberOfRowsInSection:section];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [self.tableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 @end

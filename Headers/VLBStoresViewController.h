@@ -15,6 +15,10 @@
 @class VLBLocationService;
 
 
+@protocol VLBStoresViewControllerDelegate <NSObject>
+-(void)didSelectStore:(NSDictionary*)store;
+@end
+
 /**
  Will fire a notification of "didEnterLocation" with a userinfo containing a "location" key with he following dictionary values
  
@@ -68,8 +72,10 @@
 @interface VLBStoresViewController : UIViewController <VLBLocationServiceDelegate, VLBLocationOperationDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> {
 
 }
-@property(nonatomic, unsafe_unretained) IBOutlet UITableView *venuesTableView;
-@property(nonatomic, unsafe_unretained) IBOutlet MKMapView *map;
+@property(nonatomic, weak) IBOutlet NSObject<VLBStoresViewControllerDelegate> *delegate;
+
+@property(nonatomic, weak) IBOutlet UITableView *venuesTableView;
+@property(nonatomic, weak) IBOutlet MKMapView *map;
 
 +(VLBStoresViewController *)newLocationViewController;
 - (IBAction)cancel:(id)sender;

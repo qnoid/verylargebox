@@ -43,6 +43,7 @@ return theBox;
 return self;
 }
 
+//http://stackoverflow.com/questions/16875559/does-cllocationmanagerstartmonitoringsignificantlocationchanges-prompt-for-user
 -(void)startMonitoringSignificantLocationChanges {
     [self.locationManager startUpdatingLocation];
 }

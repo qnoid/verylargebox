@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VLBTypography.h"
+#import "VLBColors.h"
 
 typedef NSInteger(^VLBNumberOfRowsInSectionBlock)(UITableView *tableView, NSInteger section);
 typedef UITableViewCell*(^VLBCellForRowAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
@@ -32,7 +34,8 @@ return ^UITableViewCell*(UITableView *tableView, NSIndexPath* indexPath)
         if(cell == nil)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-            cell.textLabel.font = [UIFont fontWithName:@"Gil Sans" size:14.0];
+            cell.textLabel.font = [VLBTypography fontLucidaGrandeEleven];
+            cell.textLabel.textColor = [VLBColors colorPearlWhite];
         }
         
         block(cell, indexPath);

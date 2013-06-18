@@ -66,7 +66,7 @@
 		90C2C37412B6C2AC00829868 /* VLBStoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905A4F991291DE6400BCB475 /* VLBStoresViewController.m */; settings = {COMPILER_FLAGS = " "; }; };
 		90C2C37512B6C2AD00829868 /* VLBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* VLBAppDelegate.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C37612B6C2AE00829868 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90CBFE5F154BF58F00349A13 /* poweredByFoursquare_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */; };
+		90CBFE5F154BF58F00349A13 /* poweredByFoursquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE5E154BF58F00349A13 /* poweredByFoursquare.png */; };
 		90CBFE6D154D4ACA00349A13 /* thewho.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE69154D4ACA00349A13 /* thewho.jpg */; };
 		90CBFE6E154D4ACA00349A13 /* koboloi.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE6A154D4ACA00349A13 /* koboloi.JPG */; };
 		90CBFE6F154D4ACA00349A13 /* hat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE6B154D4ACA00349A13 /* hat.jpg */; };
@@ -122,7 +122,6 @@
 		BD2A8AB6175B42A00036A852 /* VLBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0B165AD1150068C749 /* VLBColors.m */; };
 		BD2A8AB7175B42A60036A852 /* VLBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* VLBItemView.m */; };
 		BD2A8AB8175B42B10036A852 /* VLBLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2ECA312930C08009195CF /* VLBLocationService.m */; };
-		BD2A8AB9175B42B60036A852 /* VLBQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* VLBQueries.m */; };
 		BD2A8ABA175B42BB0036A852 /* VLBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* VLBGridView.m */; };
 		BD2A8ABB175B42C50036A852 /* VLBScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A6C4521300822C00AEEE9F /* VLBScrollView.m */; };
 		BD2A8ABC175B42D30036A852 /* VLBLocalitiesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0B25E217494778001B3A9B /* VLBLocalitiesTableViewController.m */; };
@@ -169,6 +168,7 @@
 		BDA2BD1A165AF8E30068C749 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD17165AF8E30068C749 /* user.png */; };
 		BDA4FB4C175FF393004AAEC6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */; };
 		BDA4FB4D175FF42D004AAEC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B07131A820F008B8B2D /* SystemConfiguration.framework */; };
+		BDAB0126176FE7B200A8034E /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
 		BDABD92C169F689F00111723 /* VLBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* VLBItemView.m */; };
 		BDABD92F169F68B100111723 /* VLBItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDABD92E169F68B100111723 /* VLBItemView.xib */; };
 		BDABD930169F9EF800111723 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
@@ -354,7 +354,7 @@
 		90C9511F12B6A16C00A8A05F /* VLBGridViewDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBGridViewDatasource.h; sourceTree = "<group>"; };
 		90C9512212B6A16C00A8A05F /* VLBTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBTakePhotoViewController.h; sourceTree = "<group>"; };
 		90C9512512B6A16C00A8A05F /* VLBVisibleStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBVisibleStrategy.h; sourceTree = "<group>"; };
-		90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredByFoursquare_gray.png; sourceTree = "<group>"; };
+		90CBFE5E154BF58F00349A13 /* poweredByFoursquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredByFoursquare.png; sourceTree = "<group>"; };
 		90CBFE69154D4ACA00349A13 /* thewho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thewho.jpg; sourceTree = "<group>"; };
 		90CBFE6A154D4ACA00349A13 /* koboloi.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = koboloi.JPG; sourceTree = "<group>"; };
 		90CBFE6B154D4ACA00349A13 /* hat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hat.jpg; sourceTree = "<group>"; };
@@ -449,6 +449,8 @@
 		BDA2BD17165AF8E30068C749 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = "Supporting Files/user.png"; sourceTree = "<group>"; };
 		BDA2BD1C165AFA200068C749 /* VLBCreateUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCreateUserOperationDelegate.h; path = ../Classes/VLBCreateUserOperationDelegate.h; sourceTree = "<group>"; };
 		BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		BDAB0124176FE7B200A8034E /* VLBTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBTypography.h; sourceTree = "<group>"; };
+		BDAB0125176FE7B200A8034E /* VLBTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTypography.m; sourceTree = "<group>"; };
 		BDABD92A169F689E00111723 /* VLBItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBItemView.h; path = ../Classes/VLBItemView.h; sourceTree = "<group>"; };
 		BDABD92B169F689F00111723 /* VLBItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBItemView.m; sourceTree = "<group>"; };
 		BDABD92E169F68B100111723 /* VLBItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBItemView.xib; path = Classes/VLBItemView.xib; sourceTree = "<group>"; };
@@ -899,7 +901,7 @@
 			children = (
 				BDA2BD15165AF8D80068C749 /* images */,
 				90CBFE68154D4ACA00349A13 /* welcome */,
-				90CBFE5E154BF58F00349A13 /* poweredByFoursquare_gray.png */,
+				90CBFE5E154BF58F00349A13 /* poweredByFoursquare.png */,
 				90E3592A1546333700075ABF /* default_item_thumb.png */,
 			);
 			path = "Supporting Files";
@@ -1015,6 +1017,8 @@
 		BDCE1E1D1757E1280070BB59 /* VLBCommon */ = {
 			isa = PBXGroup;
 			children = (
+				BDAB0124176FE7B200A8034E /* VLBTypography.h */,
+				BDAB0125176FE7B200A8034E /* VLBTypography.m */,
 			);
 			name = VLBCommon;
 			sourceTree = "<group>";
@@ -1150,7 +1154,7 @@
 				905A4FBA1291DEB400BCB475 /* VLBStoresViewController.xib in Resources */,
 				90D830F412B51DA400BE4470 /* VLBCell.xib in Resources */,
 				90E3592C1546333700075ABF /* default_item_thumb.png in Resources */,
-				90CBFE5F154BF58F00349A13 /* poweredByFoursquare_gray.png in Resources */,
+				90CBFE5F154BF58F00349A13 /* poweredByFoursquare.png in Resources */,
 				90CBFE6D154D4ACA00349A13 /* thewho.jpg in Resources */,
 				90CBFE6E154D4ACA00349A13 /* koboloi.JPG in Resources */,
 				90CBFE6F154D4ACA00349A13 /* hat.jpg in Resources */,
@@ -1406,6 +1410,7 @@
 				BDAE3C47176CEE0D0037734C /* NSDictionary+VLBFoursquareVenue.m in Sources */,
 				BDAE3C4A176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m in Sources */,
 				BDAE3C55176E04AC0037734C /* VLBTheBox.m in Sources */,
+				BDAB0126176FE7B200A8034E /* VLBTypography.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1443,7 +1448,6 @@
 				BD2A8AB6175B42A00036A852 /* VLBColors.m in Sources */,
 				BD2A8AB7175B42A60036A852 /* VLBItemView.m in Sources */,
 				BD2A8AB8175B42B10036A852 /* VLBLocationService.m in Sources */,
-				BD2A8AB9175B42B60036A852 /* VLBQueries.m in Sources */,
 				BD2A8ABA175B42BB0036A852 /* VLBGridView.m in Sources */,
 				BD2A8ABB175B42C50036A852 /* VLBScrollView.m in Sources */,
 				BD2A8ABC175B42D30036A852 /* VLBLocalitiesTableViewController.m in Sources */,
@@ -1759,8 +1763,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Andrew Williams";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1770,12 +1773,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACH_O_TYPE = mh_execute;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = thebox;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AC6F6B61-A6A9-4A37-8FEE-80342AE36B96";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
@@ -2009,9 +2011,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACH_O_TYPE = mh_bundle;
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = thebox;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -2042,7 +2043,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TheBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACH_O_TYPE = mh_execute;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = thebox;

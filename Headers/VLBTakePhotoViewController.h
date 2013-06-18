@@ -15,6 +15,7 @@
 #import "AmazonServiceRequest.h"
 #import "VLBButton.h"
 #import "VLBViews.h"
+#import "VLBStoresViewController.h"
 @class VLBTheBox;
 @protocol VLBCreateItemOperationDelegate;
 
@@ -23,7 +24,7 @@
  When done, if the locality hasn't resolved, the user will be prompted to select one of the existing ones, 
  or asked to get a fix on her location.
  */
-@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, VLBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate>
+@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBStoresViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, VLBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate>
 {
 }
 

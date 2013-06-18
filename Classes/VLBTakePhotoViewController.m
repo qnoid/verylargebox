@@ -189,19 +189,15 @@ return self;
 
 - (IBAction)enterLocation:(id)sender
 {
-	UIViewController *locationController = [VLBStoresViewController newLocationViewController];
-	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(didEnterLocation:) name:@"didEnterLocation" object:locationController];
-	
-	[self presentModalViewController:locationController animated:YES];	
+	VLBStoresViewController *locationController = [VLBStoresViewController newLocationViewController];
+    locationController.delegate = self;
+
+	[self presentModalViewController:locationController animated:YES];
 }
 
--(void)didEnterLocation:(NSNotification *)aNotification
+-(void)didSelectStore:(NSMutableDictionary *)store
 {
-	NSDictionary *userInfo = [aNotification userInfo];
-    self.location = [userInfo valueForKey:@"location"];
-    
+    self.location = store;    
 	NSString *locationName = [self.location objectForKey:@"name"];
     self.storeLabel.text = locationName;
 }
