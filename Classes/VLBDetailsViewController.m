@@ -15,6 +15,7 @@
 #import "VLBQueries.h"
 #import "AFHTTPRequestOperation.h"
 #import "UIViewController+VLBViewController.h"
+#import "VLBTypography.h"
 
 @interface VLBDetailsViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
@@ -31,7 +32,7 @@
         [[VLBDetailsViewController alloc] initWithBundle:[NSBundle mainBundle] onItem:item];
     
     UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.text = [item objectForKey:@"location"] objectForKey:"@name"];
+    titleLabel.text = [[item objectForKey:@"location"] objectForKey:@"name"];
     titleLabel.textColor = [UIColor blackColor];
     titleLabel.backgroundColor = [UIColor clearColor];
 		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];

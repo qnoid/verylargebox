@@ -19,6 +19,7 @@
 #import "VLBMacros.h"
 #import "DDLog.h"
 #import "VLBErrorBlocks.h"
+#import "VLBTypography.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
