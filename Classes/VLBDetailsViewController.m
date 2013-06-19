@@ -27,9 +27,18 @@
 
 +(VLBDetailsViewController *)newDetailsViewController:(NSDictionary*)item
 {
-    VLBDetailsViewController * detailsViewController =
+    VLBDetailsViewController *detailsViewController =
         [[VLBDetailsViewController alloc] initWithBundle:[NSBundle mainBundle] onItem:item];
     
+    UILabel* titleLabel = [[UILabel alloc] init];
+    titleLabel.text = [item objectForKey:@"location"] objectForKey:"@name"];
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
+    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    detailsViewController.navigationItem.titleView = titleLabel;
+    [titleLabel sizeToFit];
+
 return detailsViewController;
 }
 
@@ -41,8 +50,6 @@ return detailsViewController;
     }
     
     self.item = item;
-    self.title = [self.item objectForKey:@"name"];
-    self.title = @"Details";
 
 return self;
 }
@@ -105,11 +112,9 @@ return self;
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         cell.textLabel.numberOfLines = 0;
-        cell.textLabel.font = [UIFont fontWithName:@"Gil Sans" size:12.0];
+        cell.textLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     }
-    
-    cell.textLabel.text = @[@"updateTitle: fffffffff", @"bar: bbbbbbbbb", @"car: cccccccccc"][indexPath.row];
     
     return cell;
 }

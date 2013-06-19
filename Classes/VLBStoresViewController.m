@@ -40,7 +40,27 @@ static UIImage* foursquarePoweredBy;
 @implementation VLBStoresViewController
 
 +(VLBStoresViewController *)newLocationViewController {
-return [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle]];
+
+		VLBStoresViewController *storesViewController =  [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle]];
+
+    UILabel* titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"Select a store";
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
+    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    storesViewController.navigationItem.titleView = titleLabel;
+    [titleLabel sizeToFit];
+
+    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+    [closeButton addTarget:storesViewController action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+
+    storesViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+
+
+return storesViewController;
 }
 
 +(void)initialize
@@ -212,9 +232,7 @@ return self;
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.textLabel.font = cell.detailTextLabel.font = [VLBTypography fontLucidaGrandeTwenty];
-        cell.textLabel.textColor = [VLBColors colorPearlWhite];
-        cell.detailTextLabel.textColor = [VLBColors colorDarkGrey];
+        cell.textLabel.font = cell.detailTextLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
     }
     
     NSDictionary* location = [self.venues objectAtIndex:indexPath.row];
@@ -241,7 +259,7 @@ return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 96.0;
+    return 66.0;
 }
 
 #pragma mark UISearchBarDelegate

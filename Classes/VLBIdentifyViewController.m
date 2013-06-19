@@ -44,15 +44,15 @@
 
     VLBIdentifyViewController * identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accounts:[NSMutableArray arrayWithArray:accounts]];
     
-    identifyViewController.title = @"thebox";
+    UILabel* titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"thebox";
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
+    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    identifyViewController.navigationItem.titleView = titleLabel;
+    [titleLabel sizeToFit];
     
-    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc]
-                                     initWithImage:[UIImage imageNamed:@"chat.png"]
-                                     style:UIBarButtonItemStylePlain
-                                     target:identifyViewController
-                                     action:@selector(launchFeedback)];
-    identifyViewController.navigationItem.leftBarButtonItem = actionButton;
-
 return identifyViewController;
 }
 
@@ -100,23 +100,23 @@ return self;
         self.emailTextField.text = @"";
         [self.navigationController popViewControllerAnimated:YES];
     }];
+    
+    [self.identifyButton setImageEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
 
     [self.browseButton onTouchUpInside:^(UIButton *button)
     {
         [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [uself class], @"didTouchUpInsideBrowseButton"]];
 
-        VLBFeedViewController *localityItemsViewController = [VLBFeedViewController newFeedViewController];
+        VLBFeedViewController *feedViewController = [VLBFeedViewController newFeedViewController];
 
+  	  	UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	  	  [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
+	  	  [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+		    [closeButton addTarget:self action:@selector(dismissViewControllerAnimated) forControlEvents:UIControlEventTouchUpInside];
+
+        feedViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
         
-        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
-                                        initWithImage:[UIImage imageNamed:@"circlex.png"]
-                                        style:UIBarButtonItemStyleBordered
-                                        target:self
-                                        action:@selector(dismissViewControllerAnimated)];
-        
-        localityItemsViewController.navigationItem.leftBarButtonItem = closeButton;
-        
-        [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:localityItemsViewController] animated:YES completion:nil];
+        [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:feedViewController] animated:YES completion:nil];
     }];
 }
 
@@ -128,10 +128,6 @@ return self;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)launchFeedback {
-    [TestFlight openFeedbackView];
 }
 
 -(void)dismissViewControllerAnimated
@@ -167,11 +163,11 @@ return self.identifyButton.enabled;
     //the residence should be passed to thebox on a method like didSucceedWithVerificationForEmail:residence
     VLBProfileViewController *profileViewController = [VLBProfileViewController newProfileViewController:residence email:email];
     VLBCityViewController *homeGridViewControler = [VLBCityViewController newHomeGridViewController];
-    VLBFeedViewController *localityItemsViewController = [VLBFeedViewController newFeedViewController];
+    VLBFeedViewController *feedViewController = [VLBFeedViewController newFeedViewController];
 
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:profileViewController], [[UINavigationController alloc] initWithRootViewController:homeGridViewControler], 
-        [[UINavigationController alloc] initWithRootViewController:localityItemsViewController]];
+        [[UINavigationController alloc] initWithRootViewController:feedViewController]];
     
     [self presentViewController:tabBarController animated:YES completion:nil];
 }
@@ -253,7 +249,7 @@ return [self.accounts count];
     if(!emailCell)
     {
         emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        emailCell.textLabel.textColor = [VLBColors colorPrimaryBlue];
+        emailCell.textLabel.font = [VLBTypography fontLucidaGrandeTwenty];
         UIView* selectedBackgroundView = [[UIView alloc] init];
         selectedBackgroundView.backgroundColor = [VLBColors colorPrimaryBlue];
         emailCell.selectedBackgroundView = selectedBackgroundView;

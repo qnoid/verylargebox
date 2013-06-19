@@ -28,16 +28,22 @@
 {
     VLBLocalitiesTableViewController *availablePlacesViewController = [[VLBLocalitiesTableViewController alloc] initWithStyle:UITableViewStylePlain];
 
-    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
-                                    initWithImage:[UIImage imageNamed:@"circlex.png"]
-                                    style:UIBarButtonItemStyleBordered
-                                    target:availablePlacesViewController
-                                    action:@selector(dismissViewControllerAnimated)];
-    
-    availablePlacesViewController.navigationItem.leftBarButtonItem = closeButton;
+    UILabel* titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"Select a location";
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
+    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    availablePlacesViewController.navigationItem.titleView = titleLabel;
+    [titleLabel sizeToFit];
 
-    availablePlacesViewController.title = @"Select a location for thebox";
-    
+    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+    [closeButton addTarget:availablePlacesViewController action:@selector(dismissViewControllerAnimated) forControlEvents:UIControlEventTouchUpInside];
+
+    availablePlacesViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+
 return availablePlacesViewController;
 }
 

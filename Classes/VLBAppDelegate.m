@@ -16,6 +16,7 @@
 #import "VLBNotifications.h"
 #import "VLBSecureHashA1.h"
 #import "DDTTYLogger.h"
+#import "VLBTypography.h"
 
 static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
 static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a03314809698";
@@ -32,7 +33,7 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a033148
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    
-	NSLog(@"Hello The Box");
+		DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -49,12 +50,21 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a033148
     [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
     [TestFlight setDeviceIdentifier:userSession];
     [TestFlight takeOff:TESTFLIGHT_APP_TOKEN];
-    
+
+    [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
+
+    [[UITabBar appearance] setTintColor:[VLBColors colorPearlWhite]];
+    [[UITabBar appearance] setSelectedImageTintColor:[VLBColors colorPrimaryBlue]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]} forState:UIControlStateNormal];
+
+    [[UISearchBar appearance] setTintColor:[VLBColors colorPearlWhite]];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.rootViewController =
         [[UINavigationController alloc] initWithRootViewController:[VLBIdentifyViewController newIdentifyViewController]];
-    
+
     [self.window makeKeyAndVisible];
 return YES;
 }

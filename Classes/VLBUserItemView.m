@@ -27,9 +27,12 @@ static const CLLocationCoordinate2D EmptyLocationCoordinate = {-1000.0, -1000.0}
     
     self.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();
 
-    [[self.detailView.vlb_border
+    self.storeLabel.layer.sublayerTransform = CATransform3DMakeTranslation(0, 5, 0);
+
+    [[[self.detailView.vlb_border
             vlb_borderWidth:1.0f]
-            vlb_borderColor:[UIColor blackColor].CGColor];
+            vlb_topBorder:[VLBColors colorPrimaryBlue]]
+            vlb_bottomBorder:[VLBColors colorPrimaryBlue]];
 
     
 return self;

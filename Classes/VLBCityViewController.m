@@ -77,7 +77,6 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 @property(nonatomic, copy) VLBUserItemViewGetDirections didTapOnGetDirectionsButton;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService didTapOnGetDirectionsButton:(VLBUserItemViewGetDirections)didTapOnGetDirectionsButton;
 -(void)updateTitle:(NSString *)localityName;
--(void)highlightLocation;
 -(void)reloadItems;
 @end
 
@@ -86,22 +85,23 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 
 +(VLBCityViewController *)newHomeGridViewController
 {
-    VLBLocationService * locationService = [VLBLocationService theBoxLocationService];
+    VLBLocationService* locationService = [VLBLocationService theBoxLocationService];
     
-    VLBCityViewController * homeGridViewController = [[VLBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
+    VLBCityViewController* homeGridViewController = [[VLBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
-                                  initWithImage:[UIImage imageNamed:@"refresh.png"]
-                                  style:UIBarButtonItemStylePlain                                  
-                                  target:homeGridViewController
-                                  action:@selector(refreshLocations)];
-    homeGridViewController.navigationItem.rightBarButtonItem = addButton;
+    UIButton* refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [refreshButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [refreshButton setImage:[UIImage imageNamed:@"refresh.png"] forState:UIControlStateNormal];
+    [refreshButton addTarget:homeGridViewController action:@selector(refreshLocations) forControlEvents:UIControlEventTouchUpInside];
+
+    homeGridViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
     homeGridViewController.navigationItem.rightBarButtonItem.enabled = NO;
     
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"Nearby";
-    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textColor = [UIColor blackColor];
     titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
     titleLabel.adjustsFontSizeToFitWidth = YES;
     homeGridViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
@@ -176,6 +176,8 @@ return self;
     locationsView.scrollViewDelegate = self;
     locationsView.showsHorizontalScrollIndicator = NO;
     locationsView.enableSeeking = YES;
+//    locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 0.0f);
+//    locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
 
     VLBGridView * itemsView = [VLBGridView newVerticalGridView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) viewsOf:160.0];
 
@@ -221,7 +223,7 @@ return self;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
 {
-
+	[self refreshLocations];
 }
 
 /**
@@ -336,8 +338,11 @@ return [[VLBItemView alloc] initWithFrame:frame];
     VLBDetailsViewController* detailsViewController = [VLBDetailsViewController newDetailsViewController:item];
     detailsViewController.hidesBottomBarWhenPushed = YES;
     
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    self.navigationItem.backBarButtonItem = backBarButton;
+    UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [backButton setTitle:@"Back" forState:UIControlStateNormal];
+
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     [self.navigationController pushViewController:detailsViewController animated:YES];
 }
@@ -357,6 +362,7 @@ return [self.locations count];
     UIButton *storeButton = [[UIButton alloc] initWithFrame:frame];
     storeButton.titleLabel.numberOfLines = 0;
     storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+		storeButton.titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
     [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
 return storeButton;
@@ -549,8 +555,6 @@ return storeButton;
 
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
-    
-    navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
     
     [self presentModalViewController:navigationController animated:YES];
 }

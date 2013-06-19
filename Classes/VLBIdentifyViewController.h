@@ -35,6 +35,7 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
                 tableViewCell.textLabel.enabled = YES;
                 tableViewCell.userInteractionEnabled = YES;
                 tableViewCell.accessoryType = UITableViewCellAccessoryNone;
+                tableViewCell.textLabel.textColor = [VLBColors colorLightGrey];
             };
         case VLBEmailStatusError:
             return ^(UITableViewCell *tableViewCell){
@@ -43,16 +44,18 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
                 tableViewCell.textLabel.enabled = NO;
                 tableViewCell.userInteractionEnabled = YES;
                 tableViewCell.accessoryView = accessoryView;
+                tableViewCell.textLabel.textColor = [VLBColors colorLightGrey];
             };            
         case VLBEmailStatusUnknown:
             return ^(UITableViewCell *tableViewCell){
-                UIActivityIndicatorView* accessoryView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                UIActivityIndicatorView* accessoryView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
                 [accessoryView startAnimating];
                 
                 tableViewCell.selected = NO;
                 tableViewCell.userInteractionEnabled = NO;
                 tableViewCell.textLabel.enabled = NO;
                 tableViewCell.accessoryView = accessoryView;
+                tableViewCell.textLabel.textColor = [VLBColors colorLightGrey];
             };
         case VLBEmailStatusUnauthorised:
             return ^(UITableViewCell *tableViewCell){
@@ -61,6 +64,7 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
                 tableViewCell.textLabel.enabled = NO;
                 tableViewCell.userInteractionEnabled = YES;
                 tableViewCell.accessoryView = accessoryView;
+                tableViewCell.textLabel.textColor = [VLBColors colorLightGrey];
             };
         case VLBEmailStatusVerified:
             return ^(UITableViewCell *tableViewCell){
@@ -68,6 +72,7 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
                 tableViewCell.textLabel.enabled = YES;
                 tableViewCell.userInteractionEnabled = YES;
                 tableViewCell.accessoryView = accessoryView;
+                tableViewCell.textLabel.textColor = [UIColor whiteColor];
             };
     }
 }

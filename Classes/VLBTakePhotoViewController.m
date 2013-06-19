@@ -19,6 +19,7 @@
 #import "VLBDrawRects.h"
 #import "VLBPolygon.h"
 #import "VLBTheBox.h"
+#import "VLBTypography.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 480.0;
@@ -44,28 +45,34 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 
 +(VLBTakePhotoViewController *)newUploadUIViewController:(VLBTheBox*)thebox userId:(NSUInteger)userId
 {
-    VLBTakePhotoViewController * newUploadUIViewController = [[VLBTakePhotoViewController alloc]
+    VLBTakePhotoViewController* newUploadUIViewController = [[VLBTakePhotoViewController alloc]
                                                          initWithBundle:[NSBundle mainBundle]
                                                               thebox:thebox
                                                               userId:userId];
     
-    newUploadUIViewController.title = @"Add item";
+    UILabel* titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"Take photo of an item";
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
+    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    newUploadUIViewController.navigationItem.titleView = titleLabel;
+    [titleLabel sizeToFit];
 
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]
-                                     initWithImage:[UIImage imageNamed:@"circlex.png"]
-                                     style:UIBarButtonItemStyleBordered
-                                     target:newUploadUIViewController
-                                     action:@selector(cancel:)];
-    
-    newUploadUIViewController.navigationItem.leftBarButtonItem = cancelButton;
+    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+    [closeButton addTarget:newUploadUIViewController action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
 
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
-                                     initWithImage:[UIImage imageNamed:@"checkmark-mini.png"]
-                                     style:UIBarButtonItemStyleDone
-                                     target:newUploadUIViewController
-                                     action:@selector(done:)];
-    
-    newUploadUIViewController.navigationItem.rightBarButtonItem = doneButton;
+    newUploadUIViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+
+    UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [doneButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [doneButton setImage:[UIImage imageNamed:@"checkmark-mini.png"] forState:UIControlStateNormal];
+    [doneButton addTarget:newUploadUIViewController action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
+
+    newUploadUIViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    newUploadUIViewController.navigationItem.rightBarButtonItem.enabled = NO;
 
 return newUploadUIViewController;
 }
@@ -89,14 +96,14 @@ return self;
 -(void)viewWillAppear:(BOOL)animated
 {
     if(self.itemImage){
-        self.takePhotoButton.titleLabel.hidden = YES;
+        self.navigationItem.rightBarButtonItem.enabled = YES;
     }
     
     self.itemImageView.image = self.itemImage;
     
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
-    [self.theBoxLocationService notifyDidFailWithError:self];
     [self.theBoxLocationService notifyDidFindPlacemark:self];
+    [self.theBoxLocationService notifyDidFailWithError:self];
     [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 }
 
@@ -128,8 +135,8 @@ return self;
 
 -(void)didFindPlacemark:(NSNotification *)notification
 {
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     self.locality = [VLBNotifications place:notification].locality;
@@ -143,7 +150,7 @@ return self;
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
     
-    navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
+    navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[VLBTypography fontLucidaGrandeTwenty]};
     
     [self presentModalViewController:navigationController animated:YES];
 }
@@ -192,14 +199,14 @@ return self;
 	VLBStoresViewController *locationController = [VLBStoresViewController newLocationViewController];
     locationController.delegate = self;
 
-	[self presentModalViewController:locationController animated:YES];
+	[self presentModalViewController:[[UINavigationController alloc] initWithRootViewController:locationController] animated:YES];
 }
 
 -(void)didSelectStore:(NSMutableDictionary *)store
 {
     self.location = store;    
 	NSString *locationName = [self.location objectForKey:@"name"];
-    self.storeLabel.text = locationName;
+    self.storeLabel.text = [NSString stringWithFormat:@"%@, %@", locationName, self.locality];
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
@@ -216,7 +223,7 @@ return self;
     UIGraphicsEndImageContext();
     
     self.itemImage = newImage;
-	
+    
 	[self dismissModalViewControllerAnimated:YES];
 }
 

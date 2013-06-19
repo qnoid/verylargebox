@@ -283,8 +283,14 @@ return view;
     if(index >= numberOfViews){
         return;
     }
-        
-    [self.scrollViewDelegate didSelectView:self atIndex:index point:[self.dimension pointOf:index]];
+    
+    CGPoint point = [self.dimension pointOf:index];
+    
+    /*
+     CGPointMake(point.x - self.contentInset.left,
+     point.y - self.contentInset.top)
+     */
+    [self.scrollViewDelegate didSelectView:self atIndex:index point:point];
 }
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
@@ -297,7 +303,7 @@ return view;
         return;
     }
 
-    [self.dimension moveCloserToWhole:targetContentOffset];    
+    [self.dimension moveCloserToWhole:targetContentOffset];
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

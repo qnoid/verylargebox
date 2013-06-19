@@ -22,6 +22,7 @@
 #import "VLBMacros.h"
 #import "VLBErrorBlocks.h"
 #import "VLBTheBox.h"
+#import "VLBTypography.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -50,30 +51,28 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = email;
-    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textColor = [UIColor blackColor];
     titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
     titleLabel.adjustsFontSizeToFitWidth = YES;    
     profileViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
     
-    profileViewController.title = email;
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
 
-    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
-                                     initWithImage:[UIImage imageNamed:@"circlex.png"]
-                                     style:UIBarButtonItemStyleBordered
-                                     target:profileViewController
-                                     action:@selector(close)];
+    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+    [closeButton addTarget:profileViewController action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+
+    profileViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
     
-    profileViewController.navigationItem.leftBarButtonItem = closeButton;
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
-                                  initWithImage:[UIImage imageNamed:@"camera-mini.png"]
-                                  style:UIBarButtonItemStyleDone
-                                  target:profileViewController
-                                  action:@selector(addItem)];
-    
-    profileViewController.navigationItem.rightBarButtonItem = addButton;
+    UIButton* addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [addButton setImage:[UIImage imageNamed:@"camera-mini.png"] forState:UIControlStateNormal];
+    [addButton addTarget:profileViewController action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
+
+    profileViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
 
 return profileViewController;
 }
@@ -121,6 +120,7 @@ return self;
     self.itemsView = itemsView;
     self.notificationAnimatedView = notificationAnimatedView;
     self.progressView = progressView.progressView;
+    self.view.backgroundColor = [VLBColors colorDarkGrey];    
 }
 
 - (void)viewDidLoad
@@ -128,11 +128,13 @@ return self;
     [super viewDidLoad];
 
     __weak VLBProfileViewController *wself = self;
-    
+
     [self.itemsView addPullToRefreshWithActionHandler:^{
         [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.residence vlb_residenceUserId] page:VLB_Integer(1) delegate:wself]];
         [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.residence vlb_residenceUserId] delegate:wself]];
     }];
+    self.itemsView.pullToRefreshView.arrowColor = [UIColor whiteColor];
+    self.itemsView.pullToRefreshView.textColor = [UIColor whiteColor];
     
     [self.itemsView triggerPullToRefresh];
 }

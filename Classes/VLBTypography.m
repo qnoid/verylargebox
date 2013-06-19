@@ -10,12 +10,16 @@
 
 @implementation VLBTypography
 
++(UIFont*)fontAvenirNextDemiBoldSixteen{
+    return [UIFont fontWithName:@"AvenirNext-DemiBold" size:16.0];
+}
+
 +(UIFont*)fontLucidaGrandeEleven{
-    return [UIFont fontWithName:@"Avenir" size:22.0];
+    return [UIFont fontWithName:@"AvenirNext-DemiBold" size:22.0];
 }
 
 +(UIFont*)fontLucidaGrandeTwenty{
-    return [UIFont fontWithName:@"Avenir" size:20.0];
+    return [UIFont fontWithName:@"AvenirNext-DemiBold" size:20.0];
 }
 
 @end

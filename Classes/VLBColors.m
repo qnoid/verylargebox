@@ -20,7 +20,11 @@
 }
 
 +(UIColor*)colorDarkGrey {
-    return [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1.0];
+    return [UIColor colorWithRed:48.0/255.0 green:48.0/255.0 blue:48.0/255.0 alpha:1.0];
+}
+
++(UIColor*)colorLightGrey {
+    return [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];
 }
 
 +(UIColor*)colorPearlWhite {

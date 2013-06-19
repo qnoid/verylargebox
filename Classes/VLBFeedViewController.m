@@ -42,26 +42,27 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 +(VLBFeedViewController *)newFeedViewController
 {
-    VLBFeedViewController * localityItemsViewController = [[VLBFeedViewController alloc] initWithBundle:[NSBundle mainBundle]
+    VLBFeedViewController* localityItemsViewController = [[VLBFeedViewController alloc] initWithBundle:[NSBundle mainBundle]
                                                                          didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
     
+    UIButton* locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [locateButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [locateButton setImage:[UIImage imageNamed:@"target.png"] forState:UIControlStateNormal];
+    [locateButton addTarget:localityItemsViewController action:@selector(locate) forControlEvents:UIControlEventTouchUpInside];
+
+    localityItemsViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:locateButton];
+
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"Recent";
-    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textColor = [UIColor blackColor];
     titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
     titleLabel.adjustsFontSizeToFitWidth = YES;
     localityItemsViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
     
     localityItemsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Recent" image:[UIImage imageNamed:@"clock.png"] tag:2];
     
-    UIBarButtonItem *locateButton = [[UIBarButtonItem alloc]
-                                    initWithImage:[UIImage imageNamed:@"location.png"]
-                                    style:UIBarButtonItemStylePlain
-                                    target:localityItemsViewController
-                                    action:@selector(locate)];
-    localityItemsViewController.navigationItem.rightBarButtonItem = locateButton;
-
 return localityItemsViewController;
 }
 
@@ -108,8 +109,9 @@ return localityItemsViewController;
     itemsView.scrollViewDelegate = self;
     itemsView.scrollsToTop = YES;
     
-    self.view = itemsView;
     self.itemsView = itemsView;
+    self.view = itemsView;
+    self.view.backgroundColor = [VLBColors colorDarkGrey];
 }
 
 - (void)viewDidLoad
@@ -121,6 +123,8 @@ return localityItemsViewController;
         [wself.operationQueue addOperation:[VLBQueries newGetItems:wself.locality page:VLB_Integer(1) delegate:wself]];
         [wself.operationQueue addOperation:[VLBQueries newGetItems:wself.locality delegate:wself]];
     }];
+    self.itemsView.pullToRefreshView.arrowColor = [UIColor whiteColor];
+    self.itemsView.pullToRefreshView.textColor = [UIColor whiteColor];
     
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     self.hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
@@ -145,8 +149,6 @@ return localityItemsViewController;
     
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
-    
-    navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
     
     [self presentModalViewController:navigationController animated:YES];
 }
@@ -309,8 +311,6 @@ return localityItemsViewController;
     
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
-    
-    navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[UIFont fontWithName:@"Arial" size:14.0]};
     
     [self presentModalViewController:navigationController animated:YES];
 }
