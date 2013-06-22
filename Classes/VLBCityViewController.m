@@ -75,7 +75,7 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
 @property(nonatomic, copy) VLBUserItemViewGetDirections didTapOnGetDirectionsButton;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService didTapOnGetDirectionsButton:(VLBUserItemViewGetDirections)didTapOnGetDirectionsButton;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService;
 -(void)updateTitle:(NSString *)localityName;
 -(void)reloadItems;
 @end
@@ -87,7 +87,7 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 {
     VLBLocationService* locationService = [VLBLocationService theBoxLocationService];
     
-    VLBCityViewController* homeGridViewController = [[VLBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
+    VLBCityViewController* homeGridViewController = [[VLBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService];
     
     UIButton* refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [refreshButton setFrame:CGRectMake(0, 0, 30, 30)];
@@ -118,7 +118,7 @@ return homeGridViewController;
 }
 
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService didTapOnGetDirectionsButton:(VLBUserItemViewGetDirections)didTapOnGetDirectionsButton
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService
 {
     self = [super initWithNibName:NSStringFromClass([VLBCityViewController class]) bundle:nibBundleOrNil];
     
@@ -132,7 +132,6 @@ return homeGridViewController;
     self.items = [NSMutableArray array];
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
-    self.didTapOnGetDirectionsButton = didTapOnGetDirectionsButton;
     self.operationQueue = [NSOperationQueue new];
     
 return self;
@@ -582,15 +581,19 @@ return storeButton;
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender
 {
+    if([self.locations vlb_isEmpty]){
+        return;
+    }
+    
     NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
     
     __weak VLBCityViewController *wself = self;
     VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
         [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [wself class], __PRETTY_FUNCTION__]];
 
-        wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
+        tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
                 [[location objectForKey:@"lng"] floatValue]),
-                location);
+                location)();
     }];
 
     VLBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [VLBAlertViews newAlertViewDelegateOnCancelDismiss];

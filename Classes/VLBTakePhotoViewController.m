@@ -34,6 +34,7 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 @property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, assign) NSUInteger userId;
+@property(nonatomic, assign) BOOL hasCoordinates;
 @end
 
 @implementation VLBTakePhotoViewController
@@ -91,13 +92,14 @@ return newUploadUIViewController;
     self.theBoxLocationService = [VLBLocationService theBoxLocationService];
     self.thebox = thebox;
     self.userId = userId;
+    self.hasCoordinates = NO;
 
 return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.locality;
+    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
     
     if(self.itemImage){
         self.itemImageView.image = self.itemImage;
@@ -127,6 +129,8 @@ return self;
         return;
     }
 
+    self.hasCoordinates = YES;
+    
 	CLLocation *location = [VLBNotifications location:notification];
 
 	[[self.location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
@@ -153,7 +157,7 @@ return self;
     self.locality = [VLBNotifications place:notification].locality;
     self.storeLabel.text = self.locality;
 
-    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.locality;
+    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
 }
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
@@ -223,6 +227,7 @@ return self;
     DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, store);
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     
+    self.hasCoordinates = YES;
     self.location = store;
     self.locality = [[self.location objectForKey:@"location"] vlb_objectForKey:@"city" ifNil:self.locality];
 

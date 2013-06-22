@@ -16,7 +16,7 @@
 {
     id obj = [self objectForKey:aKey];
     
-    if(!obj){
+    if(!obj || [NSNull null] == obj){
         return defaultObj;
     }
     

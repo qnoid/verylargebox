@@ -14,17 +14,17 @@
 #import "VLBButton.h"
 #import "VLBView.h"
 
-typedef void(^VLBUserItemViewGetDirections)(CLLocationCoordinate2D destination, NSDictionary *options);
+typedef void(^VLBUserItemViewGetDirections)();
 
 NS_INLINE
 VLBUserItemViewGetDirections tbUserItemViewGetDirectionsNoOp(){
-return ^(CLLocationCoordinate2D destination, NSDictionary *options){};
+return ^(){};
 }
 
 NS_INLINE
-VLBUserItemViewGetDirections tbUserItemViewGetDirectionsWithAppleMaps()
+VLBUserItemViewGetDirections tbUserItemViewGetDirectionsWithAppleMaps(CLLocationCoordinate2D destination, NSDictionary *options)
 {
-return ^(CLLocationCoordinate2D destination, NSDictionary *options)
+return ^()
     {
         MKPlacemark* placeMark = [[MKPlacemark alloc] initWithCoordinate:destination addressDictionary:nil];
     
@@ -41,9 +41,9 @@ return ^(CLLocationCoordinate2D destination, NSDictionary *options)
 }
         
 NS_INLINE
-VLBUserItemViewGetDirections tbUserItemViewGetDirectionsWithGoogleMaps()
+VLBUserItemViewGetDirections tbUserItemViewGetDirectionsWithGoogleMaps(CLLocationCoordinate2D destination, NSDictionary *options)
 {
-return ^(CLLocationCoordinate2D destination, NSDictionary *options){
+return ^(){
         NSString *urlstring =
             [NSString stringWithFormat:@"http://maps.google.com/?dirflg=w&daddr=%f,%f",
              destination.latitude,
@@ -56,14 +56,14 @@ return ^(CLLocationCoordinate2D destination, NSDictionary *options){
 }
 
 NS_INLINE
-VLBUserItemViewGetDirections tbUserItemViewGetDirections()
+VLBUserItemViewGetDirections tbUserItemViewGetDirections(CLLocationCoordinate2D destination, NSDictionary *options)
 {
     Class itemClass = [MKMapItem class];
     if ([itemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)]) {
-        return tbUserItemViewGetDirectionsWithAppleMaps();
+        return tbUserItemViewGetDirectionsWithAppleMaps(destination, options);
     }
     
-return tbUserItemViewGetDirectionsWithGoogleMaps();
+return tbUserItemViewGetDirectionsWithGoogleMaps(destination, options);
 }
 
 @interface VLBUserItemView : UIView <VLBViewDrawRectDelegate>

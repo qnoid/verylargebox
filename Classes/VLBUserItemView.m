@@ -17,6 +17,7 @@
 #import "NSDictionary+VLBLocality.h"
 #import "UIImageView+AFNetworking.h"
 #import "VLBAlertViews.h"
+#import "NSDictionary+VLBDictionary.h"
 
 static const CLLocationDegrees EmptyLocation = -1000.0;
 static const CLLocationCoordinate2D EmptyLocationCoordinate = {-1000.0, -1000.0};
@@ -37,7 +38,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     VLB_IF_NOT_SELF_RETURN_NIL()
     VLB_LOAD_VIEW()
     
-    self.didTapOnGetDirectionsButton = tbUserItemViewGetDirections();
+    self.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();
     self.storeLabel.layer.sublayerTransform = CATransform3DMakeTranslation(0, 5, 0);
 
     
@@ -51,7 +52,7 @@ return self;
     VLB_IF_NOT_SELF_RETURN_NIL()
     VLB_LOAD_VIEW()
     
-    self.didTapOnGetDirectionsButton = tbUserItemViewGetDirections();    
+    self.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();    
     self.storeLabel.layer.sublayerTransform = CATransform3DMakeTranslation(0, 5, 0);
     
     NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
@@ -99,13 +100,13 @@ return self;
     self.whenLabel.text = [item vlb_objectForKey:VLBItemWhen];
     
     __weak VLBUserItemView *wself = self;
-    self.didTapOnGetDirectionsButton = ^(CLLocationCoordinate2D destination, NSDictionary *options){
+    self.didTapOnGetDirectionsButton = ^(){
         VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
             [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTapOnGetDirectionsButton"]];
             
-            wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
-                                                                         [[location objectForKey:@"lng"] floatValue]),
-                                              location);
+            tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location vlb_objectForKey:@"lat"] floatValue],
+                                                                   [[location objectForKey:@"lng"] floatValue]),
+                                        location)();
         }];
         
         VLBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [VLBAlertViews newAlertViewDelegateOnCancelDismiss];
@@ -123,7 +124,7 @@ return self;
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender
 {
-    self.didTapOnGetDirectionsButton(EmptyLocationCoordinate, nil);
+    self.didTapOnGetDirectionsButton();
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view

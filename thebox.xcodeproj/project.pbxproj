@@ -66,10 +66,6 @@
 		90C2C37512B6C2AD00829868 /* VLBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* VLBAppDelegate.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C37612B6C2AE00829868 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90CBFE5F154BF58F00349A13 /* poweredByFoursquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE5E154BF58F00349A13 /* poweredByFoursquare.png */; };
-		90CBFE6D154D4ACA00349A13 /* thewho.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE69154D4ACA00349A13 /* thewho.jpg */; };
-		90CBFE6E154D4ACA00349A13 /* koboloi.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE6A154D4ACA00349A13 /* koboloi.JPG */; };
-		90CBFE6F154D4ACA00349A13 /* hat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE6B154D4ACA00349A13 /* hat.jpg */; };
-		90CBFE70154D4ACA00349A13 /* earings.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90CBFE6C154D4ACA00349A13 /* earings.jpg */; };
 		90D830F412B51DA400BE4470 /* VLBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90D830F312B51DA400BE4470 /* VLBCell.xib */; };
 		90D9A93F12B921950063FF60 /* VLBItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9A93E12B921950063FF60 /* VLBItem.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90D9A96412B924130063FF60 /* VLBMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9A96312B924130063FF60 /* VLBMath.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -131,6 +127,7 @@
 		BD2D29F016B9DAC90092EB95 /* VLBRecycleStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D3E6112A13BDA00F70930 /* VLBRecycleStrategy.m */; };
 		BD2D29F116B9DAFC0092EB95 /* VLBAFHTTPRequestOperationCompletionBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DCC1673BF6E00286511 /* VLBAFHTTPRequestOperationCompletionBlocks.m */; };
 		BD2D29F216B9DB390092EB95 /* NSString+VLBString.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B46165D7E6F002C944D /* NSString+VLBString.m */; };
+		BD30A3A51776234300A71DC9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD30A3A41776234300A71DC9 /* Crashlytics.framework */; };
 		BD4292B9175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4292BA175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
@@ -166,7 +163,6 @@
 		BDA2BCDF1659853E0068C749 /* VLBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* VLBButton.m */; };
 		BDA2BD0C165AD1160068C749 /* VLBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0B165AD1150068C749 /* VLBColors.m */; };
 		BDA2BD1A165AF8E30068C749 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD17165AF8E30068C749 /* user.png */; };
-		BDA4FB4C175FF393004AAEC6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */; };
 		BDA4FB4D175FF42D004AAEC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B07131A820F008B8B2D /* SystemConfiguration.framework */; };
 		BDAB0126176FE7B200A8034E /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
 		BDABD92C169F689F00111723 /* VLBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* VLBItemView.m */; };
@@ -365,10 +361,6 @@
 		90C9512212B6A16C00A8A05F /* VLBTakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBTakePhotoViewController.h; sourceTree = "<group>"; };
 		90C9512512B6A16C00A8A05F /* VLBVisibleStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBVisibleStrategy.h; sourceTree = "<group>"; };
 		90CBFE5E154BF58F00349A13 /* poweredByFoursquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredByFoursquare.png; sourceTree = "<group>"; };
-		90CBFE69154D4ACA00349A13 /* thewho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thewho.jpg; sourceTree = "<group>"; };
-		90CBFE6A154D4ACA00349A13 /* koboloi.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = koboloi.JPG; sourceTree = "<group>"; };
-		90CBFE6B154D4ACA00349A13 /* hat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hat.jpg; sourceTree = "<group>"; };
-		90CBFE6C154D4ACA00349A13 /* earings.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earings.jpg; sourceTree = "<group>"; };
 		90CEADEB1349CDBD0084C5F0 /* VLBSizeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBSizeTest.m; sourceTree = "<group>"; };
 		90D11E531531C97300D52F58 /* VLBTestEqualsPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTestEqualsPredicate.h; path = Headers/VLBTestEqualsPredicate.h; sourceTree = "<group>"; };
 		90D11E551531C97300D52F58 /* VLBTestRanking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTestRanking.h; path = Headers/VLBTestRanking.h; sourceTree = "<group>"; };
@@ -421,6 +413,7 @@
 		BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBAlertViews.m; sourceTree = "<group>"; };
 		BD2A8AAD175B3DE00036A852 /* XRay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XRay.framework; sourceTree = "<group>"; };
 		BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCityViewControllerTest.m; sourceTree = "<group>"; };
+		BD30A3A41776234300A71DC9 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BD4292B7175B4BBB00459891 /* VLBErrorBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBErrorBlocks.h; path = ../Classes/VLBErrorBlocks.h; sourceTree = "<group>"; };
 		BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBErrorBlocks.m; sourceTree = "<group>"; };
 		BD4BA9AA16FA5B6C009C1518 /* UIViewController+VLBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+VLBViewController.h"; path = "../Classes/UIViewController+VLBViewController.h"; sourceTree = "<group>"; };
@@ -462,7 +455,6 @@
 		BDA2BD0B165AD1150068C749 /* VLBColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBColors.m; sourceTree = "<group>"; };
 		BDA2BD17165AF8E30068C749 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = "Supporting Files/user.png"; sourceTree = "<group>"; };
 		BDA2BD1C165AFA200068C749 /* VLBCreateUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCreateUserOperationDelegate.h; path = ../Classes/VLBCreateUserOperationDelegate.h; sourceTree = "<group>"; };
-		BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BDAB0124176FE7B200A8034E /* VLBTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTypography.h; path = ../Classes/VLBTypography.h; sourceTree = "<group>"; };
 		BDAB0125176FE7B200A8034E /* VLBTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTypography.m; sourceTree = "<group>"; };
 		BDABD92A169F689E00111723 /* VLBItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBItemView.h; path = ../Classes/VLBItemView.h; sourceTree = "<group>"; };
@@ -553,7 +545,7 @@
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
 				9089482515533980009188B4 /* libTestFlight.a in Frameworks */,
 				BD2A8AAE175B3DE00036A852 /* XRay.framework in Frameworks */,
-				BDA4FB4C175FF393004AAEC6 /* Crashlytics.framework in Frameworks */,
+				BD30A3A51776234300A71DC9 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,7 +702,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */,
 				BDF825C016FDFCEA003B3003 /* AddressBook.framework */,
 				BDA21877165EEBEA00094510 /* Security.framework */,
 				908363A61400659200E5AAAF /* libz.dylib */,
@@ -769,6 +760,7 @@
 		90454B01154DBBCA0064D998 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				BD30A3A41776234300A71DC9 /* Crashlytics.framework */,
 				BD2A8AAD175B3DE00036A852 /* XRay.framework */,
 				9089482415533980009188B4 /* libTestFlight.a */,
 			);
@@ -897,17 +889,6 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
-		90CBFE68154D4ACA00349A13 /* welcome */ = {
-			isa = PBXGroup;
-			children = (
-				90CBFE69154D4ACA00349A13 /* thewho.jpg */,
-				90CBFE6A154D4ACA00349A13 /* koboloi.JPG */,
-				90CBFE6B154D4ACA00349A13 /* hat.jpg */,
-				90CBFE6C154D4ACA00349A13 /* earings.jpg */,
-			);
-			path = welcome;
-			sourceTree = "<group>";
-		};
 		90D11E4C1531C81100D52F58 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,7 +914,6 @@
 			isa = PBXGroup;
 			children = (
 				BDA2BD15165AF8D80068C749 /* images */,
-				90CBFE68154D4ACA00349A13 /* welcome */,
 				90CBFE5E154BF58F00349A13 /* poweredByFoursquare.png */,
 				90E3592A1546333700075ABF /* default_item_thumb.png */,
 				BD5CB777177119E800BC21D1 /* navigationbar.png */,
@@ -1204,10 +1184,6 @@
 				90D830F412B51DA400BE4470 /* VLBCell.xib in Resources */,
 				90E3592C1546333700075ABF /* default_item_thumb.png in Resources */,
 				90CBFE5F154BF58F00349A13 /* poweredByFoursquare.png in Resources */,
-				90CBFE6D154D4ACA00349A13 /* thewho.jpg in Resources */,
-				90CBFE6E154D4ACA00349A13 /* koboloi.JPG in Resources */,
-				90CBFE6F154D4ACA00349A13 /* hat.jpg in Resources */,
-				90CBFE70154D4ACA00349A13 /* earings.jpg in Resources */,
 				90F9FDE4154D97C5001BCD66 /* icon@2x.png in Resources */,
 				90F9FDE6154D97D0001BCD66 /* icon.png in Resources */,
 				90454B05154DE5DF0064D998 /* icon-72.png in Resources */,
@@ -1388,7 +1364,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 81f3a35c563de29aa0f370c973501175ae86d19c";
+			shellScript = "./External/Crashlytics.framework/run 81f3a35c563de29aa0f370c973501175ae86d19c";
 		};
 		CE5E207957CB4ABE9AB0632E /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

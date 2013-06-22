@@ -35,11 +35,10 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, strong) NSDictionary* residence;
 @property(nonatomic, strong) NSMutableArray* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
-@property(nonatomic, copy) VLBUserItemViewGetDirections didTapOnGetDirectionsButton;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence didTapOnGetDirectionsButton:(VLBUserItemViewGetDirections)didTapOnGetDirectionsButton;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence;
 @end
 
 @implementation VLBProfileViewController
@@ -47,8 +46,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 +(VLBProfileViewController *)newProfileViewController:(NSDictionary*)residence email:(NSString*)email
 {
     VLBProfileViewController * profileViewController = [[VLBProfileViewController alloc] initWithBundle:[NSBundle mainBundle]
-                                                                                           residence:residence
-                                                                         didTapOnGetDirectionsButton:tbUserItemViewGetDirections()];
+                                                                                           residence:residence];
     
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = email;
@@ -78,7 +76,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 return profileViewController;
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence didTapOnGetDirectionsButton:(VLBUserItemViewGetDirections)didTapOnGetDirectionsButton
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence
 {
     self = [super initWithNibName:NSStringFromClass([VLBProfileViewController class]) bundle:nibBundleOrNil];
     
@@ -90,7 +88,6 @@ return profileViewController;
     self.items = [NSMutableArray array];
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
-    self.didTapOnGetDirectionsButton = didTapOnGetDirectionsButton;
     self.operationQueue = [NSOperationQueue new];
 
 return self;
