@@ -348,9 +348,10 @@ return [[VLBItemView alloc] initWithFrame:frame];
     
     UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [backButton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImage:[UIImage imageNamed:@"left-arrow.png"] forState:UIControlStateNormal];
 
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    detailsViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     [self.navigationController pushViewController:detailsViewController animated:YES];
 }
