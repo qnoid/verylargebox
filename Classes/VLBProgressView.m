@@ -8,6 +8,7 @@
 
 #import "VLBProgressView.h"
 #import "VLBMacros.h"
+#import "VLBColors.h"
 
 @implementation VLBProgressView
 
@@ -19,7 +20,8 @@
     }
 
     VLB_LOAD_VIEW();
-    
+    self.progressView.progressTintColor = [VLBColors colorPrimaryBlue];
+    self.progressView.trackTintColor = [VLBColors color0102161];
 return self;
 }
 

@@ -39,7 +39,7 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
             };
         case VLBEmailStatusError:
             return ^(UITableViewCell *tableViewCell){
-                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refresh.png"]];
+                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refresh-mini.png"]];
                 
                 tableViewCell.textLabel.enabled = NO;
                 tableViewCell.userInteractionEnabled = YES;
@@ -77,12 +77,16 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
     }
 }
 
+/**
+ 
+ 
+ Holds, in memory, an index of email statuses for each email account registered with thebox.
+ */
 @interface VLBIdentifyViewController : UIViewController <VLBVerifyUserOperationDelegate, VLBCreateUserOperationDelegate, UITableViewDelegate, VLBViewDrawRectDelegate>
 
 @property (nonatomic, weak) IBOutlet VLBButton *identifyButton;
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UITableView *accountsTableView;
-@property (nonatomic, weak) IBOutlet VLBButton *showMoreButton;
 @property (nonatomic, weak) IBOutlet VLBButton *browseButton;
 
 +(VLBIdentifyViewController *)newIdentifyViewController;

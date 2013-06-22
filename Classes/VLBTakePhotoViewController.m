@@ -20,6 +20,8 @@
 #import "VLBPolygon.h"
 #import "VLBTheBox.h"
 #import "VLBTypography.h"
+#import "NSDictionary+VLBLocation.h"
+#import "NSDictionary+VLBDictionary.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 480.0;
@@ -29,9 +31,10 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 
 @property(nonatomic, strong) UIImage* itemImage;
 @property(nonatomic, strong) NSString* locality;
-@property(nonatomic, strong) NSMutableDictionary* location;
+@property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, assign) NSUInteger userId;
+@property(nonatomic, assign) BOOL hasAskedForLocality;
 @end
 
 @implementation VLBTakePhotoViewController
@@ -85,21 +88,22 @@ return newUploadUIViewController;
         return nil;
     }
     
-    self.location = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"location"];
+    self.location = @{@"name":@"", @"location": [@{@"name": @""} mutableCopy]};
     self.theBoxLocationService = [VLBLocationService theBoxLocationService];
     self.thebox = thebox;
     self.userId = userId;
+    self.hasAskedForLocality = NO;
 
 return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if(self.itemImage){
-        self.navigationItem.rightBarButtonItem.enabled = YES;
-    }
+    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.locality;
     
-    self.itemImageView.image = self.itemImage;
+    if(self.itemImage){
+        self.itemImageView.image = self.itemImage;
+    }
     
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
     [self.theBoxLocationService notifyDidFindPlacemark:self];
@@ -121,6 +125,9 @@ return self;
 -(void)didUpdateToLocation:(NSNotification *)notification;
 {
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+    if(self.location){
+        return;
+    }
 
 	CLLocation *location = [VLBNotifications location:notification];
 
@@ -131,6 +138,24 @@ return self;
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
+    if(self.hasAskedForLocality || self.locality != nil){
+        return;
+    }
+    
+    VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
+    
+    localitiesViewController.delegate = self;
+    
+    UINavigationController *navigationController =
+    [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
+    
+    __weak VLBTakePhotoViewController *wself = self;
+    [self presentViewController:navigationController animated:YES completion:^{
+        wself.hasAskedForLocality = YES;
+    }];
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
@@ -138,36 +163,61 @@ return self;
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     
+    if(self.locality){
+        return;
+    }
+    
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     self.locality = [VLBNotifications place:notification].locality;
+    self.storeLabel.text = self.locality;
+
+    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.locality;
 }
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
+    [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
+    if(self.hasAskedForLocality || self.locality != nil){
+        return;
+    }
+
     VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
+    
+    localitiesViewController.delegate = self;
     
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
     
-    navigationController.navigationBar.titleTextAttributes = @{UITextAttributeFont:[VLBTypography fontLucidaGrandeTwenty]};
-    
-    [self presentModalViewController:navigationController animated:YES];
+    __weak VLBTakePhotoViewController *wself = self;
+    [self presentViewController:navigationController animated:YES completion:^{
+        wself.hasAskedForLocality = YES;
+    }];
 }
 
 #pragma mark TBLocalitiesTableViewControllerDelegate
 
 -(void)didSelectLocality:(NSDictionary *)locality
 {
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, locality);
     self.locality = [locality objectForKey:@"name"];
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    
+    NSDictionary *location = [self.location vlb_objectForKey:@"location"];
+    
+    self.storeLabel.text = [NSString stringWithFormat:@"%@ \n %@", [location objectForKey:VLBLocationName], self.locality];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark TheBoxKeyboardObserver
 
 - (IBAction)cancel:(id)sender{
-	[self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)done:(id)sender 
@@ -191,7 +241,7 @@ return self;
     picker.showsCameraControls = YES;    
 #endif
 	
-	[self presentModalViewController:picker animated:YES];
+	[self presentViewController:picker animated:YES completion:nil];
 }
 
 - (IBAction)enterLocation:(id)sender
@@ -199,14 +249,20 @@ return self;
 	VLBStoresViewController *locationController = [VLBStoresViewController newLocationViewController];
     locationController.delegate = self;
 
-	[self presentModalViewController:[[UINavigationController alloc] initWithRootViewController:locationController] animated:YES];
+	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:locationController] animated:YES completion:nil];
 }
 
 -(void)didSelectStore:(NSMutableDictionary *)store
 {
-    self.location = store;    
-	NSString *locationName = [self.location objectForKey:@"name"];
-    self.storeLabel.text = [NSString stringWithFormat:@"%@, %@", locationName, self.locality];
+    DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, store);
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    
+    self.location = store;
+    self.locality = [[self.location objectForKey:@"location"] vlb_objectForKey:@"city" ifNil:self.locality];
+
+	NSString *locationName = [self.location vlb_objectForKey:@"name"];
+    
+    self.storeLabel.text = [NSString stringWithFormat:@"%@ \n %@", locationName, self.locality];
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
@@ -229,7 +285,7 @@ return self;
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-	[self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view

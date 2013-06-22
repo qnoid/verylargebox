@@ -48,7 +48,6 @@
 		90A5FCD11387CC1F004E65B3 /* VLBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* VLBGridView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90A6C4541300822C00AEEE9F /* VLBScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A6C4521300822C00AEEE9F /* VLBScrollView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90B56BE51534D3E10064CB4E /* VLBDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* VLBDetailsViewController.m */; };
-		90C2A47B1526679C00AC16B6 /* VLBDefaultKeyboardObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2A47A1526679B00AC16B6 /* VLBDefaultKeyboardObserver.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C35412B6C24E00829868 /* VLBSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0038D12B63C0E0029863E /* VLBSize.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C35512B6C24E00829868 /* VLBBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D830D812B51BDF00BE4470 /* VLBBundle.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90C2C35712B6C24F00829868 /* VLBGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 903367ED129C5F510046C59D /* VLBGridViewController.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -240,6 +239,16 @@
 		BDE482C11750510D0096903C /* VLBFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE482BF1750510D0096903C /* VLBFeedViewController.m */; };
 		BDE482C31750510D0096903C /* VLBFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE482C01750510D0096903C /* VLBFeedViewController.xib */; };
 		BDE482C41750510D0096903C /* VLBFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE482C01750510D0096903C /* VLBFeedViewController.xib */; };
+		BDE4925917750B1600FFC41F /* down-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4925817750B1600FFC41F /* down-arrow@2x.png */; };
+		BDE4925C1775132300FFC41F /* NSDictionary+VLBItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE4925B1775132300FFC41F /* NSDictionary+VLBItem.m */; };
+		BDE4925F1775142E00FFC41F /* NSDictionary+VLBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE4925E1775142D00FFC41F /* NSDictionary+VLBLocation.m */; };
+		BDE49261177515E300FFC41F /* left-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE49260177515E300FFC41F /* left-arrow@2x.png */; };
+		BDE49262177522A900FFC41F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
+		BDE492651775B89200FFC41F /* NSDictionary+VLBLocality.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE492641775B89200FFC41F /* NSDictionary+VLBLocality.m */; };
+		BDE4926A1775DD7900FFC41F /* take-photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE492681775DD7900FFC41F /* take-photo@2x.png */; };
+		BDE4926B1775DD7900FFC41F /* take-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE492691775DD7900FFC41F /* take-photo.png */; };
+		BDE4926E1775F7A700FFC41F /* refresh-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */; };
+		BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926D1775F7A700FFC41F /* refresh-mini.png */; };
 		BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
 		BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF825C016FDFCEA003B3003 /* AddressBook.framework */; };
 		FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */; };
@@ -333,8 +342,6 @@
 		90B56BE41534D3E10064CB4E /* VLBDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBDetailsViewController.m; path = Classes/VLBDetailsViewController.m; sourceTree = "<group>"; };
 		90C0038D12B63C0E0029863E /* VLBSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBSize.m; sourceTree = "<group>"; };
 		90C0048E12B6437B0029863E /* VLBRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBRect.m; sourceTree = "<group>"; };
-		90C2A4791526679B00AC16B6 /* VLBDefaultKeyboardObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBDefaultKeyboardObserver.h; sourceTree = "<group>"; };
-		90C2A47A1526679B00AC16B6 /* VLBDefaultKeyboardObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBDefaultKeyboardObserver.m; sourceTree = "<group>"; };
 		90C2ECA312930C08009195CF /* VLBLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBLocationService.m; sourceTree = "<group>"; };
 		90C2EE7812934108009195CF /* VLBNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBNotifications.m; sourceTree = "<group>"; };
 		90C9510212B6A16C00A8A05F /* VLBCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBCityViewController.h; sourceTree = "<group>"; };
@@ -456,7 +463,7 @@
 		BDA2BD17165AF8E30068C749 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = "Supporting Files/user.png"; sourceTree = "<group>"; };
 		BDA2BD1C165AFA200068C749 /* VLBCreateUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCreateUserOperationDelegate.h; path = ../Classes/VLBCreateUserOperationDelegate.h; sourceTree = "<group>"; };
 		BDA4FB4B175FF393004AAEC6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		BDAB0124176FE7B200A8034E /* VLBTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBTypography.h; sourceTree = "<group>"; };
+		BDAB0124176FE7B200A8034E /* VLBTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTypography.h; path = ../Classes/VLBTypography.h; sourceTree = "<group>"; };
 		BDAB0125176FE7B200A8034E /* VLBTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTypography.m; sourceTree = "<group>"; };
 		BDABD92A169F689E00111723 /* VLBItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBItemView.h; path = ../Classes/VLBItemView.h; sourceTree = "<group>"; };
 		BDABD92B169F689F00111723 /* VLBItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBItemView.m; sourceTree = "<group>"; };
@@ -506,6 +513,18 @@
 		BDE482BE1750510D0096903C /* VLBFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBFeedViewController.h; path = ../Classes/VLBFeedViewController.h; sourceTree = "<group>"; };
 		BDE482BF1750510D0096903C /* VLBFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBFeedViewController.m; sourceTree = "<group>"; };
 		BDE482C01750510D0096903C /* VLBFeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBFeedViewController.xib; path = Classes/VLBFeedViewController.xib; sourceTree = "<group>"; };
+		BDE4925817750B1600FFC41F /* down-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down-arrow@2x.png"; path = "Supporting Files/down-arrow@2x.png"; sourceTree = "<group>"; };
+		BDE4925A1775132300FFC41F /* NSDictionary+VLBItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBItem.h"; path = "../Classes/NSDictionary+VLBItem.h"; sourceTree = "<group>"; };
+		BDE4925B1775132300FFC41F /* NSDictionary+VLBItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBItem.m"; sourceTree = "<group>"; };
+		BDE4925D1775142D00FFC41F /* NSDictionary+VLBLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBLocation.h"; path = "../Classes/NSDictionary+VLBLocation.h"; sourceTree = "<group>"; };
+		BDE4925E1775142D00FFC41F /* NSDictionary+VLBLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBLocation.m"; sourceTree = "<group>"; };
+		BDE49260177515E300FFC41F /* left-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "left-arrow@2x.png"; path = "Supporting Files/left-arrow@2x.png"; sourceTree = "<group>"; };
+		BDE492631775B89200FFC41F /* NSDictionary+VLBLocality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBLocality.h"; path = "../Classes/NSDictionary+VLBLocality.h"; sourceTree = "<group>"; };
+		BDE492641775B89200FFC41F /* NSDictionary+VLBLocality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBLocality.m"; sourceTree = "<group>"; };
+		BDE492681775DD7900FFC41F /* take-photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "take-photo@2x.png"; path = "Supporting Files/take-photo@2x.png"; sourceTree = "<group>"; };
+		BDE492691775DD7900FFC41F /* take-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "take-photo.png"; path = "Supporting Files/take-photo.png"; sourceTree = "<group>"; };
+		BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-mini@2x.png"; path = "Supporting Files/refresh-mini@2x.png"; sourceTree = "<group>"; };
+		BDE4926D1775F7A700FFC41F /* refresh-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-mini.png"; path = "Supporting Files/refresh-mini.png"; sourceTree = "<group>"; };
 		BDF0F42316C8254B002CDE8E /* VLBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBVerifyOperationBlock.h; path = ../Classes/VLBVerifyOperationBlock.h; sourceTree = "<group>"; };
 		BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVerifyOperationBlock.m; sourceTree = "<group>"; };
 		BDF825C016FDFCEA003B3003 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -561,6 +580,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDE49262177522A900FFC41F /* QuartzCore.framework in Frameworks */,
 				BDCD9394165C127A009C2F8F /* CoreGraphics.framework in Frameworks */,
 				BDCD9393165C127A009C2F8F /* UIKit.framework in Frameworks */,
 				BD84EF70165C2363009D9408 /* SenTestingKit.framework in Frameworks */,
@@ -621,7 +641,6 @@
 				90226B90135999D1006E43EC /* VLBBinarySearch.m */,
 				90226C6C1359B1DB006E43EC /* VLBPredicates.m */,
 				90A5FCCF1387CC1F004E65B3 /* VLBGridView.m */,
-				90C2A47A1526679B00AC16B6 /* VLBDefaultKeyboardObserver.m */,
 				9022BAA0153EA7CC00AB2418 /* NSMutableDictionary+VLBMutableDictionary.m */,
 				90894829155349DE009188B4 /* NSDictionary+VLBDictionary.m */,
 				BDA2BD0B165AD1150068C749 /* VLBColors.m */,
@@ -797,6 +816,10 @@
 		90C950FA12B6A10700A8A05F /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				BDE492631775B89200FFC41F /* NSDictionary+VLBLocality.h */,
+				BDAB0124176FE7B200A8034E /* VLBTypography.h */,
+				BDE4925A1775132300FFC41F /* NSDictionary+VLBItem.h */,
+				BDE4925D1775142D00FFC41F /* NSDictionary+VLBLocation.h */,
 				BDAE3C48176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.h */,
 				BDAE3C45176CEE0A0037734C /* NSDictionary+VLBFoursquareVenue.h */,
 				BDAE3C42176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.h */,
@@ -832,7 +855,6 @@
 				90C9512212B6A16C00A8A05F /* VLBTakePhotoViewController.h */,
 				90C9512512B6A16C00A8A05F /* VLBVisibleStrategy.h */,
 				90F08275132AEDA000E7E35F /* UITextField+VLBTextField.h */,
-				90C2A4791526679B00AC16B6 /* VLBDefaultKeyboardObserver.h */,
 				9022BA9F153EA7CC00AB2418 /* NSMutableDictionary+VLBMutableDictionary.h */,
 				90E359311546359B00075ABF /* NSCache+VLBCache.h */,
 				BDE0DBB1155EC1B600B474DC /* VLBUpdateItemOperationDelegate.h */,
@@ -989,16 +1011,22 @@
 				BDAF7AD317534816008899D1 /* city@2x.png */,
 				BDAF7AB6175281EB008899D1 /* clock.png */,
 				BDAF7AB7175281EB008899D1 /* clock@2x.png */,
+				BDE4925817750B1600FFC41F /* down-arrow@2x.png */,
 				BDBA74591770EA71001AE3F3 /* envelope@2x.png */,
 				BDBA745A1770EA71001AE3F3 /* envelope.png */,
 				BDBA745D1770EB4B001AE3F3 /* eye@2x.png */,
 				BDBA745E1770EB4B001AE3F3 /* eye.png */,
 				BDBA74551770E925001AE3F3 /* identify@2x.png */,
 				BDBA74561770E925001AE3F3 /* identify.png */,
+				BDE49260177515E300FFC41F /* left-arrow@2x.png */,
 				BD258DDD1678040500286511 /* refresh.png */,
 				BDAF7AAA17528194008899D1 /* refresh@2x.png */,
+				BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */,
+				BDE4926D1775F7A700FFC41F /* refresh-mini.png */,
 				BDAF7AAB17528194008899D1 /* signpost.png */,
 				BDAF7AAC17528194008899D1 /* signpost@2x.png */,
+				BDE492681775DD7900FFC41F /* take-photo@2x.png */,
+				BDE492691775DD7900FFC41F /* take-photo.png */,
 				BD5CB77B1771327600BC21D1 /* target@2x.png */,
 				BD5CB77C1771327600BC21D1 /* target.png */,
 				BDA2BD17165AF8E30068C749 /* user.png */,
@@ -1036,8 +1064,10 @@
 		BDCE1E1D1757E1280070BB59 /* VLBCommon */ = {
 			isa = PBXGroup;
 			children = (
-				BDAB0124176FE7B200A8034E /* VLBTypography.h */,
 				BDAB0125176FE7B200A8034E /* VLBTypography.m */,
+				BDE4925B1775132300FFC41F /* NSDictionary+VLBItem.m */,
+				BDE4925E1775142D00FFC41F /* NSDictionary+VLBLocation.m */,
+				BDE492641775B89200FFC41F /* NSDictionary+VLBLocality.m */,
 			);
 			name = VLBCommon;
 			sourceTree = "<group>";
@@ -1226,6 +1256,12 @@
 				BD5CB77E1771327600BC21D1 /* target.png in Resources */,
 				BD5CB781177133EE00BC21D1 /* camera.png in Resources */,
 				BD5CB782177133EE00BC21D1 /* camera@2x.png in Resources */,
+				BDE4925917750B1600FFC41F /* down-arrow@2x.png in Resources */,
+				BDE49261177515E300FFC41F /* left-arrow@2x.png in Resources */,
+				BDE4926A1775DD7900FFC41F /* take-photo@2x.png in Resources */,
+				BDE4926B1775DD7900FFC41F /* take-photo.png in Resources */,
+				BDE4926E1775F7A700FFC41F /* refresh-mini@2x.png in Resources */,
+				BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1401,7 +1437,6 @@
 				90226B91135999D1006E43EC /* VLBBinarySearch.m in Sources */,
 				90226C6E1359B1DB006E43EC /* VLBPredicates.m in Sources */,
 				90A5FCD11387CC1F004E65B3 /* VLBGridView.m in Sources */,
-				90C2A47B1526679C00AC16B6 /* VLBDefaultKeyboardObserver.m in Sources */,
 				90B56BE51534D3E10064CB4E /* VLBDetailsViewController.m in Sources */,
 				9022BAA1153EA7CC00AB2418 /* NSMutableDictionary+VLBMutableDictionary.m in Sources */,
 				90E359301546348E00075ABF /* NSCache+VLBCache.m in Sources */,
@@ -1434,6 +1469,9 @@
 				BDAE3C4A176CF3210037734C /* NSDictionary+VLBVenuesOperationParameters.m in Sources */,
 				BDAE3C55176E04AC0037734C /* VLBTheBox.m in Sources */,
 				BDAB0126176FE7B200A8034E /* VLBTypography.m in Sources */,
+				BDE4925C1775132300FFC41F /* NSDictionary+VLBItem.m in Sources */,
+				BDE4925F1775142E00FFC41F /* NSDictionary+VLBLocation.m in Sources */,
+				BDE492651775B89200FFC41F /* NSDictionary+VLBLocality.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1542,7 +1580,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "thebox-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
@@ -1599,7 +1637,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "thebox-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
@@ -1828,7 +1866,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "thebox-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Pods/TestFlightSDK\"",

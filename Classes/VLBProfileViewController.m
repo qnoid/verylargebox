@@ -27,6 +27,7 @@
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
+
 @interface VLBProfileViewController ()
 @property(nonatomic, weak) VLBScrollView * itemsView;
 @property(nonatomic, weak) UIView<QNDAnimatedView> *notificationAnimatedView;
@@ -36,7 +37,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, copy) VLBUserItemViewGetDirections didTapOnGetDirectionsButton;
 @property(nonatomic, strong) NSString* locality;
-@property(nonatomic, strong) NSMutableDictionary* location;
+@property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence didTapOnGetDirectionsButton:(VLBUserItemViewGetDirections)didTapOnGetDirectionsButton;
 @end
@@ -62,7 +63,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
     UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"down-arrow.png"] forState:UIControlStateNormal];
     [closeButton addTarget:profileViewController action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
 
     profileViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
@@ -108,7 +109,7 @@ return self;
     [notificationAnimatedView addSubview:progressView];
     
     VLBScrollView * itemsView = [[[[VLBScrollViewBuilder alloc] initWith:
-                                     CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:320.0] allowSelection] newVerticalScrollView];
+                                     CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:416] allowSelection] newVerticalScrollView];
     
     itemsView.backgroundColor = [UIColor whiteColor];
     itemsView.datasource = self;
@@ -133,6 +134,7 @@ return self;
         [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.residence vlb_residenceUserId] page:VLB_Integer(1) delegate:wself]];
         [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.residence vlb_residenceUserId] delegate:wself]];
     }];
+    self.itemsView.pullToRefreshView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;    
     self.itemsView.pullToRefreshView.arrowColor = [UIColor whiteColor];
     self.itemsView.pullToRefreshView.textColor = [UIColor whiteColor];
     
@@ -154,7 +156,7 @@ return self;
 
 -(void)close
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)addItem
@@ -165,7 +167,7 @@ return self;
     takePhotoViewController.createItemDelegate = self;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:takePhotoViewController];
-    [self presentModalViewController:navigationController animated:YES];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark AmazonServiceRequestDelegate
@@ -238,7 +240,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 }
  */
 
--(void)didStartUploadingItem:(NSMutableDictionary*) location locality:(NSString*) locality
+-(void)didStartUploadingItem:(NSDictionary*) location locality:(NSString*) locality
 {
 	self.location = location;
 	self.locality = locality;
@@ -327,51 +329,7 @@ return [[VLBUserItemView alloc] initWithFrame:frame];
     NSDictionary* item = [[self.items objectAtIndex:index] objectForKey:@"item"];
     
     VLBUserItemView * userItemView = (VLBUserItemView *)view;
-    [userItemView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"iphoneImageURL"]] placeholderImage:self.defaultItemImage];
-    userItemView.whenLabel.text = [item objectForKey:@"when"];
-    
-    /**
-     {
-     "created_at" = "2013-03-07T19:58:26Z";
-     foursquareid = 4b082a2ff964a520380523e3;
-     id = 265;
-     lat = "55.94223";
-     lng = "-3.18421";
-     name = "The Dagda Bar";
-     "updated_at" = "2013-03-07T19:58:26Z";
-     }
-    */
-    NSDictionary *location = [item objectForKey:@"location"];
-    
-    id name = [location objectForKey:@"name"];
-    if([[NSNull null] isEqual:name]){
-        name = @"";
-    }
-
-    userItemView.storeLabel.text = name;
-    
-    __weak VLBProfileViewController *wself = self;
-    
-    userItemView.didTapOnGetDirectionsButton = ^(CLLocationCoordinate2D destination, NSDictionary *options){        
-        VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTapOnGetDirectionsButton"]];
-
-            wself.didTapOnGetDirectionsButton(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
-                    [[location objectForKey:@"lng"] floatValue]),
-                    location);
-        }];
-        
-        VLBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [VLBAlertViews newAlertViewDelegateOnCancelDismiss];
-        
-        NSObject<UIAlertViewDelegate> *didTapOnGetDirectionsDelegate =
-        [VLBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
-        
-        UIAlertView *alertView = [VLBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:[NSString stringWithFormat:@"Exit the app and get directions to %@.", [location objectForKey:@"name"]]];
-        
-        alertView.delegate = didTapOnGetDirectionsDelegate;
-        
-        [alertView show];
-    };
+    [userItemView viewWillAppear:item];
 }
 
 @end

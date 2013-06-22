@@ -7,21 +7,16 @@
 //
 
 #import "VLBItemView.h"
+#import "VLBMacros.h"
 
 @implementation VLBItemView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (!self) {
-        return nil;
-    }
     
-    NSArray *views = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-                                                   owner:self
-                                                 options:nil];
-    
-    [self addSubview:views[0]];
+    VLB_IF_NOT_SELF_RETURN_NIL()
+    VLB_LOAD_VIEW()
 
 return self;
 }

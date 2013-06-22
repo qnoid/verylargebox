@@ -13,7 +13,7 @@
 
 @protocol VLBCreateItemOperationDelegate <NSObject, AmazonServiceRequestDelegate, VLBNSErrorDelegate>
 
--(void)didStartUploadingItem:(NSMutableDictionary*) location locality:(NSString*) locality;
+-(void)didStartUploadingItem:(NSDictionary*) location locality:(NSString*) locality;
 -(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(long long)totalBytesWritten totalBytesExpectedToWrite:(long long)totalBytesExpectedToWrite;
 -(void)didSucceedWithItem:(NSDictionary*)item;
 -(void)didFailOnItemWithError:(NSError*)error;

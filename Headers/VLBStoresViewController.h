@@ -1,18 +1,16 @@
-/*
- *  Copyright 2010 The Box
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas on 15/11/10.
-
- */
+//  VLBStoresViewController.h
+//  thebox
+//
+//  Created by Markos Charatzas on 15/11/2010.
+//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
+//
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "VLBLocationServiceDelegate.h"
 #import "VLBLocationOperationDelegate.h"
 @class VLBLocationService;
+@protocol QNDAnimatedView;
 
 
 @protocol VLBStoresViewControllerDelegate <NSObject>
@@ -74,8 +72,10 @@
 }
 @property(nonatomic, weak) IBOutlet NSObject<VLBStoresViewControllerDelegate> *delegate;
 
-@property(nonatomic, weak) IBOutlet UITableView *venuesTableView;
 @property(nonatomic, weak) IBOutlet MKMapView *map;
+@property(nonatomic, weak) IBOutlet UISearchBar *searchBar;
+@property(nonatomic, weak) IBOutlet UITableView *venuesTableView;
+@property(nonatomic, weak) IBOutlet UIView<QNDAnimatedView>* animatedVenuesTableView;
 
 +(VLBStoresViewController *)newLocationViewController;
 - (IBAction)cancel:(id)sender;

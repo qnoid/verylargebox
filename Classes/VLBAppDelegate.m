@@ -54,17 +54,20 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a033148
     [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
 
-    [[UITabBar appearance] setTintColor:[VLBColors colorPearlWhite]];
-    [[UITabBar appearance] setSelectedImageTintColor:[VLBColors colorPrimaryBlue]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]} forState:UIControlStateNormal];
+    [[UITabBar appearance] setTintColor:[VLBColors color333333]];
+    [[UITabBar appearance] setSelectedImageTintColor:[VLBColors color0102161]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldTwelve]} forState:UIControlStateNormal];
+    [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
 
     [[UISearchBar appearance] setTintColor:[VLBColors colorPearlWhite]];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.rootViewController =
-        [[UINavigationController alloc] initWithRootViewController:[VLBIdentifyViewController newIdentifyViewController]];
-
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:[VLBIdentifyViewController newIdentifyViewController]];
+    
+    self.window.rootViewController = navigationController;
+    
+    
     [self.window makeKeyAndVisible];
 return YES;
 }

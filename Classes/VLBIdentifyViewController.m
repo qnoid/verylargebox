@@ -29,9 +29,20 @@
 #import "QNDAnimatedView.h"
 #import "VLBSecureHashA1.h"
 
+
+NSString* const VLB_EMAIL_VALIDATION_REGEX =
+@"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+@"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+@"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+@"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+@"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+@"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+@"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+
 @interface VLBIdentifyViewController ()
 @property(nonatomic, strong) NSOperationQueue *operations;
 @property(nonatomic, strong) NSMutableArray* accounts;
+@property(nonatomic, strong) NSMutableArray* emailStatuses;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts;
 @end
@@ -42,7 +53,7 @@
 {
     NSArray* accounts = [SSKeychain accountsForService:THE_BOX_SERVICE];
 
-    VLBIdentifyViewController * identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accounts:[NSMutableArray arrayWithArray:accounts]];
+    VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accounts:[NSMutableArray arrayWithArray:accounts]];
     
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"thebox";
@@ -66,6 +77,11 @@ return identifyViewController;
     
     self.operations = [[NSOperationQueue alloc] init];
     self.accounts = accounts;
+    self.emailStatuses = [NSMutableArray arrayWithCapacity:self.accounts.count];
+    
+    for (id obj in accounts) {
+        [self.emailStatuses addObject:@(VLBEmailStatusDefault)];
+    }
     
 return self;
 }
@@ -81,7 +97,7 @@ return self;
     }];
     
     self.accountsTableView.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 20);
-    self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0);
+    self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(60, 0, 0);
 
     __weak VLBIdentifyViewController *uself = self;
     
@@ -101,7 +117,6 @@ return self;
         [self.navigationController popViewControllerAnimated:YES];
     }];
     
-    [self.identifyButton setImageEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
 
     [self.browseButton onTouchUpInside:^(UIButton *button)
     {
@@ -110,9 +125,9 @@ return self;
         VLBFeedViewController *feedViewController = [VLBFeedViewController newFeedViewController];
 
   	  	UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	  	  [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-	  	  [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
-		    [closeButton addTarget:self action:@selector(dismissViewControllerAnimated) forControlEvents:UIControlEventTouchUpInside];
+        [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
+        [closeButton setImage:[UIImage imageNamed:@"down-arrow.png"] forState:UIControlStateNormal];
+        [closeButton addTarget:self action:@selector(dismissViewControllerAnimated) forControlEvents:UIControlEventTouchUpInside];
 
         feedViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
         
@@ -138,21 +153,44 @@ return self;
 #pragma mark UITextFieldDelegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    [self.identifyButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-return self.identifyButton.enabled;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    self.identifyButton.enabled = textField.text.length - range.length + string.length > 0;
     
-    return YES;
+    [textField resignFirstResponder];
+    
+    NSPredicate *emailValidation = [NSPredicate predicateWithFormat:@"self MATCHES[c] %@", VLB_EMAIL_VALIDATION_REGEX];
+
+    if(![emailValidation evaluateWithObject:textField.text]) {
+    return NO;
+    }
+
+    textField.textColor = [UIColor lightGrayColor];
+    textField.backgroundColor = [UIColor whiteColor];
+    [self.identifyButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    self.identifyButton.enabled = NO;
+
+return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    self.identifyButton.enabled = YES;
-};
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSPredicate *emailValidation = [NSPredicate predicateWithFormat:@"self MATCHES[c] %@", VLB_EMAIL_VALIDATION_REGEX];
+    
+    NSString *resolvedEmail = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    BOOL isValidEmail = [emailValidation evaluateWithObject:resolvedEmail];
+    
+    self.identifyButton.enabled = isValidEmail;
+    
+    if(isValidEmail){
+        textField.textColor = [UIColor whiteColor];
+        textField.backgroundColor = [VLBColors colorPrimaryBlue];
+    }
+    else {
+        textField.textColor = [UIColor lightGrayColor];
+        textField.backgroundColor = [UIColor whiteColor];
+    }
+    
+return YES;
+}
 
 #pragma mark TBVerifyUserOperationDelegate
 -(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence
@@ -161,13 +199,12 @@ return self.identifyButton.enabled;
     
     //thebox should be a property to be shared across every controller
     //the residence should be passed to thebox on a method like didSucceedWithVerificationForEmail:residence
-    VLBProfileViewController *profileViewController = [VLBProfileViewController newProfileViewController:residence email:email];
-    VLBCityViewController *homeGridViewControler = [VLBCityViewController newHomeGridViewController];
-    VLBFeedViewController *feedViewController = [VLBFeedViewController newFeedViewController];
+    UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[VLBProfileViewController newProfileViewController:residence email:email]];
+    UINavigationController *homeGridViewControler = [[UINavigationController alloc] initWithRootViewController:[VLBCityViewController newHomeGridViewController]];
+    UINavigationController *feedViewController = [[UINavigationController alloc] initWithRootViewController:[VLBFeedViewController newFeedViewController]];
 
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:profileViewController], [[UINavigationController alloc] initWithRootViewController:homeGridViewControler], 
-        [[UINavigationController alloc] initWithRootViewController:feedViewController]];
+    tabBarController.viewControllers = @[profileViewController, homeGridViewControler, feedViewController];
     
     [self presentViewController:tabBarController animated:YES completion:nil];
 }
@@ -191,6 +228,11 @@ return self.identifyButton.enabled;
     }
     
     self.accounts = [NSMutableArray arrayWithArray:[SSKeychain accountsForService:THE_BOX_SERVICE]];
+    self.emailStatuses = [NSMutableArray arrayWithCapacity:self.accounts.count];
+    for (id obj in self.accounts) {
+        [self.emailStatuses addObject:@(VLBEmailStatusDefault)];
+    }
+
     [self.accountsTableView reloadData];
     
     UIAlertView* userDidEnterEmailAlertView =
@@ -257,8 +299,11 @@ return [self.accounts count];
     }
     
     NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
+    VLBEmailStatus emailStatus = [[self.emailStatuses objectAtIndex:indexPath.row] intValue];
+
     emailCell.textLabel.text = email;
-    
+    vlbEmailStatus(emailStatus)(emailCell);
+
 return emailCell;
 }
 
@@ -288,25 +333,29 @@ return YES;
 {
     UITableViewCell* tableViewCell = [tableView cellForRowAtIndexPath:indexPath];
     vlbEmailStatus(VLBEmailStatusUnknown)(tableViewCell);
+    [self.emailStatuses setObject:@(VLBEmailStatusUnknown) atIndexedSubscript:indexPath.row];
 
-    __weak NSObject<VLBVerifyUserOperationDelegate> *wself = self;
+    __weak VLBIdentifyViewController *wself = self;
     
     VLBVerifyOperationBlock *verifyOperationBlock = [VLBVerifyOperationBlock new];
     verifyOperationBlock.didSucceedWithVerificationForEmail = ^(NSString* email, NSDictionary* residence)
     {
         vlbEmailStatus(VLBEmailStatusVerified)(tableViewCell);
+        [wself.emailStatuses setObject:@(VLBEmailStatusVerified) atIndexedSubscript:indexPath.row];
         [wself didSucceedWithVerificationForEmail:email residence:residence];
     };
     
     verifyOperationBlock.didFailOnVerifyWithError = ^(NSError* error)
     {
         vlbEmailStatus(VLBEmailStatusUnauthorised)(tableViewCell);
+        [wself.emailStatuses setObject:@(VLBEmailStatusUnauthorised) atIndexedSubscript:indexPath.row];        
         [wself didFailOnVerifyWithError:error];
     };
     
     verifyOperationBlock.didFailWithNotConnectToInternet = ^(NSError *error)
     {
         vlbEmailStatus(VLBEmailStatusError)(tableViewCell);
+        [wself.emailStatuses setObject:@(VLBEmailStatusError) atIndexedSubscript:indexPath.row];
 
         UIAlertView* notConnectedToInternetAlertView =
         [VLBAlertViews newAlertViewWithOk:@"Not Connected to Internet"

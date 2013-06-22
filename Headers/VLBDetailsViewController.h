@@ -1,25 +1,20 @@
-/*
- *  Copyright 2012 TheBox 
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas  on 10/04/2012.
+//  VLBDetailsViewController.h
+//  thebox
+//
+//  Created by Markos Charatzas on 10/04/2012.
+//  Copyright (c) 2012 (verylargebox.com). All rights reserved.
+//
 
- */
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
-#import "VLBLocationServiceDelegate.h"
-#import "VLBUpdateItemOperationDelegate.h"
 
+@class VLBUserItemView;
 
 @interface VLBDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     
 }
 
-@property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
-@property(nonatomic, weak) IBOutlet UILabel* itemWhenLabel;
+@property(nonatomic, weak) IBOutlet VLBUserItemView* userItemView;
 
 +(VLBDetailsViewController *)newDetailsViewController:(NSMutableDictionary*)item;
 

@@ -107,9 +107,6 @@ static NSInteger const FIRST_VIEW_TAG = -1;
     [titleLabel sizeToFit];
 
     homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"city.png"] tag:0];
-
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:homeGridViewController selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     
 return homeGridViewController;
 }
@@ -210,6 +207,10 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:[UIApplication sharedApplication]];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -217,6 +218,13 @@ return self;
     [self.theBoxLocationService notifyDidFindPlacemark:self];
     [self.theBoxLocationService notifyDidFailWithError:self];
     [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
+                                                  object:[UIApplication sharedApplication]];
 }
 
 #pragma mark application events
@@ -340,7 +348,7 @@ return [[VLBItemView alloc] initWithFrame:frame];
     
     UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [backButton setTitle:@"Back" forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"left-arrow.png"] forState:UIControlStateNormal];
 
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
@@ -556,7 +564,7 @@ return storeButton;
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
     
-    [self presentModalViewController:navigationController animated:YES];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark TBLocalitiesTableViewControllerDelegate
@@ -567,7 +575,7 @@ return storeButton;
 
     [self updateTitle:localityName];
 
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     [[VLBQueries newGetLocationsGivenLocalityName:localityName delegate:self] start];
 }
 

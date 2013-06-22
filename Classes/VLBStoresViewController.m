@@ -1,10 +1,8 @@
+//  VLBStoresViewController.m
+//  thebox
 //
-//  Copyright 2010 The Box
-//  All rights reserved.
-//
-//  This file is part of TheBox
-//
-//  Created by Markos Charatzas on 15/11/10.
+//  Created by Markos Charatzas on 15/11/2010.
+//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
 //
 
 #import "VLBStoresViewController.h"
@@ -23,6 +21,8 @@
 #import "VLBErrorBlocks.h"
 #import "VLBColors.h"
 #import "VLBTypography.h"
+#import "QNDAnimations.h"
+#import "QNDAnimatedView.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare";
 static NSString* const foursquarePoweredByType = @"png";
@@ -41,7 +41,7 @@ static UIImage* foursquarePoweredBy;
 
 +(VLBStoresViewController *)newLocationViewController {
 
-		VLBStoresViewController *storesViewController =  [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle]];
+    VLBStoresViewController *storesViewController =  [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle]];
 
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"Select a store";
@@ -54,11 +54,14 @@ static UIImage* foursquarePoweredBy;
 
     UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"down-arrow.png"] forState:UIControlStateNormal];
     [closeButton addTarget:storesViewController action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
 
     storesViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
 
+    [[NSNotificationCenter defaultCenter] addObserver:storesViewController selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:storesViewController selector:@selector(keyboardWillHide:) name:@"UIKeyboardWillHideNotification" object:nil];
 
 return storesViewController;
 }
@@ -69,16 +72,19 @@ return storesViewController;
     foursquarePoweredBy = [UIImage imageWithContentsOfFile:path];
 }
 
-@synthesize venuesTableView;
-@synthesize map;
-@synthesize theBoxLocationService;
-@synthesize venues;
-
-
 -(void)dealloc
 {
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
 	[self.theBoxLocationService dontNotifyDidFailWithError:self];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"UIKeyboardWillShowNotification"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"UIKeyboardWillHideNotification"
+                                                  object:nil];
+
 }
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil
@@ -94,6 +100,31 @@ return storesViewController;
 return self;
 }
 
+-(void)keyboardWillShow:(NSNotification*)notification
+{
+    UIButton* dismissSearchBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [dismissSearchBarButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [dismissSearchBarButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+    [dismissSearchBarButton addTarget:self action:@selector(dismissSearchBar:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:dismissSearchBarButton];
+
+    __weak VLBStoresViewController *wself = self;
+    [self.animatedVenuesTableView animateWithDuration:0.2 animation:^(UIView *view) {
+        wself.animatedVenuesTableView.frame = CGRectMake(0, 44, 320, wself.view.bounds.size.height - 44);
+    }];
+}
+
+-(void)keyboardWillHide:(NSNotification*)notification
+{
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+-(void)dismissSearchBar:(id)sender
+{
+    [self.animatedVenuesTableView rewind];
+    [self.searchBar resignFirstResponder];
+}
 
 -(void) viewDidLoad
 {
@@ -125,22 +156,19 @@ return self;
 
 - (IBAction)cancel:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
     DDLogError(@"%s %@", __PRETTY_FUNCTION__, notification);
-    NSError* error = [VLBNotifications error:notification];
-
-    if([kCLErrorDomain isEqual:error.domain]){
-        DDLogWarn(@"%@", error);
-    return;
-    }
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
     __block VLBAlertViewDelegate *alertViewDelegate;
     alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
         alertViewDelegate = nil;
     }];
     
@@ -153,6 +181,8 @@ return self;
 
 -(void)didUpdateToLocation:(NSNotification *)notification;
 {
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
+
     [self.hud hide:YES];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
@@ -167,8 +197,8 @@ return self;
     
     [operation start];
     
-	[map setRegion:newRegion];
-    map.showsUserLocation = YES;
+	[self.map setRegion:newRegion];
+    self.map.showsUserLocation = YES;
     
     self.hud = [MBProgressHUD showHUDAddedTo:self.venuesTableView animated:YES];
     self.hud.labelText = [NSString stringWithFormat:@"Finding stores nearby"];
@@ -255,7 +285,7 @@ return cell;
 
 	[self.delegate didSelectStore:store];
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -269,7 +299,7 @@ return cell;
     [searchBar resignFirstResponder];
     NSString* query = searchBar.text;
     
-    CLLocation* userLocation = map.userLocation.location;
+    CLLocation* userLocation = self.map.userLocation.location;
     
     AFHTTPRequestOperation* operation = [VLBQueries newLocationQuery:userLocation.coordinate.latitude longtitude:userLocation.coordinate.longitude query:query delegate:self];
     

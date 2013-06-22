@@ -7,6 +7,7 @@
 //
 
 #import "VLBLocalitiesTableViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "VLBTableViewDataSourceBuilder.h"
 #import "VLBTableViewDelegateBuilder.h"
 #import "VLBQueries.h"
@@ -33,20 +34,19 @@
     titleLabel.textColor = [UIColor blackColor];
     titleLabel.backgroundColor = [UIColor clearColor];
 		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    titleLabel.adjustsFontSizeToFitWidth = YES;
     availablePlacesViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
     UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"down-arrow.png"] forState:UIControlStateNormal];
     [closeButton addTarget:availablePlacesViewController action:@selector(dismissViewControllerAnimated) forControlEvents:UIControlEventTouchUpInside];
 
     availablePlacesViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
 
 return availablePlacesViewController;
 }
-
 
 -(void)dismissViewControllerAnimated
 {
@@ -121,6 +121,7 @@ return availablePlacesViewController;
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [VLBColors colorDarkGrey];
+    self.tableView.layer.sublayerTransform = CATransform3DMakeTranslation(35, 0, 0);
 
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
@@ -151,6 +152,10 @@ return availablePlacesViewController;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [self.tableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 80.0;
 }
 
 @end

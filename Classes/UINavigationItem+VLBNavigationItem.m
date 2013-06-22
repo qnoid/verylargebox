@@ -15,7 +15,7 @@ VLBNavigationItemAction TBNavigationItemActionDismissViewControllerAnimatedOnLef
                                           initWithTitle:@"Dismiss"
                                           style:UIBarButtonItemStylePlain
                                           target:target
-                                          action:@selector(dismissViewControllerAnimated)];
+                                          action:@selector(dismissViewControllerAnimated:completion:)];
         
         navigationItem.leftBarButtonItem = dismissButton;
 };

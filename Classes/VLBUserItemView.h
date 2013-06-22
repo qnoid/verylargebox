@@ -68,11 +68,11 @@ return tbUserItemViewGetDirectionsWithGoogleMaps();
 
 @interface VLBUserItemView : UIView <VLBViewDrawRectDelegate>
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
-@property(nonatomic, weak) IBOutlet UIView* detailView;
 @property(nonatomic, weak) IBOutlet UILabel* whenLabel;
 @property(nonatomic, weak) IBOutlet UILabel* storeLabel;
 @property(nonatomic, copy) VLBUserItemViewGetDirections didTapOnGetDirectionsButton;
 
+-(void)viewWillAppear:(NSDictionary*)item;
 -(IBAction)didTapOnGetDirectionsButton:(id)sender;
 
 @end

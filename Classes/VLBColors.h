@@ -10,10 +10,12 @@
 
 @interface VLBColors : NSObject
 
++(UIColor*)color333333;
 +(UIColor*)colorDarkGreen;
 +(UIColor*)colorLightGreen;
 +(UIColor*)colorDarkGrey;
 +(UIColor*)colorLightGrey;
 +(UIColor*)colorPearlWhite;
 +(UIColor*)colorPrimaryBlue;
++(UIColor*)color0102161;
 @end
