@@ -21,8 +21,6 @@
 
 /**
  
- When done, if the locality hasn't resolved, the user will be prompted to select one of the existing ones, 
- or asked to get a fix on her location.
  */
 @interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBStoresViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, VLBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate>
 {

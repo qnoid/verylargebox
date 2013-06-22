@@ -34,7 +34,6 @@ static CGFloat const IMAGE_HEIGHT = 480.0;
 @property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, assign) NSUInteger userId;
-@property(nonatomic, assign) BOOL hasAskedForLocality;
 @end
 
 @implementation VLBTakePhotoViewController
@@ -92,7 +91,6 @@ return newUploadUIViewController;
     self.theBoxLocationService = [VLBLocationService theBoxLocationService];
     self.thebox = thebox;
     self.userId = userId;
-    self.hasAskedForLocality = NO;
 
 return self;
 }
@@ -140,22 +138,6 @@ return self;
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-
-    if(self.hasAskedForLocality || self.locality != nil){
-        return;
-    }
-    
-    VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
-    
-    localitiesViewController.delegate = self;
-    
-    UINavigationController *navigationController =
-    [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
-    
-    __weak VLBTakePhotoViewController *wself = self;
-    [self presentViewController:navigationController animated:YES completion:^{
-        wself.hasAskedForLocality = YES;
-    }];
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
@@ -179,22 +161,6 @@ return self;
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-
-    if(self.hasAskedForLocality || self.locality != nil){
-        return;
-    }
-
-    VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
-    
-    localitiesViewController.delegate = self;
-    
-    UINavigationController *navigationController =
-    [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
-    
-    __weak VLBTakePhotoViewController *wself = self;
-    [self presentViewController:navigationController animated:YES completion:^{
-        wself.hasAskedForLocality = YES;
-    }];
 }
 
 #pragma mark TBLocalitiesTableViewControllerDelegate
