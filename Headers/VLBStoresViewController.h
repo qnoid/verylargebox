@@ -7,6 +7,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <QuartzCore/QuartzCore.h>
 #import "VLBLocationServiceDelegate.h"
 #import "VLBLocationOperationDelegate.h"
 @class VLBLocationService;
@@ -75,7 +76,6 @@
 @property(nonatomic, weak) IBOutlet MKMapView *map;
 @property(nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property(nonatomic, weak) IBOutlet UITableView *venuesTableView;
-@property(nonatomic, weak) IBOutlet UIView<QNDAnimatedView>* animatedVenuesTableView;
 
 +(VLBStoresViewController *)newLocationViewController;
 - (IBAction)cancel:(id)sender;

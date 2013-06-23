@@ -9,11 +9,13 @@
  */
 #import <Foundation/Foundation.h>
 
+typedef id(^VLBMapBlock)(id obj, NSUInteger idx);
 
 @interface NSArray (VLBDecorator)
 
 - (BOOL)vlb_isEmpty;
 - (BOOL)vlb_isLast:(id)anObject;
 - (id)vlb_next:(id)anObject;
+-(NSArray*)vlb_map:(VLBMapBlock)block;
 
 @end

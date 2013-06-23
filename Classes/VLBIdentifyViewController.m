@@ -90,12 +90,6 @@ return self;
 {
     [super viewDidLoad];
     
-    
-    UIView<QNDAnimatedView> *accountsTableView = [[QNDAnimations new] animateView:self.accountsTableView];
-    [accountsTableView addViewAnimationBlockWithDuration:0.5 animation:^(UIView *view) {
-        view.frame = CGRectMake(0, 124, 320, 94);
-    }];
-    
     self.accountsTableView.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 20);
     self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(60, 0, 0);
 

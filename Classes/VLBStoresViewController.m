@@ -23,6 +23,7 @@
 #import "VLBTypography.h"
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
+#import "NSArray+VLBDecorator.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare";
 static NSString* const foursquarePoweredByType = @"png";
@@ -32,7 +33,7 @@ static UIImage* foursquarePoweredBy;
 @interface VLBStoresViewController ()
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSArray* venues;
-
+@property(nonatomic, strong) NSObject<QNDAnimatedView> *animatedMap;
 @property(nonatomic, weak) MBProgressHUD *hud;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @end
@@ -109,20 +110,36 @@ return self;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:dismissSearchBarButton];
 
-    __weak VLBStoresViewController *wself = self;
-    [self.animatedVenuesTableView animateWithDuration:0.2 animation:^(UIView *view) {
-        wself.animatedVenuesTableView.frame = CGRectMake(0, 44, 320, wself.view.bounds.size.height - 44);
+    NSValue *value = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    [self.animatedMap animateWithDuration:0.5 animation:^(UIView *view) {
+        view.frame = CGRectMake(0, -view.frame.size.height, view.frame.size.width, view.frame.size.height);
     }];
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.venuesTableView.contentInset = self.venuesTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, value.CGRectValue.size.height, 0);        
+    }];
+
 }
 
 -(void)keyboardWillHide:(NSNotification*)notification
 {
+    [self.animatedMap rewind];
+    self.venuesTableView.contentInset = self.venuesTableView.scrollIndicatorInsets = UIEdgeInsetsMake(205, 0, 0, 0);
+    
+    CGRect visibleRect;
+    visibleRect.origin = self.venuesTableView.bounds.origin;
+    visibleRect.size = CGSizeMake(self.venuesTableView.bounds.size.width,
+                                  self.venuesTableView.bounds.size.height - self.venuesTableView.contentInset.top +
+                                  self.venuesTableView.bounds.origin.y);
+    
+    //CGRectMake(0, 0, 320, 392 - 205)
+    [self.venuesTableView scrollRectToVisible:visibleRect animated:YES];
     self.navigationItem.rightBarButtonItem = nil;
 }
 
 -(void)dismissSearchBar:(id)sender
 {
-    [self.animatedVenuesTableView rewind];
     [self.searchBar resignFirstResponder];
 }
 
@@ -132,7 +149,11 @@ return self;
     imageView.frame = CGRectMake(0, 0, 320, 121);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     
+    self.searchBar.layer.zPosition = 1;
+    self.animatedMap = [[QNDAnimations new] animateView:self.map];    
+
     self.venuesTableView.tableFooterView = imageView;
+    self.venuesTableView.contentInset = UIEdgeInsetsMake(205, 0, 0, 0);
     
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -200,7 +221,7 @@ return self;
 	[self.map setRegion:newRegion];
     self.map.showsUserLocation = YES;
     
-    self.hud = [MBProgressHUD showHUDAddedTo:self.venuesTableView animated:YES];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.hud.labelText = [NSString stringWithFormat:@"Finding stores nearby"];
 }
 
