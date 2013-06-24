@@ -1,12 +1,12 @@
 //
-//  Copyright 2010 The Box
-//  All rights reserved.
 //
-//  This file is part of TheBox
+//  VLBCityViewController.m
+//  thebox
 //
 //  Created by Markos Charatzas on 23/11/2010.
+//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
 //
-//
+
 
 #import <QuartzCore/QuartzCore.h>
 #import "VLBCityViewController.h"
@@ -172,8 +172,8 @@ return self;
     locationsView.scrollViewDelegate = self;
     locationsView.showsHorizontalScrollIndicator = NO;
     locationsView.enableSeeking = YES;
-//    locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 0.0f);
-//    locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
+    locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 0.0f);
+    locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
 
     VLBGridView * itemsView = [VLBGridView newVerticalGridView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) viewsOf:160.0];
 
@@ -419,6 +419,8 @@ return storeButton;
     if(![self.locationsView isEqual:scrollView]){
         return;
     }
+
+    index += 1;
 
     if(self.index == index){
         return;

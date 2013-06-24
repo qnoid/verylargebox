@@ -24,7 +24,7 @@
 #import "NSDictionary+VLBDictionary.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
-static CGFloat const IMAGE_HEIGHT = 480.0;
+static CGFloat const IMAGE_HEIGHT = 640.0;
 
 @interface VLBTakePhotoViewController ()
 @property(nonatomic, strong) VLBTheBox* thebox;

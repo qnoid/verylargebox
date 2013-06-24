@@ -68,6 +68,8 @@ return CGPointMake(whole + value, foo);
 
 -(CGPoint)pointOf:(NSUInteger)index;
 
+-(CGPoint)pointOf:(NSUInteger)index offset:(UIEdgeInsets)edgeInsets;
+
 /*
  Dimension implementations set the point closer
  to their whole number like a piecewise function where
@@ -81,6 +83,8 @@ return CGPointMake(whole + value, foo);
  @param point
  */
 -(void)moveCloserToWhole:(inout CGPoint*)point;
+
+-(void)moveCloserToWhole:(inout CGPoint*)point offset:(UIEdgeInsets)edgeInsets;
 
 @end
 

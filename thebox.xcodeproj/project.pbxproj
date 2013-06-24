@@ -43,7 +43,6 @@
 		9083640D1400752A00E5AAAF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 908363A61400659200E5AAAF /* libz.dylib */; };
 		9089482515533980009188B4 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9089482415533980009188B4 /* libTestFlight.a */; };
 		9089482A155349DE009188B4 /* NSDictionary+VLBDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 90894829155349DE009188B4 /* NSDictionary+VLBDictionary.m */; };
-		9096CC09133BB81E00639685 /* VLBQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* VLBQueries.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90A1E51E133CC10000CC9212 /* VLBCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E51D133CC10000CC9212 /* VLBCache.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90A5FCD11387CC1F004E65B3 /* VLBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* VLBGridView.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90A6C4541300822C00AEEE9F /* VLBScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A6C4521300822C00AEEE9F /* VLBScrollView.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -106,7 +105,6 @@
 		BD2A8AAC175AD9360036A852 /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
 		BD2A8AAE175B3DE00036A852 /* XRay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2A8AAD175B3DE00036A852 /* XRay.framework */; };
 		BD2A8AB1175B413D0036A852 /* VLBCityViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */; };
-		BD2A8AB2175B42830036A852 /* VLBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* VLBCityViewController.m */; };
 		BD2A8AB3175B42910036A852 /* VLBDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* VLBDetailsViewController.m */; };
 		BD2A8AB5175B429B0036A852 /* VLBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* VLBButton.m */; };
 		BD2A8AB6175B42A00036A852 /* VLBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0B165AD1150068C749 /* VLBColors.m */; };
@@ -247,6 +245,11 @@
 		BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926D1775F7A700FFC41F /* refresh-mini.png */; };
 		BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
 		BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF825C016FDFCEA003B3003 /* AddressBook.framework */; };
+		BDFBA12A177829C500A59BCF /* VLBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* VLBCityViewController.m */; };
+		BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
+		BDFBA12C177829CF00A59BCF /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
+		BDFBA12D177829D700A59BCF /* VLBQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* VLBQueries.m */; };
+		BDFBA12E177829D800A59BCF /* VLBQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* VLBQueries.m */; };
 		FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */; };
 /* End PBXBuildFile section */
 
@@ -1408,7 +1411,6 @@
 				90D9A96412B924130063FF60 /* VLBMath.m in Sources */,
 				90A6C4541300822C00AEEE9F /* VLBScrollView.m in Sources */,
 				90F08273132AED5200E7E35F /* UITextField+VLBTextField.m in Sources */,
-				9096CC09133BB81E00639685 /* VLBQueries.m in Sources */,
 				90A1E51E133CC10000CC9212 /* VLBCache.m in Sources */,
 				90226B91135999D1006E43EC /* VLBBinarySearch.m in Sources */,
 				90226C6E1359B1DB006E43EC /* VLBPredicates.m in Sources */,
@@ -1448,6 +1450,7 @@
 				BDE4925C1775132300FFC41F /* NSDictionary+VLBItem.m in Sources */,
 				BDE4925F1775142E00FFC41F /* NSDictionary+VLBLocation.m in Sources */,
 				BDE492651775B89200FFC41F /* NSDictionary+VLBLocality.m in Sources */,
+				BDFBA12E177829D800A59BCF /* VLBQueries.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1479,7 +1482,6 @@
 				BD9F24EB175A4302009D212F /* VLBPolygonTest.m in Sources */,
 				BD1D000E175A4A18009B0829 /* VLBPolygon.m in Sources */,
 				BD2A8AB1175B413D0036A852 /* VLBCityViewControllerTest.m in Sources */,
-				BD2A8AB2175B42830036A852 /* VLBCityViewController.m in Sources */,
 				BD2A8AB3175B42910036A852 /* VLBDetailsViewController.m in Sources */,
 				BD2A8AB5175B429B0036A852 /* VLBButton.m in Sources */,
 				BD2A8AB6175B42A00036A852 /* VLBColors.m in Sources */,
@@ -1496,6 +1498,10 @@
 				BD6BE05D175B570900B93854 /* VLBViews.m in Sources */,
 				BD8BB289176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */,
 				BDAE3C56176E04AC0037734C /* VLBTheBox.m in Sources */,
+				BDFBA12A177829C500A59BCF /* VLBCityViewController.m in Sources */,
+				BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */,
+				BDFBA12C177829CF00A59BCF /* VLBTypography.m in Sources */,
+				BDFBA12D177829D700A59BCF /* VLBQueries.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

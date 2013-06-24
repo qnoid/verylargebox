@@ -183,7 +183,7 @@ return self;
 
     CGRect bounds = [self bounds];
     DDLogVerbose(@"layoutSubviews on bounds %@", NSStringFromCGRect(bounds));
-
+    
 	[self recycleVisibleViewsWithinBounds:bounds];
 	[self removeRecycledFromVisibleViews];
 	[self displayViewsWithinBounds:bounds];
@@ -284,12 +284,8 @@ return view;
         return;
     }
     
-    CGPoint point = [self.dimension pointOf:index];
-    
-    /*
-     CGPointMake(point.x - self.contentInset.left,
-     point.y - self.contentInset.top)
-     */
+    CGPoint point = [self.dimension pointOf:index offset:self.contentInset];
+        
     [self.scrollViewDelegate didSelectView:self atIndex:index point:point];
 }
 
@@ -303,10 +299,11 @@ return view;
         return;
     }
 
-    [self.dimension moveCloserToWhole:targetContentOffset];
+    [self.dimension moveCloserToWhole:targetContentOffset offset:self.contentInset];
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
     [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:scrollView.bounds.origin]];
 }
 

@@ -1,12 +1,12 @@
 //
-//  Copyright 2012 TheBox 
-//  All rights reserved.
 //
-//  This file is part of TheBox
+//  VLBBinarySearchTest.m
+//  thebox
 //
 //  Created by Markos Charatzas on 16/04/2011.
+//  Copyright (c) 2011 (verylargebox.com). All rights reserved.
+//
 
- */
 #import <SenTestingKit/SenTestingKit.h>
 #import "VLBBinarySearch.h"
 #import "VLBTestRanking.h"

@@ -1,13 +1,11 @@
 //
-//  Copyright 2010 The Box
-//  All rights reserved.
+//  VLBRecycleStrategyTest.m
+//  thebox
 //
-//  This file is part of TheBox
+//  Created by Markos Charatzas on 15/12/2010.
+//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
 //
-//  Created by Markos Charatzas on 15/12/10.
 
- */
-   
 #import <SenTestingKit/SenTestingKit.h>
 #import "VLBRecycleStrategy.h"
 #import "VLBTestViews.h"

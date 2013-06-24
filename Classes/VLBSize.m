@@ -1,11 +1,10 @@
 //
-//  Copyright 2010 The Box
-//  All rights reserved.
 //
-//  This file is part of TheBox
+//  VLBSize.m
+//  thebox
 //
-//  Created by Markos Charatzas on 13/12/10.
-//
+//  Created by Markos Charatzas on 13/12/2010.
+//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
 //
 
 #import "VLBSize.h"
@@ -29,11 +28,8 @@
 return self;
 }
 
--(NSInteger)floorIndexOf:(CGPoint)point
-{
-	NSInteger visibleWindowStart = point.y;
-	
-return floor(visibleWindowStart / value);
+-(NSInteger)floorIndexOf:(CGPoint)point{
+return floor(point.y / value);
 }
 
 -(NSInteger)ceilIndexOf:(CGRect)rect
@@ -59,6 +55,25 @@ return CGRectMake(bounds.origin.x, index * self.value, bounds.size.width, self.v
 return CGPointMake(0, self.value * index);
 }
 
+-(CGPoint)pointOf:(NSUInteger)index offset:(UIEdgeInsets)edgeInsets {
+    return CGPointMake((self.value * index) - edgeInsets.top, 0);
+}
+
+-(void)moveCloserToWhole:(inout CGPoint*)point offset:(UIEdgeInsets)edgeInsets
+{
+    float average = self.value / 2.0 + edgeInsets.top / 2.0;
+    
+    float mod = fmod(point->y, self.value);
+    float whole = point->y - mod;
+    
+    if(mod <= average){
+        point->y = whole;
+    return;
+    }
+    
+    point->y = whole + self.value;
+}
+
 -(void)moveCloserToWhole:(inout CGPoint*)point
 {
     float average = self.value / 2.0;
@@ -68,7 +83,7 @@ return CGPointMake(0, self.value * index);
     
     if(mod <= average){
         point->y = whole;
-    return;
+        return;
     }
     
     point->y = whole + self.value;
@@ -100,7 +115,7 @@ return self;
 }
 
 -(NSInteger)floorIndexOf:(CGPoint)point{
-return floor( abs(point.x) / value);
+return floor( point.x / value);
 }
 
 -(NSInteger)ceilIndexOf:(CGRect)rect
@@ -126,6 +141,10 @@ return CGRectMake(index * self.value, bounds.origin.y, self.value, bounds.size.h
 return CGPointMake(self.value * index, 0);
 }
 
+-(CGPoint)pointOf:(NSUInteger)index offset:(UIEdgeInsets)edgeInsets {
+    return CGPointMake((self.value * index) - edgeInsets.left, 0);
+}
+
 -(void)moveCloserToWhole:(inout CGPoint*)point
 {
     float average = self.value / 2.0;
@@ -139,6 +158,21 @@ return CGPointMake(self.value * index, 0);
     }
     
     point->x = whole + self.value;
+}
+
+-(void)moveCloserToWhole:(inout CGPoint*)point  offset:(UIEdgeInsets)edgeInsets
+{
+    float average = self.value / 2.0;
+    
+    float mod = fmod(point->x, self.value);
+    float whole = point->x - mod;
+    
+    if(mod <= average){
+        point->x = whole - edgeInsets.left;
+        return;
+    }
+    
+    point->x = whole + self.value - edgeInsets.left;
 }
 
 -(NSString *) description{
