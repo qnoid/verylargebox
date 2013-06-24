@@ -420,8 +420,6 @@ return storeButton;
         return;
     }
 
-    index += 1;
-
     if(self.index == index){
         return;
     }

@@ -304,11 +304,19 @@ return view;
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:scrollView.bounds.origin]];
+    CGPoint point = CGPointMake(scrollView.bounds.origin.x + self.contentInset.left,
+                                scrollView.bounds.origin.y + self.contentInset.top);
+    
+    [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:point]];
 }
 
--(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:scrollView.bounds.origin]];    
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    CGPoint point = CGPointMake(scrollView.bounds.origin.x + self.contentInset.left,
+                                scrollView.bounds.origin.y + self.contentInset.top);
+    
+
+    [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:point]];
 }
 
 @end
