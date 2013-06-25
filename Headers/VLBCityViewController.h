@@ -1,12 +1,11 @@
-/*
- *  Copyright 2010 The Box
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas on 23/11/10.
-
- */
+//
+//
+//  VLBCityViewController.h
+//  thebox
+//
+//  Created by Markos Charatzas on 23/11/2010.
+//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
+//
 #import "VLBGridViewController.h"
 #import "VLBLocationServiceDelegate.h"
 #import "VLBItemsOperationDelegate.h"
