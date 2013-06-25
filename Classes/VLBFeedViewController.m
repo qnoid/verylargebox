@@ -107,7 +107,8 @@ return localityItemsViewController;
     
     self.itemsView = itemsView;
     self.view = itemsView;
-    self.view.backgroundColor = [VLBColors colorDarkGrey];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+
 }
 
 - (void)viewDidLoad

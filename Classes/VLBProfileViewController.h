@@ -12,6 +12,10 @@
 #import "VLBItemsOperationDelegate.h"
 #import "VLBLocationServiceDelegate.h"
 
+/**
+ 
+ Subsequent requests to post an item on the server are queued and processed in a FIFO order.
+ */
 @interface VLBProfileViewController : UIViewController <VLBCreateItemOperationDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate>
 
 +(VLBProfileViewController *)newProfileViewController:(NSDictionary*)residence email:(NSString*)email;

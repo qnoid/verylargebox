@@ -89,6 +89,7 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
     self.accountsTableView.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 20);
     self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(60, 0, 0);

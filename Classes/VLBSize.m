@@ -28,8 +28,13 @@
 return self;
 }
 
--(NSInteger)floorIndexOf:(CGPoint)point{
-return floor(point.y / value);
+-(NSInteger)floorIndexOf:(CGPoint)point
+{
+    if(point.y < 0){
+        return 0;
+    }
+    
+return floorf( point.y / value);
 }
 
 -(NSInteger)ceilIndexOf:(CGRect)rect
@@ -61,9 +66,9 @@ return CGPointMake(0, self.value * index);
 
 -(void)moveCloserToWhole:(inout CGPoint*)point offset:(UIEdgeInsets)edgeInsets
 {
-    float average = self.value / 2.0 + edgeInsets.top / 2.0;
+    float average = self.value / 2.0;
     
-    float mod = fmod(point->y, self.value);
+    float mod = fmod(point->y + edgeInsets.top, self.value);
     float whole = point->y - mod;
     
     if(mod <= average){
@@ -114,8 +119,11 @@ return [NSString stringWithFormat:@"%f", value];
 return self;
 }
 
--(NSInteger)floorIndexOf:(CGPoint)point{
-return floor( point.x / value);
+-(NSInteger)floorIndexOf:(CGPoint)point {
+    if(point.x < 0)
+        return 0;
+    
+return floorf( point.x / value);
 }
 
 -(NSInteger)ceilIndexOf:(CGRect)rect
@@ -164,15 +172,15 @@ return CGPointMake(self.value * index, 0);
 {
     float average = self.value / 2.0;
     
-    float mod = fmod(point->x, self.value);
+    float mod = fmod(point->x + edgeInsets.left, self.value);
     float whole = point->x - mod;
     
     if(mod <= average){
-        point->x = whole - edgeInsets.left;
+        point->x = whole;
         return;
     }
     
-    point->x = whole + self.value - edgeInsets.left;
+    point->x = whole + self.value;
 }
 
 -(NSString *) description{

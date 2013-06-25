@@ -22,9 +22,27 @@
 #import "VLBTypography.h"
 #import "NSDictionary+VLBLocation.h"
 #import "NSDictionary+VLBDictionary.h"
+#import "QNDAnimations.h"
+#import "QNDAnimatedView.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
+
+
+NS_INLINE
+QNDViewAnimation* viewAnimationWillAnimateImageViewAlpha()
+{
+return [[[[QNDViewAnimationBuilder alloc] initWithViewAnimationBlock:^(UIView *view) {
+        UIButton*button = (UIButton*)view;
+        button.imageView.alpha = 0.1;
+    }] config:^(QNDViewAnimationBuilder *builder) {
+        builder.duration = 1.0;
+        builder.options = UIViewAnimationOptionCurveEaseInOut |
+                            UIViewAnimationOptionRepeat |
+                            UIViewAnimationOptionAutoreverse |
+                            UIViewAnimationOptionAllowUserInteraction;
+    }] newViewAnimation];
+}
 
 @interface VLBTakePhotoViewController ()
 @property(nonatomic, strong) VLBTheBox* thebox;
@@ -97,12 +115,22 @@ return newUploadUIViewController;
 return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
+
+    [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton completion:nil];
+    [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
     
-    if(self.itemImage){
-        self.itemImageView.image = self.itemImage;
+    if(self.itemImage)
+    {
+        self.itemImageView.image = self.itemImage;        
+        self.takePhotoButton.imageView.alpha = 1.0;
     }
     
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
@@ -224,12 +252,14 @@ return self;
 
 -(void)didSelectStore:(NSMutableDictionary *)store
 {
+    self.locationButton.imageView.alpha = 1.0;
+
     DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, store);
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     
     self.hasCoordinates = YES;
     self.location = store;
-    self.locality = [[self.location objectForKey:@"location"] vlb_objectForKey:@"city" ifNil:self.locality];
+    self.locality = self.locality;
 
 	NSString *locationName = [self.location vlb_objectForKey:@"name"];
     

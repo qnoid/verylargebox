@@ -121,7 +121,6 @@ return availablePlacesViewController;
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [VLBColors colorDarkGrey];
-    self.tableView.layer.sublayerTransform = CATransform3DMakeTranslation(35, 0, 0);
 
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }

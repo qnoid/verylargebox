@@ -163,7 +163,7 @@ return self;
                                                             CGPointZero.y,
                                                             applicationFrame.size.width,
                                                             applicationFrame.size.height - 44.0 - 49.0)];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
     VLBScrollView * locationsView = [[[[VLBScrollViewBuilder alloc] initWith:CGRectMake(CGPointZero.x, CGPointZero.y, applicationFrame.size.width, LOCATIONS_VIEW_HEIGHT) viewsOf:LOCATIONS_VIEW_WIDTH] allowSelection] newHorizontalScrollView];
     
@@ -172,7 +172,7 @@ return self;
     locationsView.scrollViewDelegate = self;
     locationsView.showsHorizontalScrollIndicator = NO;
     locationsView.enableSeeking = YES;
-    locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 0.0f);
+    locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 100.0f);
     locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
 
     VLBGridView * itemsView = [VLBGridView newVerticalGridView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) viewsOf:160.0];
@@ -260,6 +260,8 @@ return self;
         [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
     }
 
+    [self.operationQueue cancelAllOperations];
+    
     NSDictionary* currentLocation = [self.locations objectAtIndex:self.index];
     NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
     

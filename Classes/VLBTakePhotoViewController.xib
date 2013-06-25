@@ -110,10 +110,6 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUILineBreakMode">0</int>
 								<reference key="IBUIHighlightedTitleColor" ref="266439788"/>
-								<object class="NSColor" key="IBUIHighlightedTitleShadowColor">
-									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MC42OTM5NzIzOTk2IDAuMzgwNDczODUwNiAwLjE3MTQ3NDgxOAA</bytes>
-								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="317609350"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -386,11 +382,11 @@
 				<string key="112.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="18.CustomClassName">VLBButton</string>
 				<string key="18.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="18.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="18.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="70.CustomClassName">VLBButton</string>
 				<string key="70.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="1" key="70.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
-				<real value="1" key="70.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="70.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="cu9-E6-1Iw.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>

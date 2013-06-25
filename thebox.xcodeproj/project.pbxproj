@@ -244,6 +244,8 @@
 		BDE4926E1775F7A700FFC41F /* refresh-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */; };
 		BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926D1775F7A700FFC41F /* refresh-mini.png */; };
 		BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
+		BDF2FD03177A1EC100941B7F /* hexabump@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD02177A1EC100941B7F /* hexabump@2X.png */; };
+		BDF2FD05177A2BB500941B7F /* hexabump.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD04177A2BB500941B7F /* hexabump.png */; };
 		BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF825C016FDFCEA003B3003 /* AddressBook.framework */; };
 		BDFBA12A177829C500A59BCF /* VLBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* VLBCityViewController.m */; };
 		BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
@@ -522,6 +524,8 @@
 		BDE4926D1775F7A700FFC41F /* refresh-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-mini.png"; path = "Supporting Files/refresh-mini.png"; sourceTree = "<group>"; };
 		BDF0F42316C8254B002CDE8E /* VLBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBVerifyOperationBlock.h; path = ../Classes/VLBVerifyOperationBlock.h; sourceTree = "<group>"; };
 		BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVerifyOperationBlock.m; sourceTree = "<group>"; };
+		BDF2FD02177A1EC100941B7F /* hexabump@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hexabump@2X.png"; sourceTree = "<group>"; };
+		BDF2FD04177A2BB500941B7F /* hexabump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hexabump.png; sourceTree = "<group>"; };
 		BDF825C016FDFCEA003B3003 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		BDF825C216FFAC59003B3003 /* VLBLocalityOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLBLocalityOperationDelegate.h; sourceTree = "<group>"; };
 		C01FCF5008A954540054247D /* VLBCanIndexLocationInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBCanIndexLocationInView.h; sourceTree = "<group>"; };
@@ -921,6 +925,8 @@
 				90E3592A1546333700075ABF /* default_item_thumb.png */,
 				BD5CB777177119E800BC21D1 /* navigationbar.png */,
 				BD5CB778177119E800BC21D1 /* navigationbar@2x.png */,
+				BDF2FD04177A2BB500941B7F /* hexabump.png */,
+				BDF2FD02177A1EC100941B7F /* hexabump@2X.png */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1241,6 +1247,8 @@
 				BDE4926B1775DD7900FFC41F /* take-photo.png in Resources */,
 				BDE4926E1775F7A700FFC41F /* refresh-mini@2x.png in Resources */,
 				BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */,
+				BDF2FD03177A1EC100941B7F /* hexabump@2X.png in Resources */,
+				BDF2FD05177A2BB500941B7F /* hexabump.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

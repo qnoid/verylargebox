@@ -118,7 +118,7 @@ return self;
     self.itemsView = itemsView;
     self.notificationAnimatedView = notificationAnimatedView;
     self.progressView = progressView.progressView;
-    self.view.backgroundColor = [VLBColors colorDarkGrey];    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 }
 
 - (void)viewDidLoad
@@ -188,7 +188,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
                                                                 user:[self.residence vlb_residenceUserId]
                                                             delegate:self];
 
-	[itemQuery start];
+	[self.operationQueue addOperation:itemQuery];
 }
 
 -(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error{
