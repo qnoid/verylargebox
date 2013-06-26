@@ -232,7 +232,8 @@ return self;
 
 - (IBAction)takePhoto:(id)sender 
 {
-    [self.cameraView takePicture:sender];
+    [self.cameraView takePicture:^(NSError *error) {
+    }];
 }
 
 - (IBAction)enterLocation:(id)sender

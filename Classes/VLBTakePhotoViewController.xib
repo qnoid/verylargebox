@@ -42,6 +42,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 7}, {320, 320}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="597228640"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -51,16 +52,13 @@
 						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">take-photo.png</string>
-						</object>
 					</object>
 					<object class="IBUIView" id="597228640">
 						<reference key="NSNextResponder" ref="841466699"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 7}, {320, 320}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="573458467"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -81,6 +79,7 @@
 								<int key="NSvFlags">288</int>
 								<string key="NSFrame">{{105, 0}, {60, 60}}</string>
 								<reference key="NSSuperview" ref="573458467"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="183032429"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -116,6 +115,7 @@
 								<int key="NSvFlags">288</int>
 								<string key="NSFrame">{{156, 0}, {60, 60}}</string>
 								<reference key="NSSuperview" ref="573458467"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="611246978"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -134,6 +134,7 @@
 						</array>
 						<string key="NSFrame">{{0, 300}, {320, 60}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1062606987"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -147,6 +148,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 360}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="800797624"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="266439788"/>
@@ -182,6 +184,8 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 404}, {320, 12}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -213,6 +217,7 @@
 				</array>
 				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="379221727"/>
 				<reference key="IBUIBackgroundColor" ref="266439788"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -452,28 +457,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">VLBCameraView</string>
 					<string key="superclassName">UIView</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">takePicture:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">takePicture:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">takePicture:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">delegate</string>
-						<string key="NS.object.0">NSObject</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">delegate</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="delegate">NSObject</string>
+						<string key="preview">UIView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="delegate">
 							<string key="name">delegate</string>
 							<string key="candidateClassName">NSObject</string>
 						</object>
-					</object>
+						<object class="IBToOneOutletInfo" key="preview">
+							<string key="name">preview</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/VLBCameraView.h</string>
@@ -507,15 +504,15 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="itemImagePreview">VLBCameraView</string>
+						<string key="cameraView">VLBCameraView</string>
 						<string key="itemImageView">UIImageView</string>
 						<string key="locationButton">VLBButton</string>
 						<string key="storeLabel">UILabel</string>
 						<string key="takePhotoButton">VLBButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="itemImagePreview">
-							<string key="name">itemImagePreview</string>
+						<object class="IBToOneOutletInfo" key="cameraView">
+							<string key="name">cameraView</string>
 							<string key="candidateClassName">VLBCameraView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="itemImageView">
@@ -553,7 +550,6 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="camera.png">{24, 18}</string>
 			<string key="signpost.png">{16, 26}</string>
-			<string key="take-photo.png">{320, 318}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

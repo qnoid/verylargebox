@@ -1,5 +1,5 @@
 //
-// 	VLBObject.m
+// 	VLBCameraView.m
 //  thebox
 //
 //  Created by Markos Charatzas on 25/06/2013.
@@ -15,9 +15,10 @@ static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCap
 
 @interface VLBCameraView ()
 @property(nonatomic, weak) IBOutlet UIView* preview;
+@property(nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
 
 @property(nonatomic, strong) UIView *flashView;
-@property(nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
+
 @end
 
 @implementation VLBCameraView
@@ -33,8 +34,7 @@ static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCap
 {
     self = [super initWithFrame:frame];
     
-    VLB_IF_NOT_SELF_RETURN_NIL();
-    
+    VLB_IF_NOT_SELF_RETURN_NIL();    
     VLB_LOAD_VIEW()
     
 return self;
@@ -44,8 +44,7 @@ return self;
 {
     self = [super initWithCoder:aDecoder];
     
-    VLB_IF_NOT_SELF_RETURN_NIL();
-    
+    VLB_IF_NOT_SELF_RETURN_NIL();    
     VLB_LOAD_VIEW()
     
 return self;
@@ -57,8 +56,6 @@ return self;
 	
 	AVCaptureSession *session = [AVCaptureSession new];
     [session setSessionPreset:AVCaptureSessionPresetPhoto];
-	
-    // Select a video device, make an input
 	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
     
@@ -67,46 +64,59 @@ return self;
                     format:[error localizedDescription], nil];
     }
 	
-	if ( [session canAddInput:deviceInput] )
-		[session addInput:deviceInput];
+    [session addInput:deviceInput];
 	
-    // Make a still image output
 	self.stillImageOutput = [AVCaptureStillImageOutput new];
 	[self.stillImageOutput addObserver:self forKeyPath:@"capturingStillImage" options:NSKeyValueObservingOptionNew context:(__bridge void *)(AVCaptureStillImageIsCapturingStillImageContext)];
-	if ( [session canAddOutput:self.stillImageOutput] )
-		[session addOutput:self.stillImageOutput];
-	
-	
+
+    [session addOutput:self.stillImageOutput];
+		
     AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-	[previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
-	[previewLayer setVideoGravity:AVLayerVideoGravityResize];
-	CALayer *rootLayer = [self.preview layer];
-	[rootLayer setMasksToBounds:YES];
-	[previewLayer setFrame:[rootLayer bounds]];
-	[rootLayer addSublayer:previewLayer];
+	previewLayer.backgroundColor = [[UIColor blackColor] CGColor];
+	previewLayer.videoGravity = AVLayerVideoGravityResize;
+	previewLayer.frame = self.preview.layer.bounds;
+	[self.preview.layer addSublayer:previewLayer];
 	[session startRunning];
 }
 
-- (void)takePicture:(id)sender
+-(void)cameraView:(VLBCameraView*)cameraView didCreateCaptureConnection:(AVCaptureConnection*)captureConnection
 {
-	AVCaptureConnection *stillImageConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
-	[stillImageConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-	[stillImageConnection setVideoScaleAndCropFactor:1.0];
+    captureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
+    
+    if(self.callbackOnDidCreateCaptureConnection){
+        [self.delegate cameraView:cameraView didCreateCaptureConnection:captureConnection];
+    }
+}
+
+-(void)cameraView:(VLBCameraView *)cameraView didFinishTakingPicture:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    [self.delegate cameraView:self didFinishTakingPicture:image editingInfo:nil];
+}
+
+- (void)takePicture:(VLBErrorTakingPicture)errorTakingPicture
+{
+	AVCaptureConnection *stillImageConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];    
+    [self cameraView:self didCreateCaptureConnection:stillImageConnection];
+    
+    VLBCaptureStillImageBlock didFinishTakingPicture = ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+        if (error) {
+            DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+            errorTakingPicture(error);
+        return ;
+        }
+        
+        UIImage *image = [UIImage imageWithData:[AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer]];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [self cameraView:self didFinishTakingPicture:image editingInfo:nil];
+        });
+    };
+    
     // set the appropriate pixel format / image type output setting depending on if we'll need an uncompressed image for
     // the possiblity of drawing the red square over top or if we're just writing a jpeg to the camera roll which is the trival case
     [self.stillImageOutput setOutputSettings:@{AVVideoCodecKey:AVVideoCodecJPEG}];
 	[self.stillImageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection
-                                                  completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-        if (error) {
-            DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-        }
-        
-        UIImage *image = [UIImage imageWithData:[AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer]];        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [self.delegate cameraView:self didFinishTakingPicture:image editingInfo:nil];
-        });
-        }
-    ];
+                                                  completionHandler:didFinishTakingPicture];
 }
 
 // perform a flash bulb animation using KVO to monitor the value of the capturingStillImage property of the AVCaptureStillImageOutput class
@@ -119,7 +129,7 @@ return self;
 		if ( isCapturingStillImage ) {
 			// do flash bulb like animation
 			self.flashView = [[UIView alloc] initWithFrame:[self.preview frame]];
-			[self.flashView setBackgroundColor:[UIColor whiteColor]];
+			[self.flashView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]]];
 			[self.flashView setAlpha:0.f];
 			[self.preview addSubview:self.flashView];
 			
