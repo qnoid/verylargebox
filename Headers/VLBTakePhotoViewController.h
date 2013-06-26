@@ -16,17 +16,19 @@
 #import "VLBButton.h"
 #import "VLBViews.h"
 #import "VLBStoresViewController.h"
+#import "VLBCameraView.h"
 @class VLBTheBox;
 @protocol VLBCreateItemOperationDelegate;
 
 /**
  
  */
-@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBStoresViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, VLBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate>
+@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBStoresViewControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, VLBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate, VLBCameraViewDelegate>
 {
 }
 
 @property(nonatomic, weak) IBOutlet UILabel *storeLabel;
+@property(nonatomic, weak) IBOutlet VLBCameraView *cameraView;
 @property(nonatomic, weak) IBOutlet UIImageView *itemImageView;
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 @property(nonatomic, weak) IBOutlet VLBButton *locationButton;

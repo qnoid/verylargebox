@@ -53,6 +53,7 @@ return [[[[QNDViewAnimationBuilder alloc] initWithViewAnimationBlock:^(UIView *v
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, assign) NSUInteger userId;
 @property(nonatomic, assign) BOOL hasCoordinates;
+
 @end
 
 @implementation VLBTakePhotoViewController
@@ -231,15 +232,7 @@ return self;
 
 - (IBAction)takePhoto:(id)sender 
 {
-	UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-	picker.delegate = self;
-	picker.allowsEditing = YES;
-#if !TARGET_IPHONE_SIMULATOR
-	picker.sourceType =  UIImagePickerControllerSourceTypeCamera;
-    picker.showsCameraControls = YES;    
-#endif
-	
-	[self presentViewController:picker animated:YES completion:nil];
+    [self.cameraView takePicture:sender];
 }
 
 - (IBAction)enterLocation:(id)sender
@@ -267,7 +260,7 @@ return self;
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+- (void)cameraView:(VLBCameraView *)cameraView didFinishTakingPicture:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     CGSize newSize = CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT);
 
@@ -281,12 +274,10 @@ return self;
     
     self.itemImage = newImage;
     
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
+//	[self dismissModalViewControllerAnimated:YES];
+    self.cameraView.hidden = YES;
+    self.itemImageView.image = self.itemImage;
+    self.takePhotoButton.userInteractionEnabled = NO;
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
