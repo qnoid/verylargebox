@@ -29,6 +29,7 @@
 #import "S3PutObjectRequest.h"
 #import "S3UploadInputStream.h"
 #import "VLBMacros.h"
+#import "NSDictionary+VLBStore.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
@@ -80,7 +81,7 @@ return ^(AFHTTPRequestOperation *operation, NSError *error)
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 
-NSString* const THE_BOX_BASE_URL_STRING = @"http://www.verylargebox.com";
+NSString* const THE_BOX_BASE_URL_STRING = @"https://www.verylargebox.com";
 
 NSString* const AWS_ACCESS_KEY = @"AKIAIFACVDF6VNIEY2EQ";
 NSString* const AWS_SECRET_KEY = @"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";
@@ -209,7 +210,8 @@ return parameters;
     
     NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"venues/search" parameters:parameters];
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest setTimeoutInterval:TIMEOUT];
+    [categoriesRequest addValue:@"public, max-age=3600" forHTTPHeaderField:@"Cache-Control"];
+    categoriesRequest.timeoutInterval = TIMEOUT;
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnLocationWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -220,11 +222,26 @@ return parameters;
     {
         NSString* responseString = operation.responseString;
 
-        [delegate didSucceedWithLocations:[[[responseString mutableObjectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"] givenParameters:parameters];
+        NSMutableArray* locations = [[[responseString mutableObjectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"];
+          
+        NSArray *sortedLocations =
+            [locations sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+                if ([[[obj1 vlb_location] objectForKey:@"distance"] intValue] > [[[obj2 vlb_location] objectForKey:@"distance"] intValue]) {
+                    return (NSComparisonResult)NSOrderedDescending;
+                }
+            
+                if ([[[obj1 vlb_location] objectForKey:@"distance"] intValue] < [[[obj2 vlb_location] objectForKey:@"distance"] intValue]) {
+                    return (NSComparisonResult)NSOrderedAscending;
+                }
+            
+            return (NSComparisonResult)NSOrderedSame;
+            }];
+                               
+        [delegate didSucceedWithLocations:sortedLocations givenParameters:parameters];
     } 
     failure:didFailOnLocationWithError];
     
-    return request;    
+return request;    
 }
 
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<VLBLocationOperationDelegate>*)delegate

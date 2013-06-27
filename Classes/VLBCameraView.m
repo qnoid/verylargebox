@@ -15,9 +15,11 @@ static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCap
 
 @interface VLBCameraView ()
 @property(nonatomic, weak) IBOutlet UIView* preview;
+@property(nonatomic, strong) AVCaptureSession *session;
 @property(nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
 
 @property(nonatomic, strong) UIView *flashView;
+
 
 @end
 
@@ -37,6 +39,9 @@ static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCap
     VLB_IF_NOT_SELF_RETURN_NIL();    
     VLB_LOAD_VIEW()
     
+    self.session = [AVCaptureSession new];
+    [self.session setSessionPreset:AVCaptureSessionPresetPhoto];
+
 return self;
 }
 
@@ -46,7 +51,10 @@ return self;
     
     VLB_IF_NOT_SELF_RETURN_NIL();    
     VLB_LOAD_VIEW()
-    
+
+    self.session = [AVCaptureSession new];
+    [self.session setSessionPreset:AVCaptureSessionPresetPhoto];
+
 return self;
 }
 
@@ -54,9 +62,7 @@ return self;
 {
 	NSError *error = nil;
 	
-	AVCaptureSession *session = [AVCaptureSession new];
-    [session setSessionPreset:AVCaptureSessionPresetPhoto];
-	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
     
     if(error){
@@ -64,19 +70,19 @@ return self;
                     format:[error localizedDescription], nil];
     }
 	
-    [session addInput:deviceInput];
+    [self.session addInput:deviceInput];
 	
 	self.stillImageOutput = [AVCaptureStillImageOutput new];
 	[self.stillImageOutput addObserver:self forKeyPath:@"capturingStillImage" options:NSKeyValueObservingOptionNew context:(__bridge void *)(AVCaptureStillImageIsCapturingStillImageContext)];
 
-    [session addOutput:self.stillImageOutput];
+    [self.session addOutput:self.stillImageOutput];
 		
-    AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
+    AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
 	previewLayer.backgroundColor = [[UIColor blackColor] CGColor];
 	previewLayer.videoGravity = AVLayerVideoGravityResize;
 	previewLayer.frame = self.preview.layer.bounds;
 	[self.preview.layer addSublayer:previewLayer];
-	[session startRunning];
+	[self.session startRunning];
 }
 
 -(void)cameraView:(VLBCameraView*)cameraView didCreateCaptureConnection:(AVCaptureConnection*)captureConnection
@@ -98,7 +104,11 @@ return self;
 	AVCaptureConnection *stillImageConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];    
     [self cameraView:self didCreateCaptureConnection:stillImageConnection];
     
-    VLBCaptureStillImageBlock didFinishTakingPicture = ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+    VLBCameraView *wself = self;
+    VLBCaptureStillImageBlock didFinishTakingPicture = ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
+    {
+        [wself.session stopRunning];
+
         if (error) {
             DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
             errorTakingPicture(error);
@@ -108,7 +118,7 @@ return self;
         UIImage *image = [UIImage imageWithData:[AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer]];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [self cameraView:self didFinishTakingPicture:image editingInfo:nil];
+            [wself cameraView:wself didFinishTakingPicture:image editingInfo:nil];
         });
     };
     

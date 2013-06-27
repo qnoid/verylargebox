@@ -23,7 +23,7 @@
 /**
  
  */
-@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBStoresViewControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, VLBLocalitiesTableViewControllerDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate, VLBCameraViewDelegate>
+@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBStoresViewControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate, VLBCameraViewDelegate>
 {
 }
 

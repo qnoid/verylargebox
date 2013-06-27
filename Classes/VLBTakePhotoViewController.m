@@ -24,6 +24,7 @@
 #import "NSDictionary+VLBDictionary.h"
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
+#import "NSString+VLBDecorator.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
@@ -107,7 +108,6 @@ return newUploadUIViewController;
         return nil;
     }
     
-    self.location = @{@"name":@"", @"location": [@{@"name": @""} mutableCopy]};
     self.theBoxLocationService = [VLBLocationService theBoxLocationService];
     self.thebox = thebox;
     self.userId = userId;
@@ -123,17 +123,19 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
-
-    [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton completion:nil];
     [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
-    
+    [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton completion:nil];
+
     if(self.itemImage)
     {
         self.itemImageView.image = self.itemImage;        
         self.takePhotoButton.imageView.alpha = 1.0;
     }
-    
+
+    if(self.location != nil && ![[self.location vlb_objectForKey:@"name"] vlb_isEmpty]){
+        self.locationButton.imageView.alpha = 1.0;
+    }
+
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
     [self.theBoxLocationService notifyDidFindPlacemark:self];
     [self.theBoxLocationService notifyDidFailWithError:self];
@@ -162,8 +164,11 @@ return self;
     
 	CLLocation *location = [VLBNotifications location:notification];
 
-	[[self.location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
-	[[self.location objectForKey:@"location"] setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lng"];
+    self.location = @{@"name":@"",
+                      @"location": @{
+                        @"lat": [NSString stringWithFormat:@"%f",location.coordinate.latitude],
+                        @"lng": [NSString stringWithFormat:@"%f",location.coordinate.longitude]}};
+    
 }
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
@@ -177,6 +182,8 @@ return self;
 {
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+    
+    self.hasCoordinates = YES;
     
     if(self.locality){
         return;
@@ -194,23 +201,6 @@ return self;
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-}
-
-#pragma mark TBLocalitiesTableViewControllerDelegate
-
--(void)didSelectLocality:(NSDictionary *)locality
-{
-    [self.theBoxLocationService dontNotifyDidFailWithError:self];
-    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-
-    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, locality);
-    self.locality = [locality objectForKey:@"name"];
-    
-    NSDictionary *location = [self.location vlb_objectForKey:@"location"];
-    
-    self.storeLabel.text = [NSString stringWithFormat:@"%@ \n %@", [location objectForKey:VLBLocationName], self.locality];
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark TheBoxKeyboardObserver
@@ -246,7 +236,7 @@ return self;
 
 -(void)didSelectStore:(NSMutableDictionary *)store
 {
-    self.locationButton.imageView.alpha = 1.0;
+    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
 
     DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, store);
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
@@ -275,10 +265,10 @@ return self;
     
     self.itemImage = newImage;
     
-//	[self dismissModalViewControllerAnimated:YES];
     self.cameraView.hidden = YES;
     self.itemImageView.image = self.itemImage;
     self.takePhotoButton.userInteractionEnabled = NO;
+    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;    
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
