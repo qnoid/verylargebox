@@ -11,25 +11,42 @@
 #import "VLBMacros.h"
 #import "DDLog.h"
 
-static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCaptureStillImageIsCapturingStillImageContext";
+typedef void(^VLBCaptureStillImageBlock)(CMSampleBufferRef imageDataSampleBuffer, NSError *error);
+
+typedef void(^VLBInit)(VLBCameraView *cameraView);
+
+static NSString* const AVCapturingStillImageKeyPath = @"capturingStillImage";
+static void * const AVCapturingStillImage = (void*)&AVCapturingStillImage;
 
 @interface VLBCameraView ()
-@property(nonatomic, weak) IBOutlet UIView* preview;
 @property(nonatomic, strong) AVCaptureSession *session;
 @property(nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
-
-@property(nonatomic, strong) UIView *flashView;
-
-
+@property(nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
+@property(nonatomic, weak) IBOutlet UIImageView* preview; //test cliptobounds and aspectfill
 @end
+
+VLBInit const VLBInitBlock = ^(VLBCameraView *cameraView){
+    cameraView.session = [AVCaptureSession new];
+    [cameraView.session setSessionPreset:AVCaptureSessionPresetPhoto];
+    
+    cameraView.flashView = [[UIView alloc] initWithFrame:cameraView.bounds];
+    cameraView.flashView.backgroundColor = [UIColor whiteColor];
+    cameraView.flashView.alpha = 0.0f;
+    [cameraView addSubview:cameraView.flashView]; //test
+    
+    cameraView.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:cameraView.session];
+	cameraView.previewLayer.backgroundColor = [[UIColor clearColor] CGColor]; //test
+	cameraView.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill; //test
+	cameraView.previewLayer.frame = cameraView.preview.layer.bounds;
+};
 
 @implementation VLBCameraView
 
 -(void)dealloc
 {
     [self.stillImageOutput removeObserver:self
-                               forKeyPath:@"capturingStillImage"
-                                  context:(__bridge void *)(AVCaptureStillImageIsCapturingStillImageContext)];
+                               forKeyPath:AVCapturingStillImageKeyPath
+                                  context:AVCapturingStillImage];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -38,9 +55,8 @@ static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCap
     
     VLB_IF_NOT_SELF_RETURN_NIL();    
     VLB_LOAD_VIEW()
-    
-    self.session = [AVCaptureSession new];
-    [self.session setSessionPreset:AVCaptureSessionPresetPhoto];
+
+    VLBInitBlock(self);
 
 return self;
 }
@@ -52,9 +68,8 @@ return self;
     VLB_IF_NOT_SELF_RETURN_NIL();    
     VLB_LOAD_VIEW()
 
-    self.session = [AVCaptureSession new];
-    [self.session setSessionPreset:AVCaptureSessionPresetPhoto];
-
+    VLBInitBlock(self);
+    
 return self;
 }
 
@@ -62,8 +77,7 @@ return self;
 {
 	NSError *error = nil;
 	
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-	AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+	AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo] error:&error];
     
     if(error){
         [NSException raise:[NSString stringWithFormat:@"Failed with error %d", (int)[error code]]
@@ -73,15 +87,14 @@ return self;
     [self.session addInput:deviceInput];
 	
 	self.stillImageOutput = [AVCaptureStillImageOutput new];
-	[self.stillImageOutput addObserver:self forKeyPath:@"capturingStillImage" options:NSKeyValueObservingOptionNew context:(__bridge void *)(AVCaptureStillImageIsCapturingStillImageContext)];
+	[self.stillImageOutput addObserver:self
+                            forKeyPath:AVCapturingStillImageKeyPath
+                               options:NSKeyValueObservingOptionNew
+                               context:AVCapturingStillImage];
 
     [self.session addOutput:self.stillImageOutput];
 		
-    AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
-	previewLayer.backgroundColor = [[UIColor blackColor] CGColor];
-	previewLayer.videoGravity = AVLayerVideoGravityResize;
-	previewLayer.frame = self.preview.layer.bounds;
-	[self.preview.layer addSublayer:previewLayer];
+	[self.preview.layer addSublayer:self.previewLayer];
 	[self.session startRunning];
 }
 
@@ -99,7 +112,12 @@ return self;
     [self.delegate cameraView:self didFinishTakingPicture:image editingInfo:nil];
 }
 
-- (void)takePicture:(VLBErrorTakingPicture)errorTakingPicture
+-(void)cameraView:(VLBCameraView *)cameraView didErrorOnTakePicture:(NSError *)error{
+    DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
+    [self.delegate cameraView:cameraView didErrorOnTakePicture:error];
+}
+
+- (void)takePicture
 {
 	AVCaptureConnection *stillImageConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];    
     [self cameraView:self didCreateCaptureConnection:stillImageConnection];
@@ -108,16 +126,20 @@ return self;
     VLBCaptureStillImageBlock didFinishTakingPicture = ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
     {
         [wself.session stopRunning];
-
+        //[wself.previewLayer removeFromSuperlayer];
+        
         if (error) {
-            DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-            errorTakingPicture(error);
-        return ;
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [wself cameraView:wself didErrorOnTakePicture:error];
+            });
+            
+        return;
         }
         
         UIImage *image = [UIImage imageWithData:[AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer]];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
+            wself.preview.image = image;
             [wself cameraView:wself didFinishTakingPicture:image editingInfo:nil];
         });
     };
@@ -129,37 +151,29 @@ return self;
                                                   completionHandler:didFinishTakingPicture];
 }
 
-// perform a flash bulb animation using KVO to monitor the value of the capturingStillImage property of the AVCaptureStillImageOutput class
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+	if (AVCapturingStillImage != context){
+        return;
+    }
+    
+    BOOL isCapturingStillImage = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];    
+    if(isCapturingStillImage) {
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             self.flashView.alpha = 1.0f;
+                         }];
+    return;
+    }
 
-	if ( context == (__bridge void *)(AVCaptureStillImageIsCapturingStillImageContext) ) {
-		BOOL isCapturingStillImage = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-		
-		if ( isCapturingStillImage ) {
-			// do flash bulb like animation
-			self.flashView = [[UIView alloc] initWithFrame:[self.preview frame]];
-			[self.flashView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]]];
-			[self.flashView setAlpha:0.f];
-			[self.preview addSubview:self.flashView];
-			
-			[UIView animateWithDuration:.4f
-							 animations:^{
-								 [self.flashView setAlpha:1.f];
-							 }
-			 ];
-		}
-		else {
-			[UIView animateWithDuration:.4f
-							 animations:^{
-								 [self.flashView setAlpha:0.f];
-							 }
-							 completion:^(BOOL finished){
-								 [self.flashView removeFromSuperview];
-							 }
-			 ];
-		}
-	}
+    [UIView animateWithDuration:0.4f
+                     animations:^{
+            self.flashView.alpha = 0.0f;
+        }
+        completion:^(BOOL finished){
+            [self.flashView removeFromSuperview];
+        }];
+
 }
 
 @end

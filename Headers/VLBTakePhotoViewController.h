@@ -29,14 +29,10 @@
 
 @property(nonatomic, weak) IBOutlet UILabel *storeLabel;
 @property(nonatomic, weak) IBOutlet VLBCameraView *cameraView;
-@property(nonatomic, weak) IBOutlet UIImageView *itemImageView;
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 @property(nonatomic, weak) IBOutlet VLBButton *locationButton;
 
 @property(nonatomic, unsafe_unretained) NSObject<VLBCreateItemOperationDelegate> *createItemDelegate;
-
-- (IBAction)cancel:(id)sender;
-- (IBAction)done:(id)sender;
 
 /**
  Presents the ImagePicker to allow the user to take a photo

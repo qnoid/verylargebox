@@ -47,7 +47,6 @@ return [[[[QNDViewAnimationBuilder alloc] initWithViewAnimationBlock:^(UIView *v
 
 @interface VLBTakePhotoViewController ()
 @property(nonatomic, strong) VLBTheBox* thebox;
-
 @property(nonatomic, strong) UIImage* itemImage;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSDictionary* location;
@@ -119,18 +118,14 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.cameraView.flashView.backgroundColor =
+            [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
     [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton completion:nil];
-
-    if(self.itemImage)
-    {
-        self.itemImageView.image = self.itemImage;        
-        self.takePhotoButton.imageView.alpha = 1.0;
-    }
 
     if(self.location != nil && ![[self.location vlb_objectForKey:@"name"] vlb_isEmpty]){
         self.locationButton.imageView.alpha = 1.0;
@@ -222,8 +217,7 @@ return self;
 
 - (IBAction)takePhoto:(id)sender 
 {
-    [self.cameraView takePicture:^(NSError *error) {
-    }];
+    [self.cameraView takePicture];
 }
 
 - (IBAction)enterLocation:(id)sender
@@ -264,11 +258,12 @@ return self;
     UIGraphicsEndImageContext();
     
     self.itemImage = newImage;
-    
-    self.cameraView.hidden = YES;
-    self.itemImageView.image = self.itemImage;
     self.takePhotoButton.userInteractionEnabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;    
+}
+
+-(void)cameraView:(VLBCameraView *)cameraView didErrorOnTakePicture:(NSError *)error{
+    
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view

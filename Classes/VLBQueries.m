@@ -210,7 +210,6 @@ return parameters;
     
     NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"venues/search" parameters:parameters];
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest addValue:@"public, max-age=3600" forHTTPHeaderField:@"Cache-Control"];
     categoriesRequest.timeoutInterval = TIMEOUT;
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnLocationWithError =
