@@ -249,7 +249,7 @@ return self;
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
-- (void)cameraView:(VLBCameraView *)cameraView didFinishTakingPicture:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+- (void)cameraView:(VLBCameraView *)cameraView didFinishTakingPicture:(UIImage *)image withInfo:(NSDictionary *)info meta:(NSDictionary *)meta
 {
     CGSize newSize = CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT);
 

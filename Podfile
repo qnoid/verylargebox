@@ -12,6 +12,7 @@ end
 
 target :ApplicationTests, :exclusive => true do
 	pod 'OCMock', '~> 2.0.1'
+	pod 'Kiwi', '~> 2.1'
 end
 
 pod 'AFNetworking'  

@@ -33,16 +33,6 @@
 
 @implementation VLBScrollViewTest
 
--(void)testGivenInitWithFrameAssertContentViewAsSubview
-{
-    CGRect frame = CGRectMake(0, 0, 320, 196);
-    VLBScrollView *theBoxScrollView = [[VLBScrollView alloc] initWithFrame:frame size:nil dimension:nil];
-    
-    STAssertTrue(1 == [theBoxScrollView.subviews count], nil);    
-    UIView* contentView = [theBoxScrollView.subviews objectAtIndex:0];    
-    STAssertTrue(CGRectEqualToRect(contentView.frame, CGRectMake(CGPointZero.x, CGPointZero.y, frame.size.width, frame.size.height)) , nil);
-}
-
 -(void)testGivenDelegateDatasourceSizeAssertTheBoxSizeOfIsCalledLayoutSubview
 {
     id mockedDelegate = [OCMockObject niceMockForProtocol:@protocol(VLBScrollViewDelegate)];

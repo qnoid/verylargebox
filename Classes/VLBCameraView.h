@@ -9,6 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+
+typedef NSString* VLBCameraViewMeta;
+
+/**
+ 
+ */
+extern VLBCameraViewMeta const VLBCameraViewMetaCrop;
+
+/**
+ Use to get the full size image as taken by 
+ */
+extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
+
 @class VLBCameraView;
 
 @protocol VLBCameraViewDelegate <NSObject>
@@ -18,9 +31,12 @@
  occur.
  
  @param cameraView the VLBCameraView intance that this delegate is assigned to
- @param image the image in JPG format using the data returned by AVCaptureStillImageOutput#jpegStillImageNSDataRepresentation:
+ @param image the square cropped image in JPG format using, its size is the maximum used to capture it, its orientation is preserved from the camera.
+ @param info
+ @param meta
+ @see VLBCameraViewMeta
  */
--(void)cameraView:(VLBCameraView*)cameraView didFinishTakingPicture:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;
+-(void)cameraView:(VLBCameraView*)cameraView didFinishTakingPicture:(UIImage *)image withInfo:(NSDictionary*)info meta:(NSDictionary *)meta;
 
 /**
  Implement to get a callaback on the main thread if an error occurs on VLBCameraView#takePicture:

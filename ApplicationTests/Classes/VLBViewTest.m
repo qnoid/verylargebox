@@ -12,19 +12,19 @@
 #import "VLBView.h"
 #import "VLBViews.h"
 
-@interface VLBButtonTest : SenTestCase
+@interface VLBViewTest : SenTestCase
 
 @end
 
-@implementation VLBButtonTest
+@implementation VLBViewTest
 
 -(void)testTrue
 {
-    VLBButton * button = [[VLBButton alloc] initWithFrame:CGRectZero];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectZero];
 
-    [button vlb_border];
+    [view vlb_border];
 
-    STAssertEquals(button.layer.borderColor, [UIColor blackColor].CGColor, nil);
-    STAssertEquals(button.layer.borderWidth, 1.0f, nil);
+    STAssertEquals(view.layer.borderColor, [UIColor blackColor].CGColor, nil);
+    STAssertEquals(view.layer.borderWidth, 1.0f, nil);
 }
 @end

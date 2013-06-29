@@ -129,6 +129,18 @@
 		BD4292B9175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4292BA175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
+		BD4D329C177F4E2D0015EADF /* VLBCameraViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D329B177F4E2D0015EADF /* VLBCameraViewTest.m */; };
+		BD4D329D177F50B30015EADF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD09177A4A7400941B7F /* AVFoundation.framework */; };
+		BD4D329E177F50D10015EADF /* VLBCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD07177A458D00941B7F /* VLBCameraView.m */; };
+		BD4D32A0177F5A370015EADF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4D329F177F5A370015EADF /* CoreMedia.framework */; };
+		BD4D32A1177F5A560015EADF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4D329F177F5A370015EADF /* CoreMedia.framework */; };
+		BD4D32A2177F5B010015EADF /* VLBCellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* VLBCellRecycleStrategyTest.m */; };
+		BD4D32A3177F5B010015EADF /* VLBCellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* VLBCellVisibleStrategyTest.m */; };
+		BD4D32A4177F5B010015EADF /* VLBGridViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 909F9F3415442A5600D1E7AE /* VLBGridViewTest.m */; };
+		BD4D32A5177F5B010015EADF /* VLBScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90428D38154B405D0090D280 /* VLBScrollViewTest.m */; };
+		BD4D32A8177F5B9E0015EADF /* VLBCameraViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D32A7177F5B9E0015EADF /* VLBCameraViewTest.m */; };
+		BD4D32AA177F5D040015EADF /* VLBViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D32A9177F5D040015EADF /* VLBViewTest.m */; };
+		BD4D32AC177F5D2F0015EADF /* VLBScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D32AB177F5D2F0015EADF /* VLBScrollViewTest.m */; };
 		BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A503A1291E4AC00BCB475 /* CoreLocation.framework */; };
 		BD5CB779177119E800BC21D1 /* navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB777177119E800BC21D1 /* navigationbar.png */; };
 		BD5CB77A177119E800BC21D1 /* navigationbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB778177119E800BC21D1 /* navigationbar@2x.png */; };
@@ -208,11 +220,8 @@
 		BDBA745C1770EA71001AE3F3 /* envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBA745A1770EA71001AE3F3 /* envelope.png */; };
 		BDBA745F1770EB4B001AE3F3 /* eye@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBA745D1770EB4B001AE3F3 /* eye@2x.png */; };
 		BDBA74601770EB4B001AE3F3 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBA745E1770EB4B001AE3F3 /* eye.png */; };
-		BDCD937F165C127A009C2F8F /* VLBCellRecycleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57E133CC68F00CC9212 /* VLBCellRecycleStrategyTest.m */; };
-		BDCD9380165C127A009C2F8F /* VLBCellVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E57F133CC68F00CC9212 /* VLBCellVisibleStrategyTest.m */; };
 		BDCD9385165C127A009C2F8F /* VLBTestViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E578133CC68A00CC9212 /* VLBTestViews.m */; };
 		BDCD9386165C127A009C2F8F /* VLBTestRanking.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226C071359AA14006E43EC /* VLBTestRanking.m */; };
-		BDCD9389165C127A009C2F8F /* VLBGridViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 909F9F3415442A5600D1E7AE /* VLBGridViewTest.m */; };
 		BDCD938B165C127A009C2F8F /* NSDictionary+VLBDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 90894829155349DE009188B4 /* NSDictionary+VLBDictionary.m */; };
 		BDCD9393165C127A009C2F8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		BDCD9394165C127A009C2F8F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -223,8 +232,6 @@
 		BDCD939A165C127A009C2F8F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A4FE11291E15400BCB475 /* MapKit.framework */; };
 		BDCD939B165C127A009C2F8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		BDCD939C165C127A009C2F8F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 908363A61400659200E5AAAF /* libz.dylib */; };
-		BDCD93A7165C1383009C2F8F /* VLBScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90428D38154B405D0090D280 /* VLBScrollViewTest.m */; };
-		BDCD93A8165C1389009C2F8F /* VLBButtonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCE5165ACC430068C749 /* VLBButtonTest.m */; };
 		BDCE1E1B1757D6050070BB59 /* VLBViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E1A1757D6050070BB59 /* VLBViews.m */; };
 		BDCE1E241757E53E0070BB59 /* VLBHuds.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E231757E53D0070BB59 /* VLBHuds.m */; };
 		BDCE1E291759495D0070BB59 /* VLBPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E281759495C0070BB59 /* VLBPolygon.m */; };
@@ -284,7 +291,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		32CA4F630368D1EE00C91783 /* TheBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheBox_Prefix.pch; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* verylargebox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = verylargebox_Prefix.pch; sourceTree = "<group>"; };
 		357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		45C9A33A307C4A318C23060B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F757C9D3B843C4A2749415 /* Pods-UnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.xcconfig"; path = "Pods/Pods-UnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -304,7 +311,7 @@
 		903AE4EB1285BE6500A8FB28 /* VLBViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = VLBViewController.xib; path = Classes/VLBViewController.xib; sourceTree = "<group>"; };
 		903AE5601285E33600A8FB28 /* VLBTakePhotoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = VLBTakePhotoViewController.xib; path = Classes/VLBTakePhotoViewController.xib; sourceTree = "<group>"; };
 		90417326134B0F1500F18F95 /* VLBRectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBRectTest.m; sourceTree = "<group>"; };
-		90428D38154B405D0090D280 /* VLBScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBScrollViewTest.m; path = ../Tests/Classes/VLBScrollViewTest.m; sourceTree = "<group>"; };
+		90428D38154B405D0090D280 /* VLBScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBScrollViewTest.m; sourceTree = "<group>"; };
 		90454B04154DE5DF0064D998 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
 		904D3E6112A13BDA00F70930 /* VLBRecycleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBRecycleStrategy.m; sourceTree = "<group>"; };
 		904D3EB112A13F6B00F70930 /* VLBVisibleStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVisibleStrategy.m; sourceTree = "<group>"; };
@@ -320,8 +327,8 @@
 		905A503A1291E4AC00BCB475 /* CoreLocation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		908363A61400659200E5AAAF /* libz.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		908363CC14006BF000E5AAAF /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		908363D614006BF100E5AAAF /* unittests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "unittests-Info.plist"; path = "TheBoxUnitTests/unittests-Info.plist"; sourceTree = "<group>"; };
-		908363DE14006BF100E5AAAF /* TheBoxUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "TheBoxUnitTests-Prefix.pch"; path = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch"; sourceTree = "<group>"; };
+		908363D614006BF100E5AAAF /* unittests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "unittests-Info.plist"; path = "UnitTests/unittests-Info.plist"; sourceTree = "<group>"; };
+		908363DE14006BF100E5AAAF /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UnitTests-Prefix.pch"; path = "UnitTests/UnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		9089482415533980009188B4 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../Pods/TestFlightSDK/libTestFlight.a; sourceTree = "<group>"; };
 		90894828155349DE009188B4 /* NSDictionary+VLBDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBDictionary.h"; path = "../Classes/NSDictionary+VLBDictionary.h"; sourceTree = "<group>"; };
 		90894829155349DE009188B4 /* NSDictionary+VLBDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBDictionary.m"; sourceTree = "<group>"; };
@@ -332,13 +339,13 @@
 		9096CC0B133BB85300639685 /* VLBMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBMath.h; sourceTree = "<group>"; };
 		9096CC0D133BB85300639685 /* VLBQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBQueries.h; sourceTree = "<group>"; };
 		9096CC0E133BB85400639685 /* VLBScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBScrollView.h; sourceTree = "<group>"; };
-		909F9F3415442A5600D1E7AE /* VLBGridViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBGridViewTest.m; path = ../Tests/Classes/VLBGridViewTest.m; sourceTree = "<group>"; };
+		909F9F3415442A5600D1E7AE /* VLBGridViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBGridViewTest.m; sourceTree = "<group>"; };
 		90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Developer/Library/Frameworks/SenTestingKit.framework; sourceTree = SDKROOT; };
 		90A1E51C133CC10000CC9212 /* VLBCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBCache.h; sourceTree = "<group>"; };
 		90A1E51D133CC10000CC9212 /* VLBCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCache.m; sourceTree = "<group>"; };
 		90A1E578133CC68A00CC9212 /* VLBTestViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTestViews.m; sourceTree = "<group>"; };
-		90A1E57E133CC68F00CC9212 /* VLBCellRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBCellRecycleStrategyTest.m; path = ../Tests/Classes/VLBCellRecycleStrategyTest.m; sourceTree = "<group>"; };
-		90A1E57F133CC68F00CC9212 /* VLBCellVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBCellVisibleStrategyTest.m; path = ../Tests/Classes/VLBCellVisibleStrategyTest.m; sourceTree = "<group>"; };
+		90A1E57E133CC68F00CC9212 /* VLBCellRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCellRecycleStrategyTest.m; sourceTree = "<group>"; };
+		90A1E57F133CC68F00CC9212 /* VLBCellVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCellVisibleStrategyTest.m; sourceTree = "<group>"; };
 		90A1E580133CC68F00CC9212 /* VLBRecycleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBRecycleStrategyTest.m; sourceTree = "<group>"; };
 		90A5FCCE1387CC1F004E65B3 /* VLBGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBGridView.h; sourceTree = "<group>"; };
 		90A5FCCF1387CC1F004E65B3 /* VLBGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBGridView.m; sourceTree = "<group>"; };
@@ -427,6 +434,11 @@
 		BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBErrorBlocks.m; sourceTree = "<group>"; };
 		BD4BA9AA16FA5B6C009C1518 /* UIViewController+VLBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+VLBViewController.h"; path = "../Classes/UIViewController+VLBViewController.h"; sourceTree = "<group>"; };
 		BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		BD4D329B177F4E2D0015EADF /* VLBCameraViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCameraViewTest.m; sourceTree = "<group>"; };
+		BD4D329F177F5A370015EADF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BD4D32A7177F5B9E0015EADF /* VLBCameraViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBCameraViewTest.m; path = Classes/VLBCameraViewTest.m; sourceTree = "<group>"; };
+		BD4D32A9177F5D040015EADF /* VLBViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBViewTest.m; path = Classes/VLBViewTest.m; sourceTree = "<group>"; };
+		BD4D32AB177F5D2F0015EADF /* VLBScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBScrollViewTest.m; path = Classes/VLBScrollViewTest.m; sourceTree = "<group>"; };
 		BD5CB777177119E800BC21D1 /* navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar.png; sourceTree = "<group>"; };
 		BD5CB778177119E800BC21D1 /* navigationbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar@2x.png"; sourceTree = "<group>"; };
 		BD5CB77B1771327600BC21D1 /* target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "target@2x.png"; path = "Supporting Files/target@2x.png"; sourceTree = "<group>"; };
@@ -456,7 +468,6 @@
 		BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBProfileViewController.xib; path = Classes/VLBProfileViewController.xib; sourceTree = "<group>"; };
 		BDA2BCDD1659853D0068C749 /* VLBButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBButton.h; path = ../Classes/VLBButton.h; sourceTree = "<group>"; };
 		BDA2BCDE1659853D0068C749 /* VLBButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBButton.m; sourceTree = "<group>"; };
-		BDA2BCE5165ACC430068C749 /* VLBButtonTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBButtonTest.m; path = ../Tests/Classes/VLBButtonTest.m; sourceTree = "<group>"; };
 		BDA2BCF2165ACC800068C749 /* ApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ApplicationTests-Info.plist"; sourceTree = "<group>"; };
 		BDA2BCF9165ACC800068C749 /* ApplicationTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ApplicationTests-Prefix.pch"; sourceTree = "<group>"; };
 		BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -549,6 +560,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD4D32A1177F5A560015EADF /* CoreMedia.framework in Frameworks */,
 				BDF2FD0A177A4A7400941B7F /* AVFoundation.framework in Frameworks */,
 				908363FB140070DC00E5AAAF /* MobileCoreServices.framework in Frameworks */,
 				BDA4FB4D175FF42D004AAEC6 /* SystemConfiguration.framework in Frameworks */,
@@ -574,6 +586,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD4D32A0177F5A370015EADF /* CoreMedia.framework in Frameworks */,
+				BD4D329D177F50B30015EADF /* AVFoundation.framework in Frameworks */,
 				908364051400752500E5AAAF /* CFNetwork.framework in Frameworks */,
 				908364071400752500E5AAAF /* MobileCoreServices.framework in Frameworks */,
 				BDA21878165EEBEA00094510 /* Security.framework in Frameworks */,
@@ -686,7 +700,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				90E359291546333700075ABF /* Supporting Files */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -696,7 +709,6 @@
 				BDA2BCF0165ACC800068C749 /* ApplicationTests */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				BDF2FD15177E5B2D00941B7F /* verylargebox-info.plist */,
-				908363D614006BF100E5AAAF /* unittests-Info.plist */,
 				BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */,
 				BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */,
 				90F9FDE5154D97D0001BCD66 /* icon.png */,
@@ -712,12 +724,12 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32CA4F630368D1EE00C91783 /* TheBox_Prefix.pch */,
-				908363DE14006BF100E5AAAF /* TheBoxUnitTests-Prefix.pch */,
+				32CA4F630368D1EE00C91783 /* verylargebox_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				BD2A8A9C175A4F4C0036A852 /* Settings.bundle */,
 			);
 			name = "Other Sources";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -727,6 +739,7 @@
 				BDF825C016FDFCEA003B3003 /* AddressBook.framework */,
 				BDA21877165EEBEA00094510 /* Security.framework */,
 				908363A61400659200E5AAAF /* libz.dylib */,
+				BD4D329F177F5A370015EADF /* CoreMedia.framework */,
 				BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */,
 				90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */,
 				90D29AFF131A81FB008B8B2D /* CFNetwork.framework */,
@@ -815,6 +828,10 @@
 		90A1E565133CC65A00CC9212 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				90A1E57E133CC68F00CC9212 /* VLBCellRecycleStrategyTest.m */,
+				90A1E57F133CC68F00CC9212 /* VLBCellVisibleStrategyTest.m */,
+				909F9F3415442A5600D1E7AE /* VLBGridViewTest.m */,
+				90428D38154B405D0090D280 /* VLBScrollViewTest.m */,
 				90A1E580133CC68F00CC9212 /* VLBRecycleStrategyTest.m */,
 				90CEADEB1349CDBD0084C5F0 /* VLBSizeTest.m */,
 				90417326134B0F1500F18F95 /* VLBRectTest.m */,
@@ -827,6 +844,7 @@
 				BD13057616A22E7D00AF0814 /* VLBDimensionTest.m */,
 				BD9F24EA175A4302009D212F /* VLBPolygonTest.m */,
 				BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */,
+				BD4D329B177F4E2D0015EADF /* VLBCameraViewTest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -929,6 +947,7 @@
 		90D8304012B506D900BE4470 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				BD4D3299177EF8C40015EADF /* Supporting Files */,
 				90D11E4C1531C81100D52F58 /* Headers */,
 				90A1E565133CC65A00CC9212 /* Classes */,
 				90A1E564133CC64D00CC9212 /* Resources */,
@@ -940,6 +959,7 @@
 		90E359291546333700075ABF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				BDA2BD15165AF8D80068C749 /* images */,
 				90CBFE5E154BF58F00349A13 /* poweredByFoursquare.png */,
 				90E3592A1546333700075ABF /* default_item_thumb.png */,
@@ -958,6 +978,16 @@
 				BD6BE05A175B524300B93854 /* VLBDrawRects.m */,
 			);
 			name = "UIViewController+VLBViewController";
+			sourceTree = "<group>";
+		};
+		BD4D3299177EF8C40015EADF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				908363DE14006BF100E5AAAF /* UnitTests-Prefix.pch */,
+				908363D614006BF100E5AAAF /* unittests-Info.plist */,
+			);
+			name = "Supporting Files";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BDA2BC87165951CB0068C749 /* Interface */ = {
@@ -1050,11 +1080,9 @@
 		BDCD92F2165C0BE7009C2F8F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				90A1E57E133CC68F00CC9212 /* VLBCellRecycleStrategyTest.m */,
-				90A1E57F133CC68F00CC9212 /* VLBCellVisibleStrategyTest.m */,
-				909F9F3415442A5600D1E7AE /* VLBGridViewTest.m */,
-				90428D38154B405D0090D280 /* VLBScrollViewTest.m */,
-				BDA2BCE5165ACC430068C749 /* VLBButtonTest.m */,
+				BD4D32A9177F5D040015EADF /* VLBViewTest.m */,
+				BD4D32A7177F5B9E0015EADF /* VLBCameraViewTest.m */,
+				BD4D32AB177F5D2F0015EADF /* VLBScrollViewTest.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1534,6 +1562,12 @@
 				BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */,
 				BDFBA12C177829CF00A59BCF /* VLBTypography.m in Sources */,
 				BDFBA12D177829D700A59BCF /* VLBQueries.m in Sources */,
+				BD4D329C177F4E2D0015EADF /* VLBCameraViewTest.m in Sources */,
+				BD4D329E177F50D10015EADF /* VLBCameraView.m in Sources */,
+				BD4D32A2177F5B010015EADF /* VLBCellRecycleStrategyTest.m in Sources */,
+				BD4D32A3177F5B010015EADF /* VLBCellVisibleStrategyTest.m in Sources */,
+				BD4D32A4177F5B010015EADF /* VLBGridViewTest.m in Sources */,
+				BD4D32A5177F5B010015EADF /* VLBScrollViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1541,18 +1575,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDCD937F165C127A009C2F8F /* VLBCellRecycleStrategyTest.m in Sources */,
-				BDCD9380165C127A009C2F8F /* VLBCellVisibleStrategyTest.m in Sources */,
 				BDCD9385165C127A009C2F8F /* VLBTestViews.m in Sources */,
 				BDCD9386165C127A009C2F8F /* VLBTestRanking.m in Sources */,
-				BDCD9389165C127A009C2F8F /* VLBGridViewTest.m in Sources */,
 				BDCD938B165C127A009C2F8F /* NSDictionary+VLBDictionary.m in Sources */,
-				BDCD93A7165C1383009C2F8F /* VLBScrollViewTest.m in Sources */,
-				BDCD93A8165C1389009C2F8F /* VLBButtonTest.m in Sources */,
 				BD9A781716BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m in Sources */,
 				BD7C27D517235DDB009D26EE /* VLBProgressView.m in Sources */,
 				BD0B25E417494778001B3A9B /* VLBLocalitiesTableViewController.m in Sources */,
 				BD8BB28A176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */,
+				BD4D32A8177F5B9E0015EADF /* VLBCameraViewTest.m in Sources */,
+				BD4D32AA177F5D040015EADF /* VLBViewTest.m in Sources */,
+				BD4D32AC177F5D2F0015EADF /* VLBScrollViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1589,7 +1621,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
+				GCC_PREFIX_HEADER = "${TARGET_NAME}_Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1647,7 +1679,7 @@
 					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
+				GCC_PREFIX_HEADER = "${TARGET_NAME}_Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1707,7 +1739,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1720,7 +1752,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Tests/Headers\"/**",
 				);
-				INFOPLIST_FILE = "TheBoxUnitTests/unittests-Info.plist";
+				INFOPLIST_FILE = "${TARGET_NAME}/unittests-Info.plist";
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1756,7 +1788,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1764,7 +1796,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Tests/Headers\"/**",
 				);
-				INFOPLIST_FILE = "TheBoxUnitTests/unittests-Info.plist";
+				INFOPLIST_FILE = "${TARGET_NAME}/unittests-Info.plist";
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1800,7 +1832,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1808,7 +1840,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Tests/Headers\"/**",
 				);
-				INFOPLIST_FILE = "TheBoxUnitTests/unittests-Info.plist";
+				INFOPLIST_FILE = "${TARGET_NAME}/unittests-Info.plist";
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
@@ -1848,11 +1880,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "TheBox-Info.plist";
+				INFOPLIST_FILE = "$(PRODUCT_NAME)-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACH_O_TYPE = mh_execute;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = thebox;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -1877,7 +1909,7 @@
 					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TheBox_Prefix.pch;
+				GCC_PREFIX_HEADER = "${TARGET_NAME}_Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1940,7 +1972,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1991,7 +2023,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2037,7 +2069,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TheBoxUnitTests/TheBoxUnitTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2087,10 +2119,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "TheBox-Info.plist";
+				INFOPLIST_FILE = "$(PRODUCT_NAME)-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACH_O_TYPE = mh_bundle;
-				PRODUCT_NAME = thebox;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -2119,11 +2151,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "TheBox-Info.plist";
+				INFOPLIST_FILE = "$(PRODUCT_NAME)-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACH_O_TYPE = mh_execute;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = thebox;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
