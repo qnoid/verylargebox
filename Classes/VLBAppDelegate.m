@@ -19,7 +19,7 @@
 #import "VLBTypography.h"
 
 static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
-static NSString * const TESTFLIGHT_APP_TOKEN = @"d9ff72b2-9a0a-4b4a-ab73-a03314809698";
+static NSString * const TESTFLIGHT_APP_TOKEN = @"0840a56f-799c-4e95-92e9-7e19616a88f7";
 
 @interface VLBAppDelegate ()
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;

@@ -199,7 +199,6 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
     hud.labelText = @"Finding your location";
 }
@@ -217,6 +216,7 @@ return self;
     [self.theBoxLocationService notifyDidFindPlacemark:self];
     [self.theBoxLocationService notifyDidFailWithError:self];
     [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -230,7 +230,7 @@ return self;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
 {
-	[self refreshLocations];
+	[self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 /**

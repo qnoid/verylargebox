@@ -33,7 +33,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="841466699">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="597228640">
@@ -42,6 +42,7 @@
 						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrame">{{0, 7}, {320, 320}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="662715">
 							<int key="NSColorSpace">3</int>
@@ -58,6 +59,7 @@
 								<int key="NSvFlags">288</int>
 								<string key="NSFrame">{{105, 0}, {60, 60}}</string>
 								<reference key="NSSuperview" ref="573458467"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="183032429"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -93,6 +95,7 @@
 								<int key="NSvFlags">288</int>
 								<string key="NSFrame">{{156, 0}, {60, 60}}</string>
 								<reference key="NSSuperview" ref="573458467"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="611246978"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -111,6 +114,7 @@
 						</array>
 						<string key="NSFrame">{{0, 300}, {320, 60}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1062606987"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="662715"/>
@@ -121,6 +125,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 360}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="800797624"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="266439788"/>
@@ -129,7 +134,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">[in verylargebox]</string>
+						<string key="IBUIText">[in the box]</string>
 						<nil key="IBUITextColor"/>
 						<nil key="IBUIHighlightedColor"/>
 						<string key="IBUIShadowOffset">{0, 0}</string>
@@ -156,6 +161,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 404}, {320, 12}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -186,6 +192,8 @@
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="597228640"/>
 				<reference key="IBUIBackgroundColor" ref="266439788"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -447,7 +455,6 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="cameraView">VLBCameraView</string>
-						<string key="itemImageView">UIImageView</string>
 						<string key="locationButton">VLBButton</string>
 						<string key="storeLabel">UILabel</string>
 						<string key="takePhotoButton">VLBButton</string>
@@ -456,10 +463,6 @@
 						<object class="IBToOneOutletInfo" key="cameraView">
 							<string key="name">cameraView</string>
 							<string key="candidateClassName">VLBCameraView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="itemImageView">
-							<string key="name">itemImageView</string>
-							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="locationButton">
 							<string key="name">locationButton</string>

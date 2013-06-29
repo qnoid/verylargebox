@@ -127,6 +127,10 @@ return self;
     [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
     [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton completion:nil];
 
+    if(self.itemImage){
+        self.takePhotoButton.imageView.alpha = 1.0;//test
+    }
+    
     if(self.location != nil && ![[self.location vlb_objectForKey:@"name"] vlb_isEmpty]){
         self.locationButton.imageView.alpha = 1.0;
     }

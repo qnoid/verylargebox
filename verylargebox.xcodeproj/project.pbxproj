@@ -251,7 +251,6 @@
 		BDF2FD0C177A5BC700941B7F /* VLBCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD0B177A5BC700941B7F /* VLBCameraView.xib */; };
 		BDF2FD0F177CEE9700941B7F /* NSDictionary+VLBStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD0E177CEE9700941B7F /* NSDictionary+VLBStore.m */; };
 		BDF2FD14177E406900941B7F /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD13177E406900941B7F /* Reveal.framework */; };
-		BDF2FD16177E5B2D00941B7F /* verylargebox-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD15177E5B2D00941B7F /* verylargebox-info.plist */; };
 		BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF825C016FDFCEA003B3003 /* AddressBook.framework */; };
 		BDFBA12A177829C500A59BCF /* VLBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* VLBCityViewController.m */; };
 		BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
@@ -575,13 +574,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				908364051400752500E5AAAF /* CFNetwork.framework in Frameworks */,
+				908364071400752500E5AAAF /* MobileCoreServices.framework in Frameworks */,
 				BDA21878165EEBEA00094510 /* Security.framework in Frameworks */,
 				9083640A1400752500E5AAAF /* UIKit.framework in Frameworks */,
 				9083640C1400752500E5AAAF /* CoreGraphics.framework in Frameworks */,
 				908363CD14006BF000E5AAAF /* SenTestingKit.framework in Frameworks */,
-				908364051400752500E5AAAF /* CFNetwork.framework in Frameworks */,
 				908364061400752500E5AAAF /* SystemConfiguration.framework in Frameworks */,
-				908364071400752500E5AAAF /* MobileCoreServices.framework in Frameworks */,
 				908364081400752500E5AAAF /* CoreLocation.framework in Frameworks */,
 				908364091400752500E5AAAF /* MapKit.framework in Frameworks */,
 				9083640B1400752500E5AAAF /* Foundation.framework in Frameworks */,
@@ -1272,7 +1271,6 @@
 				BDF2FD03177A1EC100941B7F /* hexabump@2X.png in Resources */,
 				BDF2FD05177A2BB500941B7F /* hexabump.png in Resources */,
 				BDF2FD0C177A5BC700941B7F /* VLBCameraView.xib in Resources */,
-				BDF2FD16177E5B2D00941B7F /* verylargebox-info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1928,7 +1926,7 @@
 			baseConfigurationReference = 9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/thebox.app/thebox";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/${PROJECT_NAME}.app/${PROJECT_NAME}";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
@@ -1980,7 +1978,7 @@
 			baseConfigurationReference = 9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/thebox.app/thebox";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/${PROJECT_NAME}.app/${PROJECT_NAME}";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2026,7 +2024,7 @@
 			baseConfigurationReference = 9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/thebox.app/thebox";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/${PROJECT_NAME}.app/${PROJECT_NAME}";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
