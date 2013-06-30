@@ -19,6 +19,8 @@
 #import "VLBAlertViews.h"
 #import "NSDictionary+VLBDictionary.h"
 
+typedef void(^VLBUserItemViewInit)(VLBUserItemView *userItemView);
+
 static const CLLocationDegrees EmptyLocation = -1000.0;
 static const CLLocationCoordinate2D EmptyLocationCoordinate = {-1000.0, -1000.0};
 
@@ -29,6 +31,15 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @end
 
+VLBUserItemViewInit const VLBUserItemViewInitBlock = ^(VLBUserItemView *userItemView){
+  
+    userItemView.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();
+    userItemView.storeLabel.layer.sublayerTransform = CATransform3DMakeTranslation(0, 5, 0);
+    
+    NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
+    userItemView.defaultItemImage = [UIImage imageWithContentsOfFile:path];
+};
+
 @implementation VLBUserItemView
 
 - (id)initWithFrame:(CGRect)frame
@@ -38,9 +49,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     VLB_IF_NOT_SELF_RETURN_NIL()
     VLB_LOAD_VIEW()
     
-    self.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();
-    self.storeLabel.layer.sublayerTransform = CATransform3DMakeTranslation(0, 5, 0);
-
+    VLBUserItemViewInitBlock(self);
     
 return self;
 }
@@ -52,11 +61,7 @@ return self;
     VLB_IF_NOT_SELF_RETURN_NIL()
     VLB_LOAD_VIEW()
     
-    self.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();    
-    self.storeLabel.layer.sublayerTransform = CATransform3DMakeTranslation(0, 5, 0);
-    
-    NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
-    self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
+    VLBUserItemViewInitBlock(self);
 
 return self;
 }

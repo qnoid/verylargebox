@@ -129,6 +129,7 @@
 		BD4292B9175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4292BA175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
+		BD4BD0601780415600D1462A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD09177A4A7400941B7F /* AVFoundation.framework */; };
 		BD4D329C177F4E2D0015EADF /* VLBCameraViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D329B177F4E2D0015EADF /* VLBCameraViewTest.m */; };
 		BD4D329D177F50B30015EADF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD09177A4A7400941B7F /* AVFoundation.framework */; };
 		BD4D329E177F50D10015EADF /* VLBCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD07177A458D00941B7F /* VLBCameraView.m */; };
@@ -140,7 +141,6 @@
 		BD4D32A5177F5B010015EADF /* VLBScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 90428D38154B405D0090D280 /* VLBScrollViewTest.m */; };
 		BD4D32A8177F5B9E0015EADF /* VLBCameraViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D32A7177F5B9E0015EADF /* VLBCameraViewTest.m */; };
 		BD4D32AA177F5D040015EADF /* VLBViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D32A9177F5D040015EADF /* VLBViewTest.m */; };
-		BD4D32AC177F5D2F0015EADF /* VLBScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D32AB177F5D2F0015EADF /* VLBScrollViewTest.m */; };
 		BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A503A1291E4AC00BCB475 /* CoreLocation.framework */; };
 		BD5CB779177119E800BC21D1 /* navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB777177119E800BC21D1 /* navigationbar.png */; };
 		BD5CB77A177119E800BC21D1 /* navigationbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB778177119E800BC21D1 /* navigationbar@2x.png */; };
@@ -438,7 +438,6 @@
 		BD4D329F177F5A370015EADF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		BD4D32A7177F5B9E0015EADF /* VLBCameraViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBCameraViewTest.m; path = Classes/VLBCameraViewTest.m; sourceTree = "<group>"; };
 		BD4D32A9177F5D040015EADF /* VLBViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBViewTest.m; path = Classes/VLBViewTest.m; sourceTree = "<group>"; };
-		BD4D32AB177F5D2F0015EADF /* VLBScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBScrollViewTest.m; path = Classes/VLBScrollViewTest.m; sourceTree = "<group>"; };
 		BD5CB777177119E800BC21D1 /* navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar.png; sourceTree = "<group>"; };
 		BD5CB778177119E800BC21D1 /* navigationbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar@2x.png"; sourceTree = "<group>"; };
 		BD5CB77B1771327600BC21D1 /* target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "target@2x.png"; path = "Supporting Files/target@2x.png"; sourceTree = "<group>"; };
@@ -607,6 +606,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD4BD0601780415600D1462A /* AVFoundation.framework in Frameworks */,
 				BDE49262177522A900FFC41F /* QuartzCore.framework in Frameworks */,
 				BDCD9394165C127A009C2F8F /* CoreGraphics.framework in Frameworks */,
 				BDCD9393165C127A009C2F8F /* UIKit.framework in Frameworks */,
@@ -1082,7 +1082,6 @@
 			children = (
 				BD4D32A9177F5D040015EADF /* VLBViewTest.m */,
 				BD4D32A7177F5B9E0015EADF /* VLBCameraViewTest.m */,
-				BD4D32AB177F5D2F0015EADF /* VLBScrollViewTest.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1584,7 +1583,6 @@
 				BD8BB28A176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */,
 				BD4D32A8177F5B9E0015EADF /* VLBCameraViewTest.m in Sources */,
 				BD4D32AA177F5D040015EADF /* VLBViewTest.m in Sources */,
-				BD4D32AC177F5D2F0015EADF /* VLBScrollViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

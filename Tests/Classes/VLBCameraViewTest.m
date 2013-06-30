@@ -71,33 +71,4 @@ context(@"assert delegate gets callbacks; given a new VLBCameraView instance ", 
     });
 });
 
-context(@"assert delegate gets callbacks; given the VLBCaptureStillImageBlock", ^{
-    it(@"should callback the VLBCameraView delegate when error", ^{
-        
-        id mockedDelegate = [OCMockObject mockForProtocol:@protocol(VLBCameraViewDelegate)];
-        VLBCameraView *cameraView = [[VLBCameraView alloc] initWithCoder:nil];
-        cameraView.delegate = mockedDelegate;
-        NSError *anyerror = [[NSError alloc] init];
-        VLBCaptureStillImageBlock stillImageBlock = [cameraView didFinishTakingPicture:nil preview:nil videoPreviewLayer:nil];
-        
-        [[mockedDelegate expect] cameraView:cameraView didErrorOnTakePicture:anyerror];
-        stillImageBlock(nil, anyerror);
-        
-        [mockedDelegate verify];
-    });
-    it(@"should callback its delegate with image", ^{
-        
-        id mockedDelegate = [OCMockObject mockForProtocol:@protocol(VLBCameraViewDelegate)];
-        VLBCameraView *cameraView = [[VLBCameraView alloc] initWithCoder:nil];
-        cameraView.delegate = mockedDelegate;
-        VLBCaptureStillImageBlock stillImageBlock = [cameraView didFinishTakingPicture:nil preview:nil videoPreviewLayer:nil];
-
-        [[mockedDelegate expect] cameraView:cameraView didFinishTakingPicture:nil withInfo:nil meta:nil];
-        stillImageBlock(nil, nil);
-        
-        [mockedDelegate verify];
-    });
-});
-
-
 SPEC_END

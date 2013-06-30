@@ -17,7 +17,7 @@ end
 
 pod 'AFNetworking'  
 pod 'AWSiOSSDK/S3'
-pod 'JSONKit', '~> 1.4'
+pod 'JSONKit', '~> 1.4', :inhibit_warnings => true
 pod 'TestFlightSDK', '= 1.2.6'
 pod 'SSKeychain', '0.1.4'
 pod 'SVPullToRefresh', '0.4.1'

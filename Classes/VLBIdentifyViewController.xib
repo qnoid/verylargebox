@@ -173,6 +173,7 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{100, 300}, {120, 120}}</string>
 						<reference key="NSSuperview" ref="328351537"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>

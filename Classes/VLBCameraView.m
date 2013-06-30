@@ -13,7 +13,7 @@
 #import "DDLog.h"
 
 typedef void(^VLBCaptureStillImageBlock)(CMSampleBufferRef imageDataSampleBuffer, NSError *error);
-typedef void(^VLBInit)(VLBCameraView *cameraView);
+typedef void(^VLBCameraViewInit)(VLBCameraView *cameraView);
 
 VLBCameraViewMeta const VLBCameraViewMetaCrop = @"VLBCameraViewMetaCrop";
 VLBCameraViewMeta const VLBCameraViewMetaOriginalImage = @"VLBCameraViewMetaOriginalImage";
@@ -26,7 +26,7 @@ VLBCameraViewMeta const VLBCameraViewMetaOriginalImage = @"VLBCameraViewMetaOrig
 @property(nonatomic, weak) IBOutlet UIImageView* preview; //test cliptobounds and aspectfill
 @end
 
-VLBInit const VLBInitBlock = ^(VLBCameraView *cameraView){
+VLBCameraViewInit const VLBCameraViewInitBlock = ^(VLBCameraView *cameraView){
     cameraView.session = [AVCaptureSession new];
     [cameraView.session setSessionPreset:AVCaptureSessionPresetPhoto];
     
@@ -49,7 +49,7 @@ VLBInit const VLBInitBlock = ^(VLBCameraView *cameraView){
     VLB_IF_NOT_SELF_RETURN_NIL();    
     VLB_LOAD_VIEW()
 
-    VLBInitBlock(self);
+    VLBCameraViewInitBlock(self);
 
 return self;
 }
@@ -61,7 +61,7 @@ return self;
     VLB_IF_NOT_SELF_RETURN_NIL();    
     VLB_LOAD_VIEW()
 
-    VLBInitBlock(self);
+    VLBCameraViewInitBlock(self);
     
 return self;
 }
@@ -94,13 +94,13 @@ return ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
             CGPoint point = [videoPreviewLayer captureDevicePointOfInterestForPoint:CGPointZero];
             
             //
-            CGRect crop = CGRectMake(image.size.height - (image.size.height * (1 - point.x)),
+            CGRect crop = CGRectMake(image.size.height - (image.size.height * (1.0f - point.x)),
                                      CGPointZero.y,
                                      image.size.width,
-                                     image.size.height * (1 - point.x));
+                                     image.size.height * (1.0f - point.x));
             
             CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], crop);
-            UIImage *newImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:image.imageOrientation]; //preserve camera orientation
+            UIImage *newImage = [UIImage imageWithCGImage:imageRef scale:1.0f orientation:image.imageOrientation]; //preserve camera orientation
             CGImageRelease(imageRef);
             
             NSDictionary *info = (__bridge NSDictionary*)attachments;

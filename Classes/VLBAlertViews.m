@@ -49,9 +49,11 @@ NSPredicate* isButtonIndexCancel(){
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if([self.predicateOnButtonIndex evaluateWithObject:VLB_Integer(buttonIndex)]){
-        self.alertViewBlock(alertView, buttonIndex);
+    if(![self.predicateOnButtonIndex evaluateWithObject:VLB_Integer(buttonIndex)]){
+        return;
     }
+
+    self.alertViewBlock(alertView, buttonIndex);
 }
 
 @end

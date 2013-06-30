@@ -9,8 +9,8 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "OCMock.h"
-#import "OCMArg.h"
+#import <OCMock/OCMock.h>
+#import <Kiwi/Kiwi.h>
 #import "VLBScrollView.h"
 #import "VLBScrollViewDatasource.h"
 #import "VLBSize.h"
@@ -18,6 +18,8 @@
 #import "VLBVisibleStrategy.h"
 
 @interface VLBScrollView (Testing)
+@property(nonatomic, strong) UIView *contentView;
+
 -(id)initWithFrame:(CGRect) frame size:(NSObject<VLBSize>*)size dimension:(NSObject<VLBDimension>*)dimension;
 -(void)setVisibleStrategy:(id<VLBVisibleStrategy>)visibleStrategy;
 -(id<VLBVisibleStrategy>)visibleStrategy;
@@ -81,3 +83,21 @@
     
 }
 @end
+
+SPEC_BEGIN(VLBScrollViewSpec)
+
+context(@"", ^{
+    it(@"", ^{
+        CGRect anyframe = CGRectMake(0, 0, 320, 196);
+        VLBScrollView *theBoxScrollView = [[VLBScrollView alloc] initWithFrame:anyframe size:nil dimension:nil];
+        
+        [[[theBoxScrollView.contentView superview] should] equal:theBoxScrollView];
+        
+        CGRect actual = CGRectMake(CGPointZero.x, CGPointZero.y, anyframe.size.width, anyframe.size.height);
+        BOOL shouldBeTrue = CGRectEqualToRect(theBoxScrollView.contentView.frame, actual);
+        
+        [[theValue(shouldBeTrue) should] equal:(theValue(true))];
+    });
+});
+SPEC_END
+
