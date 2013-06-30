@@ -48,9 +48,7 @@ return ^(){
             [NSString stringWithFormat:@"http://maps.google.com/?dirflg=w&daddr=%f,%f",
              destination.latitude,
              destination.longitude];
-        
-        NSLog(@"%@", urlstring);
-        
+                
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlstring]];
     };
 }

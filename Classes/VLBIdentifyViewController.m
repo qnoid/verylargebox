@@ -28,7 +28,7 @@
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
 #import "VLBSecureHashA1.h"
-
+#import "DDLog.h"
 
 NSString* const VLB_EMAIL_VALIDATION_REGEX =
 @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -190,7 +190,7 @@ return YES;
 #pragma mark TBVerifyUserOperationDelegate
 -(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence
 {
-    NSLog(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);
+    DDLogVerbose(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);
     
     //thebox should be a property to be shared across every controller
     //the residence should be passed to thebox on a method like didSucceedWithVerificationForEmail:residence
@@ -219,7 +219,7 @@ return YES;
     [SSKeychain setPassword:residence forService:THE_BOX_SERVICE account:email error:&error];
     
     if (error) {
-        NSLog(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
+        DDLogWarn(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
     }
     
     self.accounts = [NSMutableArray arrayWithArray:[SSKeychain accountsForService:THE_BOX_SERVICE]];
@@ -240,7 +240,7 @@ return YES;
 #pragma mark TBCreateUserOperationDelegate
 -(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
     UIAlertView* userUnauthorisedAlertView =
         [VLBAlertViews newAlertViewWithOk:@"New Registration"

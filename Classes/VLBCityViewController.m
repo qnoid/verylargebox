@@ -280,7 +280,7 @@ return self;
 
 -(void)didFailOnLocationWithError:(NSError*)error
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 }
 
@@ -416,7 +416,7 @@ return storeButton;
 
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index
 {
-    NSLog(@"%s %u", __PRETTY_FUNCTION__, index);
+    DDLogVerbose(@"%s %u", __PRETTY_FUNCTION__, index);
     
     if(![self.locationsView isEqual:scrollView]){
         return;
@@ -504,7 +504,7 @@ return storeButton;
 
 -(void)didSucceedWithItems:(NSMutableArray*) items
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, items);
+    DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, items);
     
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     
@@ -516,7 +516,7 @@ return storeButton;
 
 -(void)didFailOnItemsWithError:(NSError*)error
 {
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 }
 
@@ -526,7 +526,7 @@ return storeButton;
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogError(@"%s", __PRETTY_FUNCTION__);
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 
     VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];

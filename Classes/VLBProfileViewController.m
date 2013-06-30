@@ -23,6 +23,7 @@
 #import "VLBErrorBlocks.h"
 #import "VLBTheBox.h"
 #import "VLBTypography.h"
+#import "DDLog.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -198,7 +199,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, items);
+    DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, items);
     self.items = items;
     [self.itemsView setNeedsLayout];
     [self.itemsView.pullToRefreshView stopAnimating];
@@ -206,7 +207,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 
 -(void)didFailOnItemsWithError:(NSError *)error
 {
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     [self.itemsView.pullToRefreshView stopAnimating];
 }
 
@@ -256,15 +257,14 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
         self.notificationAnimatedView.hidden = YES;
     }];
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSLog(@"%@", item);
+    DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, item);
     [self.items addObject:item];
     [self.itemsView setNeedsLayout];
 }
 
 -(void)didFailOnItemWithError:(NSError*)error
 {
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     [self.notificationAnimatedView rewind:^(BOOL finished) {
         self.notificationAnimatedView.hidden = YES;
     }];

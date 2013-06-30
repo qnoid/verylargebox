@@ -56,7 +56,7 @@ return availablePlacesViewController;
 #pragma mark TBLocalityOperationDelegate
 -(void)didSucceedWithLocalities:(NSArray *)localities
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, localities);
+    DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, localities);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
     NSObject<UITableViewDataSource> *datasource = [[[[VLBTableViewDataSourceBuilder new] numberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
@@ -83,7 +83,7 @@ return availablePlacesViewController;
 
 -(void)didFailOnLocalitiesWithError:(NSError *)error
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
     MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];

@@ -25,6 +25,7 @@
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
 #import "NSString+VLBDecorator.h"
+#import "VLBErrorBlocks.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
@@ -48,12 +49,14 @@ return [[[[QNDViewAnimationBuilder alloc] initWithViewAnimationBlock:^(UIView *v
 @interface VLBTakePhotoViewController ()
 @property(nonatomic, strong) VLBTheBox* thebox;
 @property(nonatomic, strong) UIImage* itemImage;
+@property(nonatomic, strong) NSArray* venues;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, assign) NSUInteger userId;
 @property(nonatomic, assign) BOOL hasCoordinates;
 
+@property(nonatomic, assign) NSObject <VLBLocationOperationDelegate> *locationOperationDelegate;
 @end
 
 @implementation VLBTakePhotoViewController
@@ -111,6 +114,7 @@ return newUploadUIViewController;
     self.thebox = thebox;
     self.userId = userId;
     self.hasCoordinates = NO;
+    self.venues = [NSArray array];
 
 return self;
 }
@@ -150,10 +154,44 @@ return self;
 {
 }
 
+#pragma mark VLBLocationOperationDelegate
+
+-(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
+{
+    DDLogVerbose(@"%s: %@", __PRETTY_FUNCTION__, locations);
+    self.venues = locations;
+    [self.locationOperationDelegate didSucceedWithLocations:locations givenParameters:parameters];
+}
+
+-(void)didFailOnLocationWithError:(NSError*)error
+{
+    DDLogError(@"%s: %@", __PRETTY_FUNCTION__, error);
+    [self.locationOperationDelegate didFailOnLocationWithError:error];
+}
+
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithTimeout:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+
 #pragma mark TheBoxLocationServiceDelegate
 
 -(void)didUpdateToLocation:(NSNotification *)notification;
 {
+    DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
+
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     if(self.location){
         return;
@@ -168,6 +206,12 @@ return self;
                         @"lat": [NSString stringWithFormat:@"%f",location.coordinate.latitude],
                         @"lng": [NSString stringWithFormat:@"%f",location.coordinate.longitude]}};
     
+    AFHTTPRequestOperation* operation =
+        [VLBQueries newLocationQuery:location.coordinate.latitude
+                          longtitude:location.coordinate.longitude
+                            delegate:self];
+    
+    [operation start];
 }
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
@@ -226,7 +270,8 @@ return self;
 
 - (IBAction)enterLocation:(id)sender
 {
-	VLBStoresViewController *locationController = [VLBStoresViewController newLocationViewController];
+	VLBStoresViewController *locationController = [VLBStoresViewController newLocationViewController:self.venues];
+    self.locationOperationDelegate = locationController;
     locationController.delegate = self;
 
 	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:locationController] animated:YES completion:nil];

@@ -93,7 +93,7 @@ return ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
             //point is in range 0..1
             CGPoint point = [videoPreviewLayer captureDevicePointOfInterestForPoint:CGPointZero];
             
-            //
+            //point is calculated with camera in landscape but crop is in portrait
             CGRect crop = CGRectMake(image.size.height - (image.size.height * (1.0f - point.x)),
                                      CGPointZero.y,
                                      image.size.width,

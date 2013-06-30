@@ -24,6 +24,7 @@
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
 #import "NSArray+VLBDecorator.h"
+#import "VLBMacros.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare";
 static NSString* const foursquarePoweredByType = @"png";
@@ -35,14 +36,16 @@ static UIImage* foursquarePoweredBy;
 @property(nonatomic, strong) NSArray* venues;
 @property(nonatomic, strong) NSObject<QNDAnimatedView> *animatedMap;
 @property(nonatomic, weak) MBProgressHUD *hud;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil venues:(NSArray*)venues;
 @end
 
 @implementation VLBStoresViewController
 
-+(VLBStoresViewController *)newLocationViewController {
++(VLBStoresViewController *)newLocationViewController:(NSArray*)venues
+{
 
-    VLBStoresViewController *storesViewController =  [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle]];
+    VLBStoresViewController *storesViewController =
+        [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle] venues:venues];
 
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"Select a store";
@@ -88,15 +91,14 @@ return storesViewController;
 
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil venues:(NSArray*)venues
 {
     self = [super initWithNibName:@"VLBStoresViewController" bundle:nibBundleOrNil];
     
-    if (self) 
-    {
-        self.venues = [NSArray array];
-        self.theBoxLocationService = [VLBLocationService theBoxLocationService];
-    }
+    VLB_IF_NOT_SELF_RETURN_NIL();
+    
+    self.venues = venues;
+    self.theBoxLocationService = [VLBLocationService theBoxLocationService];
     
 return self;
 }
@@ -214,12 +216,12 @@ return self;
 	MKCoordinateSpan span = MKCoordinateSpanMake(0.009, 0.009);
 	MKCoordinateRegion newRegion = MKCoordinateRegionMake(centerCoordinate, span);	
 
-    AFHTTPRequestOperation* operation = [VLBQueries newLocationQuery:location.coordinate.latitude longtitude:location.coordinate.longitude delegate:self];
-    
-    [operation start];
-    
 	[self.map setRegion:newRegion];
     self.map.showsUserLocation = YES;
+    
+    if(![self.venues vlb_isEmpty]){
+        return;
+    }
     
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.hud.labelText = [NSString stringWithFormat:@"Finding stores nearby"];

@@ -77,7 +77,7 @@
 @property(nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property(nonatomic, weak) IBOutlet UITableView *venuesTableView;
 
-+(VLBStoresViewController *)newLocationViewController;
++(VLBStoresViewController *)newLocationViewController:(NSArray*)venues;
 - (IBAction)cancel:(id)sender;
 
 @end

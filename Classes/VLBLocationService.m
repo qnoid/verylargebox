@@ -106,7 +106,7 @@ return self;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
 
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:newLocation forKey:@"newLocation"];
 	
@@ -117,7 +117,7 @@ return self;
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
     {
         if(error){
-            NSLog(@"Could not retrieve the specified place information.\n");
+            DDLogError(@"Could not retrieve the specified place information.\n");
             
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
             
@@ -134,7 +134,7 @@ return self;
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
     
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
     
