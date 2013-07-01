@@ -1,6 +1,6 @@
 //
 //  NSDictionary+VLBStore.h
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 27/06/2013.
 //  Copyright (c) 2013 verylargebox.com.

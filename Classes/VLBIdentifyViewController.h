@@ -1,6 +1,6 @@
 //
 //  VLBIdentifyViewController.h
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 18/11/2012.
 //  Copyright (c) 2012 (verylargebox.com). All rights reserved.

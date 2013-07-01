@@ -1,6 +1,6 @@
 //
 //  VLBRecycleStrategyTest.m
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 15/12/2010.
 //  Copyright (c) 2010 (verylargebox.com). All rights reserved.

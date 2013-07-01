@@ -1,7 +1,7 @@
 //
 //
 //  VLBBinarySearchTest.m
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 16/04/2011.
 //  Copyright (c) 2011 (verylargebox.com). All rights reserved.

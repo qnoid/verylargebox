@@ -1,6 +1,6 @@
 //
 //  VLBAFHTTPRequestOperationCompletionBlocks.h
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 08/12/2012.
 //  Copyright (c) 2012 (verylargebox.com). All rights reserved.

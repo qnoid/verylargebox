@@ -1,7 +1,7 @@
 //
 //
 //  VLBCityViewController.h
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 23/11/2010.
 //  Copyright (c) 2010 (verylargebox.com). All rights reserved.

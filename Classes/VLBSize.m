@@ -1,7 +1,7 @@
 //
 //
 //  VLBSize.m
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 13/12/2010.
 //  Copyright (c) 2010 (verylargebox.com). All rights reserved.

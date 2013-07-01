@@ -1,6 +1,6 @@
 //
 //  VLBItemView.h
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 10/01/2013.
 //  Copyright (c) 2013 (verylargebox.com). All rights reserved.

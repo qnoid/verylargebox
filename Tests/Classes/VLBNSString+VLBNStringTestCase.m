@@ -1,6 +1,6 @@
 //
 //  TBNSString+TBSStringTestCase.m
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 22/11/2012.
 //  Copyright (c) 2012 (verylargebox.com). All rights reserved.

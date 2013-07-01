@@ -1,7 +1,7 @@
 //
 //
 //  VLBCityViewController.m
-//  thebox
+//  verylargebox 
 //
 //  Created by Markos Charatzas on 23/11/2010.
 //  Copyright (c) 2010 (verylargebox.com). All rights reserved.
@@ -531,7 +531,7 @@ return storeButton;
 
     VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
     UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
-                                                       message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'thebox' to access your location."];
+                                                       message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
     alertView.delegate = alertViewDelegate;
     
     [alertView show]; 

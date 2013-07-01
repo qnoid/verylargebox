@@ -1,5 +1,5 @@
 //  VLBDetailsViewController.m
-//  thebox
+//  verylargebox
 //
 //  Created by Markos Charatzas on 10/04/2012.
 //  Copyright (c) 2012 (verylargebox.com). All rights reserved.
