@@ -34,7 +34,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, weak) UIView<QNDAnimatedView> *notificationAnimatedView;
 @property(nonatomic, weak) UIProgressView *progressView;
 @property(nonatomic, strong) NSDictionary* residence;
-@property(nonatomic, strong) NSMutableArray* items;
+@property(nonatomic, strong) NSMutableOrderedSet* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSDictionary* location;
@@ -86,7 +86,7 @@ return profileViewController;
     }
     
     self.residence = residence;
-    self.items = [NSMutableArray array];
+    self.items = [NSMutableOrderedSet orderedSetWithCapacity:10];
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
     self.operationQueue = [NSOperationQueue new];
@@ -200,7 +200,8 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
     DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, items);
-    self.items = items;
+    self.items = [NSMutableOrderedSet orderedSetWithCapacity:items.count];
+		[self.items addObjectsFromArray:items];
     [self.itemsView setNeedsLayout];
     [self.itemsView.pullToRefreshView stopAnimating];
 }
@@ -258,7 +259,12 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
     }];
     
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, item);
-    [self.items addObject:item];
+		if(self.items.count == 0){
+			[self.items addObject:item];
+		}
+		else{
+	    [self.items insertObject:item atIndex:0];
+		}
     [self.itemsView setNeedsLayout];
 }
 

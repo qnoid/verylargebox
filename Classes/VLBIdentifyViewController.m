@@ -44,6 +44,7 @@ NSString* const VLB_EMAIL_VALIDATION_REGEX =
 @property(nonatomic, strong) NSOperationQueue *operations;
 @property(nonatomic, strong) NSMutableArray* accounts;
 @property(nonatomic, strong) NSMutableArray* emailStatuses;
+@property(nonatomic, assign) BOOL isIdentifyViewOpen;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts;
 @end
@@ -159,7 +160,9 @@ return self;
                                     104,
                                     view.frame.size.width, view.frame.size.height);
         }];
-    }];
+
+		self.isIdentifyViewOpen = YES;
+		}];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -248,6 +251,7 @@ return YES;
 -(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence
 {
     [self.identifyView rewind];
+		self.isIdentifyViewOpen = NO;
     
     [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
         view.frame = CGRectMake(view.frame.origin.x,
@@ -361,8 +365,7 @@ return YES;
     
     [self.accountsTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
-    
-    if([self.accounts vlb_isEmpty]){
+    if([self.accounts vlb_isEmpty] && !self.isIdentifyViewOpen){
         [self.identifyView animateWithDuration:0.5 animation:^(UIView *view) {
             view.frame = CGRectMake(view.frame.origin.x, CGPointZero.y,
                                     view.frame.size.width, view.frame.size.height);

@@ -197,7 +197,7 @@
 					</object>
 					<object class="IBUITableView" id="901978289">
 						<reference key="NSNextResponder" ref="328351537"/>
-						<int key="NSvFlags">1298</int>
+						<int key="NSvFlags">1314</int>
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{0, 44}, {320, 214}}</string>
 						<reference key="NSSuperview" ref="328351537"/>
@@ -226,6 +226,7 @@
 						<string key="NSFrame">{{100, 256}, {120, 120}}</string>
 						<reference key="NSSuperview" ref="328351537"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
