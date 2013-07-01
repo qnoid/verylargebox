@@ -26,6 +26,7 @@
 #import "QNDAnimatedView.h"
 #import "NSString+VLBDecorator.h"
 #import "VLBErrorBlocks.h"
+#import "NSArray+VLBDecorator.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
@@ -141,6 +142,9 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.defaultStoreButton.titleLabel.numberOfLines = self.storeLabel.numberOfLines;
+    self.defaultStoreButton.titleLabel.lineBreakMode = self.storeLabel.lineBreakMode;
+    self.defaultStoreButton.titleLabel.textAlignment = self.storeLabel.textAlignment;
     self.cameraView.flashView.backgroundColor =
             [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 }
@@ -178,6 +182,24 @@ return self;
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
     DDLogVerbose(@"%s: %@", __PRETTY_FUNCTION__, locations);
+
+    if([locations vlb_isEmpty]){
+        self.venues = locations;
+        [self.locationOperationDelegate didSucceedWithLocations:locations givenParameters:parameters];
+    return;
+    }
+    
+    NSDictionary *location = [locations objectAtIndex:0];
+    
+    self.defaultStoreButton.hidden = NO;
+    self.defaultStoreButton.enabled = YES;
+    [self.defaultStoreButton setTitle:[NSString stringWithFormat:@"%@ [accept?]", [location vlb_objectForKey:@"name"]] forState:UIControlStateNormal];
+    
+    [self.defaultStoreButton onTouchUpInside:^(UIButton *button) {
+        self.locationButton.imageView.alpha = 1.0;        
+        [self didSelectStore:location];
+    }];
+
     self.venues = locations;
     [self.locationOperationDelegate didSucceedWithLocations:locations givenParameters:parameters];
 }
@@ -299,10 +321,14 @@ return self;
 
 -(void)didSelectStore:(NSMutableDictionary *)store
 {
-    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
-
     DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, store);
+    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+
+    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
+    self.defaultStoreButton.hidden = YES;
+    self.defaultStoreButton.enabled = NO;
+
     
     self.hasCoordinates = YES;
     self.location = store;

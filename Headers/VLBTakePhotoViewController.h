@@ -46,6 +46,7 @@
 @property(nonatomic, weak) IBOutlet VLBCameraView *cameraView;
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 @property(nonatomic, weak) IBOutlet VLBButton *locationButton;
+@property(nonatomic, weak) IBOutlet VLBButton *defaultStoreButton;
 
 @property(nonatomic, unsafe_unretained) NSObject<VLBCreateItemOperationDelegate> *createItemDelegate;
 
