@@ -158,7 +158,7 @@ return ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
     CGImageRelease(imageRef);
 
     
-    [self.delegate cameraView:self
+    [self.delegate cameraView:cameraView
        didFinishTakingPicture:newImage
                      withInfo:info meta:@{VLBCameraViewMetaCrop:[NSValue valueWithCGRect:crop],
                                           VLBCameraViewMetaOriginalImage:image}];
