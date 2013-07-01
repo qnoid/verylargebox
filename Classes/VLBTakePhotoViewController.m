@@ -46,6 +46,24 @@ return [[[[QNDViewAnimationBuilder alloc] initWithViewAnimationBlock:^(UIView *v
     }] newViewAnimation];
 }
 
+@interface CLLocation (VLBLocation)
+
+-(BOOL)vlb_isMoreAccurateThan:(CLLocation*)location;
+
+@end
+
+@implementation CLLocation (VLBLocation)
+
+-(BOOL)vlb_isMoreAccurateThan:(CLLocation*)location{
+    if(location == nil){
+        return YES;
+    }
+    
+return self.horizontalAccuracy < location.horizontalAccuracy || self.verticalAccuracy < location.verticalAccuracy;
+}
+
+@end
+
 @interface VLBTakePhotoViewController ()
 @property(nonatomic, strong) VLBTheBox* thebox;
 @property(nonatomic, strong) UIImage* itemImage;
@@ -56,7 +74,8 @@ return [[[[QNDViewAnimationBuilder alloc] initWithViewAnimationBlock:^(UIView *v
 @property(nonatomic, assign) NSUInteger userId;
 @property(nonatomic, assign) BOOL hasCoordinates;
 
-@property(nonatomic, assign) NSObject <VLBLocationOperationDelegate> *locationOperationDelegate;
+@property(nonatomic, strong) CLLocation *lastKnownLocation;
+@property(nonatomic, weak) NSObject <VLBLocationOperationDelegate> *locationOperationDelegate;
 @end
 
 @implementation VLBTakePhotoViewController
@@ -193,14 +212,15 @@ return self;
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
 
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
-    if(self.location){
+    CLLocation *location = [VLBNotifications location:notification];
+
+    if(![location vlb_isMoreAccurateThan:self.lastKnownLocation]){
         return;
     }
 
+    self.lastKnownLocation = location;
     self.hasCoordinates = YES;
     
-	CLLocation *location = [VLBNotifications location:notification];
-
     self.location = @{@"name":@"",
                       @"location": @{
                         @"lat": [NSString stringWithFormat:@"%f",location.coordinate.latitude],

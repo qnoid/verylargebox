@@ -29,6 +29,7 @@
 #import "QNDAnimatedView.h"
 #import "VLBSecureHashA1.h"
 #import "DDLog.h"
+#import "NSArray+VLBDecorator.h"
 
 NSString* const VLB_EMAIL_VALIDATION_REGEX =
 @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -94,9 +95,25 @@ return self;
     self.accountsTableView.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 20);
     self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(60, 0, 0);
 
+    if([self.accounts vlb_isEmpty]){
+        [self.identifyView animateWithDuration:0.5 animation:^(UIView *view) {
+            view.frame = CGRectMake(view.frame.origin.x, CGPointZero.y,
+                                    view.frame.size.width, view.frame.size.height);
+        }];
+        
+        [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
+            view.frame = CGRectMake(view.frame.origin.x,
+                                    104,
+                                    view.frame.size.width, view.frame.size.height);
+        }];
+    }
+    
     __weak VLBIdentifyViewController *uself = self;
     
-    [self.identifyButton onTouchUp:^(UIButton *button) {
+    [self.identifyButton onTouchUp:^(UIButton *button)
+    {
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [uself class], @"didTouchUpInsideIdentifyButton"]];
+        
         VLBSecureHashA1 *sha1 = [VLBSecureHashA1 new];
         NSString* residence = [sha1 newKey];
         
@@ -127,6 +144,21 @@ return self;
         feedViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
         
         [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:feedViewController] animated:YES completion:nil];
+    }];
+    
+    [self.addEmailButton onTouchUpInside:^(UIButton *button) {
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [uself class], @"didTouchUpInsideAddEmailButton"]];
+        
+        [self.identifyView animateWithDuration:0.5 animation:^(UIView *view) {
+            view.frame = CGRectMake(view.frame.origin.x, CGPointZero.y,
+                                    view.frame.size.width, view.frame.size.height);
+        }];
+        
+        [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
+            view.frame = CGRectMake(view.frame.origin.x,
+                                    104,
+                                    view.frame.size.width, view.frame.size.height);
+        }];
     }];
 }
 
@@ -215,13 +247,21 @@ return YES;
 
 -(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence
 {
+    [self.identifyView rewind];
+    
+    [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
+        view.frame = CGRectMake(view.frame.origin.x,
+                                44,
+                                view.frame.size.width, view.frame.size.height);
+    }];
+
     NSError *error = nil;
     [SSKeychain setPassword:residence forService:THE_BOX_SERVICE account:email error:&error];
     
     if (error) {
         DDLogWarn(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
     }
-    
+        
     self.accounts = [NSMutableArray arrayWithArray:[SSKeychain accountsForService:THE_BOX_SERVICE]];
     self.emailStatuses = [NSMutableArray arrayWithCapacity:self.accounts.count];
     for (id obj in self.accounts) {
@@ -320,6 +360,20 @@ return YES;
     [self.accounts removeObjectAtIndex:indexPath.row];
     
     [self.accountsTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
+    
+    if([self.accounts vlb_isEmpty]){
+        [self.identifyView animateWithDuration:0.5 animation:^(UIView *view) {
+            view.frame = CGRectMake(view.frame.origin.x, CGPointZero.y,
+                                    view.frame.size.width, view.frame.size.height);
+        }];
+        
+        [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
+            view.frame = CGRectMake(view.frame.origin.x,
+                                    104,
+                                    view.frame.size.width, view.frame.size.height);
+        }];
+    }
 }
 
 

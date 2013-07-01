@@ -222,9 +222,9 @@ return self;
     if(![self.venues vlb_isEmpty]){
         return;
     }
-    
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.hud.labelText = [NSString stringWithFormat:@"Finding stores nearby"];
+    
 }
 
 #pragma mark VLBLocationOperationDelegate

@@ -21,7 +21,22 @@
 @protocol VLBCreateItemOperationDelegate;
 
 /**
+ Displays a video preview of the camera and 2 primary actions.
+ 1. Take a photo of the item
+ 2. Select a store for the item
+
+ #events
+ didFindPlacemark
+    1. will async get the venues from 4sq for the lat/long
  
+ didFailReverseGeocodeLocationWithError
+    stop monitoring for location updates
+
+ #network connections
+    one at a time to 4sq.com to fetch the venues given the lat/long
+
+ 
+ As soon as the location is update
  */
 @interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBLocationOperationDelegate, VLBStoresViewControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate, VLBCameraViewDelegate>
 {

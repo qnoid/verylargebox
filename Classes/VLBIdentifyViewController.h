@@ -15,6 +15,7 @@
 #import "VLBAFHTTPRequestOperationCompletionBlocks.h"
 
 @protocol VLBButton;
+@class QNDAnimatedView;
 
 typedef NS_ENUM(NSInteger, VLBEmailStatus){
     VLBEmailStatusDefault,
@@ -88,6 +89,9 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UITableView *accountsTableView;
 @property (nonatomic, weak) IBOutlet VLBButton *browseButton;
+
+@property (nonatomic, weak) IBOutlet QNDAnimatedView *identifyView;
+@property (nonatomic, weak) IBOutlet VLBButton *addEmailButton;
 
 +(VLBIdentifyViewController *)newIdentifyViewController;
 

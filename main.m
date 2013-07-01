@@ -1,25 +1,17 @@
-/*
- *  Copyright 2010 The Box
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas on 5/11/10.
-
- */
+//
+//  main.m
+//  thebox
+//
+//  Created by Markos Charatzas on 05/11/2010.
+//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
+//
 #import <UIKit/UIKit.h>
 #import "VLBAppDelegate.h"
 
 int main(int argc, char *argv[]) {
     int retVal = -1;
     @autoreleasepool {
-        @try {
-            retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([VLBAppDelegate class]));
-        }
-        @catch (NSException* exception) {
-            NSLog(@"Uncaught exception: %@", exception.description);
-            NSLog(@"Stack trace: %@", [exception callStackSymbols]);
-        }
+        retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([VLBAppDelegate class]));
     }
     return retVal;
 }
