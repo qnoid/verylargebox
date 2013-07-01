@@ -362,6 +362,7 @@ return YES;
     NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
     [SSKeychain deletePasswordForService:THE_BOX_SERVICE account:email];
     [self.accounts removeObjectAtIndex:indexPath.row];
+		[self.emailStatuses removeObjectAtIndex:indexPath.row];
     
     [self.accountsTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
