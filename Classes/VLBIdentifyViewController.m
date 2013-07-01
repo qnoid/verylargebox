@@ -44,7 +44,6 @@ NSString* const VLB_EMAIL_VALIDATION_REGEX =
 @property(nonatomic, strong) NSOperationQueue *operations;
 @property(nonatomic, strong) NSMutableArray* accounts;
 @property(nonatomic, strong) NSMutableArray* emailStatuses;
-@property(nonatomic, assign) BOOL isIdentifyViewOpen;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts;
 @end
@@ -96,19 +95,6 @@ return self;
     self.accountsTableView.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 20);
     self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(60, 0, 0);
 
-    if([self.accounts vlb_isEmpty]){
-        [self.identifyView animateWithDuration:0.5 animation:^(UIView *view) {
-            view.frame = CGRectMake(view.frame.origin.x, CGPointZero.y,
-                                    view.frame.size.width, view.frame.size.height);
-        }];
-        
-        [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
-            view.frame = CGRectMake(view.frame.origin.x,
-                                    104,
-                                    view.frame.size.width, view.frame.size.height);
-        }];
-    }
-    
     __weak VLBIdentifyViewController *uself = self;
     
     [self.identifyButton onTouchUp:^(UIButton *button)
@@ -160,8 +146,6 @@ return self;
                                     104,
                                     view.frame.size.width, view.frame.size.height);
         }];
-
-		self.isIdentifyViewOpen = YES;
 		}];
 }
 
@@ -251,7 +235,6 @@ return YES;
 -(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence
 {
     [self.identifyView rewind];
-		self.isIdentifyViewOpen = NO;
     
     [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
         view.frame = CGRectMake(view.frame.origin.x,
@@ -365,21 +348,7 @@ return YES;
 		[self.emailStatuses removeObjectAtIndex:indexPath.row];
     
     [self.accountsTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-
-    if([self.accounts vlb_isEmpty] && !self.isIdentifyViewOpen){
-        [self.identifyView animateWithDuration:0.5 animation:^(UIView *view) {
-            view.frame = CGRectMake(view.frame.origin.x, CGPointZero.y,
-                                    view.frame.size.width, view.frame.size.height);
-        }];
-        
-        [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
-            view.frame = CGRectMake(view.frame.origin.x,
-                                    104,
-                                    view.frame.size.width, view.frame.size.height);
-        }];
-    }
 }
-
 
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
