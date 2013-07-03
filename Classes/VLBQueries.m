@@ -31,12 +31,23 @@
 #import "VLBMacros.h"
 #import "NSDictionary+VLBStore.h"
 #import "S3TransferManager.h"
+#import "NSDictionary+VLBDictionary.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
 static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
 static NSString* const USER_ITEMS = @"/users/%u/items";
 static NSString* const ITEMS = @"/items";
+
+@interface NSObject (VLBObject)
+-(bool) vlb_isNil;
+@end
+
+@implementation NSObject (VLBObject)
+-(bool) vlb_isNil{
+return nil == self || [NSNull null] == self;
+}
+@end
 
 VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImageJpegPublicRead = ^(S3PutObjectRequest *por){
     por.contentType = @"image/jpeg";
@@ -217,15 +228,15 @@ return parameters;
           
         NSArray *sortedLocations =
             [locations sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-                if ([[[obj1 vlb_location] objectForKey:@"distance"] intValue] > [[[obj2 vlb_location] objectForKey:@"distance"] intValue]) {
-                    return (NSComparisonResult)NSOrderedDescending;
-                }
-            
-                if ([[[obj1 vlb_location] objectForKey:@"distance"] intValue] < [[[obj2 vlb_location] objectForKey:@"distance"] intValue]) {
-                    return (NSComparisonResult)NSOrderedAscending;
-                }
-            
-            return (NSComparisonResult)NSOrderedSame;
+
+								id obj1Distance = [[obj1 vlb_location] vlb_objectForKey:@"distance" ifNil:[NSNumber numberWithInt:NSIntegerMax]];
+								id obj2Distance = [[obj2 vlb_location] vlb_objectForKey:@"distance" ifNil:[NSNumber numberWithInt:NSIntegerMax]];
+
+								if([obj1Distance intValue] == [obj2Distance intValue]){
+									return (NSComparisonResult)NSOrderedSame;
+								}
+
+            return ([obj1Distance intValue] > [obj2Distance intValue])?(NSComparisonResult)NSOrderedDescending:(NSComparisonResult)NSOrderedAscending;
             }];
                                
         [delegate didSucceedWithLocations:sortedLocations givenParameters:parameters];
@@ -345,7 +356,7 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
 
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     [parameters setObject:imageURL forKey:@"item_url"];
-    [parameters vlb_setObjectIfNotNil:[location objectForKey:@"name"] forKey:@"item[location_attributes][name]"];
+    [parameters vlb_setStringIfNotNilOrEmpty:[location objectForKey:@"name"] forKey:@"item[location_attributes][name]"];
     [parameters vlb_setObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lat"] forKey:@"item[location_attributes][lat]"];
     [parameters vlb_setObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][lng]"];
     [parameters vlb_setObjectIfNotNil:[location objectForKey:@"id"] forKey:@"item[location_attributes][foursquareid]"];

@@ -13,6 +13,8 @@
 #import "VLBVisibleStrategy.h"
 #import "VLBSize.h"
 #import <QuartzCore/QuartzCore.h>
+#import "DDLog.h"
+#import "VLBMacros.h"
 
 CGFloat const DEFAULT_HEIGHT = 196;
 
@@ -125,6 +127,20 @@ return scrollView;
         self.delegate = self;
 		[self addSubview:self.contentView];
 	}
+return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    VLB_IF_NOT_SELF_RETURN_NIL();
+    VLB_LOAD_VIEW();
+
+    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, self.frame.size.width, self.frame.size.height)];
+    self.delegate = self;
+    [self addSubview:self.contentView];
+
 return self;
 }
 

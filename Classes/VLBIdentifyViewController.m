@@ -30,6 +30,7 @@
 #import "VLBSecureHashA1.h"
 #import "DDLog.h"
 #import "NSArray+VLBDecorator.h"
+#import "VLBTheBox.h"
 
 NSString* const VLB_EMAIL_VALIDATION_REGEX =
 @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -41,20 +42,22 @@ NSString* const VLB_EMAIL_VALIDATION_REGEX =
 @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
 @interface VLBIdentifyViewController ()
+@property(nonatomic, weak) VLBTheBox *thebox;
+
 @property(nonatomic, strong) NSOperationQueue *operations;
 @property(nonatomic, strong) NSMutableArray* accounts;
 @property(nonatomic, strong) NSMutableArray* emailStatuses;
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox accounts:(NSMutableArray*) accounts;
 @end
 
 @implementation VLBIdentifyViewController
 
-+(VLBIdentifyViewController *)newIdentifyViewController
++(VLBIdentifyViewController*)newIdentifyViewController:(VLBTheBox*)thebox
 {
     NSArray* accounts = [SSKeychain accountsForService:THE_BOX_SERVICE];
 
-    VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] accounts:[NSMutableArray arrayWithArray:accounts]];
+    VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:(VLBTheBox*)thebox accounts:[NSMutableArray arrayWithArray:accounts]];
     
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"thebox";
@@ -68,7 +71,7 @@ NSString* const VLB_EMAIL_VALIDATION_REGEX =
 return identifyViewController;
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil accounts:(NSMutableArray*) accounts
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox accounts:(NSMutableArray*) accounts
 {
     self = [super initWithNibName:@"VLBIdentifyViewController" bundle:nibBundleOrNil];
     
@@ -76,6 +79,8 @@ return identifyViewController;
         return nil;
     }
     
+		self.thebox = thebox;
+
     self.operations = [[NSOperationQueue alloc] init];
     self.accounts = accounts;
     self.emailStatuses = [NSMutableArray arrayWithCapacity:self.accounts.count];
@@ -91,9 +96,8 @@ return self;
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
-    
-    self.accountsTableView.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 20);
-    self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(60, 0, 0);
+    self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 0)];
+    self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
 
     __weak VLBIdentifyViewController *uself = self;
     
@@ -209,11 +213,10 @@ return YES;
 #pragma mark TBVerifyUserOperationDelegate
 -(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence
 {
-    DDLogVerbose(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);
+    DDLogVerbose(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);    
+    [self.thebox didSucceedWithVerificationForEmail:email residence:residence];
     
-    //thebox should be a property to be shared across every controller
-    //the residence should be passed to thebox on a method like didSucceedWithVerificationForEmail:residence
-    UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[VLBProfileViewController newProfileViewController:residence email:email]];
+    UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileViewController]];
     UINavigationController *homeGridViewControler = [[UINavigationController alloc] initWithRootViewController:[VLBCityViewController newHomeGridViewController]];
     UINavigationController *feedViewController = [[UINavigationController alloc] initWithRootViewController:[VLBFeedViewController newFeedViewController]];
 
@@ -314,6 +317,7 @@ return [self.accounts count];
     {
         emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         emailCell.textLabel.font = [VLBTypography fontLucidaGrandeTwenty];
+        emailCell.textLabel.adjustsFontSizeToFitWidth = YES;
         UIView* selectedBackgroundView = [[UIView alloc] init];
         selectedBackgroundView.backgroundColor = [VLBColors colorPrimaryBlue];
         emailCell.selectedBackgroundView = selectedBackgroundView;

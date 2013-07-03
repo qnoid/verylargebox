@@ -175,16 +175,19 @@ return localityItemsViewController;
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
+    [self.hud hide:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
+    [self.hud hide:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
+    [self.hud hide:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 

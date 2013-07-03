@@ -12,6 +12,7 @@ NSString* const VLBItemLocation = @"location";
 NSString* const VLBItemWhen = @"when";
 NSString* const VLBItemIPhoneImageURL = @"iphoneImageURL";
 NSString* const VLBItemLocality = @"locality";
+NSString* const VLBItemImageKey = @"image_file_name";
 
 @implementation NSDictionary (VLBItem)
 

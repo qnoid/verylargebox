@@ -57,6 +57,12 @@ extern VLBScrollViewConfig const VLBScrollViewAllowSelection;
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index;
 
 @optional
+
+/**
+ Implement when using IB
+ */
+- (CGFloat)viewsOf:(VLBScrollView *)scrollView;
+
 - (void)didSelectView:(VLBScrollView *)scrollView atIndex:(NSUInteger)index point:(CGPoint)point;
 
 #pragma when using a refresh view
@@ -131,8 +137,8 @@ extern VLBScrollViewConfig const VLBScrollViewAllowSelection;
  */
 +(VLBScrollView *) newHorizontalScrollView:(CGRect)frame viewsOf:(CGFloat)width;
 
-@property(nonatomic, unsafe_unretained) IBOutlet id <VLBScrollViewDatasource> datasource;
-@property(nonatomic, unsafe_unretained) IBOutlet id <VLBScrollViewDelegate> scrollViewDelegate;
+@property(nonatomic, weak) IBOutlet id <VLBScrollViewDatasource> datasource;
+@property(nonatomic, weak) IBOutlet id <VLBScrollViewDelegate> scrollViewDelegate;
 
 // the scrollview will only stop at the edge of a view.
 @property(nonatomic, assign, getter = isSeekingEnabled) BOOL enableSeeking;

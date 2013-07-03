@@ -25,6 +25,7 @@
 #import "VLBTypography.h"
 #import "DDLog.h"
 #import "VLBDrawRects.h"
+#import "VLBButton.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -34,21 +35,26 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, weak) VLBScrollView * itemsView;
 @property(nonatomic, weak) UIView<QNDAnimatedView> *notificationAnimatedView;
 @property(nonatomic, weak) UIProgressView *progressView;
+
+@property(nonatomic, weak) VLBTheBox *thebox;
+
 @property(nonatomic, strong) NSDictionary* residence;
 @property(nonatomic, strong) NSMutableOrderedSet* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox residence:(NSDictionary*)residence;
 @end
 
 @implementation VLBProfileViewController
 
-+(VLBProfileViewController *)newProfileViewController:(NSDictionary*)residence email:(NSString*)email
++(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email
 {
-    VLBProfileViewController * profileViewController = [[VLBProfileViewController alloc] initWithBundle:[NSBundle mainBundle]
-                                                                                           residence:residence];
+    VLBProfileViewController * profileViewController =
+        [[VLBProfileViewController alloc] initWithBundle:[NSBundle mainBundle]
+                                                  thebox:thebox
+                                               residence:residence];
     
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = email;
@@ -78,7 +84,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 return profileViewController;
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil residence:(NSDictionary*)residence
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox residence:(NSDictionary*)residence
 {
     self = [super initWithNibName:NSStringFromClass([VLBProfileViewController class]) bundle:nibBundleOrNil];
     
@@ -86,6 +92,7 @@ return profileViewController;
         return nil;
     }
     
+	self.thebox = thebox;
     self.residence = residence;
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:10];
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
@@ -99,22 +106,21 @@ return self;
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     
-    VLBScrollView * itemsView = [[[[VLBScrollViewBuilder alloc] initWith:
-                                     CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:416] allowSelection] newVerticalScrollView];
-    
-    itemsView.backgroundColor = [UIColor whiteColor];
+    VLBScrollView * itemsView = [[[VLBScrollViewBuilder alloc] initWith:
+                                     CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:416] newVerticalScrollView];
+    itemsView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     itemsView.datasource = self;
     itemsView.scrollViewDelegate = self;
     itemsView.scrollsToTop = YES;
 
-    self.view = itemsView;
     self.itemsView = itemsView;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.view = self.itemsView;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 
     __weak VLBProfileViewController *wself = self;
 
@@ -139,7 +145,7 @@ return self;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[self.itemsView setContentOffset:CGPointMake(0, 0) animated:YES];
+
 }
 
 -(void)close
@@ -147,10 +153,9 @@ return self;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)addItem
+-(IBAction)addItem
 {
-    //thebox should be a property
-    VLBTakePhotoViewController * takePhotoViewController = [VLBTakePhotoViewController newUploadUIViewController:[VLBTheBox newTheBox:self.residence] userId:[self.residence vlb_residenceUserId]];
+    VLBTakePhotoViewController * takePhotoViewController = [self.thebox newUploadUIViewController];
     
     takePhotoViewController.createItemDelegate = self;
     
@@ -229,7 +234,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 }
  */
 
--(void)didStartUploadingItem:(NSDictionary*) location locality:(NSString*) locality
+-(void)didStartUploadingItem:(UIImage*)itemImage key:(NSString*)key location:(NSDictionary*) location locality:(NSString*) locality
 {
 	self.location = location;
 	self.locality = locality;
@@ -237,6 +242,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
     UIView<QNDAnimatedView> *notificationAnimatedView = [[QNDAnimations new] newViewAnimated:CGRectMake(0, -44, 320, 44)];
     notificationAnimatedView.backgroundColor = [UIColor blackColor];
     VLBProgressView *progressView = [[VLBProgressView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    progressView.imageView.image = itemImage;
     [notificationAnimatedView addSubview:progressView];
     self.notificationAnimatedView = notificationAnimatedView;
     self.progressView = progressView.progressView;
@@ -310,9 +316,6 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
     
 }
 
--(void)didSelectView:(VLBScrollView *)scrollView atIndex:(NSUInteger)inde point:(CGPoint)point {
-    
-}
 
 #pragma mark TheBoxUIScrollViewDatasource
 

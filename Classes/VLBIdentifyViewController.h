@@ -16,6 +16,7 @@
 
 @protocol VLBButton;
 @class QNDAnimatedView;
+@class VLBTheBox;
 
 typedef NS_ENUM(NSInteger, VLBEmailStatus){
     VLBEmailStatusDefault,
@@ -93,6 +94,5 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
 @property (nonatomic, weak) IBOutlet QNDAnimatedView *identifyView;
 @property (nonatomic, weak) IBOutlet VLBButton *addEmailButton;
 
-+(VLBIdentifyViewController *)newIdentifyViewController;
-
++(VLBIdentifyViewController*)newIdentifyViewController:(VLBTheBox*)thebox;
 @end

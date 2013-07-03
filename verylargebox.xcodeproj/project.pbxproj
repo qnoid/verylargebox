@@ -185,7 +185,6 @@
 		BDAE3C4C176D9CFC0037734C /* VLBDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */; };
 		BDAE3C4D176D9CFC0037734C /* VLBDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */; };
 		BDAE3C55176E04AC0037734C /* VLBTheBox.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C54176E04AA0037734C /* VLBTheBox.m */; };
-		BDAE3C56176E04AC0037734C /* VLBTheBox.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C54176E04AA0037734C /* VLBTheBox.m */; };
 		BDAF7AAE17528196008899D1 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAA17528194008899D1 /* refresh@2x.png */; };
 		BDAF7AAF17528196008899D1 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAA17528194008899D1 /* refresh@2x.png */; };
 		BDAF7AB217528196008899D1 /* signpost@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAF7AAC17528194008899D1 /* signpost@2x.png */; };
@@ -1564,7 +1563,6 @@
 				BD6BE05C175B524300B93854 /* VLBDrawRects.m in Sources */,
 				BD6BE05D175B570900B93854 /* VLBViews.m in Sources */,
 				BD8BB289176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */,
-				BDAE3C56176E04AC0037734C /* VLBTheBox.m in Sources */,
 				BDFBA12A177829C500A59BCF /* VLBCityViewController.m in Sources */,
 				BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */,
 				BDFBA12C177829CF00A59BCF /* VLBTypography.m in Sources */,

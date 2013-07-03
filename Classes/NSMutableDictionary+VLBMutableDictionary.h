@@ -12,6 +12,7 @@
 
 @interface NSMutableDictionary (VLBMutableDictionary)
 
+-(void)vlb_setStringIfNotNilOrEmpty:(NSString*)string forKey:(id)key;
 -(void)vlb_setObjectIfNotNil:(id)object forKey:(id)key;
 
 @end

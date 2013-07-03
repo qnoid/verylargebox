@@ -27,6 +27,16 @@ static const CLLocationCoordinate2D EmptyLocationCoordinate = {-1000.0, -1000.0}
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
+@interface NSObject (VLBObject)
++(BOOL)vlb_isNil:(id)obj;
+@end
+
+@implementation NSObject (VLBObject)
++(BOOL)vlb_isNil:(id)obj{
+return nil == obj || [NSNull null] == obj;
+}
+@end
+
 @interface VLBUserItemView ()
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @end
@@ -88,18 +98,9 @@ return self;
      */
     NSDictionary *location = [item vlb_location];
     
-    id name = [location vlb_objectForKey:VLBLocationName];
-    if([[NSNull null] isEqual:name]){
-        name = @"";
-    }
-
-    NSDictionary *locality = [item vlb_locality];
-
-    id localityName = [locality vlb_objectForKey:VLBLocalityName];
-    if([[NSNull null] isEqual:localityName]){
-        localityName = @"[in thebox]";
-    }
-    
+    id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
+    id locality = [item vlb_locality];
+    id localityName = ([NSObject vlb_isNil:locality])?@"[in the box]":[locality vlb_objectForKey:VLBLocalityName ifNil:@"[in the box]"];
 
     self.storeLabel.text = [NSString stringWithFormat:@"%@ \n %@", name, localityName];
     self.whenLabel.text = [item vlb_objectForKey:VLBItemWhen];

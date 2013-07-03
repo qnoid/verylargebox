@@ -15,11 +15,10 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (!self) {
-        return nil;
-    }
 
+    VLB_IF_NOT_SELF_RETURN_NIL();
     VLB_LOAD_VIEW();
+    
     self.progressView.progressTintColor = [VLBColors colorPrimaryBlue];
     self.progressView.trackTintColor = [VLBColors color0102161];
 return self;

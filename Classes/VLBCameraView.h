@@ -10,15 +10,21 @@
 #import <AVFoundation/AVFoundation.h>
 
 
+/**
+ Defines a key for the "meta" dictionary as returned in VLBCameraViewDelegate#cameraView:didFinishTakingPicture:withInfo:meta
+ 
+ @see VLBCameraViewMetaCrop
+ @see VLBCameraViewMetaOriginalImage
+ */
 typedef NSString* VLBCameraViewMeta;
 
 /**
- 
+ Key to get a CGRect object, the rectangle in which the full resolution image was cropped at.
  */
 extern VLBCameraViewMeta const VLBCameraViewMetaCrop;
 
 /**
- Use to get the full size image as taken by 
+ Key to get a UIImage object, the full resolution image as taken by the camera.
  */
 extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
 
@@ -50,7 +56,9 @@ extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
 /**
  Implement if VLBCameraView.callbackOnDidCreateCaptureConnection is set to YES.
  
- AVCaptureConnection has the following properties set:
+ Will get a callback to customise the underlying AVCaptureConnection when created.
+ 
+ AVCaptureConnection has the following properties already set:
 
     videoOrientation = AVCaptureVideoOrientationPortrait;
  
@@ -59,6 +67,16 @@ extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
  @see AVCaptureSession#captureStillImageAsynchronouslyFromConnection:completionHandler:
  */
 -(void)cameraView:(VLBCameraView*)cameraView didCreateCaptureConnection:(AVCaptureConnection*)captureConnection;
+
+/**
+ Implement if VLBCameraView.allowPictureRetake is set to YES.
+ 
+ Will get a callaback with the image as returned by the last call to #cameraView:didFinishTakingPicture:info:meta
+ 
+ @param cameraView the VLBCameraView intance that this delegate is assigned to.
+ @param image current image currently previewing.
+ */
+-(void)cameraView:(VLBCameraView*)cameraView willRekatePicture:(UIImage *)image;
 @end
 
 /**
@@ -80,6 +98,15 @@ extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
  @precondition have cameraView:didCreateCaptureConnection: implemented
  */
 @property(nonatomic, assign) BOOL callbackOnDidCreateCaptureConnection;
+
+/**
+ Set to true to allow the user to retake a photo by tapping on the preview
+ 
+ @precondition have delegate set
+ @precondition have cameraView:didCreateCaptureConnection: implemented
+ */
+@property(nonatomic, assign) BOOL allowPictureRetake;
+
 
 /**
  
@@ -104,5 +131,6 @@ extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
  @callback on the main thread at VLBCameraViewDelegate#cameraview:didFinishTakingPicture:editingInfo once the still image is processed.
  */
 - (void)takePicture;
+
 
 @end

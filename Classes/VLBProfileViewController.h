@@ -13,12 +13,19 @@
 #import "VLBLocationServiceDelegate.h"
 #import "VLBView.h"
 
+@class VLBTheBox;
+@class VLBButton;
+
 /**
  
  Subsequent requests to post an item on the server are queued and processed in a FIFO order.
  */
 @interface VLBProfileViewController : UIViewController <VLBCreateItemOperationDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBViewDrawRectDelegate>
 
-+(VLBProfileViewController *)newProfileViewController:(NSDictionary*)residence email:(NSString*)email;
+@property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
+
++(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email;
+
+-(IBAction)addItem;
 
 @end

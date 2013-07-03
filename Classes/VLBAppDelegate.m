@@ -17,11 +17,11 @@
 #import "VLBSecureHashA1.h"
 #import "DDTTYLogger.h"
 #import "VLBTypography.h"
+#import "VLBTheBox.h"
 
-static NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
-static NSString * const TESTFLIGHT_APP_TOKEN = @"0840a56f-799c-4e95-92e9-7e19616a88f7";
 
 @interface VLBAppDelegate ()
+@property(nonatomic, strong) VLBTheBox* thebox;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @end
 
@@ -36,20 +36,8 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"0840a56f-799c-4e95-92e9-7e19616
 		DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString* userSession = [standardUserDefaults objectForKey:[[NSBundle mainBundle] bundleIdentifier]];
-    
-    if(!userSession){
-        userSession = [[VLBSecureHashA1 new] uuid];
-        
-        [standardUserDefaults setObject:userSession
-                                 forKey:[[NSBundle mainBundle] bundleIdentifier]];
-        [standardUserDefaults synchronize];
-    }
-
+		self.thebox = [VLBTheBox newTheBox];
     [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
-    [TestFlight setDeviceIdentifier:userSession];
-    [TestFlight takeOff:TESTFLIGHT_APP_TOKEN];
 
     [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
@@ -63,7 +51,7 @@ static NSString * const TESTFLIGHT_APP_TOKEN = @"0840a56f-799c-4e95-92e9-7e19616
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:[VLBIdentifyViewController newIdentifyViewController]];
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newIdentifyViewController]];
     
     self.window.rootViewController = navigationController;
     

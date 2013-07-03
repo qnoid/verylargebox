@@ -14,6 +14,7 @@ extern VLBItemKey const VLBItemLocation;
 extern VLBItemKey const VLBItemWhen;
 extern VLBItemKey const VLBItemIPhoneImageURL;
 extern VLBItemKey const VLBItemLocality;
+extern VLBItemKey const VLBItemImageKey;
 
 @interface NSDictionary (VLBItem)
 

@@ -8,11 +8,24 @@
 
 #import <Foundation/Foundation.h>
 @protocol VLBCreateItemOperationDelegate;
+@class VLBIdentifyViewController;
+@class VLBProfileViewController;
+@class VLBTakePhotoViewController;
 
 @interface VLBTheBox : NSObject
 
-+(instancetype) newTheBox:(NSDictionary *) residence;
++(instancetype)newTheBox;
 
--(void)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate;
+-(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSDictionary*)residence; 
+
+-(VLBIdentifyViewController*)newIdentifyViewController;
+-(VLBProfileViewController*)newProfileViewController;
+-(VLBTakePhotoViewController*)newUploadUIViewController;
+
+/**
+ 
+ @return the key under which will store the image
+ */
+-(NSString*)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate;
 
 @end

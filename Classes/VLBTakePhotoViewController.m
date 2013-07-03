@@ -146,6 +146,7 @@ return self;
     self.defaultStoreButton.titleLabel.numberOfLines = self.storeLabel.numberOfLines;
     self.defaultStoreButton.titleLabel.lineBreakMode = self.storeLabel.lineBreakMode;
     self.defaultStoreButton.titleLabel.textAlignment = self.storeLabel.textAlignment;
+    self.cameraView.allowPictureRetake = YES;
     self.cameraView.flashView.backgroundColor =
     [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
@@ -196,9 +197,11 @@ return self;
     self.defaultStoreButton.enabled = YES;
     [self.defaultStoreButton setTitle:[NSString stringWithFormat:@"%@ [accept?]", [location vlb_objectForKey:@"name"]] forState:UIControlStateNormal];
     
+		__weak VLBTakePhotoViewController *wself = self;	
     [self.defaultStoreButton onTouchUpInside:^(UIButton *button) {
-        self.locationButton.imageView.alpha = 1.0;        
-        [self didSelectStore:location];
+    		[TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTouchUpInsideDefaultStoreButton"]];
+        wself.locationButton.imageView.alpha = 1.0;        
+        [wself didSelectStore:location];
     }];
 
     self.venues = locations;
@@ -298,10 +301,10 @@ return self;
 {
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
-    [self.thebox newPostImage:self.itemImage delegate:self.createItemDelegate];
+    NSString* key = [self.thebox newPostImage:self.itemImage delegate:self.createItemDelegate];
 
 	[self dismissViewControllerAnimated:YES completion:^{
-        [self.createItemDelegate didStartUploadingItem:self.location locality:self.locality];
+        [self.createItemDelegate didStartUploadingItem:self.itemImage key:key location:self.location locality:self.locality];
     }];
 }
 
@@ -359,6 +362,11 @@ return self;
 
 -(void)cameraView:(VLBCameraView *)cameraView didErrorOnTakePicture:(NSError *)error{
     
+}
+
+-(void)cameraView:(VLBCameraView *)cameraView willRekatePicture:(UIImage *)image{
+    self.takePhotoButton.userInteractionEnabled = YES;
+    [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view

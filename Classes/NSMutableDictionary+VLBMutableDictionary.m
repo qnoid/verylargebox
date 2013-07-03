@@ -9,8 +9,18 @@
 //
 
 #import "NSMutableDictionary+VLBMutableDictionary.h"
+#import "NSString+VLBDecorator.h"
 
 @implementation NSMutableDictionary (VLBMutableDictionary)
+
+-(void)vlb_setStringIfNotNilOrEmpty:(NSString*)string forKey:(id)key
+{
+    if(string == nil || [string vlb_isEmpty]){
+        return;
+    }
+    
+    [self setObject:string forKey:key];
+}
 
 -(void)vlb_setObjectIfNotNil:(id)object forKey:(id)key
 {
