@@ -30,6 +30,7 @@
 #import "S3UploadInputStream.h"
 #import "VLBMacros.h"
 #import "NSDictionary+VLBStore.h"
+#import "S3TransferManager.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
@@ -83,9 +84,6 @@ NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 
 NSString* const THE_BOX_BASE_URL_STRING = @"https://www.verylargebox.com";
 
-NSString* const AWS_ACCESS_KEY = @"AKIAIFACVDF6VNIEY2EQ";
-NSString* const AWS_SECRET_KEY = @"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";
-
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
@@ -96,20 +94,14 @@ NSUInteger const TIMEOUT = 60;
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
 }
 
--(VLBQueryBlock)newS3PutObjectRequest:(VLBS3PutObjectRequestConfiguration)config
+-(S3PutObjectRequest*)newS3PutObjectRequest:(NSDictionary*) parameters config:(VLBS3PutObjectRequestConfiguration)config
 {
-    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:AWS_ACCESS_KEY
-                                                     withSecretKey:AWS_SECRET_KEY];
-return ^(NSDictionary* parameters) {
+    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:[parameters objectForKey:@"key"]
+                                                             inBucket:[parameters objectForKey:@"bucket"]];
     
-        [s3 setEndpoint:[parameters objectForKey:@"endpoint"]];
-        S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:[parameters objectForKey:@"key"]
-                                                                 inBucket:[parameters objectForKey:@"bucket"]];
+    config(por);
     
-        config(por);
-    
-        [s3 putObject:por];
-    };
+return por;
 }
 
 +(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<VLBCreateUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence

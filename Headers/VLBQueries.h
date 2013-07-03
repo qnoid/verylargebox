@@ -29,8 +29,6 @@
 @class S3PutObjectRequest;
 
 
-typedef void(^VLBQueryBlock)(NSDictionary* parameters);
-
 typedef void(^VLBS3PutObjectRequestConfiguration)(S3PutObjectRequest* request);
 
 extern VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImageJpegPublicRead;
@@ -48,7 +46,7 @@ extern VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImag
 
 extern NSString* const THE_BOX_SERVICE;
 
--(VLBQueryBlock)newS3PutObjectRequest:(VLBS3PutObjectRequestConfiguration)config;
+-(S3PutObjectRequest*)newS3PutObjectRequest:(NSDictionary*) parameters config:(VLBS3PutObjectRequestConfiguration)config;
 
 /**
  

@@ -24,6 +24,7 @@
 #import "VLBTheBox.h"
 #import "VLBTypography.h"
 #import "DDLog.h"
+#import "VLBDrawRects.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -97,14 +98,6 @@ return self;
 -(void)loadView
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-
-    UIView<QNDAnimatedView> *notificationAnimatedView =
-        [[QNDAnimations new] newViewAnimated:CGRectMake(0, -44, 320, 44)];
-    notificationAnimatedView.backgroundColor = [UIColor blackColor];
-    notificationAnimatedView.hidden = YES;
-    
-    VLBProgressView *progressView = [[VLBProgressView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    [notificationAnimatedView addSubview:progressView];
     
     VLBScrollView * itemsView = [[[[VLBScrollViewBuilder alloc] initWith:
                                      CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:416] allowSelection] newVerticalScrollView];
@@ -115,10 +108,7 @@ return self;
     itemsView.scrollsToTop = YES;
 
     self.view = itemsView;
-    [self.view addSubview:notificationAnimatedView];
     self.itemsView = itemsView;
-    self.notificationAnimatedView = notificationAnimatedView;
-    self.progressView = progressView.progressView;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 }
 
@@ -201,7 +191,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
     DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, items);
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:items.count];
-		[self.items addObjectsFromArray:items];
+	[self.items addObjectsFromArray:items];
     [self.itemsView setNeedsLayout];
     [self.itemsView.pullToRefreshView stopAnimating];
 }
@@ -244,7 +234,14 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 	self.location = location;
 	self.locality = locality;
 
-    self.notificationAnimatedView.hidden = NO;
+    UIView<QNDAnimatedView> *notificationAnimatedView = [[QNDAnimations new] newViewAnimated:CGRectMake(0, -44, 320, 44)];
+    notificationAnimatedView.backgroundColor = [UIColor blackColor];
+    VLBProgressView *progressView = [[VLBProgressView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [notificationAnimatedView addSubview:progressView];
+    self.notificationAnimatedView = notificationAnimatedView;
+    self.progressView = progressView.progressView;
+    [self.view addSubview:self.notificationAnimatedView];
+
     [self.notificationAnimatedView animateWithDuration:0.5 animation:^(UIView *view) {
         view.frame = CGRectMake(0, 0, 320, 44);
     }];
@@ -255,7 +252,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
     [self.notificationAnimatedView rewind:^(BOOL finished) {
-        self.notificationAnimatedView.hidden = YES;
+        [self.notificationAnimatedView removeFromSuperview];
     }];
     
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, item);
@@ -272,7 +269,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     [self.notificationAnimatedView rewind:^(BOOL finished) {
-        self.notificationAnimatedView.hidden = YES;
+        [self.notificationAnimatedView removeFromSuperview];
     }];
     
     VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
@@ -333,6 +330,11 @@ return [[VLBUserItemView alloc] initWithFrame:frame];
     
     VLBUserItemView * userItemView = (VLBUserItemView *)view;
     [userItemView viewWillAppear:item];
+}
+
+- (void)drawRect:(CGRect)rect inView:(UIView*)view
+{
+    [[VLBDrawRects new] drawContextOfHexagonInRect:rect];
 }
 
 @end

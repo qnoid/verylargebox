@@ -252,6 +252,7 @@
 		BDE4926E1775F7A700FFC41F /* refresh-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */; };
 		BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926D1775F7A700FFC41F /* refresh-mini.png */; };
 		BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
+		BDF27466178408FA000E179E /* camera-button.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF27465178408FA000E179E /* camera-button.png */; };
 		BDF2FD03177A1EC100941B7F /* hexabump@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD02177A1EC100941B7F /* hexabump@2X.png */; };
 		BDF2FD05177A2BB500941B7F /* hexabump.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD04177A2BB500941B7F /* hexabump.png */; };
 		BDF2FD08177A458D00941B7F /* VLBCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD07177A458D00941B7F /* VLBCameraView.m */; };
@@ -540,6 +541,7 @@
 		BDE4926D1775F7A700FFC41F /* refresh-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-mini.png"; path = "Supporting Files/refresh-mini.png"; sourceTree = "<group>"; };
 		BDF0F42316C8254B002CDE8E /* VLBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBVerifyOperationBlock.h; path = ../Classes/VLBVerifyOperationBlock.h; sourceTree = "<group>"; };
 		BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVerifyOperationBlock.m; sourceTree = "<group>"; };
+		BDF27465178408FA000E179E /* camera-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-button.png"; path = "Supporting Files/camera-button.png"; sourceTree = "<group>"; };
 		BDF2FD02177A1EC100941B7F /* hexabump@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hexabump@2X.png"; sourceTree = "<group>"; };
 		BDF2FD04177A2BB500941B7F /* hexabump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hexabump.png; sourceTree = "<group>"; };
 		BDF2FD06177A458D00941B7F /* VLBCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCameraView.h; path = Classes/VLBCameraView.h; sourceTree = "<group>"; };
@@ -1037,6 +1039,7 @@
 			children = (
 				BD5CB77F177133EE00BC21D1 /* camera.png */,
 				BD5CB780177133EE00BC21D1 /* camera@2x.png */,
+				BDF27465178408FA000E179E /* camera-button.png */,
 				BD0A53E51767EDC100279EA5 /* camera-mini.png */,
 				BD0A53E61767EDC100279EA5 /* camera-mini@2x.png */,
 				BDB1571C175552F500E140E9 /* chat.png */,
@@ -1301,6 +1304,7 @@
 				BDF2FD0C177A5BC700941B7F /* VLBCameraView.xib in Resources */,
 				BDC8A1D81782028E00E5BF8C /* idcard-white@2x.png in Resources */,
 				BDC8A1DA178202C300E5BF8C /* idcard-white.png in Resources */,
+				BDF27466178408FA000E179E /* camera-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

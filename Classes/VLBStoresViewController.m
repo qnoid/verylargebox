@@ -127,7 +127,7 @@ return self;
 -(void)keyboardWillHide:(NSNotification*)notification
 {
     [self.animatedMap rewind];
-    self.venuesTableView.contentInset = self.venuesTableView.scrollIndicatorInsets = UIEdgeInsetsMake(205, 0, 0, 0);
+    self.venuesTableView.contentInset = self.venuesTableView.scrollIndicatorInsets = UIEdgeInsetsMake(185, 0, 0, 0);
     
     CGRect visibleRect;
     visibleRect.origin = self.venuesTableView.bounds.origin;
@@ -155,7 +155,7 @@ return self;
     self.animatedMap = [[QNDAnimations new] animateView:self.map];    
 
     self.venuesTableView.tableFooterView = imageView;
-    self.venuesTableView.contentInset = UIEdgeInsetsMake(205, 0, 0, 0);
+    self.venuesTableView.contentInset = UIEdgeInsetsMake(185, 0, 0, 0);
     
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

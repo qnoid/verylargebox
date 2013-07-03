@@ -15,7 +15,7 @@ target :ApplicationTests, :exclusive => true do
 	pod 'Kiwi', '~> 2.1'
 end
 
-pod 'AFNetworking'  
+pod 'AFNetworking', '= 1.3.1' 
 pod 'AWSiOSSDK/S3'
 pod 'JSONKit', '~> 1.4', :inhibit_warnings => true
 pod 'TestFlightSDK', '= 1.2.6'

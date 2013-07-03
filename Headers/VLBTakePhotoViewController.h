@@ -25,8 +25,11 @@
  1. Take a photo of the item
  2. Select a store for the item
 
+ Will constantly monitor for location changes until no better match can be found, so as to improve the results from 4sq 
+ when the user selects a location.
+ 
  #events
- didFindPlacemark
+ didUpdateToLocation
     1. will async get the venues from 4sq for the lat/long
  
  didFailReverseGeocodeLocationWithError

@@ -83,6 +83,7 @@ return self.horizontalAccuracy < location.horizontalAccuracy || self.verticalAcc
 
 - (void) dealloc
 {
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];    
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
@@ -146,7 +147,12 @@ return self;
     self.defaultStoreButton.titleLabel.lineBreakMode = self.storeLabel.lineBreakMode;
     self.defaultStoreButton.titleLabel.textAlignment = self.storeLabel.textAlignment;
     self.cameraView.flashView.backgroundColor =
-            [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    
+    [self.theBoxLocationService notifyDidUpdateToLocation:self];
+    [self.theBoxLocationService notifyDidFindPlacemark:self];
+    [self.theBoxLocationService notifyDidFailWithError:self];
+    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -161,11 +167,6 @@ return self;
     if(self.location != nil && ![[self.location vlb_objectForKey:@"name"] vlb_isEmpty]){
         self.locationButton.imageView.alpha = 1.0;
     }
-
-    [self.theBoxLocationService notifyDidUpdateToLocation:self];
-    [self.theBoxLocationService notifyDidFindPlacemark:self];
-    [self.theBoxLocationService notifyDidFailWithError:self];
-    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -233,11 +234,12 @@ return self;
 {
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
 
-    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     CLLocation *location = [VLBNotifications location:notification];
 
     if(![location vlb_isMoreAccurateThan:self.lastKnownLocation]){
-        return;
+        
+        [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];        
+    return;
     }
 
     self.lastKnownLocation = location;
@@ -266,7 +268,6 @@ return self;
 -(void)didFindPlacemark:(NSNotification *)notification
 {
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     
     self.hasCoordinates = YES;
     
@@ -285,7 +286,6 @@ return self;
 {
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
-    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 #pragma mark TheBoxKeyboardObserver
@@ -321,7 +321,7 @@ return self;
 
 -(void)didSelectStore:(NSMutableDictionary *)store
 {
-    DDLogInfo(@"%s, %@", __PRETTY_FUNCTION__, store);
+    DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, store);
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
 

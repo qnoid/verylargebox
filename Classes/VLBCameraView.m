@@ -127,6 +127,7 @@ return ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
     [self.session addOutput:self.stillImageOutput];
 		
 	[self.layer addSublayer:self.videoPreviewLayer];
+    
 	[self.session startRunning];
     
     self.stillImageConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
