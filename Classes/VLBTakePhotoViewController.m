@@ -27,6 +27,7 @@
 #import "NSString+VLBDecorator.h"
 #import "VLBErrorBlocks.h"
 #import "NSArray+VLBDecorator.h"
+#import "VLBAlertViews.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
@@ -148,6 +149,7 @@ return self;
     self.defaultStoreButton.titleLabel.lineBreakMode = self.storeLabel.lineBreakMode;
     self.defaultStoreButton.titleLabel.textAlignment = self.storeLabel.textAlignment;
     self.cameraView.allowPictureRetake = YES;
+    self.cameraView.writeToCameraRoll = YES;
     self.cameraView.flashView.backgroundColor =
     [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
@@ -361,8 +363,8 @@ return self;
     self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;    
 }
 
--(void)cameraView:(VLBCameraView *)cameraView didErrorOnTakePicture:(NSError *)error{
-    
+-(void)cameraView:(VLBCameraView *)cameraView didErrorOnTakePicture:(NSError *)error
+{
 }
 
 -(void)cameraView:(VLBCameraView *)cameraView willRekatePicture:(UIImage *)image
@@ -370,6 +372,11 @@ return self;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.takePhotoButton.userInteractionEnabled = YES;
     [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
+}
+
+-(void)cameraView:(VLBCameraView *)cameraView willRriteToCameraRollWithMetadata:(NSDictionary *)metadata
+{
+    
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view

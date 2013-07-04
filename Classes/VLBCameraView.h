@@ -77,6 +77,17 @@ extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
  @param image current image currently previewing.
  */
 -(void)cameraView:(VLBCameraView*)cameraView willRekatePicture:(UIImage *)image;
+
+/**
+ Implement if VLBCameraView.writeToCameraRoll is set to YES.
+ 
+ Will get a callback before writing the image to the camera roll as taken in full resolution by the camera.
+ 
+ @param cameraView the VLBCameraView instance this delegate is assigned to
+ @param metadata the metadata instance that will be used to capture the image
+ */
+-(void)cameraView:(VLBCameraView*)cameraView willRriteToCameraRollWithMetadata:(NSDictionary *)metadata;
+
 @end
 
 /**
@@ -106,6 +117,10 @@ extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
  @precondition have cameraView:didCreateCaptureConnection: implemented
  */
 @property(nonatomic, assign) BOOL allowPictureRetake;
+
+
+///
+@property(nonatomic, assign) BOOL writeToCameraRoll;
 
 
 /**

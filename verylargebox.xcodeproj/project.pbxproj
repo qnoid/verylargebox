@@ -254,6 +254,8 @@
 		BDF274731785557A000E179E /* refresh-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF274711785557A000E179E /* refresh-grey.png */; };
 		BDF274741785557A000E179E /* refresh-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF274721785557A000E179E /* refresh-grey@2x.png */; };
 		BDF2747717855F63000E179E /* VLBScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF2747617855F63000E179E /* VLBScrollView.xib */; };
+		BDF274791786352F000E179E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF274781786352E000E179E /* AssetsLibrary.framework */; };
+		BDF2747B178635D3000E179E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF274781786352E000E179E /* AssetsLibrary.framework */; };
 		BDF2FD03177A1EC100941B7F /* hexabump@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD02177A1EC100941B7F /* hexabump@2X.png */; };
 		BDF2FD05177A2BB500941B7F /* hexabump.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD04177A2BB500941B7F /* hexabump.png */; };
 		BDF2FD08177A458D00941B7F /* VLBCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD07177A458D00941B7F /* VLBCameraView.m */; };
@@ -545,6 +547,7 @@
 		BDF274711785557A000E179E /* refresh-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-grey.png"; path = "Supporting Files/refresh-grey.png"; sourceTree = "<group>"; };
 		BDF274721785557A000E179E /* refresh-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-grey@2x.png"; path = "Supporting Files/refresh-grey@2x.png"; sourceTree = "<group>"; };
 		BDF2747617855F63000E179E /* VLBScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBScrollView.xib; sourceTree = "<group>"; };
+		BDF274781786352E000E179E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		BDF2FD02177A1EC100941B7F /* hexabump@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hexabump@2X.png"; sourceTree = "<group>"; };
 		BDF2FD04177A2BB500941B7F /* hexabump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hexabump.png; sourceTree = "<group>"; };
 		BDF2FD06177A458D00941B7F /* VLBCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCameraView.h; path = Classes/VLBCameraView.h; sourceTree = "<group>"; };
@@ -566,6 +569,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF2747B178635D3000E179E /* AssetsLibrary.framework in Frameworks */,
 				BD4D32A1177F5A560015EADF /* CoreMedia.framework in Frameworks */,
 				BDF2FD0A177A4A7400941B7F /* AVFoundation.framework in Frameworks */,
 				908363FB140070DC00E5AAAF /* MobileCoreServices.framework in Frameworks */,
@@ -592,6 +596,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF274791786352F000E179E /* AssetsLibrary.framework in Frameworks */,
 				BD4D32A0177F5A370015EADF /* CoreMedia.framework in Frameworks */,
 				BD4D329D177F50B30015EADF /* AVFoundation.framework in Frameworks */,
 				908364051400752500E5AAAF /* CFNetwork.framework in Frameworks */,
@@ -742,6 +747,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDF274781786352E000E179E /* AssetsLibrary.framework */,
 				BDF2FD09177A4A7400941B7F /* AVFoundation.framework */,
 				BDF825C016FDFCEA003B3003 /* AddressBook.framework */,
 				BDA21877165EEBEA00094510 /* Security.framework */,

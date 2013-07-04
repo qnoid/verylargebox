@@ -9,6 +9,7 @@
 #import "VLBCameraView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreImage/CoreImage.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "VLBMacros.h"
 #import "DDLog.h"
 
@@ -84,17 +85,29 @@ return ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
         return;
         }
         
-        UIImage *image = [UIImage imageWithData:[AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer]];
+        NSData* imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+        UIImage *image = [UIImage imageWithData:imageData];
         CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault,
                                                                     imageDataSampleBuffer,
                                                                     kCMAttachmentMode_ShouldPropagate);
-        
+        NSDictionary *info = (__bridge NSDictionary*)attachments;
+
+        if(self.writeToCameraRoll)
+        {
+            [self.delegate cameraView:self willRriteToCameraRollWithMetadata:info];
+            
+            ALAssetsLibrary *library = [ALAssetsLibrary new];
+            [library writeImageDataToSavedPhotosAlbum:imageData
+                                             metadata:info
+                                      completionBlock:^(NSURL *assetURL, NSError *error) {
+                                          DDLogError(@"%@", error);
+                                      }];
+        }
+
         dispatch_async(dispatch_get_main_queue(), ^(void)
         {
             preview.image = image;
-            
-            NSDictionary *info = (__bridge NSDictionary*)attachments;
-            
+                        
             [wself cameraView:wself didFinishTakingPicture:image withInfo:info meta:nil];
             
             CFRelease(attachments);
@@ -114,7 +127,14 @@ return ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
 			device.focusMode = AVCaptureFocusModeContinuousAutoFocus;
 			[device unlockForConfiguration];
         }
-    }        
+    }
+    
+    if([device isFlashModeSupported:AVCaptureFlashModeAuto]){
+		if ([device lockForConfiguration:&error]) {
+            device.flashMode = AVCaptureFlashModeAuto;
+			[device unlockForConfiguration];
+        }
+    }
 
 	AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
     
