@@ -108,7 +108,6 @@
 		BD2A8AB3175B42910036A852 /* VLBDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* VLBDetailsViewController.m */; };
 		BD2A8AB5175B429B0036A852 /* VLBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* VLBButton.m */; };
 		BD2A8AB6175B42A00036A852 /* VLBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0B165AD1150068C749 /* VLBColors.m */; };
-		BD2A8AB7175B42A60036A852 /* VLBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* VLBItemView.m */; };
 		BD2A8AB8175B42B10036A852 /* VLBLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2ECA312930C08009195CF /* VLBLocationService.m */; };
 		BD2A8ABA175B42BB0036A852 /* VLBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* VLBGridView.m */; };
 		BD2A8ABB175B42C50036A852 /* VLBScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A6C4521300822C00AEEE9F /* VLBScrollView.m */; };
@@ -175,8 +174,6 @@
 		BDA2BD1A165AF8E30068C749 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD17165AF8E30068C749 /* user.png */; };
 		BDA4FB4D175FF42D004AAEC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B07131A820F008B8B2D /* SystemConfiguration.framework */; };
 		BDAB0126176FE7B200A8034E /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
-		BDABD92C169F689F00111723 /* VLBItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDABD92B169F689F00111723 /* VLBItemView.m */; };
-		BDABD92F169F68B100111723 /* VLBItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDABD92E169F68B100111723 /* VLBItemView.xib */; };
 		BDABD930169F9EF800111723 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
 		BDAC04AD16FAF95900B40646 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */; };
 		BDAE3C44176CE0ED0037734C /* UINavigationItem+VLBNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C43176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.m */; };
@@ -482,9 +479,6 @@
 		BDA2BD1C165AFA200068C749 /* VLBCreateUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCreateUserOperationDelegate.h; path = ../Classes/VLBCreateUserOperationDelegate.h; sourceTree = "<group>"; };
 		BDAB0124176FE7B200A8034E /* VLBTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTypography.h; path = ../Classes/VLBTypography.h; sourceTree = "<group>"; };
 		BDAB0125176FE7B200A8034E /* VLBTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTypography.m; sourceTree = "<group>"; };
-		BDABD92A169F689E00111723 /* VLBItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBItemView.h; path = ../Classes/VLBItemView.h; sourceTree = "<group>"; };
-		BDABD92B169F689F00111723 /* VLBItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBItemView.m; sourceTree = "<group>"; };
-		BDABD92E169F68B100111723 /* VLBItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBItemView.xib; path = Classes/VLBItemView.xib; sourceTree = "<group>"; };
 		BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BDAE3C42176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationItem+VLBNavigationItem.h"; path = "../Classes/UINavigationItem+VLBNavigationItem.h"; sourceTree = "<group>"; };
 		BDAE3C43176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+VLBNavigationItem.m"; sourceTree = "<group>"; };
@@ -688,7 +682,6 @@
 				BD127B3E165D77B0002C944D /* VLBSecureHashA1.m */,
 				BD127B46165D7E6F002C944D /* NSString+VLBString.m */,
 				BD258DD71673F1F700286511 /* VLBTableViewDataSourceBuilder.m */,
-				BDABD92B169F689F00111723 /* VLBItemView.m */,
 				BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */,
 				BD14C28416BDC70C0039E978 /* VLBUserItemView.m */,
 				BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */,
@@ -936,7 +929,6 @@
 				BDA2187B165EEF6700094510 /* VLBVerifyUserOperationDelegate.h */,
 				BD258DD01673C33A00286511 /* VLBNSErrorDelegate.h */,
 				BD258DD61673F1F700286511 /* VLBTableViewDataSourceBuilder.h */,
-				BDABD92A169F689E00111723 /* VLBItemView.h */,
 				BD9A781316BD53D300FD30E0 /* VLBTableViewDelegateBuilder.h */,
 				BD14C28316BDC70C0039E978 /* VLBUserItemView.h */,
 				BDF0F42316C8254B002CDE8E /* VLBVerifyOperationBlock.h */,
@@ -1013,7 +1005,6 @@
 				BDE482C01750510D0096903C /* VLBFeedViewController.xib */,
 				90D830F312B51DA400BE4470 /* VLBCell.xib */,
 				BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */,
-				BDABD92E169F68B100111723 /* VLBItemView.xib */,
 				BD14C28A16BDC73F0039E978 /* VLBUserItemView.xib */,
 				BD7C27D617235DE6009D26EE /* VLBProgressView.xib */,
 				903AE3D91284900300A8FB28 /* VLBCityViewController.xib */,
@@ -1276,7 +1267,6 @@
 				BDA2BC921659600F0068C749 /* VLBProfileViewController.xib in Resources */,
 				BDA2BD1A165AF8E30068C749 /* user.png in Resources */,
 				BD258DDE1678040500286511 /* refresh.png in Resources */,
-				BDABD92F169F68B100111723 /* VLBItemView.xib in Resources */,
 				BD14C28B16BDC73F0039E978 /* VLBUserItemView.xib in Resources */,
 				BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */,
 				BDAC04AD16FAF95900B40646 /* Default-568h@2x.png in Resources */,
@@ -1520,7 +1510,6 @@
 				BD127B47165D7E70002C944D /* NSString+VLBString.m in Sources */,
 				BD258DCD1673BF6E00286511 /* VLBAFHTTPRequestOperationCompletionBlocks.m in Sources */,
 				BD258DD81673F1F700286511 /* VLBTableViewDataSourceBuilder.m in Sources */,
-				BDABD92C169F689F00111723 /* VLBItemView.m in Sources */,
 				BD9A781516BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m in Sources */,
 				BD14C28516BDC70C0039E978 /* VLBUserItemView.m in Sources */,
 				BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */,
@@ -1579,7 +1568,6 @@
 				BD2A8AB3175B42910036A852 /* VLBDetailsViewController.m in Sources */,
 				BD2A8AB5175B429B0036A852 /* VLBButton.m in Sources */,
 				BD2A8AB6175B42A00036A852 /* VLBColors.m in Sources */,
-				BD2A8AB7175B42A60036A852 /* VLBItemView.m in Sources */,
 				BD2A8AB8175B42B10036A852 /* VLBLocationService.m in Sources */,
 				BD2A8ABA175B42BB0036A852 /* VLBGridView.m in Sources */,
 				BD2A8ABB175B42C50036A852 /* VLBScrollView.m in Sources */,

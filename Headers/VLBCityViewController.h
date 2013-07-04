@@ -42,8 +42,10 @@
  */
 +(VLBCityViewController *)newHomeGridViewController;
 
-@property(nonatomic, strong) IBOutlet UIButton* directionsButton;
+@property(nonatomic, weak) IBOutlet UIButton* directionsButton;
 @property(nonatomic, strong) IBOutlet VLBScrollView * locationsView;
 @property(nonatomic, strong) IBOutlet VLBGridView * itemsView;
+
+-(IBAction)didTapOnGetDirectionsButton:(id)sender;
 
 @end

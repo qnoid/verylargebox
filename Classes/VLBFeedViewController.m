@@ -20,13 +20,13 @@
 #import "DDLog.h"
 #import "VLBErrorBlocks.h"
 #import "VLBTypography.h"
+#import "VLBPredicates.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 
 @interface VLBFeedViewController ()
-@property(nonatomic, weak) VLBScrollView * itemsView;
 
 @property(nonatomic, strong) NSString *locality;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
@@ -76,9 +76,7 @@ return localityItemsViewController;
 {
     self = [super initWithNibName:NSStringFromClass([VLBFeedViewController class]) bundle:nibBundleOrNil];
     
-    if (!self) {
-        return nil;
-    }
+    VLB_IF_NOT_SELF_RETURN_NIL();
     
     self.theBoxLocationService = [VLBLocationService theBoxLocationService];
     self.items = [NSMutableArray array];
@@ -94,25 +92,12 @@ return localityItemsViewController;
     [titleView sizeToFit];
 }
 
--(void)loadView
-{
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    
-    VLBScrollView * itemsView = [[[[VLBScrollViewBuilder alloc] initWith:
-                                       CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) orientation:VLBScrollViewOrientationVertical] allowSelection] newScrollView:^(VLBScrollView *scrollView, BOOL cancelsTouchesInView)
-																			{			
-    																			scrollView.datasource = self;
-																				  scrollView.scrollViewDelegate = self;
-																			}];
-    
-    self.itemsView = itemsView;
-    self.view = itemsView;
-}
-
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
-    self.itemsView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    [super viewDidLoad];
+    self.view.backgroundColor = self.itemsView.backgroundColor =
+        [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    
     self.itemsView.scrollsToTop = YES;
     __weak VLBFeedViewController *wself = self;
     
@@ -129,11 +114,14 @@ return localityItemsViewController;
     self.hud.labelText = @"Finding your location";    
 }
 
--(void)viewDidAppear:(BOOL)animated
-{    
-    [self.theBoxLocationService notifyDidFindPlacemark:self];
-    [self.theBoxLocationService notifyDidFailWithError:self];
-    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+-(void)viewWillAppear:(BOOL)animated
+{
+    //introduce VLBConditionals with a macro @conditional to execute a block
+    [[VLBPredicates new] ifNil:self.locality then:^{
+        [self.theBoxLocationService notifyDidFindPlacemark:self];
+        [self.theBoxLocationService notifyDidFailWithError:self];
+        [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -213,10 +201,6 @@ return VLBScrollViewOrientationVertical;
 }
 
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index{
-    
-}
-
--(void)didSelectView:(VLBScrollView *)scrollView atIndex:(NSUInteger)inde point:(CGPoint)point {
     
 }
 

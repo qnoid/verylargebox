@@ -36,4 +36,13 @@ return [thizCategoryId intValue] > [thatCategoryId intValue];
 return [[VLBPredicateOnLocation alloc] init];
 }
 
+-(void)ifNil:(id)obj then:(VLBPredicateBlock)block
+{
+    if(obj){
+        return;
+    }
+    
+    block();
+}
+
 @end

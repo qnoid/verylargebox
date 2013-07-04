@@ -101,24 +101,12 @@ return profileViewController;
 return self;
 }
 
-/*
--(void)loadView
-{
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    VLBScrollView * itemsView = [[[VLBScrollViewBuilder alloc] initWith:
-                                  CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:416] newVerticalScrollView];
-
-    itemsView.datasource = self;
-    itemsView.scrollViewDelegate = self;
-    self.itemsView = itemsView;
-    self.view = self.itemsView;
-}
-*/
-
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.itemsView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.view.backgroundColor = self.itemsView.backgroundColor =
+        [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    
     self.itemsView.scrollsToTop = YES;
 
     __weak VLBProfileViewController *wself = self;

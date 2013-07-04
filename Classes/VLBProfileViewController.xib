@@ -40,7 +40,7 @@
 					<object class="IBUIButton" id="827051304">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{28, 76}, {264, 264}}</string>
+						<string key="NSFrame">{{28, 66}, {264, 264}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="260515666"/>
@@ -79,7 +79,7 @@
 					<object class="IBUILabel" id="260515666">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{28, 347}, {264, 25}}</string>
+						<string key="NSFrame">{{28, 337}, {264, 25}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -112,18 +112,22 @@
 					</object>
 					<object class="IBUIScrollView" id="219623547">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrameSize">{320, 416}</string>
+						<int key="NSvFlags">306</int>
+						<string key="NSFrameSize">{320, 367}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="827051304"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
+						</object>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
+				<string key="NSFrame">{{0, 64}, {320, 367}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="219623547"/>
@@ -136,6 +140,7 @@
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<bool key="IBUIPrompted">NO</bool>
 				</object>
+				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
 					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
@@ -234,6 +239,7 @@
 							<reference ref="219623547"/>
 						</array>
 						<reference key="parent" ref="0"/>
+						<string key="objectName">view</string>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">-1</string>
@@ -261,6 +267,7 @@
 						<string key="id">ura-5h-9RG</string>
 						<reference key="object" ref="219623547"/>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">itemsView</string>
 					</object>
 				</array>
 			</object>
@@ -339,10 +346,15 @@
 					<string key="className">VLBScrollView</string>
 					<string key="superclassName">UIScrollView</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="contentView">UIView</string>
 						<string key="datasource">id</string>
 						<string key="scrollViewDelegate">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="contentView">
+							<string key="name">contentView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="datasource">
 							<string key="name">datasource</string>
 							<string key="candidateClassName">id</string>

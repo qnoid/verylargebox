@@ -22,7 +22,6 @@
 #import "NSDictionary+VLBDictionary.h"
 #import "VLBCell.h"
 #import "VLBScrollView.h"
-#import "VLBItemView.h"
 #import "VLBView.h"
 #import "VLBColors.h"
 #import "VLBLocationService.h"
@@ -159,51 +158,17 @@ return self;
     self.tabBarItem.title = localityName;
 }
 
--(void)loadView
-{
-    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
-
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x,
-                                                            CGPointZero.y,
-                                                            applicationFrame.size.width,
-                                                            applicationFrame.size.height - 44.0 - 49.0)];
-    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
-    
-    VLBScrollView *locationsView = [[[[VLBScrollViewBuilder alloc] initWith:CGRectMake(CGPointZero.x, CGPointZero.y, applicationFrame.size.width, LOCATIONS_VIEW_HEIGHT) orientation:VLBScrollViewOrientationHorizontal] allowSelection] newScrollView:^(VLBScrollView *scrollView, BOOL cancelsTouchesInView){
-	  	  scrollView.datasource = self;
-	  	  scrollView.scrollViewDelegate = self;
-		}];
-
-    VLBGridView *itemsView = [VLBGridView newVerticalGridView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) config:^(VLBGridView* gridView){
-    	gridView.datasource = self;
-	    gridView.delegate = self;
-		}];
-		itemsView.backgroundColor = [UIColor clearColor];
-
-    itemsView.showsVerticalScrollIndicator = YES;
-    
-    VLBButton *directionsButton = [[VLBButton alloc] initWithFrame:CGRectMake(130.0, LOCATIONS_VIEW_HEIGHT - 30, 60, 60)];
-    [directionsButton setImage:[UIImage imageNamed:@"signpost"] forState:UIControlStateNormal];
-    directionsButton.delegate = self;
-    [directionsButton addTarget:self action:@selector(didTapOnGetDirectionsButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [view addSubview:locationsView];
-    [view addSubview:itemsView];
-    [view addSubview:directionsButton];
-    
-    self.view = view;
-    self.locationsView = locationsView;
-    self.itemsView = itemsView;
-}
-
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     self.locationsView.backgroundColor = [VLBColors colorDarkGrey];
     self.locationsView.showsHorizontalScrollIndicator = NO;
     self.locationsView.enableSeeking = YES;
     self.locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 100.0f);
     self.locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
+    VLBScrollViewAllowSelection(self.locationsView, NO);
+    self.itemsView.showsVerticalScrollIndicator = YES;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
     hud.labelText = @"Finding your location";
 }
@@ -326,7 +291,7 @@ return self.items.count%2==0?2:1;
 }
 
 -(UIView *)gridView:(VLBGridView *)gridView viewOf:(UIView *)view ofFrame:(CGRect)frame atRow:(NSUInteger)row atIndex:(NSUInteger)index {
-return [[VLBItemView alloc] initWithFrame:frame];
+return [[UIImageView alloc] initWithFrame:frame];
 }
 
 -(void)gridView:(VLBGridView *)gridView atIndex:(NSInteger)index willAppear:(UIView *)view{
@@ -337,9 +302,10 @@ return [[VLBItemView alloc] initWithFrame:frame];
 {
     NSDictionary *item = [[[self items] objectAtIndex:(row * 2) + index] objectForKey:@"item"];
     
-    VLBItemView *imageView = (VLBItemView *)view;
+    UIImageView *imageView = (UIImageView *)view;
     //@"http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/020/thumb/.jpg"
-    [imageView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]] placeholderImage:self.defaultItemImage];
+    [imageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]]
+              placeholderImage:self.defaultItemImage];
 }
 
 #pragma mark VLBGridViewDelegate
@@ -388,7 +354,7 @@ return storeButton;
 #pragma mark VLBScrollViewDelegate
 
 -(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView{
-return VLBScrollViewOrientationVertical;
+return VLBScrollViewOrientationHorizontal;
 }
 
 -(CGFloat)viewsOf:(VLBScrollView *)scrollView{

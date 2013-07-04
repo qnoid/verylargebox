@@ -10,16 +10,15 @@
 #import <Foundation/Foundation.h>
 #import "VLBBinarySearch.h"
 
+typedef void(^VLBPredicateBlock)();
 @interface VLBPredicateOnLocation : NSObject <VLBPredicate>
-{
-}
 @end
 
 
 @interface VLBPredicates : NSObject {
-
 }
 
 +(VLBPredicateOnLocation *)newLocationIdPredicate;
 
+-(void)ifNil:(id)obj then:(VLBPredicateBlock)block;
 @end

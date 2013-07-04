@@ -17,6 +17,7 @@
 #import "VLBHuds.h"
 #import "VLBErrorBlocks.h"
 #import "VLBColors.h"
+#import "DDLog.h"
 
 @interface VLBLocalitiesTableViewController ()
 @property(nonatomic, strong) NSObject<UITableViewDataSource> *tableViewDataSource;
@@ -105,15 +106,6 @@ return availablePlacesViewController;
 -(void)didFailWithTimeout:(NSError *)error
 {
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad

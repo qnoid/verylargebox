@@ -19,8 +19,9 @@
 
 @interface VLBScrollView (Testing)
 @property(nonatomic, strong) UIView *contentView;
+@property(nonatomic, strong) VLBSize *size;
+@property(nonatomic, strong) id<VLBDimension> dimension;
 
--(id)initWithFrame:(CGRect) frame size:(NSObject<VLBSize>*)size dimension:(NSObject<VLBDimension>*)dimension;
 -(void)setVisibleStrategy:(id<VLBVisibleStrategy>)visibleStrategy;
 -(id<VLBVisibleStrategy>)visibleStrategy;
 -(void)setRecycleStrategy:(VLBRecycleStrategy *)recycleStrategy;
@@ -43,7 +44,10 @@
 
     CGFloat size = 160;
 
-    VLBScrollView *theBoxScrollView = [[VLBScrollView alloc] initWithFrame:CGRectZero size:mockedSize dimension:[VLBWidth newWidth:size]];
+    VLBScrollView *theBoxScrollView = [[VLBScrollView alloc] initWithFrame:CGRectZero];
+    theBoxScrollView.size = mockedSize;
+    theBoxScrollView.dimension = [VLBWidth newWidth:size];
+    
     theBoxScrollView.scrollViewDelegate = mockedDelegate;
     theBoxScrollView.datasource = mockedDatasource;
     
@@ -83,21 +87,3 @@
     
 }
 @end
-
-SPEC_BEGIN(VLBScrollViewSpec)
-
-context(@"", ^{
-    it(@"", ^{
-        CGRect anyframe = CGRectMake(0, 0, 320, 196);
-        VLBScrollView *theBoxScrollView = [[VLBScrollView alloc] initWithFrame:anyframe size:nil dimension:nil];
-        
-        [[[theBoxScrollView.contentView superview] should] equal:theBoxScrollView];
-        
-        CGRect actual = CGRectMake(CGPointZero.x, CGPointZero.y, anyframe.size.width, anyframe.size.height);
-        BOOL shouldBeTrue = CGRectEqualToRect(theBoxScrollView.contentView.frame, actual);
-        
-        [[theValue(shouldBeTrue) should] equal:(theValue(true))];
-    });
-});
-SPEC_END
-

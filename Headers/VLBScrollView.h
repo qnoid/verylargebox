@@ -158,29 +158,3 @@ extern VLBScrollViewOrientation const VLBScrollViewOrientationHorizontal;
 -(void)setNeedsLayout;
 
 @end
-
-/**
-  Allows user 
- */
-@interface VLBScrollViewBuilder : NSObject
-
-/**
- Creates a new VLBScrollViewBuilder that creates scrollviews with the given frame and orientation.
- 
- @param frame the frame of the scroll view
- @param  orientation the orientation of the view 
- @return a new instance of VLBScrollViewBuilder
- */
-- (id)initWith:(CGRect)frame orientation:(VLBScrollViewOrientation)orientation;
-
-/**
- Enables user selection by tapping in a view.
- 
- @discussion @required VLBScrollViewDelegate#didSelectView:atIndex:
- */
--(VLBScrollViewBuilder*)allowSelection;
-
--(VLBScrollViewBuilder*)canCancelContentTouches;
-
--(VLBScrollView *) newScrollView:(VLBScrollViewConfig)config;
-@end

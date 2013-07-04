@@ -12,6 +12,7 @@
 #import "VLBScrollView.h"
 #import "VLBScrollViewDatasource.h"
 #import "VLBMacros.h"
+#import "DDLog.h"
 
 @interface VLBGridView () <VLBScrollViewDatasource, VLBScrollViewDelegate>
 @property(nonatomic, strong) NSMutableDictionary* frames;
@@ -26,15 +27,24 @@
 
 VLBGridViewOrientation const VLBGridViewOrientationVertical = ^(VLBGridView *gridView)
 {
-	  VLBScrollView *scrollView = [VLBScrollView newVerticalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, gridView.frame.size.width, gridView.frame.size.height) config:^(VLBScrollView* scrollView, BOOL foo){
-				scrollView.datasource = gridView;
-				scrollView.scrollViewDelegate = gridView;
-		    scrollView.showsVerticalScrollIndicator = NO;
-		    scrollView.scrollsToTop = YES;
-    		UITapGestureRecognizer *tapGestureRecognizer =
-        		[[UITapGestureRecognizer alloc] initWithTarget:gridView action:@selector(viewWasTapped:)];
-    		[scrollView addGestureRecognizer:tapGestureRecognizer];
-		}];
+    CGRect frame = CGRectMake(CGPointZero.x, CGPointZero.y, gridView.frame.size.width, gridView.frame.size.height);
+    
+    VLBScrollView *scrollView =
+        [VLBScrollView newVerticalScrollView:frame
+                                      config:^(VLBScrollView* scrollView, BOOL foo)
+                                    {
+                                        scrollView.datasource = gridView;
+                                        scrollView.scrollViewDelegate = gridView;
+                                        scrollView.showsVerticalScrollIndicator = NO;
+                                        scrollView.scrollsToTop = YES;
+                                        scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+                                        scrollView.backgroundColor = [UIColor clearColor];
+                                        
+                                        UITapGestureRecognizer *tapGestureRecognizer =
+                                            [[UITapGestureRecognizer alloc] initWithTarget:gridView
+                                                                                    action:@selector(viewWasTapped:)];
+                                        [scrollView addGestureRecognizer:tapGestureRecognizer];
+                                    }];
 
     gridView.scrollView = scrollView;
     [gridView addSubview:gridView.scrollView];
@@ -42,15 +52,24 @@ VLBGridViewOrientation const VLBGridViewOrientationVertical = ^(VLBGridView *gri
 
 VLBGridViewOrientation const VLBGridViewOrientationHorizontal = ^(VLBGridView *gridView)
 {
-	  VLBScrollView *scrollView = [VLBScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, gridView.frame.size.width, gridView.frame.size.height) config:^(VLBScrollView* scrollView, BOOL foo){
-				scrollView.datasource = gridView;
-				scrollView.scrollViewDelegate = gridView;
-		    scrollView.showsHorizontalScrollIndicator = NO;
-		    scrollView.scrollsToTop = YES;
-    		UITapGestureRecognizer *tapGestureRecognizer =
-        		[[UITapGestureRecognizer alloc] initWithTarget:gridView action:@selector(viewWasTapped:)];
-    		[scrollView addGestureRecognizer:tapGestureRecognizer];
-		}];
+    CGRect frame = CGRectMake(CGPointZero.x, CGPointZero.y, gridView.frame.size.width, gridView.frame.size.height);
+    
+    VLBScrollView *scrollView =
+        [VLBScrollView newHorizontalScrollView:frame
+                                        config:^(VLBScrollView* scrollView, BOOL foo)
+                                        {
+                                            scrollView.datasource = gridView;
+                                            scrollView.scrollViewDelegate = gridView;
+                                            scrollView.showsHorizontalScrollIndicator = NO;
+                                            scrollView.scrollsToTop = YES;
+                                            scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+                                            scrollView.backgroundColor = [UIColor clearColor];
+                                            
+                                            UITapGestureRecognizer *tapGestureRecognizer =
+                                                [[UITapGestureRecognizer alloc] initWithTarget:gridView
+                                                                                        action:@selector(viewWasTapped:)];
+                                            [scrollView addGestureRecognizer:tapGestureRecognizer];
+                                        }];
 
     gridView.scrollView = scrollView;
     [gridView addSubview:gridView.scrollView];
@@ -71,7 +90,7 @@ return gridView;
 {
     self = [super initWithFrame:frame];
 
-		VLB_IF_NOT_SELF_RETURN_NIL();
+    VLB_IF_NOT_SELF_RETURN_NIL();
     
     self.frames = [NSMutableDictionary new];
     self.views = [NSMutableDictionary new];
@@ -82,10 +101,10 @@ return self;
 #pragma mark testing
 - (id)initWith:(NSMutableDictionary*)frames
 {
-		VLB_INIT_OR_RETURN_NIL();
+    VLB_INIT_OR_RETURN_NIL();
 
-		self.frames = frames;
-		self.views = [NSMutableDictionary new];       
+    self.frames = frames;
+    self.views = [NSMutableDictionary new];       
 
 return self;
 }
@@ -95,17 +114,17 @@ return self;
 {
     self = [super initWithCoder:coder];
 
-		VLB_IF_NOT_SELF_RETURN_NIL();
+    VLB_IF_NOT_SELF_RETURN_NIL();
 
-		self.frames = [NSMutableDictionary new];
-		self.views = [NSMutableDictionary new];       
+    self.frames = [NSMutableDictionary new];
+    self.views = [NSMutableDictionary new];       
 
 return self;
 }
 
 -(void)awakeFromNib
 {
-		VLBGridViewOrientationVertical(self);
+    VLBGridViewOrientationVertical(self);
 }
 
 -(void)setShowsVerticalScrollIndicator:(BOOL)indeed {
@@ -196,11 +215,13 @@ return [self.datasource numberOfViewsInGridView:self];
 
 	DDLogVerbose(@"asking for row %d", index);
 	
-    VLBScrollView * view = [VLBScrollView newHorizontalScrollView:frame
-																													 config:^(VLBScrollView *scrollView, BOOL canCancelContentTouches){
-											    																 		scrollView.datasource = self;
-																												   	  scrollView.scrollViewDelegate = self;
-																													}]; 
+    VLBScrollView * view =
+        [VLBScrollView newHorizontalScrollView:frame
+                                        config:^(VLBScrollView *scrollView, BOOL canCancelContentTouches){
+                                            scrollView.datasource = self;
+                                            scrollView.scrollViewDelegate = self;
+                                            scrollView.backgroundColor = [UIColor clearColor];
+                                        }];
     
     
 	DDLogVerbose(@"view %@", view);

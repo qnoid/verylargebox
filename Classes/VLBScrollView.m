@@ -14,8 +14,6 @@
 #import "DDLog.h"
 #import "VLBMacros.h"
 
-CGFloat const DEFAULT_HEIGHT = 196;
-
 @interface VLBScrollView ()
 @property(nonatomic, assign) BOOL needsLayout;
 @property(nonatomic, strong) VLBRecycleStrategy *recycleStrategy;
@@ -83,13 +81,14 @@ return scrollView;
 
 - (id) initWithFrame:(CGRect)frame
 {
-		self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame];
     
     VLB_IF_NOT_SELF_RETURN_NIL();
     VLB_LOAD_VIEW();
 
     self.scrollsToTop = NO;
     self.delegate = self;
+    self.backgroundColor = [UIColor clearColor];
 
 return self;
 }
@@ -103,6 +102,7 @@ return self;
 
     self.scrollsToTop = NO;
     self.delegate = self;
+    self.backgroundColor = [UIColor clearColor];    
     
 return self;
 }
@@ -301,59 +301,6 @@ return view;
     
 
     [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:point]];
-}
-
-@end
-
-@interface VLBScrollViewBuilder ()
-@property (nonatomic, assign) CGRect frame;
-@property (nonatomic, copy) VLBScrollViewOrientation orientation;
-@property (nonatomic, assign) BOOL enableSelection;
-@property (nonatomic, assign) BOOL cancelContentTouches;
-@end
-
-@implementation VLBScrollViewBuilder
-
-- (id)initWith:(CGRect)frame orientation:(VLBScrollViewOrientation)orientation
-{
-		VLB_INIT_OR_RETURN_NIL();
-    
-    self.frame = frame;
-    self.orientation = orientation;
-
-return self;
-}
-
--(VLBScrollViewBuilder *)allowSelection
-{
-    self.enableSelection = YES;
-    
-return self;
-}
-
--(VLBScrollViewBuilder *)canCancelContentTouches
-{
-    self.cancelContentTouches = YES;
-    
-return self;
-}
-
--(VLBScrollView *) newScrollView:(VLBScrollViewConfig)config
-{
-    VLBScrollView *scrollView =
-        [[VLBScrollView alloc] initWithFrame:self.frame];
-
-    config(scrollView, self.cancelContentTouches);
-
-    if(self.enableSelection){
-        VLBScrollViewAllowSelection(scrollView, self.cancelContentTouches);
-    }
-    
-    scrollView.canCancelContentTouches = self.cancelContentTouches;
-    
-		self.orientation(scrollView);
-
-return scrollView;
 }
 
 @end
