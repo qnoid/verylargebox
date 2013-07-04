@@ -14,6 +14,7 @@
 			<string>IBProxyObject</string>
 			<string>IBUIButton</string>
 			<string>IBUILabel</string>
+			<string>IBUIScrollView</string>
 			<string>IBUIView</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -36,13 +37,13 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIButton" id="736167737">
+					<object class="IBUIButton" id="827051304">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{28, 76}, {264, 264}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="380006977"/>
+						<reference key="NSNextKeyView" ref="260515666"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -75,7 +76,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUILabel" id="380006977">
+					<object class="IBUILabel" id="260515666">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{28, 347}, {264, 25}}</string>
@@ -109,11 +110,23 @@
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
+					<object class="IBUIScrollView" id="219623547">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrameSize">{320, 416}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="827051304"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
 				</array>
 				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="736167737"/>
+				<reference key="NSNextKeyView" ref="219623547"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -158,14 +171,22 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">takePhotoButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="736167737"/>
+						<reference key="destination" ref="827051304"/>
 					</object>
 					<string key="id">DOG-Ou-Jtc</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">itemsView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="219623547"/>
+					</object>
+					<string key="id">99l-T1-xsO</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="736167737"/>
+						<reference key="source" ref="827051304"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<string key="id">jCR-bo-agf</string>
@@ -173,11 +194,27 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">addItem</string>
-						<reference key="source" ref="736167737"/>
+						<reference key="source" ref="827051304"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
 					<string key="id">EFa-nZ-FFk</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">scrollViewDelegate</string>
+						<reference key="source" ref="219623547"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<string key="id">GC0-s6-ZRK</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">datasource</string>
+						<reference key="source" ref="219623547"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<string key="id">cSY-Q3-FDN</string>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -192,8 +229,9 @@
 						<string key="id">1</string>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="736167737"/>
-							<reference ref="380006977"/>
+							<reference ref="827051304"/>
+							<reference ref="260515666"/>
+							<reference ref="219623547"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -210,13 +248,18 @@
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">5nM-wh-rNV</string>
-						<reference key="object" ref="736167737"/>
+						<reference key="object" ref="827051304"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">takePhotoButton</string>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">yBp-1n-iHz</string>
-						<reference key="object" ref="380006977"/>
+						<reference key="object" ref="260515666"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<string key="id">ura-5h-9RG</string>
+						<reference key="object" ref="219623547"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -229,6 +272,8 @@
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5nM-wh-rNV.CustomClassName">VLBButton</string>
 				<string key="5nM-wh-rNV.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="ura-5h-9RG.CustomClassName">VLBScrollView</string>
+				<string key="ura-5h-9RG.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="yBp-1n-iHz.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
@@ -271,30 +316,51 @@
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">takePhotoButton</string>
-						<string key="NS.object.0">VLBButton</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">takePhotoButton</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="itemsView">VLBScrollView</string>
+						<string key="takePhotoButton">VLBButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="itemsView">
+							<string key="name">itemsView</string>
+							<string key="candidateClassName">VLBScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="takePhotoButton">
 							<string key="name">takePhotoButton</string>
 							<string key="candidateClassName">VLBButton</string>
 						</object>
-					</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/VLBProfileViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">VLBScrollView</string>
+					<string key="superclassName">UIScrollView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="datasource">id</string>
+						<string key="scrollViewDelegate">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="datasource">
+							<string key="name">datasource</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollViewDelegate">
+							<string key="name">scrollViewDelegate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/VLBScrollView.h</string>
 					</object>
 				</object>
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1552" key="NS.object.0"/>
-		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
 			<integer value="4600" key="NS.object.0"/>

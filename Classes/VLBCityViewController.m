@@ -36,6 +36,8 @@
 #import "VLBDrawRects.h"
 #import "VLBMacros.h"
 #import "VLBErrorBlocks.h"
+#import "TestFlight.h"
+#import "DDLog.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -87,15 +89,16 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 {
     VLBLocationService* locationService = [VLBLocationService theBoxLocationService];
     
-    VLBCityViewController* homeGridViewController = [[VLBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService];
+    VLBCityViewController* cityViewController = [[VLBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService];
     
     UIButton* refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [refreshButton setFrame:CGRectMake(0, 0, 30, 30)];
     [refreshButton setImage:[UIImage imageNamed:@"refresh.png"] forState:UIControlStateNormal];
-    [refreshButton addTarget:homeGridViewController action:@selector(refreshLocations) forControlEvents:UIControlEventTouchUpInside];
+    [refreshButton setImage:[UIImage imageNamed:@"refresh-grey.png"] forState:UIControlStateDisabled];
+    [refreshButton addTarget:cityViewController action:@selector(refreshLocations) forControlEvents:UIControlEventTouchUpInside];
 
-    homeGridViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
-    homeGridViewController.navigationItem.rightBarButtonItem.enabled = NO;
+    cityViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
+    cityViewController.navigationItem.rightBarButtonItem.enabled = NO;
     
     UILabel* titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"Nearby";
@@ -103,12 +106,12 @@ static NSInteger const FIRST_VIEW_TAG = -1;
     titleLabel.backgroundColor = [UIColor clearColor];
 		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
     titleLabel.adjustsFontSizeToFitWidth = YES;
-    homeGridViewController.navigationItem.titleView = titleLabel;
+    cityViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
-    homeGridViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"city.png"] tag:0];
+    cityViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"city.png"] tag:0];
     
-return homeGridViewController;
+return cityViewController;
 }
 
 -(void)dealloc
@@ -144,6 +147,7 @@ return self;
 
 -(void)refreshLocations
 {
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     [[VLBQueries newGetLocationsGivenLocalityName:self.placemark.locality delegate:self] start];
 }
 
@@ -165,27 +169,23 @@ return self;
                                                             applicationFrame.size.height - 44.0 - 49.0)];
     view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
-    VLBScrollView * locationsView = [[[[VLBScrollViewBuilder alloc] initWith:CGRectMake(CGPointZero.x, CGPointZero.y, applicationFrame.size.width, LOCATIONS_VIEW_HEIGHT) viewsOf:LOCATIONS_VIEW_WIDTH] allowSelection] newHorizontalScrollView];
-    
-    locationsView.backgroundColor = [VLBColors colorDarkGrey];
-    locationsView.datasource = self;
-    locationsView.scrollViewDelegate = self;
-    locationsView.showsHorizontalScrollIndicator = NO;
-    locationsView.enableSeeking = YES;
-    locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 100.0f);
-    locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
+    VLBScrollView *locationsView = [[[[VLBScrollViewBuilder alloc] initWith:CGRectMake(CGPointZero.x, CGPointZero.y, applicationFrame.size.width, LOCATIONS_VIEW_HEIGHT) orientation:VLBScrollViewOrientationHorizontal] allowSelection] newScrollView:^(VLBScrollView *scrollView, BOOL cancelsTouchesInView){
+	  	  scrollView.datasource = self;
+	  	  scrollView.scrollViewDelegate = self;
+		}];
 
-    VLBGridView * itemsView = [VLBGridView newVerticalGridView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) viewsOf:160.0];
+    VLBGridView *itemsView = [VLBGridView newVerticalGridView:CGRectMake(CGPointZero.x, LOCATIONS_VIEW_HEIGHT, applicationFrame.size.width, applicationFrame.size.height - LOCATIONS_VIEW_HEIGHT - 44.0 - 49) config:^(VLBGridView* gridView){
+    	gridView.datasource = self;
+	    gridView.delegate = self;
+		}];
+		itemsView.backgroundColor = [UIColor clearColor];
 
-    itemsView.datasource = self;
-    itemsView.delegate = self;
     itemsView.showsVerticalScrollIndicator = YES;
     
-    VLBButton * directionsButton = [[VLBButton alloc] initWithFrame:CGRectMake(130.0, LOCATIONS_VIEW_HEIGHT - 30, 60, 60)];
+    VLBButton *directionsButton = [[VLBButton alloc] initWithFrame:CGRectMake(130.0, LOCATIONS_VIEW_HEIGHT - 30, 60, 60)];
     [directionsButton setImage:[UIImage imageNamed:@"signpost"] forState:UIControlStateNormal];
     directionsButton.delegate = self;
     [directionsButton addTarget:self action:@selector(didTapOnGetDirectionsButton:) forControlEvents:UIControlEventTouchUpInside];
-
     
     [view addSubview:locationsView];
     [view addSubview:itemsView];
@@ -199,6 +199,11 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.locationsView.backgroundColor = [VLBColors colorDarkGrey];
+    self.locationsView.showsHorizontalScrollIndicator = NO;
+    self.locationsView.enableSeeking = YES;
+    self.locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 100.0f);
+    self.locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
     hud.labelText = @"Finding your location";
 }
@@ -256,9 +261,7 @@ return self;
  */
 -(void)reloadItems
 {
-    if(![self.operationQueue vlb_isInProgress]){
-        [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
-    }
+    [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
 
     [self.operationQueue cancelAllOperations];
     
@@ -273,6 +276,7 @@ return self;
 
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     self.locations = locations;
     [self.locationsView setNeedsLayout];
@@ -287,20 +291,23 @@ return self;
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
-#pragma mark TheBoxUIGridViewDatasource
+#pragma mark VLBGridViewDatasource
 -(NSUInteger)numberOfViewsInGridView:(VLBGridView *)gridView {
     return self.numberOfRows;
 }
@@ -335,7 +342,7 @@ return [[VLBItemView alloc] initWithFrame:frame];
     [imageView.itemImageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]] placeholderImage:self.defaultItemImage];
 }
 
-#pragma mark TheBoxUIGridViewDelegate
+#pragma mark VLBGridViewDelegate
 
 -(void)didSelect:(VLBGridView *)gridView atRow:(NSInteger)row atIndex:(NSInteger)index
 {
@@ -361,7 +368,7 @@ return [[VLBItemView alloc] initWithFrame:frame];
     return 160.0;
 }
 
-#pragma mark TheBoxUIScrollViewDatasource
+#pragma mark VLBScrollViewDatasource
 
 -(NSUInteger)numberOfViewsInScrollView:(VLBScrollView *)scrollView {
 return [self.locations count];
@@ -378,7 +385,15 @@ return [self.locations count];
 return storeButton;
 }
 
-#pragma mark TheBoxUIScrollViewDelegate
+#pragma mark VLBScrollViewDelegate
+
+-(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView{
+return VLBScrollViewOrientationVertical;
+}
+
+-(CGFloat)viewsOf:(VLBScrollView *)scrollView{
+    return LOCATIONS_VIEW_WIDTH;
+}
 
 -(void)didLayoutSubviews:(UIScrollView*)scrollView
 {
@@ -403,12 +418,8 @@ return storeButton;
         storeButton.tag = index;
     }
     
-    id name = [location objectForKey:@"name"];
+    id name = [location vlb_objectForKey:@"name" ifNil:@""];
     
-    if([[NSNull null] isEqual:name]){
-        name = @"";
-    }
-
     [storeButton setBackgroundColor:[VLBColors colorDarkGrey]];
     [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [storeButton setTitle:name forState:UIControlStateNormal];
@@ -506,7 +517,7 @@ return storeButton;
 {
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, items);
     
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.itemsView animated:YES];
     
 	self.items = items;
     self.numberOfRows = round((float)self.items.count/2.0);

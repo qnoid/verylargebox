@@ -22,6 +22,7 @@
  */
 @interface VLBProfileViewController : UIViewController <VLBCreateItemOperationDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBViewDrawRectDelegate>
 
+@property(nonatomic, weak) IBOutlet VLBScrollView * itemsView;
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 
 +(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email;

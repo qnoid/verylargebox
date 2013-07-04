@@ -1,16 +1,13 @@
 //
-//  Copyright 2010 The Box
-//  All rights reserved.
-//
-//  This file is part of TheBox
+// 	VLBAlertViews.m
+//  verylargebox
 //
 //  Created by Markos Charatzas on 25/05/2013.
-//
+//  Copyright (c) 2013 (verylargebox.com). All rights reserved.
 //
 
 #import "VLBAlertViews.h"
 #import "VLBMacros.h"
-#import <objc/runtime.h>
 
 NS_INLINE
 NSPredicate* isButtonIndex(VLBButtonIndex buttonIndex){

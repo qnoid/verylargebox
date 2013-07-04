@@ -1,11 +1,9 @@
 //
-// Copyright 2013 TheBox
-// All rights reserved.
+// 	VLBAlertViews.h
+//  verylargebox
 //
-// This file is part of thebox
-//
-// Created by Markos Charatzas on 25/05/2013.
-//
+//  Created by Markos Charatzas on 25/05/2013.
+//  Copyright (c) 2013 (verylargebox.com). All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

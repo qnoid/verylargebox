@@ -1,11 +1,9 @@
 //
-//  Copyright (c) 2010 (verylargebox.com). All rights reserved.
-//  All rights reserved.
-//
-//  This file is part of TheBox
+//  VLBGridView.m
+//  verylargebox
 //
 //  Created by Markos Charatzas on 21/05/2011.
-//
+//  Copyright (c) 2011 (verylargebox.com). All rights reserved.
 //
 
 #import "VLBGridView.h"
@@ -13,57 +11,70 @@
 #import "VLBGridViewDelegate.h"
 #import "VLBScrollView.h"
 #import "VLBScrollViewDatasource.h"
+#import "VLBMacros.h"
 
 @interface VLBGridView () <VLBScrollViewDatasource, VLBScrollViewDelegate>
 @property(nonatomic, strong) NSMutableDictionary* frames;
 @property(nonatomic, strong) NSMutableDictionary* views;
 @property(nonatomic, strong) VLBScrollView *scrollView;
 
-- (id)initWith:(CGRect)frame scrollView:(VLBScrollView *)scrollView;
+-(void)viewWasTapped:(id)sender;
 -(UIView*)gridView:(VLBGridView *)gridView viewOf:(UIView*)view ofFrame:(CGRect)frame atIndex:(NSInteger)index;
 -(UIView*)viewAtRow:(NSUInteger)row;
 -(void)setView:(UIView*)view atIndex:(NSUInteger)index;
 @end
 
+VLBGridViewOrientation const VLBGridViewOrientationVertical = ^(VLBGridView *gridView)
+{
+	  VLBScrollView *scrollView = [VLBScrollView newVerticalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, gridView.frame.size.width, gridView.frame.size.height) config:^(VLBScrollView* scrollView, BOOL foo){
+				scrollView.datasource = gridView;
+				scrollView.scrollViewDelegate = gridView;
+		    scrollView.showsVerticalScrollIndicator = NO;
+		    scrollView.scrollsToTop = YES;
+    		UITapGestureRecognizer *tapGestureRecognizer =
+        		[[UITapGestureRecognizer alloc] initWithTarget:gridView action:@selector(viewWasTapped:)];
+    		[scrollView addGestureRecognizer:tapGestureRecognizer];
+		}];
+
+    gridView.scrollView = scrollView;
+    [gridView addSubview:gridView.scrollView];
+};
+
+VLBGridViewOrientation const VLBGridViewOrientationHorizontal = ^(VLBGridView *gridView)
+{
+	  VLBScrollView *scrollView = [VLBScrollView newHorizontalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, gridView.frame.size.width, gridView.frame.size.height) config:^(VLBScrollView* scrollView, BOOL foo){
+				scrollView.datasource = gridView;
+				scrollView.scrollViewDelegate = gridView;
+		    scrollView.showsHorizontalScrollIndicator = NO;
+		    scrollView.scrollsToTop = YES;
+    		UITapGestureRecognizer *tapGestureRecognizer =
+        		[[UITapGestureRecognizer alloc] initWithTarget:gridView action:@selector(viewWasTapped:)];
+    		[scrollView addGestureRecognizer:tapGestureRecognizer];
+		}];
+
+    gridView.scrollView = scrollView;
+    [gridView addSubview:gridView.scrollView];
+};
 
 @implementation VLBGridView
 
-+(instancetype)newVerticalGridView:(CGRect)frame viewsOf:(CGFloat)height
++(instancetype)newVerticalGridView:(CGRect)frame config:(VLBGridViewConfig)config
 {
-    
-    VLBScrollViewBuilder *builder =
-        [[VLBScrollViewBuilder alloc] initWith:CGRectMake(CGPointZero.x, CGPointZero.y, frame.size.width, frame.size.height)
-                                            viewsOf:height];
-
-    VLBScrollView *newVerticalScrollView = [builder newVerticalScrollView];
-    
-    VLBGridView * gridView = [[VLBGridView alloc] initWith:frame scrollView:newVerticalScrollView];
-    
-	newVerticalScrollView.datasource = gridView;
-	newVerticalScrollView.scrollViewDelegate = gridView;
-    newVerticalScrollView.showsVerticalScrollIndicator = NO;
-    newVerticalScrollView.scrollsToTop = YES;
-    
-    UITapGestureRecognizer *tapGestureRecognizer =
-        [[UITapGestureRecognizer alloc] initWithTarget:gridView action:@selector(viewWasTapped:)];
-    
-    [newVerticalScrollView addGestureRecognizer:tapGestureRecognizer];
+    VLBGridView *gridView = [[VLBGridView alloc] initWithFrame:frame];
+	  config(gridView);
+		VLBGridViewOrientationVertical(gridView);
     
 return gridView;
 }
 
-- (id)initWith:(CGRect)frame scrollView:(VLBScrollView *)scrollView
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (!self) {
-        return nil;
-    }
+
+		VLB_IF_NOT_SELF_RETURN_NIL();
     
     self.frames = [NSMutableDictionary new];
     self.views = [NSMutableDictionary new];
-
-    self.scrollView = scrollView;
-    [self addSubview:self.scrollView];
 
 return self;
 }
@@ -71,23 +82,30 @@ return self;
 #pragma mark testing
 - (id)initWith:(NSMutableDictionary*)frames
 {
-    self = [super init];
-    if (self) {
+		VLB_INIT_OR_RETURN_NIL();
+
 		self.frames = frames;
 		self.views = [NSMutableDictionary new];       
-    }
-    return self;
+
+return self;
 }
 
 #pragma mark 
 - (id)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
-    if (self) {
+
+		VLB_IF_NOT_SELF_RETURN_NIL();
+
 		self.frames = [NSMutableDictionary new];
 		self.views = [NSMutableDictionary new];       
-    }
-    return self;
+
+return self;
+}
+
+-(void)awakeFromNib
+{
+		VLBGridViewOrientationVertical(self);
 }
 
 -(void)setShowsVerticalScrollIndicator:(BOOL)indeed {
@@ -96,27 +114,6 @@ return self;
 
 -(BOOL)showsVerticalScrollIndicator{
     return self.scrollView.showsVerticalScrollIndicator;
-}
-
--(void)awakeFromNib
-{
-    CGFloat height = [self.delegate whatRowHeight:self];
-    
-    VLBScrollView *newVerticalScrollView =
-        [VLBScrollView
-            newVerticalScrollView:CGRectMake(CGPointZero.x, CGPointZero.y, self.frame.size.width, self.frame.size.height)
-            viewsOf:height];
-    
-	newVerticalScrollView.datasource = self;
-	newVerticalScrollView.scrollViewDelegate = self;
-    newVerticalScrollView.showsVerticalScrollIndicator = NO;
-    newVerticalScrollView.scrollsToTop = YES;
-    
-    self.scrollView = newVerticalScrollView;
-    [self addSubview:self.scrollView];
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped:)];
-    [self.scrollView addGestureRecognizer:tapGestureRecognizer];
 }
 
 #pragma mark private
@@ -140,7 +137,15 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
 	[self.frames setObject:[NSNumber numberWithInt:index] forKey:[NSValue valueWithCGRect:[view frame]]];
 }
 
-#pragma mark TheBoxUIScrollViewDelegate
+#pragma mark VLBScrollViewDelegate
+
+-(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView{
+return VLBScrollViewOrientationVertical;
+}
+
+-(CGFloat)viewsOf:(VLBScrollView *)scrollView{
+    return [self.delegate whatCellWidth:self];
+}
 
 -(void)didLayoutSubviews:(UIScrollView *)scrollView
 {
@@ -168,7 +173,7 @@ return [self.views objectForKey:[NSNumber numberWithInt:row]];
     [self.delegate gridView:self atIndex:index willAppear:view];
 }
 
-#pragma mark TheBoxUIScrollViewDatasource
+#pragma mark VLBcrollViewDatasource
 
 -(NSUInteger)numberOfViewsInScrollView:(VLBScrollView *)scrollView
 {
@@ -191,19 +196,19 @@ return [self.datasource numberOfViewsInGridView:self];
 
 	DDLogVerbose(@"asking for row %d", index);
 	
-    VLBScrollView * view = [VLBScrollView
-                                newHorizontalScrollView:frame
-                  viewsOf:[self.delegate whatCellWidth:self]];
+    VLBScrollView * view = [VLBScrollView newHorizontalScrollView:frame
+																													 config:^(VLBScrollView *scrollView, BOOL canCancelContentTouches){
+											    																 		scrollView.datasource = self;
+																												   	  scrollView.scrollViewDelegate = self;
+																													}]; 
     
-    view.datasource = self;
-    view.scrollViewDelegate = self;
     
 	DDLogVerbose(@"view %@", view);
     
 return view;
 }
 
-#pragma mark TheBoxUIScrollViewDelegate
+#pragma mark VLBScrollViewDelegate
 
 -(void)didSelectView:(VLBScrollView *)scrollView atIndex:(NSUInteger)index
 {

@@ -115,6 +115,7 @@ return self.horizontalAccuracy < location.horizontalAccuracy || self.verticalAcc
     UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [doneButton setFrame:CGRectMake(0, 0, 30, 30)];
     [doneButton setImage:[UIImage imageNamed:@"checkmark-mini.png"] forState:UIControlStateNormal];
+    [doneButton setImage:[UIImage imageNamed:@"checkmark-mini-grey.png"] forState:UIControlStateDisabled];
     [doneButton addTarget:newUploadUIViewController action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
 
     newUploadUIViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
@@ -231,7 +232,7 @@ return self;
 }
 
 
-#pragma mark TheBoxLocationServiceDelegate
+#pragma mark VLBLocationServiceDelegate
 
 -(void)didUpdateToLocation:(NSNotification *)notification;
 {
@@ -291,7 +292,7 @@ return self;
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
 
-#pragma mark TheBoxKeyboardObserver
+#pragma mark VLBKeyboardObserver
 
 - (IBAction)cancel:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -364,7 +365,9 @@ return self;
     
 }
 
--(void)cameraView:(VLBCameraView *)cameraView willRekatePicture:(UIImage *)image{
+-(void)cameraView:(VLBCameraView *)cameraView willRekatePicture:(UIImage *)image
+{
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     self.takePhotoButton.userInteractionEnabled = YES;
     [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
 }

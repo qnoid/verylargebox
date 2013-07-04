@@ -1,16 +1,18 @@
-/*
- *  Copyright (c) 2010 (verylargebox.com). All rights reserved.
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas on 21/05/2011.
-
- */
+//
+//  VLBGridView.h
+//  verylargebox
+//
+//  Created by Markos Charatzas on 21/05/2011.
+//  Copyright (c) 2011 (verylargebox.com). All rights reserved.
+//
 #import <Foundation/Foundation.h>
 
 @protocol VLBGridViewDatasource;
 @protocol VLBGridViewDelegate;
+@class VLBGridView;
+
+typedef void(^VLBGridViewConfig)(VLBGridView *gridView);
+typedef void(^VLBGridViewOrientation)(VLBGridView *gridView);
 
 @interface VLBGridView : UIView
 
@@ -20,7 +22,7 @@
 //@default NO
 @property(nonatomic, assign) BOOL showsVerticalScrollIndicator;
 
-+(instancetype)newVerticalGridView:(CGRect)frame viewsOf:(CGFloat)height;
++(instancetype)newVerticalGridView:(CGRect)frame config:(VLBGridViewConfig)config;
 
 -(void)reload;
 - (void)flashScrollIndicators;

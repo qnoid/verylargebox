@@ -252,6 +252,11 @@
 		BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926D1775F7A700FFC41F /* refresh-mini.png */; };
 		BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
 		BDF27466178408FA000E179E /* camera-button.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF27465178408FA000E179E /* camera-button.png */; };
+		BDF2746F178551F4000E179E /* checkmark-mini-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2746D178551F4000E179E /* checkmark-mini-grey.png */; };
+		BDF27470178551F4000E179E /* checkmark-mini-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2746E178551F4000E179E /* checkmark-mini-grey@2x.png */; };
+		BDF274731785557A000E179E /* refresh-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF274711785557A000E179E /* refresh-grey.png */; };
+		BDF274741785557A000E179E /* refresh-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF274721785557A000E179E /* refresh-grey@2x.png */; };
+		BDF2747717855F63000E179E /* VLBScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF2747617855F63000E179E /* VLBScrollView.xib */; };
 		BDF2FD03177A1EC100941B7F /* hexabump@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD02177A1EC100941B7F /* hexabump@2X.png */; };
 		BDF2FD05177A2BB500941B7F /* hexabump.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD04177A2BB500941B7F /* hexabump.png */; };
 		BDF2FD08177A458D00941B7F /* VLBCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD07177A458D00941B7F /* VLBCameraView.m */; };
@@ -541,6 +546,11 @@
 		BDF0F42316C8254B002CDE8E /* VLBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBVerifyOperationBlock.h; path = ../Classes/VLBVerifyOperationBlock.h; sourceTree = "<group>"; };
 		BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVerifyOperationBlock.m; sourceTree = "<group>"; };
 		BDF27465178408FA000E179E /* camera-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-button.png"; path = "Supporting Files/camera-button.png"; sourceTree = "<group>"; };
+		BDF2746D178551F4000E179E /* checkmark-mini-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-mini-grey.png"; path = "Supporting Files/checkmark-mini-grey.png"; sourceTree = "<group>"; };
+		BDF2746E178551F4000E179E /* checkmark-mini-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-mini-grey@2x.png"; path = "Supporting Files/checkmark-mini-grey@2x.png"; sourceTree = "<group>"; };
+		BDF274711785557A000E179E /* refresh-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-grey.png"; path = "Supporting Files/refresh-grey.png"; sourceTree = "<group>"; };
+		BDF274721785557A000E179E /* refresh-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-grey@2x.png"; path = "Supporting Files/refresh-grey@2x.png"; sourceTree = "<group>"; };
+		BDF2747617855F63000E179E /* VLBScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBScrollView.xib; sourceTree = "<group>"; };
 		BDF2FD02177A1EC100941B7F /* hexabump@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hexabump@2X.png"; sourceTree = "<group>"; };
 		BDF2FD04177A2BB500941B7F /* hexabump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hexabump.png; sourceTree = "<group>"; };
 		BDF2FD06177A458D00941B7F /* VLBCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCameraView.h; path = Classes/VLBCameraView.h; sourceTree = "<group>"; };
@@ -631,6 +641,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDF2747517855F4F000E179E /* VLBScrollView */,
 				1D3623250D0F684500981E51 /* VLBAppDelegate.m */,
 				BDCE1E1D1757E1280070BB59 /* VLBCommon */,
 				BDCE1E181757D5E00070BB59 /* VLBViews */,
@@ -1047,6 +1058,8 @@
 				BDB157231755549100E140E9 /* checkmark@2x.png */,
 				BD0A53D31767E63200279EA5 /* checkmark-mini.png */,
 				BD0A53D41767E63200279EA5 /* checkmark-mini@2x.png */,
+				BDF2746D178551F4000E179E /* checkmark-mini-grey.png */,
+				BDF2746E178551F4000E179E /* checkmark-mini-grey@2x.png */,
 				BDB157161755492B00E140E9 /* circle-no.png */,
 				BDB157171755492B00E140E9 /* circle-no@2x.png */,
 				BD0A53EB1767F09500279EA5 /* circlex.png */,
@@ -1065,6 +1078,8 @@
 				BDE49260177515E300FFC41F /* left-arrow@2x.png */,
 				BD258DDD1678040500286511 /* refresh.png */,
 				BDAF7AAA17528194008899D1 /* refresh@2x.png */,
+				BDF274711785557A000E179E /* refresh-grey.png */,
+				BDF274721785557A000E179E /* refresh-grey@2x.png */,
 				BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */,
 				BDE4926D1775F7A700FFC41F /* refresh-mini.png */,
 				BDAF7AAB17528194008899D1 /* signpost.png */,
@@ -1136,6 +1151,14 @@
 				BDE482BF1750510D0096903C /* VLBFeedViewController.m */,
 			);
 			name = Feed;
+			sourceTree = "<group>";
+		};
+		BDF2747517855F4F000E179E /* VLBScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				BDF2747617855F63000E179E /* VLBScrollView.xib */,
+			);
+			name = VLBScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1304,6 +1327,11 @@
 				BDC8A1D81782028E00E5BF8C /* idcard-white@2x.png in Resources */,
 				BDC8A1DA178202C300E5BF8C /* idcard-white.png in Resources */,
 				BDF27466178408FA000E179E /* camera-button.png in Resources */,
+				BDF2746F178551F4000E179E /* checkmark-mini-grey.png in Resources */,
+				BDF27470178551F4000E179E /* checkmark-mini-grey@2x.png in Resources */,
+				BDF274731785557A000E179E /* refresh-grey.png in Resources */,
+				BDF274741785557A000E179E /* refresh-grey@2x.png in Resources */,
+				BDF2747717855F63000E179E /* VLBScrollView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

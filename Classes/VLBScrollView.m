@@ -1,11 +1,9 @@
 //
-//  Copyright 2010 The Box
-//  All rights reserved.
+//  VLBScrollView.m
+//  verylargebox
 //
-//  This file is part of TheBox
-//
-//  Created by Markos Charatzas on 07/02/10.
-//
+//  Created by Markos Charatzas on 07/02/2011.
+//  Copyright (c) 2011 (verylargebox.com). All rights reserved.
 //
 
 #import "VLBScrollView.h"
@@ -22,18 +20,31 @@ CGFloat const DEFAULT_HEIGHT = 196;
 @property(nonatomic, assign) BOOL needsLayout;
 @property(nonatomic, strong) VLBRecycleStrategy *recycleStrategy;
 @property(nonatomic, strong) id<VLBVisibleStrategy> visibleStrategy;
-/* Apparently a UIScrollView needs another view as its content view else it messes up the scrollers.
- * Interface Builder uses a private _contentView instead.
- */
-@property(nonatomic, strong) UIView *contentView;
 
-@property(nonatomic, strong) NSObject<VLBSize> *theBoxSize;
+@property(nonatomic, strong) NSObject<VLBSize> *size;
 @property(nonatomic, strong) NSObject<VLBDimension> *dimension;
--(id)initWithFrame:(CGRect) frame size:(NSObject<VLBSize>*)size dimension:(NSObject<VLBDimension>*)dimension;
 -(void)didTapOnScrollView:(id)sender;
 @end
 
-VLBScrollViewConfig const VLBUIScrollViewConfigEmpty = ^(VLBScrollView *scrollView, BOOL cancelsTouchesInView){};
+VLBScrollViewOrientation const VLBScrollViewOrientationVertical = ^(VLBScrollView *scrollView)
+{
+    scrollView.size= [[VLBSizeInHeight alloc] initWithSize:scrollView.frame.size];
+    scrollView.dimension = [VLBHeight newHeight:[scrollView.scrollViewDelegate viewsOf:scrollView]];
+		scrollView.recycleStrategy = [[VLBRecycleStrategy alloc] init];
+		scrollView.visibleStrategy = [VLBVisibleStrategy newVisibleStrategyOnHeight:[scrollView.scrollViewDelegate viewsOf:scrollView]];
+		scrollView.visibleStrategy.delegate = scrollView;
+};
+
+VLBScrollViewOrientation const VLBScrollViewOrientationHorizontal = ^(VLBScrollView *scrollView)
+{
+    scrollView.size = [[VLBSizeInWidth alloc] initWithSize:scrollView.frame.size];
+    scrollView.dimension = [VLBWidth newWidth:[scrollView.scrollViewDelegate viewsOf:scrollView]];
+		scrollView.recycleStrategy = [[VLBRecycleStrategy alloc] init];
+		scrollView.visibleStrategy = [VLBVisibleStrategy newVisibleStrategyOnWidth:[scrollView.scrollViewDelegate viewsOf:scrollView]];
+		scrollView.visibleStrategy.delegate = scrollView;
+};
+
+VLBScrollViewConfig const VLBScrollViewConfigEmpty = ^(VLBScrollView *scrollView, BOOL cancelsTouchesInView){};
 
 VLBScrollViewConfig const VLBScrollViewAllowSelection = ^(VLBScrollView *scrollView, BOOL cancelsTouchesInView)
 {
@@ -46,87 +57,40 @@ VLBScrollViewConfig const VLBScrollViewAllowSelection = ^(VLBScrollView *scrollV
 
 @implementation VLBScrollView
 
-+(VLBScrollView *) newScrollView:(CGRect)aFrame recycleStrategy:(VLBRecycleStrategy *)aRecycleStrategy visibleStrategy:(id<VLBVisibleStrategy>) aVisibleStrategy size:(NSObject<VLBSize>*)size dimension:(NSObject<VLBDimension>*)dimension
-{
-	VLBScrollView *scrollView = [[VLBScrollView alloc] initWithFrame:aFrame size:size dimension:dimension];
-	scrollView.recycleStrategy = aRecycleStrategy;
-	scrollView.visibleStrategy = aVisibleStrategy;	
-	scrollView.visibleStrategy.delegate = scrollView;
-    scrollView.scrollsToTop = NO;
-    
-return scrollView;
-}
-
 @synthesize contentView;
 
-+(VLBScrollView *) newVerticalScrollView:(CGRect)frame viewsOf:(CGFloat)height
++(VLBScrollView *) newVerticalScrollView:(CGRect)frame config:(VLBScrollViewConfig)config
 {
-	VLBVisibleStrategy *visibleStrategy =
-        [VLBVisibleStrategy newVisibleStrategyOnHeight:height];
-	
-	VLBRecycleStrategy *recycleStrategy =
-		[[VLBRecycleStrategy alloc] init];
+	VLBScrollView *scrollView = [[VLBScrollView alloc] initWithFrame:frame];
+	config(scrollView, NO);
 
-	VLBScrollView *scrollView =
-		[VLBScrollView
-			newScrollView:frame
-			recycleStrategy:recycleStrategy 
-			visibleStrategy:visibleStrategy
-            size:[[VLBSizeInHeight alloc] initWithSize:frame.size]
-            dimension:[VLBHeight newHeight:height]];
+	VLBScrollViewOrientationVertical(scrollView);
 
 return scrollView;
 }
 
-+(VLBScrollView *) newHorizontalScrollView:(CGRect)frame viewsOf:(CGFloat)width
++(VLBScrollView *) newHorizontalScrollView:(CGRect)frame config:(VLBScrollViewConfig)config
 {
-	VLBVisibleStrategy *visibleStrategy =
-        [VLBVisibleStrategy newVisibleStrategyOnWidth:width];
-	
-	VLBRecycleStrategy *recycleStrategy =
-        [[VLBRecycleStrategy alloc] init];
-	
-	VLBScrollView *scrollView =
-		[VLBScrollView
-		 newScrollView:frame
-		 recycleStrategy:recycleStrategy 
-		 visibleStrategy:visibleStrategy
-         size:[[VLBSizeInWidth alloc] initWithSize:frame.size]
-         dimension:[VLBWidth newWidth:width]];
-	
+	VLBScrollView *scrollView = [[VLBScrollView alloc] initWithFrame:frame];
+	config(scrollView, NO);
+
+	VLBScrollViewOrientationHorizontal(scrollView);
+
 return scrollView;
 }
 
 #pragma mark private fields
 
--(id)awakeAfterUsingCoder:(NSCoder *)aDecoder
+- (id) initWithFrame:(CGRect)frame
 {
-    VLBScrollView * scrollView = [VLBScrollView newHorizontalScrollView:self.frame viewsOf:DEFAULT_HEIGHT];
-    scrollView.scrollsToTop = YES;
+		self = [super initWithFrame:frame];
     
-return scrollView;
-}
+    VLB_IF_NOT_SELF_RETURN_NIL();
+    VLB_LOAD_VIEW();
 
--(void)awakeFromNib
-{
-    DDLogVerbose(@"%@", self);
-    self.datasource = _datasource;
-    self.scrollViewDelegate = _scrollViewDelegate;
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnScrollView:)];
-    [self addGestureRecognizer:tapGestureRecognizer];
-}
+    self.scrollsToTop = NO;
+    self.delegate = self;
 
-- (id) initWithFrame:(CGRect) frame size:(NSObject<VLBSize>*)size dimension:(NSObject<VLBDimension>*)dimension
-{
-	self = [super initWithFrame:frame];
-	if (self) 
-	{
-		self.theBoxSize = size;
-        self.dimension = dimension;
-		self.contentView = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, frame.size.width, frame.size.height)];
-        self.delegate = self;
-		[self addSubview:self.contentView];
-	}
 return self;
 }
 
@@ -137,11 +101,15 @@ return self;
     VLB_IF_NOT_SELF_RETURN_NIL();
     VLB_LOAD_VIEW();
 
-    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(CGPointZero.x, CGPointZero.y, self.frame.size.width, self.frame.size.height)];
+    self.scrollsToTop = NO;
     self.delegate = self;
-    [self addSubview:self.contentView];
-
+    
 return self;
+}
+
+-(void)awakeFromNib
+{
+	[self.scrollViewDelegate orientation:self](self);
 }
 
 -(void)setContentSize:(CGSize)contentSize
@@ -191,9 +159,9 @@ return self;
     
 	[self.visibleStrategy minimumVisibleIndexShould:ceilVisibleIndexAt(0)];
 	[self.visibleStrategy maximumVisibleIndexShould:floorVisibleIndexAt(numberOfViews)];
-    self.contentSize = [self.theBoxSize sizeOf:numberOfViews size:self.dimension.value];
+  self.contentSize = [self.size sizeOf:numberOfViews size:self.dimension.value];
 	
-    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+  DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
 	DDLogVerbose(@"frame %@", NSStringFromCGRect(self.frame));	
 	DDLogVerbose(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
 
@@ -265,7 +233,7 @@ return [self.contentView subviews];
     {
         /* This is really required due to VLBGridView design and not mandated by UIKit.
          VLBGridView currently uses VLBScrollView for its rows, hence when a view
-         is dequeued it needs to have its subviews removed and recycled fo reuse.
+         is dequeued it needs to have its subviews removed and recycled for reuse.
          
          This behavior should really be on VLBGridView, as a result of
          a view being dequeued.
@@ -339,22 +307,19 @@ return view;
 
 @interface VLBScrollViewBuilder ()
 @property (nonatomic, assign) CGRect frame;
-@property (nonatomic, assign) CGFloat dimension;
+@property (nonatomic, copy) VLBScrollViewOrientation orientation;
 @property (nonatomic, assign) BOOL enableSelection;
 @property (nonatomic, assign) BOOL cancelContentTouches;
 @end
 
 @implementation VLBScrollViewBuilder
 
-- (id)initWith:(CGRect)frame viewsOf:(CGFloat)dimension
+- (id)initWith:(CGRect)frame orientation:(VLBScrollViewOrientation)orientation
 {
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
+		VLB_INIT_OR_RETURN_NIL();
     
     self.frame = frame;
-    self.dimension = dimension;
+    self.orientation = orientation;
 
 return self;
 }
@@ -370,27 +335,15 @@ return self;
 {
     self.cancelContentTouches = YES;
     
-    return self;
+return self;
 }
 
--(VLBScrollView *) newVerticalScrollView
+-(VLBScrollView *) newScrollView:(VLBScrollViewConfig)config
 {
-    VLBScrollView * scrollView =
-        [VLBScrollView newVerticalScrollView:self.frame viewsOf:self.dimension];
-    
-    if(self.enableSelection){
-        VLBScrollViewAllowSelection(scrollView, self.cancelContentTouches);
-    }
-    
-    scrollView.canCancelContentTouches = self.cancelContentTouches;
-    
-return scrollView;
-}
+    VLBScrollView *scrollView =
+        [[VLBScrollView alloc] initWithFrame:self.frame];
 
--(VLBScrollView *) newHorizontalScrollView
-{
-    VLBScrollView * scrollView =
-        [VLBScrollView newHorizontalScrollView:self.frame viewsOf:self.dimension];
+    config(scrollView, self.cancelContentTouches);
 
     if(self.enableSelection){
         VLBScrollViewAllowSelection(scrollView, self.cancelContentTouches);
@@ -398,8 +351,9 @@ return scrollView;
     
     scrollView.canCancelContentTouches = self.cancelContentTouches;
     
+		self.orientation(scrollView);
+
 return scrollView;
 }
 
 @end
-

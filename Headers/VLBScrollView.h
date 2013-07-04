@@ -1,12 +1,11 @@
 //
-//  Copyright (c) 2011 (verylargebox.com). All rights reserved.
-//  All rights reserved.
-//
-//  This file is part of TheBox
+//  VLBScrollView.m
+//  verylargebox
 //
 //  Created by Markos Charatzas on 07/02/2011.
+//  Copyright (c) 2011 (verylargebox.com). All rights reserved.
 //
-//
+
 #import "VLBVisibleStrategy.h"
 #import "VLBScrollViewDatasource.h"
 #import "VLBCanIndexLocationInView.h"
@@ -18,12 +17,19 @@
 @protocol VLBDimension;
 
 typedef void(^VLBScrollViewConfig)(VLBScrollView *scrollView, BOOL cancelsTouchesInView);
+typedef void(^VLBScrollViewOrientation)(VLBScrollView *scrollView);
 
 extern CGFloat const DEFAULT_HEIGHT;
 extern VLBScrollViewConfig const VLBScrollViewAllowSelection;
+extern VLBScrollViewOrientation const VLBScrollViewOrientationVertical;
+/// Creates a new scroll view which scrolls on the horizontal axis.
+extern VLBScrollViewOrientation const VLBScrollViewOrientationHorizontal; 
 
 @protocol VLBScrollViewDelegate
 
+-(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView;
+
+- (CGFloat)viewsOf:(VLBScrollView *)scrollView;
 /**
  Will get a callback if #setNeedsLayout has been called on the next #layoutSubviews.
  
@@ -58,10 +64,6 @@ extern VLBScrollViewConfig const VLBScrollViewAllowSelection;
 
 @optional
 
-/**
- Implement when using IB
- */
-- (CGFloat)viewsOf:(VLBScrollView *)scrollView;
 
 - (void)didSelectView:(VLBScrollView *)scrollView atIndex:(NSUInteger)index point:(CGPoint)point;
 
@@ -127,18 +129,22 @@ extern VLBScrollViewConfig const VLBScrollViewAllowSelection;
  @parameter frame the frame of the scrollview
  @parameter height the height of each view in the scrollview as returned by VLBScrollViewDatasource#viewInScrollView:atIndex:
  */
-+(VLBScrollView *) newVerticalScrollView:(CGRect)frame viewsOf:(CGFloat)height;
-
++(VLBScrollView *) newVerticalScrollView:(CGRect)frame config:(VLBScrollViewConfig)config;
 /**
  Creates a new scroll view which scrolls on the horizontal axis.
  
  @param frame the frame of the scroll view
  @param width the width of each view in the axis the scroll view is created
  */
-+(VLBScrollView *) newHorizontalScrollView:(CGRect)frame viewsOf:(CGFloat)width;
++(VLBScrollView *) newHorizontalScrollView:(CGRect)frame config:(VLBScrollViewConfig)config;
 
 @property(nonatomic, weak) IBOutlet id <VLBScrollViewDatasource> datasource;
 @property(nonatomic, weak) IBOutlet id <VLBScrollViewDelegate> scrollViewDelegate;
+
+/* Apparently a UIScrollView needs another view as its content view else it messes up the scrollers.
+ * Interface Builder uses a private _contentView instead.
+ */
+@property(nonatomic, strong) IBOutlet UIView *contentView;
 
 // the scrollview will only stop at the edge of a view.
 @property(nonatomic, assign, getter = isSeekingEnabled) BOOL enableSeeking;
@@ -159,27 +165,22 @@ extern VLBScrollViewConfig const VLBScrollViewAllowSelection;
 @interface VLBScrollViewBuilder : NSObject
 
 /**
- Creates a new VLBScrollViewBuilder that creates scrollviews with the given frame.
- 
- A vertical scrollview will have its views matching in width and a height in the given dimension.
- A horizontal scrollview will have its views matching in height and a width in the given dimension.
+ Creates a new VLBScrollViewBuilder that creates scrollviews with the given frame and orientation.
  
  @param frame the frame of the scroll view
- @param dimension the dimension of each view in the axis the scroll view is created
+ @param  orientation the orientation of the view 
  @return a new instance of VLBScrollViewBuilder
  */
-- (id)initWith:(CGRect)frame viewsOf:(CGFloat)dimension;
+- (id)initWith:(CGRect)frame orientation:(VLBScrollViewOrientation)orientation;
 
 /**
  Enables user selection by tapping in a view.
  
  @discussion @required VLBScrollViewDelegate#didSelectView:atIndex:
  */
--(VLBScrollViewBuilder *)allowSelection;
+-(VLBScrollViewBuilder*)allowSelection;
 
--(VLBScrollViewBuilder *)canCancelContentTouches;
+-(VLBScrollViewBuilder*)canCancelContentTouches;
 
--(VLBScrollView *)newVerticalScrollView;
-
--(VLBScrollView *)newHorizontalScrollView;
+-(VLBScrollView *) newScrollView:(VLBScrollViewConfig)config;
 @end

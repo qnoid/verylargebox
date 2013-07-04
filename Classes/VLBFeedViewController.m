@@ -69,6 +69,7 @@ return localityItemsViewController;
 {
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil
@@ -98,22 +99,21 @@ return localityItemsViewController;
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     
     VLBScrollView * itemsView = [[[[VLBScrollViewBuilder alloc] initWith:
-                                       CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) viewsOf:416] allowSelection] newVerticalScrollView];
-    
-    itemsView.backgroundColor = [UIColor whiteColor];
-    itemsView.datasource = self;
-    itemsView.scrollViewDelegate = self;
-    itemsView.scrollsToTop = YES;
+                                       CGRectMake(CGPointZero.x, CGPointZero.y, screenBounds.size.width, 367.0) orientation:VLBScrollViewOrientationVertical] allowSelection] newScrollView:^(VLBScrollView *scrollView, BOOL cancelsTouchesInView)
+																			{			
+    																			scrollView.datasource = self;
+																				  scrollView.scrollViewDelegate = self;
+																			}];
     
     self.itemsView = itemsView;
     self.view = itemsView;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
-
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];    
+    self.itemsView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.itemsView.scrollsToTop = YES;
     __weak VLBFeedViewController *wself = self;
     
     [self.itemsView addPullToRefreshWithActionHandler:^{
@@ -142,6 +142,9 @@ return localityItemsViewController;
 
 -(void)locate
 {
+		[self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+		[self.hud hide:YES];
     VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
     localitiesViewController.delegate = self;
     
@@ -191,7 +194,15 @@ return localityItemsViewController;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
-#pragma mark TheBoxUIScrollViewDelegate
+#pragma mark VLBScrollViewDelegate
+
+-(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView{
+return VLBScrollViewOrientationVertical;
+}
+
+-(CGFloat)viewsOf:(VLBScrollView *)scrollView{
+    return 416.0;
+}
 
 -(void)didLayoutSubviews:(UIScrollView *)scrollView{
     
@@ -209,7 +220,7 @@ return localityItemsViewController;
     
 }
 
-#pragma mark TheBoxUIScrollViewDatasource
+#pragma mark VLBScrollViewDatasource
 
 -(NSUInteger)numberOfViewsInScrollView:(VLBScrollView *)scrollView{
     return [self.items count];
@@ -227,11 +238,10 @@ return localityItemsViewController;
     [userItemView viewWillAppear:item];
 }
 
-#pragma mark TheBoxLocationServiceDelegate
+#pragma mark VLBLocationServiceDelegate
 -(void)didFindPlacemark:(NSNotification *)notification
 {
     [self.hud hide:YES];
-    
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     
@@ -247,7 +257,8 @@ return localityItemsViewController;
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
     [self.hud hide:YES];
-    
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
     DDLogWarn(@"%s", __PRETTY_FUNCTION__);
     
     VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
@@ -262,7 +273,9 @@ return localityItemsViewController;
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
     [self.hud hide:YES];
-    
+		[self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
     DDLogWarn(@"%s", __PRETTY_FUNCTION__);
     VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
     localitiesViewController.delegate = self;

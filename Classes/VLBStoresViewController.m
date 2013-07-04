@@ -43,7 +43,6 @@ static UIImage* foursquarePoweredBy;
 
 +(VLBStoresViewController *)newLocationViewController:(NSArray*)venues
 {
-
     VLBStoresViewController *storesViewController =
         [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle] venues:venues];
 
@@ -145,7 +144,7 @@ return self;
     [self.searchBar resignFirstResponder];
 }
 
--(void) viewDidLoad
+-(void)viewDidLoad
 {
     UIImageView* imageView = [[UIImageView alloc] initWithImage:foursquarePoweredBy];
     imageView.frame = CGRectMake(0, 0, 320, 121);
@@ -254,16 +253,19 @@ return self;
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
+    [self.hud hide:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
+    [self.hud hide:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
+    [self.hud hide:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 

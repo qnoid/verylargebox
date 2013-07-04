@@ -32,7 +32,6 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 
 @interface VLBProfileViewController ()
-@property(nonatomic, weak) VLBScrollView * itemsView;
 @property(nonatomic, weak) UIView<QNDAnimatedView> *notificationAnimatedView;
 @property(nonatomic, weak) UIProgressView *progressView;
 
@@ -102,25 +101,25 @@ return profileViewController;
 return self;
 }
 
+/*
 -(void)loadView
 {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    
     VLBScrollView * itemsView = [[[VLBScrollViewBuilder alloc] initWith:
-                                     CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:416] newVerticalScrollView];
-    itemsView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+                                  CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, 367.0) viewsOf:416] newVerticalScrollView];
+
     itemsView.datasource = self;
     itemsView.scrollViewDelegate = self;
-    itemsView.scrollsToTop = YES;
-
     self.itemsView = itemsView;
     self.view = self.itemsView;
 }
+*/
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.itemsView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.itemsView.scrollsToTop = YES;
 
     __weak VLBProfileViewController *wself = self;
 
@@ -302,7 +301,15 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
-#pragma mark TheBoxUIScrollViewDelegate
+#pragma mark VLBScrollViewDelegate
+
+-(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView{
+return VLBScrollViewOrientationVertical;
+}
+
+-(CGFloat)viewsOf:(VLBScrollView *)scrollView{
+    return 416.0;
+}
 
 -(void)didLayoutSubviews:(UIScrollView *)scrollView{
     
@@ -317,7 +324,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 }
 
 
-#pragma mark TheBoxUIScrollViewDatasource
+#pragma mark VLBScrollViewDatasource
 
 -(NSUInteger)numberOfViewsInScrollView:(VLBScrollView *)scrollView{
     return [self.items count];
