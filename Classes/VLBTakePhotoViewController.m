@@ -215,21 +215,25 @@ return self;
 {
     DDLogError(@"%s: %@", __PRETTY_FUNCTION__, error);
     [self.locationOperationDelegate didFailOnLocationWithError:error];
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);    
 }
 
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
+    [self.locationOperationDelegate didFailWithCannonConnectToHost:error];    
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
+    [self.locationOperationDelegate didFailWithNotConnectToInternet:error];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
+    [self.locationOperationDelegate didFailWithTimeout:error];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 

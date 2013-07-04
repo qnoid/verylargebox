@@ -32,6 +32,7 @@
 #import "NSDictionary+VLBStore.h"
 #import "S3TransferManager.h"
 #import "NSDictionary+VLBDictionary.h"
+#import "DDLog.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";

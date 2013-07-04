@@ -192,6 +192,16 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     [self.itemsView.pullToRefreshView stopAnimating];
+    
+    VLBAlertViewDelegate *onCancelDismissDelegate = [VLBAlertViews newAlertViewDelegateOnCancelDismiss];
+    VLBAlertViewDelegate *onOkRefreshDelegate = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [self.itemsView triggerPullToRefresh];
+    }];
+    
+    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOkAndCancel:@"Error" message:[error localizedDescription]];
+    
+    alertView.delegate = [VLBAlertViews all:@[onOkRefreshDelegate, onCancelDismissDelegate]];
+    [alertView show];
 }
 
 /**
@@ -276,16 +286,19 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
+    [self.itemsView.pullToRefreshView stopAnimating];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
+    [self.itemsView.pullToRefreshView stopAnimating];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
+    [self.itemsView.pullToRefreshView stopAnimating];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 

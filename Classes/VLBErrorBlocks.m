@@ -19,7 +19,7 @@
         MBProgressHUD *hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
         hud.detailsLabelText = error.localizedDescription;
         [hud show:YES];
-        [hud hide:YES afterDelay:3.0];
+        [hud hide:YES afterDelay:5.0];
     return YES;
     };
 }
