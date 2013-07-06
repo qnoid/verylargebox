@@ -20,10 +20,9 @@
  
  Subsequent requests to post an item on the server are queued and processed in a FIFO order.
  */
-@interface VLBProfileViewController : UIViewController <VLBCreateItemOperationDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBViewDrawRectDelegate>
+@interface VLBProfileViewController : UIViewController <VLBCreateItemOperationDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate>
 
 @property(nonatomic, weak) IBOutlet VLBScrollView * itemsView;
-@property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 
 +(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email;
 

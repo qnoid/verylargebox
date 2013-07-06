@@ -25,6 +25,7 @@
 #import "QNDAnimatedView.h"
 #import "NSArray+VLBDecorator.h"
 #import "VLBMacros.h"
+#import "VLBViewControllers.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare";
 static NSString* const foursquarePoweredByType = @"png";
@@ -46,21 +47,12 @@ static UIImage* foursquarePoweredBy;
     VLBStoresViewController *storesViewController =
         [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle] venues:venues];
 
-    UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"Select a store";
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Select a store"];
     storesViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
-    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [closeButton setImage:[UIImage imageNamed:@"down-arrow.png"] forState:UIControlStateNormal];
-    [closeButton addTarget:storesViewController action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
-
-    storesViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+    storesViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] closeButton:storesViewController
+                                                                                            action:@selector(cancel:)];
 
     [[NSNotificationCenter defaultCenter] addObserver:storesViewController selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
 
@@ -330,6 +322,9 @@ return cell;
     AFHTTPRequestOperation* operation = [VLBQueries newLocationQuery:userLocation.coordinate.latitude longtitude:userLocation.coordinate.longitude query:query delegate:self];
     
     [operation start];    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.labelText = @"Finding stores";
+		self.hud.detailsLabelText = [NSString stringWithFormat:@"matching '%@'", query];
 }
 
 

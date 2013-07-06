@@ -17,6 +17,8 @@
 #import "VLBIdentifyViewController.h"
 #import "VLBProfileViewController.h"
 #import "VLBTakePhotoViewController.h"
+#import "NSDictionary+VLBUser.h"
+#import "VLBProfileEmptyViewController.h"
 
 NSString* const VERYLARGEBOX_BUCKET = @"com.verylargebox.server";
 NSString* const AWS_ACCESS_KEY = @"AKIAIFACVDF6VNIEY2EQ";
@@ -65,8 +67,13 @@ return self;
 return [VLBIdentifyViewController newIdentifyViewController:self];
 }
 
--(VLBProfileViewController*)newProfileViewController{
-return [VLBProfileViewController newProfileViewController:self residence:self.residence email:self.email];
+-(UIViewController*)newProfileViewController
+{
+    if([[[self.residence vlb_objectForKey:VLBResidenceUserKey] vlb_objectForKey:VLBUserDidTakePhotoKey] intValue] == 1){
+        return [VLBProfileViewController newProfileViewController:self residence:self.residence email:self.email];
+    }
+
+return [VLBProfileEmptyViewController newProfileViewController:self residence:self.residence email:self.email];
 }
 
 -(VLBTakePhotoViewController*)newUploadUIViewController{
@@ -75,10 +82,9 @@ return [VLBTakePhotoViewController newUploadUIViewController:self userId:[self.r
 
 -(NSString*)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate
 {
-    //if residence is nil, runtime error
-		if(!self.residence){
-				[NSException raise:@"Residence should not be nil" format:@"#didAuthenticateResidence should have been called", nil];
-		}	
+    if(!self.residence){
+        [NSException raise:@"Residence should not be nil" format:@"#didAuthenticateResidence should have been called", nil];
+    }	
     
     AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:AWS_ACCESS_KEY
                                                      withSecretKey:AWS_SECRET_KEY];

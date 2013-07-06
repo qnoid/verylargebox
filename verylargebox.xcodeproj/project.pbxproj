@@ -256,6 +256,10 @@
 		BDF2747717855F63000E179E /* VLBScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF2747617855F63000E179E /* VLBScrollView.xib */; };
 		BDF274791786352F000E179E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF274781786352E000E179E /* AssetsLibrary.framework */; };
 		BDF2747B178635D3000E179E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF274781786352E000E179E /* AssetsLibrary.framework */; };
+		BDF2747D1786B143000E179E /* VLBProfileEmptyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF2747C1786B142000E179E /* VLBProfileEmptyViewController.xib */; };
+		BDF274801786B1FC000E179E /* VLBProfileEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2747F1786B1FC000E179E /* VLBProfileEmptyViewController.m */; };
+		BDF274841786B5EE000E179E /* NSDictionary+VLBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF274831786B5ED000E179E /* NSDictionary+VLBUser.m */; };
+		BDF274861786B9DB000E179E /* VLBViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF274851786B9DB000E179E /* VLBViewControllers.m */; };
 		BDF2FD03177A1EC100941B7F /* hexabump@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD02177A1EC100941B7F /* hexabump@2X.png */; };
 		BDF2FD05177A2BB500941B7F /* hexabump.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD04177A2BB500941B7F /* hexabump.png */; };
 		BDF2FD08177A458D00941B7F /* VLBCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD07177A458D00941B7F /* VLBCameraView.m */; };
@@ -548,6 +552,12 @@
 		BDF274721785557A000E179E /* refresh-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-grey@2x.png"; path = "Supporting Files/refresh-grey@2x.png"; sourceTree = "<group>"; };
 		BDF2747617855F63000E179E /* VLBScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBScrollView.xib; sourceTree = "<group>"; };
 		BDF274781786352E000E179E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		BDF2747C1786B142000E179E /* VLBProfileEmptyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBProfileEmptyViewController.xib; path = Classes/VLBProfileEmptyViewController.xib; sourceTree = "<group>"; };
+		BDF2747E1786B1FB000E179E /* VLBProfileEmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBProfileEmptyViewController.h; sourceTree = "<group>"; };
+		BDF2747F1786B1FC000E179E /* VLBProfileEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBProfileEmptyViewController.m; sourceTree = "<group>"; };
+		BDF274821786B5EC000E179E /* NSDictionary+VLBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+VLBUser.h"; sourceTree = "<group>"; };
+		BDF274831786B5ED000E179E /* NSDictionary+VLBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBUser.m"; sourceTree = "<group>"; };
+		BDF274851786B9DB000E179E /* VLBViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBViewControllers.m; sourceTree = "<group>"; };
 		BDF2FD02177A1EC100941B7F /* hexabump@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hexabump@2X.png"; sourceTree = "<group>"; };
 		BDF2FD04177A2BB500941B7F /* hexabump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hexabump.png; sourceTree = "<group>"; };
 		BDF2FD06177A458D00941B7F /* VLBCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCameraView.h; path = Classes/VLBCameraView.h; sourceTree = "<group>"; };
@@ -656,6 +666,8 @@
 				905A4F9C1291DE6F00BCB475 /* Stores */,
 				BDAE3C43176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.m */,
 				BDAE3C46176CEE0B0037734C /* NSDictionary+VLBFoursquareVenue.m */,
+				BDF2747E1786B1FB000E179E /* VLBProfileEmptyViewController.h */,
+				BDF2747F1786B1FC000E179E /* VLBProfileEmptyViewController.m */,
 				BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */,
 				BDA2BC8A165952C20068C749 /* VLBIdentifyViewController.m */,
 				BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */,
@@ -695,6 +707,8 @@
 				BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */,
 				BDAE3C53176E04A90037734C /* VLBTheBox.h */,
 				BDAE3C54176E04AA0037734C /* VLBTheBox.m */,
+				BDF274821786B5EC000E179E /* NSDictionary+VLBUser.h */,
+				BDF274831786B5ED000E179E /* NSDictionary+VLBUser.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1006,6 +1020,7 @@
 		BDA2BC87165951CB0068C749 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				BDF2747C1786B142000E179E /* VLBProfileEmptyViewController.xib */,
 				BDA2BC8B165952C20068C749 /* VLBIdentifyViewController.xib */,
 				BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */,
 				BDE482C01750510D0096903C /* VLBFeedViewController.xib */,
@@ -1110,6 +1125,7 @@
 				BDA2BCDE1659853D0068C749 /* VLBButton.m */,
 				BDCE1E1A1757D6050070BB59 /* VLBViews.m */,
 				BDCE1E281759495C0070BB59 /* VLBPolygon.m */,
+				BDF274851786B9DB000E179E /* VLBViewControllers.m */,
 			);
 			name = VLBViews;
 			sourceTree = "<group>";
@@ -1328,6 +1344,7 @@
 				BDF274731785557A000E179E /* refresh-grey.png in Resources */,
 				BDF274741785557A000E179E /* refresh-grey@2x.png in Resources */,
 				BDF2747717855F63000E179E /* VLBScrollView.xib in Resources */,
+				BDF2747D1786B143000E179E /* VLBProfileEmptyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1540,6 +1557,9 @@
 				BDFBA12E177829D800A59BCF /* VLBQueries.m in Sources */,
 				BDF2FD08177A458D00941B7F /* VLBCameraView.m in Sources */,
 				BDF2FD0F177CEE9700941B7F /* NSDictionary+VLBStore.m in Sources */,
+				BDF274801786B1FC000E179E /* VLBProfileEmptyViewController.m in Sources */,
+				BDF274841786B5EE000E179E /* NSDictionary+VLBUser.m in Sources */,
+				BDF274861786B9DB000E179E /* VLBViewControllers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

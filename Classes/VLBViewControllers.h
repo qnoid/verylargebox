@@ -8,18 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol VLBViewControllers <NSObject>
+@interface VLBViewControllers : NSObject
 
+-(UILabel*)titleView:(NSString*)text;
+
+-(UIBarButtonItem*)closeButton:(id)target action:(SEL)action;
+
+-(UIBarButtonItem*)discardButton:(id)target action:(SEL)action;
+
+-(UIBarButtonItem*)cameraButton:(id)target action:(SEL)action;
+
+-(UIBarButtonItem*)locateButton:(id)target action:(SEL)action;
 @end
-CGPoint center = CGRectCenter(rect);
-TBPolygon* hexagon = [TBPolygon hexagonAt:center];
-
-tbViewSolidContext([TBColors colorLightGreen], [TBColors colorDarkGreen])(^(CGContextRef context){
-    [hexagon rotateAt:0.25 collect:^(int index, CGPoint angle) {
-        if(index == 0){
-            CGContextMoveToPoint(context, angle.x, angle.y);
-        }
-        
-        CGContextAddLineToPoint(context, angle.x, angle.y);
-    }];
-});

@@ -21,6 +21,7 @@
 #import "VLBErrorBlocks.h"
 #import "VLBTypography.h"
 #import "VLBPredicates.h"
+#import "VLBViewControllers.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -44,19 +45,9 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 {
     VLBFeedViewController* localityItemsViewController = [[VLBFeedViewController alloc] initWithBundle:[NSBundle mainBundle]];
     
-    UIButton* locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [locateButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [locateButton setImage:[UIImage imageNamed:@"target.png"] forState:UIControlStateNormal];
-    [locateButton addTarget:localityItemsViewController action:@selector(locate) forControlEvents:UIControlEventTouchUpInside];
+    localityItemsViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new] locateButton:localityItemsViewController action:@selector(locate)];
 
-    localityItemsViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:locateButton];
-
-    UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"Recent";
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Recent"];
     localityItemsViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
     
@@ -95,22 +86,22 @@ return localityItemsViewController;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = self.itemsView.backgroundColor =
+    self.view.backgroundColor = self.feedView.backgroundColor =
         [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
-    self.itemsView.scrollsToTop = YES;
+    self.feedView.scrollsToTop = YES;
     __weak VLBFeedViewController *wself = self;
     
-    [self.itemsView addPullToRefreshWithActionHandler:^{
+    [self.feedView addPullToRefreshWithActionHandler:^{
         [wself.operationQueue addOperation:[VLBQueries newGetItems:wself.locality page:VLB_Integer(1) delegate:wself]];
         [wself.operationQueue addOperation:[VLBQueries newGetItems:wself.locality delegate:wself]];
     }];
-    self.itemsView.pullToRefreshView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    self.itemsView.pullToRefreshView.arrowColor = [UIColor whiteColor];
-    self.itemsView.pullToRefreshView.textColor = [UIColor whiteColor];
+    self.feedView.pullToRefreshView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    self.feedView.pullToRefreshView.arrowColor = [UIColor whiteColor];
+    self.feedView.pullToRefreshView.textColor = [UIColor whiteColor];
     
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.feedView animated:YES];
     self.hud.labelText = @"Finding your location";    
 }
 
@@ -149,14 +140,14 @@ return localityItemsViewController;
     DDLogVerbose(@"%@", items);
     
     self.items = items;
-    [self.itemsView setNeedsLayout];
-    [self.itemsView.pullToRefreshView stopAnimating];
+    [self.feedView setNeedsLayout];
+    [self.feedView.pullToRefreshView stopAnimating];
 }
 
 -(void)didFailOnItemsWithError:(NSError *)error
 {
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-    [self.itemsView.pullToRefreshView stopAnimating];
+    [self.feedView.pullToRefreshView stopAnimating];
 
     MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
     hud.detailsLabelText = error.localizedDescription;
@@ -235,7 +226,7 @@ return VLBScrollViewOrientationVertical;
     [self updateTitle:locality];
     
     self.locality = locality;
-    [self.itemsView triggerPullToRefresh];
+    [self.feedView triggerPullToRefresh];
 }
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification

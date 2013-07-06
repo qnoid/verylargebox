@@ -37,6 +37,7 @@
 #import "VLBErrorBlocks.h"
 #import "TestFlight.h"
 #import "DDLog.h"
+#import "VLBViewControllers.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -99,12 +100,7 @@ static NSInteger const FIRST_VIEW_TAG = -1;
     cityViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
     cityViewController.navigationItem.rightBarButtonItem.enabled = NO;
     
-    UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"Nearby";
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Nearby"];
     cityViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
@@ -537,13 +533,7 @@ return VLBScrollViewOrientationHorizontal;
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     
-    VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
-    localitiesViewController.delegate = self;
-
-    UINavigationController *navigationController =
-        [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
-    
-    [self presentViewController:navigationController animated:YES completion:nil];
+    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 }
 
 #pragma mark TBLocalitiesTableViewControllerDelegate

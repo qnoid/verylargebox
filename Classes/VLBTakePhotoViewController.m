@@ -28,6 +28,7 @@
 #import "VLBErrorBlocks.h"
 #import "NSArray+VLBDecorator.h"
 #import "VLBAlertViews.h"
+#import "VLBViewControllers.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
@@ -97,21 +98,12 @@ return self.horizontalAccuracy < location.horizontalAccuracy || self.verticalAcc
                                                               thebox:thebox
                                                               userId:userId];
     
-    UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"Take photo of an item";
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Take photo of an item"];
     newUploadUIViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
-    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [closeButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
-    [closeButton addTarget:newUploadUIViewController action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
-
-    newUploadUIViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+    newUploadUIViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] discardButton:newUploadUIViewController
+			                                                                                            action:@selector(cancel:)];
 
     UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [doneButton setFrame:CGRectMake(0, 0, 30, 30)];
@@ -215,7 +207,7 @@ return self;
 {
     DDLogError(@"%s: %@", __PRETTY_FUNCTION__, error);
     [self.locationOperationDelegate didFailOnLocationWithError:error];
-    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);    
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TBNSErrorDelegate

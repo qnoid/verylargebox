@@ -40,7 +40,7 @@
  */
 @interface VLBFeedViewController : UIViewController <VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBLocalitiesTableViewControllerDelegate>
 
-@property(nonatomic, weak) IBOutlet VLBScrollView * itemsView;
+@property(nonatomic, weak) IBOutlet VLBScrollView * feedView;
 
 +(VLBFeedViewController *)newFeedViewController;
 

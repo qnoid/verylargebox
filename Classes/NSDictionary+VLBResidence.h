@@ -13,6 +13,7 @@
 extern VLBResidenceKey const VLBResidenceUserId;
 extern VLBResidenceKey const VLBResidenceToken;
 extern VLBResidenceKey const VLBResidence;
+extern VLBResidenceKey const VLBResidenceUserKey;
 
 @interface NSDictionary (VLBResidence)
 

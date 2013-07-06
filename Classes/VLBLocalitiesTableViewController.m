@@ -18,6 +18,7 @@
 #import "VLBErrorBlocks.h"
 #import "VLBColors.h"
 #import "DDLog.h"
+#import "VLBViewControllers.h"
 
 @interface VLBLocalitiesTableViewController ()
 @property(nonatomic, strong) NSObject<UITableViewDataSource> *tableViewDataSource;
@@ -30,21 +31,11 @@
 {
     VLBLocalitiesTableViewController *availablePlacesViewController = [[VLBLocalitiesTableViewController alloc] initWithStyle:UITableViewStylePlain];
 
-    UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"Select a location";
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Select a location"];
     availablePlacesViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
-    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [closeButton setImage:[UIImage imageNamed:@"down-arrow.png"] forState:UIControlStateNormal];
-    [closeButton addTarget:availablePlacesViewController action:@selector(dismissViewControllerAnimated) forControlEvents:UIControlEventTouchUpInside];
-
-    availablePlacesViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+    availablePlacesViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] closeButton:availablePlacesViewController action:@selector(dismissViewControllerAnimated)];
 
 return availablePlacesViewController;
 }
@@ -85,7 +76,7 @@ return availablePlacesViewController;
 -(void)didFailOnLocalitiesWithError:(NSError *)error
 {
     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
     MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
     hud.detailsLabelText = error.localizedDescription;
@@ -95,16 +86,19 @@ return availablePlacesViewController;
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 

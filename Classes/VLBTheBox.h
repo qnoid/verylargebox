@@ -19,7 +19,7 @@
 -(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSDictionary*)residence; 
 
 -(VLBIdentifyViewController*)newIdentifyViewController;
--(VLBProfileViewController*)newProfileViewController;
+-(UIViewController*)newProfileViewController;
 -(VLBTakePhotoViewController*)newUploadUIViewController;
 
 /**

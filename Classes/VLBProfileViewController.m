@@ -26,6 +26,7 @@
 #import "DDLog.h"
 #import "VLBDrawRects.h"
 #import "VLBButton.h"
+#import "VLBViewControllers.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -50,35 +51,21 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 +(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email
 {
-    VLBProfileViewController * profileViewController =
+    VLBProfileViewController *profileViewController =
         [[VLBProfileViewController alloc] initWithBundle:[NSBundle mainBundle]
                                                   thebox:thebox
                                                residence:residence];
     
-    UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.text = email;
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;    
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:email];
     profileViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
     
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
-
-    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [closeButton setImage:[UIImage imageNamed:@"down-arrow.png"] forState:UIControlStateNormal];
-    [closeButton addTarget:profileViewController action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
-
-    profileViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] closeButton:profileViewController
+                                                                                            action:@selector(close)];
     
-    UIButton* addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [addButton setImage:[UIImage imageNamed:@"camera-mini.png"] forState:UIControlStateNormal];
-    [addButton addTarget:profileViewController action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
-
-    profileViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+    profileViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new] cameraButton:profileViewController
+                                                                                              action:@selector(addItem)];
 
 return profileViewController;
 }
@@ -104,8 +91,7 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = self.itemsView.backgroundColor =
-        [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
     self.itemsView.scrollsToTop = YES;
 
@@ -142,7 +128,7 @@ return self;
 
 -(IBAction)addItem
 {
-    VLBTakePhotoViewController * takePhotoViewController = [self.thebox newUploadUIViewController];
+    VLBTakePhotoViewController *takePhotoViewController = [self.thebox newUploadUIViewController];
     
     takePhotoViewController.createItemDelegate = self;
     
@@ -178,6 +164,25 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 	[self didFailOnItemWithError:error];
 }
 
+-(void)didStartUploadingItem:(UIImage*)itemImage key:(NSString*)key location:(NSDictionary*) location locality:(NSString*) locality
+{
+	self.location = location;
+	self.locality = locality;
+
+    UIView<QNDAnimatedView> *notificationAnimatedView = [[QNDAnimations new] newViewAnimated:CGRectMake(0, -44, 320, 44)];
+    notificationAnimatedView.backgroundColor = [UIColor blackColor];
+    VLBProgressView *progressView = [[VLBProgressView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    progressView.imageView.image = itemImage;
+    [notificationAnimatedView addSubview:progressView];
+    self.notificationAnimatedView = notificationAnimatedView;
+    self.progressView = progressView.progressView;
+    [self.view addSubview:self.notificationAnimatedView];
+
+    [self.notificationAnimatedView animateWithDuration:0.5 animation:^(UIView *view) {
+        view.frame = CGRectMake(0, 0, 320, 44);
+    }];
+}
+
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
@@ -191,17 +196,8 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 -(void)didFailOnItemsWithError:(NSError *)error
 {
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-    [self.itemsView.pullToRefreshView stopAnimating];
-    
-    VLBAlertViewDelegate *onCancelDismissDelegate = [VLBAlertViews newAlertViewDelegateOnCancelDismiss];
-    VLBAlertViewDelegate *onOkRefreshDelegate = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        [self.itemsView triggerPullToRefresh];
-    }];
-    
-    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOkAndCancel:@"Error" message:[error localizedDescription]];
-    
-    alertView.delegate = [VLBAlertViews all:@[onOkRefreshDelegate, onCancelDismissDelegate]];
-    [alertView show];
+    [self.itemsView.pullToRefreshView stopAnimating];    
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 /**
@@ -231,27 +227,6 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 }
  */
 
--(void)didStartUploadingItem:(UIImage*)itemImage key:(NSString*)key location:(NSDictionary*) location locality:(NSString*) locality
-{
-	self.location = location;
-	self.locality = locality;
-
-    UIView<QNDAnimatedView> *notificationAnimatedView = [[QNDAnimations new] newViewAnimated:CGRectMake(0, -44, 320, 44)];
-    notificationAnimatedView.backgroundColor = [UIColor blackColor];
-    VLBProgressView *progressView = [[VLBProgressView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    progressView.imageView.image = itemImage;
-    [notificationAnimatedView addSubview:progressView];
-    self.notificationAnimatedView = notificationAnimatedView;
-    self.progressView = progressView.progressView;
-    [self.view addSubview:self.notificationAnimatedView];
-
-    [self.notificationAnimatedView animateWithDuration:0.5 animation:^(UIView *view) {
-        view.frame = CGRectMake(0, 0, 320, 44);
-    }];
-}
-
-
-
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
     [self.notificationAnimatedView rewind:^(BOOL finished) {
@@ -275,12 +250,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
         [self.notificationAnimatedView removeFromSuperview];
     }];
     
-    VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
-    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Upload Fail"
-                                                       message:error.localizedDescription];
-    alertView.delegate = alertViewDelegate;
-    
-    [alertView show]; 
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TBNSErrorDelegate
@@ -341,11 +311,6 @@ return [[VLBUserItemView alloc] initWithFrame:frame];
     
     VLBUserItemView * userItemView = (VLBUserItemView *)view;
     [userItemView viewWillAppear:item];
-}
-
-- (void)drawRect:(CGRect)rect inView:(UIView*)view
-{
-    [[VLBDrawRects new] drawContextOfHexagonInRect:rect];
 }
 
 @end
