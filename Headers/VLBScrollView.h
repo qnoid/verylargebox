@@ -35,7 +35,7 @@ extern VLBScrollViewOrientation const VLBScrollViewOrientationHorizontal;
  
  @param scrollView the VLBScrollView associated with the delegate
  */
--(void)didLayoutSubviews:(UIScrollView*)scrollView;
+-(void)didLayoutSubviews:(VLBScrollView*)scrollView;
 
 /**
  Implementations should customise the appearance of the view.
@@ -156,5 +156,11 @@ extern VLBScrollViewOrientation const VLBScrollViewOrientationHorizontal;
  Any previously visible views are invalidated.
  */
 -(void)setNeedsLayout;
+
+/**
+ 
+ */
+-(void)scrollIndexToVisible:(NSUInteger)index animated:(BOOL)animated;
+
 
 @end

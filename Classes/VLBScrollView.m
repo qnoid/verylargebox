@@ -159,9 +159,9 @@ return self;
     
 	[self.visibleStrategy minimumVisibleIndexShould:ceilVisibleIndexAt(0)];
 	[self.visibleStrategy maximumVisibleIndexShould:floorVisibleIndexAt(numberOfViews)];
-  self.contentSize = [self.size sizeOf:numberOfViews size:self.dimension.value];
+    self.contentSize = [self.size sizeOf:numberOfViews size:self.dimension.value];
 	
-  DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
 	DDLogVerbose(@"frame %@", NSStringFromCGRect(self.frame));	
 	DDLogVerbose(@"contentSize %@", NSStringFromCGSize(self.contentSize));	
 
@@ -303,4 +303,9 @@ return view;
     [self.scrollViewDelegate scrollView:scrollView willStopAt:[self indexOf:point]];
 }
 
+-(void)scrollIndexToVisible:(NSUInteger)index animated:(BOOL)animated
+{
+    CGRect rect = [self.dimension frameOf:self.bounds atIndex:index];
+    [super scrollRectToVisible:rect animated:animated];
+}
 @end

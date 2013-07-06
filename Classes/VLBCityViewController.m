@@ -47,6 +47,8 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 static NSInteger const FIRST_VIEW_TAG = -1;
 
+static dispatch_once_t onceToken;
+
 @interface NSOperationQueue (VLBOperationQueue)
 -(BOOL)vlb_isInProgress;
 @end
@@ -77,6 +79,7 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
 @property(nonatomic, copy) VLBUserItemViewGetDirections didTapOnGetDirectionsButton;
+
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService;
 -(void)updateTitle:(NSString *)localityName;
 -(void)reloadItems;
@@ -106,6 +109,8 @@ static NSInteger const FIRST_VIEW_TAG = -1;
 
     cityViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"city.png"] tag:0];
     
+    onceToken = 0;
+    
 return cityViewController;
 }
 
@@ -120,10 +125,7 @@ return cityViewController;
 {
     self = [super initWithNibName:NSStringFromClass([VLBCityViewController class]) bundle:nibBundleOrNil];
     
-    if (!self)
-    {
-        return nil;
-    }
+    VLB_IF_NOT_SELF_RETURN_NIL();
     
     self.theBoxLocationService = locationService;
     self.locations = [NSArray array];
@@ -357,8 +359,12 @@ return VLBScrollViewOrientationHorizontal;
     return LOCATIONS_VIEW_WIDTH;
 }
 
--(void)didLayoutSubviews:(UIScrollView*)scrollView
+-(void)didLayoutSubviews:(VLBScrollView*)scrollView
 {
+    dispatch_once(&onceToken, ^{
+        [scrollView scrollIndexToVisible:self.locations.count >> 1 animated:YES];
+    });
+
     [self highlightLocation];
     [self reloadItems];
 }

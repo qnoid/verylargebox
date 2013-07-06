@@ -166,7 +166,7 @@ return VLBScrollViewOrientationVertical;
     return [self.delegate whatCellWidth:self];
 }
 
--(void)didLayoutSubviews:(UIScrollView *)scrollView
+-(void)didLayoutSubviews:(VLBScrollView *)scrollView
 {
 }
 

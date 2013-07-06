@@ -193,7 +193,7 @@ return VLBScrollViewOrientationVertical;
     return 416.0;
 }
 
--(void)didLayoutSubviews:(UIScrollView *)scrollView{
+-(void)didLayoutSubviews:(VLBScrollView *)scrollView{
     
 }
 
