@@ -51,7 +51,7 @@
 @property(nonatomic, weak) IBOutlet VLBButton *locationButton;
 @property(nonatomic, weak) IBOutlet VLBButton *defaultStoreButton;
 
-@property(nonatomic, unsafe_unretained) NSObject<VLBCreateItemOperationDelegate> *createItemDelegate;
+@property(nonatomic, weak) NSObject<VLBCreateItemOperationDelegate> *createItemDelegate;
 
 /**
  Presents the ImagePicker to allow the user to take a photo

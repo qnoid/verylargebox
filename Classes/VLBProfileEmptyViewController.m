@@ -13,10 +13,17 @@
 #import "VLBTakePhotoViewController.h"
 #import "VLBTheBox.h"
 #import "VLBViewControllers.h"
+#import "AFHTTPRequestOperation.h"
+#import "VLBErrorBlocks.h"
+#import "VLBQueries.h"
+#import "NSDictionary+VLBResidence.h"
+#import "VLBProfileViewController.h"
 
 @interface VLBProfileEmptyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
 
+@property(nonatomic, strong) NSString* locality;
+@property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) NSDictionary* residence;
 @end
 
@@ -56,19 +63,71 @@ return self;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)drawRect:(CGRect)rect inView:(UIView*)view
+-(void)viewDidLoad
 {
-    [[VLBDrawRects new] drawContextOfHexagonInRect:rect];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 }
 
 -(IBAction)didTouchUpInsideTakePhoto
 {
     VLBTakePhotoViewController *takePhotoViewController = [self.thebox newUploadUIViewController];
     
-    takePhotoViewController.createItemDelegate = self;
-    
+    VLBNotificationView *notificationView = [VLBNotificationView newView];
+    takePhotoViewController.createItemDelegate = notificationView;
+    notificationView.delegate = self;
+    [self.view addSubview:notificationView];
+
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:takePhotoViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+-(void)didCompleteUploading:(VLBNotificationView *)notificationView at:(NSString *)itemURL
+{
+	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:itemURL
+                                                            location:self.location
+                                                            locality:self.locality
+                                                                user:[self.residence vlb_residenceUserId]
+                                                            delegate:notificationView];
+    
+	[itemQuery start];
+}
+
+-(void)didStartUploadingItem:(UIImage*)itemImage key:(NSString*)key location:(NSDictionary*) location locality:(NSString*) locality
+{
+	self.location = location;
+	self.locality = locality;
+}
+
+-(void)didSucceedWithItem:(NSDictionary*)item
+{
+    UINavigationController* profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileViewController]];
+    
+    NSMutableArray* viewControllers = [NSMutableArray arrayWithArray:self.tabBarController.viewControllers];
+    [viewControllers replaceObjectAtIndex:0 withObject:profileViewController];
+    
+    self.tabBarController.viewControllers = viewControllers;
+}
+
+-(void)didFailOnItemWithError:(NSError*)error
+{
+    DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+#pragma mark TBNSErrorDelegate
+-(void)didFailWithCannonConnectToHost:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithNotConnectToInternet:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(void)didFailWithTimeout:(NSError *)error
+{
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 

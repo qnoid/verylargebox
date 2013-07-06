@@ -20,4 +20,5 @@ extern VLBResidenceKey const VLBResidenceUserKey;
 -(NSUInteger)vlb_residenceUserId;
 
 -(id)vlb_objectForKey:(VLBResidenceKey)key;
+-(BOOL)vlb_hasUserTakenPhoto;
 @end

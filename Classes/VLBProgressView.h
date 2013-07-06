@@ -12,4 +12,7 @@
 
 @property(nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property(nonatomic, weak) IBOutlet UIImageView *imageView;
+
+- (void)setProgress:(float)progress animated:(BOOL)animated;
+
 @end

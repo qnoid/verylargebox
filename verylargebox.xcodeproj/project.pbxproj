@@ -150,6 +150,10 @@
 		BD6BE05B175B524300B93854 /* VLBDrawRects.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6BE05A175B524300B93854 /* VLBDrawRects.m */; };
 		BD6BE05C175B524300B93854 /* VLBDrawRects.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6BE05A175B524300B93854 /* VLBDrawRects.m */; };
 		BD6BE05D175B570900B93854 /* VLBViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E1A1757D6050070BB59 /* VLBViews.m */; };
+		BD77441317886926007F7AAA /* VLBViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF274851786B9DB000E179E /* VLBViewControllers.m */; };
+		BD774416178869B5007F7AAA /* VLBNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD774415178869B5007F7AAA /* VLBNotificationView.m */; };
+		BD77441817886D98007F7AAA /* VLBNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD77441717886D98007F7AAA /* VLBNotificationView.xib */; };
+		BD77441917887E7D007F7AAA /* NSDictionary+VLBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF274831786B5ED000E179E /* NSDictionary+VLBUser.m */; };
 		BD7C27D417235DDB009D26EE /* VLBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7C27D317235DDB009D26EE /* VLBProgressView.m */; };
 		BD7C27D517235DDB009D26EE /* VLBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7C27D317235DDB009D26EE /* VLBProgressView.m */; };
 		BD7C27D717235DE7009D26EE /* VLBProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7C27D617235DE6009D26EE /* VLBProgressView.xib */; };
@@ -456,6 +460,9 @@
 		BD6BE058175B503D00B93854 /* VLBViewControllers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLBViewControllers.h; path = ../Classes/VLBViewControllers.h; sourceTree = "<group>"; };
 		BD6BE059175B524300B93854 /* VLBDrawRects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBDrawRects.h; path = ../Classes/VLBDrawRects.h; sourceTree = "<group>"; };
 		BD6BE05A175B524300B93854 /* VLBDrawRects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBDrawRects.m; sourceTree = "<group>"; };
+		BD774414178869B5007F7AAA /* VLBNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBNotificationView.h; sourceTree = "<group>"; };
+		BD774415178869B5007F7AAA /* VLBNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBNotificationView.m; sourceTree = "<group>"; };
+		BD77441717886D98007F7AAA /* VLBNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBNotificationView.xib; sourceTree = "<group>"; };
 		BD7C27D217235DDB009D26EE /* VLBProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBProgressView.h; path = ../Classes/VLBProgressView.h; sourceTree = "<group>"; };
 		BD7C27D317235DDB009D26EE /* VLBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBProgressView.m; sourceTree = "<group>"; };
 		BD7C27D617235DE6009D26EE /* VLBProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBProgressView.xib; path = Classes/VLBProgressView.xib; sourceTree = "<group>"; };
@@ -709,6 +716,9 @@
 				BDAE3C54176E04AA0037734C /* VLBTheBox.m */,
 				BDF274821786B5EC000E179E /* NSDictionary+VLBUser.h */,
 				BDF274831786B5ED000E179E /* NSDictionary+VLBUser.m */,
+				BD774414178869B5007F7AAA /* VLBNotificationView.h */,
+				BD774415178869B5007F7AAA /* VLBNotificationView.m */,
+				BD77441717886D98007F7AAA /* VLBNotificationView.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1345,6 +1355,7 @@
 				BDF274741785557A000E179E /* refresh-grey@2x.png in Resources */,
 				BDF2747717855F63000E179E /* VLBScrollView.xib in Resources */,
 				BDF2747D1786B143000E179E /* VLBProfileEmptyViewController.xib in Resources */,
+				BD77441817886D98007F7AAA /* VLBNotificationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1560,6 +1571,7 @@
 				BDF274801786B1FC000E179E /* VLBProfileEmptyViewController.m in Sources */,
 				BDF274841786B5EE000E179E /* NSDictionary+VLBUser.m in Sources */,
 				BDF274861786B9DB000E179E /* VLBViewControllers.m in Sources */,
+				BD774416178869B5007F7AAA /* VLBNotificationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1615,6 +1627,8 @@
 				BD4D32A3177F5B010015EADF /* VLBCellVisibleStrategyTest.m in Sources */,
 				BD4D32A4177F5B010015EADF /* VLBGridViewTest.m in Sources */,
 				BD4D32A5177F5B010015EADF /* VLBScrollViewTest.m in Sources */,
+				BD77441317886926007F7AAA /* VLBViewControllers.m in Sources */,
+				BD77441917887E7D007F7AAA /* NSDictionary+VLBUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

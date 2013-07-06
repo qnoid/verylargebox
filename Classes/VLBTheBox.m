@@ -67,12 +67,11 @@ return self;
 return [VLBIdentifyViewController newIdentifyViewController:self];
 }
 
--(UIViewController*)newProfileViewController
-{
-    if([[[self.residence vlb_objectForKey:VLBResidenceUserKey] vlb_objectForKey:VLBUserDidTakePhotoKey] intValue] == 1){
-        return [VLBProfileViewController newProfileViewController:self residence:self.residence email:self.email];
-    }
+-(VLBProfileViewController*)newProfileViewController {
+return [VLBProfileViewController newProfileViewController:self residence:self.residence email:self.email];
+}
 
+-(VLBProfileEmptyViewController*)newProfileEmptyViewController{
 return [VLBProfileEmptyViewController newProfileViewController:self residence:self.residence email:self.email];
 }
 

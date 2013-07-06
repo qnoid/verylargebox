@@ -31,6 +31,8 @@
 #import "DDLog.h"
 #import "NSArray+VLBDecorator.h"
 #import "VLBTheBox.h"
+#import "NSDictionary+VLBResidence.h"
+#import "VLBProfileEmptyViewController.h"
 
 NSString* const VLB_EMAIL_VALIDATION_REGEX =
 @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -216,7 +218,16 @@ return YES;
     DDLogVerbose(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);    
     [self.thebox didSucceedWithVerificationForEmail:email residence:residence];
     
-    UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileViewController]];
+    BOOL hasUserTakenPhoto = [residence vlb_hasUserTakenPhoto];
+    
+    UINavigationController *profileViewController;
+    
+    if(hasUserTakenPhoto)
+        profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileViewController]];
+    else{
+        profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileEmptyViewController]];
+    }
+    
     UINavigationController *homeGridViewControler = [[UINavigationController alloc] initWithRootViewController:[VLBCityViewController newHomeGridViewController]];
     UINavigationController *feedViewController = [[UINavigationController alloc] initWithRootViewController:[VLBFeedViewController newFeedViewController]];
 

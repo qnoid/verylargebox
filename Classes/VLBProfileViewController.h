@@ -12,6 +12,7 @@
 #import "VLBItemsOperationDelegate.h"
 #import "VLBLocationServiceDelegate.h"
 #import "VLBView.h"
+#import "VLBNotificationView.h"
 
 @class VLBTheBox;
 @class VLBButton;
@@ -20,7 +21,7 @@
  
  Subsequent requests to post an item on the server are queued and processed in a FIFO order.
  */
-@interface VLBProfileViewController : UIViewController <VLBCreateItemOperationDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate>
+@interface VLBProfileViewController : UIViewController <VLBNotificationViewDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate>
 
 @property(nonatomic, weak) IBOutlet VLBScrollView * itemsView;
 

@@ -27,10 +27,10 @@
 #import "VLBDrawRects.h"
 #import "VLBButton.h"
 #import "VLBViewControllers.h"
+#import "VLBNotificationView.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
-
 
 @interface VLBProfileViewController ()
 @property(nonatomic, weak) UIView<QNDAnimatedView> *notificationAnimatedView;
@@ -130,126 +130,73 @@ return self;
 {
     VLBTakePhotoViewController *takePhotoViewController = [self.thebox newUploadUIViewController];
     
-    takePhotoViewController.createItemDelegate = self;
-    
+    VLBNotificationView *notificationView = [VLBNotificationView newView];
+    takePhotoViewController.createItemDelegate = notificationView;
+    notificationView.delegate = self;
+    [self.view addSubview:notificationView];
+
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:takePhotoViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 
-#pragma mark AmazonServiceRequestDelegate
--(void)request:(AmazonServiceRequest *)request didSendData:(NSInteger)bytesWritten
-totalBytesWritten:(NSInteger)totalBytesWritten
-totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+-(void)didCompleteUploading:(VLBNotificationView *)notificationView at:(NSString *)itemURL
 {
-	[self bytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
-}
-
--(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(long long)totalBytesWritten totalBytesExpectedToWrite:(long long)totalBytesExpectedToWrite
-{
-    [self.progressView setProgress:(float)totalBytesWritten / (float)totalBytesExpectedToWrite animated:YES];
-}
-
--(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
-{
-	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:[[request url] absoluteString]
+	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:itemURL
                                                             location:self.location
                                                             locality:self.locality
                                                                 user:[self.residence vlb_residenceUserId]
-                                                            delegate:self];
+                                                            delegate:notificationView];
 
 	[self.operationQueue addOperation:itemQuery];
-}
-
--(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error{
-	[self didFailOnItemWithError:error];
 }
 
 -(void)didStartUploadingItem:(UIImage*)itemImage key:(NSString*)key location:(NSDictionary*) location locality:(NSString*) locality
 {
 	self.location = location;
-	self.locality = locality;
-
-    UIView<QNDAnimatedView> *notificationAnimatedView = [[QNDAnimations new] newViewAnimated:CGRectMake(0, -44, 320, 44)];
-    notificationAnimatedView.backgroundColor = [UIColor blackColor];
-    VLBProgressView *progressView = [[VLBProgressView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    progressView.imageView.image = itemImage;
-    [notificationAnimatedView addSubview:progressView];
-    self.notificationAnimatedView = notificationAnimatedView;
-    self.progressView = progressView.progressView;
-    [self.view addSubview:self.notificationAnimatedView];
-
-    [self.notificationAnimatedView animateWithDuration:0.5 animation:^(UIView *view) {
-        view.frame = CGRectMake(0, 0, 320, 44);
-    }];
-}
-
-#pragma mark TBItemsOperationDelegate
--(void)didSucceedWithItems:(NSMutableArray *)items
-{
-    DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, items);
-    self.items = [NSMutableOrderedSet orderedSetWithCapacity:items.count];
-	[self.items addObjectsFromArray:items];
-    [self.itemsView setNeedsLayout];
-    [self.itemsView.pullToRefreshView stopAnimating];
-}
-
--(void)didFailOnItemsWithError:(NSError *)error
-{
-    DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-    [self.itemsView.pullToRefreshView stopAnimating];    
-    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+	self.locality = locality;    
 }
 
 /**
-{
-    "item": {
-        "created_at": "2013-02-02T21:53:53Z",
-        "id": 223,
-        "image_content_type": "image/jpeg",
-        "image_file_name": ".jpg",
-        "image_file_size": 387436,
-        "location_id": 258,
-        "updated_at": "2013-02-02T21:53:55Z",
-        "user_id": 1,
-        "when": "less than a minute ago",
-        "imageURL": "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/223/thumb/.jpg",
-        "iphoneImageURL": "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/223/iphone/.jpg",
-        "location": {
-            "created_at": "2013-02-02T19:41:49Z",
-            "foursquareid": "4b49b8d1f964a520d57226e3",
-            "id": 258,
-            "lat": "55.944493",
-            "lng": "-3.183833",
-            "name": "Kilimanjaro Coffee",
-            "updated_at": "2013-02-02T19:41:49Z"
-        }
-    }
-}
+ {
+ "item": {
+ "created_at": "2013-02-02T21:53:53Z",
+ "id": 223,
+ "image_content_type": "image/jpeg",
+ "image_file_name": ".jpg",
+ "image_file_size": 387436,
+ "location_id": 258,
+ "updated_at": "2013-02-02T21:53:55Z",
+ "user_id": 1,
+ "when": "less than a minute ago",
+ "imageURL": "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/223/thumb/.jpg",
+ "iphoneImageURL": "http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/223/iphone/.jpg",
+ "location": {
+ "created_at": "2013-02-02T19:41:49Z",
+ "foursquareid": "4b49b8d1f964a520d57226e3",
+ "id": 258,
+ "lat": "55.944493",
+ "lng": "-3.183833",
+ "name": "Kilimanjaro Coffee",
+ "updated_at": "2013-02-02T19:41:49Z"
+ }
+ }
+ }
  */
-
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
-    [self.notificationAnimatedView rewind:^(BOOL finished) {
-        [self.notificationAnimatedView removeFromSuperview];
-    }];
-    
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, item);
-		if(self.items.count == 0){
-			[self.items addObject:item];
-		}
-		else{
+    if(self.items.count == 0){
+        [self.items addObject:item];
+    }
+    else{
 	    [self.items insertObject:item atIndex:0];
-		}
+    }
     [self.itemsView setNeedsLayout];
 }
 
 -(void)didFailOnItemWithError:(NSError*)error
 {
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-    [self.notificationAnimatedView rewind:^(BOOL finished) {
-        [self.notificationAnimatedView removeFromSuperview];
-    }];
-    
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
@@ -269,6 +216,24 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 -(void)didFailWithTimeout:(NSError *)error
 {
     [self.itemsView.pullToRefreshView stopAnimating];
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+
+#pragma mark TBItemsOperationDelegate
+-(void)didSucceedWithItems:(NSMutableArray *)items
+{
+    DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, items);
+    self.items = [NSMutableOrderedSet orderedSetWithCapacity:items.count];
+	[self.items addObjectsFromArray:items];
+    [self.itemsView setNeedsLayout];
+    [self.itemsView.pullToRefreshView stopAnimating];
+}
+
+-(void)didFailOnItemsWithError:(NSError *)error
+{
+    DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
+    [self.itemsView.pullToRefreshView stopAnimating];    
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 

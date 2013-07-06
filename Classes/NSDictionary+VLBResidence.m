@@ -7,6 +7,7 @@
 //
 
 #import "NSDictionary+VLBResidence.h"
+#import "NSDictionary+VLBUser.h"
 
 
 VLBResidenceKey const VLBResidenceUserId = @"user_id";
@@ -26,6 +27,10 @@ VLBResidenceKey const VLBResidenceUserKey = @"user";
 
 -(id)vlb_objectForKey:(VLBResidenceKey)key {
     return [self objectForKey:key];
+}
+
+-(BOOL)vlb_hasUserTakenPhoto{
+    return [[[self vlb_objectForKey:VLBResidenceUserKey] vlb_objectForKey:VLBUserDidTakePhotoKey] intValue] == 1;
 }
 
 @end

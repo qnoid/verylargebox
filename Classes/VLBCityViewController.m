@@ -479,6 +479,13 @@ return VLBScrollViewOrientationHorizontal;
 {
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, items);
     
+    if([items vlb_isEmpty]){
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+        hud.labelText = [NSString stringWithFormat:@"No stores in %@", self.tabBarItem.title];
+        hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
+    return;
+    }
+    
     [MBProgressHUD hideAllHUDsForView:self.itemsView animated:YES];
     
 	self.items = items;

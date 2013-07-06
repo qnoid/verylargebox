@@ -10,6 +10,7 @@
 @protocol VLBCreateItemOperationDelegate;
 @class VLBIdentifyViewController;
 @class VLBProfileViewController;
+@class VLBProfileEmptyViewController;
 @class VLBTakePhotoViewController;
 
 @interface VLBTheBox : NSObject
@@ -19,7 +20,9 @@
 -(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSDictionary*)residence; 
 
 -(VLBIdentifyViewController*)newIdentifyViewController;
--(UIViewController*)newProfileViewController;
+-(VLBProfileViewController*)newProfileViewController;
+-(VLBProfileEmptyViewController*)newProfileEmptyViewController;
+
 -(VLBTakePhotoViewController*)newUploadUIViewController;
 
 /**

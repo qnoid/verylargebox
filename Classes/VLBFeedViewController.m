@@ -22,6 +22,7 @@
 #import "VLBTypography.h"
 #import "VLBPredicates.h"
 #import "VLBViewControllers.h"
+#import "NSArray+VLBDecorator.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -138,7 +139,16 @@ return localityItemsViewController;
 {
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     DDLogVerbose(@"%@", items);
+
+    if([items vlb_isEmpty]){
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.feedView animated:YES];
+        hud.labelText = [NSString stringWithFormat:@"No items in %@", self.locality];
+        hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
+    return;
+    }
     
+    [MBProgressHUD hideAllHUDsForView:self.feedView animated:YES];
+
     self.items = items;
     [self.feedView setNeedsLayout];
     [self.feedView.pullToRefreshView stopAnimating];
