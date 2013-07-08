@@ -175,7 +175,7 @@ return self;
     self.locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
     VLBScrollViewAllowSelection(self.locationsView, NO);
     self.itemsView.showsVerticalScrollIndicator = YES;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Finding your location";
 }
 
@@ -248,15 +248,17 @@ return self;
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
     self.navigationItem.rightBarButtonItem.enabled = YES;
-    
+
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+
     if([locations vlb_isEmpty]){
         MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CAMERA];
         hud.labelText = [NSString stringWithFormat:@"No stores in %@", self.tabBarItem.title];
         hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
-        return;
+        [hud show:YES];        
+    return;
     }
 
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.locations = locations;
     [self.locationsView setNeedsLayout];
 }
