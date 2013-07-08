@@ -7,10 +7,42 @@
 //
 
 #import "VLBErrorBlocks.h"
+#import <CoreLocation/CoreLocation.h>
 #import "MBProgressHUD.h"
 #import "VLBHuds.h"
+#import "VLBAlertViews.h"
 
 @implementation VLBErrorBlocks
+
++(VLBAFHTTPRequestOperationErrorBlock) locationErrorBlock:(UIView*) view config:(VLBProgressHUDBlock)block
+{
+    return ^BOOL(NSError* error)
+    {
+    switch (error.code) {
+				case kCLErrorLocationUnknown:
+				case kCLErrorNetwork:{
+	        MBProgressHUD *hud = [VLBHuds newWithView:view config:block];
+    	    [hud show:YES];
+	        [hud hide:YES afterDelay:5.0];
+				}
+				break;
+        case kCLErrorDenied:{
+    			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
+			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
+      			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
+			    alertView.delegate = alertViewDelegate;
+
+			    [alertView show]; 
+				}
+        break;
+				default:{
+					[VLBErrorBlocks localizedDescriptionOfErrorBlock:view](error);
+				}
+				break;
+    }
+    return YES;
+    };
+}
 
 +(VLBAFHTTPRequestOperationErrorBlock) localizedDescriptionOfErrorBlock:(UIView*) view
 {

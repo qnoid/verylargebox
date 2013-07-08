@@ -20,11 +20,35 @@ VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO = ^(MBProgressH
 return hud;
 };
 
+VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH = ^(MBProgressHUD *hud)
+{
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refresh.png"]];
+    hud.mode = MBProgressHUDModeCustomView;
+    
+return hud;
+};
+
+VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET = ^(MBProgressHUD *hud)
+{
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"target.png"]];
+    hud.mode = MBProgressHUDModeCustomView;
+    
+return hud;
+};
+
 +(MBProgressHUD*)newWithView:(UIView*)view config:(VLBProgressHUDBlock)block
 {
 	MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
 	[view addSubview:hud];
 
 return block(hud);
+}
+
++(MBProgressHUD*)newWithView:(UIView*)view 
+{
+	MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
+	[view addSubview:hud];
+
+return hud;
 }
 @end

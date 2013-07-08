@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "VLBAFHTTPRequestOperationCompletionBlocks.h"
+#import "VLBHuds.h"
 
 @interface VLBErrorBlocks : NSObject
 
++(VLBAFHTTPRequestOperationErrorBlock) locationErrorBlock:(UIView*) view config:(VLBProgressHUDBlock)block;
 +(VLBAFHTTPRequestOperationErrorBlock) localizedDescriptionOfErrorBlock:(UIView*) view;
 @end

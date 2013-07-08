@@ -15,7 +15,6 @@
 #import "VLBGridViewDatasource.h"
 #import "VLBGridViewDelegate.h"
 #import "VLBLocalityOperationDelegate.h"
-#import "VLBLocalitiesTableViewController.h"
 #import "VLBViews.h"
 #import "VLBView.h"
 @class VLBLocationService;
@@ -35,7 +34,7 @@
   and start a new one.
  
  */
-@interface VLBCityViewController : UIViewController <VLBLocationServiceDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBLocationOperationDelegate, UISearchBarDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, UITableViewDelegate, VLBGridViewDatasource, VLBGridViewDelegate, VLBLocalitiesTableViewControllerDelegate, VLBViewDrawRectDelegate>
+@interface VLBCityViewController : UIViewController <VLBLocationServiceDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBLocationOperationDelegate, UISearchBarDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, UITableViewDelegate, VLBGridViewDatasource, VLBGridViewDelegate, VLBViewDrawRectDelegate>
 
 /**
  Creates a new instance of HomeUIGridViewController

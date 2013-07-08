@@ -141,9 +141,10 @@ return localityItemsViewController;
     DDLogVerbose(@"%@", items);
 
     if([items vlb_isEmpty]){
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.feedView animated:YES];
+        MBProgressHUD *hud = [VLBHuds newWithView:self.view];
         hud.labelText = [NSString stringWithFormat:@"No items in %@", self.locality];
         hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
+				[hud show:YES];
     return;
     }
     
@@ -249,19 +250,12 @@ return VLBScrollViewOrientationVertical;
     
 		NSError *error = [VLBNotifications error:notification];
 
-    switch (error.code) {
-        case kCLErrorDenied:{
-    			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
-			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
-      			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
-			    alertView.delegate = alertViewDelegate;
-
-			    [alertView show]; 
-				}
-        break;
-    }
-
-	[VLBErrorBlocks localizedDescriptionOfErrorBlock:self.feedView](error);
+		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
+			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET(hud);
+			hud.detailsLabelText = @"Please select a location.";
+		return hud;
+		};
+		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
 }
 
 

@@ -14,9 +14,12 @@
 typedef MBProgressHUD*(^VLBProgressHUDBlock)(MBProgressHUD *hud);
 
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO;
+extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH;
+extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET;
 
 @interface VLBHuds : NSObject
 
 +(MBProgressHUD*)newWithView:(UIView*)view config:(VLBProgressHUDBlock)block;
++(MBProgressHUD*)newWithView:(UIView*)view;
 
 @end

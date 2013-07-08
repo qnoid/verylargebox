@@ -144,6 +144,13 @@ return self;
 
 -(void)refreshLocations
 {
+		if(!self.placemark){
+			[self.theBoxLocationService notifyDidFindPlacemark:self];
+			[self.theBoxLocationService notifyDidFailWithError:self];
+			[self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+			[self.theBoxLocationService startMonitoringSignificantLocationChanges];
+		return;
+		}
     //locality can be nil
     self.navigationItem.rightBarButtonItem.enabled = NO;
     [[VLBQueries newGetLocationsGivenLocalityName:self.placemark.locality delegate:self] start];
@@ -513,25 +520,18 @@ return VLBScrollViewOrientationHorizontal;
     //show appropriate error message when receiveing this due to nil location
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 
     DDLogError(@"%s", __PRETTY_FUNCTION__);
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 
 		NSError *error = [VLBNotifications error:notification];
-
-    switch (error.code) {
-        case kCLErrorDenied:{
-    			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
-			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
-      			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
-			    alertView.delegate = alertViewDelegate;
-
-			    [alertView show]; 
-				}
-        break;
-    }
-
-	[VLBErrorBlocks localizedDescriptionOfErrorBlock:self.itemsView](error);
+		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
+			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH(hud);
+			hud.detailsLabelText = @"Please refresh.";
+		return hud;
+		};
+		[VLBErrorBlocks locationErrorBlock:self.itemsView config:block](error);
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
@@ -556,22 +556,16 @@ return VLBScrollViewOrientationHorizontal;
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 
 		NSError *error = [VLBNotifications error:notification];
-		[VLBErrorBlocks localizedDescriptionOfErrorBlock:self.itemsView](error);
-}
-
-#pragma mark TBLocalitiesTableViewControllerDelegate
-
--(void)didSelectLocality:(NSDictionary *)locality
-{
-    NSString *localityName = [locality objectForKey:@"name"];
-
-    [self updateTitle:localityName];
-
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    [[VLBQueries newGetLocationsGivenLocalityName:localityName delegate:self] start];
+		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
+			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH(hud);
+			hud.detailsLabelText = @"Please refresh.";
+		return hud;
+		};
+		[VLBErrorBlocks locationErrorBlock:self.itemsView config:block](error);
 }
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender
