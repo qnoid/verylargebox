@@ -36,6 +36,14 @@ VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET = ^
 return hud;
 };
 
+VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_CAMERA = ^(MBProgressHUD *hud)
+{
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera-mini.png"]];
+    hud.mode = MBProgressHUDModeCustomView;
+    
+    return hud;
+};
+
 +(MBProgressHUD*)newWithView:(UIView*)view config:(VLBProgressHUDBlock)block
 {
 	MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];

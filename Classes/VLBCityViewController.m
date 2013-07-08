@@ -247,8 +247,16 @@ return self;
 
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
-		self.navigationItem.rightBarButtonItem.enabled = YES;
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    
+    if([locations vlb_isEmpty]){
+        MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CAMERA];
+        hud.labelText = [NSString stringWithFormat:@"No stores in %@", self.tabBarItem.title];
+        hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
+        return;
+    }
+
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.locations = locations;
     [self.locationsView setNeedsLayout];
 }
@@ -256,25 +264,25 @@ return self;
 -(void)didFailOnLocationWithError:(NSError*)error
 {
     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
@@ -493,14 +501,7 @@ return VLBScrollViewOrientationHorizontal;
 {
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, items);
     
-    if([items vlb_isEmpty]){
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
-        hud.labelText = [NSString stringWithFormat:@"No stores in %@", self.tabBarItem.title];
-        hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
-    return;
-    }
-    
-    [MBProgressHUD hideAllHUDsForView:self.itemsView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
 	self.items = items;
     self.numberOfRows = round((float)self.items.count/2.0);
@@ -511,7 +512,7 @@ return VLBScrollViewOrientationHorizontal;
 -(void)didFailOnItemsWithError:(NSError*)error
 {
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 #pragma mark VLBServiceDelegate
@@ -523,7 +524,7 @@ return VLBScrollViewOrientationHorizontal;
     self.navigationItem.rightBarButtonItem.enabled = YES;
 
     DDLogError(@"%s", __PRETTY_FUNCTION__);
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 
 		NSError *error = [VLBNotifications error:notification];
 		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
@@ -531,7 +532,7 @@ return VLBScrollViewOrientationHorizontal;
 			hud.detailsLabelText = @"Please refresh.";
 		return hud;
 		};
-		[VLBErrorBlocks locationErrorBlock:self.itemsView config:block](error);
+		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
@@ -557,7 +558,7 @@ return VLBScrollViewOrientationHorizontal;
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     self.navigationItem.rightBarButtonItem.enabled = YES;
-    [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 
 		NSError *error = [VLBNotifications error:notification];
 		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
@@ -565,7 +566,7 @@ return VLBScrollViewOrientationHorizontal;
 			hud.detailsLabelText = @"Please refresh.";
 		return hud;
 		};
-		[VLBErrorBlocks locationErrorBlock:self.itemsView config:block](error);
+		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
 }
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender
