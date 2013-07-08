@@ -29,8 +29,11 @@ VLBResidenceKey const VLBResidenceUserKey = @"user";
     return [self objectForKey:key];
 }
 
--(BOOL)vlb_hasUserTakenPhoto{
-    return [[[self vlb_objectForKey:VLBResidenceUserKey] vlb_objectForKey:VLBUserDidTakePhotoKey] intValue] == 1;
+-(BOOL)vlb_hasUserTakenPhoto
+{
+    id didTakePhoto = [[self vlb_objectForKey:VLBResidenceUserKey] vlb_objectForKey:VLBUserDidTakePhotoKey];
+    
+return [NSNull null] != didTakePhoto && [didTakePhoto intValue] == 1;
 }
 
 @end
