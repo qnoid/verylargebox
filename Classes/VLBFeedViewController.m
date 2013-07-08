@@ -139,12 +139,13 @@ return localityItemsViewController;
 {
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     DDLogVerbose(@"%@", items);
+    [self.feedView.pullToRefreshView stopAnimating];
 
     if([items vlb_isEmpty]){
-        MBProgressHUD *hud = [VLBHuds newWithView:self.view];
+        MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET];
         hud.labelText = [NSString stringWithFormat:@"No items in %@", self.locality];
-        hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
-				[hud show:YES];
+        hud.detailsLabelText = @"Select a location.";
+        [hud show:YES];
     return;
     }
     
@@ -152,7 +153,6 @@ return localityItemsViewController;
 
     self.items = items;
     [self.feedView setNeedsLayout];
-    [self.feedView.pullToRefreshView stopAnimating];
 }
 
 -(void)didFailOnItemsWithError:(NSError *)error
