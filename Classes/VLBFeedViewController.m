@@ -250,13 +250,14 @@ return VLBScrollViewOrientationVertical;
 		NSError *error = [VLBNotifications error:notification];
 
     switch (error.code) {
-        case kCLErrorDenied:
+        case kCLErrorDenied:{
     			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
 			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
       			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
 			    alertView.delegate = alertViewDelegate;
 
 			    [alertView show]; 
+				}
         break;
     }
 
@@ -289,7 +290,7 @@ return VLBScrollViewOrientationVertical;
     NSString *localityName = [locality objectForKey:@"name"];
 
 		__weak VLBFeedViewController *wself = self;
-    [self dismissViewControllerAnimated:YES completion:^(BOOL finished){
+    [self dismissViewControllerAnimated:YES completion:^(){
     	wself.hud = [MBProgressHUD showHUDAddedTo:wself.view animated:YES];
 		}];
     

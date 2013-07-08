@@ -520,13 +520,14 @@ return VLBScrollViewOrientationHorizontal;
 		NSError *error = [VLBNotifications error:notification];
 
     switch (error.code) {
-        case kCLErrorDenied:
+        case kCLErrorDenied:{
     			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
 			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
       			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
 			    alertView.delegate = alertViewDelegate;
 
 			    [alertView show]; 
+				}
         break;
     }
 
@@ -555,8 +556,9 @@ return VLBScrollViewOrientationHorizontal;
     DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-    
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+
+		NSError *error = [VLBNotifications error:notification];
 		[VLBErrorBlocks localizedDescriptionOfErrorBlock:self.itemsView](error);
 }
 

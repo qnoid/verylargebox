@@ -131,7 +131,7 @@ return self;
         CLPlacemark *place = [placemarks objectAtIndex:0];
 
 				if(!place){
-						NSError *error = [NSError errorWithDomain:kCLErrorDomain code:kCLErrorGeocodeFoundNoResult userInfo:nil]
+						NSError *error = [NSError errorWithDomain:kCLErrorDomain code:kCLErrorGeocodeFoundNoResult userInfo:nil];
 
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
             
