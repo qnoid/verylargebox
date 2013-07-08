@@ -245,15 +245,22 @@ return VLBScrollViewOrientationVertical;
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 
-
     DDLogWarn(@"%s", __PRETTY_FUNCTION__);
     
-    VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
-    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
-                                                       message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'thebox' to access your location."];
-    alertView.delegate = alertViewDelegate;
-    
-    [alertView show];
+		NSError *error = [VLBNotifications error:notification];
+
+    switch (error.code) {
+        case kCLErrorDenied:
+    			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
+			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
+      			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
+			    alertView.delegate = alertViewDelegate;
+
+			    [alertView show]; 
+        break;
+    }
+
+	[VLBErrorBlocks localizedDescriptionOfErrorBlock:self.feedView](error);
 }
 
 
@@ -279,9 +286,12 @@ return VLBScrollViewOrientationVertical;
 
 -(void)didSelectLocality:(NSDictionary *)locality
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
     NSString *localityName = [locality objectForKey:@"name"];
+
+		__weak VLBFeedViewController *wself = self;
+    [self dismissViewControllerAnimated:YES completion:^(BOOL finished){
+    	wself.hud = [MBProgressHUD showHUDAddedTo:wself.view animated:YES];
+		}];
     
     [self updateTitle:localityName];
     
