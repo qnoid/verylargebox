@@ -12,6 +12,8 @@
 #import "QNDAnimations.h"
 #import "DDLog.h"
 #import "VLBMacros.h"
+#import "AmazonServiceRequest.h"
+#import "AmazonServiceResponse.h"
 
 @implementation VLBNotificationView
 
