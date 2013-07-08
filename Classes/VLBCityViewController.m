@@ -517,12 +517,20 @@ return VLBScrollViewOrientationHorizontal;
     DDLogError(@"%s", __PRETTY_FUNCTION__);
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
 
-    VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
-    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
-                                                       message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
-    alertView.delegate = alertViewDelegate;
-    
-    [alertView show]; 
+		NSError *error = [VLBNotifications error:notification];
+
+    switch (error.code) {
+        case kCLErrorDenied:
+    			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
+			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
+      			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
+			    alertView.delegate = alertViewDelegate;
+
+			    [alertView show]; 
+        break;
+    }
+
+	[VLBErrorBlocks localizedDescriptionOfErrorBlock:self.itemsView](error);
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
@@ -549,6 +557,7 @@ return VLBScrollViewOrientationHorizontal;
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
+		[VLBErrorBlocks localizedDescriptionOfErrorBlock:self.itemsView](error);
 }
 
 #pragma mark TBLocalitiesTableViewControllerDelegate

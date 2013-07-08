@@ -117,10 +117,9 @@ return self;
     
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
     {
-        CLPlacemark *place = [placemarks objectAtIndex:0];
 
         //if place is nil, if the request was canceled
-        if(error || place == nil){
+        if(error){
             DDLogError(@"Could not retrieve the specified place information.\n");
             
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
@@ -129,6 +128,17 @@ return self;
         return;
         }
      
+        CLPlacemark *place = [placemarks objectAtIndex:0];
+
+				if(!place){
+						NSError *error = [NSError errorWithDomain:kCLErrorDomain code:kCLErrorGeocodeFoundNoResult userInfo:nil]
+
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
+            
+         	[[NSNotificationCenter defaultCenter] postNotificationName:@"didFailReverseGeocodeLocationWithError" object:self userInfo:userInfo];
+				return;
+				}
+
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:place forKey:@"place"];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"didFindPlacemark" object:self userInfo:userInfo];
