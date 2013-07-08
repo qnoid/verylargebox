@@ -144,6 +144,7 @@ return self;
 
 -(void)refreshLocations
 {
+    //locality can be nil
     self.navigationItem.rightBarButtonItem.enabled = NO;
     [[VLBQueries newGetLocationsGivenLocalityName:self.placemark.locality delegate:self] start];
 }
@@ -239,7 +240,7 @@ return self;
 
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
-    self.navigationItem.rightBarButtonItem.enabled = YES;
+		self.navigationItem.rightBarButtonItem.enabled = YES;
     [MBProgressHUD hideHUDForView:self.itemsView animated:YES];
     self.locations = locations;
     [self.locationsView setNeedsLayout];
@@ -509,6 +510,7 @@ return VLBScrollViewOrientationHorizontal;
 #pragma mark VLBServiceDelegate
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
+    //show appropriate error message when receiveing this due to nil location
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 

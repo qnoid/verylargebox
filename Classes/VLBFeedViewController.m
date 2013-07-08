@@ -111,7 +111,7 @@ return localityItemsViewController;
     //introduce VLBConditionals with a macro @conditional to execute a block
     [[VLBPredicates new] ifNil:self.locality then:^{
         [self.theBoxLocationService notifyDidFindPlacemark:self];
-        [self.theBoxLocationService notifyDidFailWithError:self];
+        [self.theBoxLocationService notifyDidFailWithError:self];        
         [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
     }];
 }
@@ -122,9 +122,9 @@ return localityItemsViewController;
 
 -(void)locate
 {
-		[self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-		[self.hud hide:YES];
+	[self.hud hide:YES];
     VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
     localitiesViewController.delegate = self;
     
@@ -242,7 +242,9 @@ return VLBScrollViewOrientationVertical;
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
     [self.hud hide:YES];
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
 
     DDLogWarn(@"%s", __PRETTY_FUNCTION__);
     
@@ -257,8 +259,10 @@ return VLBScrollViewOrientationVertical;
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
 {
+    //this can also happen if the request has been cancelled.
+    //check the code under VLBFeedViewController in case we stopMonitoringChanges early, before placemark resolution.
     [self.hud hide:YES];
-		[self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 
     DDLogWarn(@"%s", __PRETTY_FUNCTION__);

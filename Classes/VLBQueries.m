@@ -170,6 +170,10 @@ return request;
 
 +(AFHTTPRequestOperation*)newGetLocationsGivenLocalityName:(NSString*)localityName delegate:(NSObject<VLBLocationOperationDelegate>*)delegate
 {
+    if(!localityName){
+        return nil;
+    }
+    
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSDictionary* parameters = @{@"locality[name]":localityName};

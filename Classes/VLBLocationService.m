@@ -9,6 +9,7 @@
 //
 
 #import "VLBLocationService.h"
+#import "DDLog.h"
 
 @implementation VLBLocationService
 
@@ -116,7 +117,10 @@ return self;
     
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
     {
-        if(error){
+        CLPlacemark *place = [placemarks objectAtIndex:0];
+
+        //if place is nil, if the request was canceled
+        if(error || place == nil){
             DDLogError(@"Could not retrieve the specified place information.\n");
             
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
@@ -125,7 +129,6 @@ return self;
         return;
         }
      
-        CLPlacemark *place = [placemarks objectAtIndex:0];
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:place forKey:@"place"];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"didFindPlacemark" object:self userInfo:userInfo];
