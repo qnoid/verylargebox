@@ -166,7 +166,7 @@ return self;
 
 -(void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     self.locationsView.backgroundColor = [VLBColors colorDarkGrey];
     self.locationsView.showsHorizontalScrollIndicator = NO;
@@ -175,8 +175,6 @@ return self;
     self.locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
     VLBScrollViewAllowSelection(self.locationsView, NO);
     self.itemsView.showsVerticalScrollIndicator = YES;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Finding your location";
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -189,14 +187,23 @@ return self;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self.theBoxLocationService notifyDidFindPlacemark:self];
-    [self.theBoxLocationService notifyDidFailWithError:self];
-    [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+    
+    //introduce VLBConditionals with a macro @conditional to execute a block
+    if(!self.placemark){
+        [self.theBoxLocationService notifyDidFindPlacemark:self];
+        [self.theBoxLocationService notifyDidFailWithError:self];
+        [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+        [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Finding your location";
+    return;
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:[UIApplication sharedApplication]];
@@ -232,7 +239,7 @@ return self;
  */
 -(void)reloadItems
 {
-    [MBProgressHUD showHUDAddedTo:self.itemsView animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     [self.operationQueue cancelAllOperations];
     

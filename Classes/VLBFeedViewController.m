@@ -102,22 +102,27 @@ return localityItemsViewController;
     self.feedView.pullToRefreshView.textColor = [UIColor whiteColor];
     
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.feedView animated:YES];
-    self.hud.labelText = @"Finding your location";    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     //introduce VLBConditionals with a macro @conditional to execute a block
-    [[VLBPredicates new] ifNil:self.locality then:^{
+    if(!self.locality){
         [self.theBoxLocationService notifyDidFindPlacemark:self];
         [self.theBoxLocationService notifyDidFailWithError:self];        
         [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
-    }];
+        
+        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.hud.labelText = @"Finding your location";
+    return;
+    }
+
+    [self.feedView triggerPullToRefresh];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 -(void)locate
@@ -149,8 +154,6 @@ return localityItemsViewController;
     return;
     }
     
-    [MBProgressHUD hideAllHUDsForView:self.feedView animated:YES];
-
     self.items = items;
     [self.feedView setNeedsLayout];
 }
