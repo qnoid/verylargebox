@@ -289,10 +289,7 @@ return VLBScrollViewOrientationVertical;
 {
     NSString *localityName = [locality objectForKey:@"name"];
 
-		__weak VLBFeedViewController *wself = self;
-    [self dismissViewControllerAnimated:YES completion:^(){
-    	wself.hud = [MBProgressHUD showHUDAddedTo:wself.view animated:YES];
-		}];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
     [self updateTitle:localityName];
     
