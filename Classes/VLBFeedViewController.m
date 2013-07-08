@@ -145,17 +145,15 @@ return localityItemsViewController;
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     DDLogVerbose(@"%@", items);
     [self.feedView.pullToRefreshView stopAnimating];
+    self.items = items;
+    [self.feedView setNeedsLayout];
 
     if([items vlb_isEmpty]){
         MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET];
         hud.labelText = [NSString stringWithFormat:@"No items in %@", self.locality];
         hud.detailsLabelText = @"Select a location.";
         [hud show:YES];
-    return;
     }
-    
-    self.items = items;
-    [self.feedView setNeedsLayout];
 }
 
 -(void)didFailOnItemsWithError:(NSError *)error
