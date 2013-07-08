@@ -48,7 +48,15 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 
 -(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
 {
-    [self.delegate didCompleteUploading:self at:[[request url] absoluteString]];
+	NSException *exception = response.exception;
+
+	if(exception){
+		DDLogError(@"%s, %@", __PRETTY_FUNCTION__, exception);
+		[self request:request didFailWithError:response.error];
+	return;
+	}
+
+  [self.delegate didCompleteUploading:self at:[[request url] absoluteString]];
 }
 
 -(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error{
