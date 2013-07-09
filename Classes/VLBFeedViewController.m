@@ -107,17 +107,14 @@ return localityItemsViewController;
 -(void)viewWillAppear:(BOOL)animated
 {
     //introduce VLBConditionals with a macro @conditional to execute a block
-    if(!self.locality){
+    [[VLBPredicates new] ifNil:self.locality then:^{
         [self.theBoxLocationService notifyDidFindPlacemark:self];
-        [self.theBoxLocationService notifyDidFailWithError:self];        
+        [self.theBoxLocationService notifyDidFailWithError:self];
         [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
         
         self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         self.hud.labelText = @"Finding your location";
-    return;
-    }
-
-    [self.feedView triggerPullToRefresh];
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
