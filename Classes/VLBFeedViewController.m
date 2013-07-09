@@ -139,6 +139,7 @@ return localityItemsViewController;
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     DDLogVerbose(@"%@", items);
     [self.feedView.pullToRefreshView stopAnimating];
@@ -155,6 +156,7 @@ return localityItemsViewController;
 
 -(void)didFailOnItemsWithError:(NSError *)error
 {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     [self.feedView.pullToRefreshView stopAnimating];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
@@ -286,5 +288,7 @@ return VLBScrollViewOrientationVertical;
     
     [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality page:VLB_Integer(1) delegate:self]];
     [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality delegate:self]];
+    MBProgressHUD *hud = [VLBHuds newWithView:self.view];
+    [hud show:YES];
 }
 @end

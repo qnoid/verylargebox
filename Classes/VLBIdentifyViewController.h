@@ -61,7 +61,7 @@ VLBEmailStatusBlock vlbEmailStatus(VLBEmailStatus emailStatus)
             };
         case VLBEmailStatusUnauthorised:
             return ^(UITableViewCell *tableViewCell){
-                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"x.png"]];
+                UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclamation-mark.png"]];
                 
                 tableViewCell.textLabel.enabled = NO;
                 tableViewCell.userInteractionEnabled = YES;

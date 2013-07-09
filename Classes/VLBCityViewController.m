@@ -252,7 +252,7 @@ return self;
     
     [self.operationQueue addOperation:[VLBQueries newGetItemsGivenLocationId:locationId page:VLB_Integer(1) delegate:self]];
     [self.operationQueue addOperation:[VLBQueries newGetItemsGivenLocationId:locationId delegate:self]];
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    MBProgressHUD *hud = [VLBHuds newWithView:self.view];
     [hud show:YES];
 }
 
