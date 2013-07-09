@@ -89,7 +89,7 @@ return hud;
 return block(hud);
 }
 
-+(MBProgressHUD*)newWithView:(UIView*)view 
++(MBProgressHUD*)newWithView:(UIView*)view
 {
 	MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
 	[view addSubview:hud];
