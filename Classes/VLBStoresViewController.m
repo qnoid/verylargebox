@@ -36,7 +36,6 @@ static UIImage* foursquarePoweredBy;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSArray* venues;
 @property(nonatomic, strong) NSObject<QNDAnimatedView> *animatedMap;
-@property(nonatomic, weak) MBProgressHUD *hud;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil venues:(NSArray*)venues;
 @end
 
@@ -149,8 +148,8 @@ return self;
     self.venuesTableView.contentInset = UIEdgeInsetsMake(185, 0, 0, 0);
     
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.labelText = @"Finding your location";
+    MBProgressHUD *hud = [VLBHuds newWithViewLocationArrow:self.view];
+    [hud show:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -197,7 +196,7 @@ return self;
 {
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
 
-    [self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
 
@@ -213,9 +212,8 @@ return self;
     if(![self.venues vlb_isEmpty]){
         return;
     }
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.labelText = [NSString stringWithFormat:@"Finding stores nearby"];
-    
+    MBProgressHUD *hud = [VLBHuds newWithViewRadar:self.view];
+    [hud show:YES];
 }
 
 #pragma mark VLBLocationOperationDelegate
@@ -223,8 +221,7 @@ return self;
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
     DDLogVerbose(@"%s: %@", __PRETTY_FUNCTION__, locations);
-    [self.hud hide:YES];
-
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     if([locations vlb_isEmpty]){
         UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"No stores found"
                                                            message:[NSString stringWithFormat:@"There were no stores found"]];
@@ -322,9 +319,8 @@ return cell;
     AFHTTPRequestOperation* operation = [VLBQueries newLocationQuery:userLocation.coordinate.latitude longtitude:userLocation.coordinate.longitude query:query delegate:self];
     
     [operation start];    
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.labelText = @"Finding stores";
-		self.hud.detailsLabelText = [NSString stringWithFormat:@"matching '%@'", query];
+    MBProgressHUD *hud = [VLBHuds newWithViewSearch:self.view query:query];
+    [hud show:YES];
 }
 
 

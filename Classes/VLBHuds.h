@@ -16,8 +16,10 @@ typedef MBProgressHUD*(^VLBProgressHUDBlock)(MBProgressHUD *hud);
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET;
+extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_RADAR;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_CAMERA;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ARROW;
+extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_SEARCH;
 
 @interface VLBHuds : NSObject
 
@@ -25,5 +27,7 @@ extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ARROW;
 +(MBProgressHUD*)newWithView:(UIView*)view;
 +(MBProgressHUD*)newWithViewLocationArrow:(UIView*)view;
 +(MBProgressHUD*)newWithViewCamera:(UIView*)view locality:(NSString*)locality;
++(MBProgressHUD*)newWithViewRadar:(UIView*)view;
++(MBProgressHUD*)newWithViewSearch:(UIView*)view query:(NSString*)query;
 
 @end

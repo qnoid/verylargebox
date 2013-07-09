@@ -53,5 +53,7 @@ extern VLBAFHTTPRequestOperationErrorBlock const VLB_ERROR_BLOCK_NOT_CONNECTED_T
  */
 extern VLBAFHTTPRequestOperationErrorBlock const VLB_ERROR_TIMEOUT;
 
+extern VLBAFHTTPRequestOperationErrorBlock const VLB_ERROR_CANCELLED;
+
 @interface VLBAFHTTPRequestOperationCompletionBlocks : NSObject
 @end

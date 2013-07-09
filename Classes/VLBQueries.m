@@ -76,6 +76,10 @@ return ^(AFHTTPRequestOperation *operation, NSError *error)
             [delegate didFailWithTimeout:error];
             return;
         }
+        
+        if(VLB_ERROR_CANCELLED(error)){
+            return;
+        }
 
         failureBlock(operation, error);
     };
