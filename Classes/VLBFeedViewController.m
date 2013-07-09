@@ -36,7 +36,6 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, strong) NSMutableArray* items;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
 
-@property(nonatomic, weak) MBProgressHUD *hud;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil;
 @end
 
@@ -112,8 +111,8 @@ return localityItemsViewController;
         [self.theBoxLocationService notifyDidFailWithError:self];
         [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
         
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.hud.labelText = @"Finding your location";
+        MBProgressHUD *hud = [VLBHuds newWithViewLocationArrow:self.view];
+        [hud show:YES];
     }];
 }
 
@@ -126,7 +125,8 @@ return localityItemsViewController;
 {
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-	[self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
     VLBLocalitiesTableViewController *localitiesViewController = [VLBLocalitiesTableViewController newLocalitiesViewController];
     localitiesViewController.delegate = self;
     
@@ -157,28 +157,25 @@ return localityItemsViewController;
 {
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
     [self.feedView.pullToRefreshView stopAnimating];
-
-    MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
-    hud.detailsLabelText = error.localizedDescription;
-    [hud show:YES];
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
-    [self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
-    [self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
-    [self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
@@ -225,7 +222,7 @@ return VLBScrollViewOrientationVertical;
 #pragma mark VLBLocationServiceDelegate
 -(void)didFindPlacemark:(NSNotification *)notification
 {
-    [self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     
@@ -240,7 +237,7 @@ return VLBScrollViewOrientationVertical;
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
-    [self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 
@@ -261,7 +258,7 @@ return VLBScrollViewOrientationVertical;
 {
     //this can also happen if the request has been cancelled.
     //check the code under VLBFeedViewController in case we stopMonitoringChanges early, before placemark resolution.
-    [self.hud hide:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 

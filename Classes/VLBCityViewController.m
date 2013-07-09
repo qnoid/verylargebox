@@ -195,14 +195,20 @@ return self;
         [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
         [self.theBoxLocationService startMonitoringSignificantLocationChanges];
         
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Finding your location";
+        MBProgressHUD *hud = [VLBHuds newWithViewLocationArrow:self.view];
+        [hud show:YES];
     return;
     }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
+    [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
+
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
@@ -239,8 +245,6 @@ return self;
  */
 -(void)reloadItems
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
     [self.operationQueue cancelAllOperations];
     
     NSDictionary* currentLocation = [self.locations objectAtIndex:self.index];
@@ -248,6 +252,8 @@ return self;
     
     [self.operationQueue addOperation:[VLBQueries newGetItemsGivenLocationId:locationId page:VLB_Integer(1) delegate:self]];
     [self.operationQueue addOperation:[VLBQueries newGetItemsGivenLocationId:locationId delegate:self]];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [hud show:YES];
 }
 
 #pragma mark TBLocationOperationDelegate
@@ -259,10 +265,8 @@ return self;
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
     if([locations vlb_isEmpty]){
-        MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CAMERA];
-        hud.labelText = [NSString stringWithFormat:@"No stores in %@", self.tabBarItem.title];
-        hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
-        [hud show:YES];        
+        MBProgressHUD *hud = [VLBHuds newWithViewCamera:self.view locality:self.tabBarItem.title];
+        [hud show:YES];
     return;
     }
 
@@ -273,7 +277,7 @@ return self;
 -(void)didFailOnLocationWithError:(NSError*)error
 {
     DDLogError(@"%s %@", __PRETTY_FUNCTION__, error);
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TBNSErrorDelegate
@@ -368,6 +372,7 @@ return [self.locations count];
     UIButton *storeButton = [[UIButton alloc] initWithFrame:frame];
     storeButton.titleLabel.numberOfLines = 0;
     storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    storeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 		storeButton.titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
     [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
@@ -508,9 +513,8 @@ return VLBScrollViewOrientationHorizontal;
 
 -(void)didSucceedWithItems:(NSMutableArray*) items
 {
-    DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, items);
-    
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, items);    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 	self.items = items;
     self.numberOfRows = round((float)self.items.count/2.0);
@@ -521,7 +525,7 @@ return VLBScrollViewOrientationHorizontal;
 -(void)didFailOnItemsWithError:(NSError*)error
 {
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark VLBServiceDelegate
@@ -546,6 +550,7 @@ return VLBScrollViewOrientationHorizontal;
 
 -(void)didFindPlacemark:(NSNotification *)notification
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];    
@@ -559,6 +564,8 @@ return VLBScrollViewOrientationHorizontal;
     [self updateTitle:localityName];
 
     [[VLBQueries newGetLocationsGivenLocalityName:localityName delegate:self] start];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [hud show:YES];
 }
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification

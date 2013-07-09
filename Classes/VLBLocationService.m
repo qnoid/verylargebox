@@ -130,14 +130,17 @@ return self;
      
         CLPlacemark *place = [placemarks objectAtIndex:0];
 
-				if(!place){
-						NSError *error = [NSError errorWithDomain:kCLErrorDomain code:kCLErrorGeocodeFoundNoResult userInfo:nil];
+        if(!place || !place.locality){
+		
+            NSError *error = [NSError errorWithDomain:kCLErrorDomain code:kCLErrorGeocodeFoundNoResult userInfo:nil];
 
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"error"];
             
-         	[[NSNotificationCenter defaultCenter] postNotificationName:@"didFailReverseGeocodeLocationWithError" object:self userInfo:userInfo];
-				return;
-				}
+         	[[NSNotificationCenter defaultCenter] postNotificationName:@"didFailReverseGeocodeLocationWithError"
+                                                                object:self
+                                                              userInfo:userInfo];
+        return;
+		}
 
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:place forKey:@"place"];
         

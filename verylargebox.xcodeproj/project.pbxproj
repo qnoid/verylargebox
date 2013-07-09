@@ -141,6 +141,8 @@
 		BD4D32A8177F5B9E0015EADF /* VLBCameraViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D32A7177F5B9E0015EADF /* VLBCameraViewTest.m */; };
 		BD4D32AA177F5D040015EADF /* VLBViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D32A9177F5D040015EADF /* VLBViewTest.m */; };
 		BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A503A1291E4AC00BCB475 /* CoreLocation.framework */; };
+		BD59A471178C82C3003A9394 /* location-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A46F178C82C3003A9394 /* location-arrow.png */; };
+		BD59A472178C82C3003A9394 /* location-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A470178C82C3003A9394 /* location-arrow@2x.png */; };
 		BD5CB779177119E800BC21D1 /* navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB777177119E800BC21D1 /* navigationbar.png */; };
 		BD5CB77A177119E800BC21D1 /* navigationbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB778177119E800BC21D1 /* navigationbar@2x.png */; };
 		BD5CB77D1771327600BC21D1 /* target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB77B1771327600BC21D1 /* target@2x.png */; };
@@ -451,6 +453,8 @@
 		BD4D329F177F5A370015EADF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		BD4D32A7177F5B9E0015EADF /* VLBCameraViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBCameraViewTest.m; path = Classes/VLBCameraViewTest.m; sourceTree = "<group>"; };
 		BD4D32A9177F5D040015EADF /* VLBViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBViewTest.m; path = Classes/VLBViewTest.m; sourceTree = "<group>"; };
+		BD59A46F178C82C3003A9394 /* location-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "location-arrow.png"; path = "Supporting Files/location-arrow.png"; sourceTree = "<group>"; };
+		BD59A470178C82C3003A9394 /* location-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "location-arrow@2x.png"; path = "Supporting Files/location-arrow@2x.png"; sourceTree = "<group>"; };
 		BD5CB777177119E800BC21D1 /* navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar.png; sourceTree = "<group>"; };
 		BD5CB778177119E800BC21D1 /* navigationbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar@2x.png"; sourceTree = "<group>"; };
 		BD5CB77B1771327600BC21D1 /* target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "target@2x.png"; path = "Supporting Files/target@2x.png"; sourceTree = "<group>"; };
@@ -1104,6 +1108,8 @@
 				BDF274721785557A000E179E /* refresh-grey@2x.png */,
 				BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */,
 				BDE4926D1775F7A700FFC41F /* refresh-mini.png */,
+				BD59A46F178C82C3003A9394 /* location-arrow.png */,
+				BD59A470178C82C3003A9394 /* location-arrow@2x.png */,
 				BDAF7AAB17528194008899D1 /* signpost.png */,
 				BDAF7AAC17528194008899D1 /* signpost@2x.png */,
 				BDE492681775DD7900FFC41F /* take-photo@2x.png */,
@@ -1356,6 +1362,8 @@
 				BDF2747717855F63000E179E /* VLBScrollView.xib in Resources */,
 				BDF2747D1786B143000E179E /* VLBProfileEmptyViewController.xib in Resources */,
 				BD77441817886D98007F7AAA /* VLBNotificationView.xib in Resources */,
+				BD59A471178C82C3003A9394 /* location-arrow.png in Resources */,
+				BD59A472178C82C3003A9394 /* location-arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
