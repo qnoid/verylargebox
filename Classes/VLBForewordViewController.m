@@ -11,6 +11,7 @@
 #import "VLBViewControllers.h"
 #import "VLBMacros.h"
 #import "VLBView.h"
+#import "VLBHuds.h"
 
 @interface VLBForewordViewController ()
 
@@ -47,6 +48,18 @@ return self;
 -(IBAction)didTouchUpInsideTwitterHandleButton:(id)sender
 {
     SLComposeViewController* composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    
+    if(!composeViewController){
+        [VLBHuds newWithView:self.view config:^MBProgressHUD *(MBProgressHUD *hud) {
+            VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO(hud);
+            hud.labelText = @"No twitter account setup.";
+            hud.detailsLabelText = @"Go to Settings -> Twitter to add an account";
+        return hud;
+        }];
+        
+    return;
+    }
+    
     [composeViewController setInitialText:@"@qnoid "];
     
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:composeViewController] animated:YES completion:nil];
