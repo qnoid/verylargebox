@@ -19,26 +19,29 @@
     return ^BOOL(NSError* error)
     {
     switch (error.code) {
-				case kCLErrorLocationUnknown:
-				case kCLErrorNetwork:{
-	        MBProgressHUD *hud = [VLBHuds newWithView:view config:block];
-    	    [hud show:YES];
-	        [hud hide:YES afterDelay:5.0];
-				}
-				break;
-        case kCLErrorDenied:{
+			case kCLErrorLocationUnknown:
+            case kCLErrorNetwork:
+            case kCLErrorGeocodeFoundNoResult:
+            {
+                MBProgressHUD *hud = [VLBHuds newWithView:view config:block];
+                hud.detailsLabelText = @"Could not find your location. Usually this happens if you are inside a building, have poor network connection or in a remote area.";                
+                [hud show:YES];
+                [hud hide:YES afterDelay:5.0];
+            }
+			break;
+            case kCLErrorDenied:{
     			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
 			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
       			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
 			    alertView.delegate = alertViewDelegate;
 
 			    [alertView show]; 
-				}
-        break;
-				default:{
+			}
+            break;
+			default:{
 					[VLBErrorBlocks localizedDescriptionOfErrorBlock:view](error);
-				}
-				break;
+			}
+			break;
     }
     return YES;
     };

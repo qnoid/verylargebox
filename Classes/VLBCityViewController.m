@@ -262,7 +262,7 @@ return self;
 {
     self.navigationItem.rightBarButtonItem.enabled = YES;
 
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
     if([locations vlb_isEmpty]){
         MBProgressHUD *hud = [VLBHuds newWithViewCamera:self.view locality:self.tabBarItem.title];
@@ -514,7 +514,7 @@ return VLBScrollViewOrientationHorizontal;
 -(void)didSucceedWithItems:(NSMutableArray*) items
 {
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, items);    
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
 	self.items = items;
     self.numberOfRows = round((float)self.items.count/2.0);
@@ -542,7 +542,7 @@ return VLBScrollViewOrientationHorizontal;
 		NSError *error = [VLBNotifications error:notification];
 		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
 			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH(hud);
-			hud.detailsLabelText = @"Please refresh.";
+			hud.labelText = @"Please refresh.";
 		return hud;
 		};
 		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
@@ -579,7 +579,7 @@ return VLBScrollViewOrientationHorizontal;
 		NSError *error = [VLBNotifications error:notification];
 		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
 			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH(hud);
-			hud.detailsLabelText = @"Please refresh.";
+            hud.labelText = @"Please refresh.";
 		return hud;
 		};
 		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);

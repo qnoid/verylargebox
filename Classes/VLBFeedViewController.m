@@ -249,7 +249,7 @@ return VLBScrollViewOrientationVertical;
 
 		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
 			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET(hud);
-			hud.detailsLabelText = @"Please select a location.";
+			hud.labelText = @"Please select a location.";
 		return hud;
 		};
 		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
