@@ -58,6 +58,7 @@ return localityItemsViewController;
 
 -(void)dealloc
 {
+    [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
