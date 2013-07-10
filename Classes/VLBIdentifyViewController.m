@@ -33,6 +33,8 @@
 #import "VLBTheBox.h"
 #import "NSDictionary+VLBResidence.h"
 #import "VLBProfileEmptyViewController.h"
+#import "VLBViewControllers.h"
+#import "VLBForewordViewController.h"
 
 NSString* const VLB_EMAIL_VALIDATION_REGEX =
 @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -61,14 +63,11 @@ NSString* const VLB_EMAIL_VALIDATION_REGEX =
 
     VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:(VLBTheBox*)thebox accounts:[NSMutableArray arrayWithArray:accounts]];
     
-    UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"thebox";
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;    
-    identifyViewController.navigationItem.titleView = titleLabel;
-    [titleLabel sizeToFit];
+    UIButton* titleButton = [[VLBViewControllers new] titleButton:@"Foreword"
+                                                           target:identifyViewController
+                                                           action:@selector(didTouchUpInsideForeword:)];
+    
+    identifyViewController.navigationItem.titleView = titleButton;
     
 return identifyViewController;
 }
@@ -92,6 +91,13 @@ return identifyViewController;
     }
     
 return self;
+}
+
+-(void)didTouchUpInsideForeword:(id)sender
+{
+    VLBForewordViewController *forewordViewController = [VLBForewordViewController newForewordViewController];
+    
+	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:forewordViewController] animated:YES completion:nil];
 }
 
 - (void)viewDidLoad

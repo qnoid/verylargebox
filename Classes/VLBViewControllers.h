@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^VLBTitleLabel)(UILabel *titleLabel);
+
 @interface VLBViewControllers : NSObject
 
 -(UILabel*)titleView:(NSString*)text;
+
+-(UIButton*)titleButton:(NSString*)text target:(id)target action:(SEL)action;
 
 -(UIBarButtonItem*)closeButton:(id)target action:(SEL)action;
 

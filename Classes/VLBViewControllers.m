@@ -11,6 +11,14 @@
 
 @implementation VLBViewControllers
 
+VLBTitleLabel const VLBTitleLabelNavigation = ^(UILabel *titleLabel)
+{
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
+    titleLabel.adjustsFontSizeToFitWidth = YES;
+};
+
 -(UIBarButtonItem*)barButtonItem:(id)target action:(SEL)action imageNamed:(NSString*) imageNamed
 {
     UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -24,13 +32,23 @@ return [[UIBarButtonItem alloc] initWithCustomView:closeButton];
 -(UILabel*)titleView:(NSString*)text
 {
     UILabel* titleLabel = [[UILabel alloc] init];
+    VLBTitleLabelNavigation(titleLabel);
     titleLabel.text = text;
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    titleLabel.adjustsFontSizeToFitWidth = YES;
-    
+
 return titleLabel;
+}
+
+-(UIButton*)titleButton:(NSString*)text target:(id)target action:(SEL)action
+{
+    UIButton* titleButon = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleButon addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    VLBTitleLabelNavigation(titleButon.titleLabel);
+    [titleButon setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
+    [titleButon setTitle:text forState:UIControlStateNormal];
+    [titleButon.titleLabel sizeToFit];
+
+return titleButon;
 }
 
 -(UIBarButtonItem*)closeButton:(id)target action:(SEL)action {

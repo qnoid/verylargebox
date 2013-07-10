@@ -157,6 +157,10 @@
 		BD59A497178CBF16003A9394 /* down-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A496178CBF16003A9394 /* down-arrow.png */; };
 		BD59A499178CC403003A9394 /* camera-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A498178CC403003A9394 /* camera-mini.png */; };
 		BD59A49B178CC8ED003A9394 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A49A178CC8ED003A9394 /* Icon-Small.png */; };
+		BD59A4A3178E1284003A9394 /* VLBForewordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD59A4A1178E1283003A9394 /* VLBForewordViewController.m */; };
+		BD59A4A4178E1284003A9394 /* VLBForewordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */; };
+		BD59A4A6178E1ACC003A9394 /* qnoid.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD59A4A5178E1ACC003A9394 /* qnoid.jpg */; };
+		BD59A4A8178E206A003A9394 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD59A4A7178E2069003A9394 /* Social.framework */; };
 		BD5CB779177119E800BC21D1 /* navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB777177119E800BC21D1 /* navigationbar.png */; };
 		BD5CB77A177119E800BC21D1 /* navigationbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB778177119E800BC21D1 /* navigationbar@2x.png */; };
 		BD5CB77D1771327600BC21D1 /* target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB77B1771327600BC21D1 /* target@2x.png */; };
@@ -477,6 +481,11 @@
 		BD59A496178CBF16003A9394 /* down-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down-arrow.png"; path = "Supporting Files/down-arrow.png"; sourceTree = "<group>"; };
 		BD59A498178CC403003A9394 /* camera-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-mini.png"; path = "Supporting Files/camera-mini.png"; sourceTree = "<group>"; };
 		BD59A49A178CC8ED003A9394 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		BD59A4A0178E1283003A9394 /* VLBForewordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBForewordViewController.h; sourceTree = "<group>"; };
+		BD59A4A1178E1283003A9394 /* VLBForewordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBForewordViewController.m; sourceTree = "<group>"; };
+		BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBForewordViewController.xib; path = Classes/VLBForewordViewController.xib; sourceTree = "<group>"; };
+		BD59A4A5178E1ACC003A9394 /* qnoid.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qnoid.jpg; sourceTree = "<group>"; };
+		BD59A4A7178E2069003A9394 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		BD5CB777177119E800BC21D1 /* navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar.png; sourceTree = "<group>"; };
 		BD5CB778177119E800BC21D1 /* navigationbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar@2x.png"; sourceTree = "<group>"; };
 		BD5CB77B1771327600BC21D1 /* target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "target@2x.png"; path = "Supporting Files/target@2x.png"; sourceTree = "<group>"; };
@@ -607,6 +616,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD59A4A8178E206A003A9394 /* Social.framework in Frameworks */,
 				BDF2747B178635D3000E179E /* AssetsLibrary.framework in Frameworks */,
 				BD4D32A1177F5A560015EADF /* CoreMedia.framework in Frameworks */,
 				BDF2FD0A177A4A7400941B7F /* AVFoundation.framework in Frameworks */,
@@ -692,6 +702,8 @@
 				903AE40012853FBE00A8FB28 /* Details */,
 				903AE40312853FD500A8FB28 /* Description */,
 				905A4F9C1291DE6F00BCB475 /* Stores */,
+				BD59A4A0178E1283003A9394 /* VLBForewordViewController.h */,
+				BD59A4A1178E1283003A9394 /* VLBForewordViewController.m */,
 				BDAE3C43176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.m */,
 				BDAE3C46176CEE0B0037734C /* NSDictionary+VLBFoursquareVenue.m */,
 				BDF2747E1786B1FB000E179E /* VLBProfileEmptyViewController.h */,
@@ -757,6 +769,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				BD59A4A7178E2069003A9394 /* Social.framework */,
 				90E359291546333700075ABF /* Supporting Files */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -1018,6 +1031,7 @@
 				BD5CB778177119E800BC21D1 /* navigationbar@2x.png */,
 				BDF2FD04177A2BB500941B7F /* hexabump.png */,
 				BDF2FD02177A1EC100941B7F /* hexabump@2X.png */,
+				BD59A4A5178E1ACC003A9394 /* qnoid.jpg */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1068,6 +1082,7 @@
 		BDA2BC87165951CB0068C749 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */,
 				BDF2747C1786B142000E179E /* VLBProfileEmptyViewController.xib */,
 				BDA2BC8B165952C20068C749 /* VLBIdentifyViewController.xib */,
 				BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */,
@@ -1410,6 +1425,8 @@
 				BD59A497178CBF16003A9394 /* down-arrow.png in Resources */,
 				BD59A499178CC403003A9394 /* camera-mini.png in Resources */,
 				BD59A49B178CC8ED003A9394 /* Icon-Small.png in Resources */,
+				BD59A4A4178E1284003A9394 /* VLBForewordViewController.xib in Resources */,
+				BD59A4A6178E1ACC003A9394 /* qnoid.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1621,6 +1638,7 @@
 				BDF274841786B5EE000E179E /* NSDictionary+VLBUser.m in Sources */,
 				BDF274861786B9DB000E179E /* VLBViewControllers.m in Sources */,
 				BD774416178869B5007F7AAA /* VLBNotificationView.m in Sources */,
+				BD59A4A3178E1284003A9394 /* VLBForewordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
