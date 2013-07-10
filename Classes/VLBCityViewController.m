@@ -564,7 +564,7 @@ return VLBScrollViewOrientationHorizontal;
     [self updateTitle:localityName];
 
     [[VLBQueries newGetLocationsGivenLocalityName:localityName delegate:self] start];
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    MBProgressHUD *hud = [VLBHuds newWithView:self.view];
     [hud show:YES];
 }
 

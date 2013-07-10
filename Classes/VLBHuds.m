@@ -84,6 +84,7 @@ return hud;
 +(MBProgressHUD*)newWithView:(UIView*)view config:(VLBProgressHUDBlock)block
 {
 	MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
+    hud.userInteractionEnabled = NO;    
 	[view addSubview:hud];
 
 return block(hud);
@@ -92,6 +93,7 @@ return block(hud);
 +(MBProgressHUD*)newWithView:(UIView*)view
 {
 	MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
+    hud.userInteractionEnabled = NO;
 	[view addSubview:hud];
 
 return hud;
