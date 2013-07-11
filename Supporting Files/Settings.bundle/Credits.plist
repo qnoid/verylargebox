@@ -6,9 +6,17 @@
 	<array>
 		<dict>
 			<key>FooterText</key>
-			<string>This application makes use of patterns from subtlepatterns.com</string>
+			<string>verylargebox makes use of patterns from subtlepatterns.com</string>
 			<key>Title</key>
-			<string>Credits</string>
+			<string>subtlepatterns</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>verylargebox uses Glyphish PRO icons from glyphish.com</string>
+			<key>Title</key>
+			<string>glyphish</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
