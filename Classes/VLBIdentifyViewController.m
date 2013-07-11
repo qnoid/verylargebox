@@ -93,6 +93,11 @@ return identifyViewController;
 return self;
 }
 
+-(void)hideHUDForView
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 -(void)didTouchUpInsideForeword:(id)sender
 {
     VLBForewordViewController *forewordViewController = [VLBForewordViewController newForewordViewController];
@@ -245,11 +250,20 @@ return YES;
 
 -(void)didFailOnVerifyWithError:(NSError *)error
 {
-    UIAlertView* userUnauthorisedAlertView =
-        [VLBAlertViews newAlertViewWithOk:@"Unauthorised"
-                                  message:@"You are not authorised. Please check your email to verify."];
+    __weak VLBIdentifyViewController *wself = self;
+    MBProgressHUD* hud = [VLBHuds newWithView:self.view config:^MBProgressHUD *(MBProgressHUD *hud) {
+        VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO(hud);
+        hud.labelText = @"Unauthorised device";
+        hud.detailsLabelText = [NSString stringWithFormat:@"%@ is not authorised. Please check your email to verify it.",
+                                [[UIDevice currentDevice] name]];
+        
+        [hud addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:wself action:@selector(hideHUDForView)]];
+        hud.userInteractionEnabled = YES;
+        
+    return hud;
+    }];
     
-    [userUnauthorisedAlertView show];
+    [hud show:YES];
 }
 
 -(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence
@@ -277,11 +291,21 @@ return YES;
 
     [self.accountsTableView reloadData];
     
-    UIAlertView* userDidEnterEmailAlertView =
-    [VLBAlertViews newAlertViewWithOk:@"Device Registration"
-                              message:[NSString stringWithFormat:@"Requested to register %@ with thebox", [[UIDevice currentDevice] name]]];
     
-    [userDidEnterEmailAlertView show];
+    __weak VLBIdentifyViewController *wself = self;
+    MBProgressHUD* hud = [VLBHuds newWithView:self.view config:^MBProgressHUD *(MBProgressHUD *hud) {
+        VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD(hud);
+        hud.labelText = @"Access request";
+        hud.detailsLabelText = [NSString stringWithFormat:@"You will receive an email shortly to pair %@ with verylargebox.",
+                                [[UIDevice currentDevice] name]];
+        
+        [hud addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:wself action:@selector(hideHUDForView)]];
+        hud.userInteractionEnabled = YES;
+        
+        return hud;
+        }];
+    
+    [hud show:YES];
 }
 
 #pragma mark TBCreateUserOperationDelegate
@@ -289,11 +313,19 @@ return YES;
 {
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
-    UIAlertView* userUnauthorisedAlertView =
-        [VLBAlertViews newAlertViewWithOk:@"New Registration"
-                                  message:[NSString stringWithFormat:@"Please check your email to verify %@", [[UIDevice currentDevice] name]]];
-     
-    [userUnauthorisedAlertView show];
+    __weak VLBIdentifyViewController *wself = self;
+    MBProgressHUD* hud = [VLBHuds newWithView:self.view config:^MBProgressHUD *(MBProgressHUD *hud) {
+        VLB_PROGRESS_HUD_CUSTOM_VIEW_IPHONE(hud);
+        hud.labelText = @"New device registration";
+        hud.detailsLabelText = [NSString stringWithFormat:@"Please check your email to verify %@.", [[UIDevice currentDevice] name]];
+        
+        [hud addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:wself action:@selector(hideHUDForView)]];
+        hud.userInteractionEnabled = YES;
+        
+    return hud;
+    }];
+    
+    [hud show:YES];
 }
 
 -(void)didFailOnRegistrationWithError:(NSError*)error
@@ -400,6 +432,7 @@ return YES;
         vlbEmailStatus(VLBEmailStatusError)(tableViewCell);
         [wself.emailStatuses setObject:@(VLBEmailStatusError) atIndexedSubscript:indexPath.row];
 
+        
         UIAlertView* notConnectedToInternetAlertView =
         [VLBAlertViews newAlertViewWithOk:@"Not Connected to Internet"
                                   message:@"You are not connected to the internet. Check your connection and try again."];

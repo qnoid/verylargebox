@@ -161,6 +161,8 @@
 		BD59A4A4178E1284003A9394 /* VLBForewordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */; };
 		BD59A4A6178E1ACC003A9394 /* qnoid.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD59A4A5178E1ACC003A9394 /* qnoid.jpg */; };
 		BD59A4A8178E206A003A9394 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD59A4A7178E2069003A9394 /* Social.framework */; };
+		BD59A4AB178E2B36003A9394 /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A4A9178E2B36003A9394 /* iphone.png */; };
+		BD59A4AC178E2B36003A9394 /* iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A4AA178E2B36003A9394 /* iphone@2x.png */; };
 		BD5CB779177119E800BC21D1 /* navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB777177119E800BC21D1 /* navigationbar.png */; };
 		BD5CB77A177119E800BC21D1 /* navigationbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB778177119E800BC21D1 /* navigationbar@2x.png */; };
 		BD5CB77D1771327600BC21D1 /* target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5CB77B1771327600BC21D1 /* target@2x.png */; };
@@ -486,6 +488,8 @@
 		BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBForewordViewController.xib; path = Classes/VLBForewordViewController.xib; sourceTree = "<group>"; };
 		BD59A4A5178E1ACC003A9394 /* qnoid.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qnoid.jpg; sourceTree = "<group>"; };
 		BD59A4A7178E2069003A9394 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		BD59A4A9178E2B36003A9394 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iphone.png; path = "Supporting Files/iphone.png"; sourceTree = "<group>"; };
+		BD59A4AA178E2B36003A9394 /* iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iphone@2x.png"; path = "Supporting Files/iphone@2x.png"; sourceTree = "<group>"; };
 		BD5CB777177119E800BC21D1 /* navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar.png; sourceTree = "<group>"; };
 		BD5CB778177119E800BC21D1 /* navigationbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar@2x.png"; sourceTree = "<group>"; };
 		BD5CB77B1771327600BC21D1 /* target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "target@2x.png"; path = "Supporting Files/target@2x.png"; sourceTree = "<group>"; };
@@ -769,7 +773,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				BD59A4A7178E2069003A9394 /* Social.framework */,
 				90E359291546333700075ABF /* Supporting Files */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -800,6 +803,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD59A4A7178E2069003A9394 /* Social.framework */,
 				BDF274781786352E000E179E /* AssetsLibrary.framework */,
 				BDF2FD09177A4A7400941B7F /* AVFoundation.framework */,
 				BDF825C016FDFCEA003B3003 /* AddressBook.framework */,
@@ -1149,6 +1153,8 @@
 				BDBA745E1770EB4B001AE3F3 /* eye.png */,
 				BDC8A1D9178202C300E5BF8C /* idcard-white.png */,
 				BDC8A1D71782028E00E5BF8C /* idcard-white@2x.png */,
+				BD59A4A9178E2B36003A9394 /* iphone.png */,
+				BD59A4AA178E2B36003A9394 /* iphone@2x.png */,
 				BD59A490178CBEFD003A9394 /* left-arrow.png */,
 				BDE49260177515E300FFC41F /* left-arrow@2x.png */,
 				BD59A488178CAE0C003A9394 /* radar.png */,
@@ -1427,6 +1433,8 @@
 				BD59A49B178CC8ED003A9394 /* Icon-Small.png in Resources */,
 				BD59A4A4178E1284003A9394 /* VLBForewordViewController.xib in Resources */,
 				BD59A4A6178E1ACC003A9394 /* qnoid.jpg in Resources */,
+				BD59A4AB178E2B36003A9394 /* iphone.png in Resources */,
+				BD59A4AC178E2B36003A9394 /* iphone@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

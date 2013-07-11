@@ -21,6 +21,22 @@ void vlb_animate(UIView *view)
     }];
 }
 
+VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD = ^(MBProgressHUD *hud)
+{
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"idcard-white.png"]];
+    hud.mode = MBProgressHUDModeCustomView;
+    
+    return hud;
+};
+
+VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_IPHONE = ^(MBProgressHUD *hud)
+{
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iphone.png"]];
+    hud.mode = MBProgressHUDModeCustomView;
+    
+    return hud;
+};
+
 VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO = ^(MBProgressHUD *hud)
 {
     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle-no.png"]];
