@@ -39,9 +39,10 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUILabel" id="598973922">
 						<reference key="NSNextResponder" ref="448323073"/>
-						<int key="NSvFlags">306</int>
+						<int key="NSvFlags">258</int>
 						<string key="NSFrame">{{20, 20}, {280, 650}}</string>
 						<reference key="NSSuperview" ref="448323073"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="531009023"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -68,8 +69,8 @@ YSByb2NrLCBpbiBhIG5hcnJvdyBzdHJlZXQgb3IganVzdCBhcm91bmQgdGhlIGNvcm5lci4gVGhlIGJv
 eCBjYW4gdGVsbCB5b3UgaG93IHRvIGdldCB0aGVyZTsganVzdCBhc2sgZm9yIGRpcmVjdGlvbnMuCgpH
 byBhaGVhZCwgc2hvd2Nhc2UgeW91ciBmaXJzdCBwcm9kdWN0IGluIHRoZSBib3guIE9uZSB0aGF0IHlv
 dSBoYXZlIGp1c3QgbWFkZS4gT25lIHlvdSBmZWxsIGluIGxvdmUuIE9uZSB5b3UgY2FtZSBhY3Jvc3Mu
-CgpMZXQgcGVvcGxlIGtub3cgdGhlIGJveCBpcyBoZXJlLgpNYWtlIHRoZSBiZXN0IG9mIGl0LgoKWW91
-IGhvbGQgYSBwYXJ0IG9mIHRoZSBib3ggaW4geW91ciBwYWxtLg</bytes>
+CgpMZXQgcGVvcGxlIGtub3cgdGhlIGJveCBpcyBoZXJlLgpNYWtlIHRoZSBiZXN0IG9mIGl0LgoKQSBz
+bWFsbCBwYXJ0IGlzIGluIHlvdXIgcGFsbS4</bytes>
 						</object>
 						<object class="NSColor" key="IBUITextColor" id="258241712">
 							<int key="NSColorSpace">1</int>
@@ -96,9 +97,10 @@ IGhvbGQgYSBwYXJ0IG9mIHRoZSBib3ggaW4geW91ciBwYWxtLg</bytes>
 					</object>
 					<object class="IBUIImageView" id="531009023">
 						<reference key="NSNextResponder" ref="448323073"/>
-						<int key="NSvFlags">256</int>
+						<int key="NSvFlags">288</int>
 						<string key="NSFrame">{{20, 670}, {75, 75}}</string>
 						<reference key="NSSuperview" ref="448323073"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="930781219"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="IBUIContentMode">1</int>
@@ -114,6 +116,7 @@ IGhvbGQgYSBwYXJ0IG9mIHRoZSBib3ggaW4geW91ciBwYWxtLg</bytes>
 						<int key="NSvFlags">294</int>
 						<string key="NSFrame">{{103, 670}, {200, 31}}</string>
 						<reference key="NSSuperview" ref="448323073"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1052961029"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -143,6 +146,7 @@ IGhvbGQgYSBwYXJ0IG9mIHRoZSBib3ggaW4geW91ciBwYWxtLg</bytes>
 						<int key="NSvFlags">294</int>
 						<string key="NSFrame">{{103, 701}, {200, 44}}</string>
 						<reference key="NSSuperview" ref="448323073"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -176,6 +180,7 @@ IGhvbGQgYSBwYXJ0IG9mIHRoZSBib3ggaW4geW91ciBwYWxtLg</bytes>
 				</array>
 				<string key="NSFrame">{{0, 64}, {320, 504}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="598973922"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -319,7 +324,43 @@ IGhvbGQgYSBwYXJ0IG9mIHRoZSBib3ggaW4geW91ciBwYWxtLg</bytes>
 			<nil key="sourceID"/>
 			<int key="maxID">23</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">VLBForewordViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">didTouchUpInsideTwitterHandleButton:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">didTouchUpInsideTwitterHandleButton:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">didTouchUpInsideTwitterHandleButton:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="imageView">UIImageView</string>
+						<string key="scrollView">UIScrollView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="imageView">
+							<string key="name">imageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollView">
+							<string key="name">scrollView</string>
+							<string key="candidateClassName">UIScrollView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/VLBForewordViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
