@@ -58,20 +58,20 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSMutableString" key="IBUIText">
-							<bytes key="NS.bytes">UGljdHVyZSBhIEJveC4KCkEgdmVyeSBsYXJnZSBib3ggaW4gdGhlIHRvd24gc3F1YXJlIHdoZXJlIGV2
-ZXJ5b25lIGZyb20gYWxsIG92ZXIgdG93biBjYW4gc2VlOyBubyBtYXR0ZXIgd2hlcmUgc2hlIHN0YW5k
-cy4gSXQgaXMgYSBzb2xpZCwgdHJhbnNwYXJlbnQgYm94IHRoYXQgeW91IGNhbiBwcm9qZWN0IGFueSBw
-cm9kdWN0IGF2YWlsYWJsZSBpbiB0b3duLiBGb3IgZXZlcnkgcHJvZHVjdCwgYSBiZWFtIGZsb3dzIGZy
-b20gdGhlIGJveCB0byB0aGUgc3RvcmUgdGhhdCBoYXMgaXQsIHRlbGxpbmcgeW91IHdoZXJlIHRvIGZp
-bmQgaXQuCgpJdCBkb2Vzbid0IG1hdHRlciBob3cgc21hbGwgYSBzdG9yZSBtaWdodCBiZSwgd2hldGhl
-ciBpdCBpcyBsb2NhdGVkIGluIHRoZSBvdGhlciBzaWRlIG9mIHRoZSB0b3duLCBoaWRkZW4gdW5kZXIg
-YSByb2NrLCBpbiBhIG5hcnJvdyBzdHJlZXQgb3IganVzdCBhcm91bmQgdGhlIGNvcm5lci4gVGhlIGJv
-eCBjYW4gdGVsbCB5b3UgaG93IHRvIGdldCB0aGVyZTsganVzdCBhc2sgZm9yIGRpcmVjdGlvbnMuCgpH
-byBhaGVhZCwgc2hvd2Nhc2UgeW91ciBmaXJzdCBwcm9kdWN0IGluIHRoZSBib3guIE9uZSB0aGF0IHlv
-dSBoYXZlIGp1c3QgbWFkZS4gT25lIHlvdSBmZWxsIGluIGxvdmUgd2l0aC4gT25lIHlvdSBjYW1lIGFj
-cm9zcy4KCkxldCBwZW9wbGUga25vdyB0aGUgYm94IGlzIGhlcmUuIApNYWtlIHRoZSBiZXN0IG9mIGl0
-LiBXaGF0IGlzIGluc2lkZSwgaXQgaXMgdXAgdG8geW91LgoKSW4geW91ciBwYWxtIHJlc3RzIGEgc21h
-bGwgcGFydC4</bytes>
+							<bytes key="NS.bytes">UGljdHVyZSBhIEJveC4KCkEgdmVyeSBsYXJnZSBib3ggaW4geW91ciB0b3duIHNxdWFyZSB3aGVyZSBl
+dmVyeW9uZSBmcm9tIGFsbCBvdmVyIHRvd24gY2FuIHNlZTsgbm8gbWF0dGVyIHdoZXJlIHNoZSBzdGFu
+ZHMuIEl0IGlzIGEgc29saWQsIHRyYW5zcGFyZW50IGJveCB0aGF0IHlvdSBjYW4gcHJvamVjdCBhbnkg
+cHJvZHVjdCBhdmFpbGFibGUgaW4gdG93bi4gRm9yIGV2ZXJ5IHByb2R1Y3QsIGEgYmVhbSBmbG93cyBm
+cm9tIHRoZSBib3ggdG8gdGhlIHN0b3JlIHRoYXQgaGFzIGl0LCB0ZWxsaW5nIHlvdSB3aGVyZSB0byBm
+aW5kIGl0LgoKSXQgZG9lc24ndCBtYXR0ZXIgaG93IHNtYWxsIGEgc3RvcmUgbWlnaHQgYmUsIHdoZXRo
+ZXIgaXQgaXMgbG9jYXRlZCBpbiB0aGUgb3RoZXIgc2lkZSBvZiB0aGUgdG93biwgaGlkZGVuIHVuZGVy
+IGEgcm9jaywgaW4gYSBuYXJyb3cgc3RyZWV0IG9yIGp1c3QgYXJvdW5kIHRoZSBjb3JuZXIuIFRoZSBi
+b3ggY2FuIHRlbGwgeW91IGhvdyB0byBnZXQgdGhlcmU7IGp1c3QgYXNrIGZvciBkaXJlY3Rpb25zLgoK
+R28gYWhlYWQsIHNob3djYXNlIHlvdXIgZmlyc3QgcHJvZHVjdCBpbiB0aGUgYm94LiBPbmUgdGhhdCB5
+b3UgaGF2ZSBqdXN0IG1hZGUuIE9uZSB5b3UgZmVsbCBpbiBsb3ZlIHdpdGguIE9uZSB5b3UgY2FtZSBh
+Y3Jvc3MuCgpMZXQgcGVvcGxlIGtub3cgdGhlIGJveCBpcyBoZXJlLiAKTWFrZSB0aGUgYmVzdCBvZiBp
+dC4gV2hhdCBpcyBpbnNpZGUsIGl0IGlzIHVwIHRvIHlvdS4KCkluIHlvdXIgcGFsbSByZXN0cyBhIHNt
+YWxsIHBhcnQuA</bytes>
 						</object>
 						<object class="NSColor" key="IBUITextColor" id="258241712">
 							<int key="NSColorSpace">1</int>
@@ -148,6 +148,7 @@ bGwgcGFydC4</bytes>
 						<string key="NSFrame">{{103, 701}, {200, 44}}</string>
 						<reference key="NSSuperview" ref="448323073"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
