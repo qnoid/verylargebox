@@ -446,7 +446,6 @@
 		BD2A8A9C175A4F4C0036A852 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Supporting Files/Settings.bundle"; sourceTree = "<group>"; };
 		BD2A8AAA175AD9340036A852 /* VLBAlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBAlertViews.h; path = ../Classes/VLBAlertViews.h; sourceTree = "<group>"; };
 		BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBAlertViews.m; sourceTree = "<group>"; };
-		BD2A8AAD175B3DE00036A852 /* XRay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XRay.framework; sourceTree = "<group>"; };
 		BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCityViewControllerTest.m; sourceTree = "<group>"; };
 		BD30A3A41776234300A71DC9 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BD4292B7175B4BBB00459891 /* VLBErrorBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBErrorBlocks.h; path = ../Classes/VLBErrorBlocks.h; sourceTree = "<group>"; };
@@ -601,7 +600,6 @@
 		BDF2FD0B177A5BC700941B7F /* VLBCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBCameraView.xib; path = Classes/VLBCameraView.xib; sourceTree = "<group>"; };
 		BDF2FD0D177CEE9700941B7F /* NSDictionary+VLBStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBStore.h"; path = "../Classes/NSDictionary+VLBStore.h"; sourceTree = "<group>"; };
 		BDF2FD0E177CEE9700941B7F /* NSDictionary+VLBStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBStore.m"; sourceTree = "<group>"; };
-		BDF2FD13177E406900941B7F /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		BDF2FD15177E5B2D00941B7F /* verylargebox-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "verylargebox-info.plist"; sourceTree = "<group>"; };
 		BDF825C016FDFCEA003B3003 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		BDF825C216FFAC59003B3003 /* VLBLocalityOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLBLocalityOperationDelegate.h; sourceTree = "<group>"; };
@@ -860,9 +858,7 @@
 		90454B01154DBBCA0064D998 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				BDF2FD13177E406900941B7F /* Reveal.framework */,
 				BD30A3A41776234300A71DC9 /* Crashlytics.framework */,
-				BD2A8AAD175B3DE00036A852 /* XRay.framework */,
 				9089482415533980009188B4 /* libTestFlight.a */,
 			);
 			path = External;
