@@ -58,7 +58,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSMutableString" key="IBUIText">
-							<bytes key="NS.bytes">UGljdHVyZSBhIGJveC4KCkEgdmVyeSBsYXJnZSBib3ggaW4gdGhlIHRvd24gc3F1YXJlIHdoZXJlIGV2
+							<bytes key="NS.bytes">UGljdHVyZSBhIEJveC4KCkEgdmVyeSBsYXJnZSBib3ggaW4gdGhlIHRvd24gc3F1YXJlIHdoZXJlIGV2
 ZXJ5b25lIGZyb20gYWxsIG92ZXIgdG93biBjYW4gc2VlOyBubyBtYXR0ZXIgd2hlcmUgc2hlIHN0YW5k
 cy4gSXQgaXMgYSBzb2xpZCwgdHJhbnNwYXJlbnQgYm94IHRoYXQgeW91IGNhbiBwcm9qZWN0IGFueSBw
 cm9kdWN0IGF2YWlsYWJsZSBpbiB0b3duLiBGb3IgZXZlcnkgcHJvZHVjdCwgYSBiZWFtIGZsb3dzIGZy
@@ -148,7 +148,6 @@ bGwgcGFydC4</bytes>
 						<string key="NSFrame">{{103, 701}, {200, 44}}</string>
 						<reference key="NSSuperview" ref="448323073"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

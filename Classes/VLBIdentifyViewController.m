@@ -63,7 +63,7 @@ NSString* const VLB_EMAIL_VALIDATION_REGEX =
 
     VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:(VLBTheBox*)thebox accounts:[NSMutableArray arrayWithArray:accounts]];
     
-    UIButton* titleButton = [[VLBViewControllers new] titleButton:@"Foreword"
+    UIButton* titleButton = [[VLBViewControllers new] titleButton:@"Picture a Box"
                                                            target:identifyViewController
                                                            action:@selector(didTouchUpInsideForeword:)];
     
