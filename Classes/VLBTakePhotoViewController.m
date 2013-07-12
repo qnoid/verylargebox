@@ -314,6 +314,7 @@ return self;
 
 - (IBAction)enterLocation:(id)sender
 {
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [self class], @"didTouchUpInsideSelectLocationButton"]];
 	VLBStoresViewController *locationController = [VLBStoresViewController newLocationViewController:self.venues];
     self.locationOperationDelegate = locationController;
     locationController.delegate = self;

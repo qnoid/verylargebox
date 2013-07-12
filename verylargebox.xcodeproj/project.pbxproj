@@ -71,7 +71,6 @@
 		90E3592C1546333700075ABF /* default_item_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 90E3592A1546333700075ABF /* default_item_thumb.png */; };
 		90E359301546348E00075ABF /* NSCache+VLBCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E3592F1546348E00075ABF /* NSCache+VLBCache.m */; };
 		90F08273132AED5200E7E35F /* UITextField+VLBTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F08272132AED5200E7E35F /* UITextField+VLBTextField.m */; settings = {COMPILER_FLAGS = ""; }; };
-		90F9FDE4154D97C5001BCD66 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE3154D97C5001BCD66 /* Icon@2x.png */; };
 		90F9FDE6154D97D0001BCD66 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 90F9FDE5154D97D0001BCD66 /* Icon.png */; };
 		BD0A53D51767E63200279EA5 /* checkmark-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53D31767E63200279EA5 /* checkmark-mini.png */; };
 		BD0A53D61767E63200279EA5 /* checkmark-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A53D31767E63200279EA5 /* checkmark-mini.png */; };
@@ -99,7 +98,6 @@
 		BD258DDF1678040500286511 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDD1678040500286511 /* refresh.png */; };
 		BD2A8A9D175A4F4C0036A852 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD2A8A9C175A4F4C0036A852 /* Settings.bundle */; };
 		BD2A8AAC175AD9360036A852 /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
-		BD2A8AAE175B3DE00036A852 /* XRay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2A8AAD175B3DE00036A852 /* XRay.framework */; };
 		BD2A8AB1175B413D0036A852 /* VLBCityViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */; };
 		BD2A8AB3175B42910036A852 /* VLBDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* VLBDetailsViewController.m */; };
 		BD2A8AB5175B429B0036A852 /* VLBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* VLBButton.m */; };
@@ -139,13 +137,10 @@
 		BD57B2E116AF1EFD000D3548 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905A503A1291E4AC00BCB475 /* CoreLocation.framework */; };
 		BD59A471178C82C3003A9394 /* location-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A46F178C82C3003A9394 /* location-arrow.png */; };
 		BD59A472178C82C3003A9394 /* location-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A470178C82C3003A9394 /* location-arrow@2x.png */; };
-		BD59A47F178CA9F1003A9394 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A477178CA9F0003A9394 /* Icon-72.png */; };
 		BD59A480178CA9F1003A9394 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A478178CA9F0003A9394 /* Icon-72@2x.png */; };
 		BD59A481178CA9F1003A9394 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A479178CA9F1003A9394 /* Icon-Small-50.png */; };
 		BD59A482178CA9F1003A9394 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A47A178CA9F1003A9394 /* Icon-Small-50@2x.png */; };
 		BD59A483178CA9F1003A9394 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A47B178CA9F1003A9394 /* Icon-Small@2x.png */; };
-		BD59A484178CA9F1003A9394 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A47C178CA9F1003A9394 /* Icon.png */; };
-		BD59A485178CA9F1003A9394 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A47D178CA9F1003A9394 /* Icon@2x.png */; };
 		BD59A486178CA9F1003A9394 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = BD59A47E178CA9F1003A9394 /* iTunesArtwork */; };
 		BD59A48A178CAE0C003A9394 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A488178CAE0C003A9394 /* radar.png */; };
 		BD59A48B178CAE0C003A9394 /* radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A489178CAE0C003A9394 /* radar@2x.png */; };
@@ -284,7 +279,6 @@
 		BDF2FD0A177A4A7400941B7F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD09177A4A7400941B7F /* AVFoundation.framework */; };
 		BDF2FD0C177A5BC700941B7F /* VLBCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD0B177A5BC700941B7F /* VLBCameraView.xib */; };
 		BDF2FD0F177CEE9700941B7F /* NSDictionary+VLBStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD0E177CEE9700941B7F /* NSDictionary+VLBStore.m */; };
-		BDF2FD14177E406900941B7F /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD13177E406900941B7F /* Reveal.framework */; };
 		BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF825C016FDFCEA003B3003 /* AddressBook.framework */; };
 		BDFBA12A177829C500A59BCF /* VLBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* VLBCityViewController.m */; };
 		BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
@@ -638,9 +632,7 @@
 				908364011400712200E5AAAF /* libz.dylib in Frameworks */,
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
 				9089482515533980009188B4 /* libTestFlight.a in Frameworks */,
-				BD2A8AAE175B3DE00036A852 /* XRay.framework in Frameworks */,
 				BD30A3A51776234300A71DC9 /* Crashlytics.framework in Frameworks */,
-				BDF2FD14177E406900941B7F /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1354,7 +1346,6 @@
 				90D830F412B51DA400BE4470 /* VLBCell.xib in Resources */,
 				90E3592C1546333700075ABF /* default_item_thumb.png in Resources */,
 				90CBFE5F154BF58F00349A13 /* poweredByFoursquare.png in Resources */,
-				90F9FDE4154D97C5001BCD66 /* Icon@2x.png in Resources */,
 				90F9FDE6154D97D0001BCD66 /* Icon.png in Resources */,
 				90454B05154DE5DF0064D998 /* Icon-72.png in Resources */,
 				BDA2BC8D165952C20068C749 /* VLBIdentifyViewController.xib in Resources */,
@@ -1413,13 +1404,10 @@
 				BD77441817886D98007F7AAA /* VLBNotificationView.xib in Resources */,
 				BD59A471178C82C3003A9394 /* location-arrow.png in Resources */,
 				BD59A472178C82C3003A9394 /* location-arrow@2x.png in Resources */,
-				BD59A47F178CA9F1003A9394 /* Icon-72.png in Resources */,
 				BD59A480178CA9F1003A9394 /* Icon-72@2x.png in Resources */,
 				BD59A481178CA9F1003A9394 /* Icon-Small-50.png in Resources */,
 				BD59A482178CA9F1003A9394 /* Icon-Small-50@2x.png in Resources */,
 				BD59A483178CA9F1003A9394 /* Icon-Small@2x.png in Resources */,
-				BD59A484178CA9F1003A9394 /* Icon.png in Resources */,
-				BD59A485178CA9F1003A9394 /* Icon@2x.png in Resources */,
 				BD59A486178CA9F1003A9394 /* iTunesArtwork in Resources */,
 				BD59A48A178CAE0C003A9394 /* radar.png in Resources */,
 				BD59A48B178CAE0C003A9394 /* radar@2x.png in Resources */,

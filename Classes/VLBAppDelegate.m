@@ -9,7 +9,6 @@
 //
 
 #import "VLBAppDelegate.h"
-#import <XRay/XRay.h>
 #import <Crashlytics/Crashlytics.h>
 #import "VLBIdentifyViewController.h"
 #import "VLBLocationService.h"
