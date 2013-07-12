@@ -247,6 +247,7 @@
 		BDCE1E1B1757D6050070BB59 /* VLBViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E1A1757D6050070BB59 /* VLBViews.m */; };
 		BDCE1E241757E53E0070BB59 /* VLBHuds.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E231757E53D0070BB59 /* VLBHuds.m */; };
 		BDCE1E291759495D0070BB59 /* VLBPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E281759495C0070BB59 /* VLBPolygon.m */; };
+		BDD7BBF9179051780015F7AC /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD59A47D178CA9F1003A9394 /* Icon@2x.png */; };
 		BDD8FEBD165C196200AB3041 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDD8FEBC165C196200AB3041 /* InfoPlist.strings */; };
 		BDE1E83615683FF800CF10CF /* VLBView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE1E83515683FF800CF10CF /* VLBView.m */; };
 		BDE482C11750510D0096903C /* VLBFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE482BF1750510D0096903C /* VLBFeedViewController.m */; };
@@ -1336,6 +1337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				903AE3DA1284900300A8FB28 /* VLBCityViewController.xib in Resources */,
+				BDD7BBF9179051780015F7AC /* Icon@2x.png in Resources */,
 				903AE4EC1285BE6500A8FB28 /* VLBViewController.xib in Resources */,
 				903AE5611285E33600A8FB28 /* VLBTakePhotoViewController.xib in Resources */,
 				905A4FBA1291DEB400BCB475 /* VLBStoresViewController.xib in Resources */,
