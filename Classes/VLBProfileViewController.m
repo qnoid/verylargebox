@@ -28,6 +28,7 @@
 #import "VLBButton.h"
 #import "VLBViewControllers.h"
 #import "VLBNotificationView.h"
+#import "VLBEmailViewController.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -38,31 +39,27 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 @property(nonatomic, weak) VLBTheBox *thebox;
 
-@property(nonatomic, strong) NSDictionary* residence;
 @property(nonatomic, strong) NSMutableOrderedSet* items;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
--(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox residence:(NSDictionary*)residence;
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox;
 @end
 
 @implementation VLBProfileViewController
 
-+(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email
++(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox email:(NSString*)email
 {
     VLBProfileViewController *profileViewController =
         [[VLBProfileViewController alloc] initWithBundle:[NSBundle mainBundle]
-                                                  thebox:thebox
-                                               residence:residence];
+                                                  thebox:thebox];
     
     UILabel* titleLabel = [[VLBViewControllers new] titleView:email];
     profileViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
     
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
-    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] closeButton:profileViewController
-                                                                                            action:@selector(close)];
     
     profileViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new] cameraButton:profileViewController
                                                                                               action:@selector(addItem)];
@@ -70,7 +67,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 return profileViewController;
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox residence:(NSDictionary*)residence
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox
 {
     self = [super initWithNibName:NSStringFromClass([VLBProfileViewController class]) bundle:nibBundleOrNil];
     
@@ -79,7 +76,6 @@ return profileViewController;
     }
     
 	self.thebox = thebox;
-    self.residence = residence;
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:10];
     NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
@@ -98,8 +94,8 @@ return self;
     __weak VLBProfileViewController *wself = self;
 
     [self.itemsView addPullToRefreshWithActionHandler:^{
-        [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.residence vlb_residenceUserId] page:VLB_Integer(1) delegate:wself]];
-        [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.residence vlb_residenceUserId] delegate:wself]];
+        [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.thebox userId] page:VLB_Integer(1) delegate:wself]];
+        [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.thebox userId] delegate:wself]];
     }];
     self.itemsView.pullToRefreshView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;    
     self.itemsView.pullToRefreshView.arrowColor = [UIColor whiteColor];
@@ -121,11 +117,6 @@ return self;
 
 }
 
--(void)close
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 -(IBAction)addItem
 {
     VLBTakePhotoViewController *takePhotoViewController = [self.thebox newUploadUIViewController];
@@ -144,7 +135,7 @@ return self;
 	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:itemURL
                                                             location:self.location
                                                             locality:self.locality
-                                                                user:[self.residence vlb_residenceUserId]
+                                                                user:[self.thebox userId]
                                                             delegate:notificationView];
 
 	[self.operationQueue addOperation:itemQuery];

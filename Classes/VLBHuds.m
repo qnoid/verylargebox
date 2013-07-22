@@ -96,6 +96,13 @@ VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_SEARCH = ^(MBProgressHUD 
 return hud;
 };
 
+VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_ENVELOPE = ^(MBProgressHUD *hud)
+{
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"envelope.png"]];
+    hud.mode = MBProgressHUDModeCustomView;
+    
+    return hud;
+};
 
 +(MBProgressHUD*)newWithView:(UIView*)view config:(VLBProgressHUDBlock)block
 {
@@ -151,4 +158,64 @@ return hud;
     
 return hud;
 }
+
++(MBProgressHUD*)newOnDidFailOnVerifyWithError:(UIView*)view
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
+    
+    hud.labelText = @"Unauthorised device";
+    hud.detailsLabelText = [NSString stringWithFormat:@"%@ is not authorised. Please check your email to verify it.",
+                            [[UIDevice currentDevice] name]];
+    
+return hud;
+}
+
++(MBProgressHUD*)newViewWithIdCard:(UIView*)view
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD];
+    
+    hud.labelText = @"Add your photos in the box.";
+    hud.detailsLabelText = [NSString stringWithFormat:@"What happens next? \n \n You will receive an email to give %@ access to verylargebox. \n \n Your email is only used to verify your identity. \n \n",
+                            [[UIDevice currentDevice] name]];
+    
+
+return hud;
+}
+
++(MBProgressHUD*)newOnDidSucceedWithRegistration:(UIView*)view email:(NSString *)email residence:(NSString *)residence
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_ENVELOPE];
+	  hud.labelText = @"Please check your email.";
+    hud.detailsLabelText = [NSString stringWithFormat:@"If you cannot find it, check your spam. \n \n Double check you have entered your email correct, '%@'. \n Tap to edit if it's wrong. \n \n Once you have verified, return here to sign in.", email];
+        
+return hud;
+}
+
++(MBProgressHUD*)newOnDidEnterEmail:(UIView*)view email:(NSString *)email
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:view config:^MBProgressHUD *(MBProgressHUD *hud) {
+        VLB_PROGRESS_HUD_CUSTOM_VIEW_ENVELOPE(hud);
+        vlb_animate(hud.customView);
+    return hud;
+    }];
+    
+    hud.labelText = @"An email is on your way.";
+
+return hud;
+}
+
++(MBProgressHUD*)newOnDidSignIn:(UIView*)view email:(NSString*)email
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:view config:^MBProgressHUD *(MBProgressHUD *hud) {
+        VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD(hud);
+        vlb_animate(hud.customView);
+    return hud;
+    }];
+    
+    hud.labelText = @"Signing you in.";
+    hud.detailsLabelText = [NSString stringWithFormat:@"Please wait while verylargebox is signing you in as %@", email];
+    
+return hud;
+}
+
 @end

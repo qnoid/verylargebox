@@ -100,8 +100,6 @@ return localityItemsViewController;
     self.feedView.pullToRefreshView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     self.feedView.pullToRefreshView.arrowColor = [UIColor whiteColor];
     self.feedView.pullToRefreshView.textColor = [UIColor whiteColor];
-    
-    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -115,6 +113,11 @@ return localityItemsViewController;
         MBProgressHUD *hud = [VLBHuds newWithViewLocationArrow:self.view];
         [hud show:YES];
     }];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

@@ -8,20 +8,55 @@
 
 #import <Foundation/Foundation.h>
 @protocol VLBCreateItemOperationDelegate;
+@protocol VLBVerifyUserOperationDelegate;
 @class VLBIdentifyViewController;
+@class VLBEmailViewController;
 @class VLBProfileViewController;
 @class VLBProfileEmptyViewController;
 @class VLBTakePhotoViewController;
+@class VLBCityViewController;
+@class VLBFeedViewController;
+
+
+extern NSString* const THE_BOX_SERVICE;
 
 @interface VLBTheBox : NSObject
 
 +(instancetype)newTheBox;
 
--(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSDictionary*)residence; 
+-(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence;
+
+-(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSDictionary*)residence;
+
+-(BOOL)hasUserTakenPhoto;
+
+-(NSString*)email;
+
+-(BOOL)didEnterEmail;
+
+/// the last one to succeed becomes the logged in user
+-(NSUInteger)userId;
+
+-(BOOL)hasUserAccount;
+
+-(NSArray*)accounts;
+
+-(void)deleteAccountAtIndex:(NSUInteger)index;
+
+-(NSString*)emailForAccountAtIndex:(NSUInteger)index;
+
+-(NSString*)residenceForEmail:(NSString*)email;
+
+-(void)identify:(NSObject<VLBVerifyUserOperationDelegate>*)delegate;
+
+-(UIViewController*)decideOnProfileViewController;
 
 -(VLBIdentifyViewController*)newIdentifyViewController;
+-(UINavigationController*)newEmailViewController;
 -(VLBProfileViewController*)newProfileViewController;
 -(VLBProfileEmptyViewController*)newProfileEmptyViewController;
+-(VLBCityViewController*)newCityViewController;
+-(VLBFeedViewController*)newFeedViewController;
 
 -(VLBTakePhotoViewController*)newUploadUIViewController;
 

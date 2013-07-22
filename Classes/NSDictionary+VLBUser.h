@@ -11,6 +11,7 @@
 #define VLBUserKey NSString*
 
 extern VLBUserKey const VLBUserDidTakePhotoKey;
+extern VLBUserKey const VLBUserEmail;
 
 @interface NSDictionary (VLBUser)
 

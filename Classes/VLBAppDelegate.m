@@ -10,14 +10,19 @@
 
 #import "VLBAppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
-#import "VLBIdentifyViewController.h"
+#import "VLBEmailViewController.h"
 #import "VLBLocationService.h"
 #import "VLBNotifications.h"
 #import "VLBSecureHashA1.h"
 #import "DDTTYLogger.h"
 #import "VLBTypography.h"
 #import "VLBTheBox.h"
-
+#import "VLBCityViewController.h"
+#import "VLBFeedViewController.h"
+#import "VLBProfileViewController.h"
+#import "VLBIdentifyViewController.h"
+#import "MBProgressHUD.h"
+#import "VLBHuds.h"
 
 @interface VLBAppDelegate ()
 @property(nonatomic, strong) VLBTheBox* thebox;
@@ -50,16 +55,29 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newIdentifyViewController]];
+
+    VLBIdentifyViewController *identifyViewController = [self.thebox newIdentifyViewController];
     
-    self.window.rootViewController = navigationController;
+    if([self.thebox hasUserAccount]) {
+        [self.thebox identify:identifyViewController];
+        MBProgressHUD *hud = [VLBHuds newOnDidSignIn:identifyViewController.view email:[self.thebox email]];
+        [hud show:YES];
+    }
+    
+    UINavigationController *cityViewControler = [[UINavigationController alloc] initWithRootViewController:[self.thebox newCityViewController]];
+    UINavigationController *feedViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newFeedViewController]];
+    
+    UITabBarController* tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:identifyViewController], cityViewControler, feedViewController];
+    tabBarController.selectedIndex = 2;
+    
+    self.window.rootViewController = tabBarController;
     
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     [self.window makeKeyAndVisible];
 return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*

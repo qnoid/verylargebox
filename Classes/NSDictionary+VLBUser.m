@@ -9,6 +9,7 @@
 #import "NSDictionary+VLBUser.h"
 
 VLBUserKey const VLBUserDidTakePhotoKey = @"did_take_photo";
+VLBUserKey const VLBUserEmail = @"email";
 
 @implementation NSDictionary (VLBUser)
 

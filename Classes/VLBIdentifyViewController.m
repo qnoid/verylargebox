@@ -2,458 +2,221 @@
 //  VLBIdentifyViewController.m
 //  verylargebox
 //
-//  Created by Markos Charatzas on 18/11/2012.
-//  Copyright (c) 2012 (verylargebox.com). All rights reserved.
+//  Created by Markos Charatzas on 21/07/2013.
+//  Copyright (c) 2013 verylargebox.com. All rights reserved.
 //
 
 #import "VLBIdentifyViewController.h"
+#import "VLBButtons.h"
 #import "VLBButton.h"
-#import "VLBColors.h"
-#import "VLBCityViewController.h"
-#import "SSKeychain.h"
-#import "VLBQueries.h"
-#import "VLBProfileViewController.h"
-#import "AFHTTPRequestOperation.h"
-#import "VLBTableViewDataSourceBuilder.h"
-#import "VLBView.h"
-#import "VLBVerifyOperationBlock.h"
-#import "VLBFeedViewController.h"
-#import "VLBAlertViews.h"
-#import "VLBViews.h"
-#import "VLBHuds.h"
+#import "VLBMacros.h"
 #import "MBProgressHUD.h"
-#import "VLBPolygon.h"
-#import "VLBErrorBlocks.h"
-#import "VLBDrawRects.h"
-#import "QNDAnimations.h"
-#import "QNDAnimatedView.h"
+#import "VLBHuds.h"
 #import "VLBSecureHashA1.h"
-#import "DDLog.h"
-#import "NSArray+VLBDecorator.h"
-#import "VLBTheBox.h"
-#import "NSDictionary+VLBResidence.h"
-#import "VLBProfileEmptyViewController.h"
-#import "VLBViewControllers.h"
 #import "VLBForewordViewController.h"
-
-NSString* const VLB_EMAIL_VALIDATION_REGEX =
-@"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
-@"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
-@"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
-@"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
-@"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
-@"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
-@"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+#import "VLBViewControllers.h"
+#import "VLBTheBox.h"
+#import "VLBErrorBlocks.h"
+#import "VLBTableViewCells.h"
+#import "VLBQueries.h"
 
 @interface VLBIdentifyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
-
-@property(nonatomic, strong) NSOperationQueue *operations;
-@property(nonatomic, strong) NSMutableArray* accounts;
-@property(nonatomic, strong) NSMutableArray* emailStatuses;
-
--(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox accounts:(NSMutableArray*) accounts;
+@property(nonatomic, assign) BOOL didEnterEmail;
 @end
 
 @implementation VLBIdentifyViewController
 
 +(VLBIdentifyViewController*)newIdentifyViewController:(VLBTheBox*)thebox
 {
-    NSArray* accounts = [SSKeychain accountsForService:THE_BOX_SERVICE];
-
-    VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:(VLBTheBox*)thebox accounts:[NSMutableArray arrayWithArray:accounts]];
+    VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:(VLBTheBox*)thebox];
     
+    identifyViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sign in" image:[UIImage imageNamed:@"idcard-grey.png"] tag:0];
+
     UIButton* titleButton = [[VLBViewControllers new] titleButton:@"Picture a Box"
                                                            target:identifyViewController
                                                            action:@selector(didTouchUpInsideForeword:)];
     
     identifyViewController.navigationItem.titleView = titleButton;
-    
+
 return identifyViewController;
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox accounts:(NSMutableArray*) accounts
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox
 {
-    self = [super initWithNibName:@"VLBIdentifyViewController" bundle:nibBundleOrNil];
+    self = [super initWithNibName:NSStringFromClass([VLBIdentifyViewController class]) bundle:nibBundleOrNil];
     
-    if (!self) {
-        return nil;
-    }
+    VLB_IF_NOT_SELF_RETURN_NIL();
     
-		self.thebox = thebox;
-
-    self.operations = [[NSOperationQueue alloc] init];
-    self.accounts = accounts;
-    self.emailStatuses = [NSMutableArray arrayWithCapacity:self.accounts.count];
-    
-    for (id obj in accounts) {
-        [self.emailStatuses addObject:@(VLBEmailStatusDefault)];
-    }
+    self.thebox = thebox;
     
 return self;
-}
-
--(void)hideHUDForView
-{
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 -(void)didTouchUpInsideForeword:(id)sender
 {
     VLBForewordViewController *forewordViewController = [VLBForewordViewController newForewordViewController];
     
-	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:forewordViewController] animated:YES completion:nil];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:forewordViewController] animated:YES completion:nil];
+}
+
+-(void)hideHUDForView
+{
+    [MBProgressHUD hideAllHUDsForView:self.noticeView animated:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];    
     self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 0)];
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
 
-    __weak VLBIdentifyViewController *uself = self;
-    
-    [self.identifyButton onTouchUp:^(UIButton *button)
-    {
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [uself class], @"didTouchUpInsideIdentifyButton"]];
-        
-        VLBSecureHashA1 *sha1 = [VLBSecureHashA1 new];
-        NSString* residence = [sha1 newKey];
-        
-        [uself didEnterEmail:uself.emailTextField.text forResidence:residence];
-        
-        //no need to handle viewcontroller unloading
-        AFHTTPRequestOperation *newRegistrationOperation =
-        [VLBQueries newCreateUserQuery:uself email:uself.emailTextField.text residence:residence];
-        
-        [self.operations addOperation:newRegistrationOperation];
-        
-        self.emailTextField.text = @"";
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-    
-
-    [self.browseButton onTouchUpInside:^(UIButton *button)
-    {
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [uself class], @"didTouchUpInsideBrowseButton"]];
-
-        VLBFeedViewController *feedViewController = [VLBFeedViewController newFeedViewController];
-
-  	  	UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
-        [closeButton setImage:[UIImage imageNamed:@"down-arrow.png"] forState:UIControlStateNormal];
-        [closeButton addTarget:self action:@selector(dismissViewControllerAnimated) forControlEvents:UIControlEventTouchUpInside];
-
-        feedViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
-        
-        [uself presentViewController:[[UINavigationController alloc] initWithRootViewController:feedViewController] animated:YES completion:nil];
-    }];
-    
-    [self.addEmailButton onTouchUpInside:^(UIButton *button) {
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [uself class], @"didTouchUpInsideAddEmailButton"]];
-        
-        [self.identifyView animateWithDuration:0.5 animation:^(UIView *view) {
-            view.frame = CGRectMake(view.frame.origin.x, CGPointZero.y,
-                                    view.frame.size.width, view.frame.size.height);
-        }];
-        
-        [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
-            view.frame = CGRectMake(view.frame.origin.x,
-                                    104,
-                                    view.frame.size.width, view.frame.size.height);
-        }];
-		}];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)dismissViewControllerAnimated
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark UITextFieldDelegate
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    [textField resignFirstResponder];
-    
-    NSPredicate *emailValidation = [NSPredicate predicateWithFormat:@"self MATCHES[c] %@", VLB_EMAIL_VALIDATION_REGEX];
-
-    if(![emailValidation evaluateWithObject:textField.text]) {
-    return NO;
-    }
-
-    textField.textColor = [UIColor lightGrayColor];
-    textField.backgroundColor = [UIColor whiteColor];
-    [self.identifyButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    self.identifyButton.enabled = NO;
-
-return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    NSPredicate *emailValidation = [NSPredicate predicateWithFormat:@"self MATCHES[c] %@", VLB_EMAIL_VALIDATION_REGEX];
-    
-    NSString *resolvedEmail = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
-    BOOL isValidEmail = [emailValidation evaluateWithObject:resolvedEmail];
-    
-    self.identifyButton.enabled = isValidEmail;
-    
-    if(isValidEmail){
-        textField.textColor = [UIColor whiteColor];
-        textField.backgroundColor = [VLBColors colorPrimaryBlue];
-    }
-    else {
-        textField.textColor = [UIColor lightGrayColor];
-        textField.backgroundColor = [UIColor whiteColor];
-    }
-    
-return YES;
-}
-
-#pragma mark TBVerifyUserOperationDelegate
--(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence
-{
-    DDLogVerbose(@"%s %@:%@", __PRETTY_FUNCTION__, email, residence);    
-    [self.thebox didSucceedWithVerificationForEmail:email residence:residence];
-    
-    BOOL hasUserTakenPhoto = [residence vlb_hasUserTakenPhoto];
-    
-    UINavigationController *profileViewController;
-    
-    if(hasUserTakenPhoto)
-        profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileViewController]];
-    else{
-        profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileEmptyViewController]];
-    }
-    
-    UINavigationController *homeGridViewControler = [[UINavigationController alloc] initWithRootViewController:[VLBCityViewController newHomeGridViewController]];
-    UINavigationController *feedViewController = [[UINavigationController alloc] initWithRootViewController:[VLBFeedViewController newFeedViewController]];
-
-    UITabBarController* tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[profileViewController, homeGridViewControler, feedViewController];
-    
-    [self presentViewController:tabBarController animated:YES completion:nil];
-}
-
--(void)didFailOnVerifyWithError:(NSError *)error
-{
     __weak VLBIdentifyViewController *wself = self;
-    MBProgressHUD* hud = [VLBHuds newWithView:self.view config:^MBProgressHUD *(MBProgressHUD *hud) {
-        VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO(hud);
-        hud.labelText = @"Unauthorised device";
-        hud.detailsLabelText = [NSString stringWithFormat:@"%@ is not authorised. Please check your email to verify it.",
-                                [[UIDevice currentDevice] name]];
+
+    [self.signInButton onTouchUp:^(UIButton *button)
+    {
+        NSString *email = [wself.thebox email];
+        NSString *residence = [wself.thebox residenceForEmail:email];
+
+        [wself hideHUDForView];
+        MBProgressHUD *hud = [VLBHuds newOnDidSignIn:wself.view email:[wself.thebox email]];
+        [hud show:YES];
         
-        [hud addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:wself action:@selector(hideHUDForView)]];
-        hud.userInteractionEnabled = YES;
-        
-    return hud;
+        AFHTTPRequestOperation *verifyUser = [VLBQueries newVerifyUserQuery:wself email:email residence:residence];
+        [verifyUser start];
     }];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    if([self.thebox hasUserAccount] || self.didEnterEmail){
+        return;
+    }
     
-    [hud show:YES];
+	MBProgressHUD *hud = [VLBHuds newViewWithIdCard:self.noticeView];
+	[hud show:YES];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(!self.signInButton.enabled){
+        return NO;
+    }
+    
+    NSString *email = self.emailTextField.text;
+    NSString* residence = [[VLBSecureHashA1 new] newKey];
+
+    [self didEnterEmail:email forResidence:residence];
+    
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
+    
+    AFHTTPRequestOperation *newRegistrationOperation =
+        [VLBQueries newCreateUserQuery:self email:email residence:residence];
+    
+    [newRegistrationOperation start];
+
+return YES;
+}
+
+-(void)textField:(UITextField *)textField email:(NSString *)email isValidEmail:(BOOL)isValidEmail
+{
+    if(!isValidEmail)
+    {
+        [self hideHUDForView];
+        MBProgressHUD *hud = [VLBHuds newViewWithIdCard:self.noticeView];
+        [hud show:NO];
+    }
+    
+    self.signInButton.enabled = isValidEmail;
 }
 
 -(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence
 {
-    [self.identifyView rewind];
-    
-    [[[QNDAnimations new] animateView:self.accountsTableView] animateWithDuration:0.5 animation:^(UIView *view) {
-        view.frame = CGRectMake(view.frame.origin.x,
-                                44,
-                                view.frame.size.width, view.frame.size.height);
-    }];
-
-    NSError *error = nil;
-    [SSKeychain setPassword:residence forService:THE_BOX_SERVICE account:email error:&error];
-    
-    if (error) {
-        DDLogWarn(@"WARNING: %s %@", __PRETTY_FUNCTION__, error);
-    }
-        
-    self.accounts = [NSMutableArray arrayWithArray:[SSKeychain accountsForService:THE_BOX_SERVICE]];
-    self.emailStatuses = [NSMutableArray arrayWithCapacity:self.accounts.count];
-    for (id obj in self.accounts) {
-        [self.emailStatuses addObject:@(VLBEmailStatusDefault)];
-    }
-
-    [self.accountsTableView reloadData];
-    
-    
-    __weak VLBIdentifyViewController *wself = self;
-    MBProgressHUD* hud = [VLBHuds newWithView:self.view config:^MBProgressHUD *(MBProgressHUD *hud) {
-        VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD(hud);
-        hud.labelText = @"Access request";
-        hud.detailsLabelText = [NSString stringWithFormat:@"You will receive an email shortly to pair %@ with verylargebox.",
-                                [[UIDevice currentDevice] name]];
-        
-        [hud addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:wself action:@selector(hideHUDForView)]];
-        hud.userInteractionEnabled = YES;
-        
-        return hud;
-        }];
-    
+    self.didEnterEmail = YES;
+    [self hideHUDForView];
+    MBProgressHUD *hud = [VLBHuds newOnDidEnterEmail:self.noticeView email:email];
     [hud show:YES];
 }
 
-#pragma mark TBCreateUserOperationDelegate
--(void)didSucceedWithRegistrationForEmail:(NSString *)email residence:(NSString *)residence
+#pragma mark VLBCreateUserOperationDelegate
+-(void)didSucceedWithRegistrationForEmail:(NSString*)email residence:(NSString*)residence
 {
+    [self hideHUDForView];
+
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+    self.signInButton.enabled = YES;
+    [self.thebox didSucceedWithRegistrationForEmail:email residence:residence];
     
-    __weak VLBIdentifyViewController *wself = self;
-    MBProgressHUD* hud = [VLBHuds newWithView:self.view config:^MBProgressHUD *(MBProgressHUD *hud) {
-        VLB_PROGRESS_HUD_CUSTOM_VIEW_IPHONE(hud);
-        hud.labelText = @"New device registration";
-        hud.detailsLabelText = [NSString stringWithFormat:@"Please check your email to verify %@.", [[UIDevice currentDevice] name]];
-        
-        [hud addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:wself action:@selector(hideHUDForView)]];
-        hud.userInteractionEnabled = YES;
-        
-    return hud;
-    }];
+    MBProgressHUD* hud = [VLBHuds newOnDidSucceedWithRegistration:self.noticeView email:email residence:residence];
     
     [hud show:YES];
 }
 
 -(void)didFailOnRegistrationWithError:(NSError*)error
 {
-    MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
-    hud.detailsLabelText = error.localizedDescription;
-    [hud show:YES];
-    [hud hide:YES afterDelay:3.0];
-    
+    [self hideHUDForView];
+
+    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
+
+-(void)didSucceedWithVerificationForEmail:(NSString *)email residence:(NSDictionary *)residence
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+    [self.thebox didSucceedWithVerificationForEmail:email residence:residence];
+    
+    UINavigationController *profileViewController =
+    [[UINavigationController alloc] initWithRootViewController:[self.thebox decideOnProfileViewController]];
+    
+    NSMutableArray* viewControllers = [NSMutableArray arrayWithArray:self.tabBarController.viewControllers];
+    [viewControllers replaceObjectAtIndex:0 withObject:profileViewController];
+    
+    self.tabBarController.viewControllers = viewControllers;
+}
+
+-(void)didFailOnVerifyWithError:(NSError *)error
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+    MBProgressHUD* hud = [VLBHuds newOnDidFailOnVerifyWithError:self.view];
+    [hud show:YES];
+    [hud hide:YES afterDelay:5.0];    
+}
+
 
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
+    [self hideHUDForView];
+
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
+    [self hideHUDForView];
+
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
+    [self hideHUDForView];
+
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
-}
-
-#pragma mark UITableViewDatasource
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-return [self.accounts count];
-}
-
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *emailCell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    
-    if(!emailCell)
-    {
-        emailCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        emailCell.textLabel.font = [VLBTypography fontLucidaGrandeTwenty];
-        emailCell.textLabel.adjustsFontSizeToFitWidth = YES;
-        UIView* selectedBackgroundView = [[UIView alloc] init];
-        selectedBackgroundView.backgroundColor = [VLBColors colorPrimaryBlue];
-        emailCell.selectedBackgroundView = selectedBackgroundView;
-        vlbEmailStatus(VLBEmailStatusDefault)(emailCell);
-    }
-    
-    NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
-    VLBEmailStatus emailStatus = [[self.emailStatuses objectAtIndex:indexPath.row] intValue];
-
-    emailCell.textLabel.text = email;
-    vlbEmailStatus(emailStatus)(emailCell);
-
-return emailCell;
-}
-
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle != UITableViewCellEditingStyleDelete) {
-        return;
-    }
-    
-    if(editingStyle == UITableViewCellSelectionStyleNone){
-        return;
-    }
-    
-    NSString* email = [[self.accounts objectAtIndex:indexPath.row] objectForKey:@"acct"];
-    [SSKeychain deletePasswordForService:THE_BOX_SERVICE account:email];
-    [self.accounts removeObjectAtIndex:indexPath.row];
-		[self.emailStatuses removeObjectAtIndex:indexPath.row];
-    
-    [self.accountsTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-}
-
-#pragma mark UITableViewDelegate
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell* tableViewCell = [tableView cellForRowAtIndexPath:indexPath];
-    vlbEmailStatus(VLBEmailStatusUnknown)(tableViewCell);
-    [self.emailStatuses setObject:@(VLBEmailStatusUnknown) atIndexedSubscript:indexPath.row];
-
-    __weak VLBIdentifyViewController *wself = self;
-    
-    VLBVerifyOperationBlock *verifyOperationBlock = [VLBVerifyOperationBlock new];
-    verifyOperationBlock.didSucceedWithVerificationForEmail = ^(NSString* email, NSDictionary* residence)
-    {
-        vlbEmailStatus(VLBEmailStatusVerified)(tableViewCell);
-        [wself.emailStatuses setObject:@(VLBEmailStatusVerified) atIndexedSubscript:indexPath.row];
-        [wself didSucceedWithVerificationForEmail:email residence:residence];
-    };
-    
-    verifyOperationBlock.didFailOnVerifyWithError = ^(NSError* error)
-    {
-        vlbEmailStatus(VLBEmailStatusUnauthorised)(tableViewCell);
-        [wself.emailStatuses setObject:@(VLBEmailStatusUnauthorised) atIndexedSubscript:indexPath.row];        
-        [wself didFailOnVerifyWithError:error];
-    };
-    
-    verifyOperationBlock.didFailWithNotConnectToInternet = ^(NSError *error)
-    {
-        vlbEmailStatus(VLBEmailStatusError)(tableViewCell);
-        [wself.emailStatuses setObject:@(VLBEmailStatusError) atIndexedSubscript:indexPath.row];
-
-        
-        UIAlertView* notConnectedToInternetAlertView =
-        [VLBAlertViews newAlertViewWithOk:@"Not Connected to Internet"
-                                  message:@"You are not connected to the internet. Check your connection and try again."];
-        
-        [notConnectedToInternetAlertView show];
-    };
-    
-    NSArray* emails = [SSKeychain accountsForService:THE_BOX_SERVICE];
-    NSString* email = [[emails objectAtIndex:indexPath.row] objectForKey:@"acct"];
-    
-    NSError *error = nil;
-    NSString *residence = [SSKeychain passwordForService:THE_BOX_SERVICE account:email error:&error];
-    
-    AFHTTPRequestOperation *verifyUser = [VLBQueries newVerifyUserQuery:verifyOperationBlock email:email residence:residence];
-    
-    [self.operations addOperation:verifyUser];
-}
-
--(void)drawRect:(CGRect)rect inView:(UIView *)view
-{
-    [[VLBDrawRects new] drawContextOfHexagonInRect:rect];
 }
 
 @end

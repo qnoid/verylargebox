@@ -19,7 +19,7 @@
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 @property(nonatomic, weak) IBOutlet UILabel *takePhotoLabel;
 
-+(VLBProfileEmptyViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email;
++(VLBProfileEmptyViewController *)newProfileViewController:(VLBTheBox*)thebox email:(NSString*)email;
 
 -(IBAction)didTouchUpInsideTakePhoto;
 

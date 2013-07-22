@@ -25,7 +25,7 @@
 
 @property(nonatomic, weak) IBOutlet VLBScrollView * itemsView;
 
-+(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email;
++(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox email:(NSString*)email;
 
 -(IBAction)addItem;
 

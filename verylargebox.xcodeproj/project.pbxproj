@@ -186,8 +186,8 @@
 		BD9F24EB175A4302009D212F /* VLBPolygonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9F24EA175A4302009D212F /* VLBPolygonTest.m */; };
 		BDA21878165EEBEA00094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
 		BDA2187A165EEBF600094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
-		BDA2BC8C165952C20068C749 /* VLBIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8A165952C20068C749 /* VLBIdentifyViewController.m */; };
-		BDA2BC8D165952C20068C749 /* VLBIdentifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BC8B165952C20068C749 /* VLBIdentifyViewController.xib */; };
+		BDA2BC8C165952C20068C749 /* VLBEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8A165952C20068C749 /* VLBEmailViewController.m */; };
+		BDA2BC8D165952C20068C749 /* VLBEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BC8B165952C20068C749 /* VLBEmailViewController.xib */; };
 		BDA2BC911659600F0068C749 /* VLBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */; };
 		BDA2BC921659600F0068C749 /* VLBProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */; };
 		BDA2BCDF1659853E0068C749 /* VLBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* VLBButton.m */; };
@@ -281,6 +281,15 @@
 		BDF2FD0C177A5BC700941B7F /* VLBCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF2FD0B177A5BC700941B7F /* VLBCameraView.xib */; };
 		BDF2FD0F177CEE9700941B7F /* NSDictionary+VLBStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2FD0E177CEE9700941B7F /* NSDictionary+VLBStore.m */; };
 		BDF825C116FDFCEA003B3003 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF825C016FDFCEA003B3003 /* AddressBook.framework */; };
+		BDF8C3BF179C6DF6002B7F60 /* idcard.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF8C3BD179C6DF6002B7F60 /* idcard.png */; };
+		BDF8C3C0179C6DF6002B7F60 /* idcard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF8C3BE179C6DF6002B7F60 /* idcard@2x.png */; };
+		BDF8C3C5179C9BF3002B7F60 /* VLBIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3C3179C9BF3002B7F60 /* VLBIdentifyViewController.m */; };
+		BDF8C3C6179C9BF3002B7F60 /* VLBIdentifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF8C3C4179C9BF3002B7F60 /* VLBIdentifyViewController.xib */; };
+		BDF8C3CC179CABFB002B7F60 /* VLBEmailTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CB179CABFA002B7F60 /* VLBEmailTextField.m */; };
+		BDF8C3CF179DB457002B7F60 /* VLBTableViewCells.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */; };
+		BDF8C3D0179DB545002B7F60 /* VLBButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3C8179CA214002B7F60 /* VLBButtons.m */; };
+		BDF8C3D3179DC7BC002B7F60 /* idcard-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF8C3D1179DC7BC002B7F60 /* idcard-grey.png */; };
+		BDF8C3D4179DC7BC002B7F60 /* idcard-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF8C3D2179DC7BC002B7F60 /* idcard-grey@2x.png */; };
 		BDFBA12A177829C500A59BCF /* VLBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* VLBCityViewController.m */; };
 		BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
 		BDFBA12C177829CF00A59BCF /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
@@ -508,9 +517,9 @@
 		BD9F24EA175A4302009D212F /* VLBPolygonTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBPolygonTest.m; sourceTree = "<group>"; };
 		BDA21877165EEBEA00094510 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDA2187B165EEF6700094510 /* VLBVerifyUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBVerifyUserOperationDelegate.h; path = ../Classes/VLBVerifyUserOperationDelegate.h; sourceTree = "<group>"; };
-		BDA2BC89165952C20068C749 /* VLBIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBIdentifyViewController.h; path = ../Classes/VLBIdentifyViewController.h; sourceTree = "<group>"; };
-		BDA2BC8A165952C20068C749 /* VLBIdentifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBIdentifyViewController.m; sourceTree = "<group>"; };
-		BDA2BC8B165952C20068C749 /* VLBIdentifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBIdentifyViewController.xib; path = Classes/VLBIdentifyViewController.xib; sourceTree = "<group>"; };
+		BDA2BC89165952C20068C749 /* VLBEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBEmailViewController.h; path = ../Classes/VLBEmailViewController.h; sourceTree = "<group>"; };
+		BDA2BC8A165952C20068C749 /* VLBEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBEmailViewController.m; sourceTree = "<group>"; };
+		BDA2BC8B165952C20068C749 /* VLBEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBEmailViewController.xib; path = Classes/VLBEmailViewController.xib; sourceTree = "<group>"; };
 		BDA2BC8E1659600F0068C749 /* VLBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBProfileViewController.h; path = ../Classes/VLBProfileViewController.h; sourceTree = "<group>"; };
 		BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBProfileViewController.m; sourceTree = "<group>"; };
 		BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBProfileViewController.xib; path = Classes/VLBProfileViewController.xib; sourceTree = "<group>"; };
@@ -604,6 +613,19 @@
 		BDF2FD15177E5B2D00941B7F /* verylargebox-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "verylargebox-info.plist"; sourceTree = "<group>"; };
 		BDF825C016FDFCEA003B3003 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		BDF825C216FFAC59003B3003 /* VLBLocalityOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLBLocalityOperationDelegate.h; sourceTree = "<group>"; };
+		BDF8C3BD179C6DF6002B7F60 /* idcard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = idcard.png; path = "Supporting Files/idcard.png"; sourceTree = "<group>"; };
+		BDF8C3BE179C6DF6002B7F60 /* idcard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard@2x.png"; path = "Supporting Files/idcard@2x.png"; sourceTree = "<group>"; };
+		BDF8C3C2179C9BF2002B7F60 /* VLBIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBIdentifyViewController.h; sourceTree = "<group>"; };
+		BDF8C3C3179C9BF3002B7F60 /* VLBIdentifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBIdentifyViewController.m; sourceTree = "<group>"; };
+		BDF8C3C4179C9BF3002B7F60 /* VLBIdentifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBIdentifyViewController.xib; sourceTree = "<group>"; };
+		BDF8C3C7179CA214002B7F60 /* VLBButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBButtons.h; sourceTree = "<group>"; };
+		BDF8C3C8179CA214002B7F60 /* VLBButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBButtons.m; sourceTree = "<group>"; };
+		BDF8C3CA179CABFA002B7F60 /* VLBEmailTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBEmailTextField.h; sourceTree = "<group>"; };
+		BDF8C3CB179CABFA002B7F60 /* VLBEmailTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBEmailTextField.m; sourceTree = "<group>"; };
+		BDF8C3CD179DB457002B7F60 /* VLBTableViewCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBTableViewCells.h; sourceTree = "<group>"; };
+		BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTableViewCells.m; sourceTree = "<group>"; };
+		BDF8C3D1179DC7BC002B7F60 /* idcard-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard-grey.png"; path = "Supporting Files/idcard-grey.png"; sourceTree = "<group>"; };
+		BDF8C3D2179DC7BC002B7F60 /* idcard-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard-grey@2x.png"; path = "Supporting Files/idcard-grey@2x.png"; sourceTree = "<group>"; };
 		C01FCF5008A954540054247D /* VLBCanIndexLocationInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBCanIndexLocationInView.h; sourceTree = "<group>"; };
 		F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ApplicationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -683,6 +705,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDF8C3C1179C9BE1002B7F60 /* Identify */,
 				BDF2747517855F4F000E179E /* VLBScrollView */,
 				1D3623250D0F684500981E51 /* VLBAppDelegate.m */,
 				BDCE1E1D1757E1280070BB59 /* VLBCommon */,
@@ -704,7 +727,7 @@
 				BDF2747E1786B1FB000E179E /* VLBProfileEmptyViewController.h */,
 				BDF2747F1786B1FC000E179E /* VLBProfileEmptyViewController.m */,
 				BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */,
-				BDA2BC8A165952C20068C749 /* VLBIdentifyViewController.m */,
+				BDA2BC8A165952C20068C749 /* VLBEmailViewController.m */,
 				BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */,
 				90E3592F1546348E00075ABF /* NSCache+VLBCache.m */,
 				9096CC07133BB81E00639685 /* VLBQueries.m */,
@@ -747,6 +770,12 @@
 				BD774414178869B5007F7AAA /* VLBNotificationView.h */,
 				BD774415178869B5007F7AAA /* VLBNotificationView.m */,
 				BD77441717886D98007F7AAA /* VLBNotificationView.xib */,
+				BDF8C3C7179CA214002B7F60 /* VLBButtons.h */,
+				BDF8C3C8179CA214002B7F60 /* VLBButtons.m */,
+				BDF8C3CA179CABFA002B7F60 /* VLBEmailTextField.h */,
+				BDF8C3CB179CABFA002B7F60 /* VLBEmailTextField.m */,
+				BDF8C3CD179DB457002B7F60 /* VLBTableViewCells.h */,
+				BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -764,6 +793,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				BD59A487178CA9FD003A9394 /* Resources */,
 				90E359291546333700075ABF /* Supporting Files */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -772,7 +802,6 @@
 				90D8304012B506D900BE4470 /* UnitTests */,
 				BDA2BCF0165ACC800068C749 /* ApplicationTests */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				BD59A487178CA9FD003A9394 /* Resources */,
 				357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */,
 				83F757C9D3B843C4A2749415 /* Pods-UnitTests.xcconfig */,
 				9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */,
@@ -956,7 +985,7 @@
 				BDE0DBB1155EC1B600B474DC /* VLBUpdateItemOperationDelegate.h */,
 				BDF825C216FFAC59003B3003 /* VLBLocalityOperationDelegate.h */,
 				BDA2BC8E1659600F0068C749 /* VLBProfileViewController.h */,
-				BDA2BC89165952C20068C749 /* VLBIdentifyViewController.h */,
+				BDA2BC89165952C20068C749 /* VLBEmailViewController.h */,
 				BD8BB286176C99CF00AE6157 /* NSDictionary+VLBResidence.h */,
 				BD7C27D917235E9A009D26EE /* VLBMacros.h */,
 				BDE1E83415683FF800CF10CF /* VLBView.h */,
@@ -1077,7 +1106,7 @@
 			children = (
 				BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */,
 				BDF2747C1786B142000E179E /* VLBProfileEmptyViewController.xib */,
-				BDA2BC8B165952C20068C749 /* VLBIdentifyViewController.xib */,
+				BDA2BC8B165952C20068C749 /* VLBEmailViewController.xib */,
 				BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */,
 				BDE482C01750510D0096903C /* VLBFeedViewController.xib */,
 				90D830F312B51DA400BE4470 /* VLBCell.xib */,
@@ -1140,6 +1169,10 @@
 				BDBA745A1770EA71001AE3F3 /* envelope.png */,
 				BDBA745D1770EB4B001AE3F3 /* eye@2x.png */,
 				BDBA745E1770EB4B001AE3F3 /* eye.png */,
+				BDF8C3BD179C6DF6002B7F60 /* idcard.png */,
+				BDF8C3BE179C6DF6002B7F60 /* idcard@2x.png */,
+				BDF8C3D1179DC7BC002B7F60 /* idcard-grey.png */,
+				BDF8C3D2179DC7BC002B7F60 /* idcard-grey@2x.png */,
 				BDC8A1D9178202C300E5BF8C /* idcard-white.png */,
 				BDC8A1D71782028E00E5BF8C /* idcard-white@2x.png */,
 				BD59A4A9178E2B36003A9394 /* iphone.png */,
@@ -1233,6 +1266,16 @@
 				BDF2747617855F63000E179E /* VLBScrollView.xib */,
 			);
 			name = VLBScrollView;
+			sourceTree = "<group>";
+		};
+		BDF8C3C1179C9BE1002B7F60 /* Identify */ = {
+			isa = PBXGroup;
+			children = (
+				BDF8C3C2179C9BF2002B7F60 /* VLBIdentifyViewController.h */,
+				BDF8C3C3179C9BF3002B7F60 /* VLBIdentifyViewController.m */,
+				BDF8C3C4179C9BF3002B7F60 /* VLBIdentifyViewController.xib */,
+			);
+			name = Identify;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1346,7 +1389,7 @@
 				90CBFE5F154BF58F00349A13 /* poweredByFoursquare.png in Resources */,
 				90F9FDE6154D97D0001BCD66 /* Icon.png in Resources */,
 				90454B05154DE5DF0064D998 /* Icon-72.png in Resources */,
-				BDA2BC8D165952C20068C749 /* VLBIdentifyViewController.xib in Resources */,
+				BDA2BC8D165952C20068C749 /* VLBEmailViewController.xib in Resources */,
 				BDA2BC921659600F0068C749 /* VLBProfileViewController.xib in Resources */,
 				BDA2BD1A165AF8E30068C749 /* user.png in Resources */,
 				BD258DDE1678040500286511 /* refresh.png in Resources */,
@@ -1421,6 +1464,11 @@
 				BD59A4A6178E1ACC003A9394 /* qnoid.jpg in Resources */,
 				BD59A4AB178E2B36003A9394 /* iphone.png in Resources */,
 				BD59A4AC178E2B36003A9394 /* iphone@2x.png in Resources */,
+				BDF8C3BF179C6DF6002B7F60 /* idcard.png in Resources */,
+				BDF8C3C0179C6DF6002B7F60 /* idcard@2x.png in Resources */,
+				BDF8C3C6179C9BF3002B7F60 /* VLBIdentifyViewController.xib in Resources */,
+				BDF8C3D3179DC7BC002B7F60 /* idcard-grey.png in Resources */,
+				BDF8C3D4179DC7BC002B7F60 /* idcard-grey@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,7 +1644,7 @@
 				90E359301546348E00075ABF /* NSCache+VLBCache.m in Sources */,
 				9089482A155349DE009188B4 /* NSDictionary+VLBDictionary.m in Sources */,
 				BDE1E83615683FF800CF10CF /* VLBView.m in Sources */,
-				BDA2BC8C165952C20068C749 /* VLBIdentifyViewController.m in Sources */,
+				BDA2BC8C165952C20068C749 /* VLBEmailViewController.m in Sources */,
 				BDA2BC911659600F0068C749 /* VLBProfileViewController.m in Sources */,
 				BDA2BCDF1659853E0068C749 /* VLBButton.m in Sources */,
 				BDA2BD0C165AD1160068C749 /* VLBColors.m in Sources */,
@@ -1633,6 +1681,10 @@
 				BDF274861786B9DB000E179E /* VLBViewControllers.m in Sources */,
 				BD774416178869B5007F7AAA /* VLBNotificationView.m in Sources */,
 				BD59A4A3178E1284003A9394 /* VLBForewordViewController.m in Sources */,
+				BDF8C3C5179C9BF3002B7F60 /* VLBIdentifyViewController.m in Sources */,
+				BDF8C3CC179CABFB002B7F60 /* VLBEmailTextField.m in Sources */,
+				BDF8C3CF179DB457002B7F60 /* VLBTableViewCells.m in Sources */,
+				BDF8C3D0179DB545002B7F60 /* VLBButtons.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2020,7 +2072,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2061,7 +2112,6 @@
 				);
 				PRODUCT_NAME = verylargebox;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;

@@ -13,6 +13,10 @@
 
 @implementation NSArray (VLBDecorator)
 
+- (id)vlb_first {
+    return [self objectAtIndex:0];
+}
+
 - (BOOL)vlb_isEmpty {
     return [self count] == 0;
 }

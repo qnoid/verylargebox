@@ -18,49 +18,41 @@
 #import "VLBQueries.h"
 #import "NSDictionary+VLBResidence.h"
 #import "VLBProfileViewController.h"
+#import "VLBEmailViewController.h"
 
 @interface VLBProfileEmptyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
 
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSDictionary* location;
-@property(nonatomic, strong) NSDictionary* residence;
 @end
 
 @implementation VLBProfileEmptyViewController
 
-+(VLBProfileEmptyViewController *)newProfileViewController:(VLBTheBox*)thebox residence:(NSDictionary*)residence email:(NSString*)email
++(VLBProfileEmptyViewController *)newProfileViewController:(VLBTheBox*)thebox email:(NSString*)email
 {
     VLBProfileEmptyViewController *profileViewController =
         [[VLBProfileEmptyViewController alloc] initWithBundle:[NSBundle mainBundle]
-                                                       thebox:thebox
-                                                    residence:residence];
+                                                       thebox:thebox];
 
     UILabel* titleLabel = [[VLBViewControllers new] titleView:email];
     profileViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
-    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] closeButton:profileViewController action:@selector(close)];
 
 return profileViewController;
 }
 
--(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox residence:(NSDictionary*)residence
+-(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox
 {
     self = [super initWithNibName:NSStringFromClass([VLBProfileEmptyViewController class]) bundle:nibBundleOrNil];
     
     VLB_IF_NOT_SELF_RETURN_NIL();
     
 	self.thebox = thebox;
-    self.residence = residence;
 
 return self;
-}
-
--(void)close
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)viewDidLoad
@@ -86,7 +78,7 @@ return self;
 	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:itemURL
                                                             location:self.location
                                                             locality:self.locality
-                                                                user:[self.residence vlb_residenceUserId]
+                                                                user:[self.thebox userId]
                                                             delegate:notificationView];
     
 	[itemQuery start];

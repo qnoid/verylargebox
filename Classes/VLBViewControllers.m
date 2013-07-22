@@ -66,4 +66,9 @@ return [self barButtonItem:target action:action imageNamed:@"camera-mini.png"];
 -(UIBarButtonItem*)locateButton:(id)target action:(SEL)action {
 return [self barButtonItem:target action:action imageNamed:@"target.png"];
 }
+
+-(UIBarButtonItem*)idCardButton:(id)target action:(SEL)action {
+    return [self barButtonItem:target action:action imageNamed:@"idcard.png"];
+}
+
 @end

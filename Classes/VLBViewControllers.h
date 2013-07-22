@@ -23,4 +23,6 @@ typedef void(^VLBTitleLabel)(UILabel *titleLabel);
 -(UIBarButtonItem*)cameraButton:(id)target action:(SEL)action;
 
 -(UIBarButtonItem*)locateButton:(id)target action:(SEL)action;
+
+-(UIBarButtonItem*)idCardButton:(id)target action:(SEL)action;
 @end

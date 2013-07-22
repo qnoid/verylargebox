@@ -13,6 +13,7 @@ typedef id(^VLBMapBlock)(id obj, NSUInteger idx);
 
 @interface NSArray (VLBDecorator)
 
+- (id)vlb_first;
 - (BOOL)vlb_isEmpty;
 - (BOOL)vlb_isLast:(id)anObject;
 - (id)vlb_next:(id)anObject;

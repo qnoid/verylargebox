@@ -44,8 +44,6 @@ extern VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImag
  */
 @interface VLBQueries : NSObject
 
-extern NSString* const THE_BOX_SERVICE;
-
 -(S3PutObjectRequest*)newS3PutObjectRequest:(NSDictionary*) parameters config:(VLBS3PutObjectRequestConfiguration)config;
 
 /**

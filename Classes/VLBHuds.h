@@ -22,6 +22,7 @@ extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_RADAR;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_CAMERA;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ARROW;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_SEARCH;
+extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_ENVELOPE;
 
 @interface VLBHuds : NSObject
 
@@ -31,5 +32,10 @@ extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_SEARCH;
 +(MBProgressHUD*)newWithViewCamera:(UIView*)view locality:(NSString*)locality;
 +(MBProgressHUD*)newWithViewRadar:(UIView*)view;
 +(MBProgressHUD*)newWithViewSearch:(UIView*)view query:(NSString*)query;
++(MBProgressHUD*)newOnDidFailOnVerifyWithError:(UIView*)view;
++(MBProgressHUD*)newViewWithIdCard:(UIView*)view;
++(MBProgressHUD*)newOnDidEnterEmail:(UIView*)view email:(NSString *)email;
++(MBProgressHUD*)newOnDidSucceedWithRegistration:(UIView*)view email:(NSString *)email residence:(NSString *)residence;
++(MBProgressHUD*)newOnDidSignIn:(UIView*)view email:(NSString*)email;
 
 @end

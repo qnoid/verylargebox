@@ -96,8 +96,6 @@ return ^(AFHTTPRequestOperation *operation, NSError *error)
 
 @implementation VLBQueries
 
-NSString* const THE_BOX_SERVICE = @"com.verylargebox";
-
 NSString* const THE_BOX_BASE_URL_STRING = @"https://www.verylargebox.com";
 
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";

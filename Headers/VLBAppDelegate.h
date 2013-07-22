@@ -7,6 +7,7 @@
  *  Created by Markos Charatzas on 5/11/10.
 
  */
+
 @interface VLBAppDelegate : NSObject <UIApplicationDelegate>
 
 @property(nonatomic) IBOutlet UIWindow *window;
