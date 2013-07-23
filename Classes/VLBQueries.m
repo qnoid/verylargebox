@@ -233,20 +233,7 @@ return parameters;
 
         NSMutableArray* locations = [[[responseString mutableObjectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"];
           
-        NSArray *sortedLocations =
-            [locations sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-
-								id obj1Distance = [[obj1 vlb_location] vlb_objectForKey:@"distance" ifNil:[NSNumber numberWithInt:NSIntegerMax]];
-								id obj2Distance = [[obj2 vlb_location] vlb_objectForKey:@"distance" ifNil:[NSNumber numberWithInt:NSIntegerMax]];
-
-								if([obj1Distance intValue] == [obj2Distance intValue]){
-									return (NSComparisonResult)NSOrderedSame;
-								}
-
-            return ([obj1Distance intValue] > [obj2Distance intValue])?(NSComparisonResult)NSOrderedDescending:(NSComparisonResult)NSOrderedAscending;
-            }];
-                               
-        [delegate didSucceedWithLocations:sortedLocations givenParameters:parameters];
+        [delegate didSucceedWithLocations:locations givenParameters:parameters];
     } 
     failure:didFailOnLocationWithError];
     

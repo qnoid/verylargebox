@@ -16,6 +16,8 @@ typedef void(^VLBTitleLabel)(UILabel *titleLabel);
 
 -(UIButton*)titleButton:(NSString*)text target:(id)target action:(SEL)action;
 
+-(UIBarButtonItem*)checkmarkMiniButton:(id)target action:(SEL)action;
+
 -(UIBarButtonItem*)closeButton:(id)target action:(SEL)action;
 
 -(UIBarButtonItem*)discardButton:(id)target action:(SEL)action;

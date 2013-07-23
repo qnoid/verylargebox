@@ -11,7 +11,6 @@
 
 @implementation VLBHuds
 
-NS_INLINE
 void vlb_animate(UIView *view)
 {
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationCurveLinear | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat animations:^{

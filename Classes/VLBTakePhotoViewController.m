@@ -104,16 +104,6 @@ return self.horizontalAccuracy < location.horizontalAccuracy || self.verticalAcc
 
     newUploadUIViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] discardButton:newUploadUIViewController
 			                                                                                            action:@selector(cancel:)];
-
-    UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [doneButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [doneButton setImage:[UIImage imageNamed:@"checkmark-mini.png"] forState:UIControlStateNormal];
-    [doneButton setImage:[UIImage imageNamed:@"checkmark-mini-grey.png"] forState:UIControlStateDisabled];
-    [doneButton addTarget:newUploadUIViewController action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-
-    newUploadUIViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    newUploadUIViewController.navigationItem.rightBarButtonItem.enabled = NO;
-
 return newUploadUIViewController;
 }
 
@@ -137,9 +127,6 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.defaultStoreButton.titleLabel.numberOfLines = self.storeLabel.numberOfLines;
-    self.defaultStoreButton.titleLabel.lineBreakMode = self.storeLabel.lineBreakMode;
-    self.defaultStoreButton.titleLabel.textAlignment = self.storeLabel.textAlignment;
     self.cameraView.allowPictureRetake = YES;
     self.cameraView.writeToCameraRoll = YES;
     self.cameraView.flashView.backgroundColor =
@@ -186,19 +173,6 @@ return self;
     return;
     }
     
-    NSDictionary *location = [locations objectAtIndex:0];
-    
-    self.defaultStoreButton.hidden = NO;
-    self.defaultStoreButton.enabled = YES;
-    [self.defaultStoreButton setTitle:[NSString stringWithFormat:@"%@ [accept?]", [location vlb_objectForKey:@"name"]] forState:UIControlStateNormal];
-    
-		__weak VLBTakePhotoViewController *wself = self;	
-    [self.defaultStoreButton onTouchUpInside:^(UIButton *button) {
-    		[TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTouchUpInsideDefaultStoreButton"]];
-        wself.locationButton.imageView.alpha = 1.0;        
-        [wself didSelectStore:location];
-    }];
-
     self.venues = locations;
     [self.locationOperationDelegate didSucceedWithLocations:locations givenParameters:parameters];
 }
@@ -281,7 +255,9 @@ return self;
     self.locality = [VLBNotifications place:notification].locality;
     self.storeLabel.text = self.locality;
 
-    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
+    if(self.itemImage && self.hasCoordinates){
+        self.navigationItem.rightBarButtonItem = [[VLBViewControllers new] checkmarkMiniButton:self action:@selector(done:)];
+    }
 }
 
 -(void)didFailReverseGeocodeLocationWithError:(NSNotification *)notification
@@ -292,7 +268,8 @@ return self;
 
 #pragma mark VLBKeyboardObserver
 
-- (IBAction)cancel:(id)sender{
+- (IBAction)cancel:(id)sender {
+    [self.createItemDelegate didCancel];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -328,11 +305,10 @@ return self;
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
 
-    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;
-    self.defaultStoreButton.hidden = YES;
-    self.defaultStoreButton.enabled = NO;
+    if(self.itemImage && self.hasCoordinates){
+        self.navigationItem.rightBarButtonItem = [[VLBViewControllers new] checkmarkMiniButton:self action:@selector(done:)];
+    }
 
-    
     self.hasCoordinates = YES;
     self.location = store;
     self.locality = self.locality;
@@ -357,7 +333,10 @@ return self;
     
     self.itemImage = newImage;
     self.takePhotoButton.userInteractionEnabled = NO;
-    self.navigationItem.rightBarButtonItem.enabled = self.itemImage && self.hasCoordinates;    
+    
+    if(self.itemImage && self.hasCoordinates){
+        self.navigationItem.rightBarButtonItem = [[VLBViewControllers new] checkmarkMiniButton:self action:@selector(done:)];
+    }
 }
 
 -(void)cameraView:(VLBCameraView *)cameraView didErrorOnTakePicture:(NSError *)error
@@ -366,7 +345,7 @@ return self;
 
 -(void)cameraView:(VLBCameraView *)cameraView willRekatePicture:(UIImage *)image
 {
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.rightBarButtonItem = nil;
     self.takePhotoButton.userInteractionEnabled = YES;
     [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
 }

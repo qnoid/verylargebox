@@ -51,6 +51,10 @@ return titleLabel;
 return titleButon;
 }
 
+-(UIBarButtonItem*)checkmarkMiniButton:(id)target action:(SEL)action {
+    return [self barButtonItem:target action:action imageNamed:@"checkmark-mini.png"];
+}
+
 -(UIBarButtonItem*)closeButton:(id)target action:(SEL)action {
 return [self barButtonItem:target action:action imageNamed:@"down-arrow.png"];
 }

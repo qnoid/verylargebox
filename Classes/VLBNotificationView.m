@@ -65,6 +65,10 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 	[self didFailOnItemWithError:error];
 }
 
+-(void)didCancel{
+    [self removeFromSuperview];
+}
+
 -(void)didStartUploadingItem:(UIImage*)itemImage key:(NSString*)key location:(NSDictionary*) location locality:(NSString*) locality
 {
     self.progressView.imageView.image = itemImage;

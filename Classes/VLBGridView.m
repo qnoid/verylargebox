@@ -37,6 +37,7 @@ VLBGridViewOrientation const VLBGridViewOrientationVertical = ^(VLBGridView *gri
                                         scrollView.scrollViewDelegate = gridView;
                                         scrollView.showsVerticalScrollIndicator = NO;
                                         scrollView.scrollsToTop = YES;
+                                        scrollView.bounces = NO;
                                         scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
                                         scrollView.backgroundColor = [UIColor clearColor];
                                         

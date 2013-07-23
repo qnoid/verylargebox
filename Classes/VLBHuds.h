@@ -13,6 +13,8 @@
 
 typedef MBProgressHUD*(^VLBProgressHUDBlock)(MBProgressHUD *hud);
 
+extern void vlb_animate(UIView *view);
+
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_IPHONE;
 extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO;

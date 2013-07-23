@@ -122,7 +122,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 360}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
-						<reference key="NSNextKeyView" ref="954989919"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="266439788"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -139,50 +139,24 @@
 						<int key="IBUINumberOfLines">2</int>
 						<int key="IBUITextAlignment">1</int>
 						<int key="IBUILineBreakMode">0</int>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="471583355">
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<string key="name">AvenirNext-DemiBold</string>
 							<string key="family">Avenir Next</string>
 							<int key="traits">2</int>
 							<double key="pointSize">18</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="970509235">
+						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">AvenirNext-Heavy</string>
 							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<double key="preferredMaxLayoutWidth">320</double>
 					</object>
-					<object class="IBUIButton" id="954989919">
-						<reference key="NSNextResponder" ref="841466699"/>
-						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{0, 360}, {320, 44}}</string>
-						<reference key="NSSuperview" ref="841466699"/>
-						<reference key="NSNextKeyView" ref="800797624"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4wMzQ5NDM0OTI3NSAwLjQzMDM4NzYyODggMC43ODk0MDEzMDc0AA</bytes>
-						</object>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<bool key="IBUIEnabled">NO</bool>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIHighlightedTitleColor" ref="266439788"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEAA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="317609350"/>
-						<reference key="IBUIFontDescription" ref="471583355"/>
-						<reference key="IBUIFont" ref="970509235"/>
-					</object>
 					<object class="IBUILabel" id="800797624">
 						<reference key="NSNextResponder" ref="841466699"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 404}, {320, 12}}</string>
 						<reference key="NSSuperview" ref="841466699"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -272,14 +246,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">defaultStoreButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="954989919"/>
-					</object>
-					<string key="id">Hw6-s6-nuq</string>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="1062606987"/>
 						<reference key="destination" ref="372490531"/>
@@ -348,7 +314,6 @@
 							<reference ref="800797624"/>
 							<reference ref="611246978"/>
 							<reference ref="597228640"/>
-							<reference ref="954989919"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -396,12 +361,6 @@
 						<reference key="parent" ref="841466699"/>
 						<string key="objectName">cameraView</string>
 					</object>
-					<object class="IBObjectRecord">
-						<string key="id">dCK-h5-tzD</string>
-						<reference key="object" ref="954989919"/>
-						<reference key="parent" ref="841466699"/>
-						<string key="objectName">defaultStoreButton</string>
-					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -422,9 +381,6 @@
 				<string key="Kkc-bm-IhE.CustomClassName">VLBCameraView</string>
 				<string key="Kkc-bm-IhE.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="cu9-E6-1Iw.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="dCK-h5-tzD.CustomClassName">VLBButton</string>
-				<string key="dCK-h5-tzD.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="dCK-h5-tzD.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>

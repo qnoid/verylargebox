@@ -61,6 +61,7 @@
     if([self.thebox hasUserAccount]) {
         [self.thebox identify:identifyViewController];
         MBProgressHUD *hud = [VLBHuds newOnDidSignIn:identifyViewController.view email:[self.thebox email]];
+        vlb_animate(hud.customView);
         [hud show:YES];
     }
     

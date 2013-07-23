@@ -33,6 +33,9 @@
  VLBItem cells are recycled, as a result setting the image to a recycled cell will cancel an existing request to load the last visible image
   and start a new one.
  
+ Decisions
+    The grid view does not bounce so as not to confuse the user with the missing pull to refresh
+ 
  */
 @interface VLBCityViewController : UIViewController <VLBLocationServiceDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBLocationOperationDelegate, UISearchBarDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, UITableViewDelegate, VLBGridViewDatasource, VLBGridViewDelegate, VLBViewDrawRectDelegate>
 
