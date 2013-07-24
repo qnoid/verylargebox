@@ -13,6 +13,6 @@
 +(UIFont*)fontAvenirNextDemiBoldTwelve;
 +(UIFont*)fontAvenirNextDemiBoldSixteen;
 +(UIFont*)fontLucidaGrandeEleven;
-+(UIFont*)fontLucidaGrandeTwenty;
++(UIFont*)fontAvenirNextDemiBoldTweenty;
 
 @end

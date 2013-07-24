@@ -179,6 +179,8 @@
 		BD8BB288176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
 		BD8BB289176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
 		BD8BB28A176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
+		BD8D411E179F4D1300560C14 /* VLBSignOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8D411C179F4D1200560C14 /* VLBSignOutViewController.m */; };
+		BD8D411F179F4D1300560C14 /* VLBSignOutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8D411D179F4D1200560C14 /* VLBSignOutViewController.xib */; };
 		BD9A781516BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */; };
 		BD9A781616BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */; };
 		BD9A781716BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */; };
@@ -511,6 +513,9 @@
 		BD7C27D917235E9A009D26EE /* VLBMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLBMacros.h; path = ../Classes/VLBMacros.h; sourceTree = "<group>"; };
 		BD8BB286176C99CF00AE6157 /* NSDictionary+VLBResidence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBResidence.h"; path = "../Classes/NSDictionary+VLBResidence.h"; sourceTree = "<group>"; };
 		BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBResidence.m"; sourceTree = "<group>"; };
+		BD8D411B179F4D1200560C14 /* VLBSignOutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBSignOutViewController.h; sourceTree = "<group>"; };
+		BD8D411C179F4D1200560C14 /* VLBSignOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBSignOutViewController.m; sourceTree = "<group>"; };
+		BD8D411D179F4D1200560C14 /* VLBSignOutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBSignOutViewController.xib; sourceTree = "<group>"; };
 		BD9A781316BD53D300FD30E0 /* VLBTableViewDelegateBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTableViewDelegateBuilder.h; path = ../Classes/VLBTableViewDelegateBuilder.h; sourceTree = "<group>"; };
 		BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTableViewDelegateBuilder.m; sourceTree = "<group>"; };
 		BD9BC53217513C0E00CF18EB /* city.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = city.png; path = "Supporting Files/city.png"; sourceTree = "<group>"; };
@@ -776,6 +781,9 @@
 				BDF8C3CB179CABFA002B7F60 /* VLBEmailTextField.m */,
 				BDF8C3CD179DB457002B7F60 /* VLBTableViewCells.h */,
 				BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */,
+				BD8D411B179F4D1200560C14 /* VLBSignOutViewController.h */,
+				BD8D411C179F4D1200560C14 /* VLBSignOutViewController.m */,
+				BD8D411D179F4D1200560C14 /* VLBSignOutViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1469,6 +1477,7 @@
 				BDF8C3C6179C9BF3002B7F60 /* VLBIdentifyViewController.xib in Resources */,
 				BDF8C3D3179DC7BC002B7F60 /* idcard-grey.png in Resources */,
 				BDF8C3D4179DC7BC002B7F60 /* idcard-grey@2x.png in Resources */,
+				BD8D411F179F4D1300560C14 /* VLBSignOutViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1685,6 +1694,7 @@
 				BDF8C3CC179CABFB002B7F60 /* VLBEmailTextField.m in Sources */,
 				BDF8C3CF179DB457002B7F60 /* VLBTableViewCells.m in Sources */,
 				BDF8C3D0179DB545002B7F60 /* VLBButtons.m in Sources */,
+				BD8D411E179F4D1300560C14 /* VLBSignOutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

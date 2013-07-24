@@ -24,6 +24,7 @@
 #import "SSKeychain.h"
 #import "NSArray+VLBDecorator.h"
 #import "VLBIdentifyViewController.h"
+#import "VLBSignOutViewController.h"
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 
@@ -67,13 +68,8 @@ return self;
     return [NSString stringWithFormat:@"%@.%@", THE_BOX_SERVICE, key];
 }
 
--(BOOL)hasUserTakenPhoto
-{
-    if(!self.residence){
-        [NSException raise:@"Residence should not be nil" format:@"#didAuthenticateResidence should have been called", nil];
-    }
-    
-    return [self.residence vlb_hasUserTakenPhoto];
+-(BOOL)hasUserTakenPhoto {
+    return [self.userDefaults boolForKey:[self prefixKey:VLBUserDidTakePhotoKey]];
 }
 
 -(NSString*)email{
@@ -105,6 +101,8 @@ return self;
 {
 	self.residence = residence;
     [self.userDefaults setInteger:[self.residence vlb_residenceUserId] forKey:[self prefixKey:VLBResidenceUserId]];
+    [self.userDefaults setBool:[self.residence vlb_hasUserTakenPhoto] forKey:[self prefixKey:VLBUserDidTakePhotoKey]];
+    [self.userDefaults synchronize];
 
     [TestFlight setDeviceIdentifier:[self.residence vlb_objectForKey:VLBResidenceToken]];
     [TestFlight takeOff:TESTFLIGHT_APP_TOKEN];
@@ -112,6 +110,11 @@ return self;
 
 -(BOOL)hasUserAccount {
     return [self userId] != 0;
+}
+
+-(void)noUserAccount{
+    [self.userDefaults setInteger:0 forKey:[self prefixKey:VLBResidenceUserId]];
+    [self.userDefaults synchronize];
 }
 
 -(NSArray*)accounts {
@@ -127,8 +130,13 @@ return [[[self accounts] objectAtIndex:index] objectForKey:@"acct"];
 return [SSKeychain passwordForService:THE_BOX_SERVICE account:email error:&error];
 }
 
--(void)deleteAccountAtIndex:(NSUInteger)index {
+-(void)deleteAccountAtIndex:(NSUInteger)index
+{
     [SSKeychain deletePasswordForService:THE_BOX_SERVICE account:[self emailForAccountAtIndex:index]];
+    
+    if([[self accounts] vlb_isEmpty]){
+        [self noUserAccount];
+    }
 }
 
 -(void)identify:(NSObject<VLBVerifyUserOperationDelegate>*)delegate
@@ -185,6 +193,10 @@ return [VLBProfileEmptyViewController newProfileViewController:self email:[self 
 
 -(VLBTakePhotoViewController*)newUploadUIViewController {
 return [VLBTakePhotoViewController newUploadUIViewController:self userId:[self userId]];
+}
+
+-(VLBSignOutViewController*)newSignOutViewController{
+return [VLBSignOutViewController newSignOutViewController:self];
 }
 
 -(NSString*)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate

@@ -39,5 +39,5 @@ extern VLBProgressHUDBlock const VLB_PROGRESS_HUD_CUSTOM_VIEW_ENVELOPE;
 +(MBProgressHUD*)newOnDidEnterEmail:(UIView*)view email:(NSString *)email;
 +(MBProgressHUD*)newOnDidSucceedWithRegistration:(UIView*)view email:(NSString *)email residence:(NSString *)residence;
 +(MBProgressHUD*)newOnDidSignIn:(UIView*)view email:(NSString*)email;
-
++(MBProgressHUD*)newSignOutViewWithIdCard:(UIView*)view;
 @end

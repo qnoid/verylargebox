@@ -16,6 +16,7 @@
 @class VLBTakePhotoViewController;
 @class VLBCityViewController;
 @class VLBFeedViewController;
+@class VLBSignOutViewController;
 
 
 extern NSString* const THE_BOX_SERVICE;
@@ -39,6 +40,8 @@ extern NSString* const THE_BOX_SERVICE;
 
 -(BOOL)hasUserAccount;
 
+-(void)noUserAccount;
+
 -(NSArray*)accounts;
 
 -(void)deleteAccountAtIndex:(NSUInteger)index;
@@ -57,8 +60,8 @@ extern NSString* const THE_BOX_SERVICE;
 -(VLBProfileEmptyViewController*)newProfileEmptyViewController;
 -(VLBCityViewController*)newCityViewController;
 -(VLBFeedViewController*)newFeedViewController;
-
 -(VLBTakePhotoViewController*)newUploadUIViewController;
+-(VLBSignOutViewController*)newSignOutViewController;
 
 /**
  

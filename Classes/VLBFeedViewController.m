@@ -117,10 +117,9 @@ return localityItemsViewController;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    [[VLBPredicates new] ifNil:self.locality then:^{
         [self.theBoxLocationService startMonitoringSignificantLocationChanges];
-    });
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

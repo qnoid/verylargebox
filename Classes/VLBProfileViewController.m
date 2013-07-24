@@ -28,7 +28,7 @@
 #import "VLBButton.h"
 #import "VLBViewControllers.h"
 #import "VLBNotificationView.h"
-#import "VLBEmailViewController.h"
+#import "VLBSignOutViewController.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -60,7 +60,9 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     [titleLabel sizeToFit];
     
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
-    
+
+    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] idCardButton:profileViewController action:@selector(presentSignOutViewController)];
+
     profileViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new] cameraButton:profileViewController
                                                                                               action:@selector(addItem)];
 
@@ -82,6 +84,13 @@ return profileViewController;
     self.operationQueue = [NSOperationQueue new];
 
 return self;
+}
+
+-(void)presentSignOutViewController
+{
+    UINavigationController *newSignOutViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newSignOutViewController]];
+    [self.navigationController presentViewController:newSignOutViewController animated:YES completion:nil];
+
 }
 
 -(void)viewDidLoad

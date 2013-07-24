@@ -26,9 +26,11 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>1.1</string>
+			<string>Version</string>
 			<key>Key</key>
 			<string>Version</string>
+			<key>DefaultValue</key>
+			<string>1.1</string>
 		</dict>
 	</array>
 </dict>

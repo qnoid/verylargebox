@@ -10,6 +10,8 @@
 
 typedef void(^VLBTitleLabel)(UILabel *titleLabel);
 
+extern VLBTitleLabel const VLBTitleLabelPrimaryBlue;
+
 @interface VLBViewControllers : NSObject
 
 -(UILabel*)titleView:(NSString*)text;

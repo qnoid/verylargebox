@@ -8,6 +8,7 @@
 
 #import "VLBViewControllers.h"
 #import "VLBTypography.h"
+#import "VLBColors.h"
 
 @implementation VLBViewControllers
 
@@ -16,6 +17,15 @@ VLBTitleLabel const VLBTitleLabelNavigation = ^(UILabel *titleLabel)
     titleLabel.textColor = [UIColor blackColor];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
+    titleLabel.adjustsFontSizeToFitWidth = YES;
+};
+
+VLBTitleLabel const VLBTitleLabelPrimaryBlue = ^(UILabel *titleLabel)
+{
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [VLBColors colorPrimaryBlue];
+    titleLabel.font = [VLBTypography fontAvenirNextDemiBoldTweenty];
+    titleLabel.minimumScaleFactor = 10;
     titleLabel.adjustsFontSizeToFitWidth = YES;
 };
 

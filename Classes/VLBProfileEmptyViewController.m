@@ -18,7 +18,7 @@
 #import "VLBQueries.h"
 #import "NSDictionary+VLBResidence.h"
 #import "VLBProfileViewController.h"
-#import "VLBEmailViewController.h"
+#import "VLBSignOutViewController.h"
 
 @interface VLBProfileEmptyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
@@ -39,6 +39,8 @@
     profileViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
+    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] idCardButton:profileViewController action:@selector(presentSignOutViewController)];
+
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
 
 return profileViewController;
@@ -53,6 +55,12 @@ return profileViewController;
 	self.thebox = thebox;
 
 return self;
+}
+
+-(void)presentSignOutViewController
+{
+    UINavigationController *newSignOutViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newSignOutViewController]];
+    [self.navigationController presentViewController:newSignOutViewController animated:YES completion:nil];
 }
 
 -(void)viewDidLoad

@@ -13,7 +13,7 @@
 +(UITableViewCell*)newEmailTableViewCell
 {
     UITableViewCell *emailCell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"VLBEmailTableViewCell"];
-    emailCell.textLabel.font = [VLBTypography fontLucidaGrandeTwenty];
+    emailCell.textLabel.font = [VLBTypography fontAvenirNextDemiBoldTweenty];
     emailCell.textLabel.adjustsFontSizeToFitWidth = YES;
     UIView* selectedBackgroundView = [[UIView alloc] init];
     selectedBackgroundView.backgroundColor = [VLBColors colorPrimaryBlue];

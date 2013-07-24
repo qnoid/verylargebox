@@ -173,7 +173,7 @@ return hud;
 {
     MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD];
     
-    hud.labelText = @"Add your photos in the box.";
+    hud.labelText = @"Add your photos to verylargebox.";
     hud.detailsLabelText = [NSString stringWithFormat:@"What happens next? \n \n You will receive an email to give %@ access to verylargebox. \n \n Your email is only used to verify your identity. \n \n",
                             [[UIDevice currentDevice] name]];
     
@@ -216,5 +216,16 @@ return hud;
     
 return hud;
 }
+
++(MBProgressHUD*)newSignOutViewWithIdCard:(UIView*)view
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD];
+    
+    hud.labelText = @"Sign out.";
+    hud.detailsLabelText = [NSString stringWithFormat:@"What happens next? \n \n You will need to verify your email again to add photos to verylargebox."];
+    
+    return hud;
+}
+
 
 @end

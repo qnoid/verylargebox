@@ -22,7 +22,7 @@
     return [UIFont fontWithName:@"AvenirNext-DemiBold" size:22.0];
 }
 
-+(UIFont*)fontLucidaGrandeTwenty{
++(UIFont*)fontAvenirNextDemiBoldTweenty{
     return [UIFont fontWithName:@"AvenirNext-DemiBold" size:20.0];
 }
 

@@ -19,6 +19,7 @@
 #import "VLBErrorBlocks.h"
 #import "VLBTableViewCells.h"
 #import "VLBQueries.h"
+#import "VLBViewControllers.h"
 
 @interface VLBIdentifyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
@@ -71,9 +72,35 @@ return self;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];    
     self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 0)];
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
+    VLBTitleLabelPrimaryBlue(self.emailButton.titleLabel);
+
+    
 
     __weak VLBIdentifyViewController *wself = self;
 
+    [self.signUpButton onTouchUp:^(UIButton *button)
+    {
+        [wself.view sendSubviewToBack:button];
+
+        NSString *email = wself.emailTextField.text;
+        NSString* residence = [[VLBSecureHashA1 new] newKey];
+        
+        [self didEnterEmail:email forResidence:residence];
+        
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
+        
+        AFHTTPRequestOperation *newRegistrationOperation =
+        [VLBQueries newCreateUserQuery:wself email:email residence:residence];
+        
+        [newRegistrationOperation start];
+    }];
+    
+    
+    [self.emailButton onTouchUp:^(UIButton *button) {
+        [wself.view sendSubviewToBack:wself.emailButton];
+        [wself.view sendSubviewToBack:wself.signInButton];
+    }];
+    
     [self.signInButton onTouchUp:^(UIButton *button)
     {
         NSString *email = [wself.thebox email];
@@ -112,35 +139,18 @@ return self;
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if(!self.signInButton.enabled){
-        return NO;
-    }
-    
-    NSString *email = self.emailTextField.text;
-    NSString* residence = [[VLBSecureHashA1 new] newKey];
+    [self.signUpButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    self.signUpButton.enabled = NO;
 
-    [self didEnterEmail:email forResidence:residence];
+    [self.emailButton setTitle:textField.text forState:UIControlStateNormal];
+    [self.view sendSubviewToBack:textField];
     
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
-    
-    AFHTTPRequestOperation *newRegistrationOperation =
-        [VLBQueries newCreateUserQuery:self email:email residence:residence];
-    
-    [newRegistrationOperation start];
-
 return YES;
 }
 
 -(void)textField:(UITextField *)textField email:(NSString *)email isValidEmail:(BOOL)isValidEmail
 {
-    if(!isValidEmail)
-    {
-        [self hideHUDForView];
-        MBProgressHUD *hud = [VLBHuds newViewWithIdCard:self.noticeView];
-        [hud show:NO];
-    }
-    
-    self.signInButton.enabled = isValidEmail;
+    self.signUpButton.enabled = isValidEmail;
 }
 
 -(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence

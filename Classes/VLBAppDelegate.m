@@ -56,20 +56,17 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-    VLBIdentifyViewController *identifyViewController = [self.thebox newIdentifyViewController];
+    UIViewController *viewController = [self.thebox newIdentifyViewController];
     
     if([self.thebox hasUserAccount]) {
-        [self.thebox identify:identifyViewController];
-        MBProgressHUD *hud = [VLBHuds newOnDidSignIn:identifyViewController.view email:[self.thebox email]];
-        vlb_animate(hud.customView);
-        [hud show:YES];
+        viewController = [self.thebox decideOnProfileViewController];
     }
     
     UINavigationController *cityViewControler = [[UINavigationController alloc] initWithRootViewController:[self.thebox newCityViewController]];
     UINavigationController *feedViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newFeedViewController]];
     
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:identifyViewController], cityViewControler, feedViewController];
+    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:viewController], cityViewControler, feedViewController];
     tabBarController.selectedIndex = 2;
     
     self.window.rootViewController = tabBarController;

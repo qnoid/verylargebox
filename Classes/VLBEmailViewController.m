@@ -56,7 +56,7 @@
 {
     NSArray* accounts = [SSKeychain accountsForService:THE_BOX_SERVICE];
 
-    VLBEmailViewController *identifyViewController = [[VLBEmailViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:(VLBTheBox*)thebox accounts:[NSMutableArray arrayWithArray:accounts]];
+    VLBEmailViewController *identifyViewController = [[VLBEmailViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:thebox accounts:[NSMutableArray arrayWithArray:accounts]];
     
     identifyViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Identify" image:[UIImage imageNamed:@"idcard.png"] tag:0];
     

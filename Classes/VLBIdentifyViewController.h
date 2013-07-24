@@ -17,6 +17,8 @@
 @interface VLBIdentifyViewController : UIViewController <VLBEmailTextFieldDelegate, VLBCreateUserOperationDelegate, VLBVerifyUserOperationDelegate>
 
 @property (nonatomic, weak) IBOutlet VLBButton *signInButton;
+@property (nonatomic, weak) IBOutlet VLBButton *signUpButton;
+@property (nonatomic, weak) IBOutlet VLBButton *emailButton;
 @property (nonatomic, weak) IBOutlet VLBEmailTextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UIView *noticeView;
 

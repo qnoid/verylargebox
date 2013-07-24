@@ -36,7 +36,11 @@
 }
 
 +(UIColor*)colorPrimaryBlue {
-    return [UIColor colorWithRed:14.0/255.0 green:118.0/255.0 blue:188.0/255.0 alpha:1.0];
+    return [UIColor colorWithRed:9.0/255.0 green:110.0/255.0 blue:201.0/255.0 alpha:1.0];
+}
+
++(UIColor*)colorSecondaryBlue {
+    return [UIColor colorWithRed:9.0/255.0 green:110.0/255.0 blue:201.0/255.0 alpha:1.0];
 }
 
 +(UIColor*)color0102161 {
