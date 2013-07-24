@@ -23,7 +23,6 @@ VLBTitleLabel const VLBTitleLabelNavigation = ^(UILabel *titleLabel)
 VLBTitleLabel const VLBTitleLabelPrimaryBlue = ^(UILabel *titleLabel)
 {
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.backgroundColor = [VLBColors colorPrimaryBlue];
     titleLabel.font = [VLBTypography fontAvenirNextDemiBoldTweenty];
     titleLabel.minimumScaleFactor = 10;
     titleLabel.adjustsFontSizeToFitWidth = YES;
