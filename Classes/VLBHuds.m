@@ -173,7 +173,7 @@ return hud;
 {
     MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD];
     
-    hud.labelText = @"Add your photos to verylargebox.";
+    hud.labelText = @"Add your photos.";
     hud.detailsLabelText = [NSString stringWithFormat:@"What happens next? \n \n You will receive an email to give %@ access to verylargebox. \n \n Your email is only used to verify your identity. \n \n",
                             [[UIDevice currentDevice] name]];
     
@@ -198,7 +198,7 @@ return hud;
     return hud;
     }];
     
-    hud.labelText = @"An email is on your way.";
+    hud.labelText = @"An email it is on its way.";
 
 return hud;
 }
@@ -222,7 +222,7 @@ return hud;
     MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD];
     
     hud.labelText = @"Sign out.";
-    hud.detailsLabelText = [NSString stringWithFormat:@"What happens next? \n \n You will need to verify your email again to add photos to verylargebox."];
+    hud.detailsLabelText = [NSString stringWithFormat:@"What happens next? \n \n You will need to verify your email again to add photos to verylargebox. \n \n Your existing photos will not be affected. \n \n Other features will remain accessible."];
     
     return hud;
 }

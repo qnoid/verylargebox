@@ -24,7 +24,7 @@
 #import "SSKeychain.h"
 #import "NSArray+VLBDecorator.h"
 #import "VLBIdentifyViewController.h"
-#import "VLBSignOutViewController.h"
+#import "VLBUserSettingsViewController.h"
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 
@@ -195,8 +195,8 @@ return [VLBProfileEmptyViewController newProfileViewController:self email:[self 
 return [VLBTakePhotoViewController newUploadUIViewController:self userId:[self userId]];
 }
 
--(VLBSignOutViewController*)newSignOutViewController{
-return [VLBSignOutViewController newSignOutViewController:self];
+-(VLBUserSettingsViewController*)newUserSettingsViewController{
+return [VLBUserSettingsViewController newUserSettingsViewController:self];
 }
 
 -(NSString*)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate

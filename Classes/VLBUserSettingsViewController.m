@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 verylargebox.com. All rights reserved.
 //
 
-#import "VLBSignOutViewController.h"
+#import "VLBUserSettingsViewController.h"
 #import "VLBMacros.h"
 #import "VLBViewControllers.h"
 #import "VLBButton.h"
@@ -15,17 +15,17 @@
 #import "MBProgressHUD.h"
 #import "VLBIdentifyViewController.h"
 
-@interface VLBSignOutViewController ()
+@interface VLBUserSettingsViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
 @end
 
-@implementation VLBSignOutViewController
+@implementation VLBUserSettingsViewController
 
-+(VLBSignOutViewController*)newSignOutViewController:(VLBTheBox*)thebox
++(VLBUserSettingsViewController*)newUserSettingsViewController:(VLBTheBox*)thebox
 {
-    VLBSignOutViewController *signOutViewController = [[VLBSignOutViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:thebox];
+    VLBUserSettingsViewController *signOutViewController = [[VLBUserSettingsViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:thebox];
 
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Sign out"];
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"User settings"];
     signOutViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
@@ -38,7 +38,7 @@ return signOutViewController;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox
 {
-    self = [super initWithNibName:NSStringFromClass([VLBSignOutViewController class]) bundle:nibBundleOrNil];
+    self = [super initWithNibName:NSStringFromClass([VLBUserSettingsViewController class]) bundle:nibBundleOrNil];
     
     VLB_IF_NOT_SELF_RETURN_NIL();
     
@@ -59,7 +59,7 @@ return signOutViewController;
     VLBTitleLabelPrimaryBlue(self.emailButton.titleLabel);
     [self.emailButton setTitle:[self.thebox email] forState:UIControlStateNormal];
     
-    __weak VLBSignOutViewController *wself = self;
+    __weak VLBUserSettingsViewController *wself = self;
     
     [self.signOutButton onTouchUp:^(UIButton *button) {
         [wself.thebox noUserAccount];

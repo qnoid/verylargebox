@@ -28,7 +28,7 @@
 #import "VLBButton.h"
 #import "VLBViewControllers.h"
 #import "VLBNotificationView.h"
-#import "VLBSignOutViewController.h"
+#import "VLBUserSettingsViewController.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -61,7 +61,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
 
-    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] idCardButton:profileViewController action:@selector(presentSignOutViewController)];
+    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] idCardButton:profileViewController action:@selector(presentUserSettingsViewController)];
 
     profileViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new] cameraButton:profileViewController
                                                                                               action:@selector(addItem)];
@@ -86,10 +86,10 @@ return profileViewController;
 return self;
 }
 
--(void)presentSignOutViewController
+-(void)presentUserSettingsViewController
 {
-    UINavigationController *newSignOutViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newSignOutViewController]];
-    [self.navigationController presentViewController:newSignOutViewController animated:YES completion:nil];
+    UINavigationController *newUserSettingsViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newUserSettingsViewController]];
+    [self.navigationController presentViewController:newUserSettingsViewController animated:YES completion:nil];
 
 }
 
