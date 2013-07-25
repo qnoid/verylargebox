@@ -196,7 +196,7 @@ return [VLBUserProfileViewController newUserSettingsViewController:self];
 
 -(NSString*)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate
 {
-    if(!self.residence){
+    if(![self hasUserAccount]){
         [NSException raise:@"Residence should not be nil" format:@"#didAuthenticateResidence should have been called", nil];
     }	
     
