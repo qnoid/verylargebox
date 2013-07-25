@@ -71,6 +71,8 @@ return self;
 
 -(IBAction)didTouchUpInsideTakePhoto
 {
+    [Flurry logEvent:@"didTouchUpInsideTakePhoto"];
+    
     VLBTakePhotoViewController *takePhotoViewController = [self.thebox newUploadUIViewController];
     
     VLBNotificationView *notificationView = [VLBNotificationView newView];
