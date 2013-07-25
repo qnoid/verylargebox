@@ -600,9 +600,10 @@ return VLBScrollViewOrientationHorizontal;
     }
     
     NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
+    id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
     
     VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBCityViewController", VLBLocationName: [location vlb_objectForKey:VLBLocationName]}];
+        [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBCityViewController", VLBLocationName: [location vlb_objectForKey:name]}];
 
         tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
                 [[location objectForKey:@"lng"] floatValue]),

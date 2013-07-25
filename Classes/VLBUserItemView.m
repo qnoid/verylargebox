@@ -108,7 +108,7 @@ return self;
     self.didTapOnGetDirectionsButton = ^(){
         VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
             [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBUserItemView",
-             VLBLocationName:[location vlb_objectForKey:VLBLocationName],
+             VLBLocationName:name,
                    VLBItemId:[item objectForKey:VLBItemId],
              VLBItemImageURL:[item vlb_objectForKey:VLBItemImageURL]}];
             
