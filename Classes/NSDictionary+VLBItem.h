@@ -10,8 +10,10 @@
 
 #define VLBItemKey NSString*
 
+extern VLBItemKey const VLBItemId;
 extern VLBItemKey const VLBItemLocation;
 extern VLBItemKey const VLBItemWhen;
+extern VLBItemKey const VLBItemImageURL;
 extern VLBItemKey const VLBItemIPhoneImageURL;
 extern VLBItemKey const VLBItemLocality;
 extern VLBItemKey const VLBItemImageKey;

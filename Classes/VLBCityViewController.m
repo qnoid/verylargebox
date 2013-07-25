@@ -37,6 +37,8 @@
 #import "VLBErrorBlocks.h"
 #import "DDLog.h"
 #import "VLBViewControllers.h"
+#import "NSDictionary+VLBItem.h"
+#import "NSDictionary+VLBLocation.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -345,7 +347,10 @@ return [[UIImageView alloc] initWithFrame:frame];
     //there should be a mapping between the index of the cell and the id of the item
 	NSMutableDictionary *item = [[self.items objectAtIndex:(row * 2) + index] objectForKey:@"item"];
     
-    [Flurry logEvent:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
+    [Flurry logEvent:@"didSelectItem" withParameters:@{
+           VLBItemId: [item objectForKey:VLBItemId],
+     VLBItemImageURL: [item vlb_objectForKey:VLBItemImageURL]}
+     ];
     
     VLBDetailsViewController* detailsViewController = [VLBDetailsViewController newDetailsViewController:item];
     detailsViewController.hidesBottomBarWhenPushed = YES;
@@ -596,9 +601,8 @@ return VLBScrollViewOrientationHorizontal;
     
     NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
     
-    __weak VLBCityViewController *wself = self;
     VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        [Flurry logEvent:[NSString stringWithFormat:@"%@, %s", [wself class], __PRETTY_FUNCTION__]];
+        [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBCityViewController", VLBLocationName: [location vlb_objectForKey:VLBLocationName]}];
 
         tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
                 [[location objectForKey:@"lng"] floatValue]),

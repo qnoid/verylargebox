@@ -8,9 +8,9 @@
 
 #import "NSDictionary+VLBLocation.h"
 
-NSString* const VLBLocationLat = @"lat";
-NSString* const VLBLocationLng = @"lng";
-NSString* const VLBLocationName = @"name";
+VLBLocationKey const VLBLocationLat = @"lat";
+VLBLocationKey const VLBLocationLng = @"lng";
+VLBLocationKey const VLBLocationName = @"name";
 
 @implementation NSDictionary (VLBLocation)
 

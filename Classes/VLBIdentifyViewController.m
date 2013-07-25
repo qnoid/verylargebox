@@ -88,7 +88,7 @@ return self;
         
         [self didEnterEmail:email forResidence:residence];
         
-        [Flurry logEvent:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
+        [Flurry logEvent:@"didSignUp"];
         
         AFHTTPRequestOperation *newRegistrationOperation =
         [VLBQueries newCreateUserQuery:wself email:email residence:residence];
@@ -106,6 +106,8 @@ return self;
     {
         NSString *email = [wself.thebox email];
         NSString *residence = [wself.thebox residenceForEmail:email];
+
+        [Flurry logEvent:@"didSignIn"];
 
         [wself hideHUDForView];
         MBProgressHUD *hud = [VLBHuds newOnDidSignIn:wself.view email:[wself.thebox email]];

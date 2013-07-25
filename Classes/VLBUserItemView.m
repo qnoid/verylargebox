@@ -105,10 +105,12 @@ return self;
     self.storeLabel.text = [NSString stringWithFormat:@"%@ \n %@", name, localityName];
     self.whenLabel.text = [item vlb_objectForKey:VLBItemWhen];
     
-    __weak VLBUserItemView *wself = self;
     self.didTapOnGetDirectionsButton = ^(){
         VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            [Flurry logEvent:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTapOnGetDirectionsButton"]];
+            [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBUserItemView",
+             VLBLocationName:[location vlb_objectForKey:VLBLocationName],
+                   VLBItemId:[item objectForKey:VLBItemId],
+             VLBItemImageURL:[item vlb_objectForKey:VLBItemImageURL]}];
             
             tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location vlb_objectForKey:@"lat"] floatValue],
                                                                    [[location objectForKey:@"lng"] floatValue]),

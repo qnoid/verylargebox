@@ -275,7 +275,7 @@ return self;
 
 - (IBAction)done:(id)sender 
 {
-    [Flurry logEvent:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
+    [Flurry logEvent:@"didTakePhoto"];
     
     NSString* key = [self.thebox newPostImage:self.itemImage delegate:self.createItemDelegate];
 
@@ -291,7 +291,7 @@ return self;
 
 - (IBAction)enterLocation:(id)sender
 {
-    [Flurry logEvent:[NSString stringWithFormat:@"%@, %@", [self class], @"didTouchUpInsideSelectLocationButton"]];
+    [Flurry logEvent:@"didEnterLocation"];
 	VLBStoresViewController *locationController = [VLBStoresViewController newLocationViewController:self.venues];
     self.locationOperationDelegate = locationController;
     locationController.delegate = self;

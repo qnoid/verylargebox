@@ -118,6 +118,8 @@
 		BD2D29F116B9DAFC0092EB95 /* VLBAFHTTPRequestOperationCompletionBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DCC1673BF6E00286511 /* VLBAFHTTPRequestOperationCompletionBlocks.m */; };
 		BD2D29F216B9DB390092EB95 /* NSString+VLBString.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127B46165D7E6F002C944D /* NSString+VLBString.m */; };
 		BD30A3A51776234300A71DC9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD30A3A41776234300A71DC9 /* Crashlytics.framework */; };
+		BD33260117A1D38F008784B3 /* NSDictionary+VLBItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE4925B1775132300FFC41F /* NSDictionary+VLBItem.m */; };
+		BD33260217A1D554008784B3 /* NSDictionary+VLBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE4925E1775142D00FFC41F /* NSDictionary+VLBLocation.m */; };
 		BD4292B9175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4292BA175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
@@ -1748,6 +1750,8 @@
 				BD4D32A5177F5B010015EADF /* VLBScrollViewTest.m in Sources */,
 				BD77441317886926007F7AAA /* VLBViewControllers.m in Sources */,
 				BD77441917887E7D007F7AAA /* NSDictionary+VLBUser.m in Sources */,
+				BD33260117A1D38F008784B3 /* NSDictionary+VLBItem.m in Sources */,
+				BD33260217A1D554008784B3 /* NSDictionary+VLBLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

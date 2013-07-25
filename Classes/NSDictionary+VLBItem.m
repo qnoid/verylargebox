@@ -8,11 +8,14 @@
 
 #import "NSDictionary+VLBItem.h"
 
-NSString* const VLBItemLocation = @"location";
-NSString* const VLBItemWhen = @"when";
-NSString* const VLBItemIPhoneImageURL = @"iphoneImageURL";
-NSString* const VLBItemLocality = @"locality";
-NSString* const VLBItemImageKey = @"image_file_name";
+
+VLBItemKey const VLBItemId = @"id";
+VLBItemKey const VLBItemLocation = @"location";
+VLBItemKey const VLBItemWhen = @"when";
+VLBItemKey const VLBItemImageURL = @"imageURL";
+VLBItemKey const VLBItemIPhoneImageURL = @"iphoneImageURL";
+VLBItemKey const VLBItemLocality = @"locality";
+VLBItemKey const VLBItemImageKey = @"image_file_name";
 
 @implementation NSDictionary (VLBItem)
 
