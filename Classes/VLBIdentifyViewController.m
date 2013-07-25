@@ -32,7 +32,7 @@
 {
     VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:(VLBTheBox*)thebox];
     
-    identifyViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sign in" image:[UIImage imageNamed:@"idcard-grey.png"] tag:0];
+    identifyViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sign in" image:[UIImage imageNamed:@"user.png"] tag:0];
 
     UIButton* titleButton = [[VLBViewControllers new] titleButton:@"Picture a Box"
                                                            target:identifyViewController
@@ -80,6 +80,7 @@ return self;
 
     [self.signUpButton onTouchUp:^(UIButton *button)
     {
+    		[wself.emailTextField resignFirstResponder];
         [wself.view sendSubviewToBack:button];
 
         NSString *email = wself.emailTextField.text;
@@ -87,7 +88,7 @@ return self;
         
         [self didEnterEmail:email forResidence:residence];
         
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
+        [Flurry logEvent:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
         
         AFHTTPRequestOperation *newRegistrationOperation =
         [VLBQueries newCreateUserQuery:wself email:email residence:residence];

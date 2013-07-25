@@ -34,9 +34,6 @@ return self;
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    [textField resignFirstResponder];
-    
     NSPredicate *emailValidation = [NSPredicate predicateWithFormat:@"self MATCHES[c] %@", VLB_EMAIL_VALIDATION_REGEX];
     
     if(![emailValidation evaluateWithObject:textField.text]) {
@@ -58,16 +55,7 @@ return YES;
     
     [self.emailTextFieldDelegate textField:self email:resolvedEmail isValidEmail:isValidEmail];
     
-    if(isValidEmail){
-        textField.textColor = [UIColor whiteColor];
-        textField.backgroundColor = [VLBColors colorPrimaryBlue];
-    }
-    else {
-        textField.textColor = [UIColor lightGrayColor];
-        textField.backgroundColor = [UIColor whiteColor];
-    }
-    
-    return YES;
+return YES;
 }
 
 -(BOOL)textFieldShouldClear:(UITextField *)textField

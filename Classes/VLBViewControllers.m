@@ -28,6 +28,19 @@ VLBTitleLabel const VLBTitleLabelPrimaryBlue = ^(UILabel *titleLabel)
     titleLabel.adjustsFontSizeToFitWidth = YES;
 };
 
+VLBTitleButton const VLBTitleButtonAttributed = ^(UIButton *titleButton)
+{
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:titleButton.titleLabel.text
+                                                                          attributes:@{
+                                                       NSUnderlineStyleAttributeName:@1,
+                                                      NSForegroundColorAttributeName:[VLBColors colorPrimaryBlue],
+                                           }];
+    
+    [titleButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+};
+
+VLBTitleButton const VLBTitleButtonNoOp = ^(UIButton *titleButon){};
+
 -(UIBarButtonItem*)barButtonItem:(id)target action:(SEL)action imageNamed:(NSString*) imageNamed
 {
     UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -59,6 +72,22 @@ return titleLabel;
 
 return titleButon;
 }
+
+-(UIButton*)attributedTitleButton:(NSString*)text target:(id)target action:(SEL)action
+{
+    UIButton* titleButon = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleButon addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    VLBTitleLabelNavigation(titleButon.titleLabel);
+    [titleButon setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [titleButon setTitle:text forState:UIControlStateNormal];
+    [titleButon.titleLabel sizeToFit];
+    
+    VLBTitleButtonAttributed(titleButon);
+    
+    return titleButon;
+}
+
 
 -(UIBarButtonItem*)checkmarkMiniButton:(id)target action:(SEL)action {
     return [self barButtonItem:target action:action imageNamed:@"checkmark-mini.png"];

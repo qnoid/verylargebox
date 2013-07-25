@@ -24,15 +24,13 @@
 #import "SSKeychain.h"
 #import "NSArray+VLBDecorator.h"
 #import "VLBIdentifyViewController.h"
-#import "VLBUserSettingsViewController.h"
+#import "VLBUserProfileViewController.h"
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 
 NSString* const VERYLARGEBOX_BUCKET = @"com.verylargebox.server";
 NSString* const AWS_ACCESS_KEY = @"AKIAIFACVDF6VNIEY2EQ";
 NSString* const AWS_SECRET_KEY = @"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";
-NSString * const TESTFLIGHT_TEAM_TOKEN = @"fc2b4104428a1fca89ef4bac9ae1e820_ODU1NzMyMDEyLTA0LTI5IDEyOjE3OjI4LjMwMjc3NQ";
-NSString * const TESTFLIGHT_APP_TOKEN = @"0840a56f-799c-4e95-92e9-7e19616a88f7";
 
 @interface VLBTheBox ()
 @property(nonatomic, strong) NSDictionary *residence;
@@ -99,13 +97,10 @@ return self;
 
 -(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSDictionary*)residence
 {
-	self.residence = residence;
+   	self.residence = residence;
     [self.userDefaults setInteger:[self.residence vlb_residenceUserId] forKey:[self prefixKey:VLBResidenceUserId]];
     [self.userDefaults setBool:[self.residence vlb_hasUserTakenPhoto] forKey:[self prefixKey:VLBUserDidTakePhotoKey]];
     [self.userDefaults synchronize];
-
-    [TestFlight setDeviceIdentifier:[self.residence vlb_objectForKey:VLBResidenceToken]];
-    [TestFlight takeOff:TESTFLIGHT_APP_TOKEN];
 }
 
 -(BOOL)hasUserAccount {
@@ -195,8 +190,8 @@ return [VLBProfileEmptyViewController newProfileViewController:self email:[self 
 return [VLBTakePhotoViewController newUploadUIViewController:self userId:[self userId]];
 }
 
--(VLBUserSettingsViewController*)newUserSettingsViewController{
-return [VLBUserSettingsViewController newUserSettingsViewController:self];
+-(VLBUserProfileViewController*)newUserProfileViewController{
+return [VLBUserProfileViewController newUserSettingsViewController:self];
 }
 
 -(NSString*)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate

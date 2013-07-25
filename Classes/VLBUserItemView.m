@@ -108,7 +108,7 @@ return self;
     __weak VLBUserItemView *wself = self;
     self.didTapOnGetDirectionsButton = ^(){
         VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTapOnGetDirectionsButton"]];
+            [Flurry logEvent:[NSString stringWithFormat:@"%@, %@", [wself class], @"didTapOnGetDirectionsButton"]];
             
             tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location vlb_objectForKey:@"lat"] floatValue],
                                                                    [[location objectForKey:@"lng"] floatValue]),

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^VLBTitleLabel)(UILabel *titleLabel);
+typedef void(^VLBTitleButton)(UIButton *titleButton);
 
 extern VLBTitleLabel const VLBTitleLabelPrimaryBlue;
 
@@ -17,6 +18,8 @@ extern VLBTitleLabel const VLBTitleLabelPrimaryBlue;
 -(UILabel*)titleView:(NSString*)text;
 
 -(UIButton*)titleButton:(NSString*)text target:(id)target action:(SEL)action;
+
+-(UIButton*)attributedTitleButton:(NSString*)text target:(id)target action:(SEL)action;
 
 -(UIBarButtonItem*)checkmarkMiniButton:(id)target action:(SEL)action;
 

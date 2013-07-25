@@ -111,7 +111,7 @@ return self;
          
          [wself didEnterEmail:wself.emailTextField.text forResidence:residence];
 
-         [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
+         [Flurry logEvent:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
          
          AFHTTPRequestOperation *newRegistrationOperation =
          [VLBQueries newCreateUserQuery:self email:wself.emailTextField.text residence:residence];

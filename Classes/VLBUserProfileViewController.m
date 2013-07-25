@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 verylargebox.com. All rights reserved.
 //
 
-#import "VLBUserSettingsViewController.h"
+#import "VLBUserProfileViewController.h"
 #import "VLBMacros.h"
 #import "VLBViewControllers.h"
 #import "VLBButton.h"
@@ -15,17 +15,17 @@
 #import "MBProgressHUD.h"
 #import "VLBIdentifyViewController.h"
 
-@interface VLBUserSettingsViewController ()
+@interface VLBUserProfileViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
 @end
 
-@implementation VLBUserSettingsViewController
+@implementation VLBUserProfileViewController
 
-+(VLBUserSettingsViewController*)newUserSettingsViewController:(VLBTheBox*)thebox
++(VLBUserProfileViewController*)newUserSettingsViewController:(VLBTheBox*)thebox
 {
-    VLBUserSettingsViewController *signOutViewController = [[VLBUserSettingsViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:thebox];
+    VLBUserProfileViewController *signOutViewController = [[VLBUserProfileViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:thebox];
 
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"User settings"];
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"User profile"];
     signOutViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
@@ -38,7 +38,7 @@ return signOutViewController;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil thebox:(VLBTheBox*)thebox
 {
-    self = [super initWithNibName:NSStringFromClass([VLBUserSettingsViewController class]) bundle:nibBundleOrNil];
+    self = [super initWithNibName:NSStringFromClass([VLBUserProfileViewController class]) bundle:nibBundleOrNil];
     
     VLB_IF_NOT_SELF_RETURN_NIL();
     
@@ -59,7 +59,7 @@ return signOutViewController;
     VLBTitleLabelPrimaryBlue(self.emailButton.titleLabel);
     [self.emailButton setTitle:[self.thebox email] forState:UIControlStateNormal];
     
-    __weak VLBUserSettingsViewController *wself = self;
+    __weak VLBUserProfileViewController *wself = self;
     
     [self.signOutButton onTouchUp:^(UIButton *button) {
         [wself.thebox noUserAccount];

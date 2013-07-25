@@ -11,12 +11,12 @@
 @class VLBButton;
 @class VLBTheBox;
 
-@interface VLBUserSettingsViewController : UIViewController
+@interface VLBUserProfileViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet VLBButton *emailButton;
 @property (nonatomic, weak) IBOutlet VLBButton *signOutButton;
 @property (nonatomic, weak) IBOutlet UIView *noticeView;
 
-+(VLBUserSettingsViewController*)newUserSettingsViewController:(VLBTheBox*)thebox;
++(VLBUserProfileViewController*)newUserSettingsViewController:(VLBTheBox*)thebox;
 
 @end

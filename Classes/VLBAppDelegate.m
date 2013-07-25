@@ -23,6 +23,7 @@
 #import "VLBIdentifyViewController.h"
 #import "MBProgressHUD.h"
 #import "VLBHuds.h"
+#import "Flurry.h"
 
 @interface VLBAppDelegate ()
 @property(nonatomic, strong) VLBTheBox* thebox;
@@ -42,6 +43,7 @@
 
 		self.thebox = [VLBTheBox newTheBox];
     [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
+		[Flurry startSession:@"WJVNH9SR82PTQRGXM9X5"];
 
     [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
@@ -70,8 +72,6 @@
     tabBarController.selectedIndex = 2;
     
     self.window.rootViewController = tabBarController;
-    
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     [self.window makeKeyAndVisible];
 return YES;

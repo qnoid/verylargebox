@@ -185,7 +185,7 @@ return hud;
 {
     MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_ENVELOPE];
 	  hud.labelText = @"Please check your email.";
-    hud.detailsLabelText = [NSString stringWithFormat:@"If you cannot find it, check your spam. \n \n Double check you have entered your email correct, '%@'. \n Tap to edit if it's wrong. \n \n Once you have verified, return here to sign in.", email];
+    hud.detailsLabelText = [NSString stringWithFormat:@"If you cannot find it, check your spam. \n \n Double check you have entered your email correctly, '%@'. \n Tap to edit if it's wrong. \n \n Once you have verified, return here to sign in.", email];
         
 return hud;
 }

@@ -15,12 +15,12 @@ target :ApplicationTests, :exclusive => true do
 	pod 'Kiwi', '~> 2.1'
 end
 
-pod 'AFNetworking', '= 1.3.1' 
-pod 'AWSiOSSDK/S3'
-pod 'JSONKit', '~> 1.4', :inhibit_warnings => true
-pod 'TestFlightSDK', '= 1.2.6'
+pod 'AFNetworking', '1.3.1' 
+pod 'AWSiOSSDK/S3', '1.6'
+pod 'JSONKit', '1.4', :inhibit_warnings => true
+pod 'FlurrySDK', '4.2.2'
 pod 'SSKeychain', '0.1.4'
 pod 'SVPullToRefresh', '0.4.1'
 pod 'QNDAnimations', '2.0.1'
 pod 'CocoaLumberjack', '1.6.2'
-pod 'MBProgressHUD', '~> 0.6'
+pod 'MBProgressHUD', '0.6'

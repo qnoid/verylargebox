@@ -18,7 +18,8 @@
 #import "VLBQueries.h"
 #import "NSDictionary+VLBResidence.h"
 #import "VLBProfileViewController.h"
-#import "VLBUserSettingsViewController.h"
+#import "VLBUserProfileViewController.h"
+#import "VLBColors.h"
 
 @interface VLBProfileEmptyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
@@ -35,11 +36,11 @@
         [[VLBProfileEmptyViewController alloc] initWithBundle:[NSBundle mainBundle]
                                                        thebox:thebox];
 
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:email];
-    profileViewController.navigationItem.titleView = titleLabel;
-    [titleLabel sizeToFit];
-
-    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] idCardButton:profileViewController action:@selector(presentUserSettingsViewController)];
+    UIButton* titleButton = [[VLBViewControllers new] attributedTitleButton:email
+                                                           target:profileViewController
+                                                           action:@selector(presentUserSettingsViewController)];
+    
+    profileViewController.navigationItem.titleView = titleButton;
 
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
 
@@ -59,7 +60,7 @@ return self;
 
 -(void)presentUserSettingsViewController
 {
-    UINavigationController *newUserSettingsViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newUserSettingsViewController]];
+    UINavigationController *newUserSettingsViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newUserProfileViewController]];
     [self.navigationController presentViewController:newUserSettingsViewController animated:YES completion:nil];
 }
 

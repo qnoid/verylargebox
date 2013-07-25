@@ -28,7 +28,8 @@
 #import "VLBButton.h"
 #import "VLBViewControllers.h"
 #import "VLBNotificationView.h"
-#import "VLBUserSettingsViewController.h"
+#import "VLBUserProfileViewController.h"
+#import "VLBColors.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -54,14 +55,15 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     VLBProfileViewController *profileViewController =
         [[VLBProfileViewController alloc] initWithBundle:[NSBundle mainBundle]
                                                   thebox:thebox];
-    
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:email];
-    profileViewController.navigationItem.titleView = titleLabel;
-    [titleLabel sizeToFit];
+
+    UIButton* titleButton = [[VLBViewControllers new] attributedTitleButton:email
+                                                           target:profileViewController
+                                                           action:@selector(presentUserSettingsViewController)];
+
+
+    profileViewController.navigationItem.titleView = titleButton;
     
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
-
-    profileViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] idCardButton:profileViewController action:@selector(presentUserSettingsViewController)];
 
     profileViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new] cameraButton:profileViewController
                                                                                               action:@selector(addItem)];
@@ -88,7 +90,7 @@ return self;
 
 -(void)presentUserSettingsViewController
 {
-    UINavigationController *newUserSettingsViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newUserSettingsViewController]];
+    UINavigationController *newUserSettingsViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newUserProfileViewController]];
     [self.navigationController presentViewController:newUserSettingsViewController animated:YES completion:nil];
 
 }

@@ -1,12 +1,12 @@
 //
-// Prefix header for all source files of the 'TheBox' target in the 'TheBox' project
+// Prefix header for all source files of the 'verylargebox' target in the 'verylargebox' project
 //
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
-    #import "TestFlight.h"
+    #import "Flurry.h"
     #import "DDLog.h"
 
 

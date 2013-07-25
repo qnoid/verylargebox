@@ -35,7 +35,6 @@
 #import "VLBDrawRects.h"
 #import "VLBMacros.h"
 #import "VLBErrorBlocks.h"
-#import "TestFlight.h"
 #import "DDLog.h"
 #import "VLBViewControllers.h"
 
@@ -346,7 +345,7 @@ return [[UIImageView alloc] initWithFrame:frame];
     //there should be a mapping between the index of the cell and the id of the item
 	NSMutableDictionary *item = [[self.items objectAtIndex:(row * 2) + index] objectForKey:@"item"];
     
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
+    [Flurry logEvent:[NSString stringWithFormat:@"%@, %s", [self class], __PRETTY_FUNCTION__]];
     
     VLBDetailsViewController* detailsViewController = [VLBDetailsViewController newDetailsViewController:item];
     detailsViewController.hidesBottomBarWhenPushed = YES;
@@ -599,7 +598,7 @@ return VLBScrollViewOrientationHorizontal;
     
     __weak VLBCityViewController *wself = self;
     VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@, %s", [wself class], __PRETTY_FUNCTION__]];
+        [Flurry logEvent:[NSString stringWithFormat:@"%@, %s", [wself class], __PRETTY_FUNCTION__]];
 
         tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
                 [[location objectForKey:@"lng"] floatValue]),

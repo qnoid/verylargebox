@@ -16,7 +16,7 @@
 @class VLBTakePhotoViewController;
 @class VLBCityViewController;
 @class VLBFeedViewController;
-@class VLBUserSettingsViewController;
+@class VLBUserProfileViewController;
 
 
 extern NSString* const THE_BOX_SERVICE;
@@ -61,7 +61,7 @@ extern NSString* const THE_BOX_SERVICE;
 -(VLBCityViewController*)newCityViewController;
 -(VLBFeedViewController*)newFeedViewController;
 -(VLBTakePhotoViewController*)newUploadUIViewController;
--(VLBUserSettingsViewController*)newUserSettingsViewController;
+-(VLBUserProfileViewController*)newUserProfileViewController;
 
 /**
  

@@ -41,7 +41,6 @@
 		9083640B1400752500E5AAAF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		9083640C1400752500E5AAAF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		9083640D1400752A00E5AAAF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 908363A61400659200E5AAAF /* libz.dylib */; };
-		9089482515533980009188B4 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9089482415533980009188B4 /* libTestFlight.a */; };
 		9089482A155349DE009188B4 /* NSDictionary+VLBDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 90894829155349DE009188B4 /* NSDictionary+VLBDictionary.m */; };
 		90A1E51E133CC10000CC9212 /* VLBCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1E51D133CC10000CC9212 /* VLBCache.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90A5FCD11387CC1F004E65B3 /* VLBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A5FCCF1387CC1F004E65B3 /* VLBGridView.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -179,8 +178,8 @@
 		BD8BB288176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
 		BD8BB289176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
 		BD8BB28A176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
-		BD8D411E179F4D1300560C14 /* VLBUserSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8D411C179F4D1200560C14 /* VLBUserSettingsViewController.m */; };
-		BD8D411F179F4D1300560C14 /* VLBUserSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8D411D179F4D1200560C14 /* VLBUserSettingsViewController.xib */; };
+		BD8D411E179F4D1300560C14 /* VLBUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8D411C179F4D1200560C14 /* VLBUserProfileViewController.m */; };
+		BD8D411F179F4D1300560C14 /* VLBUserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8D411D179F4D1200560C14 /* VLBUserProfileViewController.xib */; };
 		BD9A781516BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */; };
 		BD9A781616BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */; };
 		BD9A781716BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */; };
@@ -362,7 +361,6 @@
 		908363CC14006BF000E5AAAF /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		908363D614006BF100E5AAAF /* unittests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "unittests-Info.plist"; path = "UnitTests/unittests-Info.plist"; sourceTree = "<group>"; };
 		908363DE14006BF100E5AAAF /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UnitTests-Prefix.pch"; path = "UnitTests/UnitTests-Prefix.pch"; sourceTree = "<group>"; };
-		9089482415533980009188B4 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../Pods/TestFlightSDK/libTestFlight.a; sourceTree = "<group>"; };
 		90894828155349DE009188B4 /* NSDictionary+VLBDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBDictionary.h"; path = "../Classes/NSDictionary+VLBDictionary.h"; sourceTree = "<group>"; };
 		90894829155349DE009188B4 /* NSDictionary+VLBDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBDictionary.m"; sourceTree = "<group>"; };
 		9094243E142E44380084C40C /* VLBGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBGridViewDelegate.h; sourceTree = "<group>"; };
@@ -513,9 +511,9 @@
 		BD7C27D917235E9A009D26EE /* VLBMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLBMacros.h; path = ../Classes/VLBMacros.h; sourceTree = "<group>"; };
 		BD8BB286176C99CF00AE6157 /* NSDictionary+VLBResidence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBResidence.h"; path = "../Classes/NSDictionary+VLBResidence.h"; sourceTree = "<group>"; };
 		BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBResidence.m"; sourceTree = "<group>"; };
-		BD8D411B179F4D1200560C14 /* VLBUserSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBUserSettingsViewController.h; sourceTree = "<group>"; };
-		BD8D411C179F4D1200560C14 /* VLBUserSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBUserSettingsViewController.m; sourceTree = "<group>"; };
-		BD8D411D179F4D1200560C14 /* VLBUserSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBUserSettingsViewController.xib; sourceTree = "<group>"; };
+		BD8D411B179F4D1200560C14 /* VLBUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBUserProfileViewController.h; sourceTree = "<group>"; };
+		BD8D411C179F4D1200560C14 /* VLBUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBUserProfileViewController.m; sourceTree = "<group>"; };
+		BD8D411D179F4D1200560C14 /* VLBUserProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBUserProfileViewController.xib; sourceTree = "<group>"; };
 		BD9A781316BD53D300FD30E0 /* VLBTableViewDelegateBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTableViewDelegateBuilder.h; path = ../Classes/VLBTableViewDelegateBuilder.h; sourceTree = "<group>"; };
 		BD9A781416BD53D400FD30E0 /* VLBTableViewDelegateBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTableViewDelegateBuilder.m; sourceTree = "<group>"; };
 		BD9BC53217513C0E00CF18EB /* city.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = city.png; path = "Supporting Files/city.png"; sourceTree = "<group>"; };
@@ -657,7 +655,6 @@
 				90836400140070DC00E5AAAF /* CoreGraphics.framework in Frameworks */,
 				908364011400712200E5AAAF /* libz.dylib in Frameworks */,
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
-				9089482515533980009188B4 /* libTestFlight.a in Frameworks */,
 				BD30A3A51776234300A71DC9 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -781,9 +778,9 @@
 				BDF8C3CB179CABFA002B7F60 /* VLBEmailTextField.m */,
 				BDF8C3CD179DB457002B7F60 /* VLBTableViewCells.h */,
 				BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */,
-				BD8D411B179F4D1200560C14 /* VLBUserSettingsViewController.h */,
-				BD8D411C179F4D1200560C14 /* VLBUserSettingsViewController.m */,
-				BD8D411D179F4D1200560C14 /* VLBUserSettingsViewController.xib */,
+				BD8D411B179F4D1200560C14 /* VLBUserProfileViewController.h */,
+				BD8D411C179F4D1200560C14 /* VLBUserProfileViewController.m */,
+				BD8D411D179F4D1200560C14 /* VLBUserProfileViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -897,7 +894,6 @@
 			isa = PBXGroup;
 			children = (
 				BD30A3A41776234300A71DC9 /* Crashlytics.framework */,
-				9089482415533980009188B4 /* libTestFlight.a */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -1477,7 +1473,7 @@
 				BDF8C3C6179C9BF3002B7F60 /* VLBIdentifyViewController.xib in Resources */,
 				BDF8C3D3179DC7BC002B7F60 /* idcard-grey.png in Resources */,
 				BDF8C3D4179DC7BC002B7F60 /* idcard-grey@2x.png in Resources */,
-				BD8D411F179F4D1300560C14 /* VLBUserSettingsViewController.xib in Resources */,
+				BD8D411F179F4D1300560C14 /* VLBUserProfileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1694,7 +1690,7 @@
 				BDF8C3CC179CABFB002B7F60 /* VLBEmailTextField.m in Sources */,
 				BDF8C3CF179DB457002B7F60 /* VLBTableViewCells.m in Sources */,
 				BDF8C3D0179DB545002B7F60 /* VLBButtons.m in Sources */,
-				BD8D411E179F4D1300560C14 /* VLBUserSettingsViewController.m in Sources */,
+				BD8D411E179F4D1300560C14 /* VLBUserProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1811,28 +1807,8 @@
 				INFOPLIST_FILE = "${PRODUCT_NAME}-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACH_O_TYPE = mh_execute;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-					"-framework",
-					SystemConfiguration,
-					"-framework",
-					MobileCoreServices,
-					"-framework",
-					CFNetwork,
-					"-framework",
-					CoreGraphics,
-					"-lz.1",
-					"-framework",
-					CoreLocation,
-					"-framework",
-					SystemConfiguration,
-				);
 				PRODUCT_NAME = verylargebox;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -1869,28 +1845,8 @@
 				INFOPLIST_FILE = "${PRODUCT_NAME}-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACH_O_TYPE = mh_execute;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-					"-framework",
-					SystemConfiguration,
-					"-framework",
-					MobileCoreServices,
-					"-framework",
-					CFNetwork,
-					"-framework",
-					CoreGraphics,
-					"-lz.1",
-					"-framework",
-					CoreLocation,
-					"-framework",
-					SystemConfiguration,
-				);
 				PRODUCT_NAME = verylargebox;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -2098,28 +2054,8 @@
 				INFOPLIST_FILE = "${PRODUCT_NAME}-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACH_O_TYPE = mh_execute;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-					"-framework",
-					SystemConfiguration,
-					"-framework",
-					MobileCoreServices,
-					"-framework",
-					CFNetwork,
-					"-framework",
-					CoreGraphics,
-					"-lz.1",
-					"-framework",
-					CoreLocation,
-					"-framework",
-					SystemConfiguration,
-				);
 				PRODUCT_NAME = verylargebox;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -2170,10 +2106,7 @@
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ApplicationTests;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
@@ -2216,10 +2149,7 @@
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ApplicationTests;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
@@ -2262,10 +2192,7 @@
 				MACH_O_TYPE = mh_bundle;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = ApplicationTests;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
