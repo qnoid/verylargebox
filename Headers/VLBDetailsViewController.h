@@ -7,14 +7,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class VLBUserItemView;
+@class VLBFeedItemView;
 
 @interface VLBDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     
 }
 
-@property(nonatomic, weak) IBOutlet VLBUserItemView* userItemView;
+@property(nonatomic, weak) IBOutlet VLBFeedItemView* itemView;
 
 +(VLBDetailsViewController *)newDetailsViewController:(NSMutableDictionary*)item;
 

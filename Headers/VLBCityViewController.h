@@ -42,7 +42,7 @@
 /**
  Creates a new instance of HomeUIGridViewController
  */
-+(VLBCityViewController *)newHomeGridViewController;
++(VLBCityViewController *)newCityViewController;
 
 @property(nonatomic, weak) IBOutlet UIButton* directionsButton;
 @property(nonatomic, strong) IBOutlet VLBScrollView * locationsView;

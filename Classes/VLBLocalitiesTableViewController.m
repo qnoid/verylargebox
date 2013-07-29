@@ -20,9 +20,9 @@
 #import "DDLog.h"
 #import "VLBViewControllers.h"
 
+
 @interface VLBLocalitiesTableViewController ()
-@property(nonatomic, strong) NSObject<UITableViewDataSource> *tableViewDataSource;
-@property(nonatomic, strong) NSObject<UITableViewDelegate> *tableViewDelegate;
+@property(nonatomic, strong) NSArray* localities;
 @end
 
 @implementation VLBLocalitiesTableViewController
@@ -51,25 +51,7 @@ return availablePlacesViewController;
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, localities);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
-    NSObject<UITableViewDataSource> *datasource = [[[[VLBTableViewDataSourceBuilder new] numberOfRowsInSection:^NSInteger(UITableView *tableView, NSInteger section) {
-        return [localities count];
-    }] cellForRowAtIndexPath:tbCellForRowAtIndexPath(^(UITableViewCell *cell, NSIndexPath* indexPath) {
-        cell.textLabel.text = [[[localities objectAtIndex:indexPath.row] objectForKey:@"locality"] objectForKey:@"name"];
-    })] newDatasource];
-    
-    self.tableViewDataSource = datasource;
-    self.tableView.dataSource = self;
-    
-    __weak VLBLocalitiesTableViewController *wself = self;
-    
-    self.tableViewDelegate = [[[VLBTableViewDelegateBuilder new] didSelectRowAtIndexPath:^(UITableView *tableView, NSIndexPath *indexPath) {
-        NSDictionary *locality = [[localities objectAtIndex:indexPath.row] objectForKey:@"locality"];
-        
-        [wself.delegate didSelectLocality:locality];
-    }] newDelegate];
-    
-    self.tableView.delegate = self.tableViewDelegate;
-
+    self.localities = localities;
     [self.tableView reloadData];
 }
 
@@ -106,9 +88,12 @@ return availablePlacesViewController;
 {
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.contentOffset = CGPointMake(0, 44);
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(44, 0, 0, 0);
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [VLBHuds newWithView:self.view];
+    [hud show:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -132,15 +117,34 @@ return availablePlacesViewController;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.tableViewDataSource tableView:tableView numberOfRowsInSection:section];
+    return self.localities.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self.tableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell.textLabel.font = [VLBTypography fontLucidaGrandeEleven];
+        cell.textLabel.textColor = [VLBColors colorPearlWhite];
+    }
+    
+    cell.textLabel.text = [[[self.localities objectAtIndex:indexPath.row] objectForKey:@"locality"] objectForKey:@"name"];
+    
+return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80.0;
+    return 40.0;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *locality = [[self.localities objectAtIndex:indexPath.row] objectForKey:@"locality"];
+    
+    [self.delegate didSelectLocality:locality];
 }
 
 @end

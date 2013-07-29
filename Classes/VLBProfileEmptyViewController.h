@@ -10,11 +10,12 @@
 #import "VLBView.h"
 #import "VLBCreateItemOperationDelegate.h"
 #import "VLBNotificationView.h"
+#import "VLBTakePhotoViewController.h"
 
 @class VLBButton;
 @class VLBTheBox;
 
-@interface VLBProfileEmptyViewController : UIViewController <VLBNotificationViewDelegate>
+@interface VLBProfileEmptyViewController : UIViewController <VLBNotificationViewDelegate, VLBTakePhotoViewControllerDelegate>
 
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 @property(nonatomic, weak) IBOutlet UILabel *takePhotoLabel;

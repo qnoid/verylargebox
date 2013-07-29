@@ -39,6 +39,8 @@
 #import "VLBViewControllers.h"
 #import "NSDictionary+VLBItem.h"
 #import "NSDictionary+VLBLocation.h"
+#import "VLBBoxAlertViews.h"
+#import "VLBViewControllers.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -79,7 +81,7 @@ static dispatch_once_t onceToken;
 @property(nonatomic, assign) NSUInteger numberOfRows;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
-@property(nonatomic, copy) VLBUserItemViewGetDirections didTapOnGetDirectionsButton;
+@property(nonatomic, copy) VLBLocationServiceDirections didTapOnGetDirectionsButton;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService;
 -(void)updateTitle:(NSString *)localityName;
@@ -89,19 +91,13 @@ static dispatch_once_t onceToken;
 
 @implementation VLBCityViewController
 
-+(VLBCityViewController *)newHomeGridViewController
++(VLBCityViewController *)newCityViewController
 {
-    VLBLocationService* locationService = [VLBLocationService theBoxLocationService];
-    
+    VLBLocationService* locationService = [VLBLocationService theBoxLocationService];    
     VLBCityViewController* cityViewController = [[VLBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService];
     
-    UIButton* refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [refreshButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [refreshButton setImage:[UIImage imageNamed:@"refresh.png"] forState:UIControlStateNormal];
-    [refreshButton setImage:[UIImage imageNamed:@"refresh-grey.png"] forState:UIControlStateDisabled];
-    [refreshButton addTarget:cityViewController action:@selector(refreshLocations) forControlEvents:UIControlEventTouchUpInside];
-
-    cityViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
+    cityViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new ]refreshButton:cityViewController
+                                                                                            action:@selector(refreshLocations)];
     cityViewController.navigationItem.rightBarButtonItem.enabled = NO;
     
     UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Nearby"];
@@ -601,25 +597,18 @@ return VLBScrollViewOrientationHorizontal;
     
     NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
     id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
-    
+
     VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBCityViewController", VLBLocationName:name}];
-
-        tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue],
-                [[location objectForKey:@"lng"] floatValue]),
-                location)();
+        [Flurry logEvent:@"didGetDirections"
+          withParameters:@{@"controller": @"VLBCityViewController", VLBLocationName:name}];
+        
+        [VLBLocationService decideOnDirections:[location vlb_coordinate]
+                                       options:location]();
     }];
-
-    VLBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [VLBAlertViews newAlertViewDelegateOnCancelDismiss];
     
-    NSObject<UIAlertViewDelegate> *didTapOnGetDirectionsDelegate =
-        [VLBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
+    UIAlertView *alertView = [VLBBoxAlertViews location:name bar:alertViewDelegateOnOkGetDirections];
     
-    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:[NSString stringWithFormat:@"Exit the app and get directions to %@.", [location objectForKey:@"name"]]];
-                                                                                                  
-    alertView.delegate = didTapOnGetDirectionsDelegate;
-    
-    [alertView show];
+    [alertView show];    
 }
 
 @end

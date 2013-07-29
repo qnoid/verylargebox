@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 @protocol VLBCreateItemOperationDelegate;
 @protocol VLBVerifyUserOperationDelegate;
 @class VLBIdentifyViewController;
@@ -17,7 +18,6 @@
 @class VLBCityViewController;
 @class VLBFeedViewController;
 @class VLBUserProfileViewController;
-
 
 extern NSString* const THE_BOX_SERVICE;
 
@@ -60,7 +60,7 @@ extern NSString* const THE_BOX_SERVICE;
 -(VLBProfileEmptyViewController*)newProfileEmptyViewController;
 -(VLBCityViewController*)newCityViewController;
 -(VLBFeedViewController*)newFeedViewController;
--(VLBTakePhotoViewController*)newUploadUIViewController;
+-(VLBTakePhotoViewController*)newTakePhotoViewController;
 -(VLBUserProfileViewController*)newUserProfileViewController;
 
 /**

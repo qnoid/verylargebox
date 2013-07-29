@@ -28,11 +28,12 @@
 return self;
 }
 
--(id<VLBViewBorder>)vlb_bottomBorder:(UIColor*)color{
-    CALayer *topBorder = [CALayer layer];
-    topBorder.frame = CGRectMake(0.0f, self.frame.size.height, self.frame.size.width, 1.0f);
-    topBorder.backgroundColor = color.CGColor;
-    [self.layer addSublayer:topBorder];
+-(id<VLBViewBorder>)vlb_bottomBorder:(UIColor*)color height:(CGFloat)height
+{
+    CALayer *border = [CALayer layer];
+    border.frame = CGRectMake(0.0f, self.frame.size.height - height, self.frame.size.width, height);
+    border.backgroundColor = color.CGColor;
+    [self.layer addSublayer:border];
 return self;
 }
 

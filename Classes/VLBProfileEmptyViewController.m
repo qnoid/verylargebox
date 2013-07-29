@@ -10,7 +10,6 @@
 #import "VLBMacros.h"
 #import "VLBView.h"
 #import "VLBDrawRects.h"
-#import "VLBTakePhotoViewController.h"
 #import "VLBTheBox.h"
 #import "VLBViewControllers.h"
 #import "AFHTTPRequestOperation.h"
@@ -69,19 +68,24 @@ return self;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 }
 
+-(void)didTouchUpInsideDiscard:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(IBAction)didTouchUpInsideTakePhoto
 {
     [Flurry logEvent:@"didTouchUpInsideTakePhoto"];
     
-    VLBTakePhotoViewController *takePhotoViewController = [self.thebox newUploadUIViewController];
+    VLBTakePhotoViewController *takePhotoViewController = [self.thebox newTakePhotoViewController];
+    takePhotoViewController.delegate = self;
     
     VLBNotificationView *notificationView = [VLBNotificationView newView];
     takePhotoViewController.createItemDelegate = notificationView;
     notificationView.delegate = self;
     [self.view addSubview:notificationView];
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:takePhotoViewController];
-    [self presentViewController:navigationController animated:YES completion:nil];
+    [self presentViewController:takePhotoViewController animated:YES completion:nil];
 }
 
 -(void)didCompleteUploading:(VLBNotificationView *)notificationView at:(NSString *)itemURL

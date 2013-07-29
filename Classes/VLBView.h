@@ -60,7 +60,7 @@ typedef void(^VLBViewDrawRect)(CGRect rect, UIView* view);
 
 -(id<VLBViewBorder>)vlb_topBorder:(UIColor*)color;
 
--(id<VLBViewBorder>)vlb_bottomBorder:(UIColor*)color;
+-(id<VLBViewBorder>)vlb_bottomBorder:(UIColor*)color height:(CGFloat)height;
 
 - (id<VLBViewBorder>)vlb_borders:(UIColor*)color;
 

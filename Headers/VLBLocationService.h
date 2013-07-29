@@ -11,6 +11,11 @@
 #import <MapKit/MapKit.h>
 #import "VLBLocationServiceDelegate.h"
 
+
+typedef void(^VLBLocationServiceDirections)();
+
+extern VLBLocationServiceDirections const VLBLocationServiceDirectionsNone;
+
 /**
  Use this class to retrieve location information such as lat/long and placemarks by a notification.
  
@@ -28,6 +33,9 @@
  *
  */
 +(VLBLocationService *)theBoxLocationService;
++(VLBLocationServiceDirections) directionsWithAppleMaps:(CLLocationCoordinate2D) destination options:(NSDictionary*) options;
++(VLBLocationServiceDirections) directionsWithGoogleMaps:(CLLocationCoordinate2D) destination options:(NSDictionary*) options;
++(VLBLocationServiceDirections) decideOnDirections:(CLLocationCoordinate2D) destination options:(NSDictionary*) options;
 
 -(id)init:(CLLocationManager *)locationManager;
 

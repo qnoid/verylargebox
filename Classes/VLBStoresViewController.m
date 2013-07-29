@@ -141,6 +141,7 @@ return self;
     imageView.frame = CGRectMake(0, 0, 320, 121);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     
+    self.searchBar.translucent = YES;
     self.searchBar.layer.zPosition = 1;
     self.animatedMap = [[QNDAnimations new] animateView:self.map];    
 

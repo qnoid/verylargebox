@@ -120,8 +120,24 @@
 		BD30A3A51776234300A71DC9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD30A3A41776234300A71DC9 /* Crashlytics.framework */; };
 		BD33260117A1D38F008784B3 /* NSDictionary+VLBItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE4925B1775132300FFC41F /* NSDictionary+VLBItem.m */; };
 		BD33260217A1D554008784B3 /* NSDictionary+VLBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE4925E1775142D00FFC41F /* NSDictionary+VLBLocation.m */; };
+		BD33260517A442BF008784B3 /* VLBBoxAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD33260417A442BF008784B3 /* VLBBoxAlertViews.m */; };
+		BD33260617A4452C008784B3 /* VLBBoxAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD33260417A442BF008784B3 /* VLBBoxAlertViews.m */; };
+		BD33260C17A45674008784B3 /* VLBFeedItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD33260B17A45674008784B3 /* VLBFeedItemView.m */; };
+		BD33260E17A4567F008784B3 /* VLBFeedItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD33260D17A4567F008784B3 /* VLBFeedItemView.xib */; };
 		BD4292B9175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4292BA175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
+		BD4A2D0717A54156004A80AE /* map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0517A54156004A80AE /* map-marker.png */; };
+		BD4A2D0817A54156004A80AE /* map-marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0617A54156004A80AE /* map-marker@2x.png */; };
+		BD4A2D0B17A5418C004A80AE /* camera-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0917A5418C004A80AE /* camera-grey.png */; };
+		BD4A2D0C17A5418C004A80AE /* camera-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0A17A5418C004A80AE /* camera-grey@2x.png */; };
+		BD4A2D0F17A54287004A80AE /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0D17A54287004A80AE /* upload.png */; };
+		BD4A2D1017A54287004A80AE /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0E17A54287004A80AE /* upload@2x.png */; };
+		BD4A2D1317A546AB004A80AE /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1117A546AB004A80AE /* x.png */; };
+		BD4A2D1417A546AB004A80AE /* x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1217A546AB004A80AE /* x@2x.png */; };
+		BD4A2D1617A5EF6B004A80AE /* takephoto.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1517A5EF6B004A80AE /* takephoto.png */; };
+		BD4A2D1B17A6F9EB004A80AE /* VLBTakePhotoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4A2D1A17A6F9EB004A80AE /* VLBTakePhotoButton.m */; };
+		BD4A2D1F17A70039004A80AE /* VLBTakePhotoButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1E17A70039004A80AE /* VLBTakePhotoButton.xib */; };
+		BD4A2D2117A70C00004A80AE /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4A2D2017A70C00004A80AE /* Reveal.framework */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
 		BD4BD0601780415600D1462A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD09177A4A7400941B7F /* AVFoundation.framework */; };
 		BD4D329C177F4E2D0015EADF /* VLBCameraViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D329B177F4E2D0015EADF /* VLBCameraViewTest.m */; };
@@ -288,7 +304,7 @@
 		BDF8C3C0179C6DF6002B7F60 /* idcard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF8C3BE179C6DF6002B7F60 /* idcard@2x.png */; };
 		BDF8C3C5179C9BF3002B7F60 /* VLBIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3C3179C9BF3002B7F60 /* VLBIdentifyViewController.m */; };
 		BDF8C3C6179C9BF3002B7F60 /* VLBIdentifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF8C3C4179C9BF3002B7F60 /* VLBIdentifyViewController.xib */; };
-		BDF8C3CC179CABFB002B7F60 /* VLBEmailTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CB179CABFA002B7F60 /* VLBEmailTextField.m */; };
+		BDF8C3CC179CABFB002B7F60 /* VLBEmailTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CB179CABFA002B7F60 /* VLBEmailTextFieldDelegate.m */; };
 		BDF8C3CF179DB457002B7F60 /* VLBTableViewCells.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */; };
 		BDF8C3D0179DB545002B7F60 /* VLBButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3C8179CA214002B7F60 /* VLBButtons.m */; };
 		BDF8C3D3179DC7BC002B7F60 /* idcard-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF8C3D1179DC7BC002B7F60 /* idcard-grey.png */; };
@@ -460,8 +476,26 @@
 		BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBAlertViews.m; sourceTree = "<group>"; };
 		BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCityViewControllerTest.m; sourceTree = "<group>"; };
 		BD30A3A41776234300A71DC9 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		BD33260317A442BF008784B3 /* VLBBoxAlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBBoxAlertViews.h; sourceTree = "<group>"; };
+		BD33260417A442BF008784B3 /* VLBBoxAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBBoxAlertViews.m; sourceTree = "<group>"; };
+		BD33260A17A45673008784B3 /* VLBFeedItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBFeedItemView.h; sourceTree = "<group>"; };
+		BD33260B17A45674008784B3 /* VLBFeedItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBFeedItemView.m; sourceTree = "<group>"; };
+		BD33260D17A4567F008784B3 /* VLBFeedItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBFeedItemView.xib; sourceTree = "<group>"; };
 		BD4292B7175B4BBB00459891 /* VLBErrorBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBErrorBlocks.h; path = ../Classes/VLBErrorBlocks.h; sourceTree = "<group>"; };
 		BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBErrorBlocks.m; sourceTree = "<group>"; };
+		BD4A2D0517A54156004A80AE /* map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-marker.png"; path = "Supporting Files/map-marker.png"; sourceTree = "<group>"; };
+		BD4A2D0617A54156004A80AE /* map-marker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-marker@2x.png"; path = "Supporting Files/map-marker@2x.png"; sourceTree = "<group>"; };
+		BD4A2D0917A5418C004A80AE /* camera-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-grey.png"; path = "Supporting Files/camera-grey.png"; sourceTree = "<group>"; };
+		BD4A2D0A17A5418C004A80AE /* camera-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-grey@2x.png"; path = "Supporting Files/camera-grey@2x.png"; sourceTree = "<group>"; };
+		BD4A2D0D17A54287004A80AE /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upload.png; path = "Supporting Files/upload.png"; sourceTree = "<group>"; };
+		BD4A2D0E17A54287004A80AE /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "upload@2x.png"; path = "Supporting Files/upload@2x.png"; sourceTree = "<group>"; };
+		BD4A2D1117A546AB004A80AE /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x.png; path = "Supporting Files/x.png"; sourceTree = "<group>"; };
+		BD4A2D1217A546AB004A80AE /* x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x@2x.png"; path = "Supporting Files/x@2x.png"; sourceTree = "<group>"; };
+		BD4A2D1517A5EF6B004A80AE /* takephoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = takephoto.png; path = "Supporting Files/takephoto.png"; sourceTree = "<group>"; };
+		BD4A2D1917A6F9EB004A80AE /* VLBTakePhotoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTakePhotoButton.h; path = Classes/VLBTakePhotoButton.h; sourceTree = "<group>"; };
+		BD4A2D1A17A6F9EB004A80AE /* VLBTakePhotoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBTakePhotoButton.m; path = Classes/VLBTakePhotoButton.m; sourceTree = "<group>"; };
+		BD4A2D1E17A70039004A80AE /* VLBTakePhotoButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBTakePhotoButton.xib; path = Classes/VLBTakePhotoButton.xib; sourceTree = "<group>"; };
+		BD4A2D2017A70C00004A80AE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		BD4BA9AA16FA5B6C009C1518 /* UIViewController+VLBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+VLBViewController.h"; path = "../Classes/UIViewController+VLBViewController.h"; sourceTree = "<group>"; };
 		BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BD4D329B177F4E2D0015EADF /* VLBCameraViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCameraViewTest.m; sourceTree = "<group>"; };
@@ -625,8 +659,8 @@
 		BDF8C3C4179C9BF3002B7F60 /* VLBIdentifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBIdentifyViewController.xib; sourceTree = "<group>"; };
 		BDF8C3C7179CA214002B7F60 /* VLBButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBButtons.h; sourceTree = "<group>"; };
 		BDF8C3C8179CA214002B7F60 /* VLBButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBButtons.m; sourceTree = "<group>"; };
-		BDF8C3CA179CABFA002B7F60 /* VLBEmailTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBEmailTextField.h; sourceTree = "<group>"; };
-		BDF8C3CB179CABFA002B7F60 /* VLBEmailTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBEmailTextField.m; sourceTree = "<group>"; };
+		BDF8C3CA179CABFA002B7F60 /* VLBEmailTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBEmailTextFieldDelegate.h; sourceTree = "<group>"; };
+		BDF8C3CB179CABFA002B7F60 /* VLBEmailTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBEmailTextFieldDelegate.m; sourceTree = "<group>"; };
 		BDF8C3CD179DB457002B7F60 /* VLBTableViewCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBTableViewCells.h; sourceTree = "<group>"; };
 		BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTableViewCells.m; sourceTree = "<group>"; };
 		BDF8C3D1179DC7BC002B7F60 /* idcard-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard-grey.png"; path = "Supporting Files/idcard-grey.png"; sourceTree = "<group>"; };
@@ -658,6 +692,7 @@
 				908364011400712200E5AAAF /* libz.dylib in Frameworks */,
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
 				BD30A3A51776234300A71DC9 /* Crashlytics.framework in Frameworks */,
+				BD4A2D2117A70C00004A80AE /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,13 +811,15 @@
 				BD77441717886D98007F7AAA /* VLBNotificationView.xib */,
 				BDF8C3C7179CA214002B7F60 /* VLBButtons.h */,
 				BDF8C3C8179CA214002B7F60 /* VLBButtons.m */,
-				BDF8C3CA179CABFA002B7F60 /* VLBEmailTextField.h */,
-				BDF8C3CB179CABFA002B7F60 /* VLBEmailTextField.m */,
+				BDF8C3CA179CABFA002B7F60 /* VLBEmailTextFieldDelegate.h */,
+				BDF8C3CB179CABFA002B7F60 /* VLBEmailTextFieldDelegate.m */,
 				BDF8C3CD179DB457002B7F60 /* VLBTableViewCells.h */,
 				BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */,
 				BD8D411B179F4D1200560C14 /* VLBUserProfileViewController.h */,
 				BD8D411C179F4D1200560C14 /* VLBUserProfileViewController.m */,
 				BD8D411D179F4D1200560C14 /* VLBUserProfileViewController.xib */,
+				BD33260317A442BF008784B3 /* VLBBoxAlertViews.h */,
+				BD33260417A442BF008784B3 /* VLBBoxAlertViews.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -887,6 +924,8 @@
 				BDF2FD06177A458D00941B7F /* VLBCameraView.h */,
 				BDF2FD07177A458D00941B7F /* VLBCameraView.m */,
 				BDF2FD0B177A5BC700941B7F /* VLBCameraView.xib */,
+				BD4A2D1917A6F9EB004A80AE /* VLBTakePhotoButton.h */,
+				BD4A2D1A17A6F9EB004A80AE /* VLBTakePhotoButton.m */,
 			);
 			name = TakePhoto;
 			path = ..;
@@ -895,6 +934,7 @@
 		90454B01154DBBCA0064D998 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				BD4A2D2017A70C00004A80AE /* Reveal.framework */,
 				BD30A3A41776234300A71DC9 /* Crashlytics.framework */,
 			);
 			path = External;
@@ -1110,6 +1150,7 @@
 		BDA2BC87165951CB0068C749 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				BD4A2D1E17A70039004A80AE /* VLBTakePhotoButton.xib */,
 				BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */,
 				BDF2747C1786B142000E179E /* VLBProfileEmptyViewController.xib */,
 				BDA2BC8B165952C20068C749 /* VLBEmailViewController.xib */,
@@ -1150,8 +1191,11 @@
 		BDA2BD15165AF8D80068C749 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BD4A2D1517A5EF6B004A80AE /* takephoto.png */,
 				BD5CB77F177133EE00BC21D1 /* camera.png */,
 				BD5CB780177133EE00BC21D1 /* camera@2x.png */,
+				BD4A2D0917A5418C004A80AE /* camera-grey.png */,
+				BD4A2D0A17A5418C004A80AE /* camera-grey@2x.png */,
 				BDF27465178408FA000E179E /* camera-button.png */,
 				BD59A498178CC403003A9394 /* camera-mini.png */,
 				BD0A53E61767EDC100279EA5 /* camera-mini@2x.png */,
@@ -1197,12 +1241,18 @@
 				BD59A48D178CAFB8003A9394 /* search@2x.png */,
 				BD59A46F178C82C3003A9394 /* location-arrow.png */,
 				BD59A470178C82C3003A9394 /* location-arrow@2x.png */,
+				BD4A2D0517A54156004A80AE /* map-marker.png */,
+				BD4A2D0617A54156004A80AE /* map-marker@2x.png */,
 				BDAF7AAB17528194008899D1 /* signpost.png */,
 				BDAF7AAC17528194008899D1 /* signpost@2x.png */,
 				BD5CB77B1771327600BC21D1 /* target@2x.png */,
 				BD5CB77C1771327600BC21D1 /* target.png */,
 				BDA2BD17165AF8E30068C749 /* user.png */,
 				BDAF7AAD17528195008899D1 /* user@2x.png */,
+				BD4A2D0D17A54287004A80AE /* upload.png */,
+				BD4A2D0E17A54287004A80AE /* upload@2x.png */,
+				BD4A2D1117A546AB004A80AE /* x.png */,
+				BD4A2D1217A546AB004A80AE /* x@2x.png */,
 				BD59A492178CBF03003A9394 /* exclamation-mark.png */,
 				BDB15729175561EE00E140E9 /* exclamation-mark@2x.png */,
 			);
@@ -1262,6 +1312,9 @@
 			isa = PBXGroup;
 			children = (
 				BDE482BF1750510D0096903C /* VLBFeedViewController.m */,
+				BD33260A17A45673008784B3 /* VLBFeedItemView.h */,
+				BD33260B17A45674008784B3 /* VLBFeedItemView.m */,
+				BD33260D17A4567F008784B3 /* VLBFeedItemView.xib */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -1476,6 +1529,17 @@
 				BDF8C3D3179DC7BC002B7F60 /* idcard-grey.png in Resources */,
 				BDF8C3D4179DC7BC002B7F60 /* idcard-grey@2x.png in Resources */,
 				BD8D411F179F4D1300560C14 /* VLBUserProfileViewController.xib in Resources */,
+				BD33260E17A4567F008784B3 /* VLBFeedItemView.xib in Resources */,
+				BD4A2D0717A54156004A80AE /* map-marker.png in Resources */,
+				BD4A2D0817A54156004A80AE /* map-marker@2x.png in Resources */,
+				BD4A2D0B17A5418C004A80AE /* camera-grey.png in Resources */,
+				BD4A2D0C17A5418C004A80AE /* camera-grey@2x.png in Resources */,
+				BD4A2D0F17A54287004A80AE /* upload.png in Resources */,
+				BD4A2D1017A54287004A80AE /* upload@2x.png in Resources */,
+				BD4A2D1317A546AB004A80AE /* x.png in Resources */,
+				BD4A2D1417A546AB004A80AE /* x@2x.png in Resources */,
+				BD4A2D1617A5EF6B004A80AE /* takephoto.png in Resources */,
+				BD4A2D1F17A70039004A80AE /* VLBTakePhotoButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1689,10 +1753,13 @@
 				BD774416178869B5007F7AAA /* VLBNotificationView.m in Sources */,
 				BD59A4A3178E1284003A9394 /* VLBForewordViewController.m in Sources */,
 				BDF8C3C5179C9BF3002B7F60 /* VLBIdentifyViewController.m in Sources */,
-				BDF8C3CC179CABFB002B7F60 /* VLBEmailTextField.m in Sources */,
+				BDF8C3CC179CABFB002B7F60 /* VLBEmailTextFieldDelegate.m in Sources */,
 				BDF8C3CF179DB457002B7F60 /* VLBTableViewCells.m in Sources */,
 				BDF8C3D0179DB545002B7F60 /* VLBButtons.m in Sources */,
 				BD8D411E179F4D1300560C14 /* VLBUserProfileViewController.m in Sources */,
+				BD33260517A442BF008784B3 /* VLBBoxAlertViews.m in Sources */,
+				BD33260C17A45674008784B3 /* VLBFeedItemView.m in Sources */,
+				BD4A2D1B17A6F9EB004A80AE /* VLBTakePhotoButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1752,6 +1819,7 @@
 				BD77441917887E7D007F7AAA /* NSDictionary+VLBUser.m in Sources */,
 				BD33260117A1D38F008784B3 /* NSDictionary+VLBItem.m in Sources */,
 				BD33260217A1D554008784B3 /* NSDictionary+VLBLocation.m in Sources */,
+				BD33260617A4452C008784B3 /* VLBBoxAlertViews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

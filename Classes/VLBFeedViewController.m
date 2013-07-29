@@ -8,9 +8,8 @@
 
 #import "VLBFeedViewController.h"
 #import "VLBLocationService.h"
-#import "VLBUserItemView.h"
+#import "VLBFeedItemView.h"
 #import "VLBQueries.h"
-#import "UIScrollView+SVPullToRefresh.h"
 #import "UIImageView+AFNetworking.h"
 #import "VLBNotifications.h"
 #import "VLBLocalitiesTableViewController.h"
@@ -23,6 +22,7 @@
 #import "VLBPredicates.h"
 #import "VLBViewControllers.h"
 #import "NSArray+VLBDecorator.h"
+#import "VLBViewControllers.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -43,17 +43,19 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 +(VLBFeedViewController *)newFeedViewController
 {
-    VLBFeedViewController* localityItemsViewController = [[VLBFeedViewController alloc] initWithBundle:[NSBundle mainBundle]];
+    VLBFeedViewController* feedViewController = [[VLBFeedViewController alloc] initWithBundle:[NSBundle mainBundle]];
     
-    localityItemsViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new] locateButton:localityItemsViewController action:@selector(locate)];
+    feedViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new ]refreshButton:feedViewController
+                                                                                            action:@selector(refreshFeed)];
 
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Recent"];
-    localityItemsViewController.navigationItem.titleView = titleLabel;
-    [titleLabel sizeToFit];
+    UIButton* titleButton = [[VLBViewControllers new] attributedTitleButton:@"Recent"
+                                                                     target:feedViewController
+                                                                     action:@selector(didTouchUpInsideRecent)];
+    feedViewController.navigationItem.titleView = titleButton;
     
-    localityItemsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Recent" image:[UIImage imageNamed:@"clock.png"] tag:2];
+    feedViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Recent" image:[UIImage imageNamed:@"clock.png"] tag:2];
     
-return localityItemsViewController;
+return feedViewController;
 }
 
 -(void)dealloc
@@ -77,10 +79,19 @@ return localityItemsViewController;
     return self;
 }
 
+-(void)refreshFeed
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:self.view];
+    [hud show:YES];
+    [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality page:VLB_Integer(1) delegate:self]];
+    [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality delegate:self]];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+}
+
 -(void)updateTitle:(NSString*)localityName
 {
-    UILabel* titleView = (UILabel*) self.navigationItem.titleView;
-    titleView.text = [NSString stringWithFormat:@"Recent in %@", localityName];
+    UIButton* titleView = (UIButton*) self.navigationItem.titleView;
+    VLBTitleButtonAttributed(titleView, [NSString stringWithFormat:@"Recent in %@", localityName]);
     [titleView sizeToFit];
 }
 
@@ -91,15 +102,6 @@ return localityItemsViewController;
         [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
     self.feedView.scrollsToTop = YES;
-    __weak VLBFeedViewController *wself = self;
-    
-    [self.feedView addPullToRefreshWithActionHandler:^{
-        [wself.operationQueue addOperation:[VLBQueries newGetItems:wself.locality page:VLB_Integer(1) delegate:wself]];
-        [wself.operationQueue addOperation:[VLBQueries newGetItems:wself.locality delegate:wself]];
-    }];
-    self.feedView.pullToRefreshView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    self.feedView.pullToRefreshView.arrowColor = [UIColor whiteColor];
-    self.feedView.pullToRefreshView.textColor = [UIColor whiteColor];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -127,7 +129,7 @@ return localityItemsViewController;
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
--(void)locate
+-(void)didTouchUpInsideRecent
 {
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
@@ -138,6 +140,7 @@ return localityItemsViewController;
     
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:localitiesViewController];
+    navigationController.navigationBar.translucent = YES;
     
     [self presentViewController:navigationController animated:YES completion:nil];
 }
@@ -145,10 +148,10 @@ return localityItemsViewController;
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     DDLogVerbose(@"%@", items);
-    [self.feedView.pullToRefreshView stopAnimating];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     self.items = items;
     [self.feedView setNeedsLayout];
 
@@ -162,27 +165,30 @@ return localityItemsViewController;
 
 -(void)didFailOnItemsWithError:(NSError *)error
 {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-    [self.feedView.pullToRefreshView stopAnimating];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
@@ -194,7 +200,7 @@ return VLBScrollViewOrientationVertical;
 }
 
 -(CGFloat)viewsOf:(VLBScrollView *)scrollView{
-    return 416.0;
+    return 428.0;
 }
 
 -(void)didLayoutSubviews:(VLBScrollView *)scrollView{
@@ -216,14 +222,14 @@ return VLBScrollViewOrientationVertical;
 }
 
 -(UIView *)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index {
-    return [[VLBUserItemView alloc] initWithFrame:frame];
+    return [[VLBFeedItemView alloc] initWithFrame:frame];
 }
 
 -(void)viewInScrollView:(VLBScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index
 {
     NSDictionary* item = [[self.items objectAtIndex:index] objectForKey:@"item"];
     
-    VLBUserItemView * userItemView = (VLBUserItemView *)view;
+    VLBFeedItemView * userItemView = (VLBFeedItemView *)view;
     [userItemView viewWillAppear:item];
 }
 
@@ -240,7 +246,7 @@ return VLBScrollViewOrientationVertical;
     [self updateTitle:locality];
     
     self.locality = locality;
-    [self.feedView triggerPullToRefresh];
+    [self refreshFeed];
 }
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification

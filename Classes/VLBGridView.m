@@ -40,7 +40,7 @@ VLBGridViewOrientation const VLBGridViewOrientationVertical = ^(VLBGridView *gri
                                         scrollView.bounces = NO;
                                         scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
                                         scrollView.backgroundColor = [UIColor clearColor];
-                                        
+
                                         UITapGestureRecognizer *tapGestureRecognizer =
                                             [[UITapGestureRecognizer alloc] initWithTarget:gridView
                                                                                     action:@selector(viewWasTapped:)];
@@ -65,7 +65,7 @@ VLBGridViewOrientation const VLBGridViewOrientationHorizontal = ^(VLBGridView *g
                                             scrollView.scrollsToTop = YES;
                                             scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
                                             scrollView.backgroundColor = [UIColor clearColor];
-                                            
+
                                             UITapGestureRecognizer *tapGestureRecognizer =
                                                 [[UITapGestureRecognizer alloc] initWithTarget:gridView
                                                                                         action:@selector(viewWasTapped:)];

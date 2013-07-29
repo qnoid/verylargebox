@@ -44,6 +44,7 @@
 						<string key="NSFrame">{{0, 96}, {320, 271}}</string>
 						<reference key="NSSuperview" ref="477452596"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="341438688">
 							<int key="NSColorSpace">3</int>
@@ -241,14 +242,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">emailTextField</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="152084368"/>
-					</object>
-					<int key="connectionID">11</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">noticeView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="643530160"/>
@@ -281,11 +274,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">emailTextFieldDelegate</string>
-						<reference key="source" ref="152084368"/>
-						<reference key="destination" ref="372490531"/>
+						<string key="label">emailTextField</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="152084368"/>
 					</object>
-					<int key="connectionID">13</int>
+					<int key="connectionID">26</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -380,7 +373,6 @@
 				<string key="24.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="2" key="24.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="7.CustomClassName">VLBEmailTextField</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<reference key="7.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="7.showNotes"/>
@@ -392,7 +384,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">25</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -416,30 +408,11 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">VLBEmailTextField</string>
-					<string key="superclassName">UITextField</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">emailTextFieldDelegate</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">emailTextFieldDelegate</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">emailTextFieldDelegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/VLBEmailTextField.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">VLBIdentifyViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="emailButton">VLBButton</string>
-						<string key="emailTextField">VLBEmailTextField</string>
+						<string key="emailTextField">UITextField</string>
 						<string key="noticeView">UIView</string>
 						<string key="signInButton">VLBButton</string>
 						<string key="signUpButton">VLBButton</string>
@@ -451,7 +424,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="emailTextField">
 							<string key="name">emailTextField</string>
-							<string key="candidateClassName">VLBEmailTextField</string>
+							<string key="candidateClassName">UITextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="noticeView">
 							<string key="name">noticeView</string>

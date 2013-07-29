@@ -28,9 +28,9 @@ VLBTitleLabel const VLBTitleLabelPrimaryBlue = ^(UILabel *titleLabel)
     titleLabel.adjustsFontSizeToFitWidth = YES;
 };
 
-VLBTitleButton const VLBTitleButtonAttributed = ^(UIButton *titleButton)
+VLBTitleButton const VLBTitleButtonAttributed = ^(UIButton *titleButton, NSString* title)
 {
-    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:titleButton.titleLabel.text
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title
                                                                           attributes:@{
                                                        NSUnderlineStyleAttributeName:@1,
                                                       NSForegroundColorAttributeName:[VLBColors colorPrimaryBlue],
@@ -39,7 +39,7 @@ VLBTitleButton const VLBTitleButtonAttributed = ^(UIButton *titleButton)
     [titleButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
 };
 
-VLBTitleButton const VLBTitleButtonNoOp = ^(UIButton *titleButon){};
+VLBTitleButton const VLBTitleButtonNoOp = ^(UIButton *titleButon, NSString* text){};
 
 -(UIBarButtonItem*)barButtonItem:(id)target action:(SEL)action imageNamed:(NSString*) imageNamed
 {
@@ -83,11 +83,21 @@ return titleButon;
     [titleButon setTitle:text forState:UIControlStateNormal];
     [titleButon.titleLabel sizeToFit];
     
-    VLBTitleButtonAttributed(titleButon);
+    VLBTitleButtonAttributed(titleButon, titleButon.titleLabel.text);
     
     return titleButon;
 }
 
+-(UIBarButtonItem*)refreshButton:(id)target action:(SEL)action
+{
+    UIButton* refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [refreshButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [refreshButton setImage:[UIImage imageNamed:@"refresh.png"] forState:UIControlStateNormal];
+    [refreshButton setImage:[UIImage imageNamed:@"refresh-grey.png"] forState:UIControlStateDisabled];
+    [refreshButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+return [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
+}
 
 -(UIBarButtonItem*)checkmarkMiniButton:(id)target action:(SEL)action {
     return [self barButtonItem:target action:action imageNamed:@"checkmark-mini.png"];

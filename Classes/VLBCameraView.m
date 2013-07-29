@@ -25,8 +25,6 @@ VLBCameraViewMeta const VLBCameraViewMetaOriginalImage = @"VLBCameraViewMetaOrig
 @property(nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @property(nonatomic, strong) AVCaptureConnection *stillImageConnection;
 @property(nonatomic, weak) IBOutlet UIImageView* preview;
-
-- (void)retakePicture:(UITapGestureRecognizer*) tapToRetakeGesture;
 @end
 
 VLBCameraViewInit const VLBCameraViewInitBlock = ^(VLBCameraView *cameraView){
@@ -99,8 +97,10 @@ return ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
             ALAssetsLibrary *library = [ALAssetsLibrary new];
             [library writeImageDataToSavedPhotosAlbum:imageData
                                              metadata:info
-                                      completionBlock:^(NSURL *assetURL, NSError *error) {
-                                          DDLogError(@"%@", error);
+                                      completionBlock:^(NSURL *assetURL, NSError *error) {                                          
+                                          if(error){
+                                              DDLogError(@"%@", error);
+                                          }
                                       }];
         }
 
@@ -212,12 +212,12 @@ return ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
     if(self.allowPictureRetake){
         UITapGestureRecognizer *tapToRetakeGesture =
         [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                action:@selector(retakePicture:)];
+                                                action:@selector(retakePicture)];
         [self.preview addGestureRecognizer:tapToRetakeGesture];
     }
 }
 
-- (void)retakePicture:(UITapGestureRecognizer*) tapToRetakeGesture
+- (void)retakePicture
 {
     [self.delegate cameraView:self willRekatePicture:self.preview.image];
     

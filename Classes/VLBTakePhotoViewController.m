@@ -29,6 +29,7 @@
 #import "NSArray+VLBDecorator.h"
 #import "VLBAlertViews.h"
 #import "VLBViewControllers.h"
+#import "VLBButton.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
@@ -38,8 +39,8 @@ NS_INLINE
 QNDViewAnimation* viewAnimationWillAnimateImageViewAlpha()
 {
 return [[[[QNDViewAnimationBuilder alloc] initWithViewAnimationBlock:^(UIView *view) {
-        UIButton*button = (UIButton*)view;
-        button.imageView.alpha = 0.1;
+        UIImageView*imageView = (UIImageView*)view;
+        imageView.alpha = 0.1;
     }] config:^(QNDViewAnimationBuilder *builder) {
         builder.duration = 1.0;
         builder.options = UIViewAnimationOptionCurveEaseInOut |
@@ -91,19 +92,13 @@ return self.horizontalAccuracy < location.horizontalAccuracy || self.verticalAcc
     [self.theBoxLocationService dontNotifyDidFailReverseGeocodeLocationWithError:self];
 }
 
-+(VLBTakePhotoViewController *)newUploadUIViewController:(VLBTheBox*)thebox userId:(NSUInteger)userId
++(VLBTakePhotoViewController *)newTakePhotoViewController:(VLBTheBox*)thebox userId:(NSUInteger)userId
 {
     VLBTakePhotoViewController* newUploadUIViewController = [[VLBTakePhotoViewController alloc]
                                                          initWithBundle:[NSBundle mainBundle]
                                                               thebox:thebox
                                                               userId:userId];
     
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Take photo of an item"];
-    newUploadUIViewController.navigationItem.titleView = titleLabel;
-    [titleLabel sizeToFit];
-
-    newUploadUIViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] discardButton:newUploadUIViewController
-			                                                                                            action:@selector(cancel:)];
 return newUploadUIViewController;
 }
 
@@ -127,9 +122,18 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    __weak VLBTakePhotoViewController *wself = self;
+    [self.takePhotoButton onTouchUpInside:^(UIButton *button) {
+        [wself takePhoto:button];
+    }];
+
+    self.locationButton.titleLabel.minimumScaleFactor = 10;
+    self.locationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [self.locationButton.titleLabel sizeToFit];
+
     self.cameraView.allowPictureRetake = YES;
     self.cameraView.writeToCameraRoll = YES;
-    self.cameraView.flashView.backgroundColor =
+    self.cameraView.flashView.backgroundColor = self.controlsView.backgroundColor =
     [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
@@ -140,8 +144,8 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
-    [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton completion:nil];
+    [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton.imageView completion:nil];
+    [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton.imageView completion:nil];
 
     if(self.itemImage){
         self.takePhotoButton.imageView.alpha = 1.0;//test
@@ -253,10 +257,11 @@ return self;
     
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     self.locality = [VLBNotifications place:notification].locality;
-    self.storeLabel.text = self.locality;
-
+    [self.locationButton setTitle:[NSString stringWithFormat:@"Assign a Store (%@)", self.locality] forState:UIControlStateNormal];
+    [self.locationButton.titleLabel sizeToFit];
+    
     if(self.itemImage && self.hasCoordinates){
-        self.navigationItem.rightBarButtonItem = [[VLBViewControllers new] checkmarkMiniButton:self action:@selector(done:)];
+        self.uploadButton.enabled = YES;
     }
 }
 
@@ -268,12 +273,13 @@ return self;
 
 #pragma mark VLBKeyboardObserver
 
-- (IBAction)cancel:(id)sender {
+- (IBAction)didTouchUpInsideDiscard:(id)sender
+{
     [self.createItemDelegate didCancel];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate didTouchUpInsideDiscard:sender];
 }
 
-- (IBAction)done:(id)sender 
+- (IBAction)didTouchUpInsideUploadButton:(id)sender 
 {
     [Flurry logEvent:@"didTakePhoto"];
     
@@ -296,7 +302,10 @@ return self;
     self.locationOperationDelegate = locationController;
     locationController.delegate = self;
 
-	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:locationController] animated:YES completion:nil];
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:locationController];
+    navigationController.navigationBar.translucent = YES;
+    
+	[self presentViewController:navigationController animated:YES completion:nil];
 }
 
 -(void)didSelectStore:(NSMutableDictionary *)store
@@ -306,21 +315,29 @@ return self;
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
 
     if(self.itemImage && self.hasCoordinates){
-        self.navigationItem.rightBarButtonItem = [[VLBViewControllers new] checkmarkMiniButton:self action:@selector(done:)];
+        self.uploadButton.enabled = YES;
     }
 
     self.hasCoordinates = YES;
     self.location = store;
     self.locality = self.locality;
 
-	NSString *locationName = [self.location vlb_objectForKey:@"name"];
+	NSString *locationName = [self.location vlb_objectForKey:VLBLocationName];
     
-    self.storeLabel.text = [NSString stringWithFormat:@"%@ \n %@", locationName, self.locality];
+    [self.locationButton setTitle:[NSString stringWithFormat:@"%@", locationName] forState:UIControlStateNormal];
+    [self.locationButton.titleLabel sizeToFit];
 }
 
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
 - (void)cameraView:(VLBCameraView *)cameraView didFinishTakingPicture:(UIImage *)image withInfo:(NSDictionary *)info meta:(NSDictionary *)meta
 {
+    [self.takePhotoButton setTitle:@"retake" forState:UIControlStateNormal];
+    
+    __weak VLBTakePhotoViewController *wself = self;
+    [self.takePhotoButton onTouchUpInside:^(UIButton *button) {
+        [wself.cameraView retakePicture];
+    }];
+    
     CGSize newSize = CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT);
 
     UIGraphicsBeginImageContext(newSize);
@@ -332,10 +349,9 @@ return self;
     UIGraphicsEndImageContext();
     
     self.itemImage = newImage;
-    self.takePhotoButton.userInteractionEnabled = NO;
     
     if(self.itemImage && self.hasCoordinates){
-        self.navigationItem.rightBarButtonItem = [[VLBViewControllers new] checkmarkMiniButton:self action:@selector(done:)];
+        self.uploadButton.enabled = YES;
     }
 }
 
@@ -345,9 +361,15 @@ return self;
 
 -(void)cameraView:(VLBCameraView *)cameraView willRekatePicture:(UIImage *)image
 {
-    self.navigationItem.rightBarButtonItem = nil;
-    self.takePhotoButton.userInteractionEnabled = YES;
-    [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton completion:nil];
+    [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton.imageView completion:nil];
+    __weak VLBTakePhotoViewController *wself = self;
+    [self.takePhotoButton onTouchUpInside:^(UIButton *button) {
+        [wself takePhoto:button];
+    }];
+
+    self.uploadButton.enabled = NO;
+    
+    [self.takePhotoButton setTitle:@"take" forState:UIControlStateNormal];
 }
 
 -(void)cameraView:(VLBCameraView *)cameraView willRriteToCameraRollWithMetadata:(NSDictionary *)metadata
@@ -357,15 +379,8 @@ return self;
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
 {
-    if([view isEqual:self.takePhotoButton]){
-        VLBViewContext context = [VLBViews fill:[VLBColors colorPrimaryBlue]];
-        context([[VLBDrawRects new] drawContextOfHexagon:[VLBPolygon hexagonAt:CGRectCenter(rect)]]);
-    }
-    else if([view isEqual:self.locationButton]){
-        VLBViewContext context = [VLBViews fill:[VLBColors colorDarkGreen]];
-        context([[VLBDrawRects new] drawContextOfHexagon:[VLBPolygon hexagonAt:CGRectCenter(rect)]]);
-    }
-    
+    VLBViewContext context = [VLBViews fill:[VLBColors colorPearlWhite]];
+    context([[VLBDrawRects new] drawContextOfHexagon:[VLBPolygon hexagonAt:CGRectCenter(rect)]]);
 }
 
 @end

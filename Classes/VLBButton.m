@@ -9,6 +9,8 @@
 #import "VLBButton.h"
 #import "VLBMacros.h"
 
+VLBButtonOnTouch const VLBButtonOnTouchNone = ^(UIButton* button){};
+
 @interface VLBButton ()
 @property(nonatomic, strong) NSMutableDictionary* uiControlEventToBlock;
 @end

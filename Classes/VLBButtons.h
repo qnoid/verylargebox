@@ -14,5 +14,4 @@
 
 @interface VLBButtons : NSObject
 
-
 @end

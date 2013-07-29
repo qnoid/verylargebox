@@ -18,11 +18,10 @@
 #import "UIImageView+AFNetworking.h"
 #import "VLBAlertViews.h"
 #import "NSDictionary+VLBDictionary.h"
+#import "VLBBoxAlertViews.h"
+#import "VLBLocationService.h"
 
 typedef void(^VLBUserItemViewInit)(VLBUserItemView *userItemView);
-
-static const CLLocationDegrees EmptyLocation = -1000.0;
-static const CLLocationCoordinate2D EmptyLocationCoordinate = {-1000.0, -1000.0};
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -43,9 +42,10 @@ return nil == obj || [NSNull null] == obj;
 
 VLBUserItemViewInit const VLBUserItemViewInitBlock = ^(VLBUserItemView *userItemView){
   
-    userItemView.didTapOnGetDirectionsButton = tbUserItemViewGetDirectionsNoOp();
-    userItemView.storeLabel.layer.sublayerTransform = CATransform3DMakeTranslation(0, 5, 0);
-    
+    userItemView.didTapOnGetDirectionsButton = VLBButtonOnTouchNone;
+    userItemView.getDirectionsButton.titleLabel.minimumScaleFactor = 10;
+    userItemView.getDirectionsButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+
     NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     userItemView.defaultItemImage = [UIImage imageWithContentsOfFile:path];
 };
@@ -102,37 +102,31 @@ return self;
     id locality = [item vlb_locality];
     id localityName = ([NSObject vlb_isNil:locality])?@"[in the box]":[locality vlb_objectForKey:VLBLocalityName ifNil:@"[in the box]"];
 
-    self.storeLabel.text = [NSString stringWithFormat:@"%@ \n %@", name, localityName];
+    [self.getDirectionsButton setTitle:[NSString stringWithFormat:@"%@\n%@", name, localityName] forState:UIControlStateNormal];
+    [self.getDirectionsButton.titleLabel sizeToFit];
+    
     self.whenLabel.text = [item vlb_objectForKey:VLBItemWhen];
     
-    self.didTapOnGetDirectionsButton = ^(){
+    self.didTapOnGetDirectionsButton = ^(UIButton* button){
         VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
             [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBUserItemView",
              VLBLocationName:name,
                    VLBItemId:[item objectForKey:VLBItemId],
              VLBItemImageURL:[item vlb_objectForKey:VLBItemImageURL]}];
             
-            tbUserItemViewGetDirections(CLLocationCoordinate2DMake([[location vlb_objectForKey:@"lat"] floatValue],
-                                                                   [[location objectForKey:@"lng"] floatValue]),
-                                        location)();
+            [VLBLocationService decideOnDirections:[location vlb_coordinate]
+                                           options:location]();
         }];
         
-        VLBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [VLBAlertViews newAlertViewDelegateOnCancelDismiss];
-        
-        NSObject<UIAlertViewDelegate> *didTapOnGetDirectionsDelegate =
-        [VLBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
-        
-        UIAlertView *alertView = [VLBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:[NSString stringWithFormat:@"Exit the app and get directions%@", [@"" isEqual:name]? @"." : [NSString stringWithFormat:@" to %@.", name]]];
-        
-        alertView.delegate = didTapOnGetDirectionsDelegate;
+        UIAlertView *alertView = [VLBBoxAlertViews location:name bar:alertViewDelegateOnOkGetDirections];
         
         [alertView show];
     };
 }
 
--(IBAction)didTapOnGetDirectionsButton:(id)sender
+-(IBAction)didTapOnGetDirectionsButton:(UIButton*)sender
 {
-    self.didTapOnGetDirectionsButton();
+    self.didTapOnGetDirectionsButton(sender);
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view

@@ -18,4 +18,7 @@ VLBLocationKey const VLBLocationName = @"name";
     return [self objectForKey:key];
 }
 
+-(CLLocationCoordinate2D)vlb_coordinate{
+return CLLocationCoordinate2DMake([[self vlb_objectForKey:VLBLocationLat] floatValue], [[self objectForKey:VLBLocationLng] floatValue]);
+}
 @end

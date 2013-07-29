@@ -17,9 +17,16 @@
 #import "VLBViews.h"
 #import "VLBStoresViewController.h"
 #import "VLBCameraView.h"
+#import "VLBView.h"
+
 @class VLBTheBox;
 @protocol VLBCreateItemOperationDelegate;
 
+@protocol VLBTakePhotoViewControllerDelegate <NSObject>
+
+- (IBAction)didTouchUpInsideDiscard:(id)sender;
+
+@end
 /**
  Displays a video preview of the camera and 2 primary actions.
  1. Take a photo of the item
@@ -41,15 +48,17 @@
  
  As soon as the location is update
  */
-@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBLocationOperationDelegate, VLBStoresViewControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, AmazonServiceRequestDelegate, VLBViewDrawRectDelegate, VLBCameraViewDelegate>
+@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBLocationOperationDelegate, VLBStoresViewControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, AmazonServiceRequestDelegate, VLBCameraViewDelegate, VLBViewDrawRectDelegate>
 {
 }
 
-@property(nonatomic, weak) IBOutlet UILabel *storeLabel;
 @property(nonatomic, weak) IBOutlet VLBCameraView *cameraView;
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
-@property(nonatomic, weak) IBOutlet VLBButton *locationButton;
+@property(nonatomic, weak) IBOutlet UIButton *locationButton;
+@property(nonatomic, weak) IBOutlet UIButton *uploadButton;
+@property(nonatomic, weak) IBOutlet UIView *controlsView;
 
+@property(nonatomic, weak) NSObject<VLBTakePhotoViewControllerDelegate> *delegate;
 @property(nonatomic, weak) NSObject<VLBCreateItemOperationDelegate> *createItemDelegate;
 
 /**
@@ -65,6 +74,10 @@
 
 - (IBAction)enterLocation:(id)sender;
 
-+(VLBTakePhotoViewController *)newUploadUIViewController:(VLBTheBox*)thebox userId:(NSUInteger)userId;
+- (IBAction)didTouchUpInsideDiscard:(id)sender;
+
+- (IBAction)didTouchUpInsideUploadButton:(id)sender;
+
++(VLBTakePhotoViewController *)newTakePhotoViewController:(VLBTheBox*)thebox userId:(NSUInteger)userId;
 
 @end

@@ -21,7 +21,7 @@
  Displays a list of localities.
  
  */
-@interface VLBLocalitiesTableViewController : UITableViewController <VLBLocalityOperationDelegate>
+@interface VLBLocalitiesTableViewController : UITableViewController <VLBLocalityOperationDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, weak) id<VLBLocalitiesTableViewControllerDelegate> delegate;
 

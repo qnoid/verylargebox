@@ -11,6 +11,8 @@
 #import "VLBLocationService.h"
 #import "DDLog.h"
 
+VLBLocationServiceDirections const VLBLocationServiceDirectionsNone = ^{};
+
 @implementation VLBLocationService
 
 +(VLBLocationService *)theBoxLocationService
@@ -24,6 +26,46 @@
 	
 return theBox;
 }
+
++(VLBLocationServiceDirections) directionsWithAppleMaps:(CLLocationCoordinate2D) destination options:(NSDictionary*) options
+{
+    return ^(){
+        MKPlacemark* placeMark = [[MKPlacemark alloc] initWithCoordinate:destination addressDictionary:nil];
+        
+        MKMapItem* mapItem =  [[MKMapItem alloc] initWithPlacemark:placeMark];
+        
+        id name = [options objectForKey:@"name"];
+        if([[NSNull null] isEqual:name]){
+            name = @"";
+        }
+        
+        mapItem.name = name;
+        [mapItem openInMapsWithLaunchOptions:@{MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeWalking}];
+    };
+}
+
++(VLBLocationServiceDirections) directionsWithGoogleMaps:(CLLocationCoordinate2D) destination options:(NSDictionary*) options
+{
+    return ^(){
+        NSString *urlstring =
+        [NSString stringWithFormat:@"http://maps.google.com/?dirflg=w&daddr=%f,%f",
+         destination.latitude,
+         destination.longitude];
+        
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlstring]];
+    };
+}
+
++(VLBLocationServiceDirections) decideOnDirections:(CLLocationCoordinate2D) destination options:(NSDictionary*) options
+{
+    Class itemClass = [MKMapItem class];
+    if ([itemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)]) {
+        return [self directionsWithAppleMaps:destination options:options];
+    }
+    
+    return [self directionsWithGoogleMaps:destination options:options];
+}
+
 
 -(void)dealloc
 {

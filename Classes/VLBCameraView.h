@@ -147,5 +147,6 @@ extern VLBCameraViewMeta const VLBCameraViewMetaOriginalImage;
  */
 - (void)takePicture;
 
+- (void)retakePicture;
 
 @end

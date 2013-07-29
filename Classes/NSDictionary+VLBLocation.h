@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 #define VLBLocationKey NSString*
 
@@ -17,5 +18,6 @@ extern VLBLocationKey const VLBLocationName;
 @interface NSDictionary (VLBLocation)
 
 -(id)vlb_objectForKey:(VLBLocationKey)key;
+-(CLLocationCoordinate2D)vlb_coordinate;
 
 @end

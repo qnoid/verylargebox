@@ -7,12 +7,10 @@
 //
 
 #import "VLBProfileViewController.h"
-#import "VLBTakePhotoViewController.h"
 #import "VLBPredicates.h"
 #import "UIImageView+AFNetworking.h"
 #import "VLBUserItemView.h"
 #import "VLBQueries.h"
-#import "UIScrollView+SVPullToRefresh.h"
 #import "UIViewController+VLBViewController.h"
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
@@ -30,6 +28,7 @@
 #import "VLBNotificationView.h"
 #import "VLBUserProfileViewController.h"
 #import "VLBColors.h"
+#import "VLBTakePhotoButton.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -56,6 +55,9 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
         [[VLBProfileViewController alloc] initWithBundle:[NSBundle mainBundle]
                                                   thebox:thebox];
 
+    profileViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new ]refreshButton:profileViewController
+                                                                                            action:@selector(refreshFeed)];
+
     UIButton* titleButton = [[VLBViewControllers new] attributedTitleButton:email
                                                            target:profileViewController
                                                            action:@selector(presentUserSettingsViewController)];
@@ -65,9 +67,6 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
 
-    profileViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new] cameraButton:profileViewController
-                                                                                              action:@selector(addItem)];
-
 return profileViewController;
 }
 
@@ -75,9 +74,8 @@ return profileViewController;
 {
     self = [super initWithNibName:NSStringFromClass([VLBProfileViewController class]) bundle:nibBundleOrNil];
     
-    if (!self) {
-        return nil;
-    }
+
+    VLB_IF_NOT_SELF_RETURN_NIL();
     
 	self.thebox = thebox;
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:10];
@@ -88,6 +86,16 @@ return profileViewController;
 return self;
 }
 
+-(void)refreshFeed
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:self.view];
+    [hud show:YES];
+
+    [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[self.thebox userId] page:VLB_Integer(1) delegate:self]];
+    [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[self.thebox userId] delegate:self]];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+}
+
 -(void)presentUserSettingsViewController
 {
     UINavigationController *newUserSettingsViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newUserProfileViewController]];
@@ -95,24 +103,24 @@ return self;
 
 }
 
+-(void)didTouchUpInsideDiscard:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
+    VLBTakePhotoButton *view = [[VLBTakePhotoButton alloc] initWithFrame:CGRectMake(0, -44, self.itemsView.bounds.size.width, 44)];
+    [view addTarget:self action:@selector(refreshFeed)];
+    [self.itemsView addSubview:view];
+    self.itemsView.contentInset = UIEdgeInsetsMake(88, 0, 0, 0);
+    
     self.itemsView.scrollsToTop = YES;
 
-    __weak VLBProfileViewController *wself = self;
-
-    [self.itemsView addPullToRefreshWithActionHandler:^{
-        [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.thebox userId] page:VLB_Integer(1) delegate:wself]];
-        [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[wself.thebox userId] delegate:wself]];
-    }];
-    self.itemsView.pullToRefreshView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;    
-    self.itemsView.pullToRefreshView.arrowColor = [UIColor whiteColor];
-    self.itemsView.pullToRefreshView.textColor = [UIColor whiteColor];
-    
-    [self.itemsView triggerPullToRefresh];
+    [self refreshFeed];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -128,19 +136,19 @@ return self;
 
 }
 
--(IBAction)addItem
+-(IBAction)didTouchUpInsideTakePhotoButton
 {
     [Flurry logEvent:@"didTouchUpInsideTakePhoto"];
 
-    VLBTakePhotoViewController *takePhotoViewController = [self.thebox newUploadUIViewController];
+    VLBTakePhotoViewController *takePhotoViewController = [self.thebox newTakePhotoViewController];
+    takePhotoViewController.delegate = self;
     
     VLBNotificationView *notificationView = [VLBNotificationView newView];
     takePhotoViewController.createItemDelegate = notificationView;
     notificationView.delegate = self;
     [self.view addSubview:notificationView];
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:takePhotoViewController];
-    [self presentViewController:navigationController animated:YES completion:nil];
+    [self presentViewController:takePhotoViewController animated:YES completion:nil];
 }
 
 -(void)didCompleteUploading:(VLBNotificationView *)notificationView at:(NSString *)itemURL
@@ -188,6 +196,8 @@ return self;
  */
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
+    [self.itemsView scrollRectToVisible:CGRectMake(0, -44.0, self.itemsView.bounds.size.width, self.itemsView.bounds.size.height) animated:YES];
+
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, item);
     if(self.items.count == 0){
         [self.items addObject:item];
@@ -207,19 +217,19 @@ return self;
 #pragma mark TBNSErrorDelegate
 -(void)didFailWithCannonConnectToHost:(NSError *)error
 {
-    [self.itemsView.pullToRefreshView stopAnimating];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithNotConnectToInternet:(NSError *)error
 {
-    [self.itemsView.pullToRefreshView stopAnimating];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 -(void)didFailWithTimeout:(NSError *)error
 {
-    [self.itemsView.pullToRefreshView stopAnimating];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
@@ -227,17 +237,20 @@ return self;
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
+    [self.itemsView scrollRectToVisible:CGRectMake(0, -44.0, self.itemsView.bounds.size.width, self.itemsView.bounds.size.height) animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, items);
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:items.count];
 	[self.items addObjectsFromArray:items];
     [self.itemsView setNeedsLayout];
-    [self.itemsView.pullToRefreshView stopAnimating];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 -(void)didFailOnItemsWithError:(NSError *)error
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     DDLogError(@"%s, %@", __PRETTY_FUNCTION__, error);
-    [self.itemsView.pullToRefreshView stopAnimating];    
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
@@ -248,7 +261,7 @@ return VLBScrollViewOrientationVertical;
 }
 
 -(CGFloat)viewsOf:(VLBScrollView *)scrollView{
-    return 416.0;
+    return 428.0;
 }
 
 -(void)didLayoutSubviews:(VLBScrollView *)scrollView{

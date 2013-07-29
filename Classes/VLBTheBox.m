@@ -37,7 +37,6 @@ NSString* const AWS_SECRET_KEY = @"B9LPevogOC/RKKmx7CayFsw4g8eezy+Diw7JTx8I";
 @property(nonatomic, strong) NSUserDefaults *userDefaults;
 @property(nonatomic, strong) VLBQueries *queries;
 @property(nonatomic, strong) S3TransferManager *s3transferManager;
-
 @end
 
 @implementation VLBTheBox
@@ -179,15 +178,15 @@ return [VLBProfileEmptyViewController newProfileViewController:self email:[self 
 }
 
 -(VLBCityViewController*)newCityViewController {
-    return [VLBCityViewController newHomeGridViewController];
+    return [VLBCityViewController newCityViewController];
 }
 
 -(VLBFeedViewController*)newFeedViewController {
     return [VLBFeedViewController newFeedViewController];
 }
 
--(VLBTakePhotoViewController*)newUploadUIViewController {
-return [VLBTakePhotoViewController newUploadUIViewController:self userId:[self userId]];
+-(VLBTakePhotoViewController*)newTakePhotoViewController {
+return [VLBTakePhotoViewController newTakePhotoViewController:self userId:[self userId]];
 }
 
 -(VLBUserProfileViewController*)newUserProfileViewController{

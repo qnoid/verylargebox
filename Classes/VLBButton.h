@@ -16,6 +16,8 @@
  */
 typedef void(^VLBButtonOnTouch)(UIButton *button);
 
+extern VLBButtonOnTouch const VLBButtonOnTouchNone;
+
 NS_INLINE
 VLBButtonOnTouch makeButton(UIColor* color) {
     return ^(UIButton *button) {

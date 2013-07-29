@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^VLBTitleLabel)(UILabel *titleLabel);
-typedef void(^VLBTitleButton)(UIButton *titleButton);
+typedef void(^VLBTitleButton)(UIButton *titleButton, NSString *text);
 
 extern VLBTitleLabel const VLBTitleLabelPrimaryBlue;
+extern VLBTitleButton const VLBTitleButtonAttributed;
 
 @interface VLBViewControllers : NSObject
 
@@ -20,6 +21,8 @@ extern VLBTitleLabel const VLBTitleLabelPrimaryBlue;
 -(UIButton*)titleButton:(NSString*)text target:(id)target action:(SEL)action;
 
 -(UIButton*)attributedTitleButton:(NSString*)text target:(id)target action:(SEL)action;
+
+-(UIBarButtonItem*)refreshButton:(id)target action:(SEL)action;
 
 -(UIBarButtonItem*)checkmarkMiniButton:(id)target action:(SEL)action;
 

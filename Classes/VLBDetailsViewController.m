@@ -16,7 +16,8 @@
 #import "AFHTTPRequestOperation.h"
 #import "UIViewController+VLBViewController.h"
 #import "VLBTypography.h"
-#import "VLBUserItemView.h"
+#import "VLBFeedItemView.h"
+#import "VLBMacros.h"
 
 @interface VLBDetailsViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
@@ -38,9 +39,8 @@ return detailsViewController;
 - (id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSMutableDictionary*)item;
 {
     self = [super initWithNibName:NSStringFromClass([VLBDetailsViewController class]) bundle:nibBundleOrNil];
-    if (!self) {
-        return nil;
-    }
+
+    VLB_IF_NOT_SELF_RETURN_NIL();
     
     self.item = item;
 
@@ -50,7 +50,7 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.userItemView viewWillAppear:self.item];
+    [self.itemView viewWillAppear:self.item];
 }
 
 - (void)viewDidUnload

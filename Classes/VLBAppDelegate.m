@@ -65,10 +65,17 @@
     }
     
     UINavigationController *cityViewControler = [[UINavigationController alloc] initWithRootViewController:[self.thebox newCityViewController]];
+    cityViewControler.navigationBar.translucent = YES;
+
     UINavigationController *feedViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newFeedViewController]];
+    feedViewController.navigationBar.translucent = YES;
+
+    UINavigationController *firstViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    firstViewController.navigationBar.translucent = YES;
+    
     
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:viewController], cityViewControler, feedViewController];
+    tabBarController.viewControllers = @[firstViewController, cityViewControler, feedViewController];
     tabBarController.selectedIndex = 2;
     
     self.window.rootViewController = tabBarController;

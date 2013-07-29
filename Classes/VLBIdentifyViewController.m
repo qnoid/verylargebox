@@ -24,6 +24,7 @@
 @interface VLBIdentifyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
 @property(nonatomic, assign) BOOL didEnterEmail;
+@property(nonatomic, strong) VLBEmailTextFieldDelegate *emailTextFieldDelegate;
 @end
 
 @implementation VLBIdentifyViewController
@@ -50,6 +51,7 @@ return identifyViewController;
     VLB_IF_NOT_SELF_RETURN_NIL();
     
     self.thebox = thebox;
+    self.emailTextFieldDelegate = [[VLBEmailTextFieldDelegate alloc] init];
     
 return self;
 }
@@ -74,13 +76,26 @@ return self;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     VLBTitleLabelPrimaryBlue(self.emailButton.titleLabel);
 
-    
-
     __weak VLBIdentifyViewController *wself = self;
+
+    self.emailTextFieldDelegate.onReturn = ^(UITextField* textField)
+    {
+        [wself.signUpButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+        wself.signUpButton.enabled = NO;
+        
+        [wself.emailButton setTitle:textField.text forState:UIControlStateNormal];
+        [wself.view sendSubviewToBack:textField];
+    };
+    
+    self.emailTextFieldDelegate.didEnterEmail = ^(UITextField *textField, NSString* email, BOOL isValid){
+        wself.signUpButton.enabled = isValid;
+    };
+    
+    self.emailTextField.delegate = self.emailTextFieldDelegate;
 
     [self.signUpButton onTouchUp:^(UIButton *button)
     {
-    		[wself.emailTextField resignFirstResponder];
+        [wself.emailTextField resignFirstResponder];
         [wself.view sendSubviewToBack:button];
 
         NSString *email = wself.emailTextField.text;
@@ -138,22 +153,6 @@ return self;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self.signUpButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    self.signUpButton.enabled = NO;
-
-    [self.emailButton setTitle:textField.text forState:UIControlStateNormal];
-    [self.view sendSubviewToBack:textField];
-    
-return YES;
-}
-
--(void)textField:(UITextField *)textField email:(NSString *)email isValidEmail:(BOOL)isValidEmail
-{
-    self.signUpButton.enabled = isValidEmail;
 }
 
 -(void)didEnterEmail:(NSString *)email forResidence:(NSString *)residence
