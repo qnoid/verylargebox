@@ -169,6 +169,7 @@ return self;
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.locationsView.backgroundColor = [VLBColors colorDarkGrey];
     self.locationsView.showsHorizontalScrollIndicator = NO;
     self.locationsView.enableSeeking = YES;
     self.locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 100.0f);
