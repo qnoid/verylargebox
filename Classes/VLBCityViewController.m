@@ -425,6 +425,7 @@ return VLBScrollViewOrientationHorizontal;
     
     [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [storeButton setTitle:name forState:UIControlStateNormal];
+    [storeButton setBackgroundColor:[VLBColors colorDarkGrey]];    
 }
 
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index
