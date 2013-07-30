@@ -34,7 +34,8 @@ static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 @interface VLBProfileViewController ()
-@property(nonatomic, weak) UIView<QNDAnimatedView> *notificationAnimatedView;
+@property(nonatomic, strong) LCPullToRefreshController *pullToRefreshController;
+
 @property(nonatomic, weak) UIProgressView *progressView;
 
 @property(nonatomic, weak) VLBTheBox *thebox;
@@ -86,6 +87,24 @@ return profileViewController;
 return self;
 }
 
+- (BOOL) pullToRefreshController:(LCPullToRefreshController *) controller canRefreshInDirection:(LCRefreshDirection)direction
+{
+    return LCRefreshDirectionTop == direction;
+}
+
+- (CGFloat) pullToRefreshController:(LCPullToRefreshController *) controller refreshableInsetForDirection:(LCRefreshDirection) direction {
+    return 44.0f;
+}
+
+- (CGFloat) pullToRefreshController:(LCPullToRefreshController *)controller refreshingInsetForDirection:(LCRefreshDirection)direction {
+    return 44.0f;
+}
+
+- (void)pullToRefreshController:(LCPullToRefreshController *)controller didEngageRefreshDirection:(LCRefreshDirection)direction
+{
+    [self performSelector:@selector(didTouchUpInsideTakePhotoButton) withObject:self afterDelay:0.0];
+}
+
 -(void)refreshFeed
 {
     MBProgressHUD* hud = [VLBHuds newWithView:self.view];
@@ -105,13 +124,20 @@ return self;
 
 -(void)didTouchUpInsideDiscard:(id)sender
 {
+    [self.pullToRefreshController finishRefreshingDirection:LCRefreshDirectionTop animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.pullToRefreshController = [[LCPullToRefreshController alloc] initWithScrollView:self.itemsView delegate:self];
+
+    VLBTakePhotoButton *view = [[VLBTakePhotoButton alloc] initWithFrame:CGRectMake(0, -44,
+                                                                        self.itemsView.bounds.size.width, 44.0)];
+    [self.itemsView addSubview:view];
+
     self.itemsView.scrollsToTop = YES;
 
     [self refreshFeed];
@@ -147,6 +173,7 @@ return self;
 
 -(void)didCompleteUploading:(VLBNotificationView *)notificationView at:(NSString *)itemURL
 {
+    [self.pullToRefreshController finishRefreshingDirection:LCRefreshDirectionTop animated:YES];
 	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:itemURL
                                                             location:self.location
                                                             locality:self.locality
@@ -190,8 +217,6 @@ return self;
  */
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
-    [self.itemsView scrollRectToVisible:CGRectMake(0, -44.0, self.itemsView.bounds.size.width, self.itemsView.bounds.size.height) animated:YES];
-
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, item);
     if(self.items.count == 0){
         [self.items addObject:item];

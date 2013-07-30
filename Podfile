@@ -20,6 +20,7 @@ pod 'AWSiOSSDK/S3', '1.6'
 pod 'JSONKit', '1.4', :inhibit_warnings => true
 pod 'FlurrySDK', '4.2.2'
 pod 'SSKeychain', '0.1.4'
-pod 'SVPullToRefresh', '0.4.1'
+pod 'MBProgressHUD', '0.7.0'
+pod 'LCPullToRefreshController', '1.0.0'
 pod 'QNDAnimations', '2.0.1'
 pod 'CocoaLumberjack', '1.6.2'

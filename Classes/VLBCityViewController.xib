@@ -46,7 +46,7 @@
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
-						<string key="NSFrame">{{0, 144}, {320, 267}}</string>
+						<string key="NSFrameSize">{320, 411}</string>
 						<reference key="NSSuperview" ref="875258060"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="518850962"/>
@@ -115,11 +115,6 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1012877108"/>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MCAwIDAAA</bytes>
-					<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
-				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<int key="IBUIBarStyle">2</int>

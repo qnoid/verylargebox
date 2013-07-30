@@ -167,9 +167,8 @@ return self;
 
 -(void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
-    self.locationsView.backgroundColor = [VLBColors colorDarkGrey];
     self.locationsView.showsHorizontalScrollIndicator = NO;
     self.locationsView.enableSeeking = YES;
     self.locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 100.0f);
@@ -373,12 +372,13 @@ return [self.locations count];
 
 - (UIView *)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index
 {
-    UIButton *storeButton = [[UIButton alloc] initWithFrame:frame];
+    UIButton *storeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     storeButton.titleLabel.numberOfLines = 0;
     storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     storeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 		storeButton.titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
     [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [storeButton setBackgroundColor:[VLBColors colorDarkGrey]];
     
 return storeButton;
 }
@@ -422,7 +422,6 @@ return VLBScrollViewOrientationHorizontal;
     
     id name = [location vlb_objectForKey:@"name" ifNil:@""];
     
-    [storeButton setBackgroundColor:[VLBColors colorDarkGrey]];
     [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [storeButton setTitle:name forState:UIControlStateNormal];
 }
