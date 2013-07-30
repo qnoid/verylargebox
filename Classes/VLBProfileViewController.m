@@ -111,13 +111,7 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
-    
-    VLBTakePhotoButton *view = [[VLBTakePhotoButton alloc] initWithFrame:CGRectMake(0, -44, self.itemsView.bounds.size.width, 44)];
-    [view addTarget:self action:@selector(refreshFeed)];
-    [self.itemsView addSubview:view];
-    self.itemsView.contentInset = UIEdgeInsetsMake(88, 0, 0, 0);
-    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];    
     self.itemsView.scrollsToTop = YES;
 
     [self refreshFeed];
@@ -237,12 +231,12 @@ return self;
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
-    [self.itemsView scrollRectToVisible:CGRectMake(0, -44.0, self.itemsView.bounds.size.width, self.itemsView.bounds.size.height) animated:YES];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, items);
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:items.count];
 	[self.items addObjectsFromArray:items];
     [self.itemsView setNeedsLayout];
+    [self.itemsView flashScrollIndicators];
     self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 

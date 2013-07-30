@@ -154,7 +154,8 @@ return feedViewController;
     self.navigationItem.rightBarButtonItem.enabled = YES;
     self.items = items;
     [self.feedView setNeedsLayout];
-
+    [self.feedView flashScrollIndicators];
+    
     if([items vlb_isEmpty]){
         MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET];
         hud.labelText = [NSString stringWithFormat:@"No items in %@", self.locality];

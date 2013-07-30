@@ -12,6 +12,7 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
+			<string>IBUIButton</string>
 			<string>IBUIScrollView</string>
 			<string>IBUIView</string>
 		</array>
@@ -41,8 +42,10 @@
 						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrameSize">{320, 411}</string>
 						<reference key="NSSuperview" ref="153490122"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="761404586"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
+						<object class="NSColor" key="IBUIBackgroundColor" id="1016830081">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
@@ -56,18 +59,68 @@
 						</object>
 						<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<double key="IBUIContentInset.top">44</double>
+						<double key="IBUIContentInset.top">88</double>
 						<double key="IBUIContentInset.bottom">0.0</double>
 						<double key="IBUIContentInset.left">0.0</double>
 						<double key="IBUIContentInset.right">0.0</double>
-						<double key="IBUIScrollIndicatorInsets.top">44</double>
+						<double key="IBUIScrollIndicatorInsets.top">88</double>
 						<double key="IBUIScrollIndicatorInsets.bottom">0.0</double>
 						<double key="IBUIScrollIndicatorInsets.left">0.0</double>
 						<double key="IBUIScrollIndicatorInsets.right">0.0</double>
+						<bool key="IBUIDelaysContentTouches">NO</bool>
+					</object>
+					<object class="IBUIButton" id="761404586">
+						<reference key="NSNextResponder" ref="153490122"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{0, 44}, {320, 44}}</string>
+						<reference key="NSSuperview" ref="153490122"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC44NDMxMzcyNTQ5IDAuODQzMTM3MjU0OSAwLjg0MzEzNzI1NDkAA</bytes>
+						</object>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<string key="IBUISelectedTitle">Take Photo of an Item in Store</string>
+						<string key="IBUINormalTitle">Take Photo of an Item in Store</string>
+						<object class="NSColor" key="IBUIHighlightedTitleColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+						</object>
+						<object class="NSColor" key="IBUISelectedTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MSAxIDEAA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4wMzQ5NDM0OTI3NSAwLjQzMDM4NzYyODggMC43ODk0MDEzMDc0AA</bytes>
+						</object>
+						<reference key="IBUISelectedTitleShadowColor" ref="1016830081"/>
+						<reference key="IBUINormalTitleShadowColor" ref="1016830081"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">camera-mini.png</string>
+						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">AvenirNext-DemiBold</string>
+							<string key="family">Avenir Next</string>
+							<int key="traits">2</int>
+							<double key="pointSize">18</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">AvenirNext-Heavy</string>
+							<double key="NSSize">18</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="219623547"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -104,6 +157,15 @@
 						<reference key="destination" ref="153490122"/>
 					</object>
 					<string key="id">pky-lE-xOo</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">didTouchUpInsideTakePhotoButton</string>
+						<reference key="source" ref="761404586"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<string key="id">Odk-My-MmS</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -146,6 +208,7 @@
 						<reference key="object" ref="153490122"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="219623547"/>
+							<reference ref="761404586"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">view</string>
@@ -157,6 +220,12 @@
 						<reference key="parent" ref="153490122"/>
 						<string key="objectName">itemsView</string>
 					</object>
+					<object class="IBObjectRecord">
+						<string key="id">eiE-UD-RcK</string>
+						<reference key="object" ref="761404586"/>
+						<reference key="parent" ref="153490122"/>
+						<string key="objectName">takePhotoButton</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -165,6 +234,9 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="b4q-xl-asy.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="eiE-UD-RcK.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="2" key="eiE-UD-RcK.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
+				<real value="2" key="eiE-UD-RcK.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="ura-5h-9RG.CustomClassName">VLBScrollView</string>
 				<string key="ura-5h-9RG.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -173,7 +245,73 @@
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">VLBProfileViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="didTouchUpInsideDiscard:">id</string>
+						<string key="didTouchUpInsideTakePhotoButton">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="didTouchUpInsideDiscard:">
+							<string key="name">didTouchUpInsideDiscard:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="didTouchUpInsideTakePhotoButton">
+							<string key="name">didTouchUpInsideTakePhotoButton</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="itemsView">VLBScrollView</string>
+						<string key="takePhotoButton">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="itemsView">
+							<string key="name">itemsView</string>
+							<string key="candidateClassName">VLBScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="takePhotoButton">
+							<string key="name">takePhotoButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/VLBProfileViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">VLBScrollView</string>
+					<string key="superclassName">UIScrollView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="contentView">UIView</string>
+						<string key="datasource">id</string>
+						<string key="scrollViewDelegate">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="contentView">
+							<string key="name">contentView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="datasource">
+							<string key="name">datasource</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollViewDelegate">
+							<string key="name">scrollViewDelegate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/VLBScrollView.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
@@ -182,6 +320,10 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">camera-mini.png</string>
+			<string key="NS.object.0">{27, 20}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

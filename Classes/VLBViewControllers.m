@@ -30,14 +30,26 @@ VLBTitleLabel const VLBTitleLabelPrimaryBlue = ^(UILabel *titleLabel)
 
 VLBTitleButton const VLBTitleButtonAttributed = ^(UIButton *titleButton, NSString* title)
 {
-    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title
-                                                                          attributes:@{
-                                                       NSUnderlineStyleAttributeName:@1,
-                                                      NSForegroundColorAttributeName:[VLBColors colorPrimaryBlue],
-                                           }];
+    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:title
+                                                                                        attributes:@{
+                                                                     NSUnderlineStyleAttributeName:@1,
+                                                                    NSForegroundColorAttributeName:[VLBColors colorPrimaryBlue],
+                                                  }];
+  
+    [titleButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+};
+
+VLBTitleButton const VLBTitleButtonAttributedd = ^(UIButton *titleButton, NSString* title)
+{
+    NSString *text = [NSString stringWithFormat:@"Assign a Store (%@)", title];
+    
+    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:text];
+    
+//    [attributedTitle setAttributes:@{NSForegroundColorAttributeName:[VLBColors colorLightGrey]} range:NSRangeFromString(title)];
     
     [titleButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
 };
+
 
 VLBTitleButton const VLBTitleButtonNoOp = ^(UIButton *titleButon, NSString* text){};
 

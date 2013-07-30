@@ -134,7 +134,6 @@
 		BD4A2D1017A54287004A80AE /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0E17A54287004A80AE /* upload@2x.png */; };
 		BD4A2D1317A546AB004A80AE /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1117A546AB004A80AE /* x.png */; };
 		BD4A2D1417A546AB004A80AE /* x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1217A546AB004A80AE /* x@2x.png */; };
-		BD4A2D1617A5EF6B004A80AE /* takephoto.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1517A5EF6B004A80AE /* takephoto.png */; };
 		BD4A2D1B17A6F9EB004A80AE /* VLBTakePhotoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4A2D1A17A6F9EB004A80AE /* VLBTakePhotoButton.m */; };
 		BD4A2D1F17A70039004A80AE /* VLBTakePhotoButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1E17A70039004A80AE /* VLBTakePhotoButton.xib */; };
 		BD4A2D2117A70C00004A80AE /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4A2D2017A70C00004A80AE /* Reveal.framework */; };
@@ -212,6 +211,12 @@
 		BDA2BCDF1659853E0068C749 /* VLBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* VLBButton.m */; };
 		BDA2BD0C165AD1160068C749 /* VLBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0B165AD1150068C749 /* VLBColors.m */; };
 		BDA2BD1A165AF8E30068C749 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BD17165AF8E30068C749 /* user.png */; };
+		BDA4E7C617A72D7900435C23 /* takephoto-retake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7C317A72D7900435C23 /* takephoto-retake@2x.png */; };
+		BDA4E7C717A72D7900435C23 /* takephoto-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7C417A72D7900435C23 /* takephoto-selected@2x.png */; };
+		BDA4E7C817A72D7900435C23 /* takephoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7C517A72D7900435C23 /* takephoto@2x.png */; };
+		BDA4E7CA17A734F300435C23 /* takephoto.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7C917A734F300435C23 /* takephoto.png */; };
+		BDA4E7CC17A7429E00435C23 /* takephoto-retake.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7CB17A7429D00435C23 /* takephoto-retake.png */; };
+		BDA4E7CE17A742C100435C23 /* takephoto-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7CD17A742C100435C23 /* takephoto-selected.png */; };
 		BDA4FB4D175FF42D004AAEC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B07131A820F008B8B2D /* SystemConfiguration.framework */; };
 		BDAB0126176FE7B200A8034E /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
 		BDABD930169F9EF800111723 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
@@ -491,7 +496,6 @@
 		BD4A2D0E17A54287004A80AE /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "upload@2x.png"; path = "Supporting Files/upload@2x.png"; sourceTree = "<group>"; };
 		BD4A2D1117A546AB004A80AE /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x.png; path = "Supporting Files/x.png"; sourceTree = "<group>"; };
 		BD4A2D1217A546AB004A80AE /* x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x@2x.png"; path = "Supporting Files/x@2x.png"; sourceTree = "<group>"; };
-		BD4A2D1517A5EF6B004A80AE /* takephoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = takephoto.png; path = "Supporting Files/takephoto.png"; sourceTree = "<group>"; };
 		BD4A2D1917A6F9EB004A80AE /* VLBTakePhotoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTakePhotoButton.h; path = Classes/VLBTakePhotoButton.h; sourceTree = "<group>"; };
 		BD4A2D1A17A6F9EB004A80AE /* VLBTakePhotoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBTakePhotoButton.m; path = Classes/VLBTakePhotoButton.m; sourceTree = "<group>"; };
 		BD4A2D1E17A70039004A80AE /* VLBTakePhotoButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBTakePhotoButton.xib; path = Classes/VLBTakePhotoButton.xib; sourceTree = "<group>"; };
@@ -571,6 +575,12 @@
 		BDA2BD0B165AD1150068C749 /* VLBColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBColors.m; sourceTree = "<group>"; };
 		BDA2BD17165AF8E30068C749 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = "Supporting Files/user.png"; sourceTree = "<group>"; };
 		BDA2BD1C165AFA200068C749 /* VLBCreateUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBCreateUserOperationDelegate.h; path = ../Classes/VLBCreateUserOperationDelegate.h; sourceTree = "<group>"; };
+		BDA4E7C317A72D7900435C23 /* takephoto-retake@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto-retake@2x.png"; path = "Supporting Files/takephoto-retake@2x.png"; sourceTree = "<group>"; };
+		BDA4E7C417A72D7900435C23 /* takephoto-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto-selected@2x.png"; path = "Supporting Files/takephoto-selected@2x.png"; sourceTree = "<group>"; };
+		BDA4E7C517A72D7900435C23 /* takephoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto@2x.png"; path = "Supporting Files/takephoto@2x.png"; sourceTree = "<group>"; };
+		BDA4E7C917A734F300435C23 /* takephoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = takephoto.png; path = "Supporting Files/takephoto.png"; sourceTree = "<group>"; };
+		BDA4E7CB17A7429D00435C23 /* takephoto-retake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto-retake.png"; path = "Supporting Files/takephoto-retake.png"; sourceTree = "<group>"; };
+		BDA4E7CD17A742C100435C23 /* takephoto-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto-selected.png"; path = "Supporting Files/takephoto-selected.png"; sourceTree = "<group>"; };
 		BDAB0124176FE7B200A8034E /* VLBTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTypography.h; path = ../Classes/VLBTypography.h; sourceTree = "<group>"; };
 		BDAB0125176FE7B200A8034E /* VLBTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTypography.m; sourceTree = "<group>"; };
 		BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1191,7 +1201,6 @@
 		BDA2BD15165AF8D80068C749 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				BD4A2D1517A5EF6B004A80AE /* takephoto.png */,
 				BD5CB77F177133EE00BC21D1 /* camera.png */,
 				BD5CB780177133EE00BC21D1 /* camera@2x.png */,
 				BD4A2D0917A5418C004A80AE /* camera-grey.png */,
@@ -1245,6 +1254,12 @@
 				BD4A2D0617A54156004A80AE /* map-marker@2x.png */,
 				BDAF7AAB17528194008899D1 /* signpost.png */,
 				BDAF7AAC17528194008899D1 /* signpost@2x.png */,
+				BDA4E7CB17A7429D00435C23 /* takephoto-retake.png */,
+				BDA4E7C317A72D7900435C23 /* takephoto-retake@2x.png */,
+				BDA4E7CD17A742C100435C23 /* takephoto-selected.png */,
+				BDA4E7C417A72D7900435C23 /* takephoto-selected@2x.png */,
+				BDA4E7C917A734F300435C23 /* takephoto.png */,
+				BDA4E7C517A72D7900435C23 /* takephoto@2x.png */,
 				BD5CB77B1771327600BC21D1 /* target@2x.png */,
 				BD5CB77C1771327600BC21D1 /* target.png */,
 				BDA2BD17165AF8E30068C749 /* user.png */,
@@ -1538,8 +1553,13 @@
 				BD4A2D1017A54287004A80AE /* upload@2x.png in Resources */,
 				BD4A2D1317A546AB004A80AE /* x.png in Resources */,
 				BD4A2D1417A546AB004A80AE /* x@2x.png in Resources */,
-				BD4A2D1617A5EF6B004A80AE /* takephoto.png in Resources */,
 				BD4A2D1F17A70039004A80AE /* VLBTakePhotoButton.xib in Resources */,
+				BDA4E7C617A72D7900435C23 /* takephoto-retake@2x.png in Resources */,
+				BDA4E7C717A72D7900435C23 /* takephoto-selected@2x.png in Resources */,
+				BDA4E7C817A72D7900435C23 /* takephoto@2x.png in Resources */,
+				BDA4E7CA17A734F300435C23 /* takephoto.png in Resources */,
+				BDA4E7CC17A7429E00435C23 /* takephoto-retake.png in Resources */,
+				BDA4E7CE17A742C100435C23 /* takephoto-selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

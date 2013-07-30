@@ -331,6 +331,8 @@ return self;
 //http://stackoverflow.com/questions/1703100/resize-uiimage-with-aspect-ratio
 - (void)cameraView:(VLBCameraView *)cameraView didFinishTakingPicture:(UIImage *)image withInfo:(NSDictionary *)info meta:(NSDictionary *)meta
 {
+    [self.takePhotoButton setImage:nil forState:UIControlStateNormal];
+    [self.takePhotoButton setBackgroundImage:[UIImage imageNamed:@"takephoto-retake.png"] forState:UIControlStateNormal];
     [self.takePhotoButton setTitle:@"retake" forState:UIControlStateNormal];
     
     __weak VLBTakePhotoViewController *wself = self;
@@ -368,8 +370,7 @@ return self;
     }];
 
     self.uploadButton.enabled = NO;
-    
-    [self.takePhotoButton setTitle:@"take" forState:UIControlStateNormal];
+    [self.takePhotoButton setImage:[UIImage imageNamed:@"takephoto.png"] forState:UIControlStateNormal];    
 }
 
 -(void)cameraView:(VLBCameraView *)cameraView willRriteToCameraRollWithMetadata:(NSDictionary *)metadata

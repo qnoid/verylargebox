@@ -42,7 +42,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIView" id="113874896">
 						<reference key="NSNextResponder" ref="875258060"/>
-						<int key="NSvFlags">290</int>
+						<int key="NSvFlags">306</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
@@ -79,7 +79,6 @@
 						<string key="NSFrame">{{130, 114}, {60, 60}}</string>
 						<reference key="NSSuperview" ref="875258060"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
