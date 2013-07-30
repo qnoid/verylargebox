@@ -127,13 +127,17 @@ return self;
         [wself takePhoto:button];
     }];
 
+    [self.locationButton vlb_cornerRadius:2.0];
     self.locationButton.titleLabel.minimumScaleFactor = 10;
     self.locationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.locationButton.titleLabel.numberOfLines = 0;
     [self.locationButton.titleLabel sizeToFit];
 
-    self.cameraView.allowPictureRetake = YES;
+    [self.discardButton vlb_cornerRadius:2.0 corners:UIRectCornerBottomLeft | UIRectCornerTopLeft];
+    [self.uploadButton vlb_cornerRadius:2.0 corners:UIRectCornerBottomRight | UIRectCornerTopRight];
+
     self.cameraView.writeToCameraRoll = YES;
-    self.cameraView.flashView.backgroundColor = self.controlsView.backgroundColor =
+    self.cameraView.flashView.backgroundColor =
     [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
     [self.theBoxLocationService notifyDidUpdateToLocation:self];
@@ -257,7 +261,11 @@ return self;
     
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     self.locality = [VLBNotifications place:notification].locality;
-    [self.locationButton setTitle:[NSString stringWithFormat:@"Assign a Store (%@)", self.locality] forState:UIControlStateNormal];
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Assign a Store (%@)", self.locality]];
+    
+    [title addAttributes:@{NSForegroundColorAttributeName:[VLBColors colorLightGrey]} range:NSMakeRange(15, self.locality.length + 2)];
+    [self.locationButton setAttributedTitle:title
+                                   forState:UIControlStateNormal];
     [self.locationButton.titleLabel sizeToFit];
     
     if(self.itemImage && self.hasCoordinates){
@@ -324,7 +332,7 @@ return self;
 
 	NSString *locationName = [self.location vlb_objectForKey:VLBLocationName];
     
-    [self.locationButton setTitle:[NSString stringWithFormat:@"%@", locationName] forState:UIControlStateNormal];
+    [self.locationButton setAttributedTitle:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", locationName] attributes:@{NSForegroundColorAttributeName:[VLBColors colorLightGrey]}] forState:UIControlStateNormal];
     [self.locationButton.titleLabel sizeToFit];
 }
 
@@ -376,12 +384,6 @@ return self;
 -(void)cameraView:(VLBCameraView *)cameraView willRriteToCameraRollWithMetadata:(NSDictionary *)metadata
 {
     
-}
-
--(void)drawRect:(CGRect)rect inView:(UIView *)view
-{
-    VLBViewContext context = [VLBViews fill:[VLBColors colorPearlWhite]];
-    context([[VLBDrawRects new] drawContextOfHexagon:[VLBPolygon hexagonAt:CGRectCenter(rect)]]);
 }
 
 @end

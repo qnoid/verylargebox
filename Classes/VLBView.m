@@ -76,6 +76,20 @@ return self;
     return self;
 }
 
+-(id<VLBViewCorner>)vlb_cornerRadius:(CGFloat)cornerRadius corners:(UIRectCorner)corners
+{
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                                   byRoundingCorners:corners
+                                                         cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
+    
+return self;
+}
+
 @end
 
 @interface VLBView ()

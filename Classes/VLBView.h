@@ -76,6 +76,9 @@ typedef void(^VLBViewDrawRect)(CGRect rect, UIView* view);
  */
 -(id<VLBViewCorner>)vlb_cornerRadius:(CGFloat)cornerRadius;
 
+//http://stackoverflow.com/questions/10167266/how-to-set-cornerradius-for-only-top-left-and-top-right-corner-of-a-uiview
+-(id<VLBViewCorner>)vlb_cornerRadius:(CGFloat)cornerRadius corners:(UIRectCorner)corners;
+
 @end
 
 /**

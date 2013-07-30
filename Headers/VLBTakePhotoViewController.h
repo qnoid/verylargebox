@@ -48,15 +48,15 @@
  
  As soon as the location is update
  */
-@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBLocationOperationDelegate, VLBStoresViewControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, AmazonServiceRequestDelegate, VLBCameraViewDelegate, VLBViewDrawRectDelegate>
+@interface VLBTakePhotoViewController : UIViewController <VLBLocationServiceDelegate, VLBLocationOperationDelegate, VLBStoresViewControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, AmazonServiceRequestDelegate, VLBCameraViewDelegate>
 {
 }
 
 @property(nonatomic, weak) IBOutlet VLBCameraView *cameraView;
 @property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
 @property(nonatomic, weak) IBOutlet UIButton *locationButton;
+@property(nonatomic, weak) IBOutlet UIButton *discardButton;
 @property(nonatomic, weak) IBOutlet UIButton *uploadButton;
-@property(nonatomic, weak) IBOutlet UIView *controlsView;
 
 @property(nonatomic, weak) NSObject<VLBTakePhotoViewControllerDelegate> *delegate;
 @property(nonatomic, weak) NSObject<VLBCreateItemOperationDelegate> *createItemDelegate;
