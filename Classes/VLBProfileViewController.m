@@ -29,6 +29,7 @@
 #import "VLBUserProfileViewController.h"
 #import "VLBColors.h"
 #import "VLBTakePhotoButton.h"
+#import "CALayer+VLBLayer.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -107,12 +108,12 @@ return self;
 
 -(void)refreshFeed
 {
-    MBProgressHUD* hud = [VLBHuds newWithView:self.view];
-    [hud show:YES];
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 
     [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[self.thebox userId] page:VLB_Integer(1) delegate:self]];
     [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[self.thebox userId] delegate:self]];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 -(void)presentUserSettingsViewController
@@ -256,8 +257,11 @@ return self;
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     DDLogVerbose(@"%s, %@", __PRETTY_FUNCTION__, items);
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_stopRotate];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:items.count];
 	[self.items addObjectsFromArray:items];
     [self.itemsView setNeedsLayout];
@@ -280,7 +284,7 @@ return VLBScrollViewOrientationVertical;
 }
 
 -(CGFloat)viewsOf:(VLBScrollView *)scrollView{
-    return 428.0;
+    return 416.0;
 }
 
 -(void)didLayoutSubviews:(VLBScrollView *)scrollView{

@@ -148,14 +148,9 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton.imageView completion:nil];
     [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton.imageView completion:nil];
-
-    if(self.itemImage){
-        self.takePhotoButton.imageView.alpha = 1.0;//test
-    }
     
-    if(self.location != nil && ![[self.location vlb_objectForKey:@"name"] vlb_isEmpty]){
+    if(self.location == nil || ![[self.location vlb_objectForKey:@"name"] vlb_isEmpty]){
         self.locationButton.imageView.alpha = 1.0;
     }
 }
@@ -341,7 +336,8 @@ return self;
 {
     [self.takePhotoButton setImage:nil forState:UIControlStateNormal];
     [self.takePhotoButton setBackgroundImage:[UIImage imageNamed:@"takephoto-retake.png"] forState:UIControlStateNormal];
-    [self.takePhotoButton setTitle:@"retake" forState:UIControlStateNormal];
+    [self.takePhotoButton setTitle:@"Retake" forState:UIControlStateNormal];
+    [self.discardButton setTitle:@"Discard" forState:UIControlStateNormal];
     
     __weak VLBTakePhotoViewController *wself = self;
     [self.takePhotoButton onTouchUpInside:^(UIButton *button) {
@@ -371,7 +367,8 @@ return self;
 
 -(void)cameraView:(VLBCameraView *)cameraView willRekatePicture:(UIImage *)image
 {
-    [viewAnimationWillAnimateImageViewAlpha() animate:self.takePhotoButton.imageView completion:nil];
+    [self.discardButton setTitle:@"Close" forState:UIControlStateNormal];
+
     __weak VLBTakePhotoViewController *wself = self;
     [self.takePhotoButton onTouchUpInside:^(UIButton *button) {
         [wself takePhoto:button];

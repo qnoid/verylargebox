@@ -12,8 +12,8 @@ typedef void(^VLBAlertViewBlock)(UIAlertView* alertView, NSInteger buttonIndex);
 
 typedef NS_ENUM(NSInteger, VLBButtonIndex)
 {
-    BUTTON_INDEX_OK = 0,
-    BUTTON_INDEX_CANCEL = 1
+    BUTTON_INDEX_CANCEL = 0,
+    BUTTON_INDEX_OK = 1    
 };
 
 @interface VLBAlertViewDelegate : NSObject <UIAlertViewDelegate>
@@ -51,4 +51,5 @@ typedef NS_ENUM(NSInteger, VLBButtonIndex)
 
 + (UIAlertView *)newAlertViewWithOkAndCancel:(NSString *)title message:(NSString *)message;
 
++ (UIAlertView *)newAlertViewWithNevermind:(NSString *)title message:(NSString *)message;
 @end

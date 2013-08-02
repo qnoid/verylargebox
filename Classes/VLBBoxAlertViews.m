@@ -7,20 +7,25 @@
 //
 
 #import "VLBBoxAlertViews.h"
-#import "VLBAlertViews.h"
 
 @implementation VLBBoxAlertViews
 
-+(UIAlertView*)location:(NSString*)name bar:(NSObject<UIAlertViewDelegate>*)alertViewDelegateOnOkGetDirections
++(UIAlertView*)location:(NSString*)name bar:(VLBAlertViewBlock)alertViewBlock
 {
     VLBAlertViewDelegate *alertViewDelegateOnCancelDismiss = [VLBAlertViews newAlertViewDelegateOnCancelDismiss];
     
-    NSObject<UIAlertViewDelegate> *didTapOnGetDirectionsDelegate =
-    [VLBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
+    NSString *message = [NSString stringWithFormat:@"Get directions directions%@",
+                         [@"" isEqual:name]? @"?" : [NSString stringWithFormat:@" to %@?", name]];
     
-    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOkAndCancel:@"Get Directions" message:[NSString stringWithFormat:@"Exit the app and get directions%@", [@"" isEqual:name]? @"." : [NSString stringWithFormat:@" to %@.", name]]];
+    UIAlertView *alertView = [VLBAlertViews newAlertViewWithNevermind:@"Open in Maps"
+                                                            message:message];
+
+    NSInteger index = [alertView addButtonWithTitle:@"Open in Maps"];
     
-    alertView.delegate = didTapOnGetDirectionsDelegate;
+    VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections =
+        [VLBAlertViews newAlertViewDelegateOnButtonIndex:index alertViewBlock:alertViewBlock];
+
+    alertView.delegate = [VLBAlertViews all:@[alertViewDelegateOnOkGetDirections, alertViewDelegateOnCancelDismiss]];
     
 return alertView;
 }

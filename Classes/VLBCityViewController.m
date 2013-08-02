@@ -41,6 +41,7 @@
 #import "NSDictionary+VLBLocation.h"
 #import "VLBBoxAlertViews.h"
 #import "VLBViewControllers.h"
+#import "CALayer+VLBLayer.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
@@ -82,6 +83,7 @@ static dispatch_once_t onceToken;
 @property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
 @property(nonatomic, copy) VLBLocationServiceDirections didTapOnGetDirectionsButton;
+@property(nonatomic, copy) NSString *localityName;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService;
 -(void)updateTitle:(NSString *)localityName;
@@ -100,7 +102,7 @@ static dispatch_once_t onceToken;
                                                                                             action:@selector(refreshLocations)];
     cityViewController.navigationItem.rightBarButtonItem.enabled = NO;
     
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Nearby"];
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Stores Nearby"];
     cityViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
@@ -145,20 +147,24 @@ return self;
 
 -(void)refreshLocations
 {
-		if(!self.placemark){
-			[self.theBoxLocationService notifyDidFindPlacemark:self];
-			[self.theBoxLocationService notifyDidFailWithError:self];
-			[self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
-			[self.theBoxLocationService startMonitoringSignificantLocationChanges];
-		return;
-		}
+    if(!self.placemark){
+        [self.theBoxLocationService notifyDidFindPlacemark:self];
+        [self.theBoxLocationService notifyDidFailWithError:self];
+        [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
+        [self.theBoxLocationService startMonitoringSignificantLocationChanges];
+    return;
+    }
     //locality can be nil
+    
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     [[VLBQueries newGetLocationsGivenLocalityName:self.placemark.locality delegate:self] start];
 }
 
 - (void)updateTitle:(NSString *)localityName
 {
+		self.localityName = localityName;
     UILabel* titleView = (UILabel*) self.navigationItem.titleView;
     titleView.text = [NSString stringWithFormat:@"Stores in %@", localityName];
     [titleView sizeToFit];
@@ -261,9 +267,9 @@ return self;
 
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_stopRotate];
     self.navigationItem.rightBarButtonItem.enabled = YES;
-
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
     if([locations vlb_isEmpty]){
         MBProgressHUD *hud = [VLBHuds newWithViewCamera:self.view locality:self.tabBarItem.title];
@@ -599,17 +605,22 @@ return VLBScrollViewOrientationHorizontal;
     NSDictionary *location = [[self.locations objectAtIndex:self.index] objectForKey:@"location"];
     id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
 
-    VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
+    VLBAlertViewBlock onOkGetDirections = ^(UIAlertView *alertView, NSInteger buttonIndex) {
         [Flurry logEvent:@"didGetDirections"
           withParameters:@{@"controller": @"VLBCityViewController", VLBLocationName:name}];
         
         [VLBLocationService decideOnDirections:[location vlb_coordinate]
                                        options:location]();
-    }];
+    };
     
-    UIAlertView *alertView = [VLBBoxAlertViews location:name bar:alertViewDelegateOnOkGetDirections];
+    UIAlertView *alertView = [VLBBoxAlertViews location:name bar:onOkGetDirections];
     
     [alertView show];    
+}
+
+-(void)didTouchUpInsideStores
+{
+
 }
 
 @end

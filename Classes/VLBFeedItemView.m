@@ -43,9 +43,10 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItemView){
     
     feedItemView.didTapOnGetDirectionsButton = VLBButtonOnTouchNone;
-    feedItemView.getDirectionsButton.titleLabel.minimumScaleFactor = 10;
-    feedItemView.getDirectionsButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [feedItemView.getDirectionsButton.titleLabel sizeToFit];
+    feedItemView.storeButton.titleLabel.minimumScaleFactor = 10;
+    feedItemView.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [feedItemView.storeButton.titleLabel sizeToFit];
+    [feedItemView.askForDirectionsButton vlb_cornerRadius:4.0];
 
     NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     feedItemView.defaultItemImage = [UIImage imageWithContentsOfFile:path];
@@ -100,13 +101,13 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     NSDictionary *location = [item vlb_location];
     
     id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
-    [self.getDirectionsButton setTitle:name forState:UIControlStateNormal];
-    [self.getDirectionsButton.titleLabel sizeToFit];
+    [self.storeButton setTitle:name forState:UIControlStateNormal];
+    [self.storeButton.titleLabel sizeToFit];
     
     self.whenLabel.text = [item vlb_objectForKey:VLBItemWhen];
     
     self.didTapOnGetDirectionsButton = ^(UIButton* button){
-        VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        VLBAlertViewBlock onOkGetDirections = ^(UIAlertView *alertView, NSInteger buttonIndex) {
             [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBFeedItemView",
              VLBLocationName:name,
                    VLBItemId:[item objectForKey:VLBItemId],
@@ -114,9 +115,9 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
             
             [VLBLocationService decideOnDirections:[location vlb_coordinate]
                                            options:location]();
-        }];
+        };
         
-        UIAlertView *alertView = [VLBBoxAlertViews location:name bar:alertViewDelegateOnOkGetDirections];
+        UIAlertView *alertView = [VLBBoxAlertViews location:name bar:onOkGetDirections];
         
         [alertView show];
     };

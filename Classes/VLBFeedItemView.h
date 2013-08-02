@@ -16,10 +16,10 @@
 #import "VLBLocationService.h"
 
 @interface VLBFeedItemView : UIView
+@property(nonatomic, weak) IBOutlet UIButton* storeButton;
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
 @property(nonatomic, weak) IBOutlet UILabel* whenLabel;
-@property(nonatomic, weak) IBOutlet UILabel* captionLabel;
-@property(nonatomic, weak) IBOutlet UIButton* getDirectionsButton;
+@property(nonatomic, weak) IBOutlet UIButton* askForDirectionsButton;
 @property(nonatomic, copy) VLBButtonOnTouch didTapOnGetDirectionsButton;
 
 -(void)viewWillAppear:(NSDictionary*)item;

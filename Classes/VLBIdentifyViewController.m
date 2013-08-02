@@ -93,6 +93,7 @@ return self;
     
     self.emailTextField.delegate = self.emailTextFieldDelegate;
 
+    [self.signUpButton vlb_cornerRadius:2.0];
     [self.signUpButton onTouchUp:^(UIButton *button)
     {
         [wself.emailTextField resignFirstResponder];
@@ -117,6 +118,7 @@ return self;
         [wself.view sendSubviewToBack:wself.signInButton];
     }];
     
+    [self.signInButton vlb_cornerRadius:2.0];
     [self.signInButton onTouchUp:^(UIButton *button)
     {
         NSString *email = [wself.thebox email];

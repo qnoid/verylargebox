@@ -108,7 +108,7 @@ NSPredicate* isButtonIndexCancel(){
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
                                                        delegate:nil
-                                              cancelButtonTitle:@"Ok"
+                                              cancelButtonTitle:@"Dismiss"
                                               otherButtonTitles:nil];
     
     return alertView;
@@ -118,10 +118,22 @@ NSPredicate* isButtonIndexCancel(){
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
                                                        delegate:nil
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:@"Cancel", nil];
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Ok", nil];
     
     return alertView;
 }
+
++ (UIAlertView *)newAlertViewWithNevermind:(NSString *)title message:(NSString *)message
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Nevermind"
+                                              otherButtonTitles:nil];
+        
+    return alertView;
+}
+
 
 @end

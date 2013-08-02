@@ -43,8 +43,9 @@ return nil == obj || [NSNull null] == obj;
 VLBUserItemViewInit const VLBUserItemViewInitBlock = ^(VLBUserItemView *userItemView){
   
     userItemView.didTapOnGetDirectionsButton = VLBButtonOnTouchNone;
-    userItemView.getDirectionsButton.titleLabel.minimumScaleFactor = 10;
-    userItemView.getDirectionsButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    userItemView.storeButton.titleLabel.minimumScaleFactor = 10;
+    userItemView.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [userItemView.askForDirectionsButton vlb_cornerRadius:4.0];
 
     NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
     userItemView.defaultItemImage = [UIImage imageWithContentsOfFile:path];
@@ -102,13 +103,13 @@ return self;
     id locality = [item vlb_locality];
     id localityName = ([NSObject vlb_isNil:locality])?@"[in the box]":[locality vlb_objectForKey:VLBLocalityName ifNil:@"[in the box]"];
 
-    [self.getDirectionsButton setTitle:[NSString stringWithFormat:@"%@\n%@", name, localityName] forState:UIControlStateNormal];
-    [self.getDirectionsButton.titleLabel sizeToFit];
+    [self.storeButton setTitle:[NSString stringWithFormat:@"%@\n%@", name, localityName] forState:UIControlStateNormal];
+    [self.storeButton.titleLabel sizeToFit];
     
     self.whenLabel.text = [item vlb_objectForKey:VLBItemWhen];
     
     self.didTapOnGetDirectionsButton = ^(UIButton* button){
-        VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        VLBAlertViewBlock onOkGetDirections = ^(UIAlertView *alertView, NSInteger buttonIndex) {
             [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBUserItemView",
              VLBLocationName:name,
                    VLBItemId:[item objectForKey:VLBItemId],
@@ -116,9 +117,9 @@ return self;
             
             [VLBLocationService decideOnDirections:[location vlb_coordinate]
                                            options:location]();
-        }];
+        };
         
-        UIAlertView *alertView = [VLBBoxAlertViews location:name bar:alertViewDelegateOnOkGetDirections];
+        UIAlertView *alertView = [VLBBoxAlertViews location:name bar:onOkGetDirections];
         
         [alertView show];
     };

@@ -23,6 +23,7 @@
 #import "VLBViewControllers.h"
 #import "NSArray+VLBDecorator.h"
 #import "VLBViewControllers.h"
+#import "CALayer+VLBLayer.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
@@ -81,11 +82,12 @@ return feedViewController;
 
 -(void)refreshFeed
 {
-    MBProgressHUD* hud = [VLBHuds newWithView:self.view];
-    [hud show:YES];
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    
     [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality page:VLB_Integer(1) delegate:self]];
     [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality delegate:self]];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 -(void)updateTitle:(NSString*)localityName
@@ -148,10 +150,12 @@ return feedViewController;
 #pragma mark TBItemsOperationDelegate
 -(void)didSucceedWithItems:(NSMutableArray *)items
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     DDLogVerbose(@"%@", items);
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_stopRotate];
     self.navigationItem.rightBarButtonItem.enabled = YES;
+    
     self.items = items;
     [self.feedView setNeedsLayout];
     [self.feedView flashScrollIndicators];
@@ -201,7 +205,7 @@ return VLBScrollViewOrientationVertical;
 }
 
 -(CGFloat)viewsOf:(VLBScrollView *)scrollView{
-    return 428.0;
+    return 416.0;
 }
 
 -(void)didLayoutSubviews:(VLBScrollView *)scrollView{

@@ -217,6 +217,8 @@
 		BDA4E7CA17A734F300435C23 /* takephoto.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7C917A734F300435C23 /* takephoto.png */; };
 		BDA4E7CC17A7429E00435C23 /* takephoto-retake.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7CB17A7429D00435C23 /* takephoto-retake.png */; };
 		BDA4E7CE17A742C100435C23 /* takephoto-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7CD17A742C100435C23 /* takephoto-selected.png */; };
+		BDA4E7D117A9AF1500435C23 /* takephoto-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7CF17A9AF1500435C23 /* takephoto-icon.png */; };
+		BDA4E7D217A9AF1500435C23 /* takephoto-icon@2x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E7D017A9AF1500435C23 /* takephoto-icon@2x.png.png */; };
 		BDA4FB4D175FF42D004AAEC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D29B07131A820F008B8B2D /* SystemConfiguration.framework */; };
 		BDAB0126176FE7B200A8034E /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
 		BDABD930169F9EF800111723 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
@@ -319,6 +321,11 @@
 		BDFBA12C177829CF00A59BCF /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
 		BDFBA12D177829D700A59BCF /* VLBQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* VLBQueries.m */; };
 		BDFBA12E177829D800A59BCF /* VLBQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 9096CC07133BB81E00639685 /* VLBQueries.m */; };
+		BDFBDD5C17AC22D00018D815 /* CALayer+VLBLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */; };
+		BDFBDD5D17AC272B0018D815 /* CALayer+VLBLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */; };
+		BDFBDD5E17AC27420018D815 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
+		BDFBDD6117AC4D4F0018D815 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFBDD5F17AC4D4F0018D815 /* map.png */; };
+		BDFBDD6217AC4D4F0018D815 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFBDD6017AC4D4F0018D815 /* map@2x.png */; };
 		FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */; };
 /* End PBXBuildFile section */
 
@@ -581,6 +588,8 @@
 		BDA4E7C917A734F300435C23 /* takephoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = takephoto.png; path = "Supporting Files/takephoto.png"; sourceTree = "<group>"; };
 		BDA4E7CB17A7429D00435C23 /* takephoto-retake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto-retake.png"; path = "Supporting Files/takephoto-retake.png"; sourceTree = "<group>"; };
 		BDA4E7CD17A742C100435C23 /* takephoto-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto-selected.png"; path = "Supporting Files/takephoto-selected.png"; sourceTree = "<group>"; };
+		BDA4E7CF17A9AF1500435C23 /* takephoto-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto-icon.png"; path = "Supporting Files/takephoto-icon.png"; sourceTree = "<group>"; };
+		BDA4E7D017A9AF1500435C23 /* takephoto-icon@2x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "takephoto-icon@2x.png.png"; path = "Supporting Files/takephoto-icon@2x.png.png"; sourceTree = "<group>"; };
 		BDAB0124176FE7B200A8034E /* VLBTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTypography.h; path = ../Classes/VLBTypography.h; sourceTree = "<group>"; };
 		BDAB0125176FE7B200A8034E /* VLBTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTypography.m; sourceTree = "<group>"; };
 		BDAC04AC16FAF95800B40646 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -675,6 +684,10 @@
 		BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTableViewCells.m; sourceTree = "<group>"; };
 		BDF8C3D1179DC7BC002B7F60 /* idcard-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard-grey.png"; path = "Supporting Files/idcard-grey.png"; sourceTree = "<group>"; };
 		BDF8C3D2179DC7BC002B7F60 /* idcard-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard-grey@2x.png"; path = "Supporting Files/idcard-grey@2x.png"; sourceTree = "<group>"; };
+		BDFBDD5A17AC22D00018D815 /* CALayer+VLBLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+VLBLayer.h"; sourceTree = "<group>"; };
+		BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+VLBLayer.m"; sourceTree = "<group>"; };
+		BDFBDD5F17AC4D4F0018D815 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = "Supporting Files/map.png"; sourceTree = "<group>"; };
+		BDFBDD6017AC4D4F0018D815 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map@2x.png"; path = "Supporting Files/map@2x.png"; sourceTree = "<group>"; };
 		C01FCF5008A954540054247D /* VLBCanIndexLocationInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBCanIndexLocationInView.h; sourceTree = "<group>"; };
 		F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ApplicationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -710,6 +723,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFBDD5E17AC27420018D815 /* QuartzCore.framework in Frameworks */,
 				BDF274791786352F000E179E /* AssetsLibrary.framework in Frameworks */,
 				BD4D32A0177F5A370015EADF /* CoreMedia.framework in Frameworks */,
 				BD4D329D177F50B30015EADF /* AVFoundation.framework in Frameworks */,
@@ -830,6 +844,8 @@
 				BD8D411D179F4D1200560C14 /* VLBUserProfileViewController.xib */,
 				BD33260317A442BF008784B3 /* VLBBoxAlertViews.h */,
 				BD33260417A442BF008784B3 /* VLBBoxAlertViews.m */,
+				BDFBDD5A17AC22D00018D815 /* CALayer+VLBLayer.h */,
+				BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1252,6 +1268,8 @@
 				BD59A470178C82C3003A9394 /* location-arrow@2x.png */,
 				BD4A2D0517A54156004A80AE /* map-marker.png */,
 				BD4A2D0617A54156004A80AE /* map-marker@2x.png */,
+				BDFBDD5F17AC4D4F0018D815 /* map.png */,
+				BDFBDD6017AC4D4F0018D815 /* map@2x.png */,
 				BDAF7AAB17528194008899D1 /* signpost.png */,
 				BDAF7AAC17528194008899D1 /* signpost@2x.png */,
 				BDA4E7CB17A7429D00435C23 /* takephoto-retake.png */,
@@ -1260,6 +1278,8 @@
 				BDA4E7C417A72D7900435C23 /* takephoto-selected@2x.png */,
 				BDA4E7C917A734F300435C23 /* takephoto.png */,
 				BDA4E7C517A72D7900435C23 /* takephoto@2x.png */,
+				BDA4E7CF17A9AF1500435C23 /* takephoto-icon.png */,
+				BDA4E7D017A9AF1500435C23 /* takephoto-icon@2x.png.png */,
 				BD5CB77B1771327600BC21D1 /* target@2x.png */,
 				BD5CB77C1771327600BC21D1 /* target.png */,
 				BDA2BD17165AF8E30068C749 /* user.png */,
@@ -1560,6 +1580,10 @@
 				BDA4E7CA17A734F300435C23 /* takephoto.png in Resources */,
 				BDA4E7CC17A7429E00435C23 /* takephoto-retake.png in Resources */,
 				BDA4E7CE17A742C100435C23 /* takephoto-selected.png in Resources */,
+				BDA4E7D117A9AF1500435C23 /* takephoto-icon.png in Resources */,
+				BDA4E7D217A9AF1500435C23 /* takephoto-icon@2x.png.png in Resources */,
+				BDFBDD6117AC4D4F0018D815 /* map.png in Resources */,
+				BDFBDD6217AC4D4F0018D815 /* map@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1780,6 +1804,7 @@
 				BD33260517A442BF008784B3 /* VLBBoxAlertViews.m in Sources */,
 				BD33260C17A45674008784B3 /* VLBFeedItemView.m in Sources */,
 				BD4A2D1B17A6F9EB004A80AE /* VLBTakePhotoButton.m in Sources */,
+				BDFBDD5C17AC22D00018D815 /* CALayer+VLBLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1840,6 +1865,7 @@
 				BD33260117A1D38F008784B3 /* NSDictionary+VLBItem.m in Sources */,
 				BD33260217A1D554008784B3 /* NSDictionary+VLBLocation.m in Sources */,
 				BD33260617A4452C008784B3 /* VLBBoxAlertViews.m in Sources */,
+				BDFBDD5D17AC272B0018D815 /* CALayer+VLBLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

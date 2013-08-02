@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VLBAlertViews.h"
 
 @interface VLBBoxAlertViews : NSObject
 
-+(UIAlertView*)location:(NSString*)name bar:(NSObject<UIAlertViewDelegate>*)alertViewDelegateOnOkGetDirections;
++(UIAlertView*)location:(NSString*)name bar:(VLBAlertViewBlock)alertViewBlock;
 
 @end
