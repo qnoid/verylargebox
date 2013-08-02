@@ -43,8 +43,6 @@
 						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrame">{{0, 140}, {320, 271}}</string>
 						<reference key="NSSuperview" ref="477452596"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="341438688">
 							<int key="NSColorSpace">3</int>
@@ -57,7 +55,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 44}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="477452596"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="152084368"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -100,7 +97,6 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{0, 44}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="477452596"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="347189861"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="783898627">
 							<int key="NSColorSpace">3</int>
@@ -133,7 +129,6 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{0, 44}, {44, 44}}</string>
 						<reference key="NSSuperview" ref="477452596"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="332497201"/>
 						<reference key="IBUIBackgroundColor" ref="341438688"/>
 						<int key="IBUIContentMode">4</int>
@@ -150,7 +145,6 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{17, 90}, {286, 44}}</string>
 						<reference key="NSSuperview" ref="477452596"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="537963487"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -189,7 +183,6 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{17, 90}, {286, 44}}</string>
 						<reference key="NSSuperview" ref="477452596"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="643530160"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -216,7 +209,6 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="46233503"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
@@ -387,66 +379,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">27</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">VLBButton</string>
-					<string key="superclassName">UIButton</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">delegate</string>
-						<string key="NS.object.0">NSObject</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">delegate</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">delegate</string>
-							<string key="candidateClassName">NSObject</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/VLBButton.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">VLBIdentifyViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="emailButton">VLBButton</string>
-						<string key="emailTextField">UITextField</string>
-						<string key="noticeView">UIView</string>
-						<string key="signInButton">VLBButton</string>
-						<string key="signUpButton">VLBButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="emailButton">
-							<string key="name">emailButton</string>
-							<string key="candidateClassName">VLBButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="emailTextField">
-							<string key="name">emailTextField</string>
-							<string key="candidateClassName">UITextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="noticeView">
-							<string key="name">noticeView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="signInButton">
-							<string key="name">signInButton</string>
-							<string key="candidateClassName">VLBButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="signUpButton">
-							<string key="name">signUpButton</string>
-							<string key="candidateClassName">VLBButton</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/VLBIdentifyViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

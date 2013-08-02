@@ -61,6 +61,7 @@ return signOutViewController;
     
     __weak VLBUserProfileViewController *wself = self;
     
+    [self.signOutButton vlb_cornerRadius:2.0];
     [self.signOutButton onTouchUp:^(UIButton *button) {
         [wself.thebox noUserAccount];
         
