@@ -161,6 +161,15 @@ return [SSKeychain passwordForService:THE_BOX_SERVICE account:email error:&error
     }
 }
 
+
+-(UINavigationController*)newNavigationController:(UIViewController*)rootViewController
+{
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    navigationController.navigationBar.translucent = YES;
+    
+return navigationController;
+}
+
 -(VLBIdentifyViewController*)newIdentifyViewController{
     return [VLBIdentifyViewController newIdentifyViewController:self];
 }

@@ -54,6 +54,7 @@ extern NSString* const THE_BOX_SERVICE;
 
 -(UIViewController*)decideOnProfileViewController;
 
+-(UINavigationController*)newNavigationController:(UIViewController*)rootViewController;
 -(VLBIdentifyViewController*)newIdentifyViewController;
 -(UINavigationController*)newEmailViewController;
 -(VLBProfileViewController*)newProfileViewController;

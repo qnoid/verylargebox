@@ -326,6 +326,8 @@
 		BDFBDD5E17AC27420018D815 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
 		BDFBDD6117AC4D4F0018D815 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFBDD5F17AC4D4F0018D815 /* map.png */; };
 		BDFBDD6217AC4D4F0018D815 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFBDD6017AC4D4F0018D815 /* map@2x.png */; };
+		BDFBDD6517AE665A0018D815 /* NSObject+VLBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFBDD6417AE66590018D815 /* NSObject+VLBObject.m */; };
+		BDFBDD6617AE671D0018D815 /* NSDictionary+VLBLocality.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE492641775B89200FFC41F /* NSDictionary+VLBLocality.m */; };
 		FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */; };
 /* End PBXBuildFile section */
 
@@ -688,6 +690,8 @@
 		BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+VLBLayer.m"; sourceTree = "<group>"; };
 		BDFBDD5F17AC4D4F0018D815 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = "Supporting Files/map.png"; sourceTree = "<group>"; };
 		BDFBDD6017AC4D4F0018D815 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map@2x.png"; path = "Supporting Files/map@2x.png"; sourceTree = "<group>"; };
+		BDFBDD6317AE66590018D815 /* NSObject+VLBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VLBObject.h"; sourceTree = "<group>"; };
+		BDFBDD6417AE66590018D815 /* NSObject+VLBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VLBObject.m"; sourceTree = "<group>"; };
 		C01FCF5008A954540054247D /* VLBCanIndexLocationInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBCanIndexLocationInView.h; sourceTree = "<group>"; };
 		F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ApplicationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -846,6 +850,8 @@
 				BD33260417A442BF008784B3 /* VLBBoxAlertViews.m */,
 				BDFBDD5A17AC22D00018D815 /* CALayer+VLBLayer.h */,
 				BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */,
+				BDFBDD6317AE66590018D815 /* NSObject+VLBObject.h */,
+				BDFBDD6417AE66590018D815 /* NSObject+VLBObject.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1805,6 +1811,7 @@
 				BD33260C17A45674008784B3 /* VLBFeedItemView.m in Sources */,
 				BD4A2D1B17A6F9EB004A80AE /* VLBTakePhotoButton.m in Sources */,
 				BDFBDD5C17AC22D00018D815 /* CALayer+VLBLayer.m in Sources */,
+				BDFBDD6517AE665A0018D815 /* NSObject+VLBObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1866,6 +1873,7 @@
 				BD33260217A1D554008784B3 /* NSDictionary+VLBLocation.m in Sources */,
 				BD33260617A4452C008784B3 /* VLBBoxAlertViews.m in Sources */,
 				BDFBDD5D17AC272B0018D815 /* CALayer+VLBLayer.m in Sources */,
+				BDFBDD6617AE671D0018D815 /* NSDictionary+VLBLocality.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

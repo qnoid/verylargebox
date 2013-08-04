@@ -6,16 +6,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "VLBView.h"
 @class VLBFeedItemView;
 
-@interface VLBDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-{
-    
-}
+@interface VLBDetailsViewController : UIViewController <VLBViewDrawRectDelegate>
 
-@property(nonatomic, weak) IBOutlet VLBFeedItemView* itemView;
+@property(nonatomic, weak) IBOutlet UIButton* storeButton;
+@property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
+@property(nonatomic, weak) IBOutlet UILabel* whenLabel;
+@property(nonatomic, weak) IBOutlet UIButton* askForDirectionsButton;
 
 +(VLBDetailsViewController *)newDetailsViewController:(NSMutableDictionary*)item;
 
+-(IBAction)didTouchUpInsideAskForDirectionsButton:(id)sender;
 @end

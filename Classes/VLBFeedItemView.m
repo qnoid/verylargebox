@@ -20,21 +20,12 @@
 #import "NSDictionary+VLBDictionary.h"
 #import "VLBBoxAlertViews.h"
 #import "VLBLocationService.h"
+#import "NSObject+VLBObject.h"
 
 typedef void(^VLBFeedItemViewInit)(VLBFeedItemView *userItemView);
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
 static NSString* const DEFAULT_ITEM_TYPE = @"png";
-
-@interface NSObject (VLBObject)
-+(BOOL)vlb_isNil:(id)obj;
-@end
-
-@implementation NSObject (VLBObject)
-+(BOOL)vlb_isNil:(id)obj{
-    return nil == obj || [NSNull null] == obj;
-}
-@end
 
 @interface VLBFeedItemView ()
 @property(nonatomic, strong) UIImage *defaultItemImage;

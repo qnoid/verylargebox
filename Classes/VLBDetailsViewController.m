@@ -6,23 +6,26 @@
 //
 
 #import "VLBDetailsViewController.h"
-#import <CoreLocation/CoreLocation.h>
-#import "VLBLocationService.h"
-#import "VLBLocationServiceDelegate.h"
-#import "VLBUpdateItemOperationDelegate.h"
-#import "VLBNotifications.h"
-#import "VLBStoresViewController.h"
-#import "VLBQueries.h"
-#import "AFHTTPRequestOperation.h"
 #import "UIViewController+VLBViewController.h"
 #import "VLBTypography.h"
-#import "VLBFeedItemView.h"
 #import "VLBMacros.h"
+#import "NSDictionary+VLBItem.h"
+#import "VLBBoxAlertViews.h"
+#import "NSDictionary+VLBLocation.h"
+#import "NSDictionary+VLBDictionary.h"
+#import "NSDictionary+VLBLocality.h"
+#import "VLBLocationService.h"
+#import "UIImageView+AFNetworking.h"
+#import "NSObject+VLBObject.h"
+#import "VLBView.h"
+#import "VLBDrawRects.h"
+
+static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
+static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
 @interface VLBDetailsViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
-@property(nonatomic) VLBLocationService *theBoxLocationService;
-@property(nonatomic) CLLocation *location;
+@property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSMutableDictionary* item;
 @end
 
@@ -44,13 +47,30 @@ return detailsViewController;
     
     self.item = item;
 
+    NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
+    self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
+
 return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.itemView viewWillAppear:self.item];
+    self.storeButton.titleLabel.minimumScaleFactor = 10;
+    self.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [self.storeButton.titleLabel sizeToFit];
+    
+    NSString *imageURL = [self.item vlb_objectForKey:VLBItemIPhoneImageURL];
+    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.defaultItemImage];
+    
+    NSDictionary *location = [self.item vlb_location];
+    
+    id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
+
+    [self.storeButton setTitle:name forState:UIControlStateNormal];
+    [self.storeButton.titleLabel sizeToFit];
+
+    self.whenLabel.text = [self.item vlb_objectForKey:VLBItemWhen];
 }
 
 - (void)viewDidUnload
@@ -61,6 +81,44 @@ return self;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(IBAction)didTouchUpInsideAskForDirectionsButton:(id)sender
+{
+    /**
+     {
+     "created_at" = "2013-03-07T19:58:26Z";
+     foursquareid = 4b082a2ff964a520380523e3;
+     id = 265;
+     lat = "55.94223";
+     lng = "-3.18421";
+     name = "The Dagda Bar";
+     "updated_at" = "2013-03-07T19:58:26Z";
+     }
+     */
+    NSDictionary *location = [self.item vlb_location];
+    id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
+
+    __weak VLBDetailsViewController *wself = self;
+    
+    VLBAlertViewBlock onOkGetDirections = ^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [Flurry logEvent:@"didGetDirections" withParameters:@{@"controller": @"VLBFeedItemView",
+         VLBLocationName:name,
+               VLBItemId:[wself.item objectForKey:VLBItemId],
+         VLBItemImageURL:[wself.item vlb_objectForKey:VLBItemImageURL]}];
+        
+        [VLBLocationService decideOnDirections:[location vlb_coordinate]
+                                       options:location]();
+    };
+    
+    UIAlertView *alertView = [VLBBoxAlertViews location:name bar:onOkGetDirections];
+    
+    [alertView show];
+}
+
+-(void)drawRect:(CGRect)rect inView:(UIView *)view
+{
+    [[VLBDrawRects new] drawContextOfHexagonInRect:rect];
 }
 
 @end

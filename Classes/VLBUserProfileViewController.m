@@ -68,7 +68,7 @@ return signOutViewController;
         UITabBarController *tabBarController = (UITabBarController*)wself.presentingViewController;
         
         NSMutableArray* viewControllers = [NSMutableArray arrayWithArray:tabBarController.viewControllers];
-        [viewControllers replaceObjectAtIndex:0 withObject:[[UINavigationController alloc] initWithRootViewController:[wself.thebox newIdentifyViewController]]];
+        [viewControllers replaceObjectAtIndex:0 withObject:[wself.thebox newNavigationController:[wself.thebox newIdentifyViewController]]];
         
         tabBarController.viewControllers = viewControllers;
         

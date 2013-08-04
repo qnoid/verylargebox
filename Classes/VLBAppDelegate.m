@@ -64,14 +64,10 @@
         viewController = [self.thebox decideOnProfileViewController];
     }
     
-    UINavigationController *cityViewControler = [[UINavigationController alloc] initWithRootViewController:[self.thebox newCityViewController]];
-    cityViewControler.navigationBar.translucent = YES;
-
-    UINavigationController *feedViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newFeedViewController]];
-    feedViewController.navigationBar.translucent = YES;
-
-    UINavigationController *firstViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    firstViewController.navigationBar.translucent = YES;
+    
+    UINavigationController *cityViewControler = [self.thebox newNavigationController:[self.thebox newCityViewController]];
+    UINavigationController *feedViewController = [self.thebox newNavigationController:[self.thebox newFeedViewController]];
+    UINavigationController *firstViewController = [self.thebox newNavigationController:viewController];
     
     
     UITabBarController* tabBarController = [[UITabBarController alloc] init];
