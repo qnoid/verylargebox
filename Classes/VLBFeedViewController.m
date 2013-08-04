@@ -121,8 +121,6 @@ return feedViewController;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
     [[VLBPredicates new] ifNil:self.locality then:^{
         [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     }];
@@ -211,7 +209,7 @@ return VLBScrollViewOrientationVertical;
 }
 
 -(void)didLayoutSubviews:(VLBScrollView *)scrollView{
-    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 -(void)viewInScrollView:(VLBScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex{
