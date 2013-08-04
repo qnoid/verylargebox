@@ -7,27 +7,14 @@
 //
 
 #import "VLBProfileViewController.h"
-#import "VLBPredicates.h"
 #import "UIImageView+AFNetworking.h"
 #import "VLBUserItemView.h"
 #import "VLBQueries.h"
-#import "UIViewController+VLBViewController.h"
-#import "QNDAnimations.h"
-#import "QNDAnimatedView.h"
-#import "VLBProgressView.h"
-#import "VLBAlertViews.h"
-#import "NSDictionary+VLBResidence.h"
 #import "VLBMacros.h"
 #import "VLBErrorBlocks.h"
 #import "VLBTheBox.h"
-#import "VLBTypography.h"
-#import "DDLog.h"
-#import "VLBDrawRects.h"
-#import "VLBButton.h"
 #import "VLBViewControllers.h"
-#import "VLBNotificationView.h"
 #import "VLBUserProfileViewController.h"
-#import "VLBColors.h"
 #import "VLBTakePhotoButton.h"
 #import "CALayer+VLBLayer.h"
 
@@ -67,7 +54,7 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 
     profileViewController.navigationItem.titleView = titleButton;
     
-    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
+    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbaritem.title.you", @"You") image:[UIImage imageNamed:@"user.png"] tag:0];
 
 return profileViewController;
 }

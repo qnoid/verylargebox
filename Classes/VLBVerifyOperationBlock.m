@@ -7,7 +7,6 @@
 //
 
 #import "VLBVerifyOperationBlock.h"
-#import "VLBAlertViews.h"
 
 @implementation VLBVerifyOperationBlock
 

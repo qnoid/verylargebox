@@ -9,8 +9,6 @@
 #import "VLBErrorBlocks.h"
 #import <CoreLocation/CoreLocation.h>
 #import "MBProgressHUD.h"
-#import "VLBHuds.h"
-#import "VLBAlertViews.h"
 
 @implementation VLBErrorBlocks
 
@@ -24,16 +22,16 @@
             case kCLErrorGeocodeFoundNoResult:
             {
                 MBProgressHUD *hud = [VLBHuds newWithView:view config:block];
-                hud.detailsLabelText = @"Could not find your location. Usually this happens if you are inside a building, have poor network connection or in a remote area.";                
+                hud.detailsLabelText = NSLocalizedString(@"errors.location.notfound", @"Could not find your location. Usually this happens if you are inside a building, have poor network connection or in a remote area.");
                 [hud show:YES];
                 [hud hide:YES afterDelay:5.0];
             }
 			break;
             case kCLErrorDenied:
             {
-                MBProgressHUD *hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
-                hud.labelText = @"Location access denied";
-                hud.detailsLabelText = @"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location.";
+                MBProgressHUD *hud = [VLBHuds newWithView:view config:block];
+                hud.labelText = NSLocalizedString(@"errors.location.denied.header", @"Location access denied");
+                hud.detailsLabelText = NSLocalizedString(@"errors.location.denied.details", @"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location.");
                 
 			    [hud show:YES];
 			}

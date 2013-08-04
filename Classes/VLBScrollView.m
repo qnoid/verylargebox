@@ -8,10 +8,6 @@
 
 #import "VLBScrollView.h"
 #import "VLBRecycleStrategy.h"
-#import "VLBVisibleStrategy.h"
-#import "VLBSize.h"
-#import <QuartzCore/QuartzCore.h>
-#import "DDLog.h"
 #import "VLBMacros.h"
 
 @interface VLBScrollView ()

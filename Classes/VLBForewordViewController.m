@@ -52,8 +52,8 @@ return self;
     if(!composeViewController){
         [VLBHuds newWithView:self.view config:^MBProgressHUD *(MBProgressHUD *hud) {
             VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO(hud);
-            hud.labelText = @"No twitter account setup.";
-            hud.detailsLabelText = @"Go to Settings -> Twitter to add an account";
+            hud.labelText = NSLocalizedString(@"huds.twitter.noaccount.header", @"No twitter account setup.");
+            hud.detailsLabelText = NSLocalizedString(@"huds.twitter.noaccount.details", @"Go to Settings -> Twitter to add an account");
         return hud;
         }];
         

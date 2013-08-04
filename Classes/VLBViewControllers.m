@@ -41,7 +41,7 @@ VLBTitleButton const VLBTitleButtonAttributed = ^(UIButton *titleButton, NSStrin
 
 VLBTitleButton const VLBTitleButtonAttributedd = ^(UIButton *titleButton, NSString* title)
 {
-    NSString *text = [NSString stringWithFormat:@"Assign a Store (%@)", title];
+    NSString *text = [NSString stringWithFormat:NSLocalizedString(@"viewcontrollers.assignstore.header", @"Assign a Store (%@)"), title];
     
     NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:text];
     

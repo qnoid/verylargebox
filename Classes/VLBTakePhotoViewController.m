@@ -10,26 +10,14 @@
 
 #import "VLBTakePhotoViewController.h"
 #import "VLBQueries.h"
-#import "AFHTTPRequestOperation.h"
-#import "JSONKit.h"
-#import "VLBStoresViewController.h"
 #import "VLBLocationService.h"
 #import "VLBCreateItemOperationDelegate.h"
-#import "UIViewController+VLBViewController.h"
-#import "VLBDrawRects.h"
-#import "VLBPolygon.h"
 #import "VLBTheBox.h"
-#import "VLBTypography.h"
 #import "NSDictionary+VLBLocation.h"
-#import "NSDictionary+VLBDictionary.h"
-#import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
 #import "NSString+VLBDecorator.h"
 #import "VLBErrorBlocks.h"
 #import "NSArray+VLBDecorator.h"
-#import "VLBAlertViews.h"
-#import "VLBViewControllers.h"
-#import "VLBButton.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
@@ -256,7 +244,7 @@ return self;
     
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     self.locality = [VLBNotifications place:notification].locality;
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Assign a Store (%@)", self.locality]];
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"viewcontrollers.assignstore.header", @"Assign a Store (%@)"), self.locality]];
     
     [title addAttributes:@{NSForegroundColorAttributeName:[VLBColors colorLightGrey]} range:NSMakeRange(15, self.locality.length + 2)];
     [self.locationButton setAttributedTitle:title
@@ -336,8 +324,8 @@ return self;
 {
     [self.takePhotoButton setImage:nil forState:UIControlStateNormal];
     [self.takePhotoButton setBackgroundImage:[UIImage imageNamed:@"takephoto-retake.png"] forState:UIControlStateNormal];
-    [self.takePhotoButton setTitle:@"Retake" forState:UIControlStateNormal];
-    [self.discardButton setTitle:@"Discard" forState:UIControlStateNormal];
+    [self.takePhotoButton setTitle:NSLocalizedString(@"buttons.takePhoto.retake", @"Retake") forState:UIControlStateNormal];
+    [self.discardButton setTitle:NSLocalizedString(@"buttons.discardButton.discard", @"Discard") forState:UIControlStateNormal];
     
     __weak VLBTakePhotoViewController *wself = self;
     [self.takePhotoButton onTouchUpInside:^(UIButton *button) {
@@ -367,7 +355,7 @@ return self;
 
 -(void)cameraView:(VLBCameraView *)cameraView willRekatePicture:(UIImage *)image
 {
-    [self.discardButton setTitle:@"Close" forState:UIControlStateNormal];
+    [self.discardButton setTitle:NSLocalizedString(@"buttons.discardButton.close", @"Close") forState:UIControlStateNormal];
 
     __weak VLBTakePhotoViewController *wself = self;
     [self.takePhotoButton onTouchUpInside:^(UIButton *button) {

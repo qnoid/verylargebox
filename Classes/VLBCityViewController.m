@@ -10,37 +10,23 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "VLBCityViewController.h"
-#import "VLBCell.h"
 #import "VLBQueries.h"
 #import "VLBTakePhotoViewController.h"
 #import "VLBBinarySearch.h"
-#import "VLBPredicates.h"
-#import "AFHTTPRequestOperation.h"
 #import "VLBDetailsViewController.h"
 #import "NSArray+VLBDecorator.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+VLBDictionary.h"
-#import "VLBCell.h"
-#import "VLBScrollView.h"
-#import "VLBView.h"
-#import "VLBColors.h"
 #import "VLBLocationService.h"
 #import "VLBTableViewDataSourceBuilder.h"
-#import "VLBTableViewDelegateBuilder.h"
-#import "UIViewController+VLBViewController.h"
-#import "VLBUserItemView.h"
 #import "VLBAlertViews.h"
-#import "MBProgressHUD.h"
-#import "VLBPolygon.h"
 #import "VLBDrawRects.h"
 #import "VLBMacros.h"
 #import "VLBErrorBlocks.h"
-#import "DDLog.h"
 #import "VLBViewControllers.h"
 #import "NSDictionary+VLBItem.h"
 #import "NSDictionary+VLBLocation.h"
 #import "VLBBoxAlertViews.h"
-#import "VLBViewControllers.h"
 #import "CALayer+VLBLayer.h"
 
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
@@ -102,11 +88,11 @@ static dispatch_once_t onceToken;
                                                                                             action:@selector(refreshLocations)];
     cityViewController.navigationItem.rightBarButtonItem.enabled = NO;
     
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Stores Nearby"];
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:NSLocalizedString(@"navigationbar.title.city", @"Stores Nearby")];
     cityViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
-    cityViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Nearby" image:[UIImage imageNamed:@"city.png"] tag:0];
+    cityViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbaritem.title.city", @"Nearby") image:[UIImage imageNamed:@"city.png"] tag:0];
     
     onceToken = 0;
     
@@ -166,7 +152,7 @@ return self;
 {
 		self.localityName = localityName;
     UILabel* titleView = (UILabel*) self.navigationItem.titleView;
-    titleView.text = [NSString stringWithFormat:@"Stores in %@", localityName];
+    titleView.text = [NSString stringWithFormat:NSLocalizedString(@"navigationbar.city.title", @"Stores in %@"), localityName];
     [titleView sizeToFit];
     self.tabBarItem.title = localityName;
 }
@@ -553,7 +539,7 @@ return VLBScrollViewOrientationHorizontal;
 		NSError *error = [VLBNotifications error:notification];
 		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
 			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH(hud);
-			hud.labelText = @"Please refresh.";
+			hud.labelText = NSLocalizedString(@"huds.refresh.title", @"Please refresh.");
 		return hud;
 		};
 		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
@@ -590,7 +576,7 @@ return VLBScrollViewOrientationHorizontal;
 		NSError *error = [VLBNotifications error:notification];
 		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
 			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH(hud);
-            hud.labelText = @"Please refresh.";
+            hud.labelText = NSLocalizedString(@"huds.refresh.title", @"Please refresh.");
 		return hud;
 		};
 		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);

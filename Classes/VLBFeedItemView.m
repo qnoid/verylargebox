@@ -7,20 +7,14 @@
 //
 
 #import "VLBFeedItemView.h"
-#import "VLBViews.h"
-#import "VLBPolygon.h"
-#import "VLBColors.h"
 #import "VLBDrawRects.h"
 #import "VLBMacros.h"
 #import "NSDictionary+VLBItem.h"
 #import "NSDictionary+VLBLocation.h"
-#import "NSDictionary+VLBLocality.h"
 #import "UIImageView+AFNetworking.h"
 #import "VLBAlertViews.h"
 #import "NSDictionary+VLBDictionary.h"
 #import "VLBBoxAlertViews.h"
-#import "VLBLocationService.h"
-#import "NSObject+VLBObject.h"
 
 typedef void(^VLBFeedItemViewInit)(VLBFeedItemView *userItemView);
 

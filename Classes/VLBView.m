@@ -10,8 +10,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "VLBView.h"
-#import "VLBColors.h"
-#import "VLBMacros.h"
 
 @implementation UIView (VLBView)
 

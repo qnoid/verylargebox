@@ -8,17 +8,13 @@
 
 #import "VLBProfileEmptyViewController.h"
 #import "VLBMacros.h"
-#import "VLBView.h"
-#import "VLBDrawRects.h"
 #import "VLBTheBox.h"
 #import "VLBViewControllers.h"
 #import "AFHTTPRequestOperation.h"
 #import "VLBErrorBlocks.h"
 #import "VLBQueries.h"
-#import "NSDictionary+VLBResidence.h"
 #import "VLBProfileViewController.h"
 #import "VLBUserProfileViewController.h"
-#import "VLBColors.h"
 
 @interface VLBProfileEmptyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
@@ -41,7 +37,7 @@
     
     profileViewController.navigationItem.titleView = titleButton;
 
-    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"You" image:[UIImage imageNamed:@"user.png"] tag:0];
+    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbaritem.title.you", @"You") image:[UIImage imageNamed:@"user.png"] tag:0];
 
 return profileViewController;
 }

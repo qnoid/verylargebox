@@ -7,17 +7,10 @@
 //
 
 #import "VLBLocalitiesTableViewController.h"
-#import <QuartzCore/QuartzCore.h>
 #import "VLBTableViewDataSourceBuilder.h"
-#import "VLBTableViewDelegateBuilder.h"
 #import "VLBQueries.h"
-#import "AFHTTPRequestOperation.h"
-#import "UINavigationItem+VLBNavigationItem.h"
-#import "MBProgressHUD.h"
 #import "VLBHuds.h"
 #import "VLBErrorBlocks.h"
-#import "VLBColors.h"
-#import "DDLog.h"
 #import "VLBViewControllers.h"
 
 
@@ -31,7 +24,7 @@
 {
     VLBLocalitiesTableViewController *availablePlacesViewController = [[VLBLocalitiesTableViewController alloc] initWithStyle:UITableViewStylePlain];
 
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Select a location"];
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:NSLocalizedString(@"navigationbar.title.localities", @"Select a location")];
     availablePlacesViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 

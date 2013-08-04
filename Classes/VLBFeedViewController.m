@@ -10,19 +10,13 @@
 #import "VLBLocationService.h"
 #import "VLBFeedItemView.h"
 #import "VLBQueries.h"
-#import "UIImageView+AFNetworking.h"
 #import "VLBNotifications.h"
-#import "VLBLocalitiesTableViewController.h"
-#import "VLBAlertViews.h"
 #import "VLBHuds.h"
 #import "VLBMacros.h"
-#import "DDLog.h"
 #import "VLBErrorBlocks.h"
-#import "VLBTypography.h"
 #import "VLBPredicates.h"
 #import "VLBViewControllers.h"
 #import "NSArray+VLBDecorator.h"
-#import "VLBViewControllers.h"
 #import "CALayer+VLBLayer.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
@@ -49,12 +43,12 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
     feedViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new ]refreshButton:feedViewController
                                                                                             action:@selector(refreshFeed)];
 
-    UIButton* titleButton = [[VLBViewControllers new] attributedTitleButton:@"Recent"
+    UIButton* titleButton = [[VLBViewControllers new] attributedTitleButton:NSLocalizedString(@"navigationbar.title.recent", @"Recent")
                                                                      target:feedViewController
                                                                      action:@selector(didTouchUpInsideRecent)];
     feedViewController.navigationItem.titleView = titleButton;
     
-    feedViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Recent" image:[UIImage imageNamed:@"clock.png"] tag:2];
+    feedViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbaritem.title.recent", @"Recent") image:[UIImage imageNamed:@"clock.png"] tag:2];
     
 return feedViewController;
 }
@@ -162,8 +156,8 @@ return feedViewController;
     
     if([items vlb_isEmpty]){
         MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET];
-        hud.labelText = [NSString stringWithFormat:@"No items in %@", self.locality];
-        hud.detailsLabelText = @"Select a location.";
+        hud.labelText = [NSString stringWithFormat:NSLocalizedString(@"huds.feed.selectlocation.title", @"No items in %@"), self.locality];
+        hud.detailsLabelText = NSLocalizedString(@"huds.feed.selectlocation.details", @"Select a location.");
         [hud show:YES];
     }
 }
@@ -259,17 +253,15 @@ return VLBScrollViewOrientationVertical;
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
-
     DDLogWarn(@"%s", __PRETTY_FUNCTION__);
-    
-		NSError *error = [VLBNotifications error:notification];
+    NSError *error = [VLBNotifications error:notification];
 
-		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
-			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET(hud);
-			hud.labelText = @"Please select a location.";
-		return hud;
-		};
-		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
+    VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
+        VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET(hud);
+        hud.labelText = @"Please select a location.";
+    return hud;
+    };
+    [VLBErrorBlocks locationErrorBlock:self.view config:block](error);
 }
 
 

@@ -9,21 +9,13 @@
 #import "VLBLocationService.h"
 #import "VLBNotifications.h"
 #import "VLBQueries.h"
-#import "AFHTTPRequestOperation.h"
 #import "VLBAlertViews.h"
-#import "VLBColors.h"
 #import "NSDictionary+VLBFoursquareVenue.h"
-#import "DDLog.h"
 #import "NSArray+VLBDecorator.h"
-#import "NSDictionary+VLBVenuesOperationParameters.h"
-#import "VLBNotifications.h"
-#import "MBProgressHUD.h"
 #import "VLBErrorBlocks.h"
-#import "VLBColors.h"
 #import "VLBTypography.h"
 #import "QNDAnimations.h"
 #import "QNDAnimatedView.h"
-#import "NSArray+VLBDecorator.h"
 #import "VLBMacros.h"
 #import "VLBViewControllers.h"
 
@@ -46,7 +38,8 @@ static UIImage* foursquarePoweredBy;
     VLBStoresViewController *storesViewController =
         [[VLBStoresViewController alloc] initWithBundle:[NSBundle mainBundle] venues:venues];
 
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"Select a store"];
+    UILabel* titleLabel;
+    titleLabel = [[VLBViewControllers new] titleView:NSLocalizedString(@"navigationbar.title.store", @"Select a store")];
     storesViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
@@ -175,22 +168,13 @@ return self;
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification
 {
-    DDLogError(@"%s %@", __PRETTY_FUNCTION__, notification);
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
-    __block VLBAlertViewDelegate *alertViewDelegate;
-    alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOk:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-        alertViewDelegate = nil;
-    }];
-    
-    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
-                                                       message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'thebox' to access your location."];
-    alertView.delegate = alertViewDelegate;
-    
-    [alertView show];    
+    DDLogWarn(@"%s", __PRETTY_FUNCTION__);
+    NSError *error = [VLBNotifications error:notification];
+
+    [VLBErrorBlocks locationErrorBlock:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO](error);
 }
 
 -(void)didUpdateToLocation:(NSNotification *)notification;
@@ -224,10 +208,10 @@ return self;
     DDLogVerbose(@"%s: %@", __PRETTY_FUNCTION__, locations);
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     if([locations vlb_isEmpty]){
-        UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"No stores found"
-                                                           message:[NSString stringWithFormat:@"There were no stores found"]];
-        [alertView show];
-    return;
+        MBProgressHUD *newNoStoresFound = [VLBHuds newNoStoresFound:self.venuesTableView];
+        [newNoStoresFound show:YES];
+        [newNoStoresFound hide:YES afterDelay:0.5];
+        return;
     }
     
     self.venues = locations;

@@ -10,11 +10,6 @@
 #import "VLBQueries.h"
 #import "VLBMacros.h"
 #import "VLBTheBox.h"
-#import "VLBAlertViews.h"
-#import "NSDictionary+VLBLocation.h"
-#import "NSDictionary+VLBItem.h"
-#import "NSDictionary+VLBDictionary.h"
-#import "VLBBoxAlertViews.h"
 
 @interface VLBButtons ()
 @end

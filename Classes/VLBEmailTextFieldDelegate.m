@@ -7,7 +7,6 @@
 //
 
 #import "VLBEmailTextFieldDelegate.h"
-#import "VLBColors.h"
 #import "VLBMacros.h"
 
 NSString* const VLB_EMAIL_VALIDATION_REGEX =

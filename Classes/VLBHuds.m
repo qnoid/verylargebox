@@ -124,7 +124,7 @@ return hud;
 +(MBProgressHUD*)newWithViewLocationArrow:(UIView*)view
 {
     MBProgressHUD *hud = [self newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ARROW];
-    hud.labelText = @"Finding your location";
+    hud.labelText = NSLocalizedString(@"huds.locationarrow.header", @"Finding your location");
 	[view addSubview:hud];
     
 return hud;
@@ -133,8 +133,8 @@ return hud;
 +(MBProgressHUD*)newWithViewCamera:(UIView*)view locality:(NSString*)locality
 {
     MBProgressHUD *hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CAMERA];
-    hud.labelText = [NSString stringWithFormat:@"No stores in %@", locality];
-    hud.detailsLabelText = @"Take a photo of an item in store under your profile. It will appear here.";
+    hud.labelText = [NSString stringWithFormat:NSLocalizedString(@"huds.camera.header", @"No stores in %@"), locality];
+    hud.detailsLabelText = NSLocalizedString(@"huds.camera.details", @"Take a photo of an item in store under your profile. It will appear here.");
     
 return hud;
 }
@@ -142,7 +142,7 @@ return hud;
 +(MBProgressHUD*)newWithViewRadar:(UIView*)view
 {
     MBProgressHUD *hud = [self newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_RADAR];
-    hud.labelText = @"Finding stores nearby";
+    hud.labelText = NSLocalizedString(@"huds.radar.header", @"Finding stores nearby");
 	[view addSubview:hud];
     
 return hud;
@@ -151,8 +151,8 @@ return hud;
 +(MBProgressHUD*)newWithViewSearch:(UIView*)view query:(NSString*)query
 {
     MBProgressHUD *hud = [self newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_SEARCH];
-    hud.labelText = @"Finding stores nearby";
-    hud.detailsLabelText = [NSString stringWithFormat:@"matching '%@'", query];
+    hud.labelText = NSLocalizedString(@"huds.search.header", @"Finding stores nearby");
+    hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"huds.search.details", @"matching '%@'"), query];
 	[view addSubview:hud];
     
 return hud;
@@ -162,9 +162,9 @@ return hud;
 {
     MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
     
-    hud.labelText = @"Unauthorised device";
-    hud.detailsLabelText = [NSString stringWithFormat:@"%@ is not authorised. Please check your email to verify it.",
-                            [[UIDevice currentDevice] name]];
+    hud.labelText = NSLocalizedString(@"huds.verify.failed.header", @"Unauthorised device");
+    hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"huds.verify.failed.details", @"%@ is not authorised. Please check your email to verify it."),
+                                                      [[UIDevice currentDevice] name]];
     
 return hud;
 }
@@ -173,9 +173,9 @@ return hud;
 {
     MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD];
     
-    hud.labelText = @"Add your photos.";
-    hud.detailsLabelText = [NSString stringWithFormat:@"What happens next? \n \n You will receive an email to give %@ access to verylargebox. \n \n Your email is only used to verify your identity. \n \n",
-                            [[UIDevice currentDevice] name]];
+    hud.labelText = NSLocalizedString(@"huds.idcard.header", @"Add your photos.");
+    hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"huds.idcard.details", @"What happens next? \n \n You will receive an email to give %@ access to verylargebox. \n \n Your email is only used to verify your identity. \n \n"),
+                                                      [[UIDevice currentDevice] name]];
     
 
 return hud;
@@ -184,8 +184,8 @@ return hud;
 +(MBProgressHUD*)newOnDidSucceedWithRegistration:(UIView*)view email:(NSString *)email residence:(NSString *)residence
 {
     MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_ENVELOPE];
-	  hud.labelText = @"Please check your email.";
-    hud.detailsLabelText = [NSString stringWithFormat:@"If you cannot find it, check your spam. \n \n Double check you have entered your email correctly, '%@'. \n Tap to edit if it's wrong. \n \n Once you have verified, return here to sign in.", email];
+	  hud.labelText = NSLocalizedString(@"huds.registration.header", @"Please check your email.");
+    hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"huds.registration.details", @"If you cannot find it, check your spam. \n \n Double check you have entered your email correctly, '%@'. \n Tap to edit if it's wrong. \n \n Once you have verified, return here to sign in."), email];
         
 return hud;
 }
@@ -198,7 +198,7 @@ return hud;
     return hud;
     }];
     
-    hud.labelText = @"An email it is on its way.";
+    hud.labelText = NSLocalizedString(@"huds.email.header", @"An email it is on its way.");
 
 return hud;
 }
@@ -211,8 +211,8 @@ return hud;
     return hud;
     }];
     
-    hud.labelText = @"Signing you in.";
-    hud.detailsLabelText = [NSString stringWithFormat:@"Please wait while verylargebox is signing you in as %@", email];
+    hud.labelText = NSLocalizedString(@"huds.signin.header", @"Signing you in.");
+    hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"huds.signin.details", @"Please wait while verylargebox is signing you in as %@"), email];
     
 return hud;
 }
@@ -221,11 +221,20 @@ return hud;
 {
     MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_IDCARD];
     
-    hud.labelText = @"Sign out.";
-    hud.detailsLabelText = [NSString stringWithFormat:@"What happens next? \n \n You will need to verify your email again to add photos to verylargebox. \n \n Your existing photos will not be affected. \n \n Other features will remain accessible."];
+    hud.labelText = NSLocalizedString(@"huds.signout.header", @"Sign out.");
+    hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"huds.signout.details", @"What happens next? \n \n You will need to verify your email again to add photos to verylargebox. \n \n Your existing photos will not be affected. \n \n Other features will remain accessible.")];
     
     return hud;
 }
 
++(MBProgressHUD*)newNoStoresFound:(UIView*)view
+{
+    MBProgressHUD* hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
+
+    hud.labelText = @"No stores found";
+    hud.detailsLabelText = @"There were no stores found";
+
+    return hud;
+}
 
 @end

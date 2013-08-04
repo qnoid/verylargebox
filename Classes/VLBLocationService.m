@@ -9,7 +9,6 @@
 //
 
 #import "VLBLocationService.h"
-#import "DDLog.h"
 
 VLBLocationServiceDirections const VLBLocationServiceDirectionsNone = ^{};
 

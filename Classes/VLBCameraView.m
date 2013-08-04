@@ -8,10 +8,8 @@
 
 #import "VLBCameraView.h"
 #import <AVFoundation/AVFoundation.h>
-#import <CoreImage/CoreImage.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "VLBMacros.h"
-#import "DDLog.h"
 
 typedef void(^VLBCaptureStillImageBlock)(CMSampleBufferRef imageDataSampleBuffer, NSError *error);
 typedef void(^VLBCameraViewInit)(VLBCameraView *cameraView);

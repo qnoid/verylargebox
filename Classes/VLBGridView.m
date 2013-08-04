@@ -10,9 +10,7 @@
 #import "VLBGridViewDatasource.h"
 #import "VLBGridViewDelegate.h"
 #import "VLBScrollView.h"
-#import "VLBScrollViewDatasource.h"
 #import "VLBMacros.h"
-#import "DDLog.h"
 
 @interface VLBGridView () <VLBScrollViewDatasource, VLBScrollViewDelegate>
 @property(nonatomic, strong) NSMutableDictionary* frames;

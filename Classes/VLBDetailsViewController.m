@@ -6,18 +6,13 @@
 //
 
 #import "VLBDetailsViewController.h"
-#import "UIViewController+VLBViewController.h"
-#import "VLBTypography.h"
 #import "VLBMacros.h"
 #import "NSDictionary+VLBItem.h"
 #import "VLBBoxAlertViews.h"
 #import "NSDictionary+VLBLocation.h"
 #import "NSDictionary+VLBDictionary.h"
-#import "NSDictionary+VLBLocality.h"
 #import "VLBLocationService.h"
 #import "UIImageView+AFNetworking.h"
-#import "NSObject+VLBObject.h"
-#import "VLBView.h"
 #import "VLBDrawRects.h"
 
 static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";

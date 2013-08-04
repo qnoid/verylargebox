@@ -8,18 +8,14 @@
 
 #import "VLBIdentifyViewController.h"
 #import "VLBButtons.h"
-#import "VLBButton.h"
 #import "VLBMacros.h"
-#import "MBProgressHUD.h"
 #import "VLBHuds.h"
 #import "VLBSecureHashA1.h"
 #import "VLBForewordViewController.h"
 #import "VLBViewControllers.h"
 #import "VLBTheBox.h"
 #import "VLBErrorBlocks.h"
-#import "VLBTableViewCells.h"
 #import "VLBQueries.h"
-#import "VLBViewControllers.h"
 
 @interface VLBIdentifyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
@@ -33,7 +29,7 @@
 {
     VLBIdentifyViewController *identifyViewController = [[VLBIdentifyViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:(VLBTheBox*)thebox];
     
-    identifyViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sign in" image:[UIImage imageNamed:@"user.png"] tag:0];
+    identifyViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbar.title.signin", @"Sign in") image:[UIImage imageNamed:@"user.png"] tag:0];
 
     UIButton* titleButton = [[VLBViewControllers new] titleButton:@"Picture a Box"
                                                            target:identifyViewController
