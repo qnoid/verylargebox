@@ -29,13 +29,13 @@
                 [hud hide:YES afterDelay:5.0];
             }
 			break;
-            case kCLErrorDenied:{
-    			VLBAlertViewDelegate *alertViewDelegate = [VLBAlertViews newAlertViewDelegateOnOkDismiss];
-			    UIAlertView *alertView = [VLBAlertViews newAlertViewWithOk:@"Location access denied"
-      			                                                 message:@"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location."];
-			    alertView.delegate = alertViewDelegate;
-
-			    [alertView show]; 
+            case kCLErrorDenied:
+            {
+                MBProgressHUD *hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
+                hud.labelText = @"Location access denied";
+                hud.detailsLabelText = @"Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location.";
+                
+			    [hud show:YES];
 			}
             break;
 			default:{

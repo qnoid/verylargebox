@@ -48,7 +48,6 @@
 						</object>
 						<string key="NSFrameSize">{320, 411}</string>
 						<reference key="NSSuperview" ref="875258060"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1012877108"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="746746686">
@@ -65,7 +64,6 @@
 						</object>
 						<string key="NSFrame">{{0, 44}, {320, 100}}</string>
 						<reference key="NSSuperview" ref="875258060"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="518850962"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="746746686"/>
@@ -78,8 +76,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{130, 114}, {60, 60}}</string>
 						<reference key="NSSuperview" ref="875258060"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -114,7 +110,6 @@
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="113874896"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">

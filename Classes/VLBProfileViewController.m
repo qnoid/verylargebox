@@ -135,10 +135,6 @@ return self;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     self.pullToRefreshController = [[LCPullToRefreshController alloc] initWithScrollView:self.itemsView delegate:self];
 
-    VLBTakePhotoButton *view = [[VLBTakePhotoButton alloc] initWithFrame:CGRectMake(0, -44,
-                                                                        self.itemsView.bounds.size.width, 44.0)];
-    [self.itemsView addSubview:view];
-
     self.itemsView.scrollsToTop = YES;
 
     [self refreshFeed];
@@ -287,8 +283,11 @@ return VLBScrollViewOrientationVertical;
     return 432.0;
 }
 
--(void)didLayoutSubviews:(VLBScrollView *)scrollView{
-    
+-(void)didLayoutSubviews:(VLBScrollView *)scrollView
+{
+    VLBTakePhotoButton *view = [[VLBTakePhotoButton alloc] initWithFrame:CGRectMake(0, -44,
+                                                                                    self.itemsView.bounds.size.width, 44.0)];
+    [self.itemsView addSubview:view];
 }
 
 -(void)viewInScrollView:(VLBScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex{

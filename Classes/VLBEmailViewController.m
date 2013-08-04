@@ -18,7 +18,6 @@
 #import "VLBView.h"
 #import "VLBVerifyOperationBlock.h"
 #import "VLBFeedViewController.h"
-#import "VLBAlertViews.h"
 #import "VLBViews.h"
 #import "VLBHuds.h"
 #import "MBProgressHUD.h"
