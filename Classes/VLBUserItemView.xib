@@ -40,8 +40,9 @@
 					<object class="IBUIButton" id="817589203">
 						<reference key="NSNextResponder" ref="389409955"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrame">{{17, 0}, {286, 44}}</string>
+						<string key="NSFrame">{{4, 0}, {312, 44}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="223132843"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="957994390">
@@ -88,6 +89,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 44}, {320, 320}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="820851618"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="IBUIContentMode">1</int>
@@ -97,8 +99,9 @@
 					<object class="IBUIView" id="13514397">
 						<reference key="NSNextResponder" ref="389409955"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{17, 386}, {286, 42}}</string>
+						<string key="NSFrame">{{4, 386}, {312, 42}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="448989820"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -113,8 +116,9 @@
 					<object class="IBUILabel" id="820851618">
 						<reference key="NSNextResponder" ref="389409955"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{17, 365}, {286, 22}}</string>
+						<string key="NSFrame">{{4, 365}, {312, 22}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="13514397"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="957994390"/>
@@ -148,8 +152,10 @@
 					<object class="IBUIButton" id="448989820">
 						<reference key="NSNextResponder" ref="389409955"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{32, 388}, {256, 38}}</string>
+						<string key="NSFrame">{{12, 388}, {298, 38}}</string>
 						<reference key="NSSuperview" ref="389409955"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -186,6 +192,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 432}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="817589203"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -325,7 +332,53 @@
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">VLBUserItemView</string>
+					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">didTapOnGetDirectionsButton:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">didTapOnGetDirectionsButton:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">didTapOnGetDirectionsButton:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="askForDirectionsButton">UIButton</string>
+						<string key="itemImageView">UIImageView</string>
+						<string key="storeButton">UIButton</string>
+						<string key="whenLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="askForDirectionsButton">
+							<string key="name">askForDirectionsButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="itemImageView">
+							<string key="name">itemImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="storeButton">
+							<string key="name">storeButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="whenLabel">
+							<string key="name">whenLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/VLBUserItemView.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
