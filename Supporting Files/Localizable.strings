@@ -27,7 +27,6 @@
 "questionmark" = "?";
 "viewcontrollers.directions.question" = " to %@?";
 "viewcontrollers.directions.header" = "Open in Maps";
-"viewcontrollers.directions.header" = "Open in Maps";
 "huds.twitter.noaccount.header" = "No twitter account setup.";
 "huds.twitter.noaccount.details" = "Go to Settings -> Twitter to add an account";
 "navigationbar.title.localities" = "Select a location";
@@ -49,3 +48,4 @@
 "buttons.discardButton.discard" = "Discard";
 "buttons.discardButton.close" = "Close";
 "huds.refresh.title" = "Please refresh.";
+"viewcontrollers.stores.search.placeholder" = "Search for the store that has the item";

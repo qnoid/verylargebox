@@ -134,9 +134,10 @@ return self;
     imageView.frame = CGRectMake(0, 0, 320, 121);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     
+    self.searchBar.placeholder = NSLocalizedString(@"viewcontrollers.stores.search.placeholder", @"Search for the store that has the item");
     self.searchBar.translucent = YES;
     self.searchBar.layer.zPosition = 1;
-    self.animatedMap = [[QNDAnimations new] animateView:self.map];    
+    self.animatedMap = [[QNDAnimations new] animateView:self.map];
 
     self.venuesTableView.tableFooterView = imageView;
     self.venuesTableView.contentInset = UIEdgeInsetsMake(185, 0, 0, 0);
