@@ -121,6 +121,8 @@ return feedViewController;
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
     [[VLBPredicates new] ifNil:self.locality then:^{
         [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     }];
