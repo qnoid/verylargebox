@@ -267,7 +267,7 @@ return VLBScrollViewOrientationVertical;
 }
 
 -(CGFloat)viewsOf:(VLBScrollView *)scrollView{
-    return 432.0;
+    return 467.0;
 }
 
 -(void)didLayoutSubviews:(VLBScrollView *)scrollView

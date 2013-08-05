@@ -193,6 +193,8 @@
 		BD7C27D717235DE7009D26EE /* VLBProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7C27D617235DE6009D26EE /* VLBProgressView.xib */; };
 		BD7C27D817235DE7009D26EE /* VLBProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7C27D617235DE6009D26EE /* VLBProgressView.xib */; };
 		BD84EF70165C2363009D9408 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A1E2C1133C89D800CC9212 /* SenTestingKit.framework */; };
+		BD86BF1E17B0554700CFF85F /* timestamp.png in Resources */ = {isa = PBXBuildFile; fileRef = BD86BF1C17B0554700CFF85F /* timestamp.png */; };
+		BD86BF1F17B0554700CFF85F /* timestamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD86BF1D17B0554700CFF85F /* timestamp@2x.png */; };
 		BD8BB288176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
 		BD8BB289176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
 		BD8BB28A176C99D000AE6157 /* NSDictionary+VLBResidence.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */; };
@@ -560,6 +562,8 @@
 		BD7C27D317235DDB009D26EE /* VLBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBProgressView.m; sourceTree = "<group>"; };
 		BD7C27D617235DE6009D26EE /* VLBProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBProgressView.xib; path = Classes/VLBProgressView.xib; sourceTree = "<group>"; };
 		BD7C27D917235E9A009D26EE /* VLBMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLBMacros.h; path = ../Classes/VLBMacros.h; sourceTree = "<group>"; };
+		BD86BF1C17B0554700CFF85F /* timestamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timestamp.png; path = "Supporting Files/timestamp.png"; sourceTree = "<group>"; };
+		BD86BF1D17B0554700CFF85F /* timestamp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timestamp@2x.png"; path = "Supporting Files/timestamp@2x.png"; sourceTree = "<group>"; };
 		BD8BB286176C99CF00AE6157 /* NSDictionary+VLBResidence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBResidence.h"; path = "../Classes/NSDictionary+VLBResidence.h"; sourceTree = "<group>"; };
 		BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBResidence.m"; sourceTree = "<group>"; };
 		BD8D411B179F4D1200560C14 /* VLBUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBUserProfileViewController.h; sourceTree = "<group>"; };
@@ -1291,6 +1295,8 @@
 				BDA4E7D017A9AF1500435C23 /* takephoto-icon@2x.png.png */,
 				BD5CB77B1771327600BC21D1 /* target@2x.png */,
 				BD5CB77C1771327600BC21D1 /* target.png */,
+				BD86BF1C17B0554700CFF85F /* timestamp.png */,
+				BD86BF1D17B0554700CFF85F /* timestamp@2x.png */,
 				BDA2BD17165AF8E30068C749 /* user.png */,
 				BDAF7AAD17528195008899D1 /* user@2x.png */,
 				BD4A2D0D17A54287004A80AE /* upload.png */,
@@ -1594,6 +1600,8 @@
 				BDFBDD6117AC4D4F0018D815 /* map.png in Resources */,
 				BDFBDD6217AC4D4F0018D815 /* map@2x.png in Resources */,
 				66C0E390E24628310924288D /* Localizable.strings in Resources */,
+				BD86BF1E17B0554700CFF85F /* timestamp.png in Resources */,
+				BD86BF1F17B0554700CFF85F /* timestamp@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

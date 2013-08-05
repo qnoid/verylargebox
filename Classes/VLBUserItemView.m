@@ -41,6 +41,7 @@ VLBUserItemViewInit const VLBUserItemViewInitBlock = ^(VLBUserItemView *userItem
     userItemView.didTapOnGetDirectionsButton = VLBButtonOnTouchNone;
     userItemView.storeButton.titleLabel.minimumScaleFactor = 10;
     userItemView.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    userItemView.storeButton.titleLabel.numberOfLines = 0;
     [userItemView.askForDirectionsButton vlb_cornerRadius:4.0];
 
     NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
@@ -95,14 +96,20 @@ return self;
      */
     NSDictionary *location = [item vlb_location];
     
-    id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
+    NSString* name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
     id locality = [item vlb_locality];
-    id localityName = ([NSObject vlb_isNil:locality])?@"[in the box]":[locality vlb_objectForKey:VLBLocalityName ifNil:@"[in the box]"];
+    NSString* localityName = ([NSObject vlb_isNil:locality])?@"[in the box]":[locality vlb_objectForKey:VLBLocalityName ifNil:@"[in the box]"];
 
-    [self.storeButton setTitle:[NSString stringWithFormat:@"%@\n%@", name, localityName] forState:UIControlStateNormal];
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:
+                                        [NSString stringWithFormat:@"%@\n%@", name, localityName]];
+    
+    
+    [title addAttributes:@{NSForegroundColorAttributeName:[VLBColors colorLightGrey]} range:NSMakeRange(name.length, localityName.length + 1)];
+
+    [self.storeButton setAttributedTitle:title forState:UIControlStateNormal];
     [self.storeButton.titleLabel sizeToFit];
     
-    self.whenLabel.text = [item vlb_objectForKey:VLBItemWhen];
+    [self.whenButton setTitle:[item vlb_objectForKey:VLBItemWhen] forState:UIControlStateNormal];
     
     self.didTapOnGetDirectionsButton = ^(UIButton* button){
         VLBAlertViewBlock onOkGetDirections = ^(UIAlertView *alertView, NSInteger buttonIndex) {

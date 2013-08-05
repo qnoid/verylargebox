@@ -30,7 +30,7 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     feedItemView.didTapOnGetDirectionsButton = VLBButtonOnTouchNone;
     feedItemView.storeButton.titleLabel.minimumScaleFactor = 10;
     feedItemView.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [feedItemView.storeButton.titleLabel sizeToFit];
+    feedItemView.storeButton.titleLabel.numberOfLines = 0;
     [feedItemView.askForDirectionsButton vlb_cornerRadius:4.0];
 
     NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
@@ -89,7 +89,7 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     [self.storeButton setTitle:name forState:UIControlStateNormal];
     [self.storeButton.titleLabel sizeToFit];
     
-    self.whenLabel.text = [item vlb_objectForKey:VLBItemWhen];
+    [self.whenButton setTitle:[item vlb_objectForKey:VLBItemWhen] forState:UIControlStateNormal];
     
     self.didTapOnGetDirectionsButton = ^(UIButton* button){
         VLBAlertViewBlock onOkGetDirections = ^(UIAlertView *alertView, NSInteger buttonIndex) {

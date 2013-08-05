@@ -65,7 +65,7 @@ return self;
     [self.storeButton setTitle:name forState:UIControlStateNormal];
     [self.storeButton.titleLabel sizeToFit];
 
-    self.whenLabel.text = [self.item vlb_objectForKey:VLBItemWhen];
+    [self.whenButton setTitle:[self.item vlb_objectForKey:VLBItemWhen] forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

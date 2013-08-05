@@ -18,7 +18,7 @@
 @interface VLBUserItemView : UIView <VLBViewDrawRectDelegate>
 @property(nonatomic, weak) IBOutlet UIButton* storeButton;
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
-@property(nonatomic, weak) IBOutlet UILabel* whenLabel;
+@property(nonatomic, weak) IBOutlet UIButton* whenButton;
 @property(nonatomic, weak) IBOutlet UIButton* askForDirectionsButton;
 @property(nonatomic, copy) VLBButtonOnTouch didTapOnGetDirectionsButton;
 
