@@ -95,7 +95,7 @@ return self;
         [wself.emailTextField resignFirstResponder];
         [wself.view sendSubviewToBack:button];
 
-        NSString *email = wself.emailTextField.text;
+        NSString *email = [wself.emailTextField.text lowercaseString];
         NSString* residence = [[VLBSecureHashA1 new] newKey];
         
         [self didEnterEmail:email forResidence:residence];

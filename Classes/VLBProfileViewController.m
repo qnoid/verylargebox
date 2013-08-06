@@ -98,6 +98,7 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.itemsView bringSubviewToFront:self.takePhotoButton];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 
     self.itemsView.scrollsToTop = YES;
