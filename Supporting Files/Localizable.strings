@@ -49,3 +49,4 @@
 "buttons.discardButton.close" = "Close";
 "huds.refresh.title" = "Please refresh.";
 "viewcontrollers.stores.search.placeholder" = "Search for the store that has the item";
+"buttons.getDirections.title" = "Get directions";

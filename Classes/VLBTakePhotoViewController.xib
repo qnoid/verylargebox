@@ -116,7 +116,7 @@
 						<double key="IBUITitleEdgeInsets.bottom">0.0</double>
 						<double key="IBUITitleEdgeInsets.left">10</double>
 						<double key="IBUITitleEdgeInsets.right">0.0</double>
-						<double key="IBUIImageEdgeInsets.top">14</double>
+						<double key="IBUIImageEdgeInsets.top">16</double>
 						<double key="IBUIImageEdgeInsets.bottom">0.0</double>
 						<double key="IBUIImageEdgeInsets.left">0.0</double>
 						<double key="IBUIImageEdgeInsets.right">0.0</double>
@@ -165,7 +165,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4wMzQ5NDM0OTI3NSAwLjQzMDM4NzYyODggMC43ODk0MDEzMDc0AA</bytes>
+							<bytes key="NSRGB">MC4wNTQ5MDE5NjA3OCAwLjQ2Mjc0NTA5OCAwLjczNzI1NDkwMgA</bytes>
 						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -566,7 +566,7 @@
 			<string key="takephoto-selected.png">{87, 94}</string>
 			<string key="takephoto.png">{88, 96}</string>
 			<string key="upload.png">{14, 13}</string>
-			<string key="x.png">{13, 13}</string>
+			<string key="x.png">{10, 10}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

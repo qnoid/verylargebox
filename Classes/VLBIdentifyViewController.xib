@@ -44,6 +44,7 @@
 						<string key="NSFrame">{{0, 140}, {320, 271}}</string>
 						<reference key="NSSuperview" ref="477452596"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="341438688">
 							<int key="NSColorSpace">3</int>
@@ -175,7 +176,7 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
-						<object class="NSCustomResource" key="IBUINormalImage" id="705373259">
+						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">idcard-white.png</string>
 						</object>
@@ -192,7 +193,7 @@
 						<reference key="NSNextKeyView" ref="643530160"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4wMzQ5NDM0OTI3NSAwLjQzMDM4NzYyODggMC43ODk0MDEzMDc0AA</bytes>
+							<bytes key="NSRGB">MC4wNTQ5MDE5NjA3OCAwLjQ2Mjc0NTA5OCAwLjczNzI1NDkwMgA</bytes>
 						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -208,7 +209,10 @@
 						<reference key="IBUIDisabledTitleColor" ref="67558702"/>
 						<reference key="IBUINormalTitleColor" ref="783898627"/>
 						<reference key="IBUINormalTitleShadowColor" ref="16942543"/>
-						<reference key="IBUINormalImage" ref="705373259"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">idcard-blue.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="162025136"/>
 						<reference key="IBUIFont" ref="398756302"/>
 					</object>
@@ -452,6 +456,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="envelope.png">{24, 16}</string>
+			<string key="idcard-blue.png">{26, 21}</string>
 			<string key="idcard-white.png">{26, 21}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

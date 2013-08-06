@@ -81,8 +81,6 @@ return availablePlacesViewController;
 {
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.contentOffset = CGPointMake(0, 44);
-    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(44, 0, 0, 0);
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 
     MBProgressHUD *hud = [VLBHuds newWithView:self.view];

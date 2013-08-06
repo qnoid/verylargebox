@@ -41,6 +41,7 @@
 						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrame">{{0, 96}, {320, 271}}</string>
 						<reference key="NSSuperview" ref="310044604"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="507141301">
 							<int key="NSColorSpace">3</int>
@@ -89,7 +90,7 @@
 						<reference key="NSNextKeyView" ref="556834489"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4wMzQ5NDM0OTI3NSAwLjQzMDM4NzYyODggMC43ODk0MDEzMDc0AA</bytes>
+							<bytes key="NSRGB">MC4wNTQ5MDE5NjA3OCAwLjQ2Mjc0NTA5OCAwLjczNzI1NDkwMgA</bytes>
 						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -109,7 +110,7 @@
 						</object>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">idcard-white.png</string>
+							<string key="NSResourceName">idcard-blue.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="592098799"/>
 						<reference key="IBUIFont" ref="131678482"/>
@@ -227,7 +228,7 @@
 				<string key="9.CustomClassName">VLBButton</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="2" key="9.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
-				<real value="3" key="9.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="9.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<reference key="9.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="9.showNotes"/>
 			</dictionary>
@@ -243,7 +244,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">idcard-white.png</string>
+			<string key="NS.key.0">idcard-blue.png</string>
 			<string key="NS.object.0">{26, 21}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

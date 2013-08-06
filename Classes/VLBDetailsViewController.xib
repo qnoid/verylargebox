@@ -162,7 +162,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="1035305759"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">map.png</string>
+							<string key="NSResourceName">map-pin.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<string key="name">AvenirNext-DemiBold</string>
@@ -374,12 +374,12 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>map.png</string>
+				<string>map-pin.png</string>
 				<string>timestamp.png</string>
 			</object>
 			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{26, 21}</string>
+				<string>{14, 21}</string>
 				<string>{18, 18}</string>
 			</object>
 		</object>

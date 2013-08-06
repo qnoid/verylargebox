@@ -135,8 +135,6 @@
 		BD4A2D1017A54287004A80AE /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0E17A54287004A80AE /* upload@2x.png */; };
 		BD4A2D1317A546AB004A80AE /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1117A546AB004A80AE /* x.png */; };
 		BD4A2D1417A546AB004A80AE /* x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1217A546AB004A80AE /* x@2x.png */; };
-		BD4A2D1B17A6F9EB004A80AE /* VLBTakePhotoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4A2D1A17A6F9EB004A80AE /* VLBTakePhotoButton.m */; };
-		BD4A2D1F17A70039004A80AE /* VLBTakePhotoButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1E17A70039004A80AE /* VLBTakePhotoButton.xib */; };
 		BD4A2D2117A70C00004A80AE /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4A2D2017A70C00004A80AE /* Reveal.framework */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
 		BD4BD0601780415600D1462A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD09177A4A7400941B7F /* AVFoundation.framework */; };
@@ -254,6 +252,10 @@
 		BDB157271755549100E140E9 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB157231755549100E140E9 /* checkmark@2x.png */; };
 		BDB1572C175561EE00E140E9 /* exclamation-mark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB15729175561EE00E140E9 /* exclamation-mark@2x.png */; };
 		BDB1572D175561EE00E140E9 /* exclamation-mark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB15729175561EE00E140E9 /* exclamation-mark@2x.png */; };
+		BDB7D75B17B179C300E5D440 /* map-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB7D75917B179C300E5D440 /* map-pin.png */; };
+		BDB7D75C17B179C300E5D440 /* map-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB7D75A17B179C300E5D440 /* map-pin@2x.png */; };
+		BDB7D75F17B1A38F00E5D440 /* idcard-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB7D75D17B1A38F00E5D440 /* idcard-blue.png */; };
+		BDB7D76017B1A38F00E5D440 /* idcard-blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB7D75E17B1A38F00E5D440 /* idcard-blue@2x.png */; };
 		BDBA745B1770EA71001AE3F3 /* envelope@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBA74591770EA71001AE3F3 /* envelope@2x.png */; };
 		BDBA745C1770EA71001AE3F3 /* envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBA745A1770EA71001AE3F3 /* envelope.png */; };
 		BDBA745F1770EB4B001AE3F3 /* eye@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBA745D1770EB4B001AE3F3 /* eye@2x.png */; };
@@ -291,7 +293,6 @@
 		BDE4926E1775F7A700FFC41F /* refresh-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */; };
 		BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926D1775F7A700FFC41F /* refresh-mini.png */; };
 		BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
-		BDF27466178408FA000E179E /* camera-button.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF27465178408FA000E179E /* camera-button.png */; };
 		BDF2746F178551F4000E179E /* checkmark-mini-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2746D178551F4000E179E /* checkmark-mini-grey.png */; };
 		BDF27470178551F4000E179E /* checkmark-mini-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2746E178551F4000E179E /* checkmark-mini-grey@2x.png */; };
 		BDF274731785557A000E179E /* refresh-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF274711785557A000E179E /* refresh-grey.png */; };
@@ -327,8 +328,6 @@
 		BDFBDD5C17AC22D00018D815 /* CALayer+VLBLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */; };
 		BDFBDD5D17AC272B0018D815 /* CALayer+VLBLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */; };
 		BDFBDD5E17AC27420018D815 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */; };
-		BDFBDD6117AC4D4F0018D815 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFBDD5F17AC4D4F0018D815 /* map.png */; };
-		BDFBDD6217AC4D4F0018D815 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFBDD6017AC4D4F0018D815 /* map@2x.png */; };
 		BDFBDD6517AE665A0018D815 /* NSObject+VLBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFBDD6417AE66590018D815 /* NSObject+VLBObject.m */; };
 		BDFBDD6617AE671D0018D815 /* NSDictionary+VLBLocality.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE492641775B89200FFC41F /* NSDictionary+VLBLocality.m */; };
 		FB3B9F4FE0C849B2A534C122 /* libPods-ApplicationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */; };
@@ -509,9 +508,6 @@
 		BD4A2D0E17A54287004A80AE /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "upload@2x.png"; path = "Supporting Files/upload@2x.png"; sourceTree = "<group>"; };
 		BD4A2D1117A546AB004A80AE /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x.png; path = "Supporting Files/x.png"; sourceTree = "<group>"; };
 		BD4A2D1217A546AB004A80AE /* x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x@2x.png"; path = "Supporting Files/x@2x.png"; sourceTree = "<group>"; };
-		BD4A2D1917A6F9EB004A80AE /* VLBTakePhotoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTakePhotoButton.h; path = Classes/VLBTakePhotoButton.h; sourceTree = "<group>"; };
-		BD4A2D1A17A6F9EB004A80AE /* VLBTakePhotoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLBTakePhotoButton.m; path = Classes/VLBTakePhotoButton.m; sourceTree = "<group>"; };
-		BD4A2D1E17A70039004A80AE /* VLBTakePhotoButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBTakePhotoButton.xib; path = Classes/VLBTakePhotoButton.xib; sourceTree = "<group>"; };
 		BD4A2D2017A70C00004A80AE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		BD4BA9AA16FA5B6C009C1518 /* UIViewController+VLBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+VLBViewController.h"; path = "../Classes/UIViewController+VLBViewController.h"; sourceTree = "<group>"; };
 		BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -622,6 +618,10 @@
 		BDB157221755549100E140E9 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = "Supporting Files/checkmark.png"; sourceTree = "<group>"; };
 		BDB157231755549100E140E9 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark@2x.png"; path = "Supporting Files/checkmark@2x.png"; sourceTree = "<group>"; };
 		BDB15729175561EE00E140E9 /* exclamation-mark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "exclamation-mark@2x.png"; path = "Supporting Files/exclamation-mark@2x.png"; sourceTree = "<group>"; };
+		BDB7D75917B179C300E5D440 /* map-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-pin.png"; path = "Supporting Files/map-pin.png"; sourceTree = "<group>"; };
+		BDB7D75A17B179C300E5D440 /* map-pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-pin@2x.png"; path = "Supporting Files/map-pin@2x.png"; sourceTree = "<group>"; };
+		BDB7D75D17B1A38F00E5D440 /* idcard-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard-blue.png"; path = "Supporting Files/idcard-blue.png"; sourceTree = "<group>"; };
+		BDB7D75E17B1A38F00E5D440 /* idcard-blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard-blue@2x.png"; path = "Supporting Files/idcard-blue@2x.png"; sourceTree = "<group>"; };
 		BDBA74591770EA71001AE3F3 /* envelope@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "envelope@2x.png"; path = "Supporting Files/envelope@2x.png"; sourceTree = "<group>"; };
 		BDBA745A1770EA71001AE3F3 /* envelope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = envelope.png; path = "Supporting Files/envelope.png"; sourceTree = "<group>"; };
 		BDBA745D1770EB4B001AE3F3 /* eye@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "eye@2x.png"; path = "Supporting Files/eye@2x.png"; sourceTree = "<group>"; };
@@ -655,7 +655,6 @@
 		BDE4926D1775F7A700FFC41F /* refresh-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-mini.png"; path = "Supporting Files/refresh-mini.png"; sourceTree = "<group>"; };
 		BDF0F42316C8254B002CDE8E /* VLBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBVerifyOperationBlock.h; path = ../Classes/VLBVerifyOperationBlock.h; sourceTree = "<group>"; };
 		BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVerifyOperationBlock.m; sourceTree = "<group>"; };
-		BDF27465178408FA000E179E /* camera-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-button.png"; path = "Supporting Files/camera-button.png"; sourceTree = "<group>"; };
 		BDF2746D178551F4000E179E /* checkmark-mini-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-mini-grey.png"; path = "Supporting Files/checkmark-mini-grey.png"; sourceTree = "<group>"; };
 		BDF2746E178551F4000E179E /* checkmark-mini-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-mini-grey@2x.png"; path = "Supporting Files/checkmark-mini-grey@2x.png"; sourceTree = "<group>"; };
 		BDF274711785557A000E179E /* refresh-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-grey.png"; path = "Supporting Files/refresh-grey.png"; sourceTree = "<group>"; };
@@ -694,8 +693,6 @@
 		BDF8C3D2179DC7BC002B7F60 /* idcard-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "idcard-grey@2x.png"; path = "Supporting Files/idcard-grey@2x.png"; sourceTree = "<group>"; };
 		BDFBDD5A17AC22D00018D815 /* CALayer+VLBLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+VLBLayer.h"; sourceTree = "<group>"; };
 		BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+VLBLayer.m"; sourceTree = "<group>"; };
-		BDFBDD5F17AC4D4F0018D815 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map.png; path = "Supporting Files/map.png"; sourceTree = "<group>"; };
-		BDFBDD6017AC4D4F0018D815 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map@2x.png"; path = "Supporting Files/map@2x.png"; sourceTree = "<group>"; };
 		BDFBDD6317AE66590018D815 /* NSObject+VLBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VLBObject.h"; sourceTree = "<group>"; };
 		BDFBDD6417AE66590018D815 /* NSObject+VLBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VLBObject.m"; sourceTree = "<group>"; };
 		C01FCF5008A954540054247D /* VLBCanIndexLocationInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBCanIndexLocationInView.h; sourceTree = "<group>"; };
@@ -963,8 +960,6 @@
 				BDF2FD06177A458D00941B7F /* VLBCameraView.h */,
 				BDF2FD07177A458D00941B7F /* VLBCameraView.m */,
 				BDF2FD0B177A5BC700941B7F /* VLBCameraView.xib */,
-				BD4A2D1917A6F9EB004A80AE /* VLBTakePhotoButton.h */,
-				BD4A2D1A17A6F9EB004A80AE /* VLBTakePhotoButton.m */,
 			);
 			name = TakePhoto;
 			path = ..;
@@ -1189,7 +1184,6 @@
 		BDA2BC87165951CB0068C749 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				BD4A2D1E17A70039004A80AE /* VLBTakePhotoButton.xib */,
 				BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */,
 				BDF2747C1786B142000E179E /* VLBProfileEmptyViewController.xib */,
 				BDA2BC8B165952C20068C749 /* VLBEmailViewController.xib */,
@@ -1234,7 +1228,6 @@
 				BD5CB780177133EE00BC21D1 /* camera@2x.png */,
 				BD4A2D0917A5418C004A80AE /* camera-grey.png */,
 				BD4A2D0A17A5418C004A80AE /* camera-grey@2x.png */,
-				BDF27465178408FA000E179E /* camera-button.png */,
 				BD59A498178CC403003A9394 /* camera-mini.png */,
 				BD0A53E61767EDC100279EA5 /* camera-mini@2x.png */,
 				BDB157221755549100E140E9 /* checkmark.png */,
@@ -1261,6 +1254,8 @@
 				BDF8C3BE179C6DF6002B7F60 /* idcard@2x.png */,
 				BDF8C3D1179DC7BC002B7F60 /* idcard-grey.png */,
 				BDF8C3D2179DC7BC002B7F60 /* idcard-grey@2x.png */,
+				BDB7D75D17B1A38F00E5D440 /* idcard-blue.png */,
+				BDB7D75E17B1A38F00E5D440 /* idcard-blue@2x.png */,
 				BDC8A1D9178202C300E5BF8C /* idcard-white.png */,
 				BDC8A1D71782028E00E5BF8C /* idcard-white@2x.png */,
 				BD59A4A9178E2B36003A9394 /* iphone.png */,
@@ -1281,8 +1276,8 @@
 				BD59A470178C82C3003A9394 /* location-arrow@2x.png */,
 				BD4A2D0517A54156004A80AE /* map-marker.png */,
 				BD4A2D0617A54156004A80AE /* map-marker@2x.png */,
-				BDFBDD5F17AC4D4F0018D815 /* map.png */,
-				BDFBDD6017AC4D4F0018D815 /* map@2x.png */,
+				BDB7D75917B179C300E5D440 /* map-pin.png */,
+				BDB7D75A17B179C300E5D440 /* map-pin@2x.png */,
 				BDAF7AAB17528194008899D1 /* signpost.png */,
 				BDAF7AAC17528194008899D1 /* signpost@2x.png */,
 				BDA4E7CB17A7429D00435C23 /* takephoto-retake.png */,
@@ -1544,7 +1539,6 @@
 				BDF2FD0C177A5BC700941B7F /* VLBCameraView.xib in Resources */,
 				BDC8A1D81782028E00E5BF8C /* idcard-white@2x.png in Resources */,
 				BDC8A1DA178202C300E5BF8C /* idcard-white.png in Resources */,
-				BDF27466178408FA000E179E /* camera-button.png in Resources */,
 				BDF2746F178551F4000E179E /* checkmark-mini-grey.png in Resources */,
 				BDF27470178551F4000E179E /* checkmark-mini-grey@2x.png in Resources */,
 				BDF274731785557A000E179E /* refresh-grey.png in Resources */,
@@ -1588,7 +1582,6 @@
 				BD4A2D1017A54287004A80AE /* upload@2x.png in Resources */,
 				BD4A2D1317A546AB004A80AE /* x.png in Resources */,
 				BD4A2D1417A546AB004A80AE /* x@2x.png in Resources */,
-				BD4A2D1F17A70039004A80AE /* VLBTakePhotoButton.xib in Resources */,
 				BDA4E7C617A72D7900435C23 /* takephoto-retake@2x.png in Resources */,
 				BDA4E7C717A72D7900435C23 /* takephoto-selected@2x.png in Resources */,
 				BDA4E7C817A72D7900435C23 /* takephoto@2x.png in Resources */,
@@ -1597,11 +1590,13 @@
 				BDA4E7CE17A742C100435C23 /* takephoto-selected.png in Resources */,
 				BDA4E7D117A9AF1500435C23 /* takephoto-icon.png in Resources */,
 				BDA4E7D217A9AF1500435C23 /* takephoto-icon@2x.png.png in Resources */,
-				BDFBDD6117AC4D4F0018D815 /* map.png in Resources */,
-				BDFBDD6217AC4D4F0018D815 /* map@2x.png in Resources */,
 				66C0E390E24628310924288D /* Localizable.strings in Resources */,
 				BD86BF1E17B0554700CFF85F /* timestamp.png in Resources */,
 				BD86BF1F17B0554700CFF85F /* timestamp@2x.png in Resources */,
+				BDB7D75B17B179C300E5D440 /* map-pin.png in Resources */,
+				BDB7D75C17B179C300E5D440 /* map-pin@2x.png in Resources */,
+				BDB7D75F17B1A38F00E5D440 /* idcard-blue.png in Resources */,
+				BDB7D76017B1A38F00E5D440 /* idcard-blue@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1821,7 +1816,6 @@
 				BD8D411E179F4D1300560C14 /* VLBUserProfileViewController.m in Sources */,
 				BD33260517A442BF008784B3 /* VLBBoxAlertViews.m in Sources */,
 				BD33260C17A45674008784B3 /* VLBFeedItemView.m in Sources */,
-				BD4A2D1B17A6F9EB004A80AE /* VLBTakePhotoButton.m in Sources */,
 				BDFBDD5C17AC22D00018D815 /* CALayer+VLBLayer.m in Sources */,
 				BDFBDD6517AE665A0018D815 /* NSObject+VLBObject.m in Sources */,
 			);

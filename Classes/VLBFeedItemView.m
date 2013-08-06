@@ -31,6 +31,7 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     feedItemView.storeButton.titleLabel.minimumScaleFactor = 10;
     feedItemView.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     feedItemView.storeButton.titleLabel.numberOfLines = 0;
+    [feedItemView.askForDirectionsButton setTitle:NSLocalizedString(@"buttons.getDirections.title", @"Get directions") forState:UIControlStateNormal];
     [feedItemView.askForDirectionsButton vlb_cornerRadius:4.0];
 
     NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];

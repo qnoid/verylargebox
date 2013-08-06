@@ -23,21 +23,6 @@ static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
 
 
-NS_INLINE
-QNDViewAnimation* viewAnimationWillAnimateImageViewAlpha()
-{
-return [[[[QNDViewAnimationBuilder alloc] initWithViewAnimationBlock:^(UIView *view) {
-        UIImageView*imageView = (UIImageView*)view;
-        imageView.alpha = 0.1;
-    }] config:^(QNDViewAnimationBuilder *builder) {
-        builder.duration = 1.0;
-        builder.options = UIViewAnimationOptionCurveEaseInOut |
-                            UIViewAnimationOptionRepeat |
-                            UIViewAnimationOptionAutoreverse |
-                            UIViewAnimationOptionAllowUserInteraction;
-    }] newViewAnimation];
-}
-
 @interface CLLocation (VLBLocation)
 
 -(BOOL)vlb_isMoreAccurateThan:(CLLocation*)location;
@@ -136,11 +121,6 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [viewAnimationWillAnimateImageViewAlpha() animate:self.locationButton.imageView completion:nil];
-    
-    if(self.location == nil || ![[self.location vlb_objectForKey:@"name"] vlb_isEmpty]){
-        self.locationButton.imageView.alpha = 1.0;
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -172,7 +152,6 @@ return self;
 {
     DDLogError(@"%s: %@", __PRETTY_FUNCTION__, error);
     [self.locationOperationDelegate didFailOnLocationWithError:error];
-    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TBNSErrorDelegate
@@ -363,7 +342,9 @@ return self;
     }];
 
     self.uploadButton.enabled = NO;
-    [self.takePhotoButton setImage:[UIImage imageNamed:@"takephoto.png"] forState:UIControlStateNormal];    
+    [self.takePhotoButton setTitle:nil forState:UIControlStateNormal];
+    [self.takePhotoButton setImage:[UIImage imageNamed:@"takephoto-icon.png"] forState:UIControlStateNormal];
+    [self.takePhotoButton setBackgroundImage:[UIImage imageNamed:@"takephoto.png"] forState:UIControlStateNormal];    
 }
 
 -(void)cameraView:(VLBCameraView *)cameraView willRriteToCameraRollWithMetadata:(NSDictionary *)metadata

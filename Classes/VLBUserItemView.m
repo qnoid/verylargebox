@@ -42,6 +42,7 @@ VLBUserItemViewInit const VLBUserItemViewInitBlock = ^(VLBUserItemView *userItem
     userItemView.storeButton.titleLabel.minimumScaleFactor = 10;
     userItemView.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     userItemView.storeButton.titleLabel.numberOfLines = 0;
+    [userItemView.askForDirectionsButton setTitle:NSLocalizedString(@"buttons.getDirections.title", @"Get directions") forState:UIControlStateNormal];
     [userItemView.askForDirectionsButton vlb_cornerRadius:4.0];
 
     NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];

@@ -223,7 +223,6 @@ return self;
 {
     DDLogError(@"%s: %@", __PRETTY_FUNCTION__, error);
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
 #pragma mark TBNSErrorDelegate

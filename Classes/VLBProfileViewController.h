@@ -14,7 +14,6 @@
 #import "VLBView.h"
 #import "VLBNotificationView.h"
 #import "VLBTakePhotoViewController.h"
-#import "LCPullToRefreshController.h"
 
 @class VLBTheBox;
 @class VLBButton;
@@ -23,7 +22,7 @@
  
  Subsequent requests to post an item on the server are queued and processed in a FIFO order.
  */
-@interface VLBProfileViewController : UIViewController <VLBNotificationViewDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBTakePhotoViewControllerDelegate, LCPullToRefreshDelegate>
+@interface VLBProfileViewController : UIViewController <VLBNotificationViewDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBTakePhotoViewControllerDelegate>
 
 @property(nonatomic, weak) IBOutlet VLBScrollView* itemsView;
 @property(nonatomic, weak) IBOutlet UIButton* takePhotoButton;
