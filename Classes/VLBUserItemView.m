@@ -16,24 +16,11 @@
 #import "VLBAlertViews.h"
 #import "NSDictionary+VLBDictionary.h"
 #import "VLBBoxAlertViews.h"
+#import "NSObject+VLBObject.h"
 
 typedef void(^VLBUserItemViewInit)(VLBUserItemView *userItemView);
 
-static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
-static NSString* const DEFAULT_ITEM_TYPE = @"png";
-
-@interface NSObject (VLBObject)
-+(BOOL)vlb_isNil:(id)obj;
-@end
-
-@implementation NSObject (VLBObject)
-+(BOOL)vlb_isNil:(id)obj{
-return nil == obj || [NSNull null] == obj;
-}
-@end
-
 @interface VLBUserItemView ()
-@property(nonatomic, strong) UIImage *defaultItemImage;
 @end
 
 VLBUserItemViewInit const VLBUserItemViewInitBlock = ^(VLBUserItemView *userItemView){
@@ -44,9 +31,6 @@ VLBUserItemViewInit const VLBUserItemViewInitBlock = ^(VLBUserItemView *userItem
     userItemView.storeButton.titleLabel.numberOfLines = 0;
     [userItemView.askForDirectionsButton setTitle:NSLocalizedString(@"buttons.getDirections.title", @"Get directions") forState:UIControlStateNormal];
     [userItemView.askForDirectionsButton vlb_cornerRadius:4.0];
-
-    NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
-    userItemView.defaultItemImage = [UIImage imageWithContentsOfFile:path];
 };
 
 @implementation VLBUserItemView
@@ -82,7 +66,7 @@ return self;
     }
     
     NSString *imageURL = [item vlb_objectForKey:VLBItemIPhoneImageURL];
-    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.defaultItemImage];
+    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
 
     /**
      {

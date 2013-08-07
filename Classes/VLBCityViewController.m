@@ -32,9 +32,6 @@
 static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
 
-static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
-static NSString* const DEFAULT_ITEM_TYPE = @"png";
-
 static NSInteger const FIRST_VIEW_TAG = -1;
 
 static dispatch_once_t onceToken;
@@ -66,7 +63,6 @@ static dispatch_once_t onceToken;
 @property(nonatomic, assign) NSUInteger index;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, assign) NSUInteger numberOfRows;
-@property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
 @property(nonatomic, copy) VLBLocationServiceDirections didTapOnGetDirectionsButton;
 @property(nonatomic, copy) NSString *localityName;
@@ -119,8 +115,6 @@ return cityViewController;
     self.theBoxLocationService = locationService;
     self.locations = [NSArray array];
     self.items = [NSMutableArray array];
-    NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
-    self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
     self.operationQueue = [NSOperationQueue new];
     
 return self;
@@ -325,7 +319,7 @@ return [[UIImageView alloc] initWithFrame:frame];
     UIImageView *imageView = (UIImageView *)view;
     //@"http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/020/thumb/.jpg"
     [imageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]]
-              placeholderImage:self.defaultItemImage];
+              placeholderImage:nil];
 }
 
 #pragma mark VLBGridViewDelegate

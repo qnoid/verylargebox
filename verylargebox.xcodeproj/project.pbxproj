@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9A33A307C4A318C23060B /* libPods.a */; };
 		5FF16CEE11F2459FA554E9A4 /* libPods-UnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 956F7906F02145ECABCED92A /* libPods-UnitTests.a */; };
-		66C0E390E24628310924288D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66C0E0BD6B455105376E9F6E /* Localizable.strings */; };
 		900378A115409DBD00579FF2 /* VLBVisibleStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 900378A015409DBD00579FF2 /* VLBVisibleStrategyTest.m */; };
 		90226B91135999D1006E43EC /* VLBBinarySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226B90135999D1006E43EC /* VLBBinarySearch.m */; settings = {COMPILER_FLAGS = ""; }; };
 		90226C6E1359B1DB006E43EC /* VLBPredicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226C6C1359B1DB006E43EC /* VLBPredicates.m */; settings = {COMPILER_FLAGS = ""; }; };
@@ -96,6 +95,7 @@
 		BD258DD81673F1F700286511 /* VLBTableViewDataSourceBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BD258DD71673F1F700286511 /* VLBTableViewDataSourceBuilder.m */; };
 		BD258DDE1678040500286511 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDD1678040500286511 /* refresh.png */; };
 		BD258DDF1678040500286511 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BD258DDD1678040500286511 /* refresh.png */; };
+		BD26464D17B2E62000CDC6B8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD26464F17B2E62000CDC6B8 /* Localizable.strings */; };
 		BD2A8A9D175A4F4C0036A852 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD2A8A9C175A4F4C0036A852 /* Settings.bundle */; };
 		BD2A8AAC175AD9360036A852 /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
 		BD2A8AB1175B413D0036A852 /* VLBCityViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */; };
@@ -125,6 +125,7 @@
 		BD33260617A4452C008784B3 /* VLBBoxAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD33260417A442BF008784B3 /* VLBBoxAlertViews.m */; };
 		BD33260C17A45674008784B3 /* VLBFeedItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD33260B17A45674008784B3 /* VLBFeedItemView.m */; };
 		BD33260E17A4567F008784B3 /* VLBFeedItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD33260D17A4567F008784B3 /* VLBFeedItemView.xib */; };
+		BD394C2717B2CDD90038312D /* CLLocation+VLBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD394C2617B2CDD90038312D /* CLLocation+VLBLocation.m */; };
 		BD4292B9175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4292BA175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4A2D0717A54156004A80AE /* map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0517A54156004A80AE /* map-marker.png */; };
@@ -360,7 +361,6 @@
 		32CA4F630368D1EE00C91783 /* verylargebox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = verylargebox_Prefix.pch; sourceTree = "<group>"; };
 		357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		45C9A33A307C4A318C23060B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		66C0E0BD6B455105376E9F6E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = "Supporting Files/Localizable.strings"; sourceTree = SOURCE_ROOT; };
 		83F757C9D3B843C4A2749415 /* Pods-UnitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.xcconfig"; path = "Pods/Pods-UnitTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		900378A015409DBD00579FF2 /* VLBVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVisibleStrategyTest.m; sourceTree = "<group>"; };
 		9020737C152CF1340017A385 /* VLBItemsOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBItemsOperationDelegate.h; sourceTree = "<group>"; };
@@ -488,6 +488,8 @@
 		BD258DD61673F1F700286511 /* VLBTableViewDataSourceBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTableViewDataSourceBuilder.h; path = ../Classes/VLBTableViewDataSourceBuilder.h; sourceTree = "<group>"; };
 		BD258DD71673F1F700286511 /* VLBTableViewDataSourceBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTableViewDataSourceBuilder.m; sourceTree = "<group>"; };
 		BD258DDD1678040500286511 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = "Supporting Files/refresh.png"; sourceTree = "<group>"; };
+		BD26465217B2E6F100CDC6B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BD26465317B2EA4200CDC6B8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD2A8A9C175A4F4C0036A852 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Supporting Files/Settings.bundle"; sourceTree = "<group>"; };
 		BD2A8AAA175AD9340036A852 /* VLBAlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBAlertViews.h; path = ../Classes/VLBAlertViews.h; sourceTree = "<group>"; };
 		BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBAlertViews.m; sourceTree = "<group>"; };
@@ -498,6 +500,8 @@
 		BD33260A17A45673008784B3 /* VLBFeedItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBFeedItemView.h; sourceTree = "<group>"; };
 		BD33260B17A45674008784B3 /* VLBFeedItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBFeedItemView.m; sourceTree = "<group>"; };
 		BD33260D17A4567F008784B3 /* VLBFeedItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBFeedItemView.xib; sourceTree = "<group>"; };
+		BD394C2517B2CDD90038312D /* CLLocation+VLBLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+VLBLocation.h"; sourceTree = "<group>"; };
+		BD394C2617B2CDD90038312D /* CLLocation+VLBLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+VLBLocation.m"; sourceTree = "<group>"; };
 		BD4292B7175B4BBB00459891 /* VLBErrorBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBErrorBlocks.h; path = ../Classes/VLBErrorBlocks.h; sourceTree = "<group>"; };
 		BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBErrorBlocks.m; sourceTree = "<group>"; };
 		BD4A2D0517A54156004A80AE /* map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-marker.png"; path = "Supporting Files/map-marker.png"; sourceTree = "<group>"; };
@@ -855,7 +859,8 @@
 				BDFBDD5B17AC22D00018D815 /* CALayer+VLBLayer.m */,
 				BDFBDD6317AE66590018D815 /* NSObject+VLBObject.h */,
 				BDFBDD6417AE66590018D815 /* NSObject+VLBObject.m */,
-				66C0E0BD6B455105376E9F6E /* Localizable.strings */,
+				BD394C2517B2CDD90038312D /* CLLocation+VLBLocation.h */,
+				BD394C2617B2CDD90038312D /* CLLocation+VLBLocation.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -895,6 +900,7 @@
 				32CA4F630368D1EE00C91783 /* verylargebox_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				BD2A8A9C175A4F4C0036A852 /* Settings.bundle */,
+				BD26464F17B2E62000CDC6B8 /* Localizable.strings */,
 			);
 			name = "Other Sources";
 			path = ..;
@@ -1466,6 +1472,7 @@
 				French,
 				German,
 				en,
+				el,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1590,13 +1597,13 @@
 				BDA4E7CE17A742C100435C23 /* takephoto-selected.png in Resources */,
 				BDA4E7D117A9AF1500435C23 /* takephoto-icon.png in Resources */,
 				BDA4E7D217A9AF1500435C23 /* takephoto-icon@2x.png.png in Resources */,
-				66C0E390E24628310924288D /* Localizable.strings in Resources */,
 				BD86BF1E17B0554700CFF85F /* timestamp.png in Resources */,
 				BD86BF1F17B0554700CFF85F /* timestamp@2x.png in Resources */,
 				BDB7D75B17B179C300E5D440 /* map-pin.png in Resources */,
 				BDB7D75C17B179C300E5D440 /* map-pin@2x.png in Resources */,
 				BDB7D75F17B1A38F00E5D440 /* idcard-blue.png in Resources */,
 				BDB7D76017B1A38F00E5D440 /* idcard-blue@2x.png in Resources */,
+				BD26464D17B2E62000CDC6B8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1818,6 +1825,7 @@
 				BD33260C17A45674008784B3 /* VLBFeedItemView.m in Sources */,
 				BDFBDD5C17AC22D00018D815 /* CALayer+VLBLayer.m in Sources */,
 				BDFBDD6517AE665A0018D815 /* NSObject+VLBObject.m in Sources */,
+				BD394C2717B2CDD90038312D /* CLLocation+VLBLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1913,6 +1921,19 @@
 			targetProxy = BD84EF5E165C200C009D9408 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BD26464F17B2E62000CDC6B8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD26465217B2E6F100CDC6B8 /* en */,
+				BD26465317B2EA4200CDC6B8 /* el */,
+			);
+			name = Localizable.strings;
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
@@ -2416,7 +2437,7 @@
 				A152E544130D7A2300514061 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		908363DF14006BF100E5AAAF /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
 			isa = XCConfigurationList;
@@ -2426,7 +2447,7 @@
 				908363E214006BF100E5AAAF /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		BDCD93A1165C127A009C2F8F /* Build configuration list for PBXNativeTarget "ApplicationTests" */ = {
 			isa = XCConfigurationList;
@@ -2436,7 +2457,7 @@
 				BDCD93A4165C127A009C2F8F /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "verylargebox" */ = {
 			isa = XCConfigurationList;
@@ -2446,7 +2467,7 @@
 				A152E543130D7A2300514061 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

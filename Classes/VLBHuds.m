@@ -133,7 +133,7 @@ return hud;
 +(MBProgressHUD*)newWithViewCamera:(UIView*)view locality:(NSString*)locality
 {
     MBProgressHUD *hud = [VLBHuds newWithView:view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CAMERA];
-    hud.labelText = [NSString stringWithFormat:NSLocalizedString(@"huds.camera.header", @"No stores in %@"), locality];
+    hud.labelText = NSLocalizedString(@"huds.camera.header", @"No stores found");
     hud.detailsLabelText = NSLocalizedString(@"huds.camera.details", @"Take a photo of an item in store under your profile. It will appear here.");
     
 return hud;

@@ -25,7 +25,7 @@
 {
     VLBUserProfileViewController *signOutViewController = [[VLBUserProfileViewController alloc] initWithBundle:[NSBundle mainBundle] thebox:thebox];
 
-    UILabel* titleLabel = [[VLBViewControllers new] titleView:@"User profile"];
+    UILabel* titleLabel = [[VLBViewControllers new] titleView:NSLocalizedString(@"viewcontrollers.userProfile.navigationBar.title", @"User Profile")];
     signOutViewController.navigationItem.titleView = titleLabel;
     [titleLabel sizeToFit];
 
@@ -61,6 +61,7 @@ return signOutViewController;
     
     __weak VLBUserProfileViewController *wself = self;
     
+    [self.signOutButton setTitle:NSLocalizedString(@"huds.signout.header", @"Sign out") forState:UIControlStateNormal];
     [self.signOutButton vlb_cornerRadius:2.0];
     [self.signOutButton onTouchUp:^(UIButton *button) {
         [wself.thebox noUserAccount];

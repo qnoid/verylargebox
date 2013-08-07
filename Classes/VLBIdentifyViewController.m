@@ -67,9 +67,13 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    self.emailTextField.placeholder = NSLocalizedString(@"viewcontrollers.identify.emailTextField.placeholder", @"Enter your email");
     self.emailTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 0)];
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
+    [self.signUpButton setTitle:NSLocalizedString(@"viewcontrollers.identify.signUpButton.placeholder", @"Sign up") forState:UIControlStateNormal];
+    [self.signInButton setTitle:NSLocalizedString(@"viewcontrollers.identify.signInButton.placeholder", @"Sign in") forState:UIControlStateNormal];
+    
     VLBTitleLabelPrimaryBlue(self.emailButton.titleLabel);
 
     __weak VLBIdentifyViewController *wself = self;

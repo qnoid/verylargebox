@@ -304,4 +304,5 @@ return view;
     CGRect rect = [self.dimension frameOf:self.bounds atIndex:index];
     [super scrollRectToVisible:rect animated:animated];
 }
+
 @end

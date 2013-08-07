@@ -17,9 +17,6 @@
 #import "VLBUserProfileViewController.h"
 #import "CALayer+VLBLayer.h"
 
-static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
-static NSString* const DEFAULT_ITEM_TYPE = @"png";
-
 @interface VLBProfileViewController ()
 
 @property(nonatomic, weak) UIProgressView *progressView;
@@ -27,7 +24,6 @@ static NSString* const DEFAULT_ITEM_TYPE = @"png";
 @property(nonatomic, weak) VLBTheBox *thebox;
 
 @property(nonatomic, strong) NSMutableOrderedSet* items;
-@property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSString* locality;
 @property(nonatomic, strong) NSDictionary* location;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
@@ -66,10 +62,6 @@ return profileViewController;
     
 	self.thebox = thebox;
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:10];
-    NSString* path = [nibBundleOrNil pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
-    self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
-    self.operationQueue = [NSOperationQueue new];
-
 return self;
 }
 
@@ -98,7 +90,8 @@ return self;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.itemsView bringSubviewToFront:self.takePhotoButton];
+    [self.takePhotoButton setTitle:NSLocalizedString(@"viewcontrollers.profile.takePhotoButton.title", @"Take photo of an item in store") forState:UIControlStateNormal];
+    [self.takePhotoButton.titleLabel sizeToFit];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 
     self.itemsView.scrollsToTop = YES;

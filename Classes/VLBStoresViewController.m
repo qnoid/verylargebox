@@ -18,6 +18,8 @@
 #import "QNDAnimatedView.h"
 #import "VLBMacros.h"
 #import "VLBViewControllers.h"
+#import "CLLocation+VLBLocation.h"
+#import "CALayer+VLBLayer.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare";
 static NSString* const foursquarePoweredByType = @"png";
@@ -28,6 +30,8 @@ static UIImage* foursquarePoweredBy;
 @property(nonatomic, strong) VLBLocationService *theBoxLocationService;
 @property(nonatomic, strong) NSArray* venues;
 @property(nonatomic, strong) NSObject<QNDAnimatedView> *animatedMap;
+
+@property(nonatomic, strong) CLLocation *lastKnownLocation;
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil venues:(NSArray*)venues;
 @end
 
@@ -45,6 +49,9 @@ static UIImage* foursquarePoweredBy;
 
     storesViewController.navigationItem.leftBarButtonItem = [[VLBViewControllers new] closeButton:storesViewController
                                                                                             action:@selector(cancel:)];
+
+    storesViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new ]refreshButton:storesViewController
+                                                                                               action:@selector(refreshLocations)];
 
     [[NSNotificationCenter defaultCenter] addObserver:storesViewController selector:@selector(keyboardWillShow:) name:@"UIKeyboardWillShowNotification" object:nil];
 
@@ -88,12 +95,7 @@ return self;
 
 -(void)keyboardWillShow:(NSNotification*)notification
 {
-    UIButton* dismissSearchBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [dismissSearchBarButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [dismissSearchBarButton setImage:[UIImage imageNamed:@"circlex.png"] forState:UIControlStateNormal];
-    [dismissSearchBarButton addTarget:self action:@selector(dismissSearchBar:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:dismissSearchBarButton];
+    self.navigationItem.rightBarButtonItem = [[VLBViewControllers new] discardButton:self action:@selector(dismissSearchBar:)];
 
     NSValue *value = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
     
@@ -120,11 +122,14 @@ return self;
     
     //CGRectMake(0, 0, 320, 392 - 205)
     [self.venuesTableView scrollRectToVisible:visibleRect animated:YES];
-    self.navigationItem.rightBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = [[VLBViewControllers new] refreshButton:self
+                                                                              action:@selector(refreshLocations)];
+
 }
 
 -(void)dismissSearchBar:(id)sender
 {
+    [self refreshLocations];
     [self.searchBar resignFirstResponder];
 }
 
@@ -188,6 +193,14 @@ return self;
 
 	CLLocation *location = [VLBNotifications location:notification];
 	
+    if(![location vlb_isMoreAccurateThan:self.lastKnownLocation]){
+        
+        [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+    return;
+    }
+    
+    self.lastKnownLocation = location;
+
 	CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude) ;
 	MKCoordinateSpan span = MKCoordinateSpanMake(0.009, 0.009);
 	MKCoordinateRegion newRegion = MKCoordinateRegionMake(centerCoordinate, span);	
@@ -195,11 +208,10 @@ return self;
 	[self.map setRegion:newRegion];
     self.map.showsUserLocation = YES;
     
-    if(![self.venues vlb_isEmpty]){
-        return;
-    }
     MBProgressHUD *hud = [VLBHuds newWithViewRadar:self.view];
     [hud show:YES];
+    
+    [self refreshLocations];
 }
 
 #pragma mark VLBLocationOperationDelegate
@@ -207,12 +219,16 @@ return self;
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
     DDLogVerbose(@"%s: %@", __PRETTY_FUNCTION__, locations);
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_stopRotate];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    if([locations vlb_isEmpty]){
+    if([locations vlb_isEmpty] && [self.venues vlb_isEmpty]){
         MBProgressHUD *newNoStoresFound = [VLBHuds newNoStoresFound:self.venuesTableView];
         [newNoStoresFound show:YES];
         [newNoStoresFound hide:YES afterDelay:0.5];
-        return;
+    return;
     }
     
     self.venues = locations;
@@ -221,6 +237,10 @@ return self;
 
 -(void)didFailOnLocationWithError:(NSError*)error
 {
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_stopRotate];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+
     DDLogError(@"%s: %@", __PRETTY_FUNCTION__, error);
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
@@ -308,5 +328,20 @@ return cell;
     [hud show:YES];
 }
 
+
+-(void)refreshLocations
+{
+    self.searchBar.text = @"";
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+
+    AFHTTPRequestOperation* operation =
+    [VLBQueries newLocationQuery:self.lastKnownLocation.coordinate.latitude
+                      longtitude:self.lastKnownLocation.coordinate.longitude
+                        delegate:self];
+    
+    [operation start];
+}
 
 @end

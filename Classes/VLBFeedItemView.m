@@ -18,11 +18,7 @@
 
 typedef void(^VLBFeedItemViewInit)(VLBFeedItemView *userItemView);
 
-static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
-static NSString* const DEFAULT_ITEM_TYPE = @"png";
-
 @interface VLBFeedItemView ()
-@property(nonatomic, strong) UIImage *defaultItemImage;
 @end
 
 VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItemView){
@@ -33,9 +29,6 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     feedItemView.storeButton.titleLabel.numberOfLines = 0;
     [feedItemView.askForDirectionsButton setTitle:NSLocalizedString(@"buttons.getDirections.title", @"Get directions") forState:UIControlStateNormal];
     [feedItemView.askForDirectionsButton vlb_cornerRadius:4.0];
-
-    NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
-    feedItemView.defaultItemImage = [UIImage imageWithContentsOfFile:path];
 };
 
 @implementation VLBFeedItemView
@@ -71,7 +64,7 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     }
     
     NSString *imageURL = [item vlb_objectForKey:VLBItemIPhoneImageURL];
-    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.defaultItemImage];
+    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
     
     /**
      {

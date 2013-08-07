@@ -1,52 +1,7 @@
-/****************************************************************************/
-/* Localization file */
+/* 
+  Localizable.strings
+  verylargebox
 
-
-"errors.location.notfound" = "Could not find your location. Usually this happens if you are inside a building, have poor network connection or in a remote area.";
-"errors.location.denied.header" = "Location access denied";
-"errors.location.denied.details" = "Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location.";
-"huds.signout.details" = "What happens next? \n \n You will need to verify your email again to add photos to verylargebox. \n \n Your existing photos will not be affected. \n \n Other features will remain accessible.";
-"huds.signout.header" = "Sign out.";
-"huds.signin.details" = "Please wait while verylargebox is signing you in as %@";
-"huds.signin.header" = "Signing you in.";
-"huds.email.header" = "An email it is on its way.";
-"huds.registration.header" = "Please check your email.";
-"huds.registration.details" = "If you cannot find it, check your spam. \n \n Double check you have entered your email correctly, '%@'. \n Tap to edit if it's wrong. \n \n Once you have verified, return here to sign in.";
-"huds.idcard.header" = "Add your photos.";
-"huds.idcard.details" = "What happens next? \n \n You will receive an email to give %@ access to verylargebox. \n \n Your email is only used to verify your identity. \n \n";
-"huds.verify.failed.header" = "Unauthorised device";
-"huds.verify.failed.details" = "%@ is not authorised. Please check your email to verify it.";
-"huds.search.header" = "Finding stores nearby";
-"huds.search.details" = "matching '%@'";
-"huds.radar.header" = "Finding stores nearby";
-"huds.camera.header" = "No stores in %@";
-"huds.camera.details" = "Take a photo of an item in store under your profile. It will appear here.";
-"huds.locationarrow.header" = "Finding your location";
-"viewcontrollers.assignstore.header" = "Assign a Store (%@)";
-"viewcontrollers.directions.details" = "Get directions directions%@";
-"questionmark" = "?";
-"viewcontrollers.directions.question" = " to %@?";
-"viewcontrollers.directions.header" = "Open in Maps";
-"huds.twitter.noaccount.header" = "No twitter account setup.";
-"huds.twitter.noaccount.details" = "Go to Settings -> Twitter to add an account";
-"navigationbar.title.localities" = "Select a location";
-"tabbar.title.signin" = "Sign in";
-"tabbaritem.title.you" = "You";
-"navigationbar.title.store" = "Select a store";
-"navigationbar.title.recent" = "Recent";
-"tabbaritem.title.recent" = "Recent";
-"navigationbar.title.city" = "Stores Nearby";
-"tabbaritem.title.city" = "Nearby";
-"alertviews.cancel.dismiss" = "Dismiss";
-"alertviews.cancel.cancel" = "Cancel";
-"alertviews.cancel.nevermind" = "Nevermind";
-"alertviews.cancel.ok" = "Ok";
-"huds.feed.selectlocation.details" = "Select a location.";
-"huds.feed.selectlocation.title" = "No items in %@";
-"navigationbar.city.title" = "Stores in %@";
-"buttons.takePhoto.retake" = "Retake";
-"buttons.discardButton.discard" = "Discard";
-"buttons.discardButton.close" = "Close";
-"huds.refresh.title" = "Please refresh.";
-"viewcontrollers.stores.search.placeholder" = "Search for the store that has the item";
-"buttons.getDirections.title" = "Get directions";
+  Created by Markos Charatzas on 07/08/2013.
+  Copyright (c) 2013 verylargebox.com. All rights reserved.
+*/

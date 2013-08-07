@@ -15,12 +15,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "VLBDrawRects.h"
 
-static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
-static NSString* const DEFAULT_ITEM_TYPE = @"png";
-
 @interface VLBDetailsViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
-@property(nonatomic, strong) UIImage *defaultItemImage;
 @property(nonatomic, strong) NSMutableDictionary* item;
 @end
 
@@ -42,9 +38,6 @@ return detailsViewController;
     
     self.item = item;
 
-    NSString* path = [[NSBundle mainBundle] pathForResource:DEFAULT_ITEM_THUMB ofType:DEFAULT_ITEM_TYPE];
-    self.defaultItemImage = [UIImage imageWithContentsOfFile:path];
-
 return self;
 }
 
@@ -56,7 +49,7 @@ return self;
     [self.storeButton.titleLabel sizeToFit];
     
     NSString *imageURL = [self.item vlb_objectForKey:VLBItemIPhoneImageURL];
-    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.defaultItemImage];
+    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
     
     NSDictionary *location = [self.item vlb_location];
     

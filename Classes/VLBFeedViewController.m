@@ -19,10 +19,6 @@
 #import "NSArray+VLBDecorator.h"
 #import "CALayer+VLBLayer.h"
 
-static NSString* const DEFAULT_ITEM_THUMB = @"default_item_thumb";
-static NSString* const DEFAULT_ITEM_TYPE = @"png";
-
-
 @interface VLBFeedViewController ()
 
 @property(nonatomic, strong) NSString *locality;
@@ -87,7 +83,7 @@ return feedViewController;
 -(void)updateTitle:(NSString*)localityName
 {
     UIButton* titleView = (UIButton*) self.navigationItem.titleView;
-    VLBTitleButtonAttributed(titleView, [NSString stringWithFormat:@"Recent in %@", localityName]);
+    VLBTitleButtonAttributed(titleView, [NSString stringWithFormat:NSLocalizedString(@"tabbaritem.title.recentin", @"Recent in %@"), localityName]);
     [titleView sizeToFit];
 }
 
@@ -155,9 +151,9 @@ return feedViewController;
     [self.feedView flashScrollIndicators];
     
     if([items vlb_isEmpty]){
-        MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET];
-        hud.labelText = [NSString stringWithFormat:NSLocalizedString(@"huds.feed.selectlocation.title", @"No items in %@"), self.locality];
-        hud.detailsLabelText = NSLocalizedString(@"huds.feed.selectlocation.details", @"Select a location.");
+        MBProgressHUD *hud = [VLBHuds newWithView:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO];
+        hud.labelText = NSLocalizedString(@"huds.feed.selectlocation.title", @"No items found");
+        hud.detailsLabelText = NSLocalizedString(@"huds.feed.selectlocation.details", @"Select a location by tapping on the navigation bar.");
         [hud show:YES];
     }
 }

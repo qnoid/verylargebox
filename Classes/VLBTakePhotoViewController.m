@@ -18,28 +18,11 @@
 #import "NSString+VLBDecorator.h"
 #import "VLBErrorBlocks.h"
 #import "NSArray+VLBDecorator.h"
+#import "CLLocation+VLBLocation.h"
 
 static CGFloat const IMAGE_WIDTH = 640.0;
 static CGFloat const IMAGE_HEIGHT = 640.0;
 
-
-@interface CLLocation (VLBLocation)
-
--(BOOL)vlb_isMoreAccurateThan:(CLLocation*)location;
-
-@end
-
-@implementation CLLocation (VLBLocation)
-
--(BOOL)vlb_isMoreAccurateThan:(CLLocation*)location{
-    if(location == nil){
-        return YES;
-    }
-    
-return self.horizontalAccuracy < location.horizontalAccuracy || self.verticalAccuracy < location.verticalAccuracy;
-}
-
-@end
 
 @interface VLBTakePhotoViewController ()
 @property(nonatomic, strong) VLBTheBox* thebox;
@@ -100,13 +83,17 @@ return self;
         [wself takePhoto:button];
     }];
 
+    [self.locationButton setTitle:NSLocalizedString(@"viewcontrollers.assignstore.header.empty", @"Assign a store") forState:UIControlStateNormal];
     [self.locationButton vlb_cornerRadius:2.0];
     self.locationButton.titleLabel.minimumScaleFactor = 10;
     self.locationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.locationButton.titleLabel.numberOfLines = 0;
     [self.locationButton.titleLabel sizeToFit];
 
+    [self.discardButton setTitle:NSLocalizedString(@"buttons.discardButton.close", @"Close") forState:UIControlStateNormal];
     [self.discardButton vlb_cornerRadius:2.0 corners:UIRectCornerBottomLeft | UIRectCornerTopLeft];
+    [self.uploadButton setTitle:NSLocalizedString(@"viewcontroller.takePhotoViewController.uploadButton.title", @"Upload") forState:UIControlStateNormal];
+    [self.uploadButton.titleLabel sizeToFit];
     [self.uploadButton vlb_cornerRadius:2.0 corners:UIRectCornerBottomRight | UIRectCornerTopRight];
 
     self.cameraView.writeToCameraRoll = YES;
@@ -137,13 +124,6 @@ return self;
 -(void)didSucceedWithLocations:(NSArray*)locations givenParameters:(NSDictionary *)parameters
 {
     DDLogVerbose(@"%s: %@", __PRETTY_FUNCTION__, locations);
-
-    if([locations vlb_isEmpty]){
-        self.venues = locations;
-        [self.locationOperationDelegate didSucceedWithLocations:locations givenParameters:parameters];
-    return;
-    }
-    
     self.venues = locations;
     [self.locationOperationDelegate didSucceedWithLocations:locations givenParameters:parameters];
 }
@@ -223,9 +203,11 @@ return self;
     
     DDLogInfo(@"%s %@", __PRETTY_FUNCTION__, notification);
     self.locality = [VLBNotifications place:notification].locality;
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"viewcontrollers.assignstore.header", @"Assign a Store (%@)"), self.locality]];
+    NSString* localizedString = NSLocalizedString(@"viewcontrollers.assignstore.header", @"Assign a Store (%@)");
     
-    [title addAttributes:@{NSForegroundColorAttributeName:[VLBColors colorLightGrey]} range:NSMakeRange(15, self.locality.length + 2)];
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:localizedString, self.locality]];
+    
+    [title addAttributes:@{NSForegroundColorAttributeName:[VLBColors colorLightGrey]} range:NSMakeRange(localizedString.length - 5, self.locality.length + 3)];
     [self.locationButton setAttributedTitle:title
                                    forState:UIControlStateNormal];
     [self.locationButton.titleLabel sizeToFit];
