@@ -531,12 +531,7 @@ return VLBScrollViewOrientationHorizontal;
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
 		NSError *error = [VLBNotifications error:notification];
-		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
-			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH(hud);
-			hud.labelText = NSLocalizedString(@"huds.refresh.title", @"Please refresh.");
-		return hud;
-		};
-		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
+		[VLBErrorBlocks locationErrorBlock:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO](error);
 }
 
 -(void)didFindPlacemark:(NSNotification *)notification
@@ -568,12 +563,7 @@ return VLBScrollViewOrientationHorizontal;
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
 		NSError *error = [VLBNotifications error:notification];
-		VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
-			VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_REFRESH(hud);
-            hud.labelText = NSLocalizedString(@"huds.refresh.title", @"Please refresh.");
-		return hud;
-		};
-		[VLBErrorBlocks locationErrorBlock:self.view config:block](error);
+		[VLBErrorBlocks locationErrorBlock:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO](error);
 }
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender

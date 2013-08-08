@@ -65,6 +65,10 @@ return self;
     return [NSString stringWithFormat:@"%@.%@", THE_BOX_SERVICE, key];
 }
 
+-(void)userDidTakePhoto {
+    [self.userDefaults setBool:YES forKey:[self prefixKey:VLBUserDidTakePhotoKey]];
+}
+
 -(BOOL)hasUserTakenPhoto {
     return [self.userDefaults boolForKey:[self prefixKey:VLBUserDidTakePhotoKey]];
 }

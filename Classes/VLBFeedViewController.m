@@ -252,12 +252,7 @@ return VLBScrollViewOrientationVertical;
     DDLogWarn(@"%s", __PRETTY_FUNCTION__);
     NSError *error = [VLBNotifications error:notification];
 
-    VLBProgressHUDBlock block = ^(MBProgressHUD *hud){
-        VLB_PROGRESS_HUD_CUSTOM_VIEW_LOCATION_ERROR_TARGET(hud);
-        hud.labelText = @"Please select a location.";
-    return hud;
-    };
-    [VLBErrorBlocks locationErrorBlock:self.view config:block](error);
+    [VLBErrorBlocks locationErrorBlock:self.view config:VLB_PROGRESS_HUD_CUSTOM_VIEW_CIRCLE_NO](error);
 }
 
 

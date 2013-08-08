@@ -2,6 +2,7 @@
 /* Localization file */
 
 
+"viewcontrollers.profile.empty.takePhotoLabel.text" = "What is inside, it is up to you.";
 "errors.location.notfound" = "Could not find your location. Usually this happens if you are inside a building, have poor network connection or in a remote area.";
 "errors.location.denied.header" = "Location access denied";
 "errors.location.denied.details" = "Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location.";
@@ -56,5 +57,6 @@
 "viewcontrollers.identify.emailTextField.placeholder" = "Enter your email";
 "viewcontrollers.identify.signUpButton.placeholder" = "Sign up";
 "viewcontrollers.identify.signInButton.placeholder" = "Sign in";
+"viewcontrollers.profile.takePhotoButton.title" = "Take photo of an item in store";
 "viewcontroller.takePhotoViewController.uploadButton.title" = "Upload";
 "viewcontrollers.userProfile.navigationBar.title" = "User Profile";

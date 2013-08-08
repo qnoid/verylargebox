@@ -61,7 +61,9 @@ return profileViewController;
     VLB_IF_NOT_SELF_RETURN_NIL();
     
 	self.thebox = thebox;
-    self.items = [NSMutableOrderedSet orderedSetWithCapacity:10];
+  self.items = [NSMutableOrderedSet orderedSetWithCapacity:10];
+	self.operationQueue = [NSOperationQueue new];
+
 return self;
 }
 

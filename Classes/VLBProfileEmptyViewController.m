@@ -61,7 +61,11 @@ return self;
 
 -(void)viewDidLoad
 {
+		[super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
+    [self.takePhotoButton setTitle:NSLocalizedString(@"viewcontrollers.profile.takePhotoButton.title", @"Take photo of an item in store") forState:UIControlStateNormal];
+    [self.takePhotoButton.titleLabel sizeToFit];
+    self.takePhotoLabel.text = NSLocalizedString(@"viewcontrollers.profile.empty.takePhotoLabel.text", @"What is inside, it is up to you.");
 }
 
 -(void)didTouchUpInsideDiscard:(id)sender
@@ -103,6 +107,7 @@ return self;
 
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
+	  [self.thebox userDidTakePhoto];
     UINavigationController* profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileViewController]];
     
     NSMutableArray* viewControllers = [NSMutableArray arrayWithArray:self.tabBarController.viewControllers];

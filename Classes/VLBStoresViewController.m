@@ -129,8 +129,23 @@ return self;
 
 -(void)dismissSearchBar:(id)sender
 {
-    [self refreshLocations];
     [self.searchBar resignFirstResponder];
+    self.searchBar.text = @"";
+
+    [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
+    [self.theBoxLocationService dontNotifyDidFailWithError:self];
+    [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
+
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+
+    AFHTTPRequestOperation* operation =
+    [VLBQueries newLocationQuery:self.lastKnownLocation.coordinate.latitude
+                      longtitude:self.lastKnownLocation.coordinate.longitude
+                        delegate:self];
+    
+    [operation start];
 }
 
 -(void)viewDidLoad
@@ -154,12 +169,15 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.theBoxLocationService notifyDidUpdateToLocation:self];
+  [self.theBoxLocationService notifyDidUpdateToLocation:self];
 	[self.theBoxLocationService notifyDidFailWithError:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -191,27 +209,36 @@ return self;
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
     [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
 
-	CLLocation *location = [VLBNotifications location:notification];
+  	CLLocation *location = [VLBNotifications location:notification];
 	
-    if(![location vlb_isMoreAccurateThan:self.lastKnownLocation]){
+    if(![location vlb_isMoreAccurateThan:self.lastKnownLocation])
+		{
+  	  	UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+	  	  [refresh.imageView.layer vlb_stopRotate];
+	    	self.navigationItem.rightBarButtonItem.enabled = YES;
         
         [self.theBoxLocationService dontNotifyOnUpdateToLocation:self];
     return;
     }
     
-    self.lastKnownLocation = location;
+   self.lastKnownLocation = location;
 
-	CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude) ;
-	MKCoordinateSpan span = MKCoordinateSpanMake(0.009, 0.009);
-	MKCoordinateRegion newRegion = MKCoordinateRegionMake(centerCoordinate, span);	
-
-	[self.map setRegion:newRegion];
-    self.map.showsUserLocation = YES;
+	 CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude) ;
+	 MKCoordinateSpan span = MKCoordinateSpanMake(0.009, 0.009);
+   MKCoordinateRegion newRegion = MKCoordinateRegionMake(centerCoordinate, span);	
+ 	 [self.map setRegion:newRegion];
+   self.map.showsUserLocation = YES;
     
-    MBProgressHUD *hud = [VLBHuds newWithViewRadar:self.view];
-    [hud show:YES];
+   MBProgressHUD *hud = [VLBHuds newWithViewRadar:self.view];
+   [hud show:YES];
     
-    [self refreshLocations];
+   self.searchBar.text = @"";
+   AFHTTPRequestOperation* operation =
+   [VLBQueries newLocationQuery:self.lastKnownLocation.coordinate.latitude
+                     longtitude:self.lastKnownLocation.coordinate.longitude
+                       delegate:self];
+    
+   [operation start];
 }
 
 #pragma mark VLBLocationOperationDelegate
@@ -331,17 +358,9 @@ return cell;
 
 -(void)refreshLocations
 {
-    self.searchBar.text = @"";
-    UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
-    [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
-
-    AFHTTPRequestOperation* operation =
-    [VLBQueries newLocationQuery:self.lastKnownLocation.coordinate.latitude
-                      longtitude:self.lastKnownLocation.coordinate.longitude
-                        delegate:self];
-    
-    [operation start];
+  [self.theBoxLocationService notifyDidUpdateToLocation:self];
+	[self.theBoxLocationService notifyDidFailWithError:self];
+  [self.theBoxLocationService startMonitoringSignificantLocationChanges];
 }
 
 @end

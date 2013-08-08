@@ -29,6 +29,8 @@ extern NSString* const THE_BOX_SERVICE;
 
 -(void)didSucceedWithVerificationForEmail:(NSString*)email residence:(NSDictionary*)residence;
 
+-(void)userDidTakePhoto;
+
 -(BOOL)hasUserTakenPhoto;
 
 -(NSString*)email;

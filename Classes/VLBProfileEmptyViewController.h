@@ -17,7 +17,7 @@
 
 @interface VLBProfileEmptyViewController : UIViewController <VLBNotificationViewDelegate, VLBTakePhotoViewControllerDelegate>
 
-@property(nonatomic, weak) IBOutlet VLBButton *takePhotoButton;
+@property(nonatomic, weak) IBOutlet UIButton *takePhotoButton;
 @property(nonatomic, weak) IBOutlet UILabel *takePhotoLabel;
 
 +(VLBProfileEmptyViewController *)newProfileViewController:(VLBTheBox*)thebox email:(NSString*)email;
