@@ -12,7 +12,7 @@
 "huds.signin.header" = "Συνδέεσαι";
 "huds.email.header" = "Αποστέλεται email.";
 "huds.registration.header" = "Έλεγξε το email σου.";
-"huds.registration.details" = "Εάν δε καταφέρεις να το βρεις, έλεγξε τον φάκελο 'ανεπιθύμητα'. \n \n Επίσης έλεγξε εαν έχεις εισάγει το email σου σωστά, '%@'. \n Πάτησε για να το διορθώσεις αν είναι λάθος. \n \n Εφόσον επιβεβαιώσεις, επέστρεψε εδώ για να συνδεθείς.";
+"huds.registration.details" = "Εάν δε καταφέρεις να το βρεις, έλεγξε τον φάκελο 'ανεπιθύμητα'. \n \n Επίσης έλεγξε εαν έχεις εισάγει το email σου σωστά, '%@'. \n Πάτησε για να το διορθώσεις αν είναι λάθος. \n \n Εφόσον επιβεβαιώσεις, επέστρεψε εδώ και πάτα 'Είσοδος'.";
 "huds.idcard.header" = "Βάλε τις φωτογραφίες σου.";
 "huds.idcard.details" = "Τι θα συμβεί μετά; \n \n Θα λάβεις ένα email το οποίο θα σου δώσει πρόσβαση στο verylargebox. \n \n To email αυτό έχει μοναδικό σκοπό να επιβεβαιώσει τη ταυτότητα σου.";
 "huds.verify.failed.header" = "Μη εξουσιοδοτομένη συσκευή.";
@@ -28,8 +28,8 @@
 "viewcontrollers.directions.details" = "Διαδρομή προς%@";
 "questionmark" = ";";
 "viewcontrollers.directions.question" = " %@;";
-"viewcontrollers.directions.header" = "Διαδρομή";
-"viewcontrollers.directions.button.ok" = "Άνοιγμα στους Χάρτες";
+"viewcontrollers.directions.header" = "Άνοιγμα στους Χάρτες";
+"viewcontrollers.directions.button.ok" = "Διαδρομή";
 "huds.twitter.noaccount.header" = "Δεν έχει δημιουργηθεί λογαριασμός Twitter.";
 "huds.twitter.noaccount.details" = "Πήγαινε στις Ρυθμίσεις -> Twitter, για να προσθέσεις έναν λογαριασμό.";
 "navigationbar.title.localities" = "Επέλεξε τοποθεσία";

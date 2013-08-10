@@ -17,10 +17,10 @@
     NSString *message = [NSString stringWithFormat:NSLocalizedString(@"viewcontrollers.directions.details", @"Get directions directions%@"),
                                                    [@"" isEqual:name] ? NSLocalizedString(@"questionmark", @"?") : [NSString stringWithFormat:NSLocalizedString(@"viewcontrollers.directions.question", @" to %@?"), name]];
     
-    UIAlertView *alertView = [VLBAlertViews newAlertViewWithNevermind:NSLocalizedString(@"viewcontrollers.directions.button.ok", @"Open in Maps")
+    UIAlertView *alertView = [VLBAlertViews newAlertViewWithNevermind:NSLocalizedString(@"viewcontrollers.directions.header", @"Open in Maps")
                                                             message:message];
 
-    NSInteger index = [alertView addButtonWithTitle:NSLocalizedString(@"viewcontrollers.directions.header", @"Open in Maps")];
+    NSInteger index = [alertView addButtonWithTitle:NSLocalizedString(@"viewcontrollers.directions.button.ok", @"Open in Maps")];
     
     VLBAlertViewDelegate *alertViewDelegateOnOkGetDirections =
         [VLBAlertViews newAlertViewDelegateOnButtonIndex:index alertViewBlock:alertViewBlock];

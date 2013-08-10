@@ -26,4 +26,6 @@ extern VLBItemKey const VLBItemImageKey;
 
 -(id)vlb_objectForKey:(VLBItemKey)key;
 
+-(NSString*)vlb_when;
+
 @end

@@ -83,7 +83,7 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     [self.storeButton setTitle:name forState:UIControlStateNormal];
     [self.storeButton.titleLabel sizeToFit];
     
-    [self.whenButton setTitle:[item vlb_objectForKey:VLBItemWhen] forState:UIControlStateNormal];
+    [self.whenButton setTitle:[item vlb_when] forState:UIControlStateNormal];
     
     self.didTapOnGetDirectionsButton = ^(UIButton* button){
         VLBAlertViewBlock onOkGetDirections = ^(UIAlertView *alertView, NSInteger buttonIndex) {

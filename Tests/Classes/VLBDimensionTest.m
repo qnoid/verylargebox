@@ -69,6 +69,4 @@
     
 	STAssertTrue(point.x == 1000, nil);
 }
-
-
 @end
