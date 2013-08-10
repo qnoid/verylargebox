@@ -25,7 +25,7 @@
 "huds.locationarrow.header" = "Finding your current location";
 "viewcontrollers.assignstore.header.empty" = "Select a Store";
 "viewcontrollers.assignstore.header" = "Select a Store (%@)";
-"viewcontrollers.directions.details" = "Get directions directions%@";
+"viewcontrollers.directions.details" = "Get directions%@";
 "questionmark" = "?";
 "viewcontrollers.directions.question" = " to %@?";
 "viewcontrollers.directions.header" = "Open in Maps";
