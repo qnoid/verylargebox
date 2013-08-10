@@ -193,7 +193,7 @@ return self;
     [self.thebox didSucceedWithVerificationForEmail:email residence:residence];
     
     UINavigationController *profileViewController =
-    [[UINavigationController alloc] initWithRootViewController:[self.thebox decideOnProfileViewController]];
+        [self.thebox newNavigationController:[self.thebox decideOnProfileViewController]];
     
     NSMutableArray* viewControllers = [NSMutableArray arrayWithArray:self.tabBarController.viewControllers];
     [viewControllers replaceObjectAtIndex:0 withObject:profileViewController];

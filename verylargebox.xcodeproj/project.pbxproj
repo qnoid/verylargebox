@@ -488,7 +488,7 @@
 		BD258DD61673F1F700286511 /* VLBTableViewDataSourceBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBTableViewDataSourceBuilder.h; path = ../Classes/VLBTableViewDataSourceBuilder.h; sourceTree = "<group>"; };
 		BD258DD71673F1F700286511 /* VLBTableViewDataSourceBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTableViewDataSourceBuilder.m; sourceTree = "<group>"; };
 		BD258DDD1678040500286511 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = "Supporting Files/refresh.png"; sourceTree = "<group>"; };
-		BD26465217B2E6F100CDC6B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BD26465217B2E6F100CDC6B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD26465317B2EA4200CDC6B8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD2A8A9C175A4F4C0036A852 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Supporting Files/Settings.bundle"; sourceTree = "<group>"; };
 		BD2A8AAA175AD9340036A852 /* VLBAlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBAlertViews.h; path = ../Classes/VLBAlertViews.h; sourceTree = "<group>"; };
@@ -552,6 +552,7 @@
 		BD5CB77C1771327600BC21D1 /* target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = target.png; path = "Supporting Files/target.png"; sourceTree = "<group>"; };
 		BD5CB77F177133EE00BC21D1 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = "Supporting Files/camera.png"; sourceTree = "<group>"; };
 		BD5CB780177133EE00BC21D1 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera@2x.png"; path = "Supporting Files/camera@2x.png"; sourceTree = "<group>"; };
+		BD5F872817B7042A00BAC456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD6BE058175B503D00B93854 /* VLBViewControllers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLBViewControllers.h; path = ../Classes/VLBViewControllers.h; sourceTree = "<group>"; };
 		BD6BE059175B524300B93854 /* VLBDrawRects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBDrawRects.h; path = ../Classes/VLBDrawRects.h; sourceTree = "<group>"; };
 		BD6BE05A175B524300B93854 /* VLBDrawRects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBDrawRects.m; sourceTree = "<group>"; };
@@ -1473,6 +1474,7 @@
 				German,
 				en,
 				el,
+				Base,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1928,6 +1930,7 @@
 			children = (
 				BD26465217B2E6F100CDC6B8 /* en */,
 				BD26465317B2EA4200CDC6B8 /* el */,
+				BD5F872817B7042A00BAC456 /* Base */,
 			);
 			name = Localizable.strings;
 			path = "Supporting Files";
