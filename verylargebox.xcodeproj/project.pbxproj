@@ -136,7 +136,6 @@
 		BD4A2D1017A54287004A80AE /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0E17A54287004A80AE /* upload@2x.png */; };
 		BD4A2D1317A546AB004A80AE /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1117A546AB004A80AE /* x.png */; };
 		BD4A2D1417A546AB004A80AE /* x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D1217A546AB004A80AE /* x@2x.png */; };
-		BD4A2D2117A70C00004A80AE /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4A2D2017A70C00004A80AE /* Reveal.framework */; };
 		BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */; };
 		BD4BD0601780415600D1462A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF2FD09177A4A7400941B7F /* AVFoundation.framework */; };
 		BD4D329C177F4E2D0015EADF /* VLBCameraViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4D329B177F4E2D0015EADF /* VLBCameraViewTest.m */; };
@@ -514,7 +513,6 @@
 		BD4A2D0E17A54287004A80AE /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "upload@2x.png"; path = "Supporting Files/upload@2x.png"; sourceTree = "<group>"; };
 		BD4A2D1117A546AB004A80AE /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x.png; path = "Supporting Files/x.png"; sourceTree = "<group>"; };
 		BD4A2D1217A546AB004A80AE /* x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x@2x.png"; path = "Supporting Files/x@2x.png"; sourceTree = "<group>"; };
-		BD4A2D2017A70C00004A80AE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		BD4BA9AA16FA5B6C009C1518 /* UIViewController+VLBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+VLBViewController.h"; path = "../Classes/UIViewController+VLBViewController.h"; sourceTree = "<group>"; };
 		BD4BA9AE16FA5D4B009C1518 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BD4D329B177F4E2D0015EADF /* VLBCameraViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCameraViewTest.m; sourceTree = "<group>"; };
@@ -731,7 +729,6 @@
 				908364011400712200E5AAAF /* libz.dylib in Frameworks */,
 				5F9827F9217C44B8AD727320 /* libPods.a in Frameworks */,
 				BD30A3A51776234300A71DC9 /* Crashlytics.framework in Frameworks */,
-				BD4A2D2117A70C00004A80AE /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -979,7 +976,6 @@
 		90454B01154DBBCA0064D998 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				BD4A2D2017A70C00004A80AE /* Reveal.framework */,
 				BD30A3A41776234300A71DC9 /* Crashlytics.framework */,
 			);
 			path = External;
