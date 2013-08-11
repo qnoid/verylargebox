@@ -107,8 +107,8 @@ return self;
 
 -(void)didSucceedWithItem:(NSDictionary*)item
 {
-	  [self.thebox userDidTakePhoto];
-    UINavigationController* profileViewController = [[UINavigationController alloc] initWithRootViewController:[self.thebox newProfileViewController]];
+    [self.thebox userDidTakePhoto];
+    UINavigationController* profileViewController = [self.thebox newNavigationController:[self.thebox newProfileViewController]];
     
     NSMutableArray* viewControllers = [NSMutableArray arrayWithArray:self.tabBarController.viewControllers];
     [viewControllers replaceObjectAtIndex:0 withObject:profileViewController];
