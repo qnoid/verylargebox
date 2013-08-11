@@ -21,10 +21,12 @@
 typedef void(^VLBUserItemViewInit)(VLBUserItemView *userItemView);
 
 @interface VLBUserItemView ()
+@property(nonatomic, strong) UIImage* placeholderImage;
 @end
 
 VLBUserItemViewInit const VLBUserItemViewInitBlock = ^(VLBUserItemView *userItemView){
   
+    userItemView.placeholderImage = [UIImage imageNamed:@"placeholder.png"];
     userItemView.didTapOnGetDirectionsButton = VLBButtonOnTouchNone;
     userItemView.storeButton.titleLabel.minimumScaleFactor = 10;
     userItemView.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -66,7 +68,7 @@ return self;
     }
     
     NSString *imageURL = [item vlb_objectForKey:VLBItemIPhoneImageURL];
-    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
+    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.placeholderImage];
 
     /**
      {

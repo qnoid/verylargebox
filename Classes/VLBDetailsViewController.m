@@ -18,6 +18,7 @@
 @interface VLBDetailsViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
 @property(nonatomic, strong) NSMutableDictionary* item;
+@property(nonatomic, strong) UIImage* placeholderImage;
 @end
 
 @implementation VLBDetailsViewController
@@ -37,7 +38,8 @@ return detailsViewController;
     VLB_IF_NOT_SELF_RETURN_NIL();
     
     self.item = item;
-
+    self.placeholderImage = [UIImage imageNamed:@"placeholder.png"];
+    
 return self;
 }
 
@@ -49,7 +51,7 @@ return self;
     [self.storeButton.titleLabel sizeToFit];
     
     NSString *imageURL = [self.item vlb_objectForKey:VLBItemIPhoneImageURL];
-    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
+    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.placeholderImage];
     
     NSDictionary *location = [self.item vlb_location];
     

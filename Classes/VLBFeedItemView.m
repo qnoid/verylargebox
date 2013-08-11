@@ -19,10 +19,12 @@
 typedef void(^VLBFeedItemViewInit)(VLBFeedItemView *userItemView);
 
 @interface VLBFeedItemView ()
+@property(nonatomic, strong) UIImage* placeholderImage;
 @end
 
 VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItemView){
     
+    feedItemView.placeholderImage = [UIImage imageNamed:@"placeholder.png"];
     feedItemView.didTapOnGetDirectionsButton = VLBButtonOnTouchNone;
     feedItemView.storeButton.titleLabel.minimumScaleFactor = 10;
     feedItemView.storeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -64,7 +66,7 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     }
     
     NSString *imageURL = [item vlb_objectForKey:VLBItemIPhoneImageURL];
-    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil];
+    [self.itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:self.placeholderImage];
     
     /**
      {

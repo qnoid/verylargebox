@@ -183,6 +183,8 @@
 		BD6BE05B175B524300B93854 /* VLBDrawRects.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6BE05A175B524300B93854 /* VLBDrawRects.m */; };
 		BD6BE05C175B524300B93854 /* VLBDrawRects.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6BE05A175B524300B93854 /* VLBDrawRects.m */; };
 		BD6BE05D175B570900B93854 /* VLBViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE1E1A1757D6050070BB59 /* VLBViews.m */; };
+		BD757BAC17B7D1F9009B9C43 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = BD757BAA17B7D1F9009B9C43 /* placeholder.png */; };
+		BD757BAD17B7D1F9009B9C43 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD757BAB17B7D1F9009B9C43 /* placeholder@2x.png */; };
 		BD77441317886926007F7AAA /* VLBViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF274851786B9DB000E179E /* VLBViewControllers.m */; };
 		BD774416178869B5007F7AAA /* VLBNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD774415178869B5007F7AAA /* VLBNotificationView.m */; };
 		BD77441817886D98007F7AAA /* VLBNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD77441717886D98007F7AAA /* VLBNotificationView.xib */; };
@@ -556,6 +558,8 @@
 		BD6BE058175B503D00B93854 /* VLBViewControllers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLBViewControllers.h; path = ../Classes/VLBViewControllers.h; sourceTree = "<group>"; };
 		BD6BE059175B524300B93854 /* VLBDrawRects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBDrawRects.h; path = ../Classes/VLBDrawRects.h; sourceTree = "<group>"; };
 		BD6BE05A175B524300B93854 /* VLBDrawRects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBDrawRects.m; sourceTree = "<group>"; };
+		BD757BAA17B7D1F9009B9C43 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		BD757BAB17B7D1F9009B9C43 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		BD774414178869B5007F7AAA /* VLBNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBNotificationView.h; sourceTree = "<group>"; };
 		BD774415178869B5007F7AAA /* VLBNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBNotificationView.m; sourceTree = "<group>"; };
 		BD77441717886D98007F7AAA /* VLBNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBNotificationView.xib; sourceTree = "<group>"; };
@@ -1140,6 +1144,8 @@
 				BD5CB778177119E800BC21D1 /* navigationbar@2x.png */,
 				BDF2FD04177A2BB500941B7F /* hexabump.png */,
 				BDF2FD02177A1EC100941B7F /* hexabump@2X.png */,
+				BD757BAA17B7D1F9009B9C43 /* placeholder.png */,
+				BD757BAB17B7D1F9009B9C43 /* placeholder@2x.png */,
 				BD59A4A5178E1ACC003A9394 /* qnoid.jpg */,
 			);
 			path = "Supporting Files";
@@ -1606,6 +1612,8 @@
 				BDB7D75F17B1A38F00E5D440 /* idcard-blue.png in Resources */,
 				BDB7D76017B1A38F00E5D440 /* idcard-blue@2x.png in Resources */,
 				BD26464D17B2E62000CDC6B8 /* Localizable.strings in Resources */,
+				BD757BAC17B7D1F9009B9C43 /* placeholder.png in Resources */,
+				BD757BAD17B7D1F9009B9C43 /* placeholder@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -66,6 +66,7 @@ static dispatch_once_t onceToken;
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
 @property(nonatomic, copy) VLBLocationServiceDirections didTapOnGetDirectionsButton;
 @property(nonatomic, copy) NSString *localityName;
+@property(nonatomic, strong) UIImage* placeholderImage;
 
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil locationService:(VLBLocationService *)locationService;
 -(void)updateTitle:(NSString *)localityName;
@@ -116,6 +117,7 @@ return cityViewController;
     self.locations = [NSArray array];
     self.items = [NSMutableArray array];
     self.operationQueue = [NSOperationQueue new];
+    self.placeholderImage = [UIImage imageNamed:@"placeholder.png"];
     
 return self;
 }
@@ -319,7 +321,7 @@ return [[UIImageView alloc] initWithFrame:frame];
     UIImageView *imageView = (UIImageView *)view;
     //@"http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/020/thumb/.jpg"
     [imageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]]
-              placeholderImage:nil];
+              placeholderImage:self.placeholderImage];
 }
 
 #pragma mark VLBGridViewDelegate
