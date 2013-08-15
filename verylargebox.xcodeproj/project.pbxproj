@@ -99,7 +99,6 @@
 		BD2A8A9D175A4F4C0036A852 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD2A8A9C175A4F4C0036A852 /* Settings.bundle */; };
 		BD2A8AAC175AD9360036A852 /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
 		BD2A8AB1175B413D0036A852 /* VLBCityViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */; };
-		BD2A8AB3175B42910036A852 /* VLBDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* VLBDetailsViewController.m */; };
 		BD2A8AB5175B429B0036A852 /* VLBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* VLBButton.m */; };
 		BD2A8AB6175B42A00036A852 /* VLBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BD0B165AD1150068C749 /* VLBColors.m */; };
 		BD2A8AB8175B42B10036A852 /* VLBLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C2ECA312930C08009195CF /* VLBLocationService.m */; };
@@ -298,6 +297,26 @@
 		BDE727DD17BCC532000DD3EF /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE727DB17BCC532000DD3EF /* warning@2x.png */; };
 		BDE727E117BD62D0000DD3EF /* VLBReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE727DF17BD62D0000DD3EF /* VLBReportViewController.m */; };
 		BDE727E217BD62D0000DD3EF /* VLBReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE727E017BD62D0000DD3EF /* VLBReportViewController.xib */; };
+		BDE727E417BD8EBE000DD3EF /* VLBDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B56BE41534D3E10064CB4E /* VLBDetailsViewController.m */; };
+		BDE727E517BD8EC3000DD3EF /* VLBTheBox.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAE3C54176E04AA0037734C /* VLBTheBox.m */; };
+		BDE727E617BD8EC7000DD3EF /* VLBReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE727DF17BD62D0000DD3EF /* VLBReportViewController.m */; };
+		BDE727E717BD8ED0000DD3EF /* VLBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */; };
+		BDE727E817BD8ED6000DD3EF /* VLBProfileEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2747F1786B1FC000E179E /* VLBProfileEmptyViewController.m */; };
+		BDE727E917BD8EE0000DD3EF /* VLBTakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9053953112888AF000FD381C /* VLBTakePhotoViewController.m */; };
+		BDE727EA17BD8EE3000DD3EF /* VLBEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8A165952C20068C749 /* VLBEmailViewController.m */; };
+		BDE727EB17BD8EE7000DD3EF /* VLBIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3C3179C9BF3002B7F60 /* VLBIdentifyViewController.m */; };
+		BDE727EC17BD8EEF000DD3EF /* VLBFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE482BF1750510D0096903C /* VLBFeedViewController.m */; };
+		BDE727ED17BD8F04000DD3EF /* VLBForewordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD59A4A1178E1283003A9394 /* VLBForewordViewController.m */; };
+		BDE727EE17BD8F08000DD3EF /* VLBTableViewCells.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */; };
+		BDE727EF17BD8F0C000DD3EF /* VLBUserItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD14C28416BDC70C0039E978 /* VLBUserItemView.m */; };
+		BDE727F017BD8F16000DD3EF /* VLBNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD774415178869B5007F7AAA /* VLBNotificationView.m */; };
+		BDE727F117BD8F22000DD3EF /* VLBStoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905A4F991291DE6400BCB475 /* VLBStoresViewController.m */; };
+		BDE727F217BD8F28000DD3EF /* VLBUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8D411C179F4D1200560C14 /* VLBUserProfileViewController.m */; };
+		BDE727F317BD8F47000DD3EF /* VLBFeedItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD33260B17A45674008784B3 /* VLBFeedItemView.m */; };
+		BDE727F417BD8F4C000DD3EF /* VLBEmailTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CB179CABFA002B7F60 /* VLBEmailTextFieldDelegate.m */; };
+		BDE727F517BD8F50000DD3EF /* VLBPredicates.m in Sources */ = {isa = PBXBuildFile; fileRef = 90226C6C1359B1DB006E43EC /* VLBPredicates.m */; };
+		BDE727F617BD8F55000DD3EF /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
+		BDE727F717BD8F60000DD3EF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD59A4A7178E2069003A9394 /* Social.framework */; };
 		BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
 		BDF2746F178551F4000E179E /* checkmark-mini-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2746D178551F4000E179E /* checkmark-mini-grey.png */; };
 		BDF27470178551F4000E179E /* checkmark-mini-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2746E178551F4000E179E /* checkmark-mini-grey@2x.png */; };
@@ -746,6 +765,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDE727F717BD8F60000DD3EF /* Social.framework in Frameworks */,
 				BDFBDD5E17AC27420018D815 /* QuartzCore.framework in Frameworks */,
 				BDF274791786352F000E179E /* AssetsLibrary.framework in Frameworks */,
 				BD4D32A0177F5A370015EADF /* CoreMedia.framework in Frameworks */,
@@ -1883,7 +1903,6 @@
 				BD9F24EB175A4302009D212F /* VLBPolygonTest.m in Sources */,
 				BD1D000E175A4A18009B0829 /* VLBPolygon.m in Sources */,
 				BD2A8AB1175B413D0036A852 /* VLBCityViewControllerTest.m in Sources */,
-				BD2A8AB3175B42910036A852 /* VLBDetailsViewController.m in Sources */,
 				BD2A8AB5175B429B0036A852 /* VLBButton.m in Sources */,
 				BD2A8AB6175B42A00036A852 /* VLBColors.m in Sources */,
 				BD2A8AB8175B42B10036A852 /* VLBLocationService.m in Sources */,
@@ -1914,6 +1933,25 @@
 				BD33260617A4452C008784B3 /* VLBBoxAlertViews.m in Sources */,
 				BDFBDD5D17AC272B0018D815 /* CALayer+VLBLayer.m in Sources */,
 				BDFBDD6617AE671D0018D815 /* NSDictionary+VLBLocality.m in Sources */,
+				BDE727E417BD8EBE000DD3EF /* VLBDetailsViewController.m in Sources */,
+				BDE727E517BD8EC3000DD3EF /* VLBTheBox.m in Sources */,
+				BDE727E617BD8EC7000DD3EF /* VLBReportViewController.m in Sources */,
+				BDE727E717BD8ED0000DD3EF /* VLBProfileViewController.m in Sources */,
+				BDE727E817BD8ED6000DD3EF /* VLBProfileEmptyViewController.m in Sources */,
+				BDE727E917BD8EE0000DD3EF /* VLBTakePhotoViewController.m in Sources */,
+				BDE727EA17BD8EE3000DD3EF /* VLBEmailViewController.m in Sources */,
+				BDE727EB17BD8EE7000DD3EF /* VLBIdentifyViewController.m in Sources */,
+				BDE727EC17BD8EEF000DD3EF /* VLBFeedViewController.m in Sources */,
+				BDE727ED17BD8F04000DD3EF /* VLBForewordViewController.m in Sources */,
+				BDE727EE17BD8F08000DD3EF /* VLBTableViewCells.m in Sources */,
+				BDE727EF17BD8F0C000DD3EF /* VLBUserItemView.m in Sources */,
+				BDE727F017BD8F16000DD3EF /* VLBNotificationView.m in Sources */,
+				BDE727F117BD8F22000DD3EF /* VLBStoresViewController.m in Sources */,
+				BDE727F217BD8F28000DD3EF /* VLBUserProfileViewController.m in Sources */,
+				BDE727F317BD8F47000DD3EF /* VLBFeedItemView.m in Sources */,
+				BDE727F417BD8F4C000DD3EF /* VLBEmailTextFieldDelegate.m in Sources */,
+				BDE727F517BD8F50000DD3EF /* VLBPredicates.m in Sources */,
+				BDE727F617BD8F55000DD3EF /* VLBVerifyOperationBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

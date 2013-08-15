@@ -13,12 +13,14 @@
 #import "NSDictionary+VLBDictionary.h"
 #import "VLBLocationService.h"
 #import "UIImageView+AFNetworking.h"
-#import "VLBDrawRects.h"
+#import "VLBReportViewController.h"
+#import "VLBTheBox.h"
 
 @interface VLBDetailsViewController ()
 -(id)initWithBundle:(NSBundle *)nibBundleOrNil onItem:(NSDictionary*)item;
 @property(nonatomic, strong) NSMutableDictionary* item;
 @property(nonatomic, strong) UIImage* placeholderImage;
+@property(nonatomic, strong) VLBTheBox* theBox;
 @end
 
 @implementation VLBDetailsViewController
@@ -39,6 +41,7 @@ return detailsViewController;
     
     self.item = item;
     self.placeholderImage = [UIImage imageNamed:@"placeholder.png"];
+    self.theBox = [VLBTheBox newTheBox];
     
 return self;
 }
@@ -61,6 +64,8 @@ return self;
     [self.storeButton.titleLabel sizeToFit];
 
     [self.whenButton setTitle:[self.item vlb_objectForKey:VLBItemWhen] forState:UIControlStateNormal];
+    [self.askForDirectionsButton vlb_cornerRadius:4.0];
+    [self.reportButton vlb_cornerRadius:4.0];
 }
 
 - (void)viewDidUnload
@@ -106,9 +111,11 @@ return self;
     [alertView show];
 }
 
--(void)drawRect:(CGRect)rect inView:(UIView *)view
+-(IBAction)didTouchUpInsideReportButton:(id)sender
 {
-    [[VLBDrawRects new] drawContextOfHexagonInRect:rect];
+    VLBReportViewController *reportViewController = [self.theBox newReportViewController:self.item];
+    
+    [self presentViewController:[self.theBox newNavigationController:reportViewController] animated:YES completion:nil];    
 }
 
 @end
