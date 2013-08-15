@@ -11,6 +11,7 @@
 @interface VLBTypography : NSObject
 
 +(UIFont*)fontAvenirNextDemiBoldTwelve;
++(UIFont*)fontAvenirNextDemiBold:(CGFloat)size;
 +(UIFont*)fontAvenirNextDemiBoldSixteen;
 +(UIFont*)fontLucidaGrandeEleven;
 +(UIFont*)fontAvenirNextDemiBoldTweenty;

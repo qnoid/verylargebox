@@ -15,15 +15,19 @@
 #import "VLBAlertViews.h"
 #import "NSDictionary+VLBDictionary.h"
 #import "VLBBoxAlertViews.h"
+#import "VLBTheBox.h"
+#import "VLBReportViewController.h"
 
 typedef void(^VLBFeedItemViewInit)(VLBFeedItemView *userItemView);
 
 @interface VLBFeedItemView ()
+@property(nonatomic, strong) VLBTheBox* theBox;
 @property(nonatomic, strong) UIImage* placeholderImage;
 @end
 
 VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItemView){
     
+    feedItemView.theBox = [VLBTheBox newTheBox];
     feedItemView.placeholderImage = [UIImage imageNamed:@"placeholder.png"];
     feedItemView.didTapOnGetDirectionsButton = VLBButtonOnTouchNone;
     feedItemView.storeButton.titleLabel.minimumScaleFactor = 10;
@@ -31,6 +35,8 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
     feedItemView.storeButton.titleLabel.numberOfLines = 0;
     [feedItemView.askForDirectionsButton setTitle:NSLocalizedString(@"buttons.getDirections.title", @"Get directions") forState:UIControlStateNormal];
     [feedItemView.askForDirectionsButton vlb_cornerRadius:4.0];
+    [feedItemView.reportButton vlb_cornerRadius:4.0];
+    feedItemView.didTapOnReportButton = VLBButtonOnTouchNone;
 };
 
 @implementation VLBFeedItemView
@@ -102,11 +108,24 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
         
         [alertView show];
     };
+    
+    __weak VLBFeedItemView *wself = self;
+    
+    self.didTapOnReportButton = ^(UIButton* button){
+        VLBReportViewController *reportViewController = [wself.theBox newReportViewController:item];
+        
+        [wself.parentViewController presentViewController:[wself.theBox newNavigationController:reportViewController] animated:YES completion:nil];
+    };
 }
 
 -(IBAction)didTapOnGetDirectionsButton:(UIButton*)sender
 {
     self.didTapOnGetDirectionsButton(sender);
+}
+
+-(IBAction)didTapOnReportButton:(UIButton*)sender
+{
+    self.didTapOnReportButton(sender);
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view

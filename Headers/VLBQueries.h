@@ -27,7 +27,7 @@
 @protocol VLBNSErrorDelegate;
 @protocol AmazonServiceRequestDelegate;
 @class S3PutObjectRequest;
-
+@protocol VLBReportOperationDelegate;
 
 typedef void(^VLBS3PutObjectRequestConfiguration)(S3PutObjectRequest* request);
 
@@ -117,5 +117,7 @@ extern VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImag
 +(AFHTTPRequestOperation*)newGetItems:(NSString*)locality delegate:(NSObject<VLBItemsOperationDelegate>*)delegate;
 
 +(AFHTTPRequestOperation*)newGetItems:(NSString*)locality page:(NSNumber*)page delegate:(NSObject<VLBItemsOperationDelegate>*)delegate;
+
++(AFHTTPRequestOperation*)newReportItem:(NSUInteger)itemId reportStatus:(NSString*)reportStatus delegate:(NSObject<VLBReportOperationDelegate>*)delegate;
 
 @end

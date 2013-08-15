@@ -14,6 +14,10 @@
     return [UIFont fontWithName:@"AvenirNext-DemiBold" size:12.0];
 }
 
++(UIFont*)fontAvenirNextDemiBold:(CGFloat)size{
+    return [UIFont fontWithName:@"AvenirNext-DemiBold" size:size];
+}
+
 +(UIFont*)fontAvenirNextDemiBoldSixteen{
     return [UIFont fontWithName:@"AvenirNext-DemiBold" size:16.0];
 }

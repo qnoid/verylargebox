@@ -20,6 +20,8 @@ extern VLBItemKey const VLBItemImageKey;
 
 @interface NSDictionary (VLBItem)
 
+-(NSUInteger)vlb_id;
+
 -(NSDictionary*)vlb_locality;
 
 -(NSDictionary*)vlb_location;

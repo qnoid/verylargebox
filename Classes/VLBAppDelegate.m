@@ -43,7 +43,9 @@
 
 		self.thebox = [VLBTheBox newTheBox];
     [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
+    #if !DEBUG
 		[Flurry startSession:@"WJVNH9SR82PTQRGXM9X5"];
+    #endif
 
     [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]}];

@@ -60,3 +60,9 @@
 "viewcontrollers.profile.takePhotoButton.title" = "Τράβα μία φωτογραφία προϊόντος";
 "viewcontroller.takePhotoViewController.uploadButton.title" = "Ανέβασμα";
 "viewcontrollers.userProfile.navigationBar.title" = "Προφίλ";
+"navigationbar.title.report" = "Αναφορά αμφίβολου περιεχομένου";
+"viewcontrollers.report.reportReasonLabel.text" = "Ποιός είναι ο λόγος της αναφοράς;";
+"viewcontrolllers.report.sexuallyexplicit" = "Αυτή η φωτογραφία είναι πορνογραφικού περιεχομένου.";
+"viewcontrolllers.report.scam" = "Αυτή η φωτογραφία είναι spam ή απάτη.";
+"viewcontrolllers.report.risk" = "Αυτή η φωτογραφία θέτει άτομα σε κίνδυνο.";
+"viewcontrolllers.report.invalid" = "Αυτή η φωτογραφία δεν θα έπρεπε να υπάρχει στο verylargebox.";

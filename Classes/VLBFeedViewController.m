@@ -216,8 +216,12 @@ return VLBScrollViewOrientationVertical;
     return [self.items count];
 }
 
--(UIView *)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index {
-    return [[VLBFeedItemView alloc] initWithFrame:frame];
+-(UIView *)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index
+{
+    VLBFeedItemView *feedItemView = [[VLBFeedItemView alloc] initWithFrame:frame];
+    feedItemView.parentViewController = self;
+    
+return feedItemView;
 }
 
 -(void)viewInScrollView:(VLBScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index

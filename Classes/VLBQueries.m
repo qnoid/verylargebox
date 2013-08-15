@@ -33,12 +33,14 @@
 #import "S3TransferManager.h"
 #import "NSDictionary+VLBDictionary.h"
 #import "DDLog.h"
+#import "VLBReportOperationDelegate.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
 static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
 static NSString* const USER_ITEMS = @"/users/%u/items";
 static NSString* const ITEMS = @"/items";
+static NSString* const REPORT_ITEM = @"/items/%u/report";
 
 @interface NSObject (VLBObject)
 -(bool) vlb_isNil;
@@ -439,6 +441,30 @@ return request;
 return request;
 }
 
++(AFHTTPRequestOperation*)newReportItem:(NSUInteger)itemId reportStatus:(NSString*)reportStatus delegate:(NSObject<VLBReportOperationDelegate>*)delegate;
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
+    NSMutableURLRequest *reportItemRequest = [client requestWithMethod:@"POST"
+                                                                  path:[NSString stringWithFormat:REPORT_ITEM, itemId]
+                                                            parameters:@{@"report_status":reportStatus}];
+    
+    [reportItemRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [reportItemRequest setTimeoutInterval:TIMEOUT];
+    
+    VLBAFHTTPRequestOperationFailureBlock didFailOnReportWithError =
+    [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnReportWithError:error];
+    }];
+    
+    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:reportItemRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+       [delegate didSucceedOnReport];
+    }
+    failure:didFailOnReportWithError];
+    
+return request;
+}
 
 
 @end

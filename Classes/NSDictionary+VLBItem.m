@@ -21,6 +21,10 @@ VLBItemKey const VLBItemTimeIntervalSinceNowKey = @"timeIntervalSinceNow";
 
 @implementation NSDictionary (VLBItem)
 
+-(NSUInteger)vlb_id {
+    return [[self objectForKey:VLBItemId] unsignedIntValue];
+}
+
 -(NSDictionary*)vlb_locality {
     return [self objectForKey:VLBItemLocality];
 }

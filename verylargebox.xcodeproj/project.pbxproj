@@ -294,6 +294,10 @@
 		BDE492651775B89200FFC41F /* NSDictionary+VLBLocality.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE492641775B89200FFC41F /* NSDictionary+VLBLocality.m */; };
 		BDE4926E1775F7A700FFC41F /* refresh-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */; };
 		BDE4926F1775F7A700FFC41F /* refresh-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE4926D1775F7A700FFC41F /* refresh-mini.png */; };
+		BDE727DC17BCC532000DD3EF /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE727DA17BCC532000DD3EF /* warning.png */; };
+		BDE727DD17BCC532000DD3EF /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE727DB17BCC532000DD3EF /* warning@2x.png */; };
+		BDE727E117BD62D0000DD3EF /* VLBReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE727DF17BD62D0000DD3EF /* VLBReportViewController.m */; };
+		BDE727E217BD62D0000DD3EF /* VLBReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE727E017BD62D0000DD3EF /* VLBReportViewController.xib */; };
 		BDF0F42516C8254C002CDE8E /* VLBVerifyOperationBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */; };
 		BDF2746F178551F4000E179E /* checkmark-mini-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2746D178551F4000E179E /* checkmark-mini-grey.png */; };
 		BDF27470178551F4000E179E /* checkmark-mini-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF2746E178551F4000E179E /* checkmark-mini-grey@2x.png */; };
@@ -660,6 +664,12 @@
 		BDE492641775B89200FFC41F /* NSDictionary+VLBLocality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBLocality.m"; sourceTree = "<group>"; };
 		BDE4926C1775F7A700FFC41F /* refresh-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-mini@2x.png"; path = "Supporting Files/refresh-mini@2x.png"; sourceTree = "<group>"; };
 		BDE4926D1775F7A700FFC41F /* refresh-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-mini.png"; path = "Supporting Files/refresh-mini.png"; sourceTree = "<group>"; };
+		BDE727DA17BCC532000DD3EF /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = warning.png; path = "Supporting Files/warning.png"; sourceTree = "<group>"; };
+		BDE727DB17BCC532000DD3EF /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "warning@2x.png"; path = "Supporting Files/warning@2x.png"; sourceTree = "<group>"; };
+		BDE727DE17BD62D0000DD3EF /* VLBReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBReportViewController.h; sourceTree = "<group>"; };
+		BDE727DF17BD62D0000DD3EF /* VLBReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBReportViewController.m; sourceTree = "<group>"; };
+		BDE727E017BD62D0000DD3EF /* VLBReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBReportViewController.xib; sourceTree = "<group>"; };
+		BDE727E317BD7CD9000DD3EF /* VLBReportOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLBReportOperationDelegate.h; sourceTree = "<group>"; };
 		BDF0F42316C8254B002CDE8E /* VLBVerifyOperationBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBVerifyOperationBlock.h; path = ../Classes/VLBVerifyOperationBlock.h; sourceTree = "<group>"; };
 		BDF0F42416C8254B002CDE8E /* VLBVerifyOperationBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVerifyOperationBlock.m; sourceTree = "<group>"; };
 		BDF2746D178551F4000E179E /* checkmark-mini-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-mini-grey.png"; path = "Supporting Files/checkmark-mini-grey.png"; sourceTree = "<group>"; };
@@ -798,6 +808,9 @@
 				905A4F9C1291DE6F00BCB475 /* Stores */,
 				BD59A4A0178E1283003A9394 /* VLBForewordViewController.h */,
 				BD59A4A1178E1283003A9394 /* VLBForewordViewController.m */,
+				BDE727DE17BD62D0000DD3EF /* VLBReportViewController.h */,
+				BDE727DF17BD62D0000DD3EF /* VLBReportViewController.m */,
+				BDE727E017BD62D0000DD3EF /* VLBReportViewController.xib */,
 				BDAE3C43176CE0EC0037734C /* UINavigationItem+VLBNavigationItem.m */,
 				BDAE3C46176CEE0B0037734C /* NSDictionary+VLBFoursquareVenue.m */,
 				BDF2747E1786B1FB000E179E /* VLBProfileEmptyViewController.h */,
@@ -863,6 +876,7 @@
 				BDFBDD6417AE66590018D815 /* NSObject+VLBObject.m */,
 				BD394C2517B2CDD90038312D /* CLLocation+VLBLocation.h */,
 				BD394C2617B2CDD90038312D /* CLLocation+VLBLocation.m */,
+				BDE727E317BD7CD9000DD3EF /* VLBReportOperationDelegate.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1309,6 +1323,8 @@
 				BD4A2D1217A546AB004A80AE /* x@2x.png */,
 				BD59A492178CBF03003A9394 /* exclamation-mark.png */,
 				BDB15729175561EE00E140E9 /* exclamation-mark@2x.png */,
+				BDE727DA17BCC532000DD3EF /* warning.png */,
+				BDE727DB17BCC532000DD3EF /* warning@2x.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -1610,6 +1626,9 @@
 				BD26464D17B2E62000CDC6B8 /* Localizable.strings in Resources */,
 				BD757BAC17B7D1F9009B9C43 /* placeholder.png in Resources */,
 				BD757BAD17B7D1F9009B9C43 /* placeholder@2x.png in Resources */,
+				BDE727DC17BCC532000DD3EF /* warning.png in Resources */,
+				BDE727DD17BCC532000DD3EF /* warning@2x.png in Resources */,
+				BDE727E217BD62D0000DD3EF /* VLBReportViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1832,6 +1851,7 @@
 				BDFBDD5C17AC22D00018D815 /* CALayer+VLBLayer.m in Sources */,
 				BDFBDD6517AE665A0018D815 /* NSObject+VLBObject.m in Sources */,
 				BD394C2717B2CDD90038312D /* CLLocation+VLBLocation.m in Sources */,
+				BDE727E117BD62D0000DD3EF /* VLBReportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

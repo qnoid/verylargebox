@@ -18,6 +18,7 @@
 @class VLBCityViewController;
 @class VLBFeedViewController;
 @class VLBUserProfileViewController;
+@class VLBReportViewController;
 
 extern NSString* const THE_BOX_SERVICE;
 
@@ -65,6 +66,7 @@ extern NSString* const THE_BOX_SERVICE;
 -(VLBFeedViewController*)newFeedViewController;
 -(VLBTakePhotoViewController*)newTakePhotoViewController;
 -(VLBUserProfileViewController*)newUserProfileViewController;
+-(VLBReportViewController*)newReportViewController:(NSDictionary*)item;
 
 /**
  

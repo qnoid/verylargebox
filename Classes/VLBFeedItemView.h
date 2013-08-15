@@ -20,9 +20,14 @@
 @property(nonatomic, weak) IBOutlet UIImageView* itemImageView;
 @property(nonatomic, weak) IBOutlet UIButton* whenButton;
 @property(nonatomic, weak) IBOutlet UIButton* askForDirectionsButton;
+@property(nonatomic, weak) IBOutlet UIButton* reportButton;
 @property(nonatomic, copy) VLBButtonOnTouch didTapOnGetDirectionsButton;
+@property(nonatomic, copy) VLBButtonOnTouch didTapOnReportButton;
+
+@property(nonatomic, weak) UIViewController* parentViewController;
 
 -(void)viewWillAppear:(NSDictionary*)item;
 -(IBAction)didTapOnGetDirectionsButton:(id)sender;
+-(IBAction)didTapOnReportButton:(UIButton*)sender;
 
 @end

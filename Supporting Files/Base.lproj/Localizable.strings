@@ -60,3 +60,9 @@
 "viewcontrollers.profile.takePhotoButton.title" = "Take photo of an item in store";
 "viewcontroller.takePhotoViewController.uploadButton.title" = "Upload";
 "viewcontrollers.userProfile.navigationBar.title" = "User Profile";
+"navigationbar.title.report" = "Report objectionable content";
+"viewcontrollers.report.reportReasonLabel.text" = "What is the reason for the report?";
+"viewcontrolllers.report.sexuallyexplicit" = "This photo is sexually explicit.";
+"viewcontrolllers.report.scam" = "This photo is spam or a scam.";
+"viewcontrolllers.report.risk" = "This photo puts people at risk.";
+"viewcontrolllers.report.invalid" = "This photo shouldn't be on verylargebox.";

@@ -25,6 +25,7 @@
 #import "NSArray+VLBDecorator.h"
 #import "VLBIdentifyViewController.h"
 #import "VLBUserProfileViewController.h"
+#import "VLBReportViewController.h"
 
 NSString* const THE_BOX_SERVICE = @"com.verylargebox";
 
@@ -204,6 +205,9 @@ return [VLBTakePhotoViewController newTakePhotoViewController:self userId:[self 
 
 -(VLBUserProfileViewController*)newUserProfileViewController{
 return [VLBUserProfileViewController newUserSettingsViewController:self];
+}
+-(VLBReportViewController*)newReportViewController:(NSDictionary*)item{
+    return [VLBReportViewController newReportViewController:item];
 }
 
 -(NSString*)newPostImage:(UIImage*)image delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate
