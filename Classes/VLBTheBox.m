@@ -104,6 +104,7 @@ return self;
    	self.residence = residence;
     [self.userDefaults setInteger:[self.residence vlb_residenceUserId] forKey:[self prefixKey:VLBResidenceUserId]];
     [self.userDefaults setBool:[self.residence vlb_hasUserTakenPhoto] forKey:[self prefixKey:VLBUserDidTakePhotoKey]];
+    [self.userDefaults setObject:[self.residence vlb_objectForKey:VLBResidenceToken] forKey:[self prefixKey:VLBResidenceToken]];
     [self.userDefaults synchronize];
 }
 
@@ -223,7 +224,7 @@ return [VLBUserProfileViewController newUserSettingsViewController:self];
     self.s3transferManager.s3 = s3;    
 
     NSString* key = [NSString stringWithFormat:@"%@/%f.jpg",
-                     [self.residence vlb_objectForKey:VLBResidenceToken],
+                     [self.userDefaults objectForKey:[self prefixKey:VLBResidenceToken]],
                      CACurrentMediaTime()];
     
     S3PutObjectRequest *putImageInBucket = [self.queries newS3PutObjectRequest:@{@"key":key, @"bucket":VERYLARGEBOX_BUCKET} config:^(S3PutObjectRequest *request) {
