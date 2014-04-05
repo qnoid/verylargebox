@@ -73,6 +73,8 @@ return self;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     [self.signUpButton setTitle:NSLocalizedString(@"viewcontrollers.identify.signUpButton.placeholder", @"Sign up") forState:UIControlStateNormal];
     [self.signInButton setTitle:NSLocalizedString(@"viewcontrollers.identify.signInButton.placeholder", @"Sign in") forState:UIControlStateNormal];
+    [self.termsOfServiceButton setTitle:NSLocalizedString(@"viewcontrollers.identify.termsOfServiceButton.title", @"By signing up you agree to the terms of service") forState:UIControlStateNormal];
+    VLBTitleButtonAttributed(self.termsOfServiceButton, self.termsOfServiceButton.titleLabel.text);
     
     VLBTitleLabelPrimaryBlue(self.emailButton.titleLabel);
 
@@ -231,6 +233,11 @@ return self;
     [self hideHUDForView];
 
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+}
+
+-(IBAction)didTouchUpInsideTermsOfServiceButton:(UIButton*)termsOfServiceButton
+{
+    
 }
 
 @end

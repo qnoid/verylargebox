@@ -41,6 +41,8 @@ return availablePlacesViewController;
 #pragma mark TBLocalityOperationDelegate
 -(void)didSucceedWithLocalities:(NSArray *)localities
 {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
     DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, localities);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
@@ -81,7 +83,6 @@ return availablePlacesViewController;
 {
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 
     MBProgressHUD *hud = [VLBHuds newWithView:self.view];
     [hud show:YES];
@@ -119,7 +120,7 @@ return availablePlacesViewController;
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         cell.textLabel.font = [VLBTypography fontLucidaGrandeEleven];
-        cell.textLabel.textColor = [VLBColors colorPearlWhite];
+        cell.textLabel.textColor = [VLBColors colorPrimaryBlue];
     }
     
     cell.textLabel.text = [[[self.localities objectAtIndex:indexPath.row] objectForKey:@"locality"] objectForKey:@"name"];
@@ -137,5 +138,6 @@ return cell;
     
     [self.delegate didSelectLocality:locality];
 }
+
 
 @end

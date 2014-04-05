@@ -12,7 +12,6 @@
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 #import "VLBItemsOperationDelegate.h"
-#import "JSONKit.h"
 #import "VLBLocationOperationDelegate.h"
 #import "NSMutableDictionary+VLBMutableDictionary.h"
 #import "VLBUpdateItemOperationDelegate.h"
@@ -34,13 +33,14 @@
 #import "NSDictionary+VLBDictionary.h"
 #import "DDLog.h"
 #import "VLBReportOperationDelegate.h"
+#import "NSString+VLBJson.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
-static NSString* const LOCATION_ITEMS = @"/locations/%d/items";
-static NSString* const USER_ITEMS = @"/users/%u/items";
+static NSString* const LOCATION_ITEMS = @"/locations/%luu/items";
+static NSString* const USER_ITEMS = @"/users/%luu/items";
 static NSString* const ITEMS = @"/items";
-static NSString* const REPORT_ITEM = @"/items/%u/report";
+static NSString* const REPORT_ITEM = @"/items/%lu/report";
 
 @interface NSObject (VLBObject)
 -(bool) vlb_isNil;
@@ -165,7 +165,7 @@ return request;
 
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:registrationRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
-       [delegate didSucceedWithVerificationForEmail:email residence:[[operation.responseString objectFromJSONString] objectForKey:@"residence"]];
+       [delegate didSucceedWithVerificationForEmail:email residence:[[operation.responseString vlb_jsonObject] objectForKey:@"residence"]];
    }
    failure:didFailOnRegistrationWithError];
     
@@ -197,7 +197,7 @@ return request;
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSString* responseString = operation.responseString;        
-        [delegate didSucceedWithLocations:[responseString mutableObjectFromJSONString] givenParameters:parameters];
+        [delegate didSucceedWithLocations:[responseString vlb_jsonObject] givenParameters:parameters];
     } 
     failure:didFailOnLocationWithError];
     
@@ -210,7 +210,7 @@ return request;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                 FOURSQUARE_CLIENT_ID, @"client_id",
                                 FOURSQUARE_CLIENT_SECRET, @"client_secret",
-                                @"20120411", @"v",
+                                @"20140405", @"v",
                                 nil];
     
 return parameters;
@@ -233,7 +233,7 @@ return parameters;
     {
         NSString* responseString = operation.responseString;
 
-        NSMutableArray* locations = [[[responseString mutableObjectFromJSONString] objectForKey:@"response"] objectForKey:@"venues"];
+        NSMutableArray* locations = [[[responseString vlb_jsonObject] objectForKey:@"response"] objectForKey:@"venues"];
           
         [delegate didSucceedWithLocations:locations givenParameters:parameters];
     } 
@@ -278,7 +278,7 @@ return [self newLocationQuery:parameters delegate:delegate];
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
        NSString* responseString = operation.responseString;
-       [delegate didSucceedWithLocalities:[responseString mutableObjectFromJSONString]];
+       [delegate didSucceedWithLocalities:[responseString vlb_jsonObject]];
     }
     failure:didFailOnLocalitiesWithError];
     
@@ -303,7 +303,7 @@ return [self newLocationQuery:parameters delegate:delegate];
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
        NSString* responseString = operation.responseString;
-       [delegate didSucceedWithLocations:[responseString mutableObjectFromJSONString] givenParameters:nil];
+       [delegate didSucceedWithLocations:[responseString vlb_jsonObject] givenParameters:nil];
    }
    failure:didFailOnLocationWithError];
 
@@ -322,7 +322,7 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
     [parameters vlb_setObjectIfNotNil:page forKey:@"page"];
 
     NSMutableURLRequest *categoriesRequest =
-    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:LOCATION_ITEMS, locationId] parameters:parameters];
+    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:LOCATION_ITEMS, (unsigned long)(unsigned long)locationId] parameters:parameters];
     
     [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [categoriesRequest setTimeoutInterval:TIMEOUT];
@@ -335,7 +335,7 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
        NSString* responseString = operation.responseString;
-       [delegate didSucceedWithItems:[responseString mutableObjectFromJSONString]];
+       [delegate didSucceedWithItems:[responseString vlb_jsonObject]];
    }
     failure:didFailOnItemsWithError];
     
@@ -370,7 +370,7 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
     AFHTTPRequestOperation *createItem = [[AFHTTPRequestOperation alloc] initWithRequest:createItemRequest];
     [createItem setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-            [delegate didSucceedWithItem:[operation.responseString mutableObjectFromJSONString]];
+            [delegate didSucceedWithItem:[operation.responseString vlb_jsonObject]];
     }
     failure:didFailOnItemWithError];
     
@@ -389,7 +389,7 @@ return createItem;
     [parameters vlb_setObjectIfNotNil:page forKey:@"page"];
 
     NSMutableURLRequest *getItemsRequest =
-    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:USER_ITEMS, userId] parameters:parameters];    
+    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:USER_ITEMS, (unsigned long)(unsigned long)userId] parameters:parameters];    
     [getItemsRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [getItemsRequest setTimeoutInterval:TIMEOUT];
     
@@ -400,7 +400,7 @@ return createItem;
 
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:getItemsRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
-       [delegate didSucceedWithItems:[operation.responseString mutableObjectFromJSONString]];
+       [delegate didSucceedWithItems:[operation.responseString vlb_jsonObject]];
    }
   failure:didFailOnItemsWithError];
     
@@ -434,7 +434,7 @@ return request;
     
     AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:getItemsRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
-       [delegate didSucceedWithItems:[operation.responseString mutableObjectFromJSONString]];
+       [delegate didSucceedWithItems:[operation.responseString vlb_jsonObject]];
    }
   failure:didFailOnItemsWithError];
     
@@ -446,7 +446,7 @@ return request;
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableURLRequest *reportItemRequest = [client requestWithMethod:@"POST"
-                                                                  path:[NSString stringWithFormat:REPORT_ITEM, itemId]
+                                                                  path:[NSString stringWithFormat:REPORT_ITEM, (unsigned long)itemId]
                                                             parameters:@{@"report_status":reportStatus}];
     
     [reportItemRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];

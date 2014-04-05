@@ -1,0 +1,28 @@
+dependencies: \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBIdentifyViewController.m \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBIdentifyViewController.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBEmailTextFieldDelegate.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBCreateUserOperationDelegate.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBNSErrorDelegate.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBVerifyUserOperationDelegate.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBButtons.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBButton.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBColors.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBView.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBScrollView.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBVisibleStrategy.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBSize.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBScrollViewDatasource.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBCanIndexLocationInView.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBMacros.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBHuds.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/MBProgressHUD/MBProgressHUD.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBSecureHashA1.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBForewordViewController.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBViewControllers.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBTheBox.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBErrorBlocks.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBAFHTTPRequestOperationCompletionBlocks.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFHTTPRequestOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFURLConnectionOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBQueries.h

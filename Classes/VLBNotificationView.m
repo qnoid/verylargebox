@@ -70,7 +70,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
     self.progressView.imageView.image = itemImage;
     
     [self animateWithDuration:0.5 animation:^(UIView *view) {
-        view.frame = CGRectMake(0, 44, 320, 44);
+        view.frame = CGRectMake(0, 64, 320, 44);
     }];
     
     [self.delegate didStartUploadingItem:itemImage key:key location:location locality:locality];

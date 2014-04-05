@@ -21,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet VLBButton *emailButton;
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UIView *noticeView;
+@property (nonatomic, weak) IBOutlet UIButton *termsOfServiceButton;
 
 +(VLBIdentifyViewController*)newIdentifyViewController:(VLBTheBox*)thebox;
 

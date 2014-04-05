@@ -84,17 +84,17 @@ return self;
     }];
 
     [self.locationButton setTitle:NSLocalizedString(@"viewcontrollers.assignstore.header.empty", @"Assign a store") forState:UIControlStateNormal];
-    [self.locationButton vlb_cornerRadius:2.0];
+    [self.locationButton vlb_cornerRadius:4.0];
     self.locationButton.titleLabel.minimumScaleFactor = 10;
     self.locationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.locationButton.titleLabel.numberOfLines = 0;
     [self.locationButton.titleLabel sizeToFit];
 
     [self.discardButton setTitle:NSLocalizedString(@"buttons.discardButton.close", @"Close") forState:UIControlStateNormal];
-    [self.discardButton vlb_cornerRadius:2.0 corners:UIRectCornerBottomLeft | UIRectCornerTopLeft];
+    [self.discardButton vlb_cornerRadius:4.0 corners:UIRectCornerBottomLeft | UIRectCornerTopLeft];
     [self.uploadButton setTitle:NSLocalizedString(@"viewcontroller.takePhotoViewController.uploadButton.title", @"Upload") forState:UIControlStateNormal];
     [self.uploadButton.titleLabel sizeToFit];
-    [self.uploadButton vlb_cornerRadius:2.0 corners:UIRectCornerBottomRight | UIRectCornerTopRight];
+    [self.uploadButton vlb_cornerRadius:4.0 corners:UIRectCornerBottomRight | UIRectCornerTopRight];
 
     self.cameraView.writeToCameraRoll = YES;
     self.cameraView.flashView.backgroundColor =
@@ -117,6 +117,10 @@ return self;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+}
+
+-(BOOL)prefersStatusBarHidden{
+    return YES;
 }
 
 #pragma mark VLBLocationOperationDelegate

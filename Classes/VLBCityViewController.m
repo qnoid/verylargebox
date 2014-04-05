@@ -29,7 +29,6 @@
 #import "VLBBoxAlertViews.h"
 #import "CALayer+VLBLayer.h"
 
-static CGFloat const LOCATIONS_VIEW_HEIGHT = 100.0;
 static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
 
 static NSInteger const FIRST_VIEW_TAG = -1;
@@ -418,7 +417,7 @@ return VLBScrollViewOrientationHorizontal;
 
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index
 {
-    DDLogVerbose(@"%s %u", __PRETTY_FUNCTION__, index);
+    DDLogVerbose(@"%s %lu", __PRETTY_FUNCTION__, index);
     
     if(![self.locationsView isEqual:scrollView]){
         return;

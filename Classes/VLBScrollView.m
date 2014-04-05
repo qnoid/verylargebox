@@ -256,7 +256,7 @@ return view;
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer*)sender;
     CGPoint locationInView = [tapGestureRecognizer locationInView:self];
     NSUInteger index = [self indexOf:locationInView];
-    DDLogVerbose(@"%u", index);
+    DDLogVerbose(@"%luu", index);
     
     NSUInteger numberOfViews = [self.datasource numberOfViewsInScrollView:self];
     

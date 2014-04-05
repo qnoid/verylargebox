@@ -17,7 +17,9 @@ extern VLBTitleLabel const VLBTitleLabelNavigation;
 extern VLBTitleLabel const VLBTitleLabelPrimaryBlue;
 extern VLBTitleButton const VLBTitleButtonAttributed;
 extern VLBAttributedTitleButton const VLBAttributedTitleButtonn;
+extern VLBTitleButton const VLBTitleButtonAttributedWhite;
 extern VLBTitleButton const VLBTitleButtonAttributedd;
+
 
 @interface VLBViewControllers : NSObject
 

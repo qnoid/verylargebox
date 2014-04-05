@@ -1,0 +1,27 @@
+dependencies: \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBStoresViewController.m \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBStoresViewController.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBLocationServiceDelegate.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBLocationOperationDelegate.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBNSErrorDelegate.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBLocationService.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBNotifications.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/VLBQueries.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBAFHTTPRequestOperationCompletionBlocks.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFHTTPRequestOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFURLConnectionOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBAlertViews.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/NSDictionary+VLBFoursquareVenue.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Headers/NSArray+VLBDecorator.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBErrorBlocks.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBHuds.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/MBProgressHUD/MBProgressHUD.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBTypography.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/QNDAnimations/QNDAnimations.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/QNDAnimations/QNDAnimatedView.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/QNDAnimations/QNDViewAnimationBlockSuppliers.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBMacros.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBViewControllers.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/CLLocation+VLBLocation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/CALayer+VLBLayer.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Classes/VLBColors.h

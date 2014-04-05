@@ -1,4 +1,4 @@
-platform :ios, :deployment_target => '5.1'
+platform :ios, :deployment_target => '7.0'
 
 post_install do | installer |
   require 'fileutils'
@@ -6,21 +6,20 @@ post_install do | installer |
 end
 
 target :UnitTests do
-	pod 'OCMock', '~> 2.0.1'
-	pod 'Kiwi', '~> 2.1'
+	pod 'OCMock', '~> 2.2.3'
+	pod 'Kiwi', '~> 2.2.0'
 end
 
 target :ApplicationTests, :exclusive => true do
-	pod 'OCMock', '~> 2.0.1'
-	pod 'Kiwi', '~> 2.1'
+	pod 'OCMock', '~> 2.2.3'
+	pod 'Kiwi', '~> 2.2.0'
 end
 
 pod 'AFNetworking', '1.3.1' 
-pod 'AWSiOSSDK/S3', '1.6'
-pod 'JSONKit', '1.4', :inhibit_warnings => true
-pod 'FlurrySDK', '4.2.2'
-pod 'SSKeychain', '0.1.4'
-pod 'MBProgressHUD', '0.7.0'
+pod 'AWSiOSSDK/S3', '1.7.1'
+pod 'FlurrySDK', '4.4.0'
+pod 'SSKeychain', '1.2.2'
+pod 'MBProgressHUD', '0.8.0'
 pod 'QNDAnimations', '2.0.1'
-pod 'CocoaLumberjack', '1.6.2'
-pod 'FormatterKit/TimeIntervalFormatter', :git => 'git@github.com:verylargebox/FormatterKit.git', :commit => 'd173b5e'
+pod 'CocoaLumberjack', '1.8.1'
+pod 'FormatterKit/TimeIntervalFormatter', '1.4.2'

@@ -1,0 +1,25 @@
+dependencies: \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Tests/Classes/VLBFoo.m \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTest.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCAbstractTest.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestAssertions.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestAssertionsImpl.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestCase.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestDefines.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestCaseRun.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestRun.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestLog.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestObserver.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestProbe.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestSuite.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/XCTest.framework/Headers/XCTestSuiteRun.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFNetworking.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFURLConnectionOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFHTTPRequestOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFJSONRequestOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFXMLRequestOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFPropertyListRequestOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFHTTPClient.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFImageRequestOperation.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/AFNetworkActivityIndicatorManager.h \
+  /Users/qnoid/Developer/workspace/objective-c/thebox/Pods/Headers/AFNetworking/UIImageView+AFNetworking.h

@@ -20,6 +20,7 @@
 #import "VLBViewControllers.h"
 #import "CLLocation+VLBLocation.h"
 #import "CALayer+VLBLayer.h"
+#import "VLBColors.h"
 
 static NSString* const foursquarePoweredByFilename = @"poweredByFoursquare";
 static NSString* const foursquarePoweredByType = @"png";
@@ -104,15 +105,14 @@ return self;
     }];
 
     [UIView animateWithDuration:0.5 animations:^{
-        self.venuesTableView.contentInset = self.venuesTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, value.CGRectValue.size.height, 0);        
+        self.venuesTableView.contentInset = self.venuesTableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, value.CGRectValue.size.height, 0);
     }];
-
 }
 
 -(void)keyboardWillHide:(NSNotification*)notification
 {
     [self.animatedMap rewind];
-    self.venuesTableView.contentInset = self.venuesTableView.scrollIndicatorInsets = UIEdgeInsetsMake(185, 0, 0, 0);
+    self.venuesTableView.contentInset = self.venuesTableView.scrollIndicatorInsets = UIEdgeInsetsMake(162 + 64, 0, 0, 0);
     
     CGRect visibleRect;
     visibleRect.origin = self.venuesTableView.bounds.origin;
@@ -155,12 +155,10 @@ return self;
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.searchBar.placeholder = NSLocalizedString(@"viewcontrollers.stores.search.placeholder", @"Search for the store that has the item");
-    self.searchBar.translucent = YES;
     self.searchBar.layer.zPosition = 1;
     self.animatedMap = [[QNDAnimations new] animateView:self.map];
 
     self.venuesTableView.tableFooterView = imageView;
-    self.venuesTableView.contentInset = UIEdgeInsetsMake(185, 0, 0, 0);
     
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     MBProgressHUD *hud = [VLBHuds newWithViewLocationArrow:self.view];
@@ -322,7 +320,7 @@ return cell;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = [VLBColors colorPrimaryBlue];
     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
 }
 

@@ -39,6 +39,17 @@ VLBTitleButton const VLBTitleButtonAttributed = ^(UIButton *titleButton, NSStrin
     [titleButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
 };
 
+VLBTitleButton const VLBTitleButtonAttributedWhite = ^(UIButton *titleButton, NSString* title)
+{
+    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:title
+                                                                                        attributes:@{
+                                                                     NSUnderlineStyleAttributeName:@1,
+                                                                    NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                  }];
+    
+    [titleButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+};
+
 VLBTitleButton const VLBTitleButtonAttributedd = ^(UIButton *titleButton, NSString* title)
 {
     NSString *text = [NSString stringWithFormat:NSLocalizedString(@"viewcontrollers.assignstore.header", @"Assign a Store (%@)"), title];

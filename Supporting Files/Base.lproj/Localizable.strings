@@ -66,3 +66,4 @@
 "viewcontrolllers.report.scam" = "This photo is spam or a scam.";
 "viewcontrolllers.report.risk" = "This photo puts people at risk.";
 "viewcontrolllers.report.invalid" = "This photo shouldn't be on verylargebox.";
+"viewcontrollers.identify.termsOfServiceButton.title" = "By signing up you agree to the terms of service";

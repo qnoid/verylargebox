@@ -66,3 +66,4 @@
 "viewcontrolllers.report.scam" = "Αυτή η φωτογραφία είναι spam ή απάτη.";
 "viewcontrolllers.report.risk" = "Αυτή η φωτογραφία θέτει άτομα σε κίνδυνο.";
 "viewcontrolllers.report.invalid" = "Αυτή η φωτογραφία δεν θα έπρεπε να υπάρχει στο verylargebox.";
+"viewcontrollers.identify.termsOfServiceButton.title" = "Με την εγγραφή σου συμφωνείς στους όρους χρήσης.";

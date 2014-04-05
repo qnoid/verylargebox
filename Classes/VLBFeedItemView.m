@@ -86,8 +86,8 @@ VLBFeedItemViewInit const VLBFeedItemViewInitBlock = ^(VLBFeedItemView *feedItem
      }
      */
     NSDictionary *location = [item vlb_location];
-    
-    id name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
+    NSString* name = [location vlb_objectForKey:VLBLocationName ifNil:@""];
+
     [self.storeButton setTitle:name forState:UIControlStateNormal];
     [self.storeButton.titleLabel sizeToFit];
     

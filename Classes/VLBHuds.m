@@ -8,6 +8,7 @@
 //
 
 #import "VLBHuds.h"
+#import "VLBColors.h"
 
 @implementation VLBHuds
 
@@ -115,6 +116,7 @@ return block(hud);
 +(MBProgressHUD*)newWithView:(UIView*)view
 {
 	MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
+    hud.color = [VLBColors colorPrimaryBlue];
     hud.userInteractionEnabled = NO;
 	[view addSubview:hud];
 

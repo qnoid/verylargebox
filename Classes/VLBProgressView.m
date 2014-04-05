@@ -19,8 +19,8 @@
     VLB_IF_NOT_SELF_RETURN_NIL();
     VLB_LOAD_VIEW();
     
-    self.progressView.progressTintColor = [VLBColors colorPrimaryBlue];
-    self.progressView.trackTintColor = [VLBColors color0102161];
+    self.progressView.progressTintColor = [UIColor whiteColor];
+    self.progressView.trackTintColor = [UIColor blackColor];
 return self;
 }
 
@@ -31,8 +31,8 @@ return self;
     VLB_IF_NOT_SELF_RETURN_NIL();
     VLB_LOAD_VIEW();
     
-    self.progressView.progressTintColor = [VLBColors colorPrimaryBlue];
-    self.progressView.trackTintColor = [VLBColors color0102161];
+    self.progressView.progressTintColor = [UIColor whiteColor];
+    self.progressView.trackTintColor = [UIColor blackColor];
     
 return self;
 }

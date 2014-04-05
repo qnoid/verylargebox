@@ -37,7 +37,7 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
-{    
+{
 		DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
@@ -50,9 +50,8 @@
     [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
 
-    [[UITabBar appearance] setTintColor:[VLBColors color333333]];
     [[UITabBar appearance] setSelectedImageTintColor:[VLBColors color0102161]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor whiteColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldTwelve]} forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldTwelve]} forState:UIControlStateNormal];
     [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
 
     [[UISearchBar appearance] setTintColor:[VLBColors colorPearlWhite]];

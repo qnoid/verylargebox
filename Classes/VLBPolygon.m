@@ -38,7 +38,7 @@ return [self of:6 at:center];
 
 +(instancetype)of:(NSUInteger)numberOfAngles at:(CGPoint)center
 {
-    DDLogVerbose(@"numberOfAngles: %d", numberOfAngles);
+    DDLogVerbose(@"numberOfAngles: %lu", numberOfAngles);
     DDLogVerbose(@"center: %@", NSStringFromCGPoint(center));
     
 return [[VLBPolygon alloc] initWithNumberOfAngles:numberOfAngles center:center];

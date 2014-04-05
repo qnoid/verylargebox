@@ -16,7 +16,7 @@ typedef void(^VLBTableViewCellBlock)(UITableViewCell* cell, NSIndexPath* indexPa
 
 NS_INLINE
 VLBNumberOfRowsInSectionBlock tbZeroNumberOfRows(){
-return ^(UITableView *tableView, NSInteger section){return 0;};
+return ^(UITableView *tableView, NSInteger section){return (NSInteger)0;};
 }
 
 NS_INLINE

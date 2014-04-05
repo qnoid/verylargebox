@@ -38,8 +38,8 @@ VLBGridViewOrientation const VLBGridViewOrientationVertical = ^(VLBGridView *gri
                                         scrollView.bounces = NO;
                                         scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
                                         scrollView.backgroundColor = [UIColor clearColor];
-                                        scrollView.contentInset = UIEdgeInsetsMake(144.0, 0, 0, 0);
-                                        scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(144.0, 0, 0, 0);
+                                        scrollView.contentInset = UIEdgeInsetsMake(100.0, 0, 0, 0);
+                                        scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(100.0, 0, 0, 0);
 
                                         UITapGestureRecognizer *tapGestureRecognizer =
                                             [[UITapGestureRecognizer alloc] initWithTarget:gridView
@@ -142,7 +142,7 @@ return self;
 {
     NSUInteger row = [[self.frames objectForKey:[NSValue valueWithCGRect:[view frame]]] unsignedIntegerValue];
     
-    DDLogVerbose(@"asking for column %d at row %d", index, row);
+    DDLogVerbose(@"asking for column %ld at row %ld", (long)index, row);
 
 return [self.datasource gridView:gridView viewOf:view ofFrame:frame atRow:row atIndex:index];
 }
@@ -214,7 +214,7 @@ return [self.datasource numberOfViewsInGridView:self];
     return [self gridView:self viewOf:scrollView ofFrame:frame atIndex:index];
     }
 
-	DDLogVerbose(@"asking for row %d", index);
+	DDLogVerbose(@"asking for row %luu", index);
 	
     VLBScrollView * view =
         [VLBScrollView newHorizontalScrollView:frame
@@ -266,7 +266,7 @@ return view;
     DDLogVerbose(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
 
     NSUInteger row = [self.scrollView indexOf:tapPoint];
-    DDLogVerbose(@"%u", row);
+    DDLogVerbose(@"%lu", row);
     
     NSUInteger numberOfRows = [self numberOfViewsInScrollView:self.scrollView];
     
