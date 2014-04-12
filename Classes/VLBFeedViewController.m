@@ -76,8 +76,8 @@ return feedViewController;
     [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
-    [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality page:VLB_Integer(1) delegate:self]];
-    [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality delegate:self]];
+    [VLBQueries newGetItems:self.locality page:VLB_Integer(1) delegate:self];
+    [VLBQueries newGetItems:self.locality delegate:self];
 }
 
 -(void)updateTitle:(NSString*)localityName
@@ -290,8 +290,8 @@ return feedItemView;
     
     self.locality = localityName;
     
-    [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality page:VLB_Integer(1) delegate:self]];
-    [self.operationQueue addOperation:[VLBQueries newGetItems:self.locality delegate:self]];
+    [VLBQueries newGetItems:self.locality page:VLB_Integer(1) delegate:self];
+    [VLBQueries newGetItems:self.locality delegate:self];
     MBProgressHUD *hud = [VLBHuds newWithView:self.view];
     [hud show:YES];
 }

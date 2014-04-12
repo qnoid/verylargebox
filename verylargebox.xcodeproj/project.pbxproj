@@ -128,6 +128,9 @@
 		BD394C2717B2CDD90038312D /* CLLocation+VLBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD394C2617B2CDD90038312D /* CLLocation+VLBLocation.m */; };
 		BD4292B9175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
 		BD4292BA175B4BBB00459891 /* VLBErrorBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */; };
+		BD46931D18F4A3BD008C6A77 /* VLBTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD46931B18F4A3BD008C6A77 /* VLBTextViewController.m */; };
+		BD46931E18F4A3BD008C6A77 /* VLBTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD46931C18F4A3BD008C6A77 /* VLBTextViewController.xib */; };
+		BD46931F18F4AEA2008C6A77 /* VLBTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD46931B18F4A3BD008C6A77 /* VLBTextViewController.m */; };
 		BD4A2D0717A54156004A80AE /* map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0517A54156004A80AE /* map-marker.png */; };
 		BD4A2D0817A54156004A80AE /* map-marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0617A54156004A80AE /* map-marker@2x.png */; };
 		BD4A2D0B17A5418C004A80AE /* camera-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4A2D0917A5418C004A80AE /* camera-grey.png */; };
@@ -422,7 +425,6 @@
 		908363A61400659200E5AAAF /* libz.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		908363CC14006BF000E5AAAF /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		908363D614006BF100E5AAAF /* unittests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "unittests-Info.plist"; path = "UnitTests/unittests-Info.plist"; sourceTree = "<group>"; };
-		908363DE14006BF100E5AAAF /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UnitTests-Prefix.pch"; path = "UnitTests/UnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		90894828155349DE009188B4 /* NSDictionary+VLBDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+VLBDictionary.h"; path = "../Classes/NSDictionary+VLBDictionary.h"; sourceTree = "<group>"; };
 		90894829155349DE009188B4 /* NSDictionary+VLBDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VLBDictionary.m"; sourceTree = "<group>"; };
 		9094243E142E44380084C40C /* VLBGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBGridViewDelegate.h; sourceTree = "<group>"; };
@@ -525,10 +527,6 @@
 		BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBAlertViews.m; sourceTree = "<group>"; };
 		BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBCityViewControllerTest.m; sourceTree = "<group>"; };
 		BD2E0D6A18D5F5BD0063086D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		BD2E0D7018D5F5BD0063086D /* Foo Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Foo Tests-Info.plist"; sourceTree = "<group>"; };
-		BD2E0D7218D5F5BD0063086D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BD2E0D7418D5F5BD0063086D /* Foo_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Foo_Tests.m; sourceTree = "<group>"; };
-		BD2E0D7618D5F5BD0063086D /* Foo Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Foo Tests-Prefix.pch"; sourceTree = "<group>"; };
 		BD2E0D7E18D5F5F80063086D /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "../../../../Library/Developer/Xcode/DerivedData/verylargebox-fywylgajxxtxiabjsrflpzcbnuxo/Build/Products/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		BD33260317A442BF008784B3 /* VLBBoxAlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBBoxAlertViews.h; sourceTree = "<group>"; };
 		BD33260417A442BF008784B3 /* VLBBoxAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBBoxAlertViews.m; sourceTree = "<group>"; };
@@ -539,6 +537,9 @@
 		BD394C2617B2CDD90038312D /* CLLocation+VLBLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+VLBLocation.m"; sourceTree = "<group>"; };
 		BD4292B7175B4BBB00459891 /* VLBErrorBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBErrorBlocks.h; path = ../Classes/VLBErrorBlocks.h; sourceTree = "<group>"; };
 		BD4292B8175B4BBB00459891 /* VLBErrorBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBErrorBlocks.m; sourceTree = "<group>"; };
+		BD46931A18F4A3BD008C6A77 /* VLBTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBTextViewController.h; sourceTree = "<group>"; };
+		BD46931B18F4A3BD008C6A77 /* VLBTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBTextViewController.m; sourceTree = "<group>"; };
+		BD46931C18F4A3BD008C6A77 /* VLBTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VLBTextViewController.xib; sourceTree = "<group>"; };
 		BD4A2D0517A54156004A80AE /* map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-marker.png"; path = "Supporting Files/map-marker.png"; sourceTree = "<group>"; };
 		BD4A2D0617A54156004A80AE /* map-marker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-marker@2x.png"; path = "Supporting Files/map-marker@2x.png"; sourceTree = "<group>"; };
 		BD4A2D0917A5418C004A80AE /* camera-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-grey.png"; path = "Supporting Files/camera-grey.png"; sourceTree = "<group>"; };
@@ -623,7 +624,6 @@
 		BDA2BCDD1659853D0068C749 /* VLBButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBButton.h; path = ../Classes/VLBButton.h; sourceTree = "<group>"; };
 		BDA2BCDE1659853D0068C749 /* VLBButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBButton.m; sourceTree = "<group>"; };
 		BDA2BCF2165ACC800068C749 /* ApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ApplicationTests-Info.plist"; sourceTree = "<group>"; };
-		BDA2BCF9165ACC800068C749 /* ApplicationTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ApplicationTests-Prefix.pch"; sourceTree = "<group>"; };
 		BDA2BD04165ACF2F0068C749 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BDA2BD0A165AD1150068C749 /* VLBColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBColors.h; path = ../Classes/VLBColors.h; sourceTree = "<group>"; };
 		BDA2BD0B165AD1150068C749 /* VLBColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBColors.m; sourceTree = "<group>"; };
@@ -916,6 +916,9 @@
 				BD15EF9317D1EFD400799907 /* VLBWebViewController.xib */,
 				BD6D6E571824FCEF00C82021 /* NSString+VLBJson.h */,
 				BD6D6E581824FCEF00C82021 /* NSString+VLBJson.m */,
+				BD46931A18F4A3BD008C6A77 /* VLBTextViewController.h */,
+				BD46931B18F4A3BD008C6A77 /* VLBTextViewController.m */,
+				BD46931C18F4A3BD008C6A77 /* VLBTextViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -937,7 +940,6 @@
 				90E359291546333700075ABF /* Supporting Files */,
 				90C950FA12B6A10700A8A05F /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				BD2E0D6E18D5F5BD0063086D /* Foo Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				90454B01154DBBCA0064D998 /* External */,
 				90D8304012B506D900BE4470 /* UnitTests */,
@@ -1203,25 +1205,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BD2E0D6E18D5F5BD0063086D /* Foo Tests */ = {
-			isa = PBXGroup;
-			children = (
-				BD2E0D7418D5F5BD0063086D /* Foo_Tests.m */,
-				BD2E0D6F18D5F5BD0063086D /* Supporting Files */,
-			);
-			path = "Foo Tests";
-			sourceTree = "<group>";
-		};
-		BD2E0D6F18D5F5BD0063086D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				BD2E0D7018D5F5BD0063086D /* Foo Tests-Info.plist */,
-				BD2E0D7118D5F5BD0063086D /* InfoPlist.strings */,
-				BD2E0D7618D5F5BD0063086D /* Foo Tests-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		BD4292B6175B4AF800459891 /* UIViewController+VLBViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1235,7 +1218,6 @@
 			isa = PBXGroup;
 			children = (
 				BDC8A1D31781F10700E5BF8C /* 8mpximage.png */,
-				908363DE14006BF100E5AAAF /* UnitTests-Prefix.pch */,
 				908363D614006BF100E5AAAF /* unittests-Info.plist */,
 			);
 			name = "Supporting Files";
@@ -1300,7 +1282,6 @@
 			children = (
 				BDA2BCF2165ACC800068C749 /* ApplicationTests-Info.plist */,
 				BDD8FEBC165C196200AB3041 /* InfoPlist.strings */,
-				BDA2BCF9165ACC800068C749 /* ApplicationTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1610,6 +1591,7 @@
 				BDBA745C1770EA71001AE3F3 /* envelope.png in Resources */,
 				BDBA745F1770EB4B001AE3F3 /* eye@2x.png in Resources */,
 				BDBA74601770EB4B001AE3F3 /* eye.png in Resources */,
+				BD46931E18F4A3BD008C6A77 /* VLBTextViewController.xib in Resources */,
 				BD5CB779177119E800BC21D1 /* navigationbar.png in Resources */,
 				BD5CB77A177119E800BC21D1 /* navigationbar@2x.png in Resources */,
 				BD5CB77D1771327600BC21D1 /* target@2x.png in Resources */,
@@ -1825,6 +1807,7 @@
 				90C2C37412B6C2AC00829868 /* VLBStoresViewController.m in Sources */,
 				90C2C37512B6C2AD00829868 /* VLBAppDelegate.m in Sources */,
 				90C2C37612B6C2AE00829868 /* main.m in Sources */,
+				BD46931D18F4A3BD008C6A77 /* VLBTextViewController.m in Sources */,
 				90D9A93F12B921950063FF60 /* VLBItem.m in Sources */,
 				90D9A96412B924130063FF60 /* VLBMath.m in Sources */,
 				90A6C4541300822C00AEEE9F /* VLBScrollView.m in Sources */,
@@ -1905,6 +1888,7 @@
 				BD2D29EC16B9DAB30092EB95 /* VLBBundle.m in Sources */,
 				BD2D29ED16B9DAB30092EB95 /* VLBVisibleStrategy.m in Sources */,
 				908363E814006C3B00E5AAAF /* VLBRecycleStrategyTest.m in Sources */,
+				BD46931F18F4AEA2008C6A77 /* VLBTextViewController.m in Sources */,
 				908363EE14006C3B00E5AAAF /* VLBSizeTest.m in Sources */,
 				908363EF14006C3B00E5AAAF /* VLBRectTest.m in Sources */,
 				908363F014006C3B00E5AAAF /* VLBBinarySearchTest.m in Sources */,
@@ -2014,14 +1998,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BD2E0D7118D5F5BD0063086D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BD2E0D7218D5F5BD0063086D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2041,6 +2017,8 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${TARGET_NAME}_Prefix.pch";
@@ -2122,7 +2100,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
+				GCC_PREFIX_HEADER = verylargebox_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -2171,7 +2149,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
+				GCC_PREFIX_HEADER = verylargebox_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2199,124 +2177,6 @@
 			};
 			name = Release;
 		};
-		908363E214006BF100E5AAAF /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83F757C9D3B843C4A2749415 /* Pods-UnitTests.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DSTROOT = /tmp/xcodeproj.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Tests/Headers\"/**",
-				);
-				INFOPLIST_FILE = "${TARGET_NAME}/unittests-Info.plist";
-				MACH_O_TYPE = mh_bundle;
-				MACOSX_DEPLOYMENT_TARGET = "";
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-all_load",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				RUN_CLANG_STATIC_ANALYZER = NO;
-				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "${BUNDLE_LOADER}";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/Tests/Headers\"";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = AdHoc;
-		};
-		A152E543130D7A2300514061 /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(PRODUCT_NAME)-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = mh_execute;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = "$(PROJECT_NAME)";
-				PROVISIONING_PROFILE = "";
-				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = NO;
-				TEST_AFTER_BUILD = YES;
-				VALID_ARCHS = "armv7 armv7s";
-			};
-			name = AdHoc;
-		};
-		A152E544130D7A2300514061 /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 357DF359FDFE4E56B5D134F8 /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/xcodeproj.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/External\"",
-					"$(SRCROOT)",
-					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "${TARGET_NAME}_Prefix.pch";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "${PRODUCT_NAME}-info.plist";
-				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACH_O_TYPE = mh_execute;
-				PRODUCT_NAME = verylargebox;
-				PROVISIONING_PROFILE = "";
-				RUN_CLANG_STATIC_ANALYZER = YES;
-				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = NO;
-				SYMROOT = build;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_AFTER_BUILD = NO;
-				USER_HEADER_SEARCH_PATHS = "";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = AdHoc;
-		};
 		BDCD93A2165C127A009C2F8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */;
@@ -2336,7 +2196,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
+				GCC_PREFIX_HEADER = verylargebox_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -2384,7 +2244,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
+				GCC_PREFIX_HEADER = verylargebox_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2408,50 +2268,6 @@
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
-		};
-		BDCD93A4165C127A009C2F8F /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CE87FA59C694D3E918C73D6 /* Pods-ApplicationTests.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/${PROJECT_NAME}.app/${PROJECT_NAME}";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DSTROOT = /tmp/xcodeproj.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(SRCROOT)/External\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Tests/Headers\"/**",
-				);
-				INFOPLIST_FILE = "ApplicationTests/ApplicationTests-Info.plist";
-				MACH_O_TYPE = mh_bundle;
-				MACOSX_DEPLOYMENT_TARGET = "";
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = ApplicationTests;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				RUN_CLANG_STATIC_ANALYZER = NO;
-				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TEST_AFTER_BUILD = NO;
-				TEST_HOST = "${BUNDLE_LOADER}";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/Tests/Headers\"";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = AdHoc;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2533,7 +2349,6 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
-				A152E544130D7A2300514061 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -2543,7 +2358,6 @@
 			buildConfigurations = (
 				908363E014006BF100E5AAAF /* Debug */,
 				908363E114006BF100E5AAAF /* Release */,
-				908363E214006BF100E5AAAF /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -2553,7 +2367,6 @@
 			buildConfigurations = (
 				BDCD93A2165C127A009C2F8F /* Debug */,
 				BDCD93A3165C127A009C2F8F /* Release */,
-				BDCD93A4165C127A009C2F8F /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -2563,7 +2376,6 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
-				A152E543130D7A2300514061 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

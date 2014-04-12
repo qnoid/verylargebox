@@ -140,7 +140,7 @@ return self;
     UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
     [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
     self.navigationItem.rightBarButtonItem.enabled = NO;
-    [[VLBQueries newGetLocationsGivenLocalityName:self.placemark.locality delegate:self] start];
+    [VLBQueries newGetLocationsGivenLocalityName:self.placemark.locality delegate:self];
 }
 
 - (void)updateTitle:(NSString *)localityName
@@ -238,8 +238,8 @@ return self;
     NSDictionary* currentLocation = [self.locations objectAtIndex:self.index];
     NSUInteger locationId = [[[currentLocation objectForKey:@"location"] objectForKey:@"id"] unsignedIntValue];
     
-    [self.operationQueue addOperation:[VLBQueries newGetItemsGivenLocationId:locationId page:VLB_Integer(1) delegate:self]];
-    [self.operationQueue addOperation:[VLBQueries newGetItemsGivenLocationId:locationId delegate:self]];
+    [VLBQueries newGetItemsGivenLocationId:locationId page:VLB_Integer(1) delegate:self];
+    [VLBQueries newGetItemsGivenLocationId:locationId delegate:self];
     MBProgressHUD *hud = [VLBHuds newWithView:self.view];
     [hud show:YES];
 }
@@ -550,7 +550,7 @@ return VLBScrollViewOrientationHorizontal;
     
     [self updateTitle:localityName];
 
-    [[VLBQueries newGetLocationsGivenLocalityName:localityName delegate:self] start];
+    [VLBQueries newGetLocationsGivenLocalityName:localityName delegate:self];
     MBProgressHUD *hud = [VLBHuds newWithView:self.view];
     [hud show:YES];
 }

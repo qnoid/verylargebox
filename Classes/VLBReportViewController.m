@@ -120,11 +120,9 @@ return reportCell;
     NSLog(@"%@", self.item);
     enum VLBReportStatus reportStatus = [[self.reasons[indexPath.row] objectForKey:@"VLBReportStatus"] unsignedIntValue];
     
-    AFHTTPRequestOperation *newReportItemOperation = [VLBQueries newReportItem:[self.item vlb_id]
-                                                                    reportStatus:VLBReportStatusToString(reportStatus)
-                                                                      delegate:self];
-    [newReportItemOperation start];
-    
+    [VLBQueries newReportItem:[self.item vlb_id]
+                reportStatus:VLBReportStatusToString(reportStatus)
+                  delegate:self];
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 

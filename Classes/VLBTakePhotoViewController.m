@@ -180,12 +180,9 @@ return self;
                         @"lat": [NSString stringWithFormat:@"%f",location.coordinate.latitude],
                         @"lng": [NSString stringWithFormat:@"%f",location.coordinate.longitude]}};
     
-    AFHTTPRequestOperation* operation =
-        [VLBQueries newLocationQuery:location.coordinate.latitude
-                          longtitude:location.coordinate.longitude
-                            delegate:self];
-    
-    [operation start];
+    [VLBQueries newLocationQuery:location.coordinate.latitude
+                      longtitude:location.coordinate.longitude
+                        delegate:self];
 }
 
 -(void)didFailUpdateToLocationWithError:(NSNotification *)notification

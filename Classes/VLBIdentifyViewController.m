@@ -16,6 +16,7 @@
 #import "VLBTheBox.h"
 #import "VLBErrorBlocks.h"
 #import "VLBQueries.h"
+#import "VLBTextViewController.h"
 
 @interface VLBIdentifyViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
@@ -74,7 +75,7 @@ return self;
     [self.signUpButton setTitle:NSLocalizedString(@"viewcontrollers.identify.signUpButton.placeholder", @"Sign up") forState:UIControlStateNormal];
     [self.signInButton setTitle:NSLocalizedString(@"viewcontrollers.identify.signInButton.placeholder", @"Sign in") forState:UIControlStateNormal];
     [self.termsOfServiceButton setTitle:NSLocalizedString(@"viewcontrollers.identify.termsOfServiceButton.title", @"By signing up you agree to the terms of service") forState:UIControlStateNormal];
-    VLBTitleButtonAttributed(self.termsOfServiceButton, self.termsOfServiceButton.titleLabel.text);
+    VLBTitleButtonAttributedWhite(self.termsOfServiceButton, self.termsOfServiceButton.titleLabel.text);
     
     VLBTitleLabelPrimaryBlue(self.emailButton.titleLabel);
 
@@ -108,10 +109,8 @@ return self;
         
         [Flurry logEvent:@"didSignUp"];
         
-        AFHTTPRequestOperation *newRegistrationOperation =
         [VLBQueries newCreateUserQuery:wself email:email residence:residence];
         
-        [newRegistrationOperation start];
     }];
     
     
@@ -132,8 +131,7 @@ return self;
         MBProgressHUD *hud = [VLBHuds newOnDidSignIn:wself.view email:[wself.thebox email]];
         [hud show:YES];
         
-        AFHTTPRequestOperation *verifyUser = [VLBQueries newVerifyUserQuery:wself email:email residence:residence];
-        [verifyUser start];
+        [VLBQueries newVerifyUserQuery:wself email:email residence:residence];
     }];
 }
 
@@ -237,7 +235,15 @@ return self;
 
 -(IBAction)didTouchUpInsideTermsOfServiceButton:(UIButton*)termsOfServiceButton
 {
+    VLBMarkdownSucessBlock markdownSuccessBlock = [[VLBViewControllers new] presentTextViewController:self title:NSLocalizedString(@"huds.termsoofservice.header", @"Terms of Service")];
     
+    [VLBQueries queryTermsOfService:markdownSuccessBlock
+    failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        [self hideHUDForView];
+        
+        [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+    }];
 }
 
 @end

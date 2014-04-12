@@ -8,6 +8,8 @@
 "errors.location.denied.details" = "Go to \n Settings > \n Privacy > \n Location Services > \n Turn switch to 'ON' under 'verylargebox' to access your location.";
 "huds.signout.details" = "What happens next? \n \n You will need to verify your email again to add photos to verylargebox. \n \n Your existing photos will not be affected. \n \n Other features will remain accessible.";
 "huds.signout.header" = "Sign out";
+"huds.termsoofservice.header" = "Terms of Service";
+"huds.privacypolicy.header" = "Privacy Policy";
 "huds.signin.details" = "Please wait while verylargebox is signing you in as %@";
 "huds.signin.header" = "Signing you in.";
 "huds.email.header" = "An email it is on its way.";

@@ -73,8 +73,8 @@ return self;
     [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
     self.navigationItem.rightBarButtonItem.enabled = NO;
 
-    [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[self.thebox userId] page:VLB_Integer(1) delegate:self]];
-    [self.operationQueue addOperation:[VLBQueries newGetItemsGivenUserId:[self.thebox userId] delegate:self]];
+    [VLBQueries newGetItemsGivenUserId:[self.thebox userId] page:VLB_Integer(1) delegate:self];
+    [VLBQueries newGetItemsGivenUserId:[self.thebox userId] delegate:self];
 }
 
 -(void)presentUserSettingsViewController
@@ -131,13 +131,12 @@ return self;
 
 -(void)didCompleteUploading:(VLBNotificationView *)notificationView at:(NSString *)itemURL
 {
-	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:itemURL
-                                                            location:self.location
-                                                            locality:self.locality
-                                                                user:[self.thebox userId]
-                                                            delegate:notificationView];
+	[VLBQueries newPostItemQuery:itemURL
+                        location:self.location
+                        locality:self.locality
+                            user:[self.thebox userId]
+                        delegate:notificationView];
 
-	[self.operationQueue addOperation:itemQuery];
 }
 
 -(void)didStartUploadingItem:(UIImage*)itemImage key:(NSString*)key location:(NSDictionary*) location locality:(NSString*) locality

@@ -112,7 +112,16 @@ return self;
     return [self userId] != 0;
 }
 
--(void)noUserAccount{
+-(void)noUserAccount
+{
+    NSError *error = nil;
+
+    [SSKeychain setPassword:nil forService:THE_BOX_SERVICE account:self.email error:&error];
+    
+    if (error) {
+        DDLogWarn(@"Could not remove residence: %s %@", __PRETTY_FUNCTION__, error);
+    }
+
     [self.userDefaults setInteger:0 forKey:[self prefixKey:VLBResidenceUserId]];
     [self.userDefaults synchronize];
 }
@@ -150,9 +159,7 @@ return [SSKeychain passwordForService:THE_BOX_SERVICE account:email error:&error
     NSError *error = nil;
     NSString *residence = [SSKeychain passwordForService:THE_BOX_SERVICE account:email error:&error];
     
-    AFHTTPRequestOperation *verifyUser = [VLBQueries newVerifyUserQuery:delegate email:email residence:residence];
-    
-    [verifyUser start];
+    [VLBQueries newVerifyUserQuery:delegate email:email residence:residence];    
 }
 
 -(UIViewController*)decideOnProfileViewController

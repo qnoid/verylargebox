@@ -15,6 +15,8 @@
 
 @property (nonatomic, weak) IBOutlet VLBButton *emailButton;
 @property (nonatomic, weak) IBOutlet VLBButton *signOutButton;
+@property (nonatomic, weak) IBOutlet VLBButton *termsOfServiceButton;
+@property (nonatomic, weak) IBOutlet VLBButton *privacyPolicyButton;
 @property (nonatomic, weak) IBOutlet UIView *noticeView;
 
 +(VLBUserProfileViewController*)newUserSettingsViewController:(VLBTheBox*)thebox;

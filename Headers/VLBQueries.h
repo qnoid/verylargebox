@@ -29,6 +29,11 @@
 @class S3PutObjectRequest;
 @protocol VLBReportOperationDelegate;
 
+typedef void(^VLBAFHTTPRequestOperationSucessBlock)(AFHTTPRequestOperation *operation, id responseObject);
+
+typedef void(^VLBMarkdownSucessBlock)(NSAttributedString *markdown);
+
+
 typedef void(^VLBS3PutObjectRequestConfiguration)(S3PutObjectRequest* request);
 
 extern VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImageJpegPublicRead;
@@ -119,5 +124,9 @@ extern VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImag
 +(AFHTTPRequestOperation*)newGetItems:(NSString*)locality page:(NSNumber*)page delegate:(NSObject<VLBItemsOperationDelegate>*)delegate;
 
 +(AFHTTPRequestOperation*)newReportItem:(NSUInteger)itemId reportStatus:(NSString*)reportStatus delegate:(NSObject<VLBReportOperationDelegate>*)delegate;
+
++(AFHTTPRequestOperation*)queryTermsOfService:(VLBMarkdownSucessBlock)success failure:(VLBAFHTTPRequestOperationFailureBlock)failure;
+
++(AFHTTPRequestOperation*)queryPrivacyPolicy:(VLBMarkdownSucessBlock)success failure:(VLBAFHTTPRequestOperationFailureBlock)failure;
 
 @end

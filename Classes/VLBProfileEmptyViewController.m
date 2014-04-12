@@ -90,13 +90,12 @@ return self;
 
 -(void)didCompleteUploading:(VLBNotificationView *)notificationView at:(NSString *)itemURL
 {
-	AFHTTPRequestOperation *itemQuery = [VLBQueries newPostItemQuery:itemURL
-                                                            location:self.location
-                                                            locality:self.locality
-                                                                user:[self.thebox userId]
-                                                            delegate:notificationView];
+	[VLBQueries newPostItemQuery:itemURL
+                        location:self.location
+                        locality:self.locality
+                            user:[self.thebox userId]
+                        delegate:notificationView];
     
-	[itemQuery start];
 }
 
 -(void)didStartUploadingItem:(UIImage*)itemImage key:(NSString*)key location:(NSDictionary*) location locality:(NSString*) locality

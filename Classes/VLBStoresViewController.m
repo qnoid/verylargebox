@@ -140,12 +140,10 @@ return self;
     [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
     self.navigationItem.rightBarButtonItem.enabled = NO;
 
-    AFHTTPRequestOperation* operation =
     [VLBQueries newLocationQuery:self.lastKnownLocation.coordinate.latitude
                       longtitude:self.lastKnownLocation.coordinate.longitude
                         delegate:self];
     
-    [operation start];
 }
 
 -(void)viewDidLoad
@@ -231,12 +229,10 @@ return self;
    [hud show:YES];
     
    self.searchBar.text = @"";
-   AFHTTPRequestOperation* operation =
    [VLBQueries newLocationQuery:self.lastKnownLocation.coordinate.latitude
                      longtitude:self.lastKnownLocation.coordinate.longitude
                        delegate:self];
     
-   [operation start];
 }
 
 #pragma mark VLBLocationOperationDelegate
@@ -346,9 +342,8 @@ return cell;
     
     CLLocation* userLocation = self.map.userLocation.location;
     
-    AFHTTPRequestOperation* operation = [VLBQueries newLocationQuery:userLocation.coordinate.latitude longtitude:userLocation.coordinate.longitude query:query delegate:self];
+    [VLBQueries newLocationQuery:userLocation.coordinate.latitude longtitude:userLocation.coordinate.longitude query:query delegate:self];
     
-    [operation start];    
     MBProgressHUD *hud = [VLBHuds newWithViewSearch:self.view query:query];
     [hud show:YES];
 }

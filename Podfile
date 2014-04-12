@@ -15,7 +15,7 @@ target :ApplicationTests, :exclusive => true do
 	pod 'Kiwi', '~> 2.2.0'
 end
 
-pod 'AFNetworking', '1.3.1' 
+pod 'AFNetworking', '2.2.1' 
 pod 'AWSiOSSDK/S3', '1.7.1'
 pod 'FlurrySDK', '4.4.0'
 pod 'SSKeychain', '1.2.2'
@@ -23,3 +23,4 @@ pod 'MBProgressHUD', '0.8.0'
 pod 'QNDAnimations', '2.0.1'
 pod 'CocoaLumberjack', '1.8.1'
 pod 'FormatterKit/TimeIntervalFormatter', '1.4.2'
+pod 'MMMarkdown', '0.3'

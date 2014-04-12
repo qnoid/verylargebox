@@ -9,7 +9,7 @@
 //
 
 #import "VLBQueries.h"
-#import "AFHTTPClient.h"
+#import "AFHTTPRequestOperationManager.h"
 #import "AFHTTPRequestOperation.h"
 #import "VLBItemsOperationDelegate.h"
 #import "VLBLocationOperationDelegate.h"
@@ -34,6 +34,7 @@
 #import "DDLog.h"
 #import "VLBReportOperationDelegate.h"
 #import "NSString+VLBJson.h"
+#import "MMMarkdown.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
@@ -48,7 +49,7 @@ static NSString* const REPORT_ITEM = @"/items/%lu/report";
 
 @implementation NSObject (VLBObject)
 -(bool) vlb_isNil{
-return nil == self || [NSNull null] == self;
+    return nil == self || [NSNull null] == self;
 }
 @end
 
@@ -61,19 +62,19 @@ VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImageJpegPu
 
 +(VLBAFHTTPRequestOperationFailureBlock)nsErrorDelegate:(NSObject<VLBNSErrorDelegate>*)delegate failureBlock:(VLBAFHTTPRequestOperationFailureBlock)failureBlock
 {
-return ^(AFHTTPRequestOperation *operation, NSError *error)
+    return ^(AFHTTPRequestOperation *operation, NSError *error)
     {
         DDLogWarn(@"%s %@", __PRETTY_FUNCTION__, error);
         if(VLB_ERROR_BLOCK_CANNOT_CONNECT_TO_HOST(error)){
             [delegate didFailWithCannonConnectToHost:error];
-        return;
+            return;
         }
         
         if(VLB_ERROR_BLOCK_NOT_CONNECTED_TO_INTERNET(error)){
             [delegate didFailWithNotConnectToInternet:error];
-        return;
+            return;
         }
-
+        
         if(VLB_ERROR_TIMEOUT(error)){
             [delegate didFailWithTimeout:error];
             return;
@@ -82,7 +83,7 @@ return ^(AFHTTPRequestOperation *operation, NSError *error)
         if(VLB_ERROR_CANCELLED(error)){
             return;
         }
-
+        
         failureBlock(operation, error);
     };
 }
@@ -99,11 +100,27 @@ return ^(AFHTTPRequestOperation *operation, NSError *error)
 @implementation VLBQueries
 
 NSString* const THE_BOX_BASE_URL_STRING = @"https://www.verylargebox.com";
+NSString* const THE_BOX_STATIC_BASE_URL_STRING = @"http://static.verylargebox.com";
 
 NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
 NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
 NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
 NSUInteger const TIMEOUT = 60;
+
+
+VLBAFHTTPRequestOperationSucessBlock VLBSucessBlockResponseObjectMarkdown(VLBMarkdownSucessBlock success)
+{
+return ^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSString *html = [MMMarkdown HTMLStringWithMarkdown:[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] error:nil];
+        
+        NSDictionary *options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
+        
+        NSAttributedString *preview = [[NSAttributedString alloc] initWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:options documentAttributes:nil error:NULL];
+        
+        success(preview);
+    };
+}
 
 +(void)initialize
 {
@@ -117,57 +134,60 @@ NSUInteger const TIMEOUT = 60;
     
     config(por);
     
-return por;
+    return por;
+}
+
++(AFHTTPRequestOperation*)queryMarkdown:(NSString*)URLString success:(VLBMarkdownSucessBlock)success failure:(VLBAFHTTPRequestOperationFailureBlock)failure
+{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_STATIC_BASE_URL_STRING]];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    AFHTTPRequestOperation* request = [manager GET:URLString parameters:nil success:VLBSucessBlockResponseObjectMarkdown(success) failure:failure];
+    
+    return request;
 }
 
 +(AFHTTPRequestOperation*)newCreateUserQuery:(NSObject<VLBCreateUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     [parameters vlb_setObjectIfNotNil:email forKey:@"email"];
     [parameters vlb_setObjectIfNotNil:residence forKey:@"residence"];
-
-    NSMutableURLRequest *registrationRequest = [client requestWithMethod:@"POST" path:@"/users" parameters:parameters];
-    [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [registrationRequest setTimeoutInterval:TIMEOUT];
-
-    VLBAFHTTPRequestOperationFailureBlock didFailOnRegistrationWithError =
-        [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [delegate didFailOnRegistrationWithError:error];
-        }];
-
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:registrationRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        [delegate didSucceedWithRegistrationForEmail:email residence:residence];
-    } 
-    failure:didFailOnRegistrationWithError];
     
-return request;
+    VLBAFHTTPRequestOperationFailureBlock didFailOnRegistrationWithError =
+    [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [delegate didFailOnRegistrationWithError:error];
+    }];
+    
+    AFHTTPRequestOperation* request = [client POST:@"/users" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+                   {
+                       [delegate didSucceedWithRegistrationForEmail:email residence:residence];
+                   }
+                                                  failure:didFailOnRegistrationWithError];
+    
+    return request;
 }
 
 +(AFHTTPRequestOperation*)newVerifyUserQuery:(NSObject<VLBVerifyUserOperationDelegate>*)delegate email:(NSString*)email residence:(NSString*)residence;
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     [parameters vlb_setObjectIfNotNil:residence forKey:@"residence"];
     [parameters vlb_setObjectIfNotNil:email forKey:@"email"];
-    
-    NSMutableURLRequest *registrationRequest = [client requestWithMethod:@"GET" path:@"/users" parameters:parameters];
-    [registrationRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [registrationRequest setTimeoutInterval:TIMEOUT];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnRegistrationWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnVerifyWithError:error];
     }];
-
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:registrationRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-   {
-       [delegate didSucceedWithVerificationForEmail:email residence:[[operation.responseString vlb_jsonObject] objectForKey:@"residence"]];
-   }
-   failure:didFailOnRegistrationWithError];
+    
+    AFHTTPRequestOperation* request = [client GET:@"/users" parameters:parameters
+                                          success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           [delegate didSucceedWithVerificationForEmail:email residence:[[operation.responseString vlb_jsonObject] objectForKey:@"residence"]];
+                                       }
+                                       failure:didFailOnRegistrationWithError];
     
 return request;
 }
@@ -178,28 +198,21 @@ return request;
         return nil;
     }
     
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSDictionary* parameters = @{@"locality[name]":localityName};
-    
-    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET"
-                                                                  path:@"/locations"
-                                                            parameters:parameters];
-    
-    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest setTimeoutInterval:TIMEOUT];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnLocationWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnLocationWithError:error];
     }];
-
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSString* responseString = operation.responseString;        
-        [delegate didSucceedWithLocations:[responseString vlb_jsonObject] givenParameters:parameters];
-    } 
-    failure:didFailOnLocationWithError];
+    
+    AFHTTPRequestOperation* request = [client GET:@"/locations" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           NSString* responseString = operation.responseString;
+                                           [delegate didSucceedWithLocations:[responseString vlb_jsonObject] givenParameters:parameters];
+                                       }
+                                                                      failure:didFailOnLocationWithError];
     
     return request;
 }
@@ -208,47 +221,43 @@ return request;
 +(NSMutableDictionary*)newParameters
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                FOURSQUARE_CLIENT_ID, @"client_id",
-                                FOURSQUARE_CLIENT_SECRET, @"client_secret",
-                                @"20140405", @"v",
-                                nil];
+                                       FOURSQUARE_CLIENT_ID, @"client_id",
+                                       FOURSQUARE_CLIENT_SECRET, @"client_secret",
+                                       @"20140405", @"v",
+                                       nil];
     
-return parameters;
+    return parameters;
 }
 
 +(AFHTTPRequestOperation*)newLocationQuery:(NSDictionary*)parameters delegate:(NSObject<VLBLocationOperationDelegate>*)delegate
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:FOURSQUARE_BASE_URL_STRING]];
-    
-    NSMutableURLRequest *categoriesRequest = [client requestWithMethod:@"GET" path:@"venues/search" parameters:parameters];
-    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    categoriesRequest.timeoutInterval = TIMEOUT;
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:FOURSQUARE_BASE_URL_STRING]];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnLocationWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnLocationWithError:error];
     }];
-
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSString* responseString = operation.responseString;
-
-        NSMutableArray* locations = [[[responseString vlb_jsonObject] objectForKey:@"response"] objectForKey:@"venues"];
-          
-        [delegate didSucceedWithLocations:locations givenParameters:parameters];
-    } 
-    failure:didFailOnLocationWithError];
     
-return request;    
+    AFHTTPRequestOperation* request = [client GET:@"venues/search" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           NSString* responseString = operation.responseString;
+                                           
+                                           NSMutableArray* locations = [[[responseString vlb_jsonObject] objectForKey:@"response"] objectForKey:@"venues"];
+                                           
+                                           [delegate didSucceedWithLocations:locations givenParameters:parameters];
+                                       }
+                                                                      failure:didFailOnLocationWithError];
+    
+    return request;
 }
 
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude delegate:(NSObject<VLBLocationOperationDelegate>*)delegate
 {
     NSMutableDictionary *parameters = [self newParameters];
-
+    
     [parameters setObject:[NSString stringWithFormat:@"%f,%f", latitude, longtitude] forKey:@"ll"];
     
-return [self newLocationQuery:parameters delegate:delegate];    
+    return [self newLocationQuery:parameters delegate:delegate];
 }
 
 +(AFHTTPRequestOperation*)newLocationQuery:(CLLocationDegrees)latitude longtitude:(CLLocationDegrees)longtitude query:(NSString*) query delegate:(NSObject<VLBLocationOperationDelegate>*)delegate
@@ -258,86 +267,69 @@ return [self newLocationQuery:parameters delegate:delegate];
     [parameters setObject:query forKey:@"query"];
     [parameters setObject:[NSString stringWithFormat:@"%f,%f", latitude, longtitude] forKey:@"ll"];
     
-return [self newLocationQuery:parameters delegate:delegate];    
+    return [self newLocationQuery:parameters delegate:delegate];
 }
 
 +(AFHTTPRequestOperation*)newGetLocalities:(NSObject<VLBLocalityOperationDelegate>*)delegate
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
-    
-    NSMutableURLRequest *categoriesRequest =
-    [client requestWithMethod:@"GET" path:LOCALITIES parameters:nil];
-    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest setTimeoutInterval:TIMEOUT];
-    
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+
     VLBAFHTTPRequestOperationFailureBlock didFailOnLocalitiesWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnLocalitiesWithError:error];
     }];
-
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-       NSString* responseString = operation.responseString;
-       [delegate didSucceedWithLocalities:[responseString vlb_jsonObject]];
-    }
-    failure:didFailOnLocalitiesWithError];
+    
+    AFHTTPRequestOperation* request = [client GET:LOCALITIES parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           NSString* responseString = operation.responseString;
+                                           [delegate didSucceedWithLocalities:[responseString vlb_jsonObject]];
+                                       }
+                                                                      failure:didFailOnLocalitiesWithError];
     
     return request;
 }
 
 +(AFHTTPRequestOperation*)newGetLocations:(NSObject<VLBLocationOperationDelegate>*)delegate
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
-    
-    NSMutableURLRequest *categoriesRequest =
-    [client requestWithMethod:@"GET" path:LOCATIONS parameters:nil];
-    
-    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest setTimeoutInterval:TIMEOUT];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnLocationWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnLocationWithError:error];
     }];
-
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-   {
-       NSString* responseString = operation.responseString;
-       [delegate didSucceedWithLocations:[responseString vlb_jsonObject] givenParameters:nil];
-   }
-   failure:didFailOnLocationWithError];
-
-return request;
+    
+    AFHTTPRequestOperation* request = [client GET:LOCATIONS parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           NSString* responseString = operation.responseString;
+                                           [delegate didSucceedWithLocations:[responseString vlb_jsonObject] givenParameters:nil];
+                                       }
+                                                                      failure:didFailOnLocationWithError];
+    
+    return request;
 }
 
 +(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId delegate:(NSObject<VLBItemsOperationDelegate>*)delegate {
-return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
+    return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
 }
 
 +(AFHTTPRequestOperation*)newGetItemsGivenLocationId:(NSUInteger)locationId page:(NSNumber*)page delegate:(NSObject<VLBItemsOperationDelegate>*)delegate
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters vlb_setObjectIfNotNil:page forKey:@"page"];
-
-    NSMutableURLRequest *categoriesRequest =
-    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:LOCATION_ITEMS, (unsigned long)(unsigned long)locationId] parameters:parameters];
-    
-    [categoriesRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [categoriesRequest setTimeoutInterval:TIMEOUT];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnItemsWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnItemsWithError:error];
     }];
-
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:categoriesRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-   {
-       NSString* responseString = operation.responseString;
-       [delegate didSucceedWithItems:[responseString vlb_jsonObject]];
-   }
-    failure:didFailOnItemsWithError];
+    
+    AFHTTPRequestOperation* request = [client GET:[NSString stringWithFormat:LOCATION_ITEMS, (unsigned long)(unsigned long)locationId] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           NSString* responseString = operation.responseString;
+                                           [delegate didSucceedWithItems:[responseString vlb_jsonObject]];
+                                       }
+                                                                      failure:didFailOnItemsWithError];
     
     return request;
 }
@@ -348,8 +340,8 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
                                       user:(NSUInteger)userId
                                   delegate:(NSObject<VLBCreateItemOperationDelegate>*)delegate
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
-
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     [parameters setObject:imageURL forKey:@"item_url"];
     [parameters vlb_setStringIfNotNilOrEmpty:[location objectForKey:@"name"] forKey:@"item[location_attributes][name]"];
@@ -357,24 +349,20 @@ return [self newGetItemsGivenLocationId:locationId page:nil delegate:delegate];
     [parameters vlb_setObjectIfNotNil:[[location objectForKey:@"location"] objectForKey:@"lng"] forKey:@"item[location_attributes][lng]"];
     [parameters vlb_setObjectIfNotNil:[location objectForKey:@"id"] forKey:@"item[location_attributes][foursquareid]"];
     [parameters vlb_setObjectIfNotNil:locality forKey:@"item[location_attributes][locality_attributes][name]"];
-
-    NSMutableURLRequest *createItemRequest = [client requestWithMethod:@"POST" path:[NSString stringWithFormat:USER_ITEMS, userId] parameters:parameters];
-    [createItemRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [createItemRequest setTimeoutInterval:TIMEOUT];
-
+    
     VLBAFHTTPRequestOperationFailureBlock didFailOnItemWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnItemWithError:error];
     }];
-
-    AFHTTPRequestOperation *createItem = [[AFHTTPRequestOperation alloc] initWithRequest:createItemRequest];
-    [createItem setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-            [delegate didSucceedWithItem:[operation.responseString vlb_jsonObject]];
-    }
-    failure:didFailOnItemWithError];
     
-return createItem;
+    AFHTTPRequestOperation *createItem = [client POST:[NSString stringWithFormat:USER_ITEMS, userId] parameters:parameters
+                                              success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         [delegate didSucceedWithItem:[operation.responseString vlb_jsonObject]];
+     }
+                                      failure:didFailOnItemWithError];
+    
+    return createItem;
 }
 
 +(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSUInteger)userId delegate:(NSObject<VLBItemsOperationDelegate>*)delegate {
@@ -383,28 +371,23 @@ return createItem;
 
 +(AFHTTPRequestOperation*)newGetItemsGivenUserId:(NSUInteger)userId page:(NSNumber*)page delegate:(NSObject<VLBItemsOperationDelegate>*)delegate
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters vlb_setObjectIfNotNil:page forKey:@"page"];
-
-    NSMutableURLRequest *getItemsRequest =
-    [client requestWithMethod:@"GET" path:[NSString stringWithFormat:USER_ITEMS, (unsigned long)(unsigned long)userId] parameters:parameters];    
-    [getItemsRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [getItemsRequest setTimeoutInterval:TIMEOUT];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnItemsWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnItemsWithError:error];
     }];
-
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:getItemsRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-   {
-       [delegate didSucceedWithItems:[operation.responseString vlb_jsonObject]];
-   }
-  failure:didFailOnItemsWithError];
     
-return request;
+    AFHTTPRequestOperation* request = [client GET:[NSString stringWithFormat:USER_ITEMS, (unsigned long)(unsigned long)userId] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           [delegate didSucceedWithItems:[operation.responseString vlb_jsonObject]];
+                                       }
+                                                                      failure:didFailOnItemsWithError];
+    
+    return request;
 }
 
 
@@ -416,55 +399,50 @@ return request;
 {
     VLB_RETURN_IF_NIL(locality)
     
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setObject:locality forKey:@"locality[name]"];
     [parameters vlb_setObjectIfNotNil:page forKey:@"page"];
-    
-    NSMutableURLRequest *getItemsRequest =
-    [client requestWithMethod:@"GET" path:ITEMS parameters:parameters];
-    [getItemsRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [getItemsRequest setTimeoutInterval:TIMEOUT];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnItemsWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnItemsWithError:error];
     }];
     
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:getItemsRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-   {
-       [delegate didSucceedWithItems:[operation.responseString vlb_jsonObject]];
-   }
-  failure:didFailOnItemsWithError];
+    AFHTTPRequestOperation* request = [client GET:ITEMS parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           [delegate didSucceedWithItems:[operation.responseString vlb_jsonObject]];
+                                       }
+                                                                      failure:didFailOnItemsWithError];
     
-return request;
+    return request;
 }
 
 +(AFHTTPRequestOperation*)newReportItem:(NSUInteger)itemId reportStatus:(NSString*)reportStatus delegate:(NSObject<VLBReportOperationDelegate>*)delegate;
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
-    
-    NSMutableURLRequest *reportItemRequest = [client requestWithMethod:@"POST"
-                                                                  path:[NSString stringWithFormat:REPORT_ITEM, (unsigned long)itemId]
-                                                            parameters:@{@"report_status":reportStatus}];
-    
-    [reportItemRequest addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [reportItemRequest setTimeoutInterval:TIMEOUT];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnReportWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         [delegate didFailOnReportWithError:error];
     }];
     
-    AFHTTPRequestOperation* request = [client HTTPRequestOperationWithRequest:reportItemRequest success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-       [delegate didSucceedOnReport];
-    }
-    failure:didFailOnReportWithError];
+    AFHTTPRequestOperation* request = [client POST:[NSString stringWithFormat:REPORT_ITEM, (unsigned long)itemId] parameters:@{@"report_status":reportStatus} success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                       {
+                                           [delegate didSucceedOnReport];
+                                       }
+                                                                      failure:didFailOnReportWithError];
     
-return request;
+    return request;
 }
 
++(AFHTTPRequestOperation*)queryTermsOfService:(VLBMarkdownSucessBlock)success failure:(VLBAFHTTPRequestOperationFailureBlock)failure {
+return [self queryMarkdown:@"/legal/termsofservice.md" success:success failure:failure];
+}
+
++(AFHTTPRequestOperation*)queryPrivacyPolicy:(VLBMarkdownSucessBlock)success failure:(VLBAFHTTPRequestOperationFailureBlock)failure {
+return [self queryMarkdown:@"/legal/privacypolicy.md" success:success failure:failure];
+}
 
 @end

@@ -8,6 +8,8 @@
 "errors.location.denied.details" = "Πήγαινε στις \n Ρυθμίσεις > \n Απόρρητο > \n Υπηρεσίες τοποθεσίας > \n Βάλε τον διακόπτη στο '1᾽ για το 'verylargebox' για να έχεις πρόσβαση στην τοποθεσιά σου.";
 "huds.signout.details" = "Τι θα συμβεί μετά; \n \n Θα χρειαστεί να επιβεβαιώσεις το email σου ξανά για να προσθέσεις φωτογραφίες στο verylargebox. \n \n Οι ήδη υπάρχουσες φωτογραφίες σου δε θα επηρεαστούν.";
 "huds.signout.header" = "Αποσύνδεση";
+"huds.termsoofservice.header" = "Όροι χρήσης";
+"huds.privacypolicy.header" = "Ιδιωτικότητα";
 "huds.signin.details" = "Παρακαλώ περίμενε καθώς συνδέεσαι στο verylargebox.";
 "huds.signin.header" = "Συνδέεσαι";
 "huds.email.header" = "Αποστέλεται email.";

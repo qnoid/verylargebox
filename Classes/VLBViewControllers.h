@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VLBQueries.h"
 
 typedef void(^VLBTitleLabel)(UILabel *titleLabel);
 typedef void(^VLBTitleButton)(UIButton *titleButton, NSString *text);
@@ -42,4 +43,6 @@ extern VLBTitleButton const VLBTitleButtonAttributedd;
 -(UIBarButtonItem*)locateButton:(id)target action:(SEL)action;
 
 -(UIBarButtonItem*)idCardButton:(id)target action:(SEL)action;
+
+-(VLBMarkdownSucessBlock)presentTextViewController:(__weak UIViewController*)presentingViewController title:(NSString*)title;
 @end

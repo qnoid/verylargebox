@@ -14,6 +14,7 @@
 #import "VLBHuds.h"
 #import "MBProgressHUD.h"
 #import "VLBIdentifyViewController.h"
+#import "VLBErrorBlocks.h"
 
 @interface VLBUserProfileViewController ()
 @property(nonatomic, weak) VLBTheBox *thebox;
@@ -76,12 +77,44 @@ return signOutViewController;
         [wself dismissViewControllerAnimated:YES completion:nil];
     }];
 
+    [self.termsOfServiceButton setTitle:NSLocalizedString(@"huds.termsoofservice.header", @"Terms of Service") forState:UIControlStateNormal];
+    [self.termsOfServiceButton vlb_cornerRadius:2.0];
+    [self.termsOfServiceButton onTouchUp:^(UIButton *button) {
+        VLBMarkdownSucessBlock markdownSuccessBlock = [[VLBViewControllers new] presentTextViewController:self title:NSLocalizedString(@"huds.termsoofservice.header", @"Terms of Service")];
+        
+        [VLBQueries queryTermsOfService:markdownSuccessBlock
+                                failure:^(AFHTTPRequestOperation *operation, NSError *error)
+         {
+             [MBProgressHUD hideHUDForView:self.noticeView animated:YES];
+             [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+             
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 [self showSignOutViewWithIdCard];
+             });
+         }];
+    }];
+
+    [self.privacyPolicyButton setTitle:NSLocalizedString(@"huds.privacypolicy.header", @"Privacy Policy") forState:UIControlStateNormal];
+    [self.privacyPolicyButton vlb_cornerRadius:2.0];
+    [self.privacyPolicyButton onTouchUp:^(UIButton *button) {
+        VLBMarkdownSucessBlock markdownSuccessBlock = [[VLBViewControllers new] presentTextViewController:self title:NSLocalizedString(@"huds.privacypolicy.header", @"Privacy Policy")];
+        
+        [VLBQueries queryPrivacyPolicy:markdownSuccessBlock
+                                failure:^(AFHTTPRequestOperation *operation, NSError *error)
+         {
+             [MBProgressHUD hideHUDForView:self.noticeView animated:YES];
+             [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 [self showSignOutViewWithIdCard];
+             });
+         }];
+    }];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    MBProgressHUD *hud = [VLBHuds newSignOutViewWithIdCard:self.noticeView];
-	[hud show:YES];
+    [self showSignOutViewWithIdCard];
 }
 
 - (void)viewDidUnload
@@ -92,6 +125,12 @@ return signOutViewController;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void)showSignOutViewWithIdCard
+{
+    MBProgressHUD *hud = [VLBHuds newSignOutViewWithIdCard:self.noticeView];
+	[hud show:YES];
 }
 
 @end

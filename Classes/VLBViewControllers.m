@@ -9,6 +9,7 @@
 #import "VLBViewControllers.h"
 #import "VLBTypography.h"
 #import "VLBColors.h"
+#import "VLBTextViewController.h"
 
 @implementation VLBViewControllers
 
@@ -144,6 +145,21 @@ return [self barButtonItem:target action:action imageNamed:@"target.png"];
 
 -(UIBarButtonItem*)idCardButton:(id)target action:(SEL)action {
     return [self barButtonItem:target action:action imageNamed:@"idcard.png"];
+}
+
+-(VLBMarkdownSucessBlock)presentTextViewController:(__weak UIViewController*)presentingViewController title:(NSString*)title
+{
+return ^(NSAttributedString *markdown)
+    {
+        VLBTextViewController *textViewController = [VLBTextViewController textViewController:title];
+        textViewController.attributedText = markdown;
+        
+        UINavigationController *navigationController =
+        [[UINavigationController alloc] initWithRootViewController:textViewController];
+        navigationController.navigationBar.translucent = YES;
+        
+        [presentingViewController presentViewController:navigationController animated:YES completion:nil];
+    };
 }
 
 @end

@@ -95,11 +95,8 @@ return self;
 
          [Flurry logEvent:[NSString stringWithFormat:@"%@", @"didTouchUpInsideIdentifyButton"]];
          
-         AFHTTPRequestOperation *newRegistrationOperation =
          [VLBQueries newCreateUserQuery:self email:wself.emailTextField.text residence:residence];
          
-         [newRegistrationOperation start];
-
          wself.emailTextField.text = @"";
      }];
 }
@@ -275,9 +272,7 @@ return YES;
     NSError *error = nil;
     NSString *residence = [SSKeychain passwordForService:THE_BOX_SERVICE account:email error:&error];
     
-    AFHTTPRequestOperation *verifyUser = [VLBQueries newVerifyUserQuery:verifyOperationBlock email:email residence:residence];
-    
-    [self.operations addOperation:verifyUser];
+    [VLBQueries newVerifyUserQuery:verifyOperationBlock email:email residence:residence];    
 }
 
 -(void)drawRect:(CGRect)rect inView:(UIView *)view
