@@ -47,7 +47,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
 
     [[UITabBar appearance] setSelectedImageTintColor:[VLBColors color0102161]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [VLBTypography fontAvenirNextDemiBoldTwelve]} forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [VLBTypography fontAvenirNextDemiBoldTwelve]} forState:UIControlStateNormal];
     [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
 
     [[UISearchBar appearance] setTintColor:[VLBColors colorPearlWhite]];
