@@ -46,7 +46,7 @@
 			<key>Key</key>
 			<string>Analytics</string>
 			<key>DefaultValue</key>
-			<string>NO</string>
+			<false/>
 		</dict>
 		<dict>
 			<key>FooterText</key>
@@ -64,7 +64,7 @@
 			<key>Key</key>
 			<string>CrashReports</string>
 			<key>DefaultValue</key>
-			<string>YES</string>
+			<true/>
 		</dict>
 	</array>
 </dict>
