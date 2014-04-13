@@ -61,7 +61,7 @@ return identifyViewController;
     self.accounts = accounts;
     self.emailStatuses = [NSMutableArray arrayWithCapacity:self.accounts.count];
     
-    for (id obj in accounts) {
+    for (NSEnumerator *objectEnumerator = accounts.objectEnumerator; [objectEnumerator nextObject] != nil;) {
         [self.emailStatuses addObject:@(VLBEmailStatusDefault)];
     }
     
@@ -153,7 +153,7 @@ return YES;
 {
     self.accounts = [NSMutableArray arrayWithArray:[SSKeychain accountsForService:THE_BOX_SERVICE]];
     self.emailStatuses = [NSMutableArray arrayWithCapacity:self.accounts.count];
-    for (id obj in self.accounts) {
+    for (NSEnumerator *objectEnumerator = self.accounts.objectEnumerator; [objectEnumerator nextObject] != nil;) {
         [self.emailStatuses addObject:@(VLBEmailStatusDefault)];
     }
 

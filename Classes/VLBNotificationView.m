@@ -32,14 +32,12 @@ return self;
 }
 
 #pragma mark AmazonServiceRequestDelegate
--(void)request:(AmazonServiceRequest *)request didSendData:(NSInteger)bytesWritten
-totalBytesWritten:(NSInteger)totalBytesWritten
-totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+-(void)request:(AmazonServiceRequest *)request didSendData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten totalBytesExpectedToWrite:(long long)totalBytesExpectedToWrite
 {
 	[self bytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
 }
 
--(void)bytesWritten:(NSInteger)bytesWritten totalBytesWritten:(long long)totalBytesWritten totalBytesExpectedToWrite:(long long)totalBytesExpectedToWrite
+-(void)bytesWritten:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten totalBytesExpectedToWrite:(long long)totalBytesExpectedToWrite
 {
     [self.progressView setProgress:(float)totalBytesWritten / (float)totalBytesExpectedToWrite animated:YES];
 }

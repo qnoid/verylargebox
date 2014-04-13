@@ -25,7 +25,7 @@
 
 @interface VLBNotificationView : QNDAnimatedView <VLBCreateItemOperationDelegate>
 
-@property(nonatomic, weak) IBOutlet VLBProgressView *progressView;
+@property(nonatomic, strong) IBOutlet VLBProgressView *progressView;
 @property(nonatomic, weak) id<VLBNotificationViewDelegate> delegate;
 
 +(VLBNotificationView*)newView;

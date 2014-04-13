@@ -1,7 +1,6 @@
 /****************************************************************************/
 /* Localization file */
 
-
 "viewcontrollers.profile.empty.takePhotoLabel.text" = "What is inside, it is up to you.";
 "errors.location.notfound" = "Could not find your location. Usually this happens if you are inside a building, have poor network connection or in a remote area.";
 "errors.location.denied.header" = "Location access denied";

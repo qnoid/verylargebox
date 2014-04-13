@@ -417,7 +417,7 @@ return VLBScrollViewOrientationHorizontal;
 
 -(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index
 {
-    DDLogVerbose(@"%s %lu", __PRETTY_FUNCTION__, index);
+    DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, @(index));
     
     if(![self.locationsView isEqual:scrollView]){
         return;

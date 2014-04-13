@@ -64,5 +64,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Do you want to keep a copy of every photo you take with verylargebox?</string>
 </dict>
 </plist>

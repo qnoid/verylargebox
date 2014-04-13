@@ -27,6 +27,8 @@
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
 			<string>version.title</string>
+			<key>Key</key>
+			<string>Version</string>
 			<key>DefaultValue</key>
 			<string>1.2</string>
 		</dict>

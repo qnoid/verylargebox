@@ -97,7 +97,7 @@ return self;
 {
 	BOOL isVisible = (minimumVisibleIndex <= index) && (index <= maximumVisibleIndex);
 	
-	DDLogVerbose(@"%ld visible? {%d <= %d <= %d} %@", index, minimumVisibleIndex, index, maximumVisibleIndex, (isVisible ? @"YES" : @"NO"));
+	DDLogVerbose(@"%@ visible? {%@ <= %@ <= %@} %@", @(index), @(minimumVisibleIndex), @(index), @(maximumVisibleIndex), (isVisible ? @"YES" : @"NO"));
 
 return isVisible;
 }

@@ -2013,7 +2013,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/External\"",
 					"$(SRCROOT)",
-					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
 					"$(PROJECT_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2056,7 +2055,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/External\"",
 					"$(SRCROOT)",
-					"\"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries\"",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

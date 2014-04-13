@@ -38,10 +38,10 @@
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
-static NSString* const LOCATION_ITEMS = @"/locations/%luu/items";
-static NSString* const USER_ITEMS = @"/users/%luu/items";
+static NSString* const LOCATION_ITEMS = @"/locations/%@/items";
+static NSString* const USER_ITEMS = @"/users/%@/items";
 static NSString* const ITEMS = @"/items";
-static NSString* const REPORT_ITEM = @"/items/%lu/report";
+static NSString* const REPORT_ITEM = @"/items/%@/report";
 
 @interface NSObject (VLBObject)
 -(bool) vlb_isNil;
@@ -102,13 +102,9 @@ VLBS3PutObjectRequestConfiguration VLBS3PutObjectRequestConfigurationImageJpegPu
 NSString* const THE_BOX_BASE_URL_STRING = @"https://www.verylargebox.com";
 NSString* const THE_BOX_STATIC_BASE_URL_STRING = @"http://static.verylargebox.com";
 
-NSString* const FOURSQUARE_BASE_URL_STRING = @"https://api.foursquare.com/v2/";
-NSString* const FOURSQUARE_CLIENT_ID = @"ITAJQL0VFSH1W0BLVJ1BFUHIYHIURCHZPFBKCRIKEYYTAFUW";
-NSString* const FOURSQUARE_CLIENT_SECRET = @"PVWUAMR2SUPKGSCUX5DO1ZEBVCKN4UO5J4WEZVA3WV01NWTK";
-NSUInteger const TIMEOUT = 60;
+NSUInteger const TIMEOUT = 30;
 
-
-VLBAFHTTPRequestOperationSucessBlock VLBSucessBlockResponseObjectMarkdown(VLBMarkdownSucessBlock success)
+static VLBAFHTTPRequestOperationSucessBlock VLBSucessBlockResponseObjectMarkdown(VLBMarkdownSucessBlock success)
 {
 return ^(AFHTTPRequestOperation *operation, id responseObject)
     {
@@ -217,21 +213,13 @@ return request;
     return request;
 }
 
-#pragma mark 4sq default parameters
-+(NSMutableDictionary*)newParameters
-{
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       FOURSQUARE_CLIENT_ID, @"client_id",
-                                       FOURSQUARE_CLIENT_SECRET, @"client_secret",
-                                       @"20140405", @"v",
-                                       nil];
-    
-    return parameters;
++(NSMutableDictionary*)newParameters {
+    return [NSMutableDictionary dictionary];
 }
 
 +(AFHTTPRequestOperation*)newLocationQuery:(NSDictionary*)parameters delegate:(NSObject<VLBLocationOperationDelegate>*)delegate
 {
-    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:FOURSQUARE_BASE_URL_STRING]];
+    AFHTTPRequestOperationManager *client = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:THE_BOX_BASE_URL_STRING]];
     
     VLBAFHTTPRequestOperationFailureBlock didFailOnLocationWithError =
     [VLBQueriesFailureBlocks nsErrorDelegate:delegate failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -324,7 +312,7 @@ return request;
         [delegate didFailOnItemsWithError:error];
     }];
     
-    AFHTTPRequestOperation* request = [client GET:[NSString stringWithFormat:LOCATION_ITEMS, (unsigned long)(unsigned long)locationId] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+    AFHTTPRequestOperation* request = [client GET:[NSString stringWithFormat:LOCATION_ITEMS, @(locationId)] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
                                        {
                                            NSString* responseString = operation.responseString;
                                            [delegate didSucceedWithItems:[responseString vlb_jsonObject]];
@@ -355,7 +343,7 @@ return request;
         [delegate didFailOnItemWithError:error];
     }];
     
-    AFHTTPRequestOperation *createItem = [client POST:[NSString stringWithFormat:USER_ITEMS, userId] parameters:parameters
+    AFHTTPRequestOperation *createItem = [client POST:[NSString stringWithFormat:USER_ITEMS, @(userId)] parameters:parameters
                                               success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          [delegate didSucceedWithItem:[operation.responseString vlb_jsonObject]];
@@ -381,7 +369,7 @@ return request;
         [delegate didFailOnItemsWithError:error];
     }];
     
-    AFHTTPRequestOperation* request = [client GET:[NSString stringWithFormat:USER_ITEMS, (unsigned long)(unsigned long)userId] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+    AFHTTPRequestOperation* request = [client GET:[NSString stringWithFormat:USER_ITEMS, @(userId)] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
                                        {
                                            [delegate didSucceedWithItems:[operation.responseString vlb_jsonObject]];
                                        }
@@ -428,7 +416,7 @@ return request;
         [delegate didFailOnReportWithError:error];
     }];
     
-    AFHTTPRequestOperation* request = [client POST:[NSString stringWithFormat:REPORT_ITEM, (unsigned long)itemId] parameters:@{@"report_status":reportStatus} success:^(AFHTTPRequestOperation *operation, id responseObject)
+    AFHTTPRequestOperation* request = [client POST:[NSString stringWithFormat:REPORT_ITEM, @(itemId)] parameters:@{@"report_status":reportStatus} success:^(AFHTTPRequestOperation *operation, id responseObject)
                                        {
                                            [delegate didSucceedOnReport];
                                        }

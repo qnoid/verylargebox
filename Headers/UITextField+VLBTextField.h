@@ -1,12 +1,11 @@
-/*
- *  Copyright 2010 Geeks Republic ( http://www.geeksrepublic.com )
- *  All rights reserved.
- *
- *  This file is part of TheBox
- *
- *  Created by Markos Charatzas on 11/03/2011.
+//
+//  UITextField+VLBTextField.h
+//  verylargebox
+//
+//  Created by Markos Charatzas on 05/07/2013.
+//  Copyright (c) 2013 verylargebox.com. All rights reserved.
+//
 
- */
 #import <UIKit/UIKit.h>
 
 

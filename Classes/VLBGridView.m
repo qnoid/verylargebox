@@ -142,7 +142,7 @@ return self;
 {
     NSUInteger row = [[self.frames objectForKey:[NSValue valueWithCGRect:[view frame]]] unsignedIntegerValue];
     
-    DDLogVerbose(@"asking for column %ld at row %ld", (long)index, row);
+    DDLogVerbose(@"asking for column %@ at row %@", @(index), @(row));
 
 return [self.datasource gridView:gridView viewOf:view ofFrame:frame atRow:row atIndex:index];
 }
@@ -214,7 +214,7 @@ return [self.datasource numberOfViewsInGridView:self];
     return [self gridView:self viewOf:scrollView ofFrame:frame atIndex:index];
     }
 
-	DDLogVerbose(@"asking for row %luu", index);
+	DDLogVerbose(@"asking for row %@", @(index));
 	
     VLBScrollView * view =
         [VLBScrollView newHorizontalScrollView:frame
@@ -266,7 +266,7 @@ return view;
     DDLogVerbose(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
 
     NSUInteger row = [self.scrollView indexOf:tapPoint];
-    DDLogVerbose(@"%lu", row);
+    DDLogVerbose(@"%@", @(row));
     
     NSUInteger numberOfRows = [self numberOfViewsInScrollView:self.scrollView];
     
