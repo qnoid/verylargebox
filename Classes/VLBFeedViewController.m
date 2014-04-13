@@ -80,6 +80,19 @@ return feedViewController;
     [VLBQueries newGetItems:self.locality delegate:self];
 }
 
+-(void)notifyOnLocation:(NSString *)locality delegate:(__weak id<VLBLocationServiceDelegate>)delegate
+{
+    //introduce VLBConditionals with a macro @conditional to execute a block
+    [[VLBPredicates new] ifNil:locality then:^{
+        [self.theBoxLocationService notifyDidFindPlacemark:delegate];
+        [self.theBoxLocationService notifyDidFailWithError:delegate];
+        [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:delegate];
+        
+        MBProgressHUD *hud = [VLBHuds newWithViewLocationArrow:self.view];
+        [hud show:YES];
+    }];
+}
+
 -(void)updateTitle:(NSString*)localityName
 {
     UIButton* titleView = (UIButton*) self.navigationItem.titleView;
@@ -98,15 +111,7 @@ return feedViewController;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    //introduce VLBConditionals with a macro @conditional to execute a block
-    [[VLBPredicates new] ifNil:self.locality then:^{
-        [self.theBoxLocationService notifyDidFindPlacemark:self];
-        [self.theBoxLocationService notifyDidFailWithError:self];
-        [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
-        
-        MBProgressHUD *hud = [VLBHuds newWithViewLocationArrow:self.view];
-        [hud show:YES];
-    }];
+    [self notifyOnLocation:self.locality delegate:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated

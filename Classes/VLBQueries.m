@@ -108,8 +108,7 @@ static VLBAFHTTPRequestOperationSucessBlock VLBSucessBlockResponseObjectMarkdown
 {
 return ^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSString *html = [MMMarkdown HTMLStringWithMarkdown:[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] error:nil];
-        
+        NSString *html = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSDictionary *options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
         
         NSAttributedString *preview = [[NSAttributedString alloc] initWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:options documentAttributes:nil error:NULL];
@@ -426,11 +425,11 @@ return request;
 }
 
 +(AFHTTPRequestOperation*)queryTermsOfService:(VLBMarkdownSucessBlock)success failure:(VLBAFHTTPRequestOperationFailureBlock)failure {
-return [self queryMarkdown:@"/legal/termsofservice.md" success:success failure:failure];
+return [self queryMarkdown:@"/terms.html" success:success failure:failure];
 }
 
 +(AFHTTPRequestOperation*)queryPrivacyPolicy:(VLBMarkdownSucessBlock)success failure:(VLBAFHTTPRequestOperationFailureBlock)failure {
-return [self queryMarkdown:@"/legal/privacypolicy.md" success:success failure:failure];
+return [self queryMarkdown:@"/privacy.html" success:success failure:failure];
 }
 
 @end
