@@ -44,10 +44,10 @@
 	self.thebox = [VLBTheBox newTheBox];
 
     [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
 
     [[UITabBar appearance] setSelectedImageTintColor:[VLBColors color0102161]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldTwelve]} forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [VLBTypography fontAvenirNextDemiBoldTwelve]} forState:UIControlStateNormal];
     [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
 
     [[UISearchBar appearance] setTintColor:[VLBColors colorPearlWhite]];

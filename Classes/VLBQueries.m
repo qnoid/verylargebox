@@ -34,7 +34,6 @@
 #import "DDLog.h"
 #import "VLBReportOperationDelegate.h"
 #import "NSString+VLBJson.h"
-#import "MMMarkdown.h"
 
 static NSString* const LOCALITIES = @"/localities";
 static NSString* const LOCATIONS = @"/locations";
