@@ -22,6 +22,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>Icon-Small-40</string>
 				<string>Icon.png</string>
 				<string>Icon@2x.png</string>
 				<string>Icon-72.png</string>
@@ -49,6 +50,10 @@
 	<string>1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationUsageDescription</key>
+	<string>Your location is used to show you items that are nearby.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Do you want to keep a copy of every photo you take with verylargebox?</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -64,9 +69,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Do you want to keep a copy of every photo you take with verylargebox?</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Your location is used to show you items that are nearby.</string>
 </dict>
 </plist>

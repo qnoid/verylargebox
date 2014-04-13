@@ -2026,7 +2026,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "${PRODUCT_NAME}-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = verylargebox;
@@ -2064,7 +2064,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "${PRODUCT_NAME}-info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = verylargebox;
@@ -2125,7 +2125,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "${BUNDLE_LOADER}";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/Tests/Headers\"";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -2169,7 +2168,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "${BUNDLE_LOADER}";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/Tests/Headers\"";
 				WRAPPER_EXTENSION = octest;
 			};
