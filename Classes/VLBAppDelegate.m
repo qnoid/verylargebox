@@ -38,14 +38,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {
-		DDLogInfo(@"%s", __PRETTY_FUNCTION__);
+	DDLogInfo(@"%s", __PRETTY_FUNCTION__);
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
-		self.thebox = [VLBTheBox newTheBox];
-    [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
-    #if !DEBUG
-		[Flurry startSession:@"WJVNH9SR82PTQRGXM9X5"];
-    #endif
+	self.thebox = [VLBTheBox newTheBox];
 
     [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],UITextAttributeFont: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
@@ -103,8 +99,22 @@ return YES;
      */
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if(YES == [userDefaults boolForKey:@"CrashReports"]){
+    [Crashlytics startWithAPIKey:@"81f3a35c563de29aa0f370c973501175ae86d19c"];
+    }
+    
+    #if !DEBUG
+    if(YES == [userDefaults boolForKey:@"Analytics"])
+    {
+        [Flurry setSecureTransportEnabled:YES];
+        [Flurry startSession:@"WJVNH9SR82PTQRGXM9X5"];
+    }
+    #endif
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
