@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 verylargebox.com.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <Kiwi/Kiwi.h>
 #import <OCMock/OCMock.h>
 #import <AVFoundation/AVFoundation.h>
@@ -45,7 +45,7 @@ typedef void(^VLBCaptureStillImageBlock)(CMSampleBufferRef imageDataSampleBuffer
 @end
 
 
-@interface VLBCameraViewTest : SenTestCase
+@interface VLBCameraViewTest : XCTestCase
 
 @end
 

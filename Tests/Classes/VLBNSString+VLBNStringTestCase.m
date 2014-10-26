@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 (verylargebox.com). All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "NSString+VLBString.h"
 
-@interface VLBNSString_VLBNStringTestCase : SenTestCase
+@interface VLBNSString_VLBNStringTestCase : XCTestCase
 
 @end
 
@@ -20,8 +20,8 @@
     uint8_t data[0];
     NSString* hex = [NSString vlb_stringHexFromData:data size:0];
     
-    STAssertNotNil(hex, hex);
-    STAssertTrue(hex.length == 0, hex);
+    XCTAssertNotNil(hex);
+    XCTAssertTrue(hex.length == 0);
 }
 
 -(void)testGivenOneDigitDataAssertHex
@@ -30,8 +30,8 @@
     NSUInteger length = 1;
     NSString* hex = [NSString vlb_stringHexFromData:data size:length];
     
-    STAssertTrue(hex.length == 2 * length, hex);
-    STAssertEqualObjects(hex, @"31", hex);
+    XCTAssertTrue(hex.length == 2 * length);
+    XCTAssertEqualObjects(hex, @"31");
 }
 
 @end

@@ -106,17 +106,10 @@ return self;
     [self.theBoxLocationService notifyDidFailReverseGeocodeLocationWithError:self];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-}
-
 -(void)viewDidAppear:(BOOL)animated
 {
+        [super viewDidAppear:animated];
     [self.theBoxLocationService startMonitoringSignificantLocationChanges];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
 }
 
 -(BOOL)prefersStatusBarHidden{

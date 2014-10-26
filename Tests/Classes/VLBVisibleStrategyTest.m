@@ -8,7 +8,7 @@
 //
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "VLBVisibleStrategy.h"
 #import "VLBVisibleStrategy.h"
 #import "OCMock.h"
@@ -19,7 +19,7 @@
 -(NSInteger)maximumVisibleIndex;
 @end
 
-@interface VLBVisibleStrategyTest : SenTestCase {
+@interface VLBVisibleStrategyTest : XCTestCase {
 }
 @end
 
@@ -38,7 +38,7 @@
     
     [visibleStrategy layoutSubviews:CGRectZero];
     
-    STAssertTrue(0 == [partiallyMockedVisibleStrategy minimumVisibleIndex], @"expected: 0 actual: %d", [partiallyMockedVisibleStrategy minimumVisibleIndex]);
+    XCTAssertTrue(0 == [partiallyMockedVisibleStrategy minimumVisibleIndex], @"expected: 0 actual: %d", [partiallyMockedVisibleStrategy minimumVisibleIndex]);
 }
 
 -(void)testGivenGreaterMaximumIndexAssertCeil
@@ -54,7 +54,7 @@
     
     [visibleStrategy layoutSubviews:CGRectZero];
     
-    STAssertTrue(0 == [partiallyMockedVisibleStrategy maximumVisibleIndex], @"expected: 0 actual: %d", [partiallyMockedVisibleStrategy maximumVisibleIndex]);
+    XCTAssertTrue(0 == [partiallyMockedVisibleStrategy maximumVisibleIndex], @"expected: 0 actual: %d", [partiallyMockedVisibleStrategy maximumVisibleIndex]);
 }
 
 

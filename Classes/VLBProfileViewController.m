@@ -101,19 +101,6 @@ return self;
     [self refreshFeed];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-
-}
-
 -(IBAction)didTouchUpInsideTakePhotoButton
 {
     [Flurry logEvent:@"didTouchUpInsideTakePhoto"];

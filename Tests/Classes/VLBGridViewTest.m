@@ -7,7 +7,7 @@
 //  Created by Markos Charatzas on 22/04/2012.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "OCMock.h"
 #import "OCMArg.h"
 #import "VLBGridView.h"
@@ -21,7 +21,7 @@
 -(NSUInteger)numberOfViewsInScrollView:(VLBScrollView *)scrollView;
 @end
 
-@interface VLBGridViewTest : SenTestCase {
+@interface VLBGridViewTest : XCTestCase {
 	
 }
 @end
@@ -42,7 +42,7 @@
     
     [[[mockedDatasource expect] andReturnValue:OCMOCK_VALUE(one)] numberOfViewsInGridView:gridView];
         
-    STAssertEquals([gridView numberOfViewsInScrollView:mockedScrollView], one, nil);
+    XCTAssertEqual([gridView numberOfViewsInScrollView:mockedScrollView], one);
 }
 
 -(void)testGivenAssignedDatasourceAssertNumberOfViewsInGridViewAtIndex
@@ -62,7 +62,7 @@
     
     [[[mockedDatasource expect] andReturnValue:OCMOCK_VALUE(one)] numberOfViewsInGridView:gridView atIndex:0];
     
-    STAssertEquals([gridView numberOfViewsInScrollView:nil], one, nil);
+    XCTAssertEqual([gridView numberOfViewsInScrollView:nil], one);
 }
 
 -(void)testGivenViewWillAppearAssertViewWillAppearOnDelegate

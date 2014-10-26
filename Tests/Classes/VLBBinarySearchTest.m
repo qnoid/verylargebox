@@ -7,12 +7,12 @@
 //  Copyright (c) 2011 (verylargebox.com). All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "VLBBinarySearch.h"
 #import "VLBTestRanking.h"
 #import "VLBTestEqualsPredicate.h"
 
-@interface VLBBinarySearchTest : SenTestCase {
+@interface VLBBinarySearchTest : XCTestCase {
 	
 }
 @end
@@ -30,7 +30,7 @@
     
     NSUInteger actual = [search find:what on:values];
     
-	STAssertTrue(index == actual, @"expected: %d actual %d", index, actual);
+	XCTAssertTrue(index == actual, @"expected: %@ actual %@", @(index), @(actual));
 }
 
 -(void)testEmptyArray

@@ -137,6 +137,8 @@ return self;
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     if([self.thebox hasUserAccount] || self.didEnterEmail){
         return;
     }

@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 (verylargebox.com). All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "VLBSize.h"
 
-@interface VLBDimensionTest : SenTestCase
+@interface VLBDimensionTest : XCTestCase
 
 @end
 
@@ -23,7 +23,7 @@
     CGPoint point = CGPointMake(0, 0);
     [dimension moveCloserToWhole:&point];
     
-	STAssertTrue(point.x == 0, nil);
+	XCTAssertTrue(point.x == 0);
 }
 
 - (void) testMoveCloserToWholeDown
@@ -34,7 +34,7 @@
     CGPoint point = CGPointMake(50.0, 0);
     [dimension moveCloserToWhole:&point];
     
-	STAssertTrue(point.x == 0, nil);
+	XCTAssertTrue(point.x == 0);
 }
 
 - (void) testMoveCloserToWholeUp
@@ -45,7 +45,7 @@
     CGPoint point = CGPointMake(50.1, 0);
     [dimension moveCloserToWhole:&point];
     
-	STAssertTrue(point.x == 100, nil);
+	XCTAssertTrue(point.x == 100);
 }
 
 - (void) testMoveCloserToWholeHundred
@@ -56,7 +56,7 @@
     CGPoint point = CGPointMake(100, 0);
     [dimension moveCloserToWhole:&point];
     
-	STAssertTrue(point.x == 100, nil);
+	XCTAssertTrue(point.x == 100);
 }
 
 - (void) testMoveCloserToWholeThousand
@@ -67,6 +67,6 @@
     CGPoint point = CGPointMake(1000, 0);
     [dimension moveCloserToWhole:&point];
     
-	STAssertTrue(point.x == 1000, nil);
+	XCTAssertTrue(point.x == 1000);
 }
 @end

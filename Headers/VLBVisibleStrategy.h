@@ -58,7 +58,7 @@ VisibleIndexPrecondition floorVisibleIndexAt(NSInteger floor)
 /*
  * @return the view corresponding to the index
  */
--(UIView *)shouldBeVisible:(int)index;
+-(UIView *)shouldBeVisible:(NSUInteger)index;
 
 /**
  @param minimumVisibleIndex the minimum visible index to appear in the next cycle

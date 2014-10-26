@@ -148,13 +148,13 @@ return [self.datasource gridView:gridView viewOf:view ofFrame:frame atRow:row at
 }
 
 -(UIView*)viewAtRow:(NSUInteger)row {
-return [self.views objectForKey:[NSNumber numberWithInt:row]];
+return [self.views objectForKey:@(row)];
 }
 
 -(void)setView:(UIView*)view atIndex:(NSUInteger)index
 {
-    [self.views setObject:view forKey:[NSNumber numberWithInt:index]];
-	[self.frames setObject:[NSNumber numberWithInt:index] forKey:[NSValue valueWithCGRect:[view frame]]];
+    [self.views setObject:view forKey:@(index)];
+	[self.frames setObject:@(index) forKey:[NSValue valueWithCGRect:[view frame]]];
 }
 
 #pragma mark VLBScrollViewDelegate
@@ -278,7 +278,7 @@ return view;
 
     tapPoint = [tapGestureRecognizer locationInView:view];
     NSUInteger index = [view indexOf:tapPoint];
-    DDLogVerbose(@"[%u, %u], %@, %@", row, index, view, NSStringFromCGRect(view.bounds));
+    DDLogVerbose(@"[%@, %@], %@, %@", @(row), @(index), view, NSStringFromCGRect(view.bounds));
     
     NSUInteger numberOfViews = [self.datasource numberOfViewsInGridView:self atIndex:row];
     

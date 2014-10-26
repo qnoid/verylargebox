@@ -7,11 +7,11 @@
 //  Created by Markos Charatzas on 12/12/10.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "VLBRecycleStrategy.h"
 #import "VLBTestViews.h"
 
-@interface VLBCellRecycleStrategyTest : SenTestCase {
+@interface VLBCellRecycleStrategyTest : XCTestCase {
 	
 }
 
@@ -33,13 +33,13 @@ return recycleStrategy;
 
 -(void)assertNotRecycled:(VLBRecycleStrategy *) cellRecycleStrategy;
 {
-	STAssertTrue(0 == cellRecycleStrategy.recycledViews.count, @"view is recycled although still visible");
-	STAssertNil([cellRecycleStrategy dequeueReusableView], @"view has been recycled");	
+	XCTAssertTrue(0 == cellRecycleStrategy.recycledViews.count, @"view is recycled although still visible");
+	XCTAssertNil([cellRecycleStrategy dequeueReusableView], @"view has been recycled");
 }
 
 -(void)assertRecycled:(VLBRecycleStrategy *) recycleStrategy count:(NSUInteger)count;
 {
-	STAssertTrue(count == recycleStrategy.recycledViews.count, [NSString stringWithFormat:@"expected: %d actual: %d", count, recycleStrategy.recycledViews.count]);    
+	XCTAssertTrue(count == recycleStrategy.recycledViews.count, @"expected: %@ actual: %@", @(count), @(recycleStrategy.recycledViews.count));
 }
 
 -(CGRect)scrollHorizontal:(CGRect)bounds by:(int)diff{
@@ -151,8 +151,8 @@ return CGRectMake(bounds.origin.x + diff, bounds.origin.y, bounds.size.width, bo
 	
 	[cellRecycleStrategy recycle:views bounds:visibleBounds];
 	
-	STAssertNotNil([cellRecycleStrategy dequeueReusableView], @"view should have been recycled");	
-	STAssertNil([cellRecycleStrategy dequeueReusableView], @"there shouldn't be any more recycled views");	
+	XCTAssertNotNil([cellRecycleStrategy dequeueReusableView], @"view should have been recycled");	
+	XCTAssertNil([cellRecycleStrategy dequeueReusableView], @"there shouldn't be any more recycled views");
 }
 
 @end

@@ -11,7 +11,7 @@ NSBundle *mainBundle = [NSBundle mainBundle]; \
 NSArray *views = [mainBundle loadNibNamed:NSStringFromClass([self class]) owner:self options:nil]; \
 [self addSubview:views[0]];
 
-#define VLB_Integer(value) [NSNumber numberWithInt:value]
+#define VLB_Integer(value) @(value)
 
 #define VLB_INIT_OR_RETURN_NIL() \
 self = [super init]; \

@@ -215,7 +215,7 @@ return [self.contentView subviews];
     [self.scrollViewDelegate viewInScrollView:self willAppearBetween:minimumVisibleIndex to:maximumVisibleIndex];
 }
 
--(UIView *)shouldBeVisible:(int)index
+-(UIView *)shouldBeVisible:(NSUInteger)index
 {
     CGRect frame = [self.dimension frameOf:self.bounds atIndex:index];
     

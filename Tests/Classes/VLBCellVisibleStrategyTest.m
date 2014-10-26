@@ -7,13 +7,13 @@
 //  Created by Markos Charatzas on 12/12/10.
 //
    
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "VLBVisibleStrategy.h"
 #import "VLBVisibleStrategy.h"
 #import "VLBTestViews.h"
 #import "VLBScrollView.h"
 
-@interface VLBCellVisibleStrategyTest : SenTestCase <VisibleStrategyDelegate> 
+@interface VLBCellVisibleStrategyTest : XCTestCase <VisibleStrategyDelegate> 
 {
 	@private
 		NSArray *views;
@@ -60,14 +60,14 @@ return [self.views objectAtIndex:index];
 	visibleStrategy.delegate = self;	
 	[visibleStrategy layoutSubviews:visibleBounds];	
 
-	STAssertTrue(2 == visibleStrategy.visibleViews.count, @"actual: %d", visibleStrategy.visibleViews.count);
+	XCTAssertTrue(2 == visibleStrategy.visibleViews.count, @"actual: %d", visibleStrategy.visibleViews.count);
 	
 	for (int visibleCell = visibleStrategy.minimumVisibleIndex; visibleCell < visibleStrategy.maximumVisibleIndex; visibleCell++) {
-		STAssertTrue([visibleStrategy.visibleViews containsObject:[self.views objectAtIndex:visibleCell]], nil);
+		XCTAssertTrue([visibleStrategy.visibleViews containsObject:[self.views objectAtIndex:visibleCell]]);
 	}
 	
-	STAssertTrue(0 == visibleStrategy.minimumVisibleIndex, @"actual: %d", visibleStrategy.minimumVisibleIndex);
-	STAssertTrue(1 == visibleStrategy.maximumVisibleIndex, @"actual: %d", visibleStrategy.maximumVisibleIndex);
+	XCTAssertTrue(0 == visibleStrategy.minimumVisibleIndex, @"actual: %d", visibleStrategy.minimumVisibleIndex);
+	XCTAssertTrue(1 == visibleStrategy.maximumVisibleIndex, @"actual: %d", visibleStrategy.maximumVisibleIndex);
 }
 
 -(void)assertWillAppear:(CGSize) cellSize visibleBounds:(CGRect)visibleBounds howMany:(NSUInteger)howMany minimum:(NSUInteger)minimum maximum:(NSUInteger)maximum
@@ -80,14 +80,14 @@ return [self.views objectAtIndex:index];
 	visibleStrategy.delegate = self;	
 	[visibleStrategy layoutSubviews:visibleBounds];	
 	
-	STAssertTrue(howMany == visibleStrategy.visibleViews.count, @"expected: %d actual: %d", howMany, visibleStrategy.visibleViews.count);
+	XCTAssertTrue(howMany == visibleStrategy.visibleViews.count, @"expected: %@ actual: %@", @(howMany), @(visibleStrategy.visibleViews.count));
 	
-	for (int visibleCell = visibleStrategy.minimumVisibleIndex; visibleCell < visibleStrategy.maximumVisibleIndex; visibleCell++) {
-		STAssertTrue([visibleStrategy.visibleViews containsObject:[self.views objectAtIndex:visibleCell]], nil);
+	for (NSInteger visibleCell = visibleStrategy.minimumVisibleIndex; visibleCell < visibleStrategy.maximumVisibleIndex; visibleCell++) {
+		XCTAssertTrue([visibleStrategy.visibleViews containsObject:[self.views objectAtIndex:visibleCell]]);
 	}
 	
-	STAssertTrue(minimum == visibleStrategy.minimumVisibleIndex, @"expected: %d actual: %d", minimum, visibleStrategy.minimumVisibleIndex);
-	STAssertTrue(maximum == visibleStrategy.maximumVisibleIndex, @"expected: %d actual: %d", maximum, visibleStrategy.maximumVisibleIndex);	
+	XCTAssertTrue(minimum == visibleStrategy.minimumVisibleIndex, @"expected: %@ actual: %@", @(minimum), @(visibleStrategy.minimumVisibleIndex));
+	XCTAssertTrue(maximum == visibleStrategy.maximumVisibleIndex, @"expected: %@ actual: %@", @(maximum), @(visibleStrategy.maximumVisibleIndex));
 }
 
 -(void)testWillAppearSingle
@@ -128,8 +128,8 @@ return [self.views objectAtIndex:index];
 	NSInteger zero = 0;
 	NSInteger one = 1;
 	
-	STAssertFalse([visibleStrategy isVisible:zero], nil);
-	STAssertFalse([visibleStrategy isVisible:one], nil);
+	XCTAssertFalse([visibleStrategy isVisible:zero]);
+	XCTAssertFalse([visibleStrategy isVisible:one]);
 }
 				 				 
 @end

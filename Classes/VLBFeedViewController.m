@@ -111,11 +111,13 @@ return feedViewController;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self notifyOnLocation:self.locality delegate:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [[VLBPredicates new] ifNil:self.locality then:^{
         [self.theBoxLocationService startMonitoringSignificantLocationChanges];
     }];
@@ -123,6 +125,7 @@ return feedViewController;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 

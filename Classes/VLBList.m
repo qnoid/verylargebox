@@ -36,7 +36,7 @@ return self;
 {
 	NSInteger current = [self.textFields indexOfObject:aTextField];
 	
-	for (int index = current + 1; index < self.textFields.count; index++) {
+	for (NSUInteger index = current + 1; index < self.textFields.count; index++) {
 		UITextField *textField = [self.textFields objectAtIndex:index];
 		if ([textField.text vlb_isEmpty]) {
 			return textField;

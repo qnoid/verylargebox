@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 (verylargebox.com). All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <QuartzCore/QuartzCore.h>
 #import "VLBButton.h"
 #import "VLBView.h"
 #import "VLBViews.h"
 
-@interface VLBViewTest : SenTestCase
+@interface VLBViewTest : XCTestCase
 
 @end
 
@@ -24,7 +24,7 @@
 
     [view vlb_border];
 
-    STAssertEquals(view.layer.borderColor, [UIColor blackColor].CGColor, nil);
-    STAssertEquals(view.layer.borderWidth, 1.0f, nil);
+    XCTAssertEqual(view.layer.borderColor, [UIColor blackColor].CGColor);
+    XCTAssertEqual(view.layer.borderWidth, 1.0f);
 }
 @end

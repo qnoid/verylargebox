@@ -6,11 +6,11 @@
 //  Copyright (c) 2010 (verylargebox.com). All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "VLBRecycleStrategy.h"
 #import "VLBTestViews.h"
 
-@interface VLBRecycleStrategyTest : SenTestCase {
+@interface VLBRecycleStrategyTest : XCTestCase {
 	
 }
 
@@ -20,12 +20,12 @@
 
 -(void)assertNotRecycled:(VLBRecycleStrategy *) cellRecycleStrategy;
 {
-	STAssertTrue(0 == cellRecycleStrategy.recycledViews.count, @"view is recycled although still visible");
+	XCTAssertTrue(0 == cellRecycleStrategy.recycledViews.count, @"view is recycled although still visible");
 }
 
 -(void)assertRecycled:(VLBRecycleStrategy *) recycleStrategy count:(NSUInteger)count;
 {
-	STAssertTrue(count == recycleStrategy.recycledViews.count, [NSString stringWithFormat:@"expected: %d actual: %d", count, recycleStrategy.recycledViews.count]);
+	XCTAssertTrue(count == recycleStrategy.recycledViews.count, @"expected: %d actual: %d", count, recycleStrategy.recycledViews.count);
 }
 
 -(CGRect)scrollVertical:(CGRect)bounds by:(int)diff{
@@ -127,7 +127,7 @@ return recycleStrategy;
     [recycleStrategy recycle:[NSArray arrayWithObject:view] bounds:visibleBounds];
     
     NSLog(@"%@", [view superview]);
-    STAssertNil([view superview], nil);
+    XCTAssertNil([view superview]);
 }
 
 -(void)testRecycleViewsBoundsForSingleView
@@ -166,8 +166,8 @@ return recycleStrategy;
 	
 	[recycleStrategy recycle:views bounds:visibleBounds];
 	
-	STAssertNotNil([recycleStrategy dequeueReusableView], @"view should have been recycled");	
-	STAssertNil([recycleStrategy dequeueReusableView], @"there shouldn't be any more recycled views");	
+	XCTAssertNotNil([recycleStrategy dequeueReusableView], @"view should have been recycled");	
+	XCTAssertNil([recycleStrategy dequeueReusableView], @"there shouldn't be any more recycled views");	
 }
 
 -(void)testIsVisible

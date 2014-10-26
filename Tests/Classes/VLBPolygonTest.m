@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 (verylargebox.com). All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <Kiwi/Kiwi.h>
 #import "VLBPolygon.h"
 
-@interface VLBPolygonTest : SenTestCase
+@interface VLBPolygonTest : XCTestCase
 
 @end
 

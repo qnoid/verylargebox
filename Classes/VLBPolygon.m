@@ -102,7 +102,7 @@ return _exteriorAngleInRadians;
 
 -(NSUInteger)hash
 {
-    int hash = 17;
+    NSUInteger hash = 17;
     hash = 31 * hash + self.numberOfAngles;
     hash = 31 * hash + self.center.x;
     hash = 31 * hash + self.center.y;

@@ -148,6 +148,7 @@ return self;
 
 -(void)viewDidLoad
 {
+    [super viewDidLoad];
     UIImageView* imageView = [[UIImageView alloc] initWithImage:foursquarePoweredBy];
     imageView.frame = CGRectMake(0, 0, 320, 121);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -165,12 +166,15 @@ return self;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
   [self.theBoxLocationService notifyDidUpdateToLocation:self];
 	[self.theBoxLocationService notifyDidFailWithError:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+        [super viewDidAppear:animated];
     UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
     [refresh.imageView.layer vlb_rotate:VLBBasicAnimationBlockRotate];
     self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -178,6 +182,7 @@ return self;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self.theBoxLocationService stopMonitoringSignificantLocationChanges];
 }
 

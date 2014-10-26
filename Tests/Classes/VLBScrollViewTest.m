@@ -8,7 +8,7 @@
 //
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 #import <Kiwi/Kiwi.h>
 #import "VLBScrollView.h"
@@ -29,7 +29,7 @@
 -(void)setTheBoxSize:(VLBSize *)size;
 @end
 
-@interface VLBScrollViewTest : SenTestCase {
+@interface VLBScrollViewTest : XCTestCase {
 	
 }
 @end
@@ -60,7 +60,7 @@
     [theBoxScrollView layoutSubviews];
     
     [mockedSize verify];
-    STAssertTrue(CGSizeEqualToSize(theBoxScrollView.contentSize, expectedContentSize), @"actual: %s expected: %s", NSStringFromCGSize(theBoxScrollView.contentSize), NSStringFromCGSize(expectedContentSize));
+    XCTAssertTrue(CGSizeEqualToSize(theBoxScrollView.contentSize, expectedContentSize), @"actual: %s expected: %s", NSStringFromCGSize(theBoxScrollView.contentSize), NSStringFromCGSize(expectedContentSize));
 }
 
 -(void)testGivenSetNeedsLayoutAssertContentSubviewsRecycleAndRemovedFromSuperview
@@ -82,8 +82,8 @@
      
     [theBoxScrollView setNeedsLayout];
     
-    STAssertTrue(0 == [[contentView subviews] count], @"expected: 0 actual: %d", [[contentView subviews] count] );
-    STAssertEquals(theBoxScrollView, [[theBoxScrollView visibleStrategy] delegate], @"actual: %@", [[theBoxScrollView visibleStrategy] delegate]);
+    XCTAssertTrue(0 == [[contentView subviews] count], @"expected: 0 actual: %d", [[contentView subviews] count] );
+    XCTAssertEqual(theBoxScrollView, [[theBoxScrollView visibleStrategy] delegate], @"actual: %@", [[theBoxScrollView visibleStrategy] delegate]);
     
 }
 @end

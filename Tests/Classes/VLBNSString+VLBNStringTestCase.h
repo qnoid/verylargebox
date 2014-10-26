@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 (verylargebox.com). All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface VLBNSString_VLBNStringTestCase : SenTestCase
+@interface VLBNSString_VLBNStringTestCase : XCTestCase
 
 @end
