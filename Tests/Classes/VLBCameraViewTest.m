@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <Kiwi/Kiwi.h>
 #import <OCMock/OCMock.h>
 #import <AVFoundation/AVFoundation.h>
 #import "VLBCameraView.h"
@@ -51,68 +50,76 @@ typedef void(^VLBCaptureStillImageBlock)(CMSampleBufferRef imageDataSampleBuffer
 
 @implementation VLBCameraViewTest
 
+/*
+    assert video preview will fill the camera view; given a new VLBCameraView instance, AVCaptureVideoPreviewLayer
+    should have videogravity of AVLayerVideoGravityResizeAspectFill
+*/
+-(void)testGivenNewInstanceAssertAspectFill
+{
+    VLBCameraView *cameraView = [[VLBCameraView alloc] initWithFrame:CGRectZero];
+
+    XCTAssertEqual(cameraView.videoPreviewLayer.videoGravity, AVLayerVideoGravityResizeAspectFill);
+}
+
+/*
+ assert 'white flash' will be shown when photo is taken; given a new VLBCameraView instance
+ should have a flashview with superlayer of AVCaptureVideoPreviewLayer
+*/
+-(void)testGivenNewInstanceAssertFlash
+{
+    VLBCameraView *cameraView = [[VLBCameraView alloc] initWithFrame:CGRectZero];
+    
+    XCTAssertEqual(cameraView.flashView.layer.superlayer, cameraView.videoPreviewLayer);
+    XCTAssertEqual(cameraView.flashView.backgroundColor, [UIColor whiteColor]);
+    XCTAssertEqual(cameraView.preview.alpha, 0.0f);
+}
+
+/*
+ assert delegate gets callbacks; given a new VLBCameraView instance.
+ should callback its delegate with AVCaptureVideoPreviewLayer when callbackOnDidCreateCaptureConnection is YES
+ */
+-(void)testGivenNewInstanceAssertCallbacks
+{
+    
+    id mockedDelegate = [OCMockObject mockForProtocol:@protocol(VLBCameraViewDelegate)];
+    AVCaptureConnection *mockedCaptureConnection = [OCMockObject niceMockForClass:[AVCaptureConnection class]];
+    
+    VLBCameraView *cameraView = [[VLBCameraView alloc] initWithCoder:nil];
+    cameraView.delegate = mockedDelegate;
+    cameraView.callbackOnDidCreateCaptureConnection = YES;
+    
+    [[mockedDelegate expect] cameraView:cameraView didCreateCaptureConnection:mockedCaptureConnection];
+    
+    [cameraView cameraView:cameraView didCreateCaptureConnection:mockedCaptureConnection];
+
+    [mockedDelegate verify];
+}
+       
+/*
+ assert camera did finish taking picture of 8mpx image.
+ should have an image of specified size correctly orientated with meta.
+*/
+-(void)testGivenTakePictureAssertOrientation
+{
+
+    VLBCameraViewTestDelegate *delegate = [[VLBCameraViewTestDelegate alloc] init];
+    VLBCameraView *cameraView = [[VLBCameraView alloc] initWithFrame:CGRectZero];
+    cameraView.delegate = delegate;
+    id mockedCaptureVideoPreviewLayer = [OCMockObject niceMockForClass:[AVCaptureVideoPreviewLayer class]];
+    NSData *imageData = [NSData dataWithContentsOfURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"8mpximage" withExtension:@"png"]];
+    UIImage *an8mpxImageAsTakenByCamera = [UIImage imageWithCGImage:[UIImage imageWithData:imageData].CGImage
+                                                              scale:1.0f
+                                                    orientation:UIImageOrientationRight];
+    CGPoint point = CGPointMake(0.124413,1);
+    [[[mockedCaptureVideoPreviewLayer stub] andReturnValue:OCMOCK_VALUE(point)] captureDevicePointOfInterestForPoint:CGPointZero];
+    cameraView.videoPreviewLayer = mockedCaptureVideoPreviewLayer;
+
+
+
+    XCTAssertTrue(CGSizeEqualToSize(delegate.image.size, CGSizeMake(2448, 2449)));
+    XCTAssertEqual(delegate.image.imageOrientation, UIImageOrientationRight);
+    XCTAssertEqualObjects([delegate.meta objectForKey:VLBCameraViewMetaOriginalImage], an8mpxImageAsTakenByCamera);
+    XCTAssertTrue(CGRectEqualToRect([[delegate.meta objectForKey:VLBCameraViewMetaCrop] CGRectValue], CGRectMake(406.08398f, 0.0f, 2448.0f, 2857.916f)));
+}
+
 @end
-
-SPEC_BEGIN(VLBCameraSpec)
-
-context(@"assert video preview will fill the camera view; given a new VLBCameraView instance, AVCaptureVideoPreviewLayer", ^{
-    it(@"should have videogravity of AVLayerVideoGravityResizeAspectFill", ^{
-        VLBCameraView *cameraView = [[VLBCameraView alloc] initWithFrame:CGRectZero];
-        
-        [[cameraView.videoPreviewLayer.videoGravity should] equal:AVLayerVideoGravityResizeAspectFill];
-    });
-});
-
-context(@"assert 'white flash' will be shown when photo is taken; given a new VLBCameraView instance", ^{
-    it(@"should have a flashview with superlayer of AVCaptureVideoPreviewLayer", ^{
-        VLBCameraView *cameraView = [[VLBCameraView alloc] initWithFrame:CGRectZero];
-        
-        [[cameraView.flashView.layer.superlayer should] equal:cameraView.videoPreviewLayer];
-        [[cameraView.flashView.backgroundColor should] equal:[UIColor whiteColor]];
-        [[theValue(cameraView.preview.alpha) should] equal:theValue(0.0f)];        
-    });
-});
-
-context(@"assert delegate gets callbacks; given a new VLBCameraView instance ", ^{
-    it(@"should callback its delegate with AVCaptureVideoPreviewLayer when callbackOnDidCreateCaptureConnection is YES", ^{
-        
-        id mockedDelegate = [OCMockObject mockForProtocol:@protocol(VLBCameraViewDelegate)];
-        AVCaptureConnection *mockedCaptureConnection = [OCMockObject niceMockForClass:[AVCaptureConnection class]];
-        
-        VLBCameraView *cameraView = [[VLBCameraView alloc] initWithCoder:nil];
-        cameraView.delegate = mockedDelegate;
-        cameraView.callbackOnDidCreateCaptureConnection = YES;
-        
-        [[mockedDelegate expect] cameraView:cameraView didCreateCaptureConnection:mockedCaptureConnection];
-        
-        [cameraView cameraView:cameraView didCreateCaptureConnection:mockedCaptureConnection];
-
-        [mockedDelegate verify];
-    });
-});
-
-context(@"assert camera did finish taking picture of 8mpx image", ^{
-    it(@"should have an image of specified size correctly orientated with meta", ^{
-		VLBCameraViewTestDelegate *delegate = [[VLBCameraViewTestDelegate alloc] init];
-        VLBCameraView *cameraView = [[VLBCameraView alloc] initWithFrame:CGRectZero];
-		cameraView.delegate = delegate;
-        id mockedCaptureVideoPreviewLayer = [OCMockObject niceMockForClass:[AVCaptureVideoPreviewLayer class]];
-        NSData *imageData = [NSData dataWithContentsOfURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"8mpximage" withExtension:@"png"]];
-        UIImage *an8mpxImageAsTakenByCamera = [UIImage imageWithCGImage:[UIImage imageWithData:imageData].CGImage
-                                                                  scale:1.0f
-                                                            orientation:UIImageOrientationRight];
-		CGPoint point = CGPointMake(0.124413,1);
-		[[[mockedCaptureVideoPreviewLayer stub] andReturnValue:OCMOCK_VALUE(point)] captureDevicePointOfInterestForPoint:CGPointZero];
-		cameraView.videoPreviewLayer = mockedCaptureVideoPreviewLayer;
-
-        [cameraView cameraView:cameraView didFinishTakingPicture:an8mpxImageAsTakenByCamera withInfo:nil meta:nil];
-
-        [[theValue(delegate.image.size) should] equal:theValue(CGSizeMake(2448, 2449))];        
-        [[theValue(delegate.image.imageOrientation) should] equal:theValue(UIImageOrientationRight)];        
-        [[[delegate.meta objectForKey:VLBCameraViewMetaOriginalImage] should] equal:an8mpxImageAsTakenByCamera];
-        BOOL haveEqualCrops = CGRectEqualToRect([[delegate.meta objectForKey:VLBCameraViewMetaCrop]CGRectValue], CGRectMake(406.08398f, 0.0f, 2448.0f, 2857.916f));
-        [[theValue(haveEqualCrops) should] equal:theValue(YES)];
-    });
-});
-
-SPEC_END

@@ -1,18 +1,17 @@
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, :deployment_target => '7.0'
 
-post_install do | installer |
-  require 'fileutils'
-  FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'Supporting Files/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
-end
+#post_install do | installer |
+#  require 'fileutils'
+#  FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'Supporting Files/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+#end
 
 target :UnitTests do
 	pod 'OCMock', '~> 3.1.1'
-	pod 'Kiwi', '~> 2.3.0'
 end
 
 target :ApplicationTests, :exclusive => true do
 	pod 'OCMock', '~> 3.1.1'
-	pod 'Kiwi', '~> 2.3.0'
 end
 
 pod 'AFNetworking', '2.4.1' 

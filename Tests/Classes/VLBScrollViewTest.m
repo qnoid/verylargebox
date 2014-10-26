@@ -10,7 +10,6 @@
 
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
-#import <Kiwi/Kiwi.h>
 #import "VLBScrollView.h"
 #import "VLBScrollViewDatasource.h"
 #import "VLBSize.h"
@@ -60,7 +59,7 @@
     [theBoxScrollView layoutSubviews];
     
     [mockedSize verify];
-    XCTAssertTrue(CGSizeEqualToSize(theBoxScrollView.contentSize, expectedContentSize), @"actual: %s expected: %s", NSStringFromCGSize(theBoxScrollView.contentSize), NSStringFromCGSize(expectedContentSize));
+    XCTAssertTrue(CGSizeEqualToSize(theBoxScrollView.contentSize, expectedContentSize), @"actual: %@ expected: %@", NSStringFromCGSize(theBoxScrollView.contentSize), NSStringFromCGSize(expectedContentSize));
 }
 
 -(void)testGivenSetNeedsLayoutAssertContentSubviewsRecycleAndRemovedFromSuperview
@@ -82,7 +81,7 @@
      
     [theBoxScrollView setNeedsLayout];
     
-    XCTAssertTrue(0 == [[contentView subviews] count], @"expected: 0 actual: %d", [[contentView subviews] count] );
+    XCTAssertTrue(0 == [[contentView subviews] count], @"expected: 0 actual: %@", @([[contentView subviews] count]) );
     XCTAssertEqual(theBoxScrollView, [[theBoxScrollView visibleStrategy] delegate], @"actual: %@", [[theBoxScrollView visibleStrategy] delegate]);
     
 }

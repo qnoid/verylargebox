@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <Kiwi/Kiwi.h>
 #import "VLBPolygon.h"
 
 @interface VLBPolygonTest : XCTestCase
@@ -16,36 +15,31 @@
 
 @implementation VLBPolygonTest
 
-@end
+-(void)testGivenTwoNewHexagonsOfSameCenterAsssertEqual
+{
+    VLBPolygon *one = [VLBPolygon hexagonAt:CGPointZero];
+    VLBPolygon *another = [VLBPolygon hexagonAt:CGPointZero];
+    VLBPolygon *intermediate = [VLBPolygon hexagonAt:CGPointZero];
 
-SPEC_BEGIN(VLBPolygonSpec)
-
-context(@"given two new hexagons of same center", ^{
-    it(@"asssert are equal", ^{
-        VLBPolygon *one = [VLBPolygon hexagonAt:CGPointZero];
-        VLBPolygon *another = [VLBPolygon hexagonAt:CGPointZero];
-        VLBPolygon *intermediate = [VLBPolygon hexagonAt:CGPointZero];
-
-        //reflexive
-        [[one should] equal:one];
-        
-        //symetric
-        [[one should] equal:another];
-        [[another should] equal:one];
-
-        //transitive
-        [[one should] equal:intermediate];
-        [[intermediate should] equal:another];        
-    });
-    it(@"asssert are have equal angles", ^{
-        VLBPolygon *one = [VLBPolygon hexagonAt:CGPointZero];
-        VLBPolygon *another = [VLBPolygon hexagonAt:CGPointZero];
-        
-        [[theValue(one.angleInRadians) should] equal:theValue(another.angleInRadians)];
-        [[theValue(one.exteriorAngleInRadians) should] equal:theValue(another.exteriorAngleInRadians)];
-        
-    });
+    //reflexive
+    XCTAssertEqual(one, one);
     
-});
+    //symetric
+    XCTAssertEqual(one, another);
+    XCTAssertEqual(another, one);
 
-SPEC_END
+    //transitive
+    XCTAssertEqual(one, intermediate);
+    XCTAssertEqual(intermediate, one);
+}
+
+-(void)testGivenTwoNewHexagonsOfSameCenterAsssertEqualAngles
+{
+    VLBPolygon *one = [VLBPolygon hexagonAt:CGPointZero];
+    VLBPolygon *another = [VLBPolygon hexagonAt:CGPointZero];
+    
+    XCTAssertEqual(one.angleInRadians, another.angleInRadians);
+    XCTAssertEqual(one.exteriorAngleInRadians, another.exteriorAngleInRadians);
+}
+
+@end

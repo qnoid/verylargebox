@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <Kiwi/Kiwi.h>
 #import <OCMock/OCMock.h>
 #import <AVFoundation/AVFoundation.h>
 #import "VLBCameraView.h"
@@ -48,22 +47,24 @@ typedef void(^VLBCaptureStillImageBlock)(CMSampleBufferRef imageDataSampleBuffer
 
 @implementation VLBCameraViewTest
 
-@end
+/*
+ assert imageview preview will fill its view; given a new VLBCameraView instance, its UIImageView
+ should have a mode of UIViewContentModeScaleAspectFill and clipToBounds
+ */
+-(void)testGivenNewInstanceAssertAspectFill
+{
+    VLBCameraView *cameraView = [[VLBCameraView alloc] initWithFrame:CGRectZero];
+    
+    XCTAssertTrue(cameraView.preview.clipsToBounds);
+    XCTAssertEqual(cameraView.preview.contentMode, UIViewContentModeScaleAspectFill);
+}
 
-SPEC_BEGIN(VLBCameraSpec)
-
-context(@"assert imageview preview will fill its view; given a new VLBCameraView instance, its UIImageView", ^{
-    it(@"should have a mode of UIViewContentModeScaleAspectFill and clipToBounds", ^{
-        VLBCameraView *cameraView = [[VLBCameraView alloc] initWithFrame:CGRectZero];
-        
-        [[theValue(cameraView.preview.clipsToBounds) should] equal:theValue(YES)];
-        [[theValue(cameraView.preview.contentMode) should] equal:theValue(UIViewContentModeScaleAspectFill)];
-    });
-});
-
-context(@"assert delegate gets callbacks; given the VLBCaptureStillImageBlock", ^{
-    it(@"should callback the VLBCameraView delegate when error", ^{
-
+/*
+ assert delegate gets callbacks; given the VLBCaptureStillImageBlock
+ should callback the VLBCameraView delegate when error
+*/
+-(void)testGivenCaptureStillImageBlockAssertCallbackOnError
+{
         id mockedDelegate = [OCMockObject mockForProtocol:@protocol(VLBCameraViewDelegate)];
         dispatch_group_t group = dispatch_group_create();
         VLBCameraViewTestDelegate *delegate = [[VLBCameraViewTestDelegate alloc] init];
@@ -84,22 +85,22 @@ context(@"assert delegate gets callbacks; given the VLBCaptureStillImageBlock", 
             dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
             [mockedDelegate verify];
         });
-    });
-    it(@"should callback its delegate with image", ^{
-        
-        id mockedDelegate = [OCMockObject mockForProtocol:@protocol(VLBCameraViewDelegate)];
-        id mockedStillImageOutput = [OCMockObject niceMockForClass:[AVCaptureStillImageOutput class]];
+}
+                       
+-(void)testGivenCaptureStillImageBlockAssertCallbackWithImage
+{
+    id mockedDelegate = [OCMockObject mockForProtocol:@protocol(VLBCameraViewDelegate)];
+    id mockedStillImageOutput = [OCMockObject niceMockForClass:[AVCaptureStillImageOutput class]];
 
-        VLBCameraView *cameraView = [[VLBCameraView alloc] initWithCoder:nil];
-        cameraView.stillImageOutput = mockedStillImageOutput;
-        cameraView.delegate = mockedDelegate;
-        VLBCaptureStillImageBlock stillImageBlock = [cameraView didFinishTakingPicture:nil preview:nil videoPreviewLayer:nil];
-        
-        [[mockedDelegate expect] cameraView:cameraView didFinishTakingPicture:nil withInfo:nil meta:nil];
-        stillImageBlock(nil, nil);
-        
-        [mockedDelegate verify];
-    });
-});
+    VLBCameraView *cameraView = [[VLBCameraView alloc] initWithCoder:nil];
+    cameraView.stillImageOutput = mockedStillImageOutput;
+    cameraView.delegate = mockedDelegate;
+    VLBCaptureStillImageBlock stillImageBlock = [cameraView didFinishTakingPicture:nil preview:nil videoPreviewLayer:nil];
+    
+    [[mockedDelegate expect] cameraView:cameraView didFinishTakingPicture:nil withInfo:nil meta:nil];
+    stillImageBlock(nil, nil);
+    
+    [mockedDelegate verify];
+}
 
-SPEC_END
+@end

@@ -38,7 +38,7 @@
     
     [visibleStrategy layoutSubviews:CGRectZero];
     
-    XCTAssertTrue(0 == [partiallyMockedVisibleStrategy minimumVisibleIndex], @"expected: 0 actual: %d", [partiallyMockedVisibleStrategy minimumVisibleIndex]);
+    XCTAssertTrue(0 == [partiallyMockedVisibleStrategy minimumVisibleIndex], @"expected: 0 actual: %@", @([partiallyMockedVisibleStrategy minimumVisibleIndex]));
 }
 
 -(void)testGivenGreaterMaximumIndexAssertCeil
@@ -54,7 +54,7 @@
     
     [visibleStrategy layoutSubviews:CGRectZero];
     
-    XCTAssertTrue(0 == [partiallyMockedVisibleStrategy maximumVisibleIndex], @"expected: 0 actual: %d", [partiallyMockedVisibleStrategy maximumVisibleIndex]);
+    XCTAssertTrue(0 == [partiallyMockedVisibleStrategy maximumVisibleIndex], @"expected: 0 actual: %@", @([partiallyMockedVisibleStrategy maximumVisibleIndex]));
 }
 
 
