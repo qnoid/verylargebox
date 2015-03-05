@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 (verylargebox.com). All rights reserved.
 //
 
-#import "VLBScrollView.h"
 #import "VLBItemsOperationDelegate.h"
 #import "VLBLocationServiceDelegate.h"
 #import "VLBLocalitiesTableViewController.h"
@@ -34,14 +33,13 @@
     returned every item available.
     will refresh the items on appear (might want to throttle)
    
- @see VLBScrollView
  @see VLBQueries#newGetItems:delegate
  @see VLBQueries#newGetItems:page:delegate
  @see VLBQueries#newGetLocalities:
  */
-@interface VLBFeedViewController : UIViewController <VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBLocalitiesTableViewControllerDelegate>
+@interface VLBFeedViewController : UIViewController <VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBLocalitiesTableViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property(nonatomic, weak) IBOutlet VLBScrollView * feedView;
+@property(nonatomic, weak) IBOutlet UICollectionView * feedView;
 
 +(VLBFeedViewController *)newFeedViewController;
 

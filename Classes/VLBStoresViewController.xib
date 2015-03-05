@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VLBStoresViewController">
@@ -18,26 +17,35 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" id="29" userLabel="storesTableView">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="29" userLabel="storesTableView">
                     <rect key="frame" x="0.0" y="44" width="320" height="436"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <inset key="contentInset" minX="0.0" minY="162" maxX="0.0" maxY="0.0"/>
                     <inset key="scrollIndicatorInsets" minX="0.0" minY="162" maxX="0.0" maxY="0.0"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="30"/>
                         <outlet property="delegate" destination="-1" id="31"/>
                     </connections>
                 </tableView>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="5">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="270"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="270" id="E0L-BQ-ekr"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="E0L-BQ-ekr"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <exclude reference="E0L-BQ-ekr"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <outlet property="delegate" destination="-1" id="36"/>
                     </connections>
                 </mapView>
-                <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="Search for the store that has the item" id="39">
+                <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Search for the store that has the item" translatesAutoresizingMaskIntoConstraints="NO" id="39">
                     <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                     <connections>
@@ -46,8 +54,59 @@
                 </searchBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="39" firstAttribute="top" secondItem="3" secondAttribute="top" constant="64" id="4Wf-Y0-wfI"/>
+                <constraint firstAttribute="trailing" secondItem="5" secondAttribute="trailing" id="8MG-57-I25"/>
+                <constraint firstAttribute="centerX" secondItem="39" secondAttribute="centerX" id="Fe3-cu-iEy"/>
+                <constraint firstItem="29" firstAttribute="top" secondItem="3" secondAttribute="top" constant="44" id="GrX-Wg-g5k"/>
+                <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" constant="210" id="I5y-MU-gbW"/>
+                <constraint firstAttribute="trailing" secondItem="29" secondAttribute="trailing" id="NV6-YK-JR7"/>
+                <constraint firstItem="29" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="dMt-JS-CjR"/>
+                <constraint firstAttribute="centerX" secondItem="5" secondAttribute="centerX" id="hym-2S-y0E"/>
+                <constraint firstItem="5" firstAttribute="top" secondItem="3" secondAttribute="top" id="tfo-OX-TdW"/>
+                <constraint firstItem="39" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="vqS-Bp-9KI"/>
+                <constraint firstItem="5" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="xKI-z2-QpF"/>
+                <constraint firstAttribute="trailing" secondItem="39" secondAttribute="trailing" id="xaD-xh-aPa"/>
+                <constraint firstAttribute="bottom" secondItem="29" secondAttribute="bottom" id="ysL-dg-IMG"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="8MG-57-I25"/>
+                    <exclude reference="I5y-MU-gbW"/>
+                    <exclude reference="hym-2S-y0E"/>
+                    <exclude reference="tfo-OX-TdW"/>
+                    <exclude reference="xKI-z2-QpF"/>
+                    <exclude reference="GrX-Wg-g5k"/>
+                    <exclude reference="NV6-YK-JR7"/>
+                    <exclude reference="dMt-JS-CjR"/>
+                    <exclude reference="ysL-dg-IMG"/>
+                    <exclude reference="4Wf-Y0-wfI"/>
+                    <exclude reference="Fe3-cu-iEy"/>
+                    <exclude reference="vqS-Bp-9KI"/>
+                    <exclude reference="xaD-xh-aPa"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <include reference="8MG-57-I25"/>
+                    <include reference="I5y-MU-gbW"/>
+                    <include reference="hym-2S-y0E"/>
+                    <include reference="tfo-OX-TdW"/>
+                    <include reference="xKI-z2-QpF"/>
+                    <include reference="GrX-Wg-g5k"/>
+                    <include reference="NV6-YK-JR7"/>
+                    <include reference="dMt-JS-CjR"/>
+                    <include reference="ysL-dg-IMG"/>
+                    <include reference="4Wf-Y0-wfI"/>
+                    <include reference="Fe3-cu-iEy"/>
+                    <include reference="vqS-Bp-9KI"/>
+                    <include reference="xaD-xh-aPa"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="300" y="506"/>
         </view>
     </objects>
 </document>

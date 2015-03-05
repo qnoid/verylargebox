@@ -68,7 +68,8 @@ return self;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.scrollView.contentSize = CGSizeMake(320, 755);
+    self.scrollView.contentSize = [UIScreen mainScreen].bounds.size;
+    self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
     [self.imageView vlb_borderWidth:2.0];
 }
 

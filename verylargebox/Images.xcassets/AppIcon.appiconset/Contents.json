@@ -111,16 +111,16 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Icon@2x-1.png",
+      "filename" : "Icon-72.png",
       "unassigned" : true,
       "scale" : "2x"
     },
     {
-      "size" : "72x72",
-      "idiom" : "ipad",
-      "filename" : "Icon-72.png",
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "Icon@2x-1.png",
       "unassigned" : true,
-      "scale" : "1x"
+      "scale" : "2x"
     }
   ],
   "info" : {

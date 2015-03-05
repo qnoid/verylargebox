@@ -107,6 +107,7 @@ return feedViewController;
         [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     
     self.feedView.scrollsToTop = YES;
+    [self.feedView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"VLBFeedItemView"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -150,12 +151,14 @@ return feedViewController;
 {
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     DDLogVerbose(@"%@", items);
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
     UIButton *refresh = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
     [refresh.imageView.layer vlb_stopRotate];
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
     self.items = items;
-    [self.feedView setNeedsLayout];
+    [self.feedView reloadData];
     [self.feedView flashScrollIndicators];
     
     if([items vlb_isEmpty]){
@@ -164,6 +167,7 @@ return feedViewController;
         hud.detailsLabelText = NSLocalizedString(@"huds.feed.selectlocation.details", @"Select a location by tapping on the navigation bar.");
         [hud show:YES];
     }
+    
 }
 
 -(void)didFailOnItemsWithError:(NSError *)error
@@ -196,48 +200,27 @@ return feedViewController;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
-#pragma mark VLBScrollViewDelegate
+#pragma mark UICollectionViewDataSource
 
--(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView{
-return VLBScrollViewOrientationVertical;
-}
-
--(CGFloat)viewsOf:(VLBScrollView *)scrollView{
-    return 467.0;
-}
-
--(void)didLayoutSubviews:(VLBScrollView *)scrollView{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-}
-
--(void)viewInScrollView:(VLBScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex{
-    
-}
-
--(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index{
-    
-}
-
-#pragma mark VLBScrollViewDatasource
-
--(NSUInteger)numberOfViewsInScrollView:(VLBScrollView *)scrollView{
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return [self.items count];
 }
 
--(UIView *)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    VLBFeedItemView *feedItemView = [[VLBFeedItemView alloc] initWithFrame:frame];
+
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"VLBFeedItemView" forIndexPath:indexPath];
+
+    NSDictionary* item = [[self.items objectAtIndex:indexPath.row] objectForKey:@"item"];
+
+    VLBFeedItemView *feedItemView = [[VLBFeedItemView alloc] initWithFrame:cell.bounds];
+    [feedItemView viewWillAppear:item];
+
+    [cell.contentView addSubview:feedItemView];
+    
     feedItemView.parentViewController = self;
     
-return feedItemView;
-}
-
--(void)viewInScrollView:(VLBScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index
-{
-    NSDictionary* item = [[self.items objectAtIndex:index] objectForKey:@"item"];
-    
-    VLBFeedItemView * userItemView = (VLBFeedItemView *)view;
-    [userItemView viewWillAppear:item];
+return cell;
 }
 
 #pragma mark VLBLocationServiceDelegate

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VLBScrollView.h"
 #import "VLBCreateItemOperationDelegate.h"
 #import "VLBItemsOperationDelegate.h"
 #import "VLBLocationServiceDelegate.h"
@@ -22,9 +21,9 @@
  
  Subsequent requests to post an item on the server are queued and processed in a FIFO order.
  */
-@interface VLBProfileViewController : UIViewController <VLBNotificationViewDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBTakePhotoViewControllerDelegate>
+@interface VLBProfileViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, VLBNotificationViewDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, VLBTakePhotoViewControllerDelegate>
 
-@property(nonatomic, weak) IBOutlet VLBScrollView* itemsView;
+@property(nonatomic, weak) IBOutlet UICollectionView* itemsView;
 @property(nonatomic, weak) IBOutlet UIButton* takePhotoButton;
 
 +(VLBProfileViewController *)newProfileViewController:(VLBTheBox*)thebox email:(NSString*)email;

@@ -163,6 +163,7 @@ return self;
     self.locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
     VLBScrollViewAllowSelection(self.locationsView, NO);
     self.itemsView.showsVerticalScrollIndicator = YES;
+    [self.itemsView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -290,48 +291,46 @@ return self;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
-#pragma mark VLBGridViewDatasource
--(NSUInteger)numberOfViewsInGridView:(VLBGridView *)gridView {
+#pragma mark UICollectionViewDatasource
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.numberOfRows;
 }
 
--(NSUInteger)numberOfViewsInGridView:(VLBGridView *)gridView atIndex:(NSInteger)index
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if(self.items.count < 2){
         return 1;
     }
 
-    if(index != (self.numberOfRows - 1)){
+    if(section != (self.numberOfRows - 1)){
         return 2;
     }
 
 return self.items.count%2==0?2:1;
 }
 
--(UIView *)gridView:(VLBGridView *)gridView viewOf:(UIView *)view ofFrame:(CGRect)frame atRow:(NSUInteger)row atIndex:(NSUInteger)index {
-return [[UIImageView alloc] initWithFrame:frame];
-}
-
--(void)gridView:(VLBGridView *)gridView atIndex:(NSInteger)index willAppear:(UIView *)view{
-    
-}
-
--(void)gridView:(VLBGridView *)gridView viewOf:(UIView *)viewOf atRow:(NSInteger)row atIndex:(NSInteger)index willAppear:(UIView *)view
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *item = [[[self items] objectAtIndex:(row * 2) + index] objectForKey:@"item"];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
     
-    UIImageView *imageView = (UIImageView *)view;
+    NSDictionary *item = [[[self items] objectAtIndex:(indexPath.section * 2) + indexPath.row] objectForKey:@"item"];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:cell.bounds];
     //@"http://s3-eu-west-1.amazonaws.com/com.verylargebox.server/items/images/000/000/020/thumb/.jpg"
     [imageView setImageWithURL:[NSURL URLWithString:[item objectForKey:@"imageURL"]]
               placeholderImage:self.placeholderImage];
+    
+    [cell.contentView addSubview:imageView];
+    
+return cell;
 }
 
-#pragma mark VLBGridViewDelegate
+#pragma mark UICollectionViewDataSource
 
--(void)didSelect:(VLBGridView *)gridView atRow:(NSInteger)row atIndex:(NSInteger)index
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //there should be a mapping between the index of the cell and the id of the item
-	NSMutableDictionary *item = [[self.items objectAtIndex:(row * 2) + index] objectForKey:@"item"];
+	NSMutableDictionary *item = [[self.items objectAtIndex:(indexPath.section * 2) + indexPath.row] objectForKey:@"item"];
     
     [Flurry logEvent:@"didSelectItem" withParameters:@{
            VLBItemId: [item objectForKey:VLBItemId],
@@ -349,10 +348,6 @@ return [[UIImageView alloc] initWithFrame:frame];
     detailsViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     [self.navigationController pushViewController:detailsViewController animated:YES];
-}
-
--(CGFloat)whatCellWidth:(VLBGridView *)gridView{
-    return 160.0;
 }
 
 #pragma mark VLBScrollViewDatasource
@@ -514,7 +509,7 @@ return VLBScrollViewOrientationHorizontal;
 	self.items = items;
     self.numberOfRows = round((float)self.items.count/2.0);
     [self.itemsView flashScrollIndicators];
-    [self.itemsView reload];
+    [self.itemsView reloadData];
 }
 
 -(void)didFailOnItemsWithError:(NSError*)error

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VLBDetailsViewController">
@@ -19,10 +19,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="63" userLabel="storeButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="63" userLabel="storeButton">
                     <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="gw6-iJ-9ON"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
@@ -34,16 +36,21 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="55" userLabel="itemImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="55" userLabel="itemImageView">
                     <rect key="frame" x="0.0" y="116" width="320" height="320"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="Hv7-wX-Ob7"/>
+                        <constraint firstAttribute="height" constant="320" id="d2e-nZ-Nsv"/>
+                    </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="67" userLabel="whenButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67" userLabel="whenButton">
                     <rect key="frame" x="0.0" y="455" width="320" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="QcY-9z-EcB"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="11"/>
                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="[about 2 hours ago]" image="timestamp.png">
+                    <state key="normal" title="[about 2 hours ago]" image="timestamp">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -51,13 +58,16 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="69" userLabel="askForDirectionsButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69" userLabel="askForDirectionsButton">
                     <rect key="frame" x="12" y="416" width="250" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.054901960780000002" green="0.46274509800000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="I7a-U5-zUs"/>
+                        <constraint firstAttribute="height" constant="38" id="eks-NO-dHE"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14.5"/>
                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Get directions" image="map-pin.png">
+                    <state key="normal" title="Get directions" image="map-pin">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -68,12 +78,14 @@
                         <action selector="didTouchUpInsideAskForDirectionsButton:" destination="-1" eventType="touchUpInside" id="71"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="70" userLabel="reportButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70" userLabel="reportButton">
                     <rect key="frame" x="270" y="416" width="38" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.054901960780000002" green="0.46274509800000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="38" id="yns-AH-7yG"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14.5"/>
-                    <state key="normal" image="warning.png">
+                    <state key="normal" image="warning">
                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -86,13 +98,55 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="63" secondAttribute="trailing" id="0fD-04-hbY"/>
+                <constraint firstItem="63" firstAttribute="leading" secondItem="55" secondAttribute="leading" id="2kW-RM-TaK"/>
+                <constraint firstItem="55" firstAttribute="trailing" secondItem="63" secondAttribute="trailing" id="2sS-oQ-w9H"/>
+                <constraint firstAttribute="trailing" secondItem="55" secondAttribute="trailing" id="Bie-1q-5Dj"/>
+                <constraint firstItem="55" firstAttribute="top" secondItem="63" secondAttribute="bottom" constant="8" symbolic="YES" id="FK9-gt-vhQ"/>
+                <constraint firstItem="69" firstAttribute="top" secondItem="55" secondAttribute="bottom" constant="-20" id="GCi-PO-p0u"/>
+                <constraint firstItem="70" firstAttribute="top" secondItem="69" secondAttribute="top" id="GS5-4W-rPl"/>
+                <constraint firstItem="70" firstAttribute="leading" secondItem="69" secondAttribute="trailing" constant="8" symbolic="YES" id="HJk-Jx-OKw"/>
+                <constraint firstAttribute="centerX" secondItem="55" secondAttribute="centerX" id="N3Q-Qw-mEh"/>
+                <constraint firstItem="55" firstAttribute="leading" secondItem="50" secondAttribute="leading" id="OI4-9p-sDj"/>
+                <constraint firstItem="69" firstAttribute="leading" secondItem="50" secondAttribute="leading" constant="12" id="Uho-sj-P8i"/>
+                <constraint firstItem="67" firstAttribute="top" secondItem="69" secondAttribute="bottom" constant="1" id="UsY-n9-I62"/>
+                <constraint firstItem="67" firstAttribute="leading" secondItem="55" secondAttribute="leading" id="VdN-CX-SF1"/>
+                <constraint firstItem="67" firstAttribute="leading" secondItem="50" secondAttribute="leading" id="XiP-Tl-5a0"/>
+                <constraint firstItem="63" firstAttribute="leading" secondItem="50" secondAttribute="leading" id="ZRf-su-5V3"/>
+                <constraint firstAttribute="trailing" secondItem="70" secondAttribute="trailing" constant="12" id="Zkr-wb-4Xq"/>
+                <constraint firstItem="55" firstAttribute="trailing" secondItem="70" secondAttribute="trailing" constant="12" id="ddG-AT-PSX"/>
+                <constraint firstItem="63" firstAttribute="top" secondItem="50" secondAttribute="top" constant="64" id="fIz-HQ-9o9"/>
+                <constraint firstItem="69" firstAttribute="bottom" secondItem="70" secondAttribute="bottom" id="hDc-5v-ycq"/>
+                <constraint firstAttribute="trailing" secondItem="67" secondAttribute="trailing" id="hYk-tv-SpF"/>
+                <constraint firstItem="67" firstAttribute="top" secondItem="55" secondAttribute="bottom" constant="19" id="iVM-Eh-rFZ"/>
+                <constraint firstItem="55" firstAttribute="leading" secondItem="69" secondAttribute="leading" constant="-12" id="nZA-zr-Axf"/>
+                <constraint firstAttribute="bottom" secondItem="67" secondAttribute="bottom" constant="3" id="xZ5-DM-Zt5"/>
+                <constraint firstItem="55" firstAttribute="trailing" secondItem="67" secondAttribute="trailing" id="y2N-Bv-aLe"/>
+            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="2kW-RM-TaK"/>
+                    <exclude reference="2sS-oQ-w9H"/>
+                    <exclude reference="Bie-1q-5Dj"/>
+                    <exclude reference="OI4-9p-sDj"/>
+                    <exclude reference="nZA-zr-Axf"/>
+                    <exclude reference="y2N-Bv-aLe"/>
+                    <exclude reference="Uho-sj-P8i"/>
+                    <exclude reference="VdN-CX-SF1"/>
+                    <exclude reference="iVM-Eh-rFZ"/>
+                    <exclude reference="xZ5-DM-Zt5"/>
+                    <exclude reference="Zkr-wb-4Xq"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="234" y="498"/>
         </view>
     </objects>
     <resources>
-        <image name="map-pin.png" width="14" height="21"/>
-        <image name="timestamp.png" width="18" height="18"/>
-        <image name="warning.png" width="24" height="19"/>
+        <image name="map-pin" width="14" height="21"/>
+        <image name="timestamp" width="18" height="18"/>
+        <image name="warning" width="24" height="19"/>
     </resources>
 </document>

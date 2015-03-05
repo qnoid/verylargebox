@@ -161,8 +161,6 @@
 		BD9F24EB175A4302009D212F /* VLBPolygonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9F24EA175A4302009D212F /* VLBPolygonTest.m */; };
 		BDA21878165EEBEA00094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
 		BDA2187A165EEBF600094510 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA21877165EEBEA00094510 /* Security.framework */; };
-		BDA2BC8C165952C20068C749 /* VLBEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8A165952C20068C749 /* VLBEmailViewController.m */; };
-		BDA2BC8D165952C20068C749 /* VLBEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BC8B165952C20068C749 /* VLBEmailViewController.xib */; };
 		BDA2BC911659600F0068C749 /* VLBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */; };
 		BDA2BC921659600F0068C749 /* VLBProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */; };
 		BDA2BCDF1659853E0068C749 /* VLBButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BCDE1659853D0068C749 /* VLBButton.m */; };
@@ -211,7 +209,6 @@
 		BDE727E717BD8ED0000DD3EF /* VLBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */; };
 		BDE727E817BD8ED6000DD3EF /* VLBProfileEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF2747F1786B1FC000E179E /* VLBProfileEmptyViewController.m */; };
 		BDE727E917BD8EE0000DD3EF /* VLBTakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9053953112888AF000FD381C /* VLBTakePhotoViewController.m */; };
-		BDE727EA17BD8EE3000DD3EF /* VLBEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2BC8A165952C20068C749 /* VLBEmailViewController.m */; };
 		BDE727EB17BD8EE7000DD3EF /* VLBIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3C3179C9BF3002B7F60 /* VLBIdentifyViewController.m */; };
 		BDE727EC17BD8EEF000DD3EF /* VLBFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE482BF1750510D0096903C /* VLBFeedViewController.m */; };
 		BDE727ED17BD8F04000DD3EF /* VLBForewordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD59A4A1178E1283003A9394 /* VLBForewordViewController.m */; };
@@ -460,9 +457,6 @@
 		BD9F24EA175A4302009D212F /* VLBPolygonTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBPolygonTest.m; sourceTree = "<group>"; };
 		BDA21877165EEBEA00094510 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDA2187B165EEF6700094510 /* VLBVerifyUserOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBVerifyUserOperationDelegate.h; path = ../Classes/VLBVerifyUserOperationDelegate.h; sourceTree = "<group>"; };
-		BDA2BC89165952C20068C749 /* VLBEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBEmailViewController.h; path = ../Classes/VLBEmailViewController.h; sourceTree = "<group>"; };
-		BDA2BC8A165952C20068C749 /* VLBEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBEmailViewController.m; sourceTree = "<group>"; };
-		BDA2BC8B165952C20068C749 /* VLBEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBEmailViewController.xib; path = Classes/VLBEmailViewController.xib; sourceTree = "<group>"; };
 		BDA2BC8E1659600F0068C749 /* VLBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBProfileViewController.h; path = ../Classes/VLBProfileViewController.h; sourceTree = "<group>"; };
 		BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBProfileViewController.m; sourceTree = "<group>"; };
 		BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VLBProfileViewController.xib; path = Classes/VLBProfileViewController.xib; sourceTree = "<group>"; };
@@ -650,7 +644,6 @@
 				BDF2747E1786B1FB000E179E /* VLBProfileEmptyViewController.h */,
 				BDF2747F1786B1FC000E179E /* VLBProfileEmptyViewController.m */,
 				BDA2BC8F1659600F0068C749 /* VLBProfileViewController.m */,
-				BDA2BC8A165952C20068C749 /* VLBEmailViewController.m */,
 				BD8BB287176C99CF00AE6157 /* NSDictionary+VLBResidence.m */,
 				90E3592F1546348E00075ABF /* NSCache+VLBCache.m */,
 				9096CC07133BB81E00639685 /* VLBQueries.m */,
@@ -940,7 +933,6 @@
 				BDE0DBB1155EC1B600B474DC /* VLBUpdateItemOperationDelegate.h */,
 				BDF825C216FFAC59003B3003 /* VLBLocalityOperationDelegate.h */,
 				BDA2BC8E1659600F0068C749 /* VLBProfileViewController.h */,
-				BDA2BC89165952C20068C749 /* VLBEmailViewController.h */,
 				BD8BB286176C99CF00AE6157 /* NSDictionary+VLBResidence.h */,
 				BD7C27D917235E9A009D26EE /* VLBMacros.h */,
 				BDE1E83415683FF800CF10CF /* VLBView.h */,
@@ -1054,7 +1046,6 @@
 			children = (
 				BD59A4A2178E1284003A9394 /* VLBForewordViewController.xib */,
 				BDF2747C1786B142000E179E /* VLBProfileEmptyViewController.xib */,
-				BDA2BC8B165952C20068C749 /* VLBEmailViewController.xib */,
 				BDA2BC901659600F0068C749 /* VLBProfileViewController.xib */,
 				BDE482C01750510D0096903C /* VLBFeedViewController.xib */,
 				90D830F312B51DA400BE4470 /* VLBCell.xib */,
@@ -1245,11 +1236,6 @@
 				LastTestingUpgradeCheck = 0610;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = verylargebox.com;
-				TargetAttributes = {
-					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = AQ2US2UQQ7;
-					};
-				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "verylargebox" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1286,7 +1272,6 @@
 				905A4FBA1291DEB400BCB475 /* VLBStoresViewController.xib in Resources */,
 				BD275CE51AA870B40099942F /* Images.xcassets in Resources */,
 				90D830F412B51DA400BE4470 /* VLBCell.xib in Resources */,
-				BDA2BC8D165952C20068C749 /* VLBEmailViewController.xib in Resources */,
 				BDA2BC921659600F0068C749 /* VLBProfileViewController.xib in Resources */,
 				BD14C28B16BDC73F0039E978 /* VLBUserItemView.xib in Resources */,
 				BD4BA9AF16FA5D4B009C1518 /* Default@2x.png in Resources */,
@@ -1444,7 +1429,6 @@
 				90E359301546348E00075ABF /* NSCache+VLBCache.m in Sources */,
 				9089482A155349DE009188B4 /* NSDictionary+VLBDictionary.m in Sources */,
 				BDE1E83615683FF800CF10CF /* VLBView.m in Sources */,
-				BDA2BC8C165952C20068C749 /* VLBEmailViewController.m in Sources */,
 				BDA2BC911659600F0068C749 /* VLBProfileViewController.m in Sources */,
 				BDA2BCDF1659853E0068C749 /* VLBButton.m in Sources */,
 				BDA2BD0C165AD1160068C749 /* VLBColors.m in Sources */,
@@ -1562,7 +1546,6 @@
 				BDE727E717BD8ED0000DD3EF /* VLBProfileViewController.m in Sources */,
 				BDE727E817BD8ED6000DD3EF /* VLBProfileEmptyViewController.m in Sources */,
 				BDE727E917BD8EE0000DD3EF /* VLBTakePhotoViewController.m in Sources */,
-				BDE727EA17BD8EE3000DD3EF /* VLBEmailViewController.m in Sources */,
 				BDE727EB17BD8EE7000DD3EF /* VLBIdentifyViewController.m in Sources */,
 				BDE727EC17BD8EEF000DD3EF /* VLBFeedViewController.m in Sources */,
 				BDE727ED17BD8F04000DD3EF /* VLBForewordViewController.m in Sources */,
@@ -1632,7 +1615,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1675,7 +1657,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1900,7 +1881,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1937,7 +1917,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;

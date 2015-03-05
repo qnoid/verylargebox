@@ -97,6 +97,7 @@ return self;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
 
     self.itemsView.scrollsToTop = YES;
+    [self.itemsView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"VLBUserItemView"];
 
     [self refreshFeed];
 }
@@ -167,7 +168,7 @@ return self;
     else{
 	    [self.items insertObject:item atIndex:0];
     }
-    [self.itemsView setNeedsLayout];
+    [self.itemsView reloadData];
 }
 
 -(void)didFailOnItemWithError:(NSError*)error
@@ -206,7 +207,7 @@ return self;
     
     self.items = [NSMutableOrderedSet orderedSetWithCapacity:items.count];
 	[self.items addObjectsFromArray:items];
-    [self.itemsView setNeedsLayout];
+    [self.itemsView reloadData];
     [self.itemsView flashScrollIndicators];
     self.navigationItem.rightBarButtonItem.enabled = YES;
 }
@@ -219,45 +220,26 @@ return self;
     [VLBErrorBlocks localizedDescriptionOfErrorBlock:self.view](error);
 }
 
-#pragma mark VLBScrollViewDelegate
+#pragma mark UICollectionViewDataSource
 
--(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView{
-return VLBScrollViewOrientationVertical;
-}
-
--(CGFloat)viewsOf:(VLBScrollView *)scrollView{
-    return 467.0;
-}
-
--(void)didLayoutSubviews:(VLBScrollView *)scrollView
-{
-}
-
--(void)viewInScrollView:(VLBScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex{
-    
-}
-
--(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index{
-    
-}
-
-
-#pragma mark VLBScrollViewDatasource
-
--(NSUInteger)numberOfViewsInScrollView:(VLBScrollView *)scrollView{
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return [self.items count];
 }
 
--(UIView *)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index {
-return [[VLBUserItemView alloc] initWithFrame:frame];
-}
 
--(void)viewInScrollView:(VLBScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary* item = [[self.items objectAtIndex:index] objectForKey:@"item"];
     
-    VLBUserItemView * userItemView = (VLBUserItemView *)view;
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"VLBUserItemView" forIndexPath:indexPath];
+    
+    NSDictionary* item = [[self.items objectAtIndex:indexPath.row] objectForKey:@"item"];
+    
+    VLBUserItemView * userItemView = [[VLBUserItemView alloc] initWithFrame:cell.bounds];
     [userItemView viewWillAppear:item];
+    
+    [cell.contentView addSubview:userItemView];
+    
+    return cell;
 }
 
 @end

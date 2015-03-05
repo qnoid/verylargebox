@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VLBProfileViewController">
             <connections>
-                <outlet property="itemsView" destination="ura-5h-9RG" id="99l-T1-xsO"/>
+                <outlet property="itemsView" destination="HgN-TE-4bD" id="gxL-jt-31X"/>
                 <outlet property="takePhotoButton" destination="wdZ-El-IFY" id="m7m-nz-fpF"/>
                 <outlet property="view" destination="b4q-xl-asy" id="lNK-aw-8Pf"/>
             </connections>
@@ -17,45 +16,90 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" id="ura-5h-9RG" userLabel="itemsView" customClass="VLBScrollView">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="HgN-TE-4bD">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <inset key="contentInset" minX="0.0" minY="44" maxX="0.0" maxY="0.0"/>
                     <inset key="scrollIndicatorInsets" minX="0.0" minY="44" maxX="0.0" maxY="0.0"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dek-zp-jMn">
+                        <size key="itemSize" width="320" height="467"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="44" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
                     <connections>
-                        <outlet property="datasource" destination="-1" id="cSY-Q3-FDN"/>
-                        <outlet property="scrollViewDelegate" destination="-1" id="GC0-s6-ZRK"/>
+                        <outlet property="dataSource" destination="-1" id="rNf-jp-GVz"/>
+                        <outlet property="delegate" destination="-1" id="Ei4-N7-mOv"/>
                     </connections>
-                </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wdZ-El-IFY" userLabel="takePhotoButton">
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdZ-El-IFY" userLabel="takePhotoButton">
                     <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.054901960780000002" green="0.46274509800000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="7EP-CO-z0Q"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14.5"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="5"/>
-                    <state key="normal" title="Take photo of an item in store" image="camera.png">
+                    <state key="normal" title="Take photo of an item in store" image="camera">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="7EP-CO-z0Q"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="7EP-CO-z0Q"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="didTouchUpInsideTakePhotoButton" destination="-1" eventType="touchUpInside" id="lhb-SA-KI8"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="HgN-TE-4bD" secondAttribute="bottom" id="2AI-uG-gnh"/>
+                <constraint firstAttribute="trailing" secondItem="wdZ-El-IFY" secondAttribute="trailing" id="9W2-6T-RE8"/>
+                <constraint firstItem="wdZ-El-IFY" firstAttribute="leading" secondItem="b4q-xl-asy" secondAttribute="leading" id="HXR-kf-f6s"/>
+                <constraint firstItem="wdZ-El-IFY" firstAttribute="top" secondItem="b4q-xl-asy" secondAttribute="top" constant="64" id="R2j-HJ-s4m"/>
+                <constraint firstAttribute="trailing" secondItem="HgN-TE-4bD" secondAttribute="trailing" id="ceK-YR-fdL"/>
+                <constraint firstItem="HgN-TE-4bD" firstAttribute="top" secondItem="b4q-xl-asy" secondAttribute="top" id="jf2-aU-Afg"/>
+                <constraint firstItem="HgN-TE-4bD" firstAttribute="leading" secondItem="b4q-xl-asy" secondAttribute="leading" id="q9u-Tg-l4t"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="2AI-uG-gnh"/>
+                    <exclude reference="ceK-YR-fdL"/>
+                    <exclude reference="jf2-aU-Afg"/>
+                    <exclude reference="q9u-Tg-l4t"/>
+                    <exclude reference="9W2-6T-RE8"/>
+                    <exclude reference="HXR-kf-f6s"/>
+                    <exclude reference="R2j-HJ-s4m"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <include reference="2AI-uG-gnh"/>
+                    <include reference="ceK-YR-fdL"/>
+                    <include reference="jf2-aU-Afg"/>
+                    <include reference="q9u-Tg-l4t"/>
+                    <include reference="9W2-6T-RE8"/>
+                    <include reference="HXR-kf-f6s"/>
+                    <include reference="R2j-HJ-s4m"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="350" y="226"/>
         </view>
     </objects>
     <resources>
-        <image name="camera.png" width="24" height="18"/>
+        <image name="camera" width="24" height="18"/>
     </resources>
 </document>

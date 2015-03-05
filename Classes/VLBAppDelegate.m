@@ -10,7 +10,6 @@
 
 #import "VLBAppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
-#import "VLBEmailViewController.h"
 #import "VLBLocationService.h"
 #import "VLBNotifications.h"
 #import "VLBSecureHashA1.h"

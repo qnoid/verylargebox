@@ -14,7 +14,6 @@
 #import "S3PutObjectRequest.h"
 #import "AmazonEndpoints.h"
 #import "S3TransferManager.h"
-#import "VLBEmailViewController.h"
 #import "VLBProfileViewController.h"
 #import "VLBTakePhotoViewController.h"
 #import "NSDictionary+VLBUser.h"
@@ -185,10 +184,6 @@ return navigationController;
 
 -(VLBIdentifyViewController*)newIdentifyViewController{
     return [VLBIdentifyViewController newIdentifyViewController:self];
-}
-
--(UINavigationController*)newEmailViewController{
-return [[UINavigationController alloc] initWithRootViewController:[VLBEmailViewController newEmailViewController:self]];
 }
 
 -(VLBProfileViewController*)newProfileViewController{

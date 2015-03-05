@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VLBTakePhotoViewController">
@@ -20,38 +19,68 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="Kkc-bm-IhE" userLabel="cameraView" customClass="VLBCameraView">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kkc-bm-IhE" userLabel="cameraView" customClass="VLBCameraView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="320" id="31v-QH-ktG"/>
+                        <constraint firstAttribute="width" constant="320" id="m13-vj-UE8"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="31v-QH-ktG"/>
+                            <exclude reference="m13-vj-UE8"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="31v-QH-ktG"/>
+                            <include reference="m13-vj-UE8"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <outlet property="delegate" destination="-1" id="SZ7-ph-9zk"/>
                     </connections>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="70" userLabel="locationButton">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70" userLabel="locationButton">
                     <rect key="frame" x="17" y="300" width="286" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <color key="backgroundColor" red="0.054901960780000002" green="0.46274509800000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="bNv-eM-Ac0"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Assign a Store" image="map-marker.png">
+                    <state key="normal" title="Assign a Store" image="map-marker">
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="bNv-eM-Ac0"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="bNv-eM-Ac0"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="enterLocation:" destination="-1" eventType="touchUpInside" id="85"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="SsT-ej-XpW" userLabel="discardButton">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SsT-ej-XpW" userLabel="discardButton">
                     <rect key="frame" x="17" y="373" width="100" height="39"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.90980398650000005" green="0.11372549830000001" blue="0.14901961389999999" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="R3G-94-gJo"/>
+                        <constraint firstAttribute="height" constant="39" id="rQG-dz-OG3"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="10" minY="10" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="16" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Close" image="x.png">
+                    <state key="normal" title="Close" image="x">
                         <color key="titleColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -65,18 +94,33 @@
                     <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="R3G-94-gJo"/>
+                            <exclude reference="rQG-dz-OG3"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="R3G-94-gJo"/>
+                            <include reference="rQG-dz-OG3"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="didTouchUpInsideDiscard:" destination="-1" eventType="touchUpInside" id="pG6-V6-wiz"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" id="xca-Zv-zAE" userLabel="uploadButton">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xca-Zv-zAE" userLabel="uploadButton">
                     <rect key="frame" x="204" y="373" width="100" height="39"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.054901960780000002" green="0.46274509800000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="39" id="UEz-2M-3DX"/>
+                        <constraint firstAttribute="width" constant="100" id="wZu-6H-7mF"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="10" minY="10" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Upload" image="upload.png">
+                    <state key="normal" title="Upload" image="upload">
                         <color key="titleColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -90,35 +134,122 @@
                     <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="UEz-2M-3DX"/>
+                            <exclude reference="wZu-6H-7mF"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="UEz-2M-3DX"/>
+                            <include reference="wZu-6H-7mF"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="didTouchUpInsideUploadButton:" destination="-1" eventType="touchUpInside" id="xS3-88-0oO"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="clip" id="18" userLabel="takePhotoButton" customClass="VLBButton">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="18" userLabel="takePhotoButton" customClass="VLBButton">
                     <rect key="frame" x="116" y="345" width="88" height="96"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="88" id="HDL-fc-KB0"/>
+                        <constraint firstAttribute="height" constant="96" id="ZHy-4f-Als"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                     <inset key="titleEdgeInsets" minX="5" minY="35" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" image="takephoto-icon.png" backgroundImage="takephoto.png">
+                    <state key="normal" image="takephoto-icon" backgroundImage="takephoto">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="takephoto-selected.png">
                         <color key="titleColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="HDL-fc-KB0"/>
+                            <exclude reference="ZHy-4f-Als"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="HDL-fc-KB0"/>
+                            <include reference="ZHy-4f-Als"/>
+                        </mask>
+                    </variation>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <constraints>
+                <constraint firstItem="18" firstAttribute="top" secondItem="SsT-ej-XpW" secondAttribute="bottom" constant="-67" id="GU5-6Z-rEC"/>
+                <constraint firstItem="SsT-ej-XpW" firstAttribute="top" secondItem="70" secondAttribute="bottom" constant="29" id="GW0-Tx-EFx"/>
+                <constraint firstItem="70" firstAttribute="top" secondItem="Kkc-bm-IhE" secondAttribute="bottom" constant="-20" id="OSg-BO-hpI"/>
+                <constraint firstItem="18" firstAttribute="leading" secondItem="SsT-ej-XpW" secondAttribute="trailing" constant="-1" id="TnB-qg-gIx"/>
+                <constraint firstItem="xca-Zv-zAE" firstAttribute="leading" secondItem="18" secondAttribute="trailing" id="akT-eI-sAB"/>
+                <constraint firstItem="70" firstAttribute="trailing" secondItem="xca-Zv-zAE" secondAttribute="trailing" constant="-1" id="cL6-9Z-MNQ"/>
+                <constraint firstItem="xca-Zv-zAE" firstAttribute="top" secondItem="Kkc-bm-IhE" secondAttribute="bottom" constant="53" id="cfB-ni-cRF"/>
+                <constraint firstItem="Kkc-bm-IhE" firstAttribute="leading" secondItem="8" secondAttribute="leading" id="gbp-O7-HzG"/>
+                <constraint firstItem="70" firstAttribute="leading" secondItem="Kkc-bm-IhE" secondAttribute="leading" constant="17" id="jbn-1J-VYa"/>
+                <constraint firstAttribute="centerX" secondItem="Kkc-bm-IhE" secondAttribute="centerX" id="lAT-fk-uqc"/>
+                <constraint firstItem="18" firstAttribute="top" secondItem="Kkc-bm-IhE" secondAttribute="bottom" constant="25" id="lx2-nE-g1M"/>
+                <constraint firstItem="Kkc-bm-IhE" firstAttribute="top" secondItem="8" secondAttribute="top" id="meJ-bC-aAm"/>
+                <constraint firstItem="SsT-ej-XpW" firstAttribute="leading" secondItem="70" secondAttribute="leading" id="p3c-xO-Nu5"/>
+                <constraint firstAttribute="centerY" secondItem="Kkc-bm-IhE" secondAttribute="centerY" constant="80" id="qa3-Ga-Evr"/>
+                <constraint firstItem="70" firstAttribute="trailing" secondItem="Kkc-bm-IhE" secondAttribute="trailing" constant="-17" id="uT6-uI-ogP"/>
+                <constraint firstAttribute="trailing" secondItem="Kkc-bm-IhE" secondAttribute="trailing" id="xZ0-6R-Wb7"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="gbp-O7-HzG"/>
+                    <exclude reference="lAT-fk-uqc"/>
+                    <exclude reference="meJ-bC-aAm"/>
+                    <exclude reference="qa3-Ga-Evr"/>
+                    <exclude reference="xZ0-6R-Wb7"/>
+                    <exclude reference="OSg-BO-hpI"/>
+                    <exclude reference="cL6-9Z-MNQ"/>
+                    <exclude reference="jbn-1J-VYa"/>
+                    <exclude reference="uT6-uI-ogP"/>
+                    <exclude reference="GU5-6Z-rEC"/>
+                    <exclude reference="TnB-qg-gIx"/>
+                    <exclude reference="lx2-nE-g1M"/>
+                    <exclude reference="GW0-Tx-EFx"/>
+                    <exclude reference="p3c-xO-Nu5"/>
+                    <exclude reference="akT-eI-sAB"/>
+                    <exclude reference="cfB-ni-cRF"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <exclude reference="gbp-O7-HzG"/>
+                    <include reference="lAT-fk-uqc"/>
+                    <include reference="meJ-bC-aAm"/>
+                    <exclude reference="qa3-Ga-Evr"/>
+                    <exclude reference="xZ0-6R-Wb7"/>
+                    <include reference="OSg-BO-hpI"/>
+                    <include reference="cL6-9Z-MNQ"/>
+                    <include reference="jbn-1J-VYa"/>
+                    <include reference="uT6-uI-ogP"/>
+                    <exclude reference="GU5-6Z-rEC"/>
+                    <include reference="TnB-qg-gIx"/>
+                    <include reference="lx2-nE-g1M"/>
+                    <include reference="GW0-Tx-EFx"/>
+                    <include reference="p3c-xO-Nu5"/>
+                    <include reference="akT-eI-sAB"/>
+                    <include reference="cfB-ni-cRF"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="365" y="506"/>
         </view>
     </objects>
     <resources>
-        <image name="map-marker.png" width="16" height="26"/>
-        <image name="takephoto-icon.png" width="40" height="38"/>
+        <image name="map-marker" width="16" height="26"/>
+        <image name="takephoto" width="88" height="96"/>
+        <image name="takephoto-icon" width="40" height="38"/>
         <image name="takephoto-selected.png" width="87" height="94"/>
-        <image name="takephoto.png" width="88" height="96"/>
-        <image name="upload.png" width="14" height="13"/>
-        <image name="x.png" width="10" height="10"/>
+        <image name="upload" width="14" height="13"/>
+        <image name="x" width="10" height="10"/>
     </resources>
 </document>

@@ -45,7 +45,6 @@ return viewController;
 {
     [super viewDidLoad];
     self.textView.attributedText = self.attributedText;
-    [self.textView sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning

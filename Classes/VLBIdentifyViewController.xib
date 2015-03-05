@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VLBIdentifyViewController">
@@ -21,14 +20,25 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="16" userLabel="noticeView">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16" userLabel="noticeView">
                     <rect key="frame" x="0.0" y="140" width="320" height="340"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="340" id="PCY-kW-lad"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="PCY-kW-lad"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="PCY-kW-lad"/>
+                        </mask>
+                    </variation>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="31" userLabel="termsOfServiceButton">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31" userLabel="termsOfServiceButton">
                     <rect key="frame" x="0.0" y="160" width="320" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
                     <state key="normal" title="By signing up you agree to the terms of service">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,9 +50,11 @@
                         <action selector="didTouchUpInsideTermsOfServiceButton:" destination="-1" eventType="touchUpInside" id="33"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="24" userLabel="emailButton" customClass="VLBButton">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24" userLabel="emailButton" customClass="VLBButton">
                     <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="sOd-Rj-FNk"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                     <inset key="contentEdgeInsets" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal">
@@ -57,23 +69,30 @@
                         <color key="titleColor" red="0.034943492749999999" green="0.43038762879999998" blue="0.78940130740000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="sOd-Rj-FNk"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="sOd-Rj-FNk"/>
+                        </mask>
+                    </variation>
                 </button>
-                <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your email" minimumFontSize="10" clearButtonMode="whileEditing" id="7" userLabel="emailTextfield">
+                <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your email" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="emailTextfield">
                     <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" red="0.034943492749999999" green="0.43038762879999998" blue="0.78940130740000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="center" image="envelope.png" id="8" userLabel="emailImageView">
+                <imageView userInteractionEnabled="NO" contentMode="center" fixedFrame="YES" image="envelope" translatesAutoresizingMaskIntoConstraints="NO" id="8" userLabel="emailImageView">
                     <rect key="frame" x="0.0" y="64" width="44" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="20" userLabel="signInButton" customClass="VLBButton">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20" userLabel="signInButton" customClass="VLBButton">
                     <rect key="frame" x="17" y="110" width="286" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.034943492749999999" green="0.43038762879999998" blue="0.78940130740000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                     <inset key="imageEdgeInsets" minX="-38" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -88,13 +107,12 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="14" userLabel="signUpButton" customClass="VLBButton">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14" userLabel="signUpButton" customClass="VLBButton">
                     <rect key="frame" x="0.0" y="110" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.054901960780000002" green="0.46274509800000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                     <inset key="imageEdgeInsets" minX="-38" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Sign up" image="idcard-blue.png">
+                    <state key="normal" title="Sign up" image="idcard-blue">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -107,14 +125,106 @@
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="deviceRGB"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <constraints>
+                <constraint firstItem="24" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" id="1su-0e-kDu"/>
+                <constraint firstItem="31" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="6" id="3NQ-9S-wtU"/>
+                <constraint firstAttribute="centerX" secondItem="31" secondAttribute="centerX" id="7h7-Pz-WTy"/>
+                <constraint firstItem="16" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="-14" id="7wd-Rd-KmY"/>
+                <constraint firstItem="24" firstAttribute="height" secondItem="20" secondAttribute="height" id="AbM-e9-5ug"/>
+                <constraint firstItem="24" firstAttribute="top" secondItem="4" secondAttribute="top" constant="64" id="Gi7-DD-6Ps"/>
+                <constraint firstItem="24" firstAttribute="top" secondItem="20" secondAttribute="top" constant="-46" id="I44-Jd-dKZ"/>
+                <constraint firstItem="16" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="JEo-TH-ZFS"/>
+                <constraint firstAttribute="centerX" secondItem="16" secondAttribute="centerX" id="KqA-tg-MBM"/>
+                <constraint firstItem="14" firstAttribute="top" secondItem="24" secondAttribute="bottom" constant="2" id="OPr-lm-l0i"/>
+                <constraint firstItem="7" firstAttribute="top" secondItem="4" secondAttribute="top" constant="64" id="R36-gv-bCs"/>
+                <constraint firstItem="14" firstAttribute="height" secondItem="20" secondAttribute="height" id="SQb-yp-Iro"/>
+                <constraint firstItem="24" firstAttribute="leading" secondItem="7" secondAttribute="leading" id="TEl-uN-Mgh"/>
+                <constraint firstItem="14" firstAttribute="trailing" secondItem="20" secondAttribute="trailing" constant="17" id="V4y-R0-OVi"/>
+                <constraint firstAttribute="trailing" secondItem="16" secondAttribute="trailing" id="bg0-MH-dBU"/>
+                <constraint firstItem="16" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="fmG-Du-oc3"/>
+                <constraint firstAttribute="trailing" secondItem="31" secondAttribute="trailing" id="jgj-JS-qvC"/>
+                <constraint firstAttribute="trailing" secondItem="24" secondAttribute="trailing" id="ogO-6o-i0a"/>
+                <constraint firstItem="14" firstAttribute="leading" secondItem="20" secondAttribute="leading" constant="-17" id="qZG-Ho-sCA"/>
+                <constraint firstAttribute="trailing" secondItem="16" secondAttribute="trailing" id="rRv-Qu-fog"/>
+                <constraint firstItem="24" firstAttribute="leading" secondItem="20" secondAttribute="leading" constant="-17" id="rqo-Wr-5qh"/>
+                <constraint firstItem="24" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="tqh-JF-ryq"/>
+                <constraint firstItem="24" firstAttribute="trailing" secondItem="20" secondAttribute="trailing" constant="17" id="vvV-Nz-sgz"/>
+                <constraint firstItem="16" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="-14" id="xwQ-Bb-tJ1"/>
+                <constraint firstAttribute="centerX" secondItem="16" secondAttribute="centerX" id="yKz-f5-khM"/>
+                <constraint firstItem="31" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="zVR-AR-dsK"/>
+                <constraint firstItem="24" firstAttribute="height" secondItem="7" secondAttribute="height" id="zg7-Ng-9yW"/>
+            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="R36-gv-bCs"/>
+                    <exclude reference="1su-0e-kDu"/>
+                    <exclude reference="AbM-e9-5ug"/>
+                    <exclude reference="Gi7-DD-6Ps"/>
+                    <exclude reference="I44-Jd-dKZ"/>
+                    <exclude reference="TEl-uN-Mgh"/>
+                    <exclude reference="ogO-6o-i0a"/>
+                    <exclude reference="rqo-Wr-5qh"/>
+                    <exclude reference="tqh-JF-ryq"/>
+                    <exclude reference="vvV-Nz-sgz"/>
+                    <exclude reference="zg7-Ng-9yW"/>
+                    <exclude reference="OPr-lm-l0i"/>
+                    <exclude reference="SQb-yp-Iro"/>
+                    <exclude reference="V4y-R0-OVi"/>
+                    <exclude reference="qZG-Ho-sCA"/>
+                    <exclude reference="7wd-Rd-KmY"/>
+                    <exclude reference="JEo-TH-ZFS"/>
+                    <exclude reference="KqA-tg-MBM"/>
+                    <exclude reference="bg0-MH-dBU"/>
+                    <exclude reference="fmG-Du-oc3"/>
+                    <exclude reference="rRv-Qu-fog"/>
+                    <exclude reference="xwQ-Bb-tJ1"/>
+                    <exclude reference="yKz-f5-khM"/>
+                    <exclude reference="3NQ-9S-wtU"/>
+                    <exclude reference="7h7-Pz-WTy"/>
+                    <exclude reference="jgj-JS-qvC"/>
+                    <exclude reference="zVR-AR-dsK"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <include reference="R36-gv-bCs"/>
+                    <include reference="1su-0e-kDu"/>
+                    <include reference="AbM-e9-5ug"/>
+                    <include reference="Gi7-DD-6Ps"/>
+                    <include reference="I44-Jd-dKZ"/>
+                    <include reference="TEl-uN-Mgh"/>
+                    <include reference="ogO-6o-i0a"/>
+                    <include reference="rqo-Wr-5qh"/>
+                    <include reference="tqh-JF-ryq"/>
+                    <include reference="vvV-Nz-sgz"/>
+                    <include reference="zg7-Ng-9yW"/>
+                    <include reference="OPr-lm-l0i"/>
+                    <include reference="SQb-yp-Iro"/>
+                    <include reference="V4y-R0-OVi"/>
+                    <include reference="qZG-Ho-sCA"/>
+                    <exclude reference="7wd-Rd-KmY"/>
+                    <exclude reference="JEo-TH-ZFS"/>
+                    <exclude reference="KqA-tg-MBM"/>
+                    <include reference="bg0-MH-dBU"/>
+                    <include reference="fmG-Du-oc3"/>
+                    <exclude reference="rRv-Qu-fog"/>
+                    <include reference="xwQ-Bb-tJ1"/>
+                    <include reference="yKz-f5-khM"/>
+                    <include reference="3NQ-9S-wtU"/>
+                    <include reference="7h7-Pz-WTy"/>
+                    <include reference="jgj-JS-qvC"/>
+                    <include reference="zVR-AR-dsK"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="234" y="498"/>
         </view>
     </objects>
     <resources>
-        <image name="envelope.png" width="24" height="16"/>
-        <image name="idcard-blue.png" width="26" height="21"/>
+        <image name="envelope" width="24" height="16"/>
+        <image name="idcard-blue" width="26" height="21"/>
         <image name="idcard-white.png" width="26" height="21"/>
     </resources>
 </document>
