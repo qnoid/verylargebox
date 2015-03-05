@@ -50,7 +50,7 @@
 	<string>1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is used to show you items that are nearby.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Do you want to keep a copy of every photo you take with verylargebox?</string>

@@ -21,7 +21,9 @@ VLBLocationServiceDirections const VLBLocationServiceDirectionsNone = ^{};
     locationManager.distanceFilter = 3000.0;
     VLBLocationService *theBox = [[VLBLocationService alloc] init:locationManager];
     
-	locationManager.delegate = theBox;	
+	locationManager.delegate = theBox;
+    [locationManager requestWhenInUseAuthorization];
+
 	
 return theBox;
 }
@@ -86,7 +88,8 @@ return self;
 }
 
 //http://stackoverflow.com/questions/16875559/does-cllocationmanagerstartmonitoringsignificantlocationchanges-prompt-for-user
--(void)startMonitoringSignificantLocationChanges {
+-(void)startMonitoringSignificantLocationChanges
+{
     [self.locationManager startUpdatingLocation];
 }
 
