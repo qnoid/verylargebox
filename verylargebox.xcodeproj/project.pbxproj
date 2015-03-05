@@ -98,6 +98,8 @@
 		BD26464D17B2E62000CDC6B8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD26464F17B2E62000CDC6B8 /* Localizable.strings */; };
 		BD275CE01AA86C4E0099942F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD275CDF1AA86C4E0099942F /* XCTest.framework */; };
 		BD275CE31AA86C730099942F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD275CE21AA86C630099942F /* XCTest.framework */; };
+		BD275CE51AA870B40099942F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD275CE41AA870B40099942F /* Images.xcassets */; };
+		BD275CE71AA8714E0099942F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD275CE61AA8714E0099942F /* LaunchScreen.storyboard */; };
 		BD2A8A9D175A4F4C0036A852 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD2A8A9C175A4F4C0036A852 /* Settings.bundle */; };
 		BD2A8AAC175AD9360036A852 /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
 		BD2A8AB1175B413D0036A852 /* VLBCityViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AB0175B413D0036A852 /* VLBCityViewControllerTest.m */; };
@@ -526,6 +528,8 @@
 		BD26465317B2EA4200CDC6B8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD275CDF1AA86C4E0099942F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BD275CE21AA86C630099942F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCTest.framework; sourceTree = "<group>"; };
+		BD275CE41AA870B40099942F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = verylargebox/Images.xcassets; sourceTree = "<group>"; };
+		BD275CE61AA8714E0099942F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD2A8A9C175A4F4C0036A852 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Supporting Files/Settings.bundle"; sourceTree = "<group>"; };
 		BD2A8AAA175AD9340036A852 /* VLBAlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLBAlertViews.h; path = ../Classes/VLBAlertViews.h; sourceTree = "<group>"; };
 		BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBAlertViews.m; sourceTree = "<group>"; };
@@ -1217,6 +1221,7 @@
 				BD757BAA17B7D1F9009B9C43 /* placeholder.png */,
 				BD757BAB17B7D1F9009B9C43 /* placeholder@2x.png */,
 				BD59A4A5178E1ACC003A9394 /* qnoid.jpg */,
+				BD275CE61AA8714E0099942F /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1252,6 +1257,7 @@
 		BD59A487178CA9FD003A9394 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD275CE41AA870B40099942F /* Images.xcassets */,
 				BDA2BD15165AF8D80068C749 /* images */,
 				BDF2FD15177E5B2D00941B7F /* verylargebox-info.plist */,
 				BD59A47E178CA9F1003A9394 /* iTunesArtwork */,
@@ -1588,6 +1594,7 @@
 				903AE4EC1285BE6500A8FB28 /* VLBViewController.xib in Resources */,
 				903AE5611285E33600A8FB28 /* VLBTakePhotoViewController.xib in Resources */,
 				905A4FBA1291DEB400BCB475 /* VLBStoresViewController.xib in Resources */,
+				BD275CE51AA870B40099942F /* Images.xcassets in Resources */,
 				90D830F412B51DA400BE4470 /* VLBCell.xib in Resources */,
 				90E3592C1546333700075ABF /* default_item_thumb.png in Resources */,
 				90CBFE5F154BF58F00349A13 /* poweredByFoursquare.png in Resources */,
@@ -1640,6 +1647,7 @@
 				BDF2FD0C177A5BC700941B7F /* VLBCameraView.xib in Resources */,
 				BDC8A1D81782028E00E5BF8C /* idcard-white@2x.png in Resources */,
 				BDC8A1DA178202C300E5BF8C /* idcard-white.png in Resources */,
+				BD275CE71AA8714E0099942F /* LaunchScreen.storyboard in Resources */,
 				BDF2746F178551F4000E179E /* checkmark-mini-grey.png in Resources */,
 				BDF27470178551F4000E179E /* checkmark-mini-grey@2x.png in Resources */,
 				BDF274731785557A000E179E /* refresh-grey.png in Resources */,
@@ -2041,6 +2049,8 @@
 			baseConfigurationReference = E1A530BAD9CA4CEABC9AF354 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -2082,6 +2092,8 @@
 			baseConfigurationReference = 364CBB19EDF41EA1A4BC7E5A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;

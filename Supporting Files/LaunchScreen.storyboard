@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Fbi-zc-bwz">
+            <objects>
+                <viewController id="djU-0T-1Va" customClass="UITabBarController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x4C-yB-smf"/>
+                        <viewControllerLayoutGuide type="bottom" id="xUy-Oj-nUt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BWR-o1-tjw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pem-Fl-5iv">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                </variation>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hexabump.png" translatesAutoresizingMaskIntoConstraints="NO" id="Djh-Ct-fgN">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Djh-Ct-fgN" firstAttribute="leading" secondItem="BWR-o1-tjw" secondAttribute="leadingMargin" constant="-16" id="RSq-6G-c6s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Djh-Ct-fgN" secondAttribute="trailing" constant="-16" id="TAv-6R-iVn"/>
+                            <constraint firstItem="xUy-Oj-nUt" firstAttribute="top" secondItem="Djh-Ct-fgN" secondAttribute="bottom" id="syd-iz-VCm"/>
+                            <constraint firstItem="Djh-Ct-fgN" firstAttribute="top" secondItem="x4C-yB-smf" secondAttribute="bottom" constant="44" id="xVI-9h-8b2"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="pem-Fl-5iv"/>
+                                <exclude reference="Djh-Ct-fgN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="RSq-6G-c6s"/>
+                                <exclude reference="TAv-6R-iVn"/>
+                                <exclude reference="xVI-9h-8b2"/>
+                                <exclude reference="syd-iz-VCm"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="pem-Fl-5iv"/>
+                                <include reference="Djh-Ct-fgN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="RSq-6G-c6s"/>
+                                <include reference="TAv-6R-iVn"/>
+                                <include reference="xVI-9h-8b2"/>
+                                <include reference="syd-iz-VCm"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gyk-UK-YhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-114" y="305"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="hexabump.png" width="19" height="33"/>
+    </resources>
+</document>
