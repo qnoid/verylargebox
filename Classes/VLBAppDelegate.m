@@ -42,10 +42,13 @@
 
 	self.thebox = [VLBTheBox newTheBox];
 
-    [[UINavigationBar appearance] setTintColor:[VLBColors colorPearlWhite]];
+    [UINavigationBar appearance].tintColor = [VLBColors colorPrimaryBlue];
+    [UINavigationBar appearance].backIndicatorImage = [UIImage imageNamed:@"left-arrow.png"];
+    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [UIImage imageNamed:@"left-arrow.png"];
+
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName: [VLBTypography fontAvenirNextDemiBoldSixteen]}];
 
-    [[UITabBar appearance] setSelectedImageTintColor:[VLBColors color0102161]];
+    [[UITabBar appearance] setTintColor:[VLBColors color0102161]];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [VLBTypography fontAvenirNextDemiBoldTwelve]} forState:UIControlStateNormal];
     [[UITabBar appearance] setSelectionIndicatorImage:[[UIImage alloc] init]];
 

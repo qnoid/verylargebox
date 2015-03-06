@@ -800,6 +800,7 @@
 			isa = PBXGroup;
 			children = (
 				902FDA8C12ABACF200CE1161 /* VLBCityViewController.m */,
+				903AE3D91284900300A8FB28 /* VLBCityViewController.xib */,
 			);
 			name = City;
 			path = ..;
@@ -1052,7 +1053,6 @@
 				BDAE3C4B176D9CFC0037734C /* VLBDetailsViewController.xib */,
 				BD14C28A16BDC73F0039E978 /* VLBUserItemView.xib */,
 				BD7C27D617235DE6009D26EE /* VLBProgressView.xib */,
-				903AE3D91284900300A8FB28 /* VLBCityViewController.xib */,
 				903AE4EB1285BE6500A8FB28 /* VLBViewController.xib */,
 				903AE5601285E33600A8FB28 /* VLBTakePhotoViewController.xib */,
 				905A4FB91291DEB400BCB475 /* VLBStoresViewController.xib */,

@@ -29,11 +29,7 @@
 #import "VLBBoxAlertViews.h"
 #import "CALayer+VLBLayer.h"
 
-static CGFloat const LOCATIONS_VIEW_WIDTH = 133.0;
-
 static NSInteger const FIRST_VIEW_TAG = -1;
-
-static dispatch_once_t onceToken;
 
 @interface NSOperationQueue (VLBOperationQueue)
 -(BOOL)vlb_isInProgress;
@@ -77,9 +73,10 @@ static dispatch_once_t onceToken;
 
 +(VLBCityViewController *)newCityViewController
 {
-    VLBLocationService* locationService = [VLBLocationService theBoxLocationService];    
+    VLBLocationService* locationService = [VLBLocationService theBoxLocationService];
     VLBCityViewController* cityViewController = [[VLBCityViewController alloc] initWithBundle:[NSBundle mainBundle] locationService:locationService];
     
+    cityViewController.automaticallyAdjustsScrollViewInsets = NO;
     cityViewController.navigationItem.rightBarButtonItem = [[VLBViewControllers new ]refreshButton:cityViewController
                                                                                             action:@selector(refreshLocations)];
     cityViewController.navigationItem.rightBarButtonItem.enabled = NO;
@@ -90,12 +87,10 @@ static dispatch_once_t onceToken;
 
     cityViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbaritem.title.city", @"Nearby") image:[UIImage imageNamed:@"city.png"] tag:0];
     
-    onceToken = 0;
-    
 return cityViewController;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     [self.theBoxLocationService dontNotifyOnFindPlacemark:self];
     [self.theBoxLocationService dontNotifyDidFailWithError:self];
@@ -158,10 +153,12 @@ return self;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hexabump.png"]];
     self.locationsView.backgroundColor = [VLBColors colorDarkGrey];
     self.locationsView.showsHorizontalScrollIndicator = NO;
-    self.locationsView.enableSeeking = YES;
-    self.locationsView.contentInset = UIEdgeInsetsMake(0.0f, 100.0f, 0.0f, 100.0f);
+    //self.locationsView.enableSeeking = YES;
+    
     self.locationsView.contentOffset = CGPointMake(-100.0f, 0.0f);
-    VLBScrollViewAllowSelection(self.locationsView, NO);
+    [self.locationsView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
+
+    self.itemsView.contentInset = UIEdgeInsetsMake(164.0f, 0.0f, 48.0f, 0.0f);
     self.itemsView.showsVerticalScrollIndicator = YES;
     [self.itemsView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
 }
@@ -219,17 +216,18 @@ return self;
  */
 -(void)highlightLocation
 {
-    for (UIButton* button in self.locationsView.subviews) {
-        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    for (UICollectionViewCell* cell in self.locationsView.visibleCells) {
+        UILabel *button = cell.contentView.subviews[0];
+        button.textColor = [UIColor lightGrayColor];
     }
     
-    UIButton* locationButton = (UIButton*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
+    UILabel* locationButton = (UILabel*)[self.locationsView viewWithTag:FIRST_VIEW_TAG];
     
     if(self.index != 0){
-        locationButton = (UIButton*)[self.locationsView viewWithTag:self.index];
+        locationButton = (UILabel*)[self.locationsView viewWithTag:self.index];
     }
     
-    [locationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    locationButton.textColor = [UIColor whiteColor];
 }
 
 /**
@@ -263,7 +261,15 @@ return self;
     }
 
     self.locations = locations;
-    [self.locationsView setNeedsLayout];
+    [self.locationsView reloadData];
+//    static dispatch_once_t onceToken;
+//
+//    dispatch_once(&onceToken, ^{
+//        [self.locationsView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.locations.count >> 1 inSection:1] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+//    });
+
+    [self highlightLocation];
+    [self reloadItems];
 }
 
 -(void)didFailOnLocationWithError:(NSError*)error
@@ -292,12 +298,21 @@ return self;
 }
 
 #pragma mark UICollectionViewDatasource
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    if([self.locationsView isEqual:collectionView]){
+        return 1;
+    }
+    
     return self.numberOfRows;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if([self.locationsView isEqual:collectionView]){
+        return [self.locations count];
+    }
+    
     if(self.items.count < 2){
         return 1;
     }
@@ -311,6 +326,10 @@ return self.items.count%2==0?2:1;
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([self.locationsView isEqual:collectionView]){
+        return [self locationsCollectionView:collectionView cellForItemAtIndexPath:indexPath];
+    }
+    
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
     
     NSDictionary *item = [[[self items] objectAtIndex:(indexPath.section * 2) + indexPath.row] objectForKey:@"item"];
@@ -329,6 +348,23 @@ return cell;
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([self.locationsView isEqual:collectionView]){
+        [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        
+        DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, @(indexPath.row));
+        
+        if(self.index == indexPath.row){
+            return;
+        }
+        
+        self.index = indexPath.row;
+        
+        [self highlightLocation];
+        [self reloadItems];
+        
+    return;
+    }
+    
     //there should be a mapping between the index of the cell and the id of the item
 	NSMutableDictionary *item = [[self.items objectAtIndex:(indexPath.section * 2) + indexPath.row] objectForKey:@"item"];
     
@@ -340,100 +376,54 @@ return cell;
     VLBDetailsViewController* detailsViewController = [VLBDetailsViewController newDetailsViewController:item];
     detailsViewController.hidesBottomBarWhenPushed = YES;
     
-    UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [backButton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setImage:[UIImage imageNamed:@"left-arrow.png"] forState:UIControlStateNormal];
-
-    detailsViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
     [self.navigationController pushViewController:detailsViewController animated:YES];
 }
 
-#pragma mark VLBScrollViewDatasource
-
--(NSUInteger)numberOfViewsInScrollView:(VLBScrollView *)scrollView {
-return [self.locations count];
-}
-
-- (UIView *)viewInScrollView:(VLBScrollView *)scrollView ofFrame:(CGRect)frame atIndex:(NSUInteger)index
+-(UICollectionViewCell *)locationsCollectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIButton *storeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    storeButton.titleLabel.numberOfLines = 0;
-    storeButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    storeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-		storeButton.titleLabel.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
-    [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [storeButton setBackgroundColor:[VLBColors colorDarkGrey]];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
+
+    NSDictionary *location = [[[self locations] objectAtIndex:indexPath.row] objectForKey:@"location"];
+
+    UILabel *storeButton = [[UILabel alloc] initWithFrame:cell.bounds];
+    storeButton.numberOfLines = 0;
+    storeButton.lineBreakMode = NSLineBreakByWordWrapping;
+    storeButton.textAlignment = NSTextAlignmentCenter;
+    storeButton.font = [VLBTypography fontAvenirNextDemiBoldSixteen];
+    storeButton.textColor = [UIColor lightGrayColor];
+    storeButton.backgroundColor = [VLBColors colorDarkGrey];
     
-return storeButton;
-}
-
-#pragma mark VLBScrollViewDelegate
-
--(VLBScrollViewOrientation)orientation:(VLBScrollView*)scrollView{
-return VLBScrollViewOrientationHorizontal;
-}
-
--(CGFloat)viewsOf:(VLBScrollView *)scrollView{
-    return LOCATIONS_VIEW_WIDTH;
-}
-
--(void)didLayoutSubviews:(VLBScrollView*)scrollView
-{
-    dispatch_once(&onceToken, ^{
-        [scrollView scrollIndexToVisible:self.locations.count >> 1 animated:YES];
-    });
-
-    [self highlightLocation];
-    [self reloadItems];
-}
-
--(void)viewInScrollView:(VLBScrollView *)scrollView willAppearBetween:(NSUInteger)minimumVisibleIndex to:(NSUInteger)maximumVisibleIndex
-{
-}
-
--(void)viewInScrollView:(VLBScrollView *)scrollView willAppear:(UIView *)view atIndex:(NSUInteger)index
-{
-    NSDictionary *location = [[[self locations] objectAtIndex:index] objectForKey:@"location"];
-
-    UIButton *storeButton = (UIButton*)view;
-    
-    if(index == 0){
+    if(indexPath.row == 0){
         storeButton.tag = FIRST_VIEW_TAG;
     }
     else{
-        storeButton.tag = index;
+        storeButton.tag = indexPath.row;
     }
     
     id name = [location vlb_objectForKey:@"name" ifNil:@""];
     
-    [storeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [storeButton setTitle:name forState:UIControlStateNormal];
-    [storeButton setBackgroundColor:[VLBColors colorDarkGrey]];    
+    storeButton.text = name;
+    [storeButton setBackgroundColor:[VLBColors colorDarkGrey]];
+    
+    [cell.contentView addSubview:storeButton];
+    
+    return cell;
 }
 
--(void)scrollView:(UIScrollView *)scrollView willStopAt:(NSUInteger)index
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDLogVerbose(@"%s %@", __PRETTY_FUNCTION__, @(index));
+    CGSize mainScreenBounds = [UIScreen mainScreen].bounds.size;
+    int halfSize = (int)mainScreenBounds.width >> 1;
     
-    if(![self.locationsView isEqual:scrollView]){
-        return;
-    }
-
-    if(self.index == index){
-        return;
-    }
-    
-    self.index = index;
-
-    [self highlightLocation];
-    [self reloadItems];
+    return CGSizeMake(halfSize, halfSize);
 }
 
--(void)didSelectView:(VLBScrollView *)scrollView atIndex:(NSUInteger)index point:(CGPoint)point
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    [self.locationsView setContentOffset:point animated:YES];
+    CGSize mainScreenBounds = [UIScreen mainScreen].bounds.size;
+    int halfSize = (int)mainScreenBounds.width >> 1;
+    
+    return mainScreenBounds.width - (halfSize * 2);
 }
 
 #pragma mark thebox

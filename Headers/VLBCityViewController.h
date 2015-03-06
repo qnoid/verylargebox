@@ -37,7 +37,7 @@
     The grid view does not bounce so as not to confuse the user with the missing pull to refresh
  
  */
-@interface VLBCityViewController : UIViewController <VLBLocationServiceDelegate, VLBScrollViewDatasource, VLBScrollViewDelegate, VLBLocationOperationDelegate, UISearchBarDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, VLBViewDrawRectDelegate>
+@interface VLBCityViewController : UIViewController <VLBLocationServiceDelegate, VLBLocationOperationDelegate, UISearchBarDelegate, VLBItemsOperationDelegate, VLBLocationServiceDelegate, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, VLBViewDrawRectDelegate>
 
 /**
  Creates a new instance of HomeUIGridViewController
@@ -45,7 +45,7 @@
 +(VLBCityViewController *)newCityViewController;
 
 @property(nonatomic, weak) IBOutlet UIButton* directionsButton;
-@property(nonatomic, weak) IBOutlet VLBScrollView * locationsView;
+@property(nonatomic, weak) IBOutlet UICollectionView * locationsView;
 @property(nonatomic, weak) IBOutlet UICollectionView * itemsView;
 
 -(IBAction)didTapOnGetDirectionsButton:(id)sender;
