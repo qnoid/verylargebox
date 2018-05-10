@@ -240,7 +240,6 @@
 		BDF8C3CC179CABFB002B7F60 /* VLBEmailTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CB179CABFA002B7F60 /* VLBEmailTextFieldDelegate.m */; };
 		BDF8C3CF179DB457002B7F60 /* VLBTableViewCells.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3CE179DB457002B7F60 /* VLBTableViewCells.m */; };
 		BDF8C3D0179DB545002B7F60 /* VLBButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF8C3C8179CA214002B7F60 /* VLBButtons.m */; };
-		BDFAE65318FB235C00AB2CE6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9A33A307C4A318C23060B /* libPods.a */; };
 		BDFBA12A177829C500A59BCF /* VLBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 902FDA8C12ABACF200CE1161 /* VLBCityViewController.m */; };
 		BDFBA12B177829CA00A59BCF /* VLBAlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A8AAB175AD9350036A852 /* VLBAlertViews.m */; };
 		BDFBA12C177829CF00A59BCF /* VLBTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB0125176FE7B200A8034E /* VLBTypography.m */; };
@@ -280,7 +279,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* verylargebox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = verylargebox_Prefix.pch; sourceTree = "<group>"; };
 		346C2CAEA38599166C4182DC /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
-		364CBB19EDF41EA1A4BC7E5A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		45C9A33A307C4A318C23060B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		900378A015409DBD00579FF2 /* VLBVisibleStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLBVisibleStrategyTest.m; sourceTree = "<group>"; };
 		9020737C152CF1340017A385 /* VLBItemsOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBItemsOperationDelegate.h; sourceTree = "<group>"; };
@@ -539,7 +537,6 @@
 		BDFBDD6417AE66590018D815 /* NSObject+VLBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VLBObject.m"; sourceTree = "<group>"; };
 		C01FCF5008A954540054247D /* VLBCanIndexLocationInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLBCanIndexLocationInView.h; sourceTree = "<group>"; };
 		CA569A7F7D1B5A8228FC74E9 /* Pods-ApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ApplicationTests/Pods-ApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E1A530BAD9CA4CEABC9AF354 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F27A88801BE94EA9AD12F37E /* libPods-ApplicationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ApplicationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -565,7 +562,6 @@
 				908363FF140070DC00E5AAAF /* Foundation.framework in Frameworks */,
 				90836400140070DC00E5AAAF /* CoreGraphics.framework in Frameworks */,
 				908364011400712200E5AAAF /* libz.dylib in Frameworks */,
-				BDFAE65318FB235C00AB2CE6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,7 +722,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+		29B97314FDCFA39411CA2CEA = {
 			isa = PBXGroup;
 			children = (
 				BD59A487178CA9FD003A9394 /* Resources */,
@@ -786,8 +782,6 @@
 		89A0162C780489732811A480 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E1A530BAD9CA4CEABC9AF354 /* Pods.debug.xcconfig */,
-				364CBB19EDF41EA1A4BC7E5A /* Pods.release.xcconfig */,
 				CA569A7F7D1B5A8228FC74E9 /* Pods-ApplicationTests.debug.xcconfig */,
 				AE81C589402534951C79C495 /* Pods-ApplicationTests.release.xcconfig */,
 				98B7D603F5F2A67D00D733E7 /* Pods-UnitTests.debug.xcconfig */,
@@ -1174,7 +1168,6 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				1249C2DE2CCC45C08200A4E7 /* Copy Pods Resources */,
 				BDCE1E2A1759D9EF0070BB59 /* Crashlytics */,
 			);
 			buildRules = (
@@ -1190,11 +1183,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 908363DF14006BF100E5AAAF /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
+				F0E36BCFE8D69C8220AE3DE3 /* [CP] Check Pods Manifest.lock */,
 				908363C714006BF000E5AAAF /* Sources */,
 				908363C814006BF000E5AAAF /* Frameworks */,
 				908363C914006BF000E5AAAF /* Resources */,
 				1249C2DE2CCC45C08200A4E7 /* Copy Pods Resources */,
 				CE5E207957CB4ABE9AB0632E /* Copy Pods Resources */,
+				1A167536FCF64F162A3F62FD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1210,11 +1205,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BDCD93A1165C127A009C2F8F /* Build configuration list for PBXNativeTarget "ApplicationTests" */;
 			buildPhases = (
+				DA861AB5A37614FE8A7A0369 /* [CP] Check Pods Manifest.lock */,
 				BDCD937E165C127A009C2F8F /* Sources */,
 				BDCD9392165C127A009C2F8F /* Frameworks */,
 				BDCD939E165C127A009C2F8F /* Resources */,
 				BDCD93A0165C127A009C2F8F /* Copy Pods Resources */,
 				A38C34C4540C442A8CB30AD9 /* Copy Pods Resources */,
+				9AB3BD0E6E000C23F2721339 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1250,7 +1247,8 @@
 				el,
 				Base,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			mainGroup = 29B97314FDCFA39411CA2CEA;
+			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -1335,6 +1333,138 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
 		};
+		1A167536FCF64F162A3F62FD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh",
+				"${PODS_ROOT}/FormatterKit/Localizations/ca.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/cs.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/da.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/de.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/el.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/en.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/es.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/fr.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/id.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/it.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/ja.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/ko.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/nb.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/nl.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/nn.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/pl.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/pt.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/pt_BR.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/ru.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/sv.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/tr.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/uk.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/vi.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/zh-Hans.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/zh-Hant.lproj",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ca.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/cs.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/da.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/de.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/el.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/es.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/id.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/it.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ko.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/nb.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/nl.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/nn.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pl.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt_BR.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ru.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/sv.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/tr.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/uk.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/vi.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hans.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hant.lproj",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AB3BD0E6E000C23F2721339 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ApplicationTests/Pods-ApplicationTests-resources.sh",
+				"${PODS_ROOT}/FormatterKit/Localizations/ca.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/cs.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/da.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/de.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/el.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/en.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/es.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/fr.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/id.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/it.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/ja.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/ko.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/nb.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/nl.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/nn.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/pl.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/pt.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/pt_BR.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/ru.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/sv.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/tr.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/uk.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/vi.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/zh-Hans.lproj",
+				"${PODS_ROOT}/FormatterKit/Localizations/zh-Hant.lproj",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ca.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/cs.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/da.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/de.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/el.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/es.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/id.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/it.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ja.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ko.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/nb.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/nl.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/nn.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pl.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt_BR.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ru.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/sv.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/tr.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/uk.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/vi.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hans.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hant.lproj",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ApplicationTests/Pods-ApplicationTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A38C34C4540C442A8CB30AD9 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1390,6 +1520,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
+		};
+		DA861AB5A37614FE8A7A0369 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ApplicationTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0E36BCFE8D69C8220AE3DE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UnitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1609,7 +1775,6 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1A530BAD9CA4CEABC9AF354 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1651,7 +1816,6 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 364CBB19EDF41EA1A4BC7E5A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

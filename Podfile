@@ -10,7 +10,7 @@ target :UnitTests do
 	pod 'OCMock', '~> 3.1.1'
 end
 
-target :ApplicationTests, :exclusive => true do
+target :ApplicationTests do
 	pod 'OCMock', '~> 3.1.1'
 end
 
